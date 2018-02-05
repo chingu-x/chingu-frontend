@@ -1,5 +1,42 @@
 .landing {
-  min-height: 100%;
+  position: relative;
+  height: 800px;
   background-color:#0f143a;
+  /* background: url("../../styles/assets/earth.jpg") no-repeat center center; */
   color: white;
+}
+
+.landing-img {
+  position: absolute;
+  top: 20%;
+  right: 0;
+  height: 80%;
+  width: auto;
+}
+
+.tagline-box {
+  position: absolute;
+  left: 150px;
+  top: 40%;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.tagline {
+  font-size: 3em;
+}
+
+.big-green-btn {
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  width: 200px;
+  border-radius: 10px;
+  background-color: #15df89;
+  color: #FFF;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
