@@ -1,0 +1,43 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 1.5em;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  float: left;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.nav-logo > a {
+  background-color: transparent;
+  text-decoration: none;
+  color: #15df89;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  float: right;
+}
+
+.header-right > a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1em;
+  text-decoration: none;
+  color: black;
+}
+
+.header-right > .btn:hover, .btn:focus {
+  background-color: rgba(21, 223, 137, 0.2);
+  color: #1ece82;
+}
