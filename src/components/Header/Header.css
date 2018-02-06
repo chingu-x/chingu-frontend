@@ -6,6 +6,10 @@
   padding: 0 1.5em;
 }
 
+.header-dark {
+  background-color: #0f143a;
+}
+
 .header-left {
   display: flex;
   flex-direction: row;
@@ -19,6 +23,10 @@
   background-color: transparent;
   text-decoration: none;
   color: #15df89;
+}
+
+.nav-logo > a.nav-light {
+  color: #FFF;
 }
 
 .header-right {
@@ -36,6 +44,16 @@
   text-decoration: none;
   color: black;
 }
+
+.header-right > .btn-light {
+  color: #FFF;
+}
+
+.header-right > .btn.btn-light:hover, .btn.btn-light:focus {
+  background-color: transparent;
+  color: #1ece82;
+}
+
 
 .header-right > .btn:hover, .btn:focus {
   background-color: rgba(21, 223, 137, 0.2);
