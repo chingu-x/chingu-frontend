@@ -12,7 +12,7 @@ class Landing extends Component {
   renderProcessBar(){
     return _.map(processItems, ({title, image, description}) => {
       return(
-        <LandingProcessItem title={title} image={image} description={description}/>
+        <LandingProcessItem key={title} title={title} image={image} description={description}/>
       );
     })
   }
