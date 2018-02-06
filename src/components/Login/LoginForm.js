@@ -118,7 +118,7 @@ class LoginForm extends Component {
             placeholder={placeholder}
             errorMessage={errorMessage}
             onBlur={e => this.handleOnBlur(e)}
-            onChange={ name === "password" ? (e => this.handleOnChange(e)) : "" }
+            onChange={ name === "password" ? (e => this.handleOnChange(e)) : function(){} }
             formErrors={this.state.formErrors}
             iconName={iconName}
           />

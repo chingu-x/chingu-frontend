@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "./Landing.css";
 
 class Landing extends Component {
   state = {  }
@@ -11,4 +12,4 @@ class Landing extends Component {
   }
 }
 
-export default Landing;
+export default Landing; 
