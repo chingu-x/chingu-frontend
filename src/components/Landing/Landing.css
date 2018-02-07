@@ -55,7 +55,8 @@
 
 .landing-bar-title {
   margin: 0 auto;
-  padding: 1.7em 0;
+  padding: 0.5em 0;
+  width: 100%;
   color: #15df89;
   font-size: 1.4em;
   font-weight: bold;
@@ -156,10 +157,6 @@
 
 /* LandingTestimonial */
 
-.testimonial {
-
-}
-
 .testimonial-box {
   position: relative;
   height: 150px;
@@ -211,4 +208,31 @@
 
 .testimonial-username {
   font-size: 1.2em;
+}
+
+/* Chingu Bar */
+
+.chingu-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 2em 0;
+  width: 100%;
+  text-align: center;
+  min-height: 300px;
+  text-align: left;
+}
+
+.chingu-bar-box {
+  padding: 6em;
+}
+
+.chingu-bar-title {
+  font-size: 4.5em;
+  font-weight: bold;
+  color: #15df89;
+}
+
+.chingu-bar-text {
+  max-width: 300px;
 }

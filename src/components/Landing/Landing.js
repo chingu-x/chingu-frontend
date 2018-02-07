@@ -83,6 +83,12 @@ class Landing extends Component {
             {this.renderProjectsBar()}
           </div>
         </div>
+        <div className="chingu-bar">
+          <div className="chingu-bar-box">          
+            <div className="chingu-bar-title">Chingu</div>
+            <div className="chingu-bar-text">Chingu is a global collaboration platform and coding-cohort generator. We connect motivated learners with shared goals to learn, help and build together.</div>
+          </div>
+          </div>
       </div>
     );
   }
