@@ -5,6 +5,7 @@ import LandingIconItem from "./LandingIconItem";
 import earth from "../../styles/assets/Global Image-02.png";
 import processItems from "./processItems";
 import cohortItems from "./cohortItems";
+import projectItems from "./projectItems";
 import "./Landing.css";
 
 class Landing extends Component {
@@ -20,6 +21,14 @@ class Landing extends Component {
 
   renderCohortsBar(){
     return _.map(cohortItems, ({title, image, description}) => {
+      return(
+        <LandingIconItem key={title} title={title} image={image} description={description}/>
+      );
+    })
+  }
+
+  renderProjectsBar(){
+    return _.map(projectItems, ({title, image, description}) => {
       return(
         <LandingIconItem key={title} title={title} image={image} description={description}/>
       );
@@ -50,6 +59,12 @@ class Landing extends Component {
           <div className="cohorts-bar-title">Current Cohorts</div>
           <div className="cohorts-bar-items">
             {this.renderCohortsBar()}
+          </div>
+        </div>
+        <div className="projects-bar">
+          <div className="projects-bar-title">Past Projects</div>
+          <div className="projects-bar-items">
+            {this.renderProjectsBar()}
           </div>
         </div>
       </div>

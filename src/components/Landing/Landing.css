@@ -101,6 +101,36 @@
   background-color: #707399;
   color: #FFF;
 }
+.projects-bar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2em 0;
+  width: 100%;
+  text-align: center;
+}
+
+.projects-bar-title {
+  margin: 0 auto;
+  padding: 0.5em 0;
+  width: 100%;
+  background-color: #0a7e4b; 
+  color: #FFF;
+  font-size: 1.4em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.projects-bar-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  padding: 2em 0;
+  background-color: #15df89;
+  color: #FFF;
+}
 
 .landing-item {
   display: block;

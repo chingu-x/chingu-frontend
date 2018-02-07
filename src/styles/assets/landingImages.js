@@ -6,4 +6,7 @@ module.exports = {
   "cohort-01": require("./cohort-01.png"),
   "cohort-02": require("./cohort-02.png"),
   "cohort-03": require("./cohort-03.png"),
+  "projects-01": require("./projects-01.jpg"),
+  "projects-02": require("./projects-02.jpg"),
+  "projects-03": require("./projects-03.jpg"),
 }
