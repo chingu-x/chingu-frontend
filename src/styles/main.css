@@ -456,10 +456,10 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 3em 0 0 0;
   padding: 3em 6em;
   background-color: #0f143a;
-  color: #ffffff; }
+  color: #ffffff;
+  border-top: 1px solid #767676; }
   .footer .footer-linkbox {
     display: flex;
     flex-direction: column; }
@@ -514,19 +514,16 @@ button:hover {
 .landing-item {
   display: block;
   margin: 0 2.5em; }
-
-.landing-item-title {
-  padding: 0.5em 0;
-  font-size: 1.5em;
-  text-transform: uppercase; }
-
-.landing-item-image {
-  height: 200px;
-  width: auto; }
-
-.landing-item-description {
-  margin: 0 auto;
-  max-width: 250px; }
+  .landing-item .landing-item-title {
+    padding: 0.5em 0;
+    font-size: 1.5em;
+    text-transform: uppercase; }
+  .landing-item .landing-item-image {
+    height: 200px;
+    width: auto; }
+  .landing-item .landing-item-description {
+    margin: 0 auto;
+    max-width: 250px; }
 
 .testimonial-box {
   position: relative;
@@ -536,26 +533,22 @@ button:hover {
   background-color: #15df89;
   display: flex;
   justify-content: center; }
-
-.testimonial-box:before,
-.testimonial-box:after {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: 0px solid transparent;
-  content: ""; }
-
-.testimonial-box:before {
-  border-right: 50px solid transparent;
-  border-top: 20px solid #15df89;
-  z-index: 1; }
-
-.testimonial-text {
-  padding: 1em 1.5em;
-  color: #FFF;
-  font-size: 1.1em; }
+  .testimonial-box:before, .testimonial-box :after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 0px solid transparent;
+    content: ""; }
+  .testimonial-box:before {
+    border-right: 50px solid transparent;
+    border-top: 20px solid #15df89;
+    z-index: 1; }
+  .testimonial-box .testimonial-text {
+    padding: 1em 1.5em;
+    color: #ffffff;
+    font-size: 1em; }
 
 .testimonial-lower {
   display: flex;
@@ -563,16 +556,44 @@ button:hover {
   align-items: center;
   flex-wrap: nowrap;
   margin: 2em 1.5em; }
+  .testimonial-lower .testimonial-img {
+    height: 50px;
+    width: 50px;
+    margin-right: 15px;
+    object-fit: cover;
+    border-radius: 50px; }
+  .testimonial-lower .testimonial-username {
+    font-size: 1.2em; }
 
-.testimonial-img {
-  height: 50px;
-  width: 50px;
-  margin-right: 15px;
-  object-fit: cover;
-  border-radius: 50px; }
-
-.testimonial-username {
-  font-size: 1.2em; }
+.login-form-item {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px; }
+  .login-form-item input {
+    width: 100%;
+    margin: 0.5em 0;
+    line-height: 30px;
+    font-size: 20px;
+    border: 1px solid #767676;
+    text-indent: 30px; }
+    .login-form-item input::placeholder {
+      font-size: 0.9em; }
+  .login-form-item i {
+    position: absolute;
+    left: 5px;
+    color: #767676; }
+  .login-form-item .errorMessage {
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    padding: 0;
+    margin: 0;
+    color: red;
+    font-size: 0.8em; }
 
 .landing {
   position: relative; }
@@ -696,3 +717,35 @@ button:hover {
         color: #15df89; }
       .landing .chingu-bar .chingu-bar-box .chingu-bar-text {
         max-width: 300px; }
+
+.login {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 80vh;
+  width: 100%; }
+  .login .login-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 300px;
+    margin: 0 auto;
+    background-color: #FFF;
+    border: 3px solid #15df89;
+    box-shadow: 10px 10px 2px rgba(21, 223, 137, 0.6); }
+  .login h1 {
+    margin: 0 auto;
+    padding: 0.25em 0;
+    width: 100%;
+    border-bottom: 3px solid #15df89;
+    color: #2fd180;
+    text-align: center; }
+  .login .login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 1em; }

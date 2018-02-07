@@ -4,7 +4,6 @@ import { graphql } from "react-apollo";
 import LoginFormItem from "./LoginFormItem";
 import userLogin from "../../mutations/loginMutation";
 import loginFields from "./loginFields";
-import "./LoginForm.css";
 
 class LoginForm extends Component {
   state = {

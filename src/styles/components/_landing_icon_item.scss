@@ -1,20 +1,20 @@
 .landing-item {
   display: block;
   margin: 0 2.5em;
-}
-
-.landing-item-title {
-  padding: 0.5em 0;
-  font-size: 1.5em;
-  text-transform: uppercase;
-}
-
-.landing-item-image {
-  height: 200px;
-  width: auto;
-}
-
-.landing-item-description {
-  margin: 0 auto;
-  max-width: 250px;
+  
+  .landing-item-title {
+    padding: 0.5em 0;
+    font-size: 1.5em;
+    text-transform: uppercase;
+  }
+  
+  .landing-item-image {
+    height: 200px;
+    width: auto;
+  }
+  
+  .landing-item-description {
+    margin: 0 auto;
+    max-width: 250px;
+  }
 }

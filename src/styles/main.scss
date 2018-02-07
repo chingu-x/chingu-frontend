@@ -28,10 +28,12 @@
 //5. Components
 @import
 	'components/landing_icon_item',
-	'components/landing_testimonial';
+	'components/landing_testimonial',
+	'components/login_form_item';
 	
 //6. Page
 @import
-	'pages/landing';
+	'pages/landing',
+	'pages/login';
 
 //7. Themes
