@@ -1,0 +1,35 @@
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 1em;
+  
+  .signup-select-box {
+    position: relative;
+    margin-bottom: 10px;
+    
+    select {
+      width: 100%;
+      margin: 0.5em 0;
+      padding: 0.2em 0;
+      line-height: 30px;
+      font-size: 20px;
+      border: 1px solid color-list("borders");
+      text-indent: 30px;
+      
+      option {
+        font-size: 0.8em;
+      }
+    }
+    
+    .select-flag {
+      position: absolute;
+      left: 5px;
+      bottom: 18px;
+      color: color-list("text-muted");
+    }
+  }
+}

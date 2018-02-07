@@ -76,13 +76,13 @@ class Profile extends Component {
           </div>
         </div>
         { bio ? (<div className="profile-bottom">
-          <div className="profile-bottom-left">
+          <div className="profile-section profile-bottom-left">
             <div className="section-header">Projects</div>
-            <div className="profile-skills-list">
+            <div className="profile-projects-list">
               {this.renderProjects(projects)}
             </div>
           </div>
-          <div className="profile-bottom-right">
+          <div className="profile-section profile-bottom-right">
             <div className="section-header">Skills</div>
             <div className="profile-skills-list">
               {this.renderSkills(skills)}

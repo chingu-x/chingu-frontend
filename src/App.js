@@ -6,7 +6,6 @@ import Landing from "./components/Landing/Landing";
 import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
-import "./App.css";
 
 class App extends Component {
   render() {
