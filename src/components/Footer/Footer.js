@@ -17,42 +17,78 @@ class Footer extends Component {
     //Do something with the state.
     document.getElementById("footerSubscribe").reset();
   }
-render(){
-  return (
-    <div className="footer">
+
+  renderLinkBoxes(){
+    return [
       <div className="footer-linkbox">
-        <div className="footer-subtitle">Contact Us</div>
-        <div className="footer-link">+44 345 678 903</div>
-        <a className="footer-link" href="">email@example.com</a>
-      </div>
-      <div className="footer-linkbox">
-        <div className="footer-subtitle">Company</div>
-        <a className="footer-link" href="">Contact Us</a>
-        <a className="footer-link" href="">Staff</a>
-        <a className="footer-link" href="">Press</a>
-        <a className="footer-link" href="">Privacy Policy</a>
-        <a className="footer-link" href="">FAQ</a>
-      </div>
-      <div className="footer-linkbox">
-        <div className="footer-subtitle">Programs</div>
-        <a className="footer-link" href="">FAQ</a>
-        <a className="footer-link" href="">Cohorts</a>
-        <a className="footer-link" href="">Application</a>
-      </div>
-        <div className="footer-subscribe">
-          <div className="footer-subscribe-subtitle">Subscribe to Chingu via Email</div>
-          <div className="footer-subscribe-lower">
-            <form id="footerSubscribe" onSubmit={(e) => this.handleSubmit(e)}>
+      <div className="footer-subtitle">Contact Us</div>
+      <div className="footer-link">+44 345 678 903</div>
+      <a className="footer-link" href="">email@example.com</a>
+    </div>,
+    <div className="footer-linkbox">
+      <div className="footer-subtitle">Company</div>
+      <a className="footer-link" href="">Contact Us</a>
+      <a className="footer-link" href="">Staff</a>
+      <a className="footer-link" href="">Press</a>
+      <a className="footer-link" href="">Privacy Policy</a>
+      <a className="footer-link" href="">FAQ</a>
+    </div>,
+    <div className="footer-linkbox">
+      <div className="footer-subtitle">Programs</div>
+      <a className="footer-link" href="">FAQ</a>
+      <a className="footer-link" href="">Cohorts</a>
+      <a className="footer-link" href="">Application</a>
+    </div>
+    ];
+  }
+
+  renderSubscribeForm(){
+    return(
+      <div className="footer-subscribe">
+        <div className="footer-subscribe-subtitle">Subscribe to Chingu via Email</div>
+        <div className="footer-subscribe-lower">
+          <form id="footerSubscribe" onSubmit={(e) => this.handleSubmit(e)}>
             <input disabled type="text" className="footer-subscribe-input" name="email" placeholder="Email Address" onChange={e => this.handleOnChange(e)}/>
             <button type="submit" className="subscribeBtn">Subscribe</button>
-            </form>
-          </div>
+          </form>
         </div>
-        <div className="footer-social">
-          <a className="footer-social-icon" href="/"><i className="fab fa-facebook fa-2x"></i></a>
-          <a className="footer-social-icon" href="/"><i className="fab fa-instagram fa-2x"></i></a>
-          <a className="footer-social-icon" href="/"><i className="fab fa-github fa-2x"></i></a>
-        </div>
+      </div>
+    );
+  }
+
+  renderSocialIcons(){
+    return (
+      <div className="footer-social">
+        <a className="footer-social-icon" href="/"><i className="fab fa-facebook fa-2x"></i></a>
+        <a className="footer-social-icon" href="/"><i className="fab fa-instagram fa-2x"></i></a>
+        <a className="footer-social-icon" href="/"><i className="fab fa-github fa-2x"></i></a>
+      </div>
+    );
+  }
+
+  renderDesktopFooter(){
+    return(
+      <div className="footer">
+        {this.renderLinkBoxes()}
+        {this.renderSubscribeForm()}
+        {this.renderSocialIcons()}
+      </div>
+    );
+  }
+
+  renderMobileFooter(){
+    return(
+      <div className="footer">
+        {this.renderSubscribeForm()}
+        {this.renderSocialIcons()}
+      </div>
+    )
+  }
+render(){
+  return (
+    <div className="footer-wrapper">
+      <div className="footer-desktop">{this.renderDesktopFooter()}</div>
+      <div className="footer-mobile">{this.renderMobileFooter()}</div>
     </div>
   );
 }

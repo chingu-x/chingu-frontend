@@ -1,11 +1,21 @@
+.testimonial {
+  @include media(">desktop") {
+    margin: 0 1.5em;
+  }
+
+  @include media("<=desktop") {
+    margin: 0 3em;
+  }
+}
+
 .testimonial-box {
   position: relative;
   height: 175px;
   width: 300px;
-  margin: 0 2em;
   background-color: color-list("accent");
   display: flex;
   justify-content: center;
+ 
   
   &:before, :after {
       position: absolute;
