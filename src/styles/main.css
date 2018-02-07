@@ -565,6 +565,15 @@ button:hover {
   .testimonial-lower .testimonial-username {
     font-size: 1.2em; }
 
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 1em; }
+
 .login-form-item {
   position: relative;
   width: 100%;
@@ -731,7 +740,7 @@ button:hover {
     align-content: center;
     width: 300px;
     margin: 0 auto;
-    background-color: #FFF;
+    background-color: #ffffff;
     border: 3px solid #15df89;
     box-shadow: 10px 10px 2px rgba(21, 223, 137, 0.6); }
   .login h1 {
@@ -739,13 +748,76 @@ button:hover {
     padding: 0.25em 0;
     width: 100%;
     border-bottom: 3px solid #15df89;
-    color: #2fd180;
+    color: #15df89;
     text-align: center; }
-  .login .login-form {
+
+.profile {
+  margin: 0 auto;
+  margin-top: 3em;
+  max-width: 1000px; }
+  .profile .profile-top {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #767676;
+    max-height: 250px;
+    background-color: #ffffff; }
+    .profile .profile-top .profile-img {
+      max-height: 250px;
+      max-width: 250px; }
+    .profile .profile-top .profile-bio {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 750px;
+      padding: 2em 3em;
+      text-align: left;
+      font-size: 0.9em; }
+      .profile .profile-top .profile-bio h1 {
+        margin: 0; }
+      .profile .profile-top .profile-bio .profile-links {
+        padding-top: 1em; }
+        .profile .profile-top .profile-bio .profile-links a {
+          margin-right: 1em;
+          text-decoration: none;
+          font-weight: bold;
+          color: #15df89; }
+          .profile .profile-top .profile-bio .profile-links a:hover, .profile .profile-top .profile-bio .profile-links a:focus {
+            color: #0f143a; }
+  .profile .profile-bottom {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2em;
+    text-align: left;
+    background-color: #ffffff; }
+    .profile .profile-bottom .profile-section {
+      padding: 2em;
+      border: 1px solid #767676; }
+      .profile .profile-bottom .profile-section.profile-bottom-left {
+        width: 65%; }
+      .profile .profile-bottom .profile-section.profile-bottom-right {
+        display: flex;
+        flex-direction: column;
+        width: 35%; }
+      .profile .profile-bottom .profile-section .section-header {
+        font-size: 1.3em;
+        color: #767676;
+        font-weight: bold; }
+      .profile .profile-bottom .profile-section .profile-skills-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 1em 0; }
+        .profile .profile-bottom .profile-section .profile-skills-list .profile-skills {
+          margin: 0.25em;
+          padding: 0.5em 1em;
+          color: #ffffff;
+          background-color: #767676; }
+  .profile .under-construction {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 1em; }
+    margin: 6em 0;
+    text-align: center;
+    background-color: #ffffff;
+    height: 250px; }

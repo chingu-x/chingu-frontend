@@ -1,0 +1,100 @@
+.profile {
+  margin: 0 auto;
+  margin-top: 3em;
+  max-width: 1000px;
+
+  .profile-top {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid color-list("text-muted");
+    max-height: 250px;
+    background-color: color-list("text-light");
+
+    .profile-img {
+      max-height: 250px;
+      max-width: 250px;
+    }
+
+    .profile-bio {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 750px;
+      padding: 2em 3em;
+      text-align: left;
+      font-size: 0.9em;
+
+      h1 {
+        margin: 0;
+      }
+
+      .profile-links {
+        padding-top: 1em;
+
+        a {
+          margin-right: 1em;
+          text-decoration: none;
+          font-weight: bold;
+          color: color-list("accent");
+
+          @include hocus {
+            color: color-list("primary");
+          }
+        }
+      }
+    }
+  }
+
+  .profile-bottom {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2em;
+    text-align: left;
+    background-color: color-list("text-light");
+
+    .profile-section {
+      padding: 2em;
+      border: 1px solid color-list("text-muted");
+
+      &.profile-bottom-left {
+        width: 65%;
+      }
+
+      &.profile-bottom-right {
+        display: flex;
+        flex-direction: column;
+        width: 35%;
+      }
+
+      .section-header {
+        font-size: 1.3em;
+        color: color-list("text-muted");
+        font-weight: bold;
+      }
+
+      .profile-skills-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 1em 0;
+
+        .profile-skills {
+          margin: 0.25em;
+          padding: 0.5em 1em;
+          color: color-list("text-light");
+          background-color: color-list("text-muted");
+        }
+      }
+    }
+  }
+  .under-construction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 6em 0;
+    text-align: center;
+    background-color: color-list("text-light");
+    height: 250px;
+  }
+}

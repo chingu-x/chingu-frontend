@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import userQuery from "../../queries/profileQuery";
 import image from "../../styles/assets/bear8.jpg";
-import "./Profile.css";
 
 class Profile extends Component {
   state = {};
