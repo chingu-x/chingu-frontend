@@ -9,4 +9,5 @@ module.exports = {
   "projects-01": require("./projects-01.jpg"),
   "projects-02": require("./projects-02.jpg"),
   "projects-03": require("./projects-03.jpg"),
+  "user-01": require("./user-01.jpg"),
 }

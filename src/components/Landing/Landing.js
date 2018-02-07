@@ -2,9 +2,11 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import LandingIconItem from "./LandingIconItem";
+import LandingTestimonial from "./LandingTestimonial";
 import earth from "../../styles/assets/Global Image-02.png";
 import processItems from "./processItems";
 import cohortItems from "./cohortItems";
+import testimonialItems from "./testimonialItems";
 import projectItems from "./projectItems";
 import "./Landing.css";
 
@@ -23,6 +25,14 @@ class Landing extends Component {
     return _.map(cohortItems, ({title, image, description}) => {
       return(
         <LandingIconItem key={title} title={title} image={image} description={description}/>
+      );
+    })
+  }
+
+  renderTestimonialBar(){
+    return _.map(testimonialItems, ({username, image, testimonial}) => {
+      return(
+        <LandingTestimonial key={username} username={username} image={image} testimonial={testimonial}/>
       );
     })
   }
@@ -59,6 +69,12 @@ class Landing extends Component {
           <div className="cohorts-bar-title">Current Cohorts</div>
           <div className="cohorts-bar-items">
             {this.renderCohortsBar()}
+          </div>
+        </div>
+        <div className="landing-bar">
+          <div className="landing-bar-title">What people are saying about Chingu</div>
+          <div className="landing-bar-items">
+            {this.renderTestimonialBar()}
           </div>
         </div>
         <div className="projects-bar">
