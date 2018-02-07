@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { graphql } from "react-apollo";
 
 import currentUserQuery from "../../queries/currentUserQuery";
-import "./Header.css";
 
 class Header extends Component {
   state = {};

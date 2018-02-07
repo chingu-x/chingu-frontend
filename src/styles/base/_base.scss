@@ -1,0 +1,28 @@
+//----------------------------------------------
+//              Basic Styles
+//----------------------------------------------
+
+/**
+*	Box Model Setup
+*/
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, button {
+  color: color-list('text-dark');
+  font-size: $base-font-size;
+  font-family: $base-font-family;
+  font-weight: $base-font-weight;
+  line-height: 1.6;
+}
+
+button {
+  &:hover {
+    cursor: pointer;
+  }
+}

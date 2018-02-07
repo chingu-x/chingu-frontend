@@ -9,6 +9,7 @@
   flex-direction: row;
   border: 1px solid lightgray;
   max-height: 250px;
+  background-color: white;
 }
 
 .profile-bio {
@@ -51,6 +52,7 @@
   flex-direction: row;
   margin-top: 2em;
   text-align: left;
+  background-color: white;
 }
 
 .profile-bottom-left {
@@ -88,6 +90,12 @@
 }
 
 .under-construction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 6em 0;
   text-align: center;
+  background-color: white;
+  height: 250px;
 }

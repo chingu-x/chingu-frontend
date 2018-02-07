@@ -76,11 +76,7 @@ class Profile extends Component {
             { bio ? <p>{bio}</p> : <p></p>}
           </div>
         </div>
-        <div className="under-construction">
-          <h2>Coming Soon</h2>
-          <p>Profile information is on the way!</p>
-        </div>
-        {/*<div className="profile-bottom">
+        { bio ? (<div className="profile-bottom">
           <div className="profile-bottom-left">
             <div className="section-header">Projects</div>
             <div className="profile-skills-list">
@@ -97,7 +93,10 @@ class Profile extends Component {
               {this.renderCohorts(cohorts)}
             </div>
           </div>
-    </div>*/}
+    </div>) : (<div className="under-construction">
+    <h2>Coming Soon</h2>
+    <p>Profile information is on the way!</p>
+  </div>)}
       </div>
     );
   }

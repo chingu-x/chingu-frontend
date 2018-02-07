@@ -9,6 +9,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import "./index.css";
 import "./styles/fontawesome/webfonts/fontawesome-all.css";
 import App from "./App";
+import "./styles/main.css";
 import registerServiceWorker from "./registerServiceWorker";
 
 const httpLink = createHttpLink({
