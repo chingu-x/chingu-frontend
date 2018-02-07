@@ -26,23 +26,12 @@
 	'layout/footer';
 
 //5. Components
-// @import
-//   'components/bouncing_arrow',
-// 	'components/button',
-// 	'components/call_to_action',
-// 	'components/card',
-// 	'components/icon_blurb',
-// 	'components/navbar',
-// 	'components/page_header',
-// 	'components/progress_bar',
-// 	'components/social_icon';
+@import
+	'components/landing_icon_item',
+	'components/landing_testimonial';
 	
-// //6. Page
-// @import
-// 	'pages/about',
-// 	'pages/home',
-// 	'pages/projects',
-// 	'pages/project_page',
-// 	'pages/resume';
+//6. Page
+@import
+	'pages/landing';
 
 //7. Themes

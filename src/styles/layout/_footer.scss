@@ -1,0 +1,80 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 3em 0 0 0;
+  padding: 3em 6em;
+  background-color: color-list("primary");
+  color: color-list("text-light");
+
+  .footer-linkbox {
+    display: flex;
+    flex-direction: column;
+
+    .footer-subtitle {
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      font-size: 0.8em;
+    }
+
+    .footer-link {
+      margin-bottom: 10px;
+      color: color-list("text-light");
+      text-decoration: none;
+
+      @include hocus {
+        color: color-list("accent");
+      }
+    }
+  }
+
+  .footer-subscribe {
+    .footer-subscribe-input {
+      margin: 1em 0 0 0;
+      width: 200px;
+      border-radius: 5px;
+      border: 1px solid color-list("accent");
+      outline: none;
+      background-color: color-list("primary");
+      color: color-list("accent");
+      font-size: 14px;
+      text-indent: 5px;
+      line-height: 30px;
+
+      &::placeholder {
+        color: color-list("accent");
+      }
+    }
+
+    .subscribeBtn {
+      margin-left: 2em;
+      padding-left: 1em;
+      padding-right: 1em;
+      border-radius: 5px;
+      border: 1px solid color-list("accent");
+      outline: none;
+      background-color: color-list("accent");
+      color: color-list("text-light");
+      line-height: 30px;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.footer-social {
+  display: flex;
+  flex-direction: column;
+
+  .footer-social-icon {
+    margin-bottom: 1em;
+    color: color-list("text-light");
+    text-decoration: none;
+    cursor: pointer;
+
+    @include hocus {
+      color: color-list("accent");
+    }
+  }
+}

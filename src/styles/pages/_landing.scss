@@ -1,0 +1,160 @@
+.landing {
+  position: relative;
+
+  .landing-top {
+    position: relative;
+    height: 94vh;
+    background-color: color-list("primary");
+    //background: url("../../styles/assets/earth.jpg") no-repeat center center;
+    color: color-list("text-light");
+
+    .landing-img {
+      position: absolute;
+      top: 30%;
+      right: 0;
+      height: 70%;
+      width: auto;
+    }
+
+    .tagline-box {
+      position: absolute;
+      left: 150px;
+      top: 40%;
+      text-align: right;
+      text-transform: uppercase;
+
+      .tagline {
+        font-size: 3em;
+      }
+
+      .big-green-btn {
+        margin: 1em 0;
+        padding: 0.5em 1em;
+        width: 200px;
+        border-radius: 10px;
+        background-color: color-list("accent");
+        color: color-list("text-light");
+        font-size: 1.5em;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .landing-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em 0;
+    text-align: center;
+
+    .landing-bar-title {
+      margin: 0 auto;
+      padding: 0.5em 0;
+      width: 100%;
+      color: color-list("accent");
+      font-size: 1.4em;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .landing-bar-items {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      padding: 2em 0;
+    }
+  }
+
+  .cohorts-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em 0;
+    width: 100%;
+    text-align: center;
+
+    .cohorts-bar-title {
+      margin: 0 auto;
+      padding: 0.5em 0;
+      width: 100%;
+      background-color: color-list("primary");
+      color: color-list("text-light");
+      font-size: 1.4em;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .cohorts-bar-items {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      padding: 2em 0;
+      background-color: color-list("emphasis");
+      color: color-list("text-light");
+    }
+  }
+
+  .projects-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em 0;
+    width: 100%;
+    text-align: center;
+
+    .projects-bar-title {
+      margin: 0 auto;
+      padding: 0.5em 0;
+      width: 100%;
+      background-color: mix(color-list("text-dark"), color-list("accent"), 20%);
+      color: color-list("text-light");
+      font-size: 1.4em;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .projects-bar-items {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      padding: 2em 0;
+      background-color: color-list("accent");
+      color: color-list("text-light");
+    }
+  }
+
+  .chingu-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2em 0;
+    width: 100%;
+    text-align: center;
+    min-height: 300px;
+    text-align: left;
+
+    .chingu-bar-box {
+      padding: 6em;
+
+      .chingu-bar-title {
+        font-size: 4.5em;
+        font-weight: bold;
+        color: color-list("accent");
+      }
+
+      .chingu-bar-text {
+        max-width: 300px;
+      }
+    }
+  }
+}
