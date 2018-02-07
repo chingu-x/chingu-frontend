@@ -1,9 +1,10 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import LandingProcessItem from "./LandingProcessItem";
+import LandingIconItem from "./LandingIconItem";
 import earth from "../../styles/assets/Global Image-02.png";
 import processItems from "./processItems";
+import cohortItems from "./cohortItems";
 import "./Landing.css";
 
 class Landing extends Component {
@@ -12,7 +13,15 @@ class Landing extends Component {
   renderProcessBar(){
     return _.map(processItems, ({title, image, description}) => {
       return(
-        <LandingProcessItem key={title} title={title} image={image} description={description}/>
+        <LandingIconItem key={title} title={title} image={image} description={description}/>
+      );
+    })
+  }
+
+  renderCohortsBar(){
+    return _.map(cohortItems, ({title, image, description}) => {
+      return(
+        <LandingIconItem key={title} title={title} image={image} description={description}/>
       );
     })
   }
@@ -31,10 +40,16 @@ class Landing extends Component {
             </Link>
           </div>
         </div>
-        <div className="process-bar">
-          <div className="process-bar-title">Chingu Process</div>
-          <div className="process-bar-items">
+        <div className="landing-bar">
+          <div className="landing-bar-title">Chingu Process</div>
+          <div className="landing-bar-items">
             {this.renderProcessBar()}
+          </div>
+        </div>
+        <div className="cohorts-bar">
+          <div className="cohorts-bar-title">Current Cohorts</div>
+          <div className="cohorts-bar-items">
+            {this.renderCohortsBar()}
           </div>
         </div>
       </div>

@@ -12,9 +12,9 @@
 
 .landing-img {
   position: absolute;
-  top: 20%;
+  top: 30%;
   right: 0;
-  height: 80%;
+  height: 70%;
   width: auto;
 }
 
@@ -45,7 +45,7 @@
   cursor: pointer;
 }
 
-.process-bar{
+.landing-bar{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,7 +53,7 @@
   text-align: center;
 }
 
-.process-bar-title {
+.landing-bar-title {
   margin: 0 auto;
   padding: 1.7em 0;
   color: #15df89;
@@ -62,31 +62,63 @@
   text-transform: uppercase;
 }
 
-.process-bar-items {
+.landing-bar-items {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: flex-start;
-  width: 80%;
+  width: 100%;
+  padding: 2em 0;
 }
 
-.process-item {
+.cohorts-bar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2em 0;
+  width: 100%;
+  text-align: center;
+}
+
+.cohorts-bar-title {
+  margin: 0 auto;
+  padding: 0.5em 0;
+  width: 100%;
+  background-color: #0f143a; 
+  color: #FFF;
+  font-size: 1.4em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.cohorts-bar-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  padding: 2em 0;
+  background-color: #707399;
+  color: #FFF;
+}
+
+.landing-item {
   display: block;
-  
+  margin: 0 2.5em;
 }
 
-.process-item-title {
+.landing-item-title {
   padding: 0.5em 0;
   font-size: 1.5em;
   text-transform: uppercase;
 }
 
-.process-item-image {
+.landing-item-image {
   height: 200px;
   width: auto;
 }
 
-.process-item-description {
+.landing-item-description {
   margin: 0 auto;
-  max-width: 200px;
+  max-width: 250px;
 }
