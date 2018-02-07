@@ -8,6 +8,7 @@ const registerUser = gql`
     $github_url: String!
     $password: String!
     $username: String!
+    $country_id: ID!
   ) {
     createUser(
       user_data: {
@@ -15,6 +16,7 @@ const registerUser = gql`
         last_name: $last_name
         github_url: $github_url
         username: $username
+        country_id: $country_id
       }
       email: $email
       password: $password
