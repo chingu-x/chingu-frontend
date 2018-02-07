@@ -1,10 +1,11 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import { graphql } from "react-apollo";
+import { graphql, compose } from "react-apollo";
 import SignUpFormItem from "./SignUpFormItem";
 import registerUser from "../../mutations/registerUserMutation";
+import getCountries from "../../queries/getCountries";
 import formFields from "./formFields";
-import countries from "./countries";
+// import countries from "./countries";
 import "./SignUpForm.css";
 
 class SignUpForm extends Component {
@@ -15,7 +16,7 @@ class SignUpForm extends Component {
     github: "",
     first_name: "",
     last_name: "",
-    country: "",
+    country_id: "",
     formErrors: {
       email: "",
       password: "",
@@ -23,7 +24,8 @@ class SignUpForm extends Component {
       username: "",
       github: "",
       first_name: "",
-      last_name: ""
+      last_name: "",
+      country_id: ""
     },
     emailValid: false,
     passwordValid: false,
@@ -37,6 +39,7 @@ class SignUpForm extends Component {
   };
 
   handleOnBlur(e) {
+    console.log(this.props);
     const name = e.target.name;
     const value = e.target.value;
     this.setState(
@@ -72,7 +75,7 @@ class SignUpForm extends Component {
       github,
       first_name,
       last_name,
-      country
+      country_id
     } = this.state;
 
     let github_url = "https://github.com/" + github;
@@ -86,12 +89,12 @@ class SignUpForm extends Component {
           github_url,
           password,
           username,
-          country
+          country_id
         }
       })
       .then(({ data }) => {
         window.localStorage.setItem("token", data.createUser.jwt);
-        window.location = "/profile/" + data.createUser.user.id;
+        window.location = "/user/" + data.createUser.user.username;
       })
       .catch(err => {
         console.error(err);
@@ -112,6 +115,7 @@ class SignUpForm extends Component {
     let countryValid = this.state.countryValid;
     const reEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const reAlphaNum = /^[a-zA-Z0-9]*$/;
+    const reAlphaNumHy = /^[a-zA-Z0-9-]*$/;
 
     switch (fieldName) {
       case "email":
@@ -127,7 +131,7 @@ class SignUpForm extends Component {
         fieldValidationErrors.passwordVerify = passwordMatch ? "" : "Error";
         break;
       case "username":
-        usernameValid = value.length >= 4;
+        usernameValid = value.match(reAlphaNum) && value.length >= 4;
         fieldValidationErrors.username = usernameValid ? "" : "Error";
         break;
       case "first_name":
@@ -139,12 +143,12 @@ class SignUpForm extends Component {
         fieldValidationErrors.last_name = lastNameValid ? "" : "Error";
         break;
       case "github":
-        githubValid = value.match(reAlphaNum) && value.length > 0;
+        githubValid = value.match(reAlphaNumHy) && value.length > 0;
         fieldValidationErrors.github = githubValid ? "" : "Error";
         break;
-      case "country":
+      case "country_id":
         countryValid = !!value;
-        fieldValidationErrors.country = countryValid ? "" : "Error";
+        fieldValidationErrors.country_id = countryValid ? "" : "Error";
         break;
       default:
         break;
@@ -200,13 +204,15 @@ class SignUpForm extends Component {
   }
 
   renderCountryOptions() {
-    return _.map(countries, ({ name }) => {
-      return (
-        <option key={name} name="country" value={name}>
-          {name}
-        </option>
-      );
-    });
+    if(!!this.props.countries.countries) {
+      const {countries} = this.props.countries;
+      return countries.map(({id, name}) => (
+          <option key={id} name="country_id" value={id}>
+            {name}
+          </option>
+        )
+      )
+    }
   }
 
   render() {
@@ -222,7 +228,7 @@ class SignUpForm extends Component {
           {this.renderFields()}
           <div className="signup-select-box">
             <select
-              name="country"
+              name="country_id"
               onChange={e => this.handleOnSelectChange(e)}
               onBlur={e => this.handleOnBlur(e)}
             >
@@ -249,4 +255,12 @@ class SignUpForm extends Component {
   }
 }
 
-export default graphql(registerUser)(SignUpForm);
+export default compose(graphql(registerUser), graphql(getCountries, 
+  {
+  name: "countries", 
+  options: { 
+    variables: {
+      limit: 250
+    } 
+  },
+}))(SignUpForm);

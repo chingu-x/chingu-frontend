@@ -61,7 +61,6 @@ class Profile extends Component {
     } 
     let {first_name, last_name, github_url, twitter_url, website_url, blog_url, bio, skills, cohorts, projects} = this.props.data.user;
     //for testing purposes
-    let lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
     return (
       <div className="profile">
         <div className="profile-top">
@@ -70,18 +69,22 @@ class Profile extends Component {
             <h1>{first_name} {last_name}</h1>
             <div className="profile-links">
               { github_url ? <a href={github_url} target="_blank">Github</a> : "" }
-              { twitter_url ? <a href={twitter_url} target="_blank">Twitter</a> : <a href={github_url} target="_blank">Twitter</a> }
-              { website_url ? <a href={website_url} target="_blank">Website</a> : <a href={github_url} target="_blank">Website</a> }
+              { twitter_url ? <a href={twitter_url} target="_blank">Twitter</a> : "" }
+              { website_url ? <a href={website_url} target="_blank">Website</a> : "" }
               { blog_url ? <a href={blog_url} target="_blank">Blog</a> : "" }
             </div>
-            { bio ? <p>{bio}</p> : <p>{lorem}</p>}
+            { bio ? <p>{bio}</p> : <p></p>}
           </div>
         </div>
-        <div className="profile-bottom">
+        <div className="under-construction">
+          <h2>Coming Soon</h2>
+          <p>Profile information is on the way!</p>
+        </div>
+        {/*<div className="profile-bottom">
           <div className="profile-bottom-left">
             <div className="section-header">Projects</div>
             <div className="profile-skills-list">
-              {/*this.renderProjects(projects)*/}
+              {this.renderProjects(projects)}
             </div>
           </div>
           <div className="profile-bottom-right">
@@ -93,9 +96,9 @@ class Profile extends Component {
             <div className="profile-cohorts-list">
               {this.renderCohorts(cohorts)}
             </div>
-            </div>
-            </div>
-            </div>
+          </div>
+    </div>*/}
+      </div>
     );
   }
 }
