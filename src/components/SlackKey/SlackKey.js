@@ -14,7 +14,7 @@ class SlackKey extends Component {
     return (
       <div className="slack-key">
         <div className="slack-top">
-          <input onChange={({target: {value}}) => this.setState({value, copied: false})} value={this.props.data.getSlackSecret || "No associated cohort."} />
+          <input onChange={({target: {value}}) => this.setState({value, copied: false})} value={`/user register ${this.props.data.getSlackSecret}`} />
           <CopyToClipboard text={this.state.value} onCopy={() => this.setState({copied: true})}>
           <button className="copyBtn">Copy</button>
           </CopyToClipboard>
