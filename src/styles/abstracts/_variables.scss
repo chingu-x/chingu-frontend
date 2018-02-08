@@ -1,0 +1,45 @@
+//----------------------------------
+//    Application-wide Variables
+//----------------------------------
+
+/// Regular font family
+/// @type List
+$base-font-family: 'Numans', sans-serif;
+$base-font-size: 16px;
+$base-font-weight: 400;
+
+/// Color Map
+/// @type List
+$color-list: (
+	'primary': #0f143a, 
+	'accent': #15df89,
+	'emphasis': #707399,
+	'borders': #d3d3d3,
+	'text-light': #ffffff,
+	'text-dark': #000000,
+	'text-muted': #767676,
+);
+
+
+/// Z-indexes
+/// @type List
+
+$z-indexes: (
+	'modal': 400,
+	'dropdown': 200,
+	'default': 1,
+	'below': -1, 
+);
+
+
+/// Container's maximum width
+/// @type Length
+$max-width: 1180px !default;
+
+
+
+/// Relative or absolute URL where all assets are served from
+/// @type String
+/// @example scss - When using a CDN
+///   $base-url: 'http://cdn.example.com/assets/';
+$base-url: '/assets/' !default;

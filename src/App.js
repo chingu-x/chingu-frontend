@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import Landing from "./components/Landing/Landing";
 import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
-import "./App.css";
+import SlackKey from "./components/SlackKey/SlackKey.js";
 
 class App extends Component {
   render() {
@@ -16,6 +17,8 @@ class App extends Component {
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/user/:username" component={Profile} />
+        <Route path="/slack" component={SlackKey} />
+        <Footer />
       </div>
     );
   }

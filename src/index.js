@@ -3,27 +3,31 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
-import { setContext } from "apollo-link-context";
-import { HttpLink } from "apollo-link-http";
+import { ApolloLink } from "apollo-link";
+import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import "./index.css";
-import "./styles/fontawesome/webfonts/fontawesome-all.css";
 import App from "./App";
+import "./styles/fontawesome/webfonts/fontawesome-all.css";
+import "./styles/main.css";
 import registerServiceWorker from "./registerServiceWorker";
 
-const authLink = setContext((_, {headers}) => {
-  const token = localStorage.getItem("token");
+const httpLink = createHttpLink({
+  uri: "https://chingu-api-dev.herokuapp.com/graphql"
+});
 
-  return {
+const middlewareAuth = new ApolloLink((operation, forward) => {
+  const token = localStorage.getItem("token");
+  const authorizationHeader = token ? `${token}` : null;
+  operation.setContext({
     headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: authorizationHeader
     }
-  }
+  });
+  return forward(operation);
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(new HttpLink({ uri: "https://chingu-api-dev.herokuapp.com/graphql" })),
+  link: middlewareAuth.concat(httpLink),
   cache: new InMemoryCache()
 });
 

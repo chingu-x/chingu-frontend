@@ -1,18 +1,42 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import LandingProcessItem from "./LandingProcessItem";
+import LandingIconItem from "./LandingIconItem";
+import LandingTestimonial from "./LandingTestimonial";
 import earth from "../../styles/assets/Global Image-02.png";
-import processItems from "./processItems";
-import "./Landing.css";
+import landingItems from "./landingItems";
 
 class Landing extends Component {
   state = {};
 
   renderProcessBar(){
-    return _.map(processItems, ({title, image, description}) => {
+    return _.map(landingItems.process, ({title, image, description}) => {
       return(
-        <LandingProcessItem title={title} image={image} description={description}/>
+        <LandingIconItem key={title} title={title} image={image} description={description}/>
+      );
+    })
+  }
+
+  renderCohortsBar(){
+    return _.map(landingItems.cohorts, ({title, image, description}) => {
+      return(
+        <LandingIconItem key={title} title={title} image={image} description={description}/>
+      );
+    })
+  }
+
+  renderTestimonialBar(){
+    return _.map(landingItems.testimonials, ({username, image, testimonial}) => {
+      return(
+        <LandingTestimonial key={username} username={username} image={image} testimonial={testimonial}/>
+      );
+    })
+  }
+
+  renderProjectsBar(){
+    return _.map(landingItems.projects, ({title, image, description}) => {
+      return(
+        <LandingIconItem key={title} title={title} image={image} description={description}/>
       );
     })
   }
@@ -31,12 +55,36 @@ class Landing extends Component {
             </Link>
           </div>
         </div>
-        <div className="process-bar">
-          <div className="process-bar-title">Chingu Process</div>
-          <div className="process-bar-items">
+        <div className="landing-bar">
+          <div className="landing-bar-title">Chingu Process</div>
+          <div className="landing-bar-items">
             {this.renderProcessBar()}
           </div>
         </div>
+        <div className="cohorts-bar">
+          <div className="cohorts-bar-title">Current Cohorts</div>
+          <div className="cohorts-bar-items">
+            {this.renderCohortsBar()}
+          </div>
+        </div>
+        <div className="landing-bar">
+          <div className="landing-bar-title">What people are saying about Chingu</div>
+          <div className="landing-bar-items">
+            {this.renderTestimonialBar()}
+          </div>
+        </div>
+        <div className="projects-bar">
+          <div className="projects-bar-title">Past Projects</div>
+          <div className="projects-bar-items">
+            {this.renderProjectsBar()}
+          </div>
+        </div>
+        <div className="chingu-bar">
+          <div className="chingu-bar-box">          
+            <div className="chingu-bar-title">Chingu</div>
+            <div className="chingu-bar-text">Chingu is a global collaboration platform and coding-cohort generator. We connect motivated learners with shared goals to learn, help and build together.</div>
+          </div>
+          </div>
       </div>
     );
   }

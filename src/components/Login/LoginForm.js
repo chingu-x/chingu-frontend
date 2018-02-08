@@ -4,7 +4,6 @@ import { graphql } from "react-apollo";
 import LoginFormItem from "./LoginFormItem";
 import userLogin from "../../mutations/loginMutation";
 import loginFields from "./loginFields";
-import "./LoginForm.css";
 
 class LoginForm extends Component {
   state = {
@@ -129,23 +128,20 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div className="login-box">
-        <h1>CHINGU</h1>
-        <form
-          className="login-form"
-          ref={input => (this.signUpForm = input)}
-          onSubmit={e => this.handleOnSubmit(e)}
+      <form
+        className="login-form"
+        ref={input => (this.signUpForm = input)}
+        onSubmit={e => this.handleOnSubmit(e)}
+      >
+        {this.renderFields()}
+        <button
+          className="submitBtn"
+          disabled={!this.state.formValid}
+          type="submit"
         >
-          {this.renderFields()}
-          <button
-            className="submitBtn"
-            disabled={!this.state.formValid}
-            type="submit"
-          >
-            login
-          </button>
-        </form>
-      </div>
+          login
+        </button>
+      </form>
     );
   }
 }
