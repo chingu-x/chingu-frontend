@@ -1097,10 +1097,12 @@ button:hover {
   justify-content: center;
   align-items: center; }
   .slack-key .slack-top {
+    position: relative;
+    padding: 3em 0;
     display: flex;
     flex-direction: row; }
     .slack-key .slack-top input {
-      width: 300px;
+      width: 200px;
       border-radius: 5px;
       border: 1px solid #d3d3d3;
       outline: none;
@@ -1122,3 +1124,11 @@ button:hover {
       font-size: 14px;
       font-weight: bold;
       text-transform: uppercase; }
+    .slack-key .slack-top .copied-success {
+      position: absolute;
+      left: 40%;
+      bottom: 0; }
+  .slack-key .slack-instructions {
+    padding: 3em 0; }
+  .slack-key .slack-example {
+    padding: 3em 0; }
