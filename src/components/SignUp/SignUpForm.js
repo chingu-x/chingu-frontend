@@ -76,6 +76,8 @@ class SignUpForm extends Component {
     } = this.state;
 
     let github_url = "https://github.com/" + github;
+    email = email.toLowerCase();
+    username = username.toLowerCase();
 
     this.props
       .mutate({

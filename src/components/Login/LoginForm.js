@@ -53,6 +53,8 @@ class LoginForm extends Component {
       password
     } = this.state;
 
+    email = email.toLowerCase();
+
     this.props
       .mutate({
         variables: {
