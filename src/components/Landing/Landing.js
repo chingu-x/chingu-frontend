@@ -4,16 +4,13 @@ import { Link } from "react-router-dom";
 import LandingIconItem from "./LandingIconItem";
 import LandingTestimonial from "./LandingTestimonial";
 import earth from "../../styles/assets/Global Image-02.png";
-import processItems from "./processItems";
-import cohortItems from "./cohortItems";
-import testimonialItems from "./testimonialItems";
-import projectItems from "./projectItems";
+import landingItems from "./landingItems";
 
 class Landing extends Component {
   state = {};
 
   renderProcessBar(){
-    return _.map(processItems, ({title, image, description}) => {
+    return _.map(landingItems.process, ({title, image, description}) => {
       return(
         <LandingIconItem key={title} title={title} image={image} description={description}/>
       );
@@ -21,7 +18,7 @@ class Landing extends Component {
   }
 
   renderCohortsBar(){
-    return _.map(cohortItems, ({title, image, description}) => {
+    return _.map(landingItems.cohorts, ({title, image, description}) => {
       return(
         <LandingIconItem key={title} title={title} image={image} description={description}/>
       );
@@ -29,7 +26,7 @@ class Landing extends Component {
   }
 
   renderTestimonialBar(){
-    return _.map(testimonialItems, ({username, image, testimonial}) => {
+    return _.map(landingItems.testimonials, ({username, image, testimonial}) => {
       return(
         <LandingTestimonial key={username} username={username} image={image} testimonial={testimonial}/>
       );
@@ -37,7 +34,7 @@ class Landing extends Component {
   }
 
   renderProjectsBar(){
-    return _.map(projectItems, ({title, image, description}) => {
+    return _.map(landingItems.projects, ({title, image, description}) => {
       return(
         <LandingIconItem key={title} title={title} image={image} description={description}/>
       );
