@@ -1089,3 +1089,36 @@ button:hover {
     color: #000000;
     text-align: center;
     font-size: 0.9em; }
+
+.slack-key {
+  min-height: 54vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .slack-key .slack-top {
+    display: flex;
+    flex-direction: row; }
+    .slack-key .slack-top input {
+      width: 300px;
+      border-radius: 5px;
+      border: 1px solid #d3d3d3;
+      outline: none;
+      background-color: #ffffff;
+      color: #000000;
+      font-size: 14px;
+      text-indent: 5px;
+      line-height: 30px; }
+    .slack-key .slack-top .copyBtn {
+      margin-left: 2em;
+      padding-left: 2em;
+      padding-right: 2em;
+      border-radius: 5px;
+      border: 1px solid #0f143a;
+      outline: none;
+      background-color: #0f143a;
+      color: #ffffff;
+      line-height: 30px;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase; }
