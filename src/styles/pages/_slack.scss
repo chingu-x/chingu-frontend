@@ -6,11 +6,13 @@
   align-items: center;
 
   .slack-top {
+    position: relative;
+    padding: 3em 0;
     display: flex;
     flex-direction: row;
 
     input {
-      width: 300px;
+      width: 200px;
       border-radius: 5px;
       border: 1px solid color-list("borders");
       outline: none;
@@ -35,5 +37,18 @@
       font-weight: bold;
       text-transform: uppercase;
     }
+    .copied-success {
+      position: absolute;
+      left: 40%;
+      bottom: 0;
+    }
+  }
+
+  .slack-instructions {
+    padding: 3em 0;
+  }
+
+  .slack-example {
+    padding: 3em 0;
   }
 }

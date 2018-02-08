@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import getSlackSecret from "../../queries/getSlackSecret";
+import image from "../../styles/assets/slackkey.JPG";
 
 class SlackKey extends Component {
 
-  state={
-    value: "",
+  state = {
     copied: false
   };
 
@@ -14,13 +14,18 @@ class SlackKey extends Component {
     return (
       <div className="slack-key">
         <div className="slack-top">
-          <input onChange={({target: {value}}) => this.setState({value, copied: false})} value={`/user register ${this.props.data.getSlackSecret}`} />
-          <CopyToClipboard text={this.state.value} onCopy={() => this.setState({copied: true})}>
-          <button className="copyBtn">Copy</button>
+          <input readOnly value={`/user register ${this.props.data.getSlackSecret}`} />
+          <CopyToClipboard text={`/user register ${this.props.data.getSlackSecret}`} onCopy={() => this.setState({copied: true})}>
+            <button className="copyBtn">Copy</button>
           </CopyToClipboard>
-          {this.state.copied ? <span style={{color: "red"}}>Copied.</span> : null}
+          <p className="copied-success">{this.state.copied ? <span style={{color: "red"}}>Copied.</span> : null}</p>
         </div>
-        <p>Press the button to copy the phrase above and paste into Voyage 4's Slack.</p>
+        <div className="slack-instructions">
+          <div>Press the button to copy the phrase above and paste into Voyage 4's Slack.</div>
+          <div>You can post it in any chat box within the Voyage 4 Slack.</div>
+          <div>If successful, The Wizard will welcome you to slack!</div>
+        </div>
+        <img className="slack-example" src={image} alt="Slack Key Example" />
       </div>
     );
   }

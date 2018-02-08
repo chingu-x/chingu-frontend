@@ -115,7 +115,7 @@ class SignUpForm extends Component {
     let countryValid = this.state.countryValid;
     const reEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const reAlphaNum = /^[a-zA-Z0-9]*$/;
-    const reAlphaNumHy = /^[a-zA-Z0-9-]*$/;
+    const reAlphaNumHy = /^[a-zA-Z0-9-_]*$/;
 
     switch (fieldName) {
       case "email":
@@ -131,7 +131,7 @@ class SignUpForm extends Component {
         fieldValidationErrors.passwordVerify = passwordMatch ? "" : "Error";
         break;
       case "username":
-        usernameValid = value.match(reAlphaNum) && value.length >= 4;
+        usernameValid = value.match(reAlphaNumHy) && value.length >= 4;
         fieldValidationErrors.username = usernameValid ? "" : "Error";
         break;
       case "first_name":
