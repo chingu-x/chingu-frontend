@@ -1,12 +1,16 @@
-import React from 'react';
+import React from "react";
 import SignUpForm from "./SignUpForm";
 
 const SignUp = () => {
   return (
     <div className="signup">
-      <SignUpForm />
+      <div className="signup-box">
+        <h1>CHINGU</h1>
+        <h3>Create your profile for the CDN!</h3>
+        <SignUpForm />
+      </div>
     </div>
   );
-}
+};
 
 export default SignUp;

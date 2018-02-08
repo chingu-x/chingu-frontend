@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import userQuery from "../../queries/profileQuery";
 import image from "../../styles/assets/bear8.jpg";
-import "./Profile.css";
 
 class Profile extends Component {
   state = {};
@@ -76,18 +75,14 @@ class Profile extends Component {
             { bio ? <p>{bio}</p> : <p></p>}
           </div>
         </div>
-        <div className="under-construction">
-          <h2>Coming Soon</h2>
-          <p>Profile information is on the way!</p>
-        </div>
-        {/*<div className="profile-bottom">
-          <div className="profile-bottom-left">
+        { bio ? (<div className="profile-bottom">
+          <div className="profile-section profile-bottom-left">
             <div className="section-header">Projects</div>
-            <div className="profile-skills-list">
+            <div className="profile-projects-list">
               {this.renderProjects(projects)}
             </div>
           </div>
-          <div className="profile-bottom-right">
+          <div className="profile-section profile-bottom-right">
             <div className="section-header">Skills</div>
             <div className="profile-skills-list">
               {this.renderSkills(skills)}
@@ -97,7 +92,10 @@ class Profile extends Component {
               {this.renderCohorts(cohorts)}
             </div>
           </div>
-    </div>*/}
+    </div>) : (<div className="under-construction">
+    <h2>Coming Soon</h2>
+    <p>Profile information is on the way!</p>
+  </div>)}
       </div>
     );
   }

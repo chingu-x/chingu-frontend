@@ -1,0 +1,32 @@
+.login {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 80vh;
+  width: 100%;
+  
+  .login-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 300px;
+    margin: 0 auto;
+    background-color: color-list("text-light");
+    border: 3px solid color-list("accent");
+    box-shadow: 10px 10px 2px rgba(color-list("accent"), 0.6);
+  }
+  
+  h1 {
+    margin: 0 auto;
+    padding: 0.25em 0;
+    width: 100%;
+    border-bottom: 3px solid color-list("accent");
+    color: color-list("accent");
+    text-align: center;
+  }
+}
+
+
+
+

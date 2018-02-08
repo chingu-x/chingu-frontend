@@ -8,7 +8,6 @@ import processItems from "./processItems";
 import cohortItems from "./cohortItems";
 import testimonialItems from "./testimonialItems";
 import projectItems from "./projectItems";
-import "./Landing.css";
 
 class Landing extends Component {
   state = {};
