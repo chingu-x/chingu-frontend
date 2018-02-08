@@ -91,7 +91,8 @@ class SignUpForm extends Component {
       })
       .then(({ data }) => {
         window.localStorage.setItem("token", data.createUser.jwt);
-        window.location = "/user/" + data.createUser.user.username;
+        // window.location = "/user/" + data.createUser.user.username;
+        window.location = "/slack";
       })
       .catch(err => {
         console.error(err);

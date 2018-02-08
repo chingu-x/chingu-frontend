@@ -11,9 +11,14 @@ import "./styles/fontawesome/webfonts/fontawesome-all.css";
 import "./styles/main.css";
 import registerServiceWorker from "./registerServiceWorker";
 
-const httpLink = createHttpLink({
-  uri: "https://chingu-api-dev.herokuapp.com/graphql"
-});
+let API_URI;
+if(window.location.host.indexOf("chingu-staging") > -1 || window.location.host.indexOf("localhost") > -1) {
+  API_URI = "https://chingu-api-dev.herokuapp.com/graphql";
+} else {
+  API_URI = "https://chingu-api.herokuapp.com/graphql";
+}
+
+const httpLink = createHttpLink({ uri: API_URI });
 
 const middlewareAuth = new ApolloLink((operation, forward) => {
   const token = localStorage.getItem("token");
