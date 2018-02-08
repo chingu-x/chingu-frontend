@@ -12,7 +12,7 @@ import "./styles/main.css";
 import registerServiceWorker from "./registerServiceWorker";
 
 let API_URI;
-if(location.host.indexOf("chingu-staging") > -1 || location.host.indexOf("localhost") > -1) {
+if(window.location.host.indexOf("chingu-staging") > -1 || window.location.host.indexOf("localhost") > -1) {
   API_URI = "https://chingu-api-dev.herokuapp.com/graphql";
 } else {
   API_URI = "https://chingu-api.herokuapp.com/graphql";
