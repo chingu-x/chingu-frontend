@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SubscribeForm from "./SubscribeForm";
 
 class Footer extends Component {
 
@@ -20,40 +21,26 @@ class Footer extends Component {
 
   renderLinkBoxes(){
     return [
-      <div className="footer-linkbox">
+    <div key="1" className="footer-linkbox">
       <div className="footer-subtitle">Contact Us</div>
       <div className="footer-link">+44 345 678 903</div>
-      <a className="footer-link" href="">email@example.com</a>
+      <a className="footer-link" href="/">email@example.com</a>
     </div>,
-    <div className="footer-linkbox">
+    <div key="2" className="footer-linkbox">
       <div className="footer-subtitle">Company</div>
-      <a className="footer-link" href="">Contact Us</a>
-      <a className="footer-link" href="">Staff</a>
-      <a className="footer-link" href="">Press</a>
-      <a className="footer-link" href="">Privacy Policy</a>
-      <a className="footer-link" href="">FAQ</a>
+      <a className="footer-link" href="/">Contact Us</a>
+      <a className="footer-link" href="/">Staff</a>
+      <a className="footer-link" href="/">Press</a>
+      <a className="footer-link" href="/">Privacy Policy</a>
+      <a className="footer-link" href="/">FAQ</a>
     </div>,
-    <div className="footer-linkbox">
+    <div key="3" className="footer-linkbox">
       <div className="footer-subtitle">Programs</div>
-      <a className="footer-link" href="">FAQ</a>
-      <a className="footer-link" href="">Cohorts</a>
-      <a className="footer-link" href="">Application</a>
+      <a className="footer-link" href="/">FAQ</a>
+      <a className="footer-link" href="/">Cohorts</a>
+      <a className="footer-link" href="/">Application</a>
     </div>
     ];
-  }
-
-  renderSubscribeForm(){
-    return(
-      <div className="footer-subscribe">
-        <div className="footer-subscribe-subtitle">Subscribe to Chingu via Email</div>
-        <div className="footer-subscribe-lower">
-          <form id="footerSubscribe" onSubmit={(e) => this.handleSubmit(e)}>
-            <input disabled type="text" className="footer-subscribe-input" name="email" placeholder="Email Address" onChange={e => this.handleOnChange(e)}/>
-            <button type="submit" className="subscribeBtn">Subscribe</button>
-          </form>
-        </div>
-      </div>
-    );
   }
 
   renderSocialIcons(){
@@ -70,7 +57,7 @@ class Footer extends Component {
     return(
       <div className="footer">
         {this.renderLinkBoxes()}
-        {this.renderSubscribeForm()}
+        <SubscribeForm onSubmit={(e) => this.handleSubmit(e)} onChange={e => this.handleOnChange(e)}/>
         {this.renderSocialIcons()}
       </div>
     );
@@ -79,7 +66,7 @@ class Footer extends Component {
   renderMobileFooter(){
     return(
       <div className="footer">
-        {this.renderSubscribeForm()}
+        <SubscribeForm onSubmit={(e) => this.handleSubmit(e)} onChange={e => this.handleOnChange(e)}/>
         {this.renderSocialIcons()}
       </div>
     )

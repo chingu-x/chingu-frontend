@@ -470,13 +470,13 @@ button:hover {
       background-color: transparent;
       color: #15df89; }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .footer-desktop {
     display: none; } }
 
 .footer-mobile {
   display: none; }
-  @media (max-width: 1023px) {
+  @media (max-width: 1024px) {
     .footer-mobile {
       display: unset; } }
 
@@ -518,7 +518,7 @@ button:hover {
   @media (max-width: 1023px) {
     .footer .footer-subscribe {
       width: 100%; } }
-  @media (max-width: 1023px) {
+  @media (max-width: 1024px) {
     .footer .footer-subscribe .footer-subscribe-subtitle {
       text-align: center; } }
   .footer .footer-subscribe .footer-subscribe-lower > form {
@@ -526,7 +526,7 @@ button:hover {
     flex-direction: row;
     flex-wrap: nowrap;
     margin: 1em 0 0 0; }
-    @media (max-width: 1023px) {
+    @media (max-width: 1024px) {
       .footer .footer-subscribe .footer-subscribe-lower > form {
         justify-content: center; } }
     .footer .footer-subscribe .footer-subscribe-lower > form .footer-subscribe-input {
@@ -558,10 +558,9 @@ button:hover {
 .footer-social {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  width: 100%; }
+  align-items: flex-end; }
 
-@media (max-width: 1023px) and (min-width: 768px) {
+@media (max-width: 1024px) and (min-width: 768px) {
   .footer-social {
     flex-direction: row;
     justify-content: center;
@@ -577,7 +576,7 @@ button:hover {
     color: #ffffff;
     text-decoration: none;
     cursor: pointer; }
-    @media (max-width: 1023px) {
+    @media (max-width: 1024px) {
       .footer-social .footer-social-icon {
         margin: 0 1em; } }
     .footer-social .footer-social-icon:hover, .footer-social .footer-social-icon:focus {

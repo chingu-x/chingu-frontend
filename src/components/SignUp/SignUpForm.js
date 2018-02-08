@@ -37,7 +37,6 @@ class SignUpForm extends Component {
   };
 
   handleOnBlur(e) {
-    console.log(this.props);
     const name = e.target.name;
     const value = e.target.value;
     this.setState(
