@@ -114,7 +114,7 @@ class SignUpForm extends Component {
     let githubValid = this.state.githubValid;
     let countryValid = this.state.countryValid;
     const reEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const reAlphaNum = /^[a-zA-Z0-9]*$/;
+    const reAlphaNum = /^[a-zA-Z0-9-\s]*$/;
     const reAlphaNumHy = /^[a-zA-Z0-9-_]*$/;
 
     switch (fieldName) {
