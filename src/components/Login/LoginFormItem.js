@@ -10,7 +10,7 @@ const LoginFormItem = props => {
         name={props.name}
         onBlur={props.onBlur}
         onChange={props.onChange}
-        autoComplete="off"
+        autoComplete="on"
       />
       <i className={props.iconName}></i>
       {props.formErrors[props.name] ? <p className="errorMessage">{props.errorMessage}</p> : ""}
