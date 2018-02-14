@@ -19,6 +19,7 @@ class LoginForm extends Component {
   };
 
   handleOnBlur(e) {
+    console.log(e.target)
     const name = e.target.name;
     const value = e.target.value;
     this.setState(

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import getSlackSecret from "../../queries/getSlackSecret";
-import image from "../../styles/assets/slack_key_gif.mp4";
+import image from "../../styles/assets/slackkey.JPG";
 
 class SlackKey extends Component {
 
