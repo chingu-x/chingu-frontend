@@ -58,8 +58,9 @@ class Profile extends Component {
           <h1>User not found</h1>
       );
     } 
-    let {first_name, last_name, github_url, twitter_url, website_url, blog_url, bio, skills, cohorts, projects} = this.props.data.user;
-    //for testing purposes
+    let {first_name, last_name, github_url, twitter_url, website_url, blog_url, linkedin_url, portfolio_url, bio, skills, cohorts, projects} = this.props.data.user;
+
+    // TODO: Verify order of links.
     return (
       <div className="profile">
         <div className="profile-top">
@@ -68,8 +69,10 @@ class Profile extends Component {
             <h1>{first_name} {last_name}</h1>
             <div className="profile-links">
               { github_url ? <a href={github_url} target="_blank">Github</a> : "" }
+              { linkedin_url ? <a href={linkedin_url} target="_blank">LinkedIn</a> : "" }
               { twitter_url ? <a href={twitter_url} target="_blank">Twitter</a> : "" }
               { website_url ? <a href={website_url} target="_blank">Website</a> : "" }
+              { portfolio_url ? <a href={portfolio_url} target="_blank">Portfolio</a> : "" }
               { blog_url ? <a href={blog_url} target="_blank">Blog</a> : "" }
             </div>
             { bio ? <p>{bio}</p> : <p></p>}

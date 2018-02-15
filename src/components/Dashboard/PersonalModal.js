@@ -1,6 +1,7 @@
 import React from "react";
 
 // TODO: add verification of data.
+// Do we want additional information?
 
 const PersonalModal = ({user, onChange}) => {
   let {first_name, last_name} = user;
