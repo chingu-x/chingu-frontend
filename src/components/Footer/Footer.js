@@ -72,7 +72,6 @@ class Footer extends Component {
     )
   }
 render(){
-  console.log(process.env.REACT_APP_CLIENT_SECRET)
   return (
     <div className="footer-wrapper">
       <div className="footer-desktop">{this.renderDesktopFooter()}</div>
