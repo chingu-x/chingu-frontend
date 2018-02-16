@@ -1,4 +1,4 @@
-##Flag-Icon-Css-Library
+## Flag-Icon-Css-Library
 
 The flag page utilizes the public flag-icon-css library from http://flag-icon-css.lip.is/
 
@@ -13,5 +13,5 @@ I figured that the best solution(performance wise), was to rebuild the library t
 The rebuilt library works exactly the same as the one mentioned above in the link except that
 instead of using ```class='flag flag-icon-background flag-icon-us'```, you would use ```class='flag flag-icon-background flag-icon-238'```.  The number 238 corresponds to the ID number within the API.
 
-Right now, there are a few hiccups in the library such as unsupported countries, but most of these countries such as (Antarctica or North Korea) would highly unlikely have Chingu Members.
+Right now, there are a few hiccups in the library such as unsupported countries, but most of these countries/territories such as Antarctica would highly unlikely have Chingu Members.
 
