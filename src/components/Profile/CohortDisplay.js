@@ -1,7 +1,6 @@
 import React from 'react';
 
 const CohortDisplay = ({cohort}) => {
-  console.log(cohort)
   return (
     <div>
       <div>{cohort.title}</div>

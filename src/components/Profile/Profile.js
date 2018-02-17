@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import userQuery from "../../queries/profileQuery";
 import CohortDisplay from "./CohortDisplay";
+import ProjectDisplay from "./ProjectDisplay";
 import image from "../../styles/assets/bear8.jpg";
 
 class Profile extends Component {
@@ -38,7 +39,9 @@ class Profile extends Component {
     if(projects.length > 0) {
       return Object.keys(projects).map(project => {
         return (
-          <div key={project} className="profile-project">Project</div>
+          <div key={project} className="profile-project">
+            <ProjectDisplay project={projects[project]}/>
+          </div>
         );
       })
     } else {
