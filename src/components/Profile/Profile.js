@@ -8,6 +8,7 @@ import image from "../../styles/assets/bear8.jpg";
 class Profile extends Component {
   state = {};
 
+  // Render skills boxes.  Skill currently not implemented.
   renderSkills(skills){
     if(skills.length > 0) {
       return Object.keys(skills).map(skill => {
@@ -16,10 +17,11 @@ class Profile extends Component {
         );
       })
     } else {
-      return <p>No Skills Listed</p>;
+      return <p>Skills are on their way!</p>;
     }
   }
 
+  // Render cohort boxes.
   renderCohorts(cohorts){
     if(cohorts.length > 0) {
       return Object.keys(cohorts).map(cohort => {
@@ -34,6 +36,7 @@ class Profile extends Component {
     }
   }
 
+  // Render project boxes.  Project images not implemented yet.
   renderProjects(projects){
     //projects data is currently not flowing
     if(projects.length > 0) {

@@ -3,6 +3,7 @@ import React from "react";
 const ProjectDisplay = ({ project }) => {
   console.log(project.skills);
 
+  // Render skills boxes.  Skill currently not implemented.
   function renderSkills(skills){
     if(skills.length > 0) {
       return Object.keys(skills).map(skill => {
