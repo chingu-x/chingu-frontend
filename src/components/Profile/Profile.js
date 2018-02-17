@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import userQuery from "../../queries/profileQuery";
+import CohortDisplay from "./CohortDisplay";
 import image from "../../styles/assets/bear8.jpg";
 
 class Profile extends Component {
@@ -8,9 +9,9 @@ class Profile extends Component {
 
   renderSkills(skills){
     if(skills.length > 0) {
-      Object.keys(skills).map(skill => {
+      return Object.keys(skills).map(skill => {
         return (
-          <div className="profile-skills">Skills</div>
+          <div key={skill} className="profile-skills">Skills</div>
         );
       })
     } else {
@@ -20,9 +21,11 @@ class Profile extends Component {
 
   renderCohorts(cohorts){
     if(cohorts.length > 0) {
-      Object.keys(cohorts).map(cohort => {
+      return Object.keys(cohorts).map(cohort => {
         return (
-          <div className="profile-cohort">Cohort</div>
+          <div key={cohort} className="profile-cohort">
+            <CohortDisplay cohort={cohorts[cohort]}/>
+          </div>
         );
       })
     } else {
@@ -33,9 +36,9 @@ class Profile extends Component {
   renderProjects(projects){
     //projects data is currently not flowing
     if(projects.length > 0) {
-      Object.keys(projects).map(project => {
+      return Object.keys(projects).map(project => {
         return (
-          <div className="profile-project">Project</div>
+          <div key={project} className="profile-project">Project</div>
         );
       })
     } else {
@@ -88,7 +91,8 @@ class Profile extends Component {
           <div className="profile-section profile-bottom-right">
             <div className="section-header">Skills</div>
             <div className="profile-skills-list">
-              {this.renderSkills(skills)}
+              Skills are on their way!
+              {/*{this.renderSkills(skills)}  // Skills are being populated currently.*/} 
             </div>
             <div className="section-header">Cohorts</div>
             <div className="profile-cohorts-list">
