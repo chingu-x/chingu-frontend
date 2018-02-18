@@ -5,6 +5,8 @@ import updateUser from "../../mutations/updateUser";
 import LinksModal from "./LinksModal";
 import BioModal from "./BioModal";
 import PersonalModal from "./PersonalModal";
+import Button from "../common/Button";
+import image from "../../styles/assets/bear8.jpg";
 
 // TODO: add verification of data.
 
@@ -13,6 +15,7 @@ class Dashboard extends Component {
     super(props);
 
     this.state = {
+      currentPage: "personal",
       currentModal: "",
       first_name: "",
       last_name: "",
@@ -84,7 +87,7 @@ class Dashboard extends Component {
       } else {
         value = "";
         errorMessages[e.target.name] =
-          "Name must contain only letters, numbers, hyphens and underscores.";
+          "Name must contain only letters, numbers, - and _.";
       }
     } else if (e.target.name === "bio") {
       if (this.validate(e.target.value, "bio")) {
@@ -197,6 +200,12 @@ class Dashboard extends Component {
     }
   }
 
+  togglePage(currentPage) {
+    this.setState({
+      currentPage: currentPage
+    });
+  }
+
   toggleModal(currentModal) {
     if (this.state.currentModal === "") {
       this.setState({
@@ -206,6 +215,96 @@ class Dashboard extends Component {
       this.setState({
         currentModal: ""
       });
+    }
+  }
+
+  renderPage(){
+    let {
+      first_name,
+      last_name,
+      bio,
+      github_url,
+      linkedin_url,
+      portfolio_url,
+      website_url,
+      twitter_url,
+      blog_url,
+      profile_image
+    } = this.props.data.user;
+    if(this.state.currentPage === "personal") {
+      return(
+        <React.Fragment>
+          <div className="dashboard-body-header">
+            <h3>Personal Details</h3>
+            <Button
+              type="button"
+              classname="dash-btn"
+              onClick={() => this.toggleModal("personal")}
+              text="Edit"
+            />
+          </div>
+          <div className="dashboard-body-item">
+            <span className="dashboard-body-left">First Name: </span>
+            <span className="dashboard-body-right">{first_name} </span>
+          </div>
+          <div className="dashboard-body-item">
+            <span className="dashboard-body-left">Last Name: </span>
+            <span className="dashboard-body-right">{last_name} </span>
+          </div>
+        </React.Fragment>
+      );
+    } else if (this.state.currentPage === "profile") {
+      return (
+        <React.Fragment>
+          <div className="dashboard-body-header">
+              <h3>Bio</h3>
+              <Button 
+                type="button" 
+                classname="dash-btn"
+                onClick={() => this.toggleModal("bio")}
+                text="Edit"
+              />
+            </div>
+            <div className="dashboard-body-item">
+              <span className="dashboard-body-left">About Me: </span>
+              <span className="dashboard-body-right">{bio} </span>
+            </div>
+
+          <div className="dashboard-body-header">
+            <h3>Links</h3>
+            <Button 
+              type="button" 
+              classname="dash-btn"
+              onClick={() => this.toggleModal("links")}
+              text="Edit"
+            />
+          </div>
+          <div className="dashboard-body-item">
+            <span className="dashboard-body-left">LinkedIn: </span>
+            <span className="dashboard-body-right">{linkedin_url} </span>
+          </div>
+          <div className="dashboard-body-item">
+            <span className="dashboard-body-left">Github: </span>
+            <span className="dashboard-body-right">{github_url} </span>
+          </div>
+          <div className="dashboard-body-item">
+            <span className="dashboard-body-left">Portfolio: </span>
+            <span className="dashboard-body-right">{portfolio_url} </span>
+          </div>
+          <div className="dashboard-body-item">
+            <span className="dashboard-body-left">Website: </span>
+            <span className="dashboard-body-right">{website_url} </span>
+          </div>
+          <div className="dashboard-body-item">
+            <span className="dashboard-body-left">Twitter: </span>
+            <span className="dashboard-body-right">{twitter_url} </span>
+          </div>
+          <div className="dashboard-body-item">
+            <span className="dashboard-body-left">Blog: </span>
+            <span className="dashboard-body-right">{blog_url} </span>
+          </div>
+        </React.Fragment>
+      );
     }
   }
 
@@ -221,10 +320,17 @@ class Dashboard extends Component {
               </div>
               <div className="edit-modal-body">{this.renderModalBody()}</div>
               <div className="edit-modal-bottom">
-                <button type="button" onClick={() => this.toggleModal("")}>
-                  Close
-                </button>
-                <button tyoe="submit">Submit</button>
+                <Button 
+                  type="button" 
+                  classname="modal-btn red"
+                  onClick={() => this.toggleModal("")}
+                  text="Cancel" 
+                />
+                <Button 
+                  type="submit"
+                  classname="modal-btn"
+                  text="Submit"
+                />
               </div>
             </form>
           </div>
@@ -254,42 +360,30 @@ class Dashboard extends Component {
       portfolio_url,
       website_url,
       twitter_url,
-      blog_url
+      blog_url,
+      profile_image
     } = this.props.data.user;
-    
+    console.log(this.props.data.user);
+
     return (
-      <div>
-        <div>
-          <h3>Personal</h3>
-          <button type="button" onClick={() => this.toggleModal("personal")}>
-            Edit
-          </button>
+      <div className="dashboard">
+        <div className="dashboard-header">
+          <h2>SETTINGS</h2>
         </div>
-        <div>First Name: {first_name} </div>
-        <div>Last Name: {last_name} </div>
-
-        <div>
-          <h3>Bio</h3>
-          <button type="button" onClick={() => this.toggleModal("bio")}>
-            Edit
-          </button>
+        <div className="dashboard-main">
+          <div className="dashboard-sidebar">
+            <img src={profile_image || image} className="dashboard-img" />
+            <div className="dashboard-name">
+              {first_name} {last_name}
+            </div>
+            <div className={this.state.currentPage === "personal" ? "dashboard-option current" : "dashboard-option"} onClick={() => this.togglePage("personal")}>Personal Details</div>
+            <div className={this.state.currentPage === "profile" ? "dashboard-option current" : "dashboard-option"} onClick={() => this.togglePage("profile")}>Public Profile</div>
+          </div>
+          <div className="dashboard-body">
+            {this.renderPage()}
+            {this.renderModal()}
+          </div>
         </div>
-        <div>Bio: {bio} </div>
-
-        <div>
-          <h3>Links</h3>
-          <button type="button" onClick={() => this.toggleModal("links")}>
-            Edit
-          </button>
-        </div>
-        <div>LinkedIn: {linkedin_url} </div>
-        <div>Github: {github_url} </div>
-        <div>Portfolio: {portfolio_url} </div>
-        <div>Website: {website_url} </div>
-        <div>Twitter: {twitter_url} </div>
-        <div>Blog: {blog_url} </div>
-
-        {this.renderModal()}
       </div>
     );
   }

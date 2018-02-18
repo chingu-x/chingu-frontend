@@ -417,14 +417,14 @@ button:hover {
   flex-direction: column;
   align-content: center; }
 
-.errorMessage {
+.errorMessages {
   position: absolute;
   left: 0;
-  bottom: -8px;
+  bottom: -24px;
   padding: 0;
   margin: 0;
   color: red;
-  font-size: 0.8em; }
+  font-size: 0.9em; }
 
 .header {
   display: flex;
@@ -593,6 +593,25 @@ button:hover {
   font-size: 18px;
   border: none; }
 
+.dash-btn {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  color: #15df89;
+  font-weight: 700; }
+
+.modal-btn {
+  background: transparent;
+  border: 3px solid #15df89;
+  color: #15df89;
+  font-weight: 700;
+  padding: 0.4em 0.6em; }
+  .modal-btn.red {
+    background: red;
+    border: 3px solid red;
+    color: #ffffff; }
+
 .landing-item {
   display: block;
   margin: 0 2.5em; }
@@ -752,6 +771,70 @@ button:hover {
     left: 5px;
     color: #767676; }
 
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  background-color: #dbdce1; }
+  .dashboard .dashboard-header {
+    background-color: #8aefc4;
+    color: #0f143a;
+    text-align: center; }
+    .dashboard .dashboard-header h2 {
+      margin: 0.3rem 0;
+      padding: 0; }
+  .dashboard .dashboard-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 5em; }
+    .dashboard .dashboard-main .dashboard-sidebar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 25%;
+      padding: 0 2rem; }
+      .dashboard .dashboard-main .dashboard-sidebar .dashboard-img {
+        height: 150px;
+        width: 150px; }
+      .dashboard .dashboard-main .dashboard-sidebar .dashboard-name {
+        margin: 1rem 0;
+        font-size: 1.2rem;
+        font-weight: 700; }
+      .dashboard .dashboard-main .dashboard-sidebar .dashboard-option {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid #0f143a;
+        cursor: pointer; }
+        .dashboard .dashboard-main .dashboard-sidebar .dashboard-option:hover {
+          background-color: #0f143a;
+          color: white; }
+    .dashboard .dashboard-main .dashboard-body {
+      min-height: 60vh;
+      width: 75%;
+      padding: 0 1.5em;
+      margin: 0 1em;
+      background-color: #ffffff;
+      box-shadow: 5px 5px 10px #d3d3d3; }
+      .dashboard .dashboard-main .dashboard-body .dashboard-body-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 2.5em;
+        border-bottom: 1px solid #0f143a; }
+        .dashboard .dashboard-main .dashboard-body .dashboard-body-header h3 {
+          margin: 0.5em 0 0.5em 0;
+          padding: 0; }
+      .dashboard .dashboard-main .dashboard-body .dashboard-body-item {
+        display: flex;
+        flex-direction: row;
+        padding-top: 1em; }
+        .dashboard .dashboard-main .dashboard-body .dashboard-body-item .dashboard-body-left {
+          width: 25%; }
+        .dashboard .dashboard-main .dashboard-body .dashboard-body-item .dashboard-body-right {
+          width: 75%; }
+
+/* ----- Edit Modal ----- */
 .modal-wrapper {
   position: absolute;
   left: 0;
@@ -773,42 +856,63 @@ button:hover {
   z-index: z-index("overlay"); }
 
 .edit-modal {
+  position: relative;
   margin: 0 auto;
-  height: auto;
-  width: 565px;
-  background-color: #FFF;
+  min-height: auto;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fff;
   border: none;
-  border-radius: 8px;
   z-index: z-index("modal");
-  animation: slideInTop .75s ease both; }
+  animation: slideInTop 0.75s ease both; }
   @media (max-width: 565px) {
     .edit-modal {
       width: 100%; } }
+  .edit-modal form {
+    height: 100%; }
   .edit-modal .edit-modal-header {
-    padding: 0.5em;
     border-bottom: 1px solid #d3d3d3;
     font-size: 1.3em;
     text-align: center; }
+    .edit-modal .edit-modal-header h3 {
+      padding: 1.5em 0 0 0;
+      margin: 0; }
   .edit-modal .edit-modal-body {
-    padding: 1em;
-    border-bottom: 1px solid #d3d3d3; }
-    .edit-modal .edit-modal-body .edit-modal-subheader {
-      padding-bottom: 0.5em;
-      font-size: 1.1em;
-      font-weight: 700; }
-    .edit-modal .edit-modal-body input {
-      padding: 0.5em;
-      margin-bottom: 1em;
-      outline: none;
-      width: 100%; }
-    .edit-modal .edit-modal-body textarea {
-      padding: 0.5em;
-      margin-bottom: 1em;
-      width: 100%;
-      outline: none; }
+    padding: 1em 2em;
+    display: flex;
+    flex-direction: column; }
+    .edit-modal .edit-modal-body .edit-modal-item {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 1em 0; }
+      .edit-modal .edit-modal-body .edit-modal-item.textarea {
+        align-items: flex-start; }
+      .edit-modal .edit-modal-body .edit-modal-item .edit-modal-left {
+        width: 30%; }
+      .edit-modal .edit-modal-body .edit-modal-item .edit-modal-right {
+        position: relative;
+        width: 70%; }
+        .edit-modal .edit-modal-body .edit-modal-item .edit-modal-right input {
+          position: relative;
+          padding: 0.5em;
+          outline: none;
+          width: 100%; }
+        .edit-modal .edit-modal-body .edit-modal-item .edit-modal-right textarea {
+          position: relative;
+          padding: 0.5em;
+          margin-bottom: 1em;
+          width: 100%;
+          outline: none;
+          resize: none; }
   .edit-modal .edit-modal-bottom {
-    padding-right: 1em;
-    text-align: right; }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1em 2em 2em 2em; }
 
 @keyframes slideInTop {
   0% {
@@ -818,6 +922,7 @@ button:hover {
     opacity: 1;
     transform: translateY(100px); } }
 
+/* ----- /Edit Modal ----- */
 .landing {
   position: relative; }
   .landing .landing-top {

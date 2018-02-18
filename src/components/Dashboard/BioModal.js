@@ -7,8 +7,14 @@ const BioModal = ({user, onChange, errorMessages}) => {
 
   return (
     <React.Fragment>
-      <textarea placeholder={bio || "Tell us a little about yourself!" }  name="bio" onChange={onChange}/>
-      <div className="errorMessages">{errorMessages.bio}</div>
+    <div className="edit-modal-item textarea">
+      <div className="edit-modal-left">About Me: </div>
+      <div className="edit-modal-right">
+        <textarea placeholder={bio || "Tell us a little about yourself!" } rows="10"  name="bio" onChange={onChange}/>
+        <div className="errorMessages">{errorMessages.bio}</div>    
+      </div>
+    
+    </div>
     </React.Fragment>
   );
 };

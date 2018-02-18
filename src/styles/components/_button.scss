@@ -9,3 +9,26 @@
   font-size: 18px;
   border: none;
 }
+
+.dash-btn {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  color: color-list("accent");
+  font-weight: 700;
+}
+
+.modal-btn {
+  background: transparent;
+  border: 3px solid color-list("accent");
+  color: color-list("accent");
+  font-weight: 700;
+  padding: 0.4em 0.6em;
+
+  &.red {
+    background: red;
+    border: 3px solid red;
+    color: color-list("text-light");
+  }
+}
