@@ -49,6 +49,7 @@
     display: flex;
     flex-direction: row;
     margin-top: 2em;
+    margin-bottom: 2em;
     text-align: left;
     background-color: color-list("text-light");
 
@@ -98,3 +99,60 @@
     height: 250px;
   }
 }
+
+/* ----- ProjectDisplay ----- */
+
+.project-display {
+  display: flex;
+  flex-direction: row;
+
+  .project-display-left {
+    width: 40%;
+
+    img {
+      height: auto;
+      width: 200px;
+    }
+  }
+
+  .project-display-right {
+    width: 60%;
+
+    .project-display-title {
+      font-size: 1.3em;
+      font-weight: 700;
+    }
+
+    .project-display-links {
+      display: flex;
+      flex-direction: row;
+      margin: 0.5em 0;
+
+      a {
+        margin-right: 1em;
+        color: color-list("accent");
+        font-weight: 700;
+        text-transform: capitalize;
+      }
+
+      span {
+        margin-right: 1em;
+      }
+    }
+
+    .project-display-desc{
+      width: 100%;
+      text-align: left;
+      margin: 0.5em 0;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+/* ----- /ProjectDisplay ----- */

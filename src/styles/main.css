@@ -1200,6 +1200,7 @@ button:hover {
     display: flex;
     flex-direction: row;
     margin-top: 2em;
+    margin-bottom: 2em;
     text-align: left;
     background-color: #ffffff; }
     .profile .profile-bottom .profile-section {
@@ -1235,6 +1236,37 @@ button:hover {
     background-color: #ffffff;
     height: 250px; }
 
+/* ----- ProjectDisplay ----- */
+.project-display {
+  display: flex;
+  flex-direction: row; }
+  .project-display .project-display-left {
+    width: 40%; }
+    .project-display .project-display-left img {
+      height: auto;
+      width: 200px; }
+  .project-display .project-display-right {
+    width: 60%; }
+    .project-display .project-display-right .project-display-title {
+      font-size: 1.3em;
+      font-weight: 700; }
+    .project-display .project-display-right .project-display-links {
+      display: flex;
+      flex-direction: row;
+      margin: 0.5em 0; }
+      .project-display .project-display-right .project-display-links a {
+        margin-right: 1em;
+        color: #15df89;
+        font-weight: 700;
+        text-transform: capitalize; }
+      .project-display .project-display-right .project-display-links span {
+        margin-right: 1em; }
+    .project-display .project-display-right .project-display-desc {
+      width: 100%;
+      text-align: left;
+      margin: 0.5em 0; }
+
+/* ----- /ProjectDisplay ----- */
 .signup-box {
   display: flex;
   flex-direction: column;
