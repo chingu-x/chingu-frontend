@@ -69,7 +69,7 @@ class Profile extends Component {
     } 
     let {first_name, last_name, github_url, twitter_url, website_url, blog_url, linkedin_url, portfolio_url, bio, skills, cohorts, projects} = this.props.data.user;
 
-    // TODO: Verify order of links.
+    // TODO: Verify order of links. 
     return (
       <div className="profile">
         <div className="profile-top">
@@ -86,7 +86,7 @@ class Profile extends Component {
             </div>
             </div>
             </div>
-        <div className="profile-bio">{ bio ? <div>{bio}</div> : <div></div>}</div>
+        { bio ? <div className="profile-bio">{bio}</div> : null}
         { bio ? (<div className="profile-bottom">
           <div className="profile-section profile-bottom-left">
             <div className="section-header">Projects</div>

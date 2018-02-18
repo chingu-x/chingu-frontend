@@ -6,7 +6,7 @@
   .profile-top {
     display: flex;
     flex-direction: row;
-    border: 1px solid color-list("text-muted");
+    border: 1px solid color-list("borders");
     max-height: 250px;
     background-color: color-list("text-light");
 
@@ -48,7 +48,7 @@
   .profile-bio {
     min-height: 100px;
     padding: 1em;
-    border: 1px solid color-list("text-dark");
+    border: 1px solid color-list("borders");
     border-top: none;
     text-align: left;
 
@@ -64,7 +64,7 @@
     margin-bottom: 2em;
     text-align: left;
     background-color: color-list("text-light");
-    border: 1px solid color-list("text-muted");
+    border: 1px solid color-list("borders");
 
     .profile-section {
       padding: 2em;
@@ -118,7 +118,7 @@
 .project-display {
   display: flex;
   flex-direction: row;
-  border: 1px solid color-list("text-dark");
+  border: 1px solid color-list("borders");
 
   .project-display-left {
     width: 40%;
@@ -172,7 +172,7 @@
   flex-direction: column;
   margin: 0.5rem 0;
   padding: 0.5rem;
-  border: 1px solid color-list("text-dark");
+  border: 1px solid color-list("borders");
 
   .cohort-display-title {
     font-size: 1.1em;

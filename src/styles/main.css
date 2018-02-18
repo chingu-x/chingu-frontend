@@ -812,7 +812,7 @@ button:hover {
     .dashboard .dashboard-main .dashboard-body {
       min-height: 60vh;
       width: 75%;
-      padding: 0 1.5em;
+      padding: 0 1.5em 2.5em 1.5em;
       margin: 0 1em;
       background-color: #ffffff;
       box-shadow: 5px 5px 10px #d3d3d3; }
@@ -1171,7 +1171,7 @@ button:hover {
   .profile .profile-top {
     display: flex;
     flex-direction: row;
-    border: 1px solid #767676;
+    border: 1px solid #d3d3d3;
     max-height: 250px;
     background-color: #ffffff; }
     .profile .profile-top .profile-img {
@@ -1199,7 +1199,7 @@ button:hover {
   .profile .profile-bio {
     min-height: 100px;
     padding: 1em;
-    border: 1px solid #000000;
+    border: 1px solid #d3d3d3;
     border-top: none;
     text-align: left; }
     .profile .profile-bio p {
@@ -1211,7 +1211,7 @@ button:hover {
     margin-bottom: 2em;
     text-align: left;
     background-color: #ffffff;
-    border: 1px solid #767676; }
+    border: 1px solid #d3d3d3; }
     .profile .profile-bottom .profile-section {
       padding: 2em; }
       .profile .profile-bottom .profile-section.profile-bottom-left {
@@ -1249,7 +1249,7 @@ button:hover {
 .project-display {
   display: flex;
   flex-direction: row;
-  border: 1px solid #000000; }
+  border: 1px solid #d3d3d3; }
   .project-display .project-display-left {
     width: 40%; }
     .project-display .project-display-left img {
@@ -1284,7 +1284,7 @@ button:hover {
   flex-direction: column;
   margin: 0.5rem 0;
   padding: 0.5rem;
-  border: 1px solid #000000; }
+  border: 1px solid #d3d3d3; }
   .cohort-display .cohort-display-title {
     font-size: 1.1em;
     font-weight: 700; }
