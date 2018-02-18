@@ -1177,7 +1177,7 @@ button:hover {
     .profile .profile-top .profile-img {
       max-height: 250px;
       max-width: 250px; }
-    .profile .profile-top .profile-bio {
+    .profile .profile-top .profile-info {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -1185,27 +1185,35 @@ button:hover {
       padding: 2em 3em;
       text-align: left;
       font-size: 0.9em; }
-      .profile .profile-top .profile-bio h1 {
+      .profile .profile-top .profile-info h1 {
         margin: 0; }
-      .profile .profile-top .profile-bio .profile-links {
+      .profile .profile-top .profile-info .profile-links {
         padding-top: 1em; }
-        .profile .profile-top .profile-bio .profile-links a {
+        .profile .profile-top .profile-info .profile-links a {
           margin-right: 1em;
           text-decoration: none;
           font-weight: bold;
           color: #15df89; }
-          .profile .profile-top .profile-bio .profile-links a:hover, .profile .profile-top .profile-bio .profile-links a:focus {
+          .profile .profile-top .profile-info .profile-links a:hover, .profile .profile-top .profile-info .profile-links a:focus {
             color: #0f143a; }
+  .profile .profile-bio {
+    min-height: 100px;
+    padding: 1em;
+    border: 1px solid #000000;
+    border-top: none;
+    text-align: left; }
+    .profile .profile-bio p {
+      margin: 0; }
   .profile .profile-bottom {
     display: flex;
     flex-direction: row;
     margin-top: 2em;
     margin-bottom: 2em;
     text-align: left;
-    background-color: #ffffff; }
+    background-color: #ffffff;
+    border: 1px solid #767676; }
     .profile .profile-bottom .profile-section {
-      padding: 2em;
-      border: 1px solid #767676; }
+      padding: 2em; }
       .profile .profile-bottom .profile-section.profile-bottom-left {
         width: 65%; }
       .profile .profile-bottom .profile-section.profile-bottom-right {
@@ -1213,9 +1221,10 @@ button:hover {
         flex-direction: column;
         width: 35%; }
       .profile .profile-bottom .profile-section .section-header {
+        margin-bottom: 0.5em;
         font-size: 1.3em;
-        color: #767676;
-        font-weight: bold; }
+        color: #000000;
+        font-weight: 700; }
       .profile .profile-bottom .profile-section .profile-skills-list {
         display: flex;
         flex-direction: row;
@@ -1239,7 +1248,8 @@ button:hover {
 /* ----- ProjectDisplay ----- */
 .project-display {
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+  border: 1px solid #000000; }
   .project-display .project-display-left {
     width: 40%; }
     .project-display .project-display-left img {
@@ -1248,6 +1258,7 @@ button:hover {
   .project-display .project-display-right {
     width: 60%; }
     .project-display .project-display-right .project-display-title {
+      margin-top: 0.5em;
       font-size: 1.3em;
       font-weight: 700; }
     .project-display .project-display-right .project-display-links {
@@ -1267,6 +1278,21 @@ button:hover {
       margin: 0.5em 0; }
 
 /* ----- /ProjectDisplay ----- */
+/* ----- CohortDisplay ----- */
+.cohort-display {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border: 1px solid #000000; }
+  .cohort-display .cohort-display-title {
+    font-size: 1.1em;
+    font-weight: 700; }
+  .cohort-display .cohort-display-stats {
+    font-size: 0.9em;
+    color: #767676; }
+
+/* ----- /CohortDisplay ----- */
 .signup-box {
   display: flex;
   flex-direction: column;

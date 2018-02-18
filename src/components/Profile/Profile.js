@@ -74,7 +74,7 @@ class Profile extends Component {
       <div className="profile">
         <div className="profile-top">
           <img src={image} alt="" className="profile-img" />
-          <div className="profile-bio">
+          <div className="profile-info">
             <h1>{first_name} {last_name}</h1>
             <div className="profile-links">
               { github_url ? <a href={github_url} target="_blank">Github</a> : "" }
@@ -84,9 +84,9 @@ class Profile extends Component {
               { portfolio_url ? <a href={portfolio_url} target="_blank">Portfolio</a> : "" }
               { blog_url ? <a href={blog_url} target="_blank">Blog</a> : "" }
             </div>
-            { bio ? <p>{bio}</p> : <p></p>}
-          </div>
-        </div>
+            </div>
+            </div>
+        <div className="profile-bio">{ bio ? <div>{bio}</div> : <div></div>}</div>
         { bio ? (<div className="profile-bottom">
           <div className="profile-section profile-bottom-left">
             <div className="section-header">Projects</div>

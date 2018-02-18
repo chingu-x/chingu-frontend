@@ -15,7 +15,7 @@
       max-width: 250px;
     }
 
-    .profile-bio {
+    .profile-info {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -45,6 +45,18 @@
     }
   }
 
+  .profile-bio {
+    min-height: 100px;
+    padding: 1em;
+    border: 1px solid color-list("text-dark");
+    border-top: none;
+    text-align: left;
+
+    p {
+      margin: 0;
+    }
+  }
+
   .profile-bottom {
     display: flex;
     flex-direction: row;
@@ -52,10 +64,10 @@
     margin-bottom: 2em;
     text-align: left;
     background-color: color-list("text-light");
+    border: 1px solid color-list("text-muted");
 
     .profile-section {
       padding: 2em;
-      border: 1px solid color-list("text-muted");
 
       &.profile-bottom-left {
         width: 65%;
@@ -68,9 +80,10 @@
       }
 
       .section-header {
+        margin-bottom: 0.5em;
         font-size: 1.3em;
-        color: color-list("text-muted");
-        font-weight: bold;
+        color: color-list("text-dark");
+        font-weight: 700;
       }
 
       .profile-skills-list {
@@ -105,6 +118,7 @@
 .project-display {
   display: flex;
   flex-direction: row;
+  border: 1px solid color-list("text-dark");
 
   .project-display-left {
     width: 40%;
@@ -119,6 +133,7 @@
     width: 60%;
 
     .project-display-title {
+      margin-top: 0.5em;
       font-size: 1.3em;
       font-weight: 700;
     }
@@ -148,11 +163,26 @@
   }
 }
 
-
-
-
-
-
-
-
 /* ----- /ProjectDisplay ----- */
+
+/* ----- CohortDisplay ----- */
+
+.cohort-display {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border: 1px solid color-list("text-dark");
+
+  .cohort-display-title {
+    font-size: 1.1em;
+    font-weight: 700;
+  }
+
+  .cohort-display-stats {
+    font-size: 0.9em;
+    color: color-list("text-muted")
+  }
+}
+
+/* ----- /CohortDisplay ----- */
