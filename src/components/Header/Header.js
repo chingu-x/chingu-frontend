@@ -25,7 +25,7 @@ class Header extends Component {
         <Link key="1" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/" onClick={e => this.handleLogout(e)}>
           Log Out
         </Link>,
-        <Link key="2" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/" >
+        <Link key="2" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/myaccount" >
           <i className="far fa-user fa-2x" />
         </Link>
       ];
