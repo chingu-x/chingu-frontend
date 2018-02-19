@@ -22,7 +22,7 @@ const ProjectDisplay = ({ project }) => {
   return (
     <div className="project-display">
       <div className="project-display-left">
-        <img src={image} />
+        <img src={image} alt="User" />
       </div>
       <div className="project-display-right">
         <div className="project-display-title">{project.title}</div>

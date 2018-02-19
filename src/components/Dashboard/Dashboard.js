@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { compose, graphql } from "react-apollo";
+import { Link } from "react-router-dom";
 import dashboardQuery from "../../queries/dashboardQuery";
 import updateUser from "../../mutations/updateUser";
-import LinksModal from "./LinksModal";
-import BioModal from "./BioModal";
-import PersonalModal from "./PersonalModal";
-import Button from "../common/Button";
+import Modals from "./Modals";
+import DashboardFrames from "./DashboardFrames";
 import image from "../../styles/assets/bear8.jpg";
 
 // TODO: add verification of data.
@@ -15,7 +14,7 @@ class Dashboard extends Component {
     super(props);
 
     this.state = {
-      currentPage: "personal",
+      currentFrame: "personal",
       currentModal: "",
       first_name: "",
       last_name: "",
@@ -48,6 +47,7 @@ class Dashboard extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
+  //On Form Submit, Update User
   handleOnSubmit(e) {
     e.preventDefault();
 
@@ -55,6 +55,7 @@ class Dashboard extends Component {
     this.toggleModal();
   }
 
+  //On Input Change, Set State
   handleOnChange(e) {
     let value = "";
     let errorMessages = this.state.errorMessages;
@@ -110,7 +111,7 @@ class Dashboard extends Component {
   validate(item, type) {
     if (type === "link") {
       //Links must start with http or https
-      const re = /^(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+      const re = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
       return item.match(re);
     } else if (type === "name") {
       //Names can only contain letters, numbers, - and _
@@ -122,6 +123,7 @@ class Dashboard extends Component {
     }
   }
 
+  //Update User in the Database
   updateUser() {
     let updatedUser = {};
 
@@ -132,6 +134,7 @@ class Dashboard extends Component {
         return (updatedUser[i] = this.state[i]);
       }
     });
+
     let {
       first_name,
       last_name,
@@ -169,44 +172,15 @@ class Dashboard extends Component {
       });
   }
 
-  renderModalBody() {
-    switch (this.state.currentModal) {
-      case "links":
-        return (
-          <LinksModal
-            user={this.props.data.user}
-            onChange={e => this.handleOnChange(e)}
-            errorMessages={this.state.errorMessages}
-          />
-        );
-      case "bio":
-        return (
-          <BioModal
-            user={this.props.data.user}
-            onChange={e => this.handleOnChange(e)}
-            errorMessages={this.state.errorMessages}
-          />
-        );
-      case "personal":
-        return (
-          <PersonalModal
-            user={this.props.data.user}
-            onChange={e => this.handleOnChange(e)}
-            errorMessages={this.state.errorMessages}
-          />
-        );
-      default:
-        return null;
-    }
-  }
-
-  togglePage(currentPage) {
+  //Toggle Frame on the Right Side of the Display
+  toggleFrame(currentFrame) {
     this.setState({
-      currentPage: currentPage
+      currentFrame: currentFrame
     });
   }
 
-  toggleModal(currentModal) {
+  //Toggle Which Modal is Open
+  toggleModal = currentModal => {
     if (this.state.currentModal === "") {
       this.setState({
         currentModal: currentModal
@@ -216,125 +190,20 @@ class Dashboard extends Component {
         currentModal: ""
       });
     }
-  }
+  };
 
-  renderPage(){
-    let {
-      first_name,
-      last_name,
-      bio,
-      github_url,
-      linkedin_url,
-      portfolio_url,
-      website_url,
-      twitter_url,
-      blog_url,
-      profile_image
-    } = this.props.data.user;
-    if(this.state.currentPage === "personal") {
-      return(
-        <React.Fragment>
-          <div className="dashboard-body-header">
-            <h3>Personal Details</h3>
-            <Button
-              type="button"
-              classname="dash-btn"
-              onClick={() => this.toggleModal("personal")}
-              text="Edit"
-            />
-          </div>
-          <div className="dashboard-body-item">
-            <span className="dashboard-body-left">First Name: </span>
-            <span className="dashboard-body-right">{first_name} </span>
-          </div>
-          <div className="dashboard-body-item">
-            <span className="dashboard-body-left">Last Name: </span>
-            <span className="dashboard-body-right">{last_name} </span>
-          </div>
-        </React.Fragment>
-      );
-    } else if (this.state.currentPage === "profile") {
-      return (
-        <React.Fragment>
-          <div className="dashboard-body-header">
-              <h3>Bio</h3>
-              <Button 
-                type="button" 
-                classname="dash-btn"
-                onClick={() => this.toggleModal("bio")}
-                text="Edit"
-              />
-            </div>
-            <div className="dashboard-body-item">
-              <span className="dashboard-body-left">About Me: </span>
-              <span className="dashboard-body-right">{bio} </span>
-            </div>
-
-          <div className="dashboard-body-header">
-            <h3>Links</h3>
-            <Button 
-              type="button" 
-              classname="dash-btn"
-              onClick={() => this.toggleModal("links")}
-              text="Edit"
-            />
-          </div>
-          <div className="dashboard-body-item">
-            <span className="dashboard-body-left">LinkedIn: </span>
-            <span className="dashboard-body-right">{linkedin_url} </span>
-          </div>
-          <div className="dashboard-body-item">
-            <span className="dashboard-body-left">Github: </span>
-            <span className="dashboard-body-right">{github_url} </span>
-          </div>
-          <div className="dashboard-body-item">
-            <span className="dashboard-body-left">Portfolio: </span>
-            <span className="dashboard-body-right">{portfolio_url} </span>
-          </div>
-          <div className="dashboard-body-item">
-            <span className="dashboard-body-left">Website: </span>
-            <span className="dashboard-body-right">{website_url} </span>
-          </div>
-          <div className="dashboard-body-item">
-            <span className="dashboard-body-left">Twitter: </span>
-            <span className="dashboard-body-right">{twitter_url} </span>
-          </div>
-          <div className="dashboard-body-item">
-            <span className="dashboard-body-left">Blog: </span>
-            <span className="dashboard-body-right">{blog_url} </span>
-          </div>
-        </React.Fragment>
-      );
-    }
-  }
-
+  //Render the Modal
   renderModal() {
     if (this.state.currentModal !== "") {
       return (
-        <div className="modal-wrapper">
-          <div className="overlay" onClick={() => this.toggleModal("")} />
-          <div className="edit-modal">
-            <form onSubmit={e => this.handleOnSubmit(e)}>
-              <div className="edit-modal-header">
-                <h3>Edit Your Settings</h3>
-              </div>
-              <div className="edit-modal-body">{this.renderModalBody()}</div>
-              <div className="edit-modal-bottom">
-                <Button 
-                  type="button" 
-                  classname="modal-btn red"
-                  onClick={() => this.toggleModal("")}
-                  text="Cancel" 
-                />
-                <Button 
-                  type="submit"
-                  classname="modal-btn"
-                  text="Submit"
-                />
-              </div>
-            </form>
-          </div>
-        </div>
+        <Modals
+          currentModal={this.state.currentModal}
+          user={this.props.data.user}
+          errorMessages={this.state.errorMessages}
+          onChange={e => this.handleOnChange(e)}
+          toggleModal={this.toggleModal}
+          onSubmit={e => this.handleOnSubmit(e)}
+        />
       );
     } else {
       return null;
@@ -354,16 +223,9 @@ class Dashboard extends Component {
     let {
       first_name,
       last_name,
-      bio,
-      github_url,
-      linkedin_url,
-      portfolio_url,
-      website_url,
-      twitter_url,
-      blog_url,
-      profile_image
+      profile_image,
+      username
     } = this.props.data.user;
-    console.log(this.props.data.user);
 
     return (
       <div className="dashboard">
@@ -372,15 +234,44 @@ class Dashboard extends Component {
         </div>
         <div className="dashboard-main">
           <div className="dashboard-sidebar">
-            <img src={profile_image || image} className="dashboard-img" />
+            <img
+              src={profile_image || image}
+              className="dashboard-img"
+              alt="User"
+            />
             <div className="dashboard-name">
               {first_name} {last_name}
             </div>
-            <div className={this.state.currentPage === "personal" ? "dashboard-option current" : "dashboard-option"} onClick={() => this.togglePage("personal")}>Personal Details</div>
-            <div className={this.state.currentPage === "profile" ? "dashboard-option current" : "dashboard-option"} onClick={() => this.togglePage("profile")}>Public Profile</div>
+            <div
+              className={
+                this.state.currentFrame === "personal"
+                  ? "dashboard-option current"
+                  : "dashboard-option"
+              }
+              onClick={() => this.toggleFrame("personal")}
+            >
+              Personal Details
+            </div>
+            <div
+              className={
+                this.state.currentFrame === "profile"
+                  ? "dashboard-option current"
+                  : "dashboard-option"
+              }
+              onClick={() => this.toggleFrame("profile")}
+            >
+              Public Profile
+            </div>
+            <Link to={`/user/${username}`} className="dashboard-option">
+              View Profile
+            </Link>
           </div>
           <div className="dashboard-body">
-            {this.renderPage()}
+            <DashboardFrames
+              user={this.props.data.user}
+              currentFrame={this.state.currentFrame}
+              toggleModal={this.toggleModal}
+            />
             {this.renderModal()}
           </div>
         </div>

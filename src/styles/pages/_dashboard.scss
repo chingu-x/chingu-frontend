@@ -44,6 +44,8 @@
         text-align: left;
         border-bottom: 1px solid color-list("primary");
         cursor: pointer;
+        color: color-list("text-dark");
+        text-decoration: none;
 
         &:hover {
           background-color: color-list("primary");
@@ -51,7 +53,7 @@
           // box-shadow: 2px 2px 5px color-list("borders");
         }
 
-        // Not a fan of this.  
+        // Not a fan of this.
         // &.current {
         //   background-color: mix(
         //     color-list("text-light"),
