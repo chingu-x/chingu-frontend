@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../common/Button";
 
-
+//Personal Information Frame on Dashboard
 const PersonalFrame = ({first_name, last_name, toggleModal}) => {
   return (
     <React.Fragment>

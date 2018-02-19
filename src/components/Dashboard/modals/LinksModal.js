@@ -1,7 +1,6 @@
 import React from "react";
 
-// TODO: add verification of data.
-
+//Links Modal for Dashboard
 const LinksModal = ({ user, onChange, errorMessages }) => {
   let {
     github_url,
@@ -79,7 +78,9 @@ const LinksModal = ({ user, onChange, errorMessages }) => {
         <div className="edit-modal-right">
           <input
             type="text"
-            placeholder={renderLinkToUsername(twitter_url, "tw") || "Twitter Username"}
+            placeholder={
+              renderLinkToUsername(twitter_url, "tw") || "Twitter Username"
+            }
             name="twitter_url"
             onChange={onChange}
           />
@@ -89,13 +90,14 @@ const LinksModal = ({ user, onChange, errorMessages }) => {
       <div className="edit-modal-item">
         <div className="edit-modal-left">Blog URL: </div>
         <div className="edit-modal-right">
-        <input
-          type="text"
-          placeholder={blog_url || "Blog URL"}
-          name="blog_url"
-          onChange={onChange}
-        />
-        <div className="errorMessages">{errorMessages.blog_url}</div></div>
+          <input
+            type="text"
+            placeholder={blog_url || "Blog URL"}
+            name="blog_url"
+            onChange={onChange}
+          />
+          <div className="errorMessages">{errorMessages.blog_url}</div>
+        </div>
       </div>
     </React.Fragment>
   );

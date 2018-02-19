@@ -6,7 +6,6 @@ import ProjectDisplay from "./ProjectDisplay";
 import image from "../../styles/assets/bear8.jpg";
 
 class Profile extends Component {
-  state = {};
 
   // Render skills boxes.  Skill currently not implemented.
   renderSkills(skills){
@@ -97,8 +96,7 @@ class Profile extends Component {
           <div className="profile-section profile-bottom-right">
             <div className="section-header">Skills</div>
             <div className="profile-skills-list">
-              Skills are on their way!
-              {/*{this.renderSkills(skills)}  // Skills are being populated currently.*/} 
+              {this.renderSkills(skills)}
             </div>
             <div className="section-header">Cohorts</div>
             <div className="profile-cohorts-list">

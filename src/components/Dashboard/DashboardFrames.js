@@ -16,6 +16,7 @@ const DashboardFrames = ({user, currentFrame, toggleModal}) => {
     profile_image
   } = user;
 
+  //Renders Which Frame is Shown
   function renderFrame(){
     
     if(currentFrame === "personal") {

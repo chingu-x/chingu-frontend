@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../../common/Button";
 
+//Profile Frame on Dashboard
 const ProfileFrame = ({
   bio,
   linkedin_url,
