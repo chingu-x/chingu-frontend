@@ -141,6 +141,7 @@
     .project-display-links {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       margin: 0.5em 0;
 
       a {

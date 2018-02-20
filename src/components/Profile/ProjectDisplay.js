@@ -30,7 +30,9 @@ const ProjectDisplay = ({ project }) => {
           <a href={project.github_url || "/"}>Live</a>
           <a href={project.project_url || "/"}>Github</a>
         </div>
-        <div className="project-display-desc">{project.description || "Description not provided."}</div>
+        <div className="project-display-desc">
+          {project.description || "Description not provided."}
+        </div>
         <div className="project-display-links">
           <span>Team:</span>
           {Object.keys(project.users).map(user => {
