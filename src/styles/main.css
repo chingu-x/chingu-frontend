@@ -1266,6 +1266,7 @@ button:hover {
     .project-display .project-display-right .project-display-links {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       margin: 0.5em 0; }
       .project-display .project-display-right .project-display-links a {
         margin-right: 1em;
