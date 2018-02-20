@@ -16,12 +16,11 @@ const registerUser = gql`
         last_name: $last_name
         github_url: $github_url
         username: $username
-        country_id: $country_id
+        country_id: $country_id 
       }
       email: $email
       password: $password
     ) {
-      jwt
       user {
         id
       }
