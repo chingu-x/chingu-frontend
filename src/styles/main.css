@@ -1169,13 +1169,15 @@ button:hover {
 .profile {
   margin: 0 auto;
   margin-top: 3em;
-  max-width: 1000px; }
+  width: 1200px; }
   .profile .profile-top {
     display: flex;
     flex-direction: row;
     border: 1px solid #d3d3d3;
     max-height: 250px;
-    background-color: #ffffff; }
+    background-color: #ffffff;
+    max-width: 1000px;
+    margin: 0 auto; }
     .profile .profile-top .profile-img {
       max-height: 250px;
       max-width: 250px; }
@@ -1203,7 +1205,9 @@ button:hover {
     padding: 1em;
     border: 1px solid #d3d3d3;
     border-top: none;
-    text-align: left; }
+    text-align: left;
+    max-width: 1000px;
+    margin: 0 auto; }
     .profile .profile-bio p {
       margin: 0; }
   .profile .profile-bottom {
@@ -1213,7 +1217,8 @@ button:hover {
     margin-bottom: 2em;
     text-align: left;
     background-color: #ffffff;
-    border: 1px solid #d3d3d3; }
+    border: 1px solid #d3d3d3;
+    max-width: 1200px; }
     .profile .profile-bottom .profile-section {
       padding: 2em; }
       .profile .profile-bottom .profile-section.profile-bottom-left {
@@ -1253,12 +1258,15 @@ button:hover {
   flex-direction: row;
   border: 1px solid #d3d3d3; }
   .project-display .project-display-left {
-    width: 40%; }
+    width: 40%;
+    display: flex;
+    align-items: center; }
     .project-display .project-display-left img {
       height: auto;
-      width: 200px; }
+      width: 100%; }
   .project-display .project-display-right {
-    width: 60%; }
+    width: 60%;
+    padding-left: 1em; }
     .project-display .project-display-right .project-display-title {
       margin-top: 0.5em;
       font-size: 1.3em;

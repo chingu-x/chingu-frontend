@@ -3,7 +3,7 @@ import { graphql } from "react-apollo";
 import userQuery from "../../queries/profileQuery";
 import CohortDisplay from "./CohortDisplay";
 import ProjectDisplay from "./ProjectDisplay";
-import image from "../../styles/assets/bear8.jpg";
+import userImage from "../../styles/assets/user-placeholder.png";
 
 class Profile extends Component {
   // Render skills boxes.  Skill currently not implemented.
@@ -80,7 +80,7 @@ class Profile extends Component {
     return (
       <div className="profile">
         <div className="profile-top">
-          <img src={image} alt="" className="profile-img" />
+          <img src={userImage} alt="" className="profile-img" />
           <div className="profile-info">
             <h1>
               {first_name} {last_name}

@@ -5,7 +5,7 @@ import dashboardQuery from "../../queries/dashboardQuery";
 import updateUser from "../../mutations/updateUser";
 import Modals from "./Modals";
 import DashboardFrames from "./DashboardFrames";
-import image from "../../styles/assets/bear8.jpg";
+import userImage from "../../styles/assets/user-placeholder.png";
 
 // TODO: add verification of data.
 
@@ -235,7 +235,7 @@ class Dashboard extends Component {
         <div className="dashboard-main">
           <div className="dashboard-sidebar">
             <img
-              src={profile_image || image}
+              src={profile_image || userImage}
               className="dashboard-img"
               alt="User"
             />

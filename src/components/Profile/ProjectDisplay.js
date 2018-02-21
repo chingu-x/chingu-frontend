@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../../styles/assets/bear8.jpg";
+import projectImage from "../../styles/assets/project-placeholder.png";
 
 const ProjectDisplay = ({ project }) => {
   console.log(project.skills);
@@ -22,7 +22,7 @@ const ProjectDisplay = ({ project }) => {
   return (
     <div className="project-display">
       <div className="project-display-left">
-        <img src={image} alt="User" />
+        <img src={projectImage} alt="User" />
       </div>
       <div className="project-display-right">
         <div className="project-display-title">{project.title}</div>
