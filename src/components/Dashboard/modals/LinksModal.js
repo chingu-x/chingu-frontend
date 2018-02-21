@@ -12,6 +12,9 @@ const LinksModal = ({ user, onChange, errorMessages }) => {
   } = user;
 
   function renderLinkToUsername(link, type) {
+    if(link === null) {
+      return "";
+    }
     if (type === "gh") {
       return link.split("/")[3];
     } else if (type === "li") {
