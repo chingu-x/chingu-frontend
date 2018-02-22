@@ -1391,6 +1391,12 @@ button:hover {
     align-items: center;
     width: 380px;
     margin: 2%; }
+    @media (max-width: 1023px) {
+      .staff .staff-item {
+        width: 300px; } }
+    @media (max-width: 767px) {
+      .staff .staff-item {
+        width: 250px; } }
     .staff .staff-item a {
       padding: 1em; }
       .staff .staff-item a img {
@@ -1398,12 +1404,23 @@ button:hover {
         width: 250px;
         border-radius: 100%;
         object-fit: cover; }
+        @media (max-width: 1023px) {
+          .staff .staff-item a img {
+            height: 200px;
+            width: 200px; } }
+        @media (max-width: 1023px) {
+          .staff .staff-item a img {
+            height: 180px;
+            width: 180px; } }
     .staff .staff-item .staff-desc {
       text-align: center; }
       .staff .staff-item .staff-desc h3 {
         margin: 0;
         font-size: 1.5rem;
         font-weight: 700; }
+        @media (max-width: 767px) {
+          .staff .staff-item .staff-desc h3 {
+            font-size: 1.2rem; } }
       .staff .staff-item .staff-desc h4 {
         margin: 0.5rem;
         font-weight: 400; }

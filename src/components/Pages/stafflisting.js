@@ -1,19 +1,19 @@
 export default [
   {
     name: "Chance Taken",
-    role: "Chance's Role",
-    link: "http://chingu.io",
-    image: ""
+    role: "Founder",
+    link: "https://github.com/tropicalchancer",
+    image: "chance"
   },
   {
     name: "Jim Medlock",
-    role: "Jim's Role",
-    link: "http://chingu.io",
-    image: ""
+    role: "Agile Coach",
+    link: "https://github.com/jdmedlock",
+    image: "jim"
   },
   {
     name: "Musaab Bakheit",
-    role: "Automation Architect / Backend",
+    role: "Software Engineer",
     link: "https://github.com/TheSabby",
     image: "sab"
   },
@@ -35,6 +35,18 @@ export default [
     link: "https://www.linkedin.com/in/fsadikin/",
     image: "francesca"
   },
+  {
+    name: "Parminder Singh",
+    role: "Machine Learning Engineer",
+    link: "https://www.trion.me",
+    image: "parminder"
+  },
+  // {
+  //   name: "Francesca Sadikin",
+  //   role: "UI Designer",
+  //   link: "https://www.linkedin.com/in/fsadikin/",
+  //   image: "francesca"
+  // },
   // {
   //   name: "Olexandr",
   //   role: "Tier 1 Mentor",

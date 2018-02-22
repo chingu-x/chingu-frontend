@@ -11,6 +11,13 @@
     width: 380px;
     margin: 2%;
 
+    @include media("<desktop") {
+      width: 300px;
+    }
+    @include media("<tablet") {
+      width: 250px;
+    }
+
     a {
       padding: 1em;
       img{
@@ -18,6 +25,15 @@
         width: 250px;
         border-radius: 100%;
         object-fit: cover;
+
+        @include media("<desktop"){
+          height: 200px;
+          width: 200px;
+        }
+        @include media("<desktop"){
+          height: 180px;
+          width: 180px;
+        }
       }
     }
     .staff-desc{
@@ -26,6 +42,9 @@
         margin: 0;
         font-size: 1.5rem;
         font-weight: 700;
+        @include media("<tablet"){
+          font-size: 1.2rem;
+        }
       }
       h4 {
         margin: 0.5rem;
