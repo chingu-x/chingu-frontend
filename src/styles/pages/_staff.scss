@@ -54,3 +54,49 @@
     }
   }
 }
+
+.contributors {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  .contributor-item {
+    display: flex;
+    flex-direction: row;
+    @include media("<small"){
+      flex-direction: column;
+      text-align: center;
+      margin-bottom: 0.7em;
+    }
+
+    .contributor-name {
+      width: 300px;
+      a {
+        color: color-list("primary");
+      }
+
+      @include media("<tablet"){
+        width: 250px;
+      }
+      @include media("<small"){
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    .contributor-desc {
+      text-align: right;
+      width: 300px;
+
+      @include media("<tablet"){
+        width: 250px;
+      }
+      @include media("<small"){
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}

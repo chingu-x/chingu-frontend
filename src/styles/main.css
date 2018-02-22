@@ -1424,3 +1424,39 @@ button:hover {
       .staff .staff-item .staff-desc h4 {
         margin: 0.5rem;
         font-weight: 400; }
+
+.contributors {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center; }
+  .contributors .contributor-item {
+    display: flex;
+    flex-direction: row; }
+    @media (max-width: 564px) {
+      .contributors .contributor-item {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 0.7em; } }
+    .contributors .contributor-item .contributor-name {
+      width: 300px; }
+      .contributors .contributor-item .contributor-name a {
+        color: #0f143a; }
+      @media (max-width: 767px) {
+        .contributors .contributor-item .contributor-name {
+          width: 250px; } }
+      @media (max-width: 564px) {
+        .contributors .contributor-item .contributor-name {
+          width: 100%;
+          text-align: center; } }
+    .contributors .contributor-item .contributor-desc {
+      text-align: right;
+      width: 300px; }
+      @media (max-width: 767px) {
+        .contributors .contributor-item .contributor-desc {
+          width: 250px; } }
+      @media (max-width: 564px) {
+        .contributors .contributor-item .contributor-desc {
+          width: 100%;
+          text-align: center; } }
