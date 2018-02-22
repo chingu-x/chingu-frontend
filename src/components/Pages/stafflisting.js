@@ -36,7 +36,7 @@ export default [
     image: "francesca"
   },
   {
-    name: "Parminder Singh",
+    name: "Parminder Singh (Trion)",
     role: "Machine Learning Engineer",
     link: "https://www.trion.me",
     image: "parminder"
