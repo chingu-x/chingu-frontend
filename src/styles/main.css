@@ -401,7 +401,7 @@ html {
 body, button {
   color: #000000;
   font-size: 16px;
-  font-family: "Numans", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 400;
   line-height: 1.6; }
 
@@ -425,6 +425,13 @@ button:hover {
   margin: 0;
   color: red;
   font-size: 0.9em; }
+
+.basic-page {
+  margin: 0 auto;
+  margin-bottom: 4em;
+  max-width: 1400px; }
+  .basic-page h1 {
+    text-align: center; }
 
 .header {
   display: flex;
@@ -1372,3 +1379,31 @@ button:hover {
     padding: 3em 0; }
   .slack-key .slack-example {
     padding: 3em 0; }
+
+.staff {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center; }
+  .staff .staff-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 380px;
+    margin: 2%; }
+    .staff .staff-item a {
+      padding: 1em; }
+      .staff .staff-item a img {
+        height: 250px;
+        width: 250px;
+        border-radius: 100%;
+        object-fit: cover; }
+    .staff .staff-item .staff-desc {
+      text-align: center; }
+      .staff .staff-item .staff-desc h3 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 700; }
+      .staff .staff-item .staff-desc h4 {
+        margin: 0.5rem;
+        font-weight: 400; }

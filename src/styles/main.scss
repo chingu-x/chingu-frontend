@@ -22,6 +22,7 @@
 
 //4. Layout
 @import
+	'layout/basic-page',
 	'layout/header',
 	'layout/footer';
 
@@ -42,6 +43,7 @@
 	'pages/login',
 	'pages/profile',
 	'pages/signup',
-	'pages/slack';
+	'pages/slack',
+	'pages/staff';
 
 //7. Themes
