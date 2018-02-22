@@ -781,7 +781,8 @@ button:hover {
 .dashboard {
   display: flex;
   flex-direction: column;
-  background-color: #dbdce1; }
+  background-color: #dbdce1;
+  min-height: 80vh; }
   .dashboard .dashboard-header {
     background-color: #8aefc4;
     color: #0f143a;
@@ -1176,7 +1177,8 @@ button:hover {
 .profile {
   margin: 0 auto;
   margin-top: 3em;
-  width: 1200px; }
+  width: 1200px;
+  min-height: 80vh; }
   .profile .profile-top {
     display: flex;
     flex-direction: row;

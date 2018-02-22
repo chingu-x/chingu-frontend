@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 import SubscribeForm from "./SubscribeForm";
 
 class Footer extends Component {
@@ -29,7 +30,7 @@ class Footer extends Component {
     <div key="2" className="footer-linkbox">
       <div className="footer-subtitle">Company</div>
       <a className="footer-link" href="/">Contact Us</a>
-      <a className="footer-link" href="/">Staff</a>
+      <Link className="footer-link" to="/staff">Staff</Link>
       <a className="footer-link" href="/">Press</a>
       <a className="footer-link" href="/">Privacy Policy</a>
       <a className="footer-link" href="/">FAQ</a>

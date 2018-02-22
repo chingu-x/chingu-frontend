@@ -213,7 +213,9 @@ class Dashboard extends Component {
   render() {
     let { loading, error, user } = this.props.data;
     if (loading) {
-      return "";
+      return (
+        <div className="dashboard"></div>
+      );
     } else if (error) {
       return <h1>An error ocurred</h1>;
     } else if (!user) {

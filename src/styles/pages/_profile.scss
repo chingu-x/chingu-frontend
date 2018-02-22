@@ -2,7 +2,7 @@
   margin: 0 auto;
   margin-top: 3em;
   width: 1200px;
-  
+  min-height: 80vh;
 
   .profile-top {
     display: flex;
@@ -125,7 +125,7 @@
   display: flex;
   flex-direction: row;
   border: 1px solid color-list("borders");
-
+  
   .project-display-left {
     width: 40%;
     display: flex;
