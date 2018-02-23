@@ -9,7 +9,6 @@ const SignUpFormItem = props => {
         placeholder={props.placeholder}
         name={props.name}
         onBlur={props.onBlur}
-        autoComplete="on"
       />
       <i className={props.iconName}></i>
       {props.formErrors[props.name] ? <p className="errorMessage">{props.errorMessage}</p> : ""}

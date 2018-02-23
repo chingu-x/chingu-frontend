@@ -11,7 +11,8 @@
 
 @import 
 	'vendors/normalize',
-	'vendors/include-media';
+	'vendors/include-media',
+	'flagicons/sass/flag-icon';
 
 //3. Base
 @import
@@ -44,6 +45,7 @@
 	'pages/profile',
 	'pages/signup',
 	'pages/slack',
+	'pages/flagpage';
 	'pages/staff';
 
 //7. Themes
