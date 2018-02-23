@@ -33,11 +33,11 @@ class Footer extends Component {
       <Link className="footer-link" to="/staff">Staff</Link>
       <a className="footer-link" href="/">Press</a>
       <a className="footer-link" href="/">Privacy Policy</a>
-      <a className="footer-link" href="/">FAQ</a>
+      <Link className="footer-link" to="/companyfaq">FAQ</Link>
     </div>,
     <div key="3" className="footer-linkbox">
       <div className="footer-subtitle">Programs</div>
-      <a className="footer-link" href="/">FAQ</a>
+      <Link className="footer-link" to="/programfaq">FAQ</Link>
       <a className="footer-link" href="/">Cohorts</a>
       <a className="footer-link" href="/">Application</a>
     </div>
