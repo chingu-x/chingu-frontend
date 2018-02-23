@@ -24,8 +24,8 @@ class Footer extends Component {
     return [
     <div key="1" className="footer-linkbox">
       <div className="footer-subtitle">Contact Us</div>
-      <div className="footer-link">+44 345 678 903</div>
-      <a className="footer-link" href="/">email@example.com</a>
+      {/*<div className="footer-link">+44 345 678 903</div>*/}
+      <a className="footer-link" href="mailto:chinguftw@gmail.com">chinguftw@gmail.com</a>
     </div>,
     <div key="2" className="footer-linkbox">
       <div className="footer-subtitle">Company</div>
@@ -47,9 +47,11 @@ class Footer extends Component {
   renderSocialIcons(){
     return (
       <div className="footer-social">
-        <a className="footer-social-icon" href="/"><i className="fab fa-facebook fa-2x"></i></a>
-        <a className="footer-social-icon" href="/"><i className="fab fa-instagram fa-2x"></i></a>
-        <a className="footer-social-icon" href="/"><i className="fab fa-github fa-2x"></i></a>
+        <a className="footer-social-icon" href="https://medium.com/chingu"><i className="fab fa-medium-m fa-2x"></i></a>
+        <a className="footer-social-icon" href="https://www.patreon.com/user?u=4763160"><i className="fab fa-patreon fa-2x"></i></a>
+        <a className="footer-social-icon" href="https://www.youtube.com/channel/UCS7zmJXbe7FgTC3sHlUf4jw"><i className="fab fa-youtube fa-2x"></i></a>
+        <a className="footer-social-icon" href="https://github.com/Chingu-cohorts"><i className="fab fa-github fa-2x"></i></a>
+        <a className="footer-social-icon" href="https://twitter.com/ChinguCollabs"><i className="fab fa-twitter fa-2x"></i></a>
       </div>
     );
   }
