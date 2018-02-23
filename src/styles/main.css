@@ -1651,7 +1651,7 @@ html {
 body, button {
   color: #000000;
   font-size: 16px;
-  font-family: "Numans", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 400;
   line-height: 1.6; }
 
@@ -1675,6 +1675,13 @@ button:hover {
   margin: 0;
   color: red;
   font-size: 0.9em; }
+
+.basic-page {
+  margin: 0 auto;
+  margin-bottom: 4em;
+  max-width: 1400px; }
+  .basic-page h1 {
+    text-align: center; }
 
 .header {
   display: flex;
@@ -2419,13 +2426,15 @@ button:hover {
 .profile {
   margin: 0 auto;
   margin-top: 3em;
-  max-width: 1000px; }
+  width: 1200px; }
   .profile .profile-top {
     display: flex;
     flex-direction: row;
     border: 1px solid #d3d3d3;
     max-height: 250px;
-    background-color: #ffffff; }
+    background-color: #ffffff;
+    max-width: 1000px;
+    margin: 0 auto; }
     .profile .profile-top .profile-img {
       max-height: 250px;
       max-width: 250px; }
@@ -2453,7 +2462,9 @@ button:hover {
     padding: 1em;
     border: 1px solid #d3d3d3;
     border-top: none;
-    text-align: left; }
+    text-align: left;
+    max-width: 1000px;
+    margin: 0 auto; }
     .profile .profile-bio p {
       margin: 0; }
   .profile .profile-bottom {
@@ -2463,7 +2474,8 @@ button:hover {
     margin-bottom: 2em;
     text-align: left;
     background-color: #ffffff;
-    border: 1px solid #d3d3d3; }
+    border: 1px solid #d3d3d3;
+    max-width: 1200px; }
     .profile .profile-bottom .profile-section {
       padding: 2em; }
       .profile .profile-bottom .profile-section.profile-bottom-left {
@@ -2503,12 +2515,15 @@ button:hover {
   flex-direction: row;
   border: 1px solid #d3d3d3; }
   .project-display .project-display-left {
-    width: 40%; }
+    width: 40%;
+    display: flex;
+    align-items: center; }
     .project-display .project-display-left img {
       height: auto;
-      width: 200px; }
+      width: 100%; }
   .project-display .project-display-right {
-    width: 60%; }
+    width: 60%;
+    padding-left: 1em; }
     .project-display .project-display-right .project-display-title {
       margin-top: 0.5em;
       font-size: 1.3em;
@@ -2516,6 +2531,7 @@ button:hover {
     .project-display .project-display-right .project-display-links {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       margin: 0.5em 0; }
       .project-display .project-display-right .project-display-links a {
         margin-right: 1em;
@@ -2672,3 +2688,85 @@ button:hover {
   height: 40px;
   top: 15px;
   left: 15px; }
+
+.staff {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center; }
+  .staff .staff-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 380px;
+    margin: 2%; }
+    @media (max-width: 1023px) {
+      .staff .staff-item {
+        width: 300px; } }
+    @media (max-width: 767px) {
+      .staff .staff-item {
+        width: 250px; } }
+    .staff .staff-item a {
+      padding: 1em; }
+      .staff .staff-item a img {
+        height: 250px;
+        width: 250px;
+        border-radius: 100%;
+        object-fit: cover; }
+        @media (max-width: 1023px) {
+          .staff .staff-item a img {
+            height: 200px;
+            width: 200px; } }
+        @media (max-width: 1023px) {
+          .staff .staff-item a img {
+            height: 180px;
+            width: 180px; } }
+    .staff .staff-item .staff-desc {
+      text-align: center; }
+      .staff .staff-item .staff-desc h3 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 700; }
+        @media (max-width: 767px) {
+          .staff .staff-item .staff-desc h3 {
+            font-size: 1.2rem; } }
+      .staff .staff-item .staff-desc h4 {
+        margin: 0.5rem;
+        font-weight: 400; }
+
+.contributors {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center; }
+  .contributors .contributor-item {
+    display: flex;
+    flex-direction: row; }
+    @media (max-width: 564px) {
+      .contributors .contributor-item {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 0.7em; } }
+    .contributors .contributor-item .contributor-name {
+      width: 300px; }
+      .contributors .contributor-item .contributor-name a {
+        color: #0f143a; }
+      @media (max-width: 767px) {
+        .contributors .contributor-item .contributor-name {
+          width: 250px; } }
+      @media (max-width: 564px) {
+        .contributors .contributor-item .contributor-name {
+          width: 100%;
+          text-align: center; } }
+    .contributors .contributor-item .contributor-desc {
+      text-align: right;
+      width: 300px; }
+      @media (max-width: 767px) {
+        .contributors .contributor-item .contributor-desc {
+          width: 250px; } }
+      @media (max-width: 564px) {
+        .contributors .contributor-item .contributor-desc {
+          width: 100%;
+          text-align: center; } }
+
