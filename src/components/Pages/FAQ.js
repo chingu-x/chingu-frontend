@@ -7,7 +7,6 @@ class FAQ extends Component {
   }
 
   handleOnClick = (ques) => {
-    console.log(ques)
     if(this.state.activeQuestion === ques) {
       this.setState({
         activeQuestion: null

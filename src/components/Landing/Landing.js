@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import LandingIconItem from "./LandingIconItem";
 import LandingTestimonial from "./LandingTestimonial";
 import earth from "../../styles/assets/Global Image-02.png";
-import landingItems from "./landingItems";
+import landingItems from "../../static-api-elements/landingItems";
 
 class Landing extends Component {
   state = {};

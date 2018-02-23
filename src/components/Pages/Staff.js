@@ -1,6 +1,6 @@
 import React from 'react';
-import staffListing from "./stafflisting";
-import contributorListing from "./contributorListing";
+import staffListing from "../../static-api-elements/staffListing";
+import contributorListing from "../../static-api-elements/contributorListing";
 import placeholder from "../../styles/assets/user-placeholder.png";
 import staffImages from "../../styles/assets/staffImages/staffImages";
 
