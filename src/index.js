@@ -7,6 +7,7 @@ import { ApolloLink } from "apollo-link";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import App from "./App";
+import ScrollToTop from "./ScrollToTop";
 import "./styles/fontawesome/webfonts/fontawesome-all.css";
 import "./styles/main.css";
 import registerServiceWorker from "./registerServiceWorker";
@@ -39,7 +40,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <BrowserRouter>
-      <App />
+      <ScrollToTop>
+        <App />
+      </ScrollToTop>
     </BrowserRouter>
   </ApolloProvider>,
   document.getElementById("root")

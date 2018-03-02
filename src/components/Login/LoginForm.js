@@ -139,7 +139,6 @@ class LoginForm extends Component {
         {this.renderFields()}
         <button
           className="submitBtn"
-          disabled={!this.state.formValid}
           type="submit"
         >
           login

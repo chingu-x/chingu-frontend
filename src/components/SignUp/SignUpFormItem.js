@@ -11,7 +11,7 @@ const SignUpFormItem = props => {
         onBlur={props.onBlur}
       />
       <i className={props.iconName}></i>
-      {props.formErrors[props.name] ? <p className="errorMessage">{props.errorMessage}</p> : ""}
+      {props.formErrors[props.name] ? <p className="menuErrorMessages">{props.errorMessage}</p> : ""}
     </div>
   );
 };
