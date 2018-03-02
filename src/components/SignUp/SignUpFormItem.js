@@ -12,7 +12,7 @@ const SignUpFormItem = props => {
         autoComplete="on"
       />
       <i className={props.iconName}></i>
-      {props.formErrors[props.name] ? <p className="errorMessage">{props.errorMessage}</p> : ""}
+      {props.formErrors[props.name] ? <p className="menuErrorMessages">{props.errorMessage}</p> : ""}
     </div>
   );
 };

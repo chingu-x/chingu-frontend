@@ -111,7 +111,7 @@ class Dashboard extends Component {
   validate(item, type) {
     if (type === "link") {
       //Links must start with http or https
-      const re = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+      const re = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w .-@~]*)*\/?$/;
       return item.match(re);
     } else if (type === "name") {
       //Names can only contain letters, numbers, - and _

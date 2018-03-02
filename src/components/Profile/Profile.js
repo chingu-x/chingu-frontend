@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
-import userQuery from "../../queries/profileQuery";
+import userQuery from "../../queries/userQuery";
 import CohortDisplay from "./CohortDisplay";
 import ProjectDisplay from "./ProjectDisplay";
 import userImage from "../../styles/assets/user-placeholder.png";
