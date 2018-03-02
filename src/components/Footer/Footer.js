@@ -25,7 +25,7 @@ class Footer extends Component {
     <div key="1" className="footer-linkbox">
       <div className="footer-subtitle">Contact Us</div>
       {/*<div className="footer-link">+44 345 678 903</div>*/}
-      <a className="footer-link" href="mailto:chinguftw@gmail.com">chinguftw@gmail.com</a>
+      <a className="footer-link" href="mailto:admin@chingu.io">admin@chingu.io</a>
     </div>,
     <div key="2" className="footer-linkbox">
       <div className="footer-subtitle">Company</div>
@@ -39,7 +39,7 @@ class Footer extends Component {
       <div className="footer-subtitle">Programs</div>
       <Link className="footer-link" to="/programfaq">FAQ</Link>
       <a className="footer-link" href="/">Cohorts</a>
-      <a className="footer-link" href="/">Application</a>
+      <a className="footer-link" href="https://docs.google.com/forms/d/e/1FAIpQLSe7eeorRF3kWj98X9Q342VrQdriGoDoBfu6ELOEeDuxrQ2wgw/viewform">Application</a>
     </div>
     ];
   }

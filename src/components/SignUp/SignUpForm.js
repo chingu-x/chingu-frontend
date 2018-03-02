@@ -1,10 +1,10 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import { gql, graphql, compose } from "react-apollo";
+import { graphql, compose } from "react-apollo";
 import SignUpFormItem from "./SignUpFormItem";
 import registerUser from "../../mutations/registerUserMutation";
 import getCountries from "../../queries/getCountries";
-import userQuery from "../../queries/userQuery";
+// import userQuery from "../../queries/userQuery";
 import formFields from "./formFields";
 
 class SignUpForm extends Component {
