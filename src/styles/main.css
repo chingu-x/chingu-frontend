@@ -533,6 +533,20 @@ button:hover {
       text-decoration: none; }
       .footer .footer-linkbox .footer-link:hover, .footer .footer-linkbox .footer-link:focus {
         color: #15df89; }
+  .footer .sub-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .footer .sub-box a {
+      margin: 2em 0; }
+  .footer .patreon {
+    margin-top: 40px; }
+    @media (max-width: 1024px) {
+      .footer .patreon {
+        display: none; } }
+    @media (max-width: 768px) {
+      .footer .patreon {
+        display: flex; } }
   @media (max-width: 1023px) {
     .footer .footer-subscribe {
       width: 100%; } }
@@ -789,6 +803,33 @@ button:hover {
     left: 5px;
     color: #767676; }
 
+.contact-form {
+  margin: 0 auto;
+  margin-bottom: 4em;
+  max-width: 1400px;
+  min-height: 52vh; }
+  .contact-form h1 {
+    text-align: center; }
+  @media (max-width: 564px) {
+    .contact-form {
+      margin: 0; } }
+  .contact-form iframe {
+    width: 760px; }
+    @media (max-width: 767px) {
+      .contact-form iframe {
+        width: 500px; } }
+    @media (max-width: 564px) {
+      .contact-form iframe {
+        width: 100%; } }
+
+.current-programs {
+  margin: 0 auto;
+  margin-bottom: 4em;
+  max-width: 1400px;
+  min-height: 52vh; }
+  .current-programs h1, .current-programs h4, .current-programs p {
+    text-align: center; }
+
 .dashboard {
   display: flex;
   flex-direction: column;
@@ -948,11 +989,14 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 800px;
+  width: 768px;
   margin: 0 auto;
   padding: 2rem 0;
   min-height: 80vh;
   cursor: pointer; }
+  @media (max-width: 768px) {
+    .faq {
+      width: 100%; } }
   .faq .faq-item {
     width: 100%; }
     .faq .faq-item .faq-question {
@@ -965,6 +1009,11 @@ button:hover {
       font-size: 1.5em;
       border: 1px solid #d3d3d3;
       z-index: 2; }
+      @media (max-width: 768px) {
+        .faq .faq-item .faq-question {
+          min-height: 64px;
+          height: unset;
+          padding: 0.5rem 1rem; } }
     .faq .faq-item .faq-answer {
       display: none;
       background-color: white;
@@ -1069,6 +1118,9 @@ button:hover {
 @media (min-width: 566px) and (max-width: 1024px) {
   .landing .landing-top .tagline-box .tagline {
     font-size: 2em; } }
+      @media (max-width: 565px) {
+        .landing .landing-top .tagline-box .tagline {
+          font-size: 2.5em; } }
       .landing .landing-top .tagline-box .big-green-btn {
         margin: 1em 0;
         padding: 0.5em 1em;
@@ -1212,6 +1264,15 @@ button:hover {
     width: 100%;
     border-bottom: 3px solid #15df89;
     color: #15df89;
+    text-align: center; }
+
+.privacy-page {
+  margin: 0 auto;
+  margin-bottom: 4em;
+  max-width: 1200px;
+  min-height: 52vh;
+  padding: 0 4em; }
+  .privacy-page h1 {
     text-align: center; }
 
 .profile {
@@ -1431,9 +1492,12 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 380px;
+    width: 250px;
     margin: 2%; }
-    @media (max-width: 1023px) {
+    @media (max-width: 1209px) {
+      .staff .staff-item {
+        width: 210px; } }
+    @media (max-width: 1024px) {
       .staff .staff-item {
         width: 300px; } }
     @media (max-width: 767px) {
@@ -1442,15 +1506,15 @@ button:hover {
     .staff .staff-item a {
       padding: 1em; }
       .staff .staff-item a img {
-        height: 250px;
-        width: 250px;
+        height: 200px;
+        width: 200px;
         border-radius: 100%;
         object-fit: cover; }
         @media (max-width: 1023px) {
           .staff .staff-item a img {
             height: 200px;
             width: 200px; } }
-        @media (max-width: 1023px) {
+        @media (max-width: 767px) {
           .staff .staff-item a img {
             height: 180px;
             width: 180px; } }
@@ -1502,3 +1566,22 @@ button:hover {
         .contributors .contributor-item .contributor-desc {
           width: 100%;
           text-align: center; } }
+
+.voyage-five {
+  margin: 0 auto;
+  margin-bottom: 4em;
+  max-width: 1400px;
+  min-height: 52vh; }
+  .voyage-five h1 {
+    text-align: center; }
+  @media (max-width: 564px) {
+    .voyage-five {
+      margin: 0; } }
+  .voyage-five iframe {
+    width: 760px; }
+    @media (max-width: 767px) {
+      .voyage-five iframe {
+        width: 500px; } }
+    @media (max-width: 564px) {
+      .voyage-five iframe {
+        width: 100%; } }

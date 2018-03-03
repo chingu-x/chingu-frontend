@@ -18,11 +18,17 @@ class FAQ extends Component {
     }
   }
 
+  renderAnswer(ans){
+    return {
+      __html: ans
+    }
+  }
+
   renderQuestion(ques, ans){
     return (
       <div key={ques} className="faq-item" onClick={() => this.handleOnClick(ques)}>
         <div className="faq-question" >{ques}</div>
-        <div className={this.state.activeQuestion === ques ? "faq-answer active" : "faq-answer"}>{ans}</div>
+        <div className={this.state.activeQuestion === ques ? "faq-answer active" : "faq-answer"} dangerouslySetInnerHTML={this.renderAnswer(ans)}></div>
       </div>
     );
   }

@@ -64,7 +64,8 @@ class LoginForm extends Component {
       })
       .then(({ data }) => {
         window.localStorage.setItem("token", data.signIn.jwt);
-        window.location = "/user/" + data.signIn.user.username;
+        // window.location = "/user/" + data.signIn.user.username; //disabled until images are setup
+        window.location = "/";
       })
       .catch(err => {
         console.error(err);

@@ -1,6 +1,6 @@
 import _ from "lodash";
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LandingIconItem from "./LandingIconItem";
 import LandingTestimonial from "./LandingTestimonial";
 import earth from "../../styles/assets/Global Image-02.png";
@@ -50,9 +50,9 @@ class Landing extends Component {
             <div className="tagline">Code More</div>
             <div className="tagline">Learn More</div>
             <div className="tagline">Build More</div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7eeorRF3kWj98X9Q342VrQdriGoDoBfu6ELOEeDuxrQ2wgw/viewform">
+            <Link to="/apply">
               <button className="big-green-btn">Apply</button>
-            </a>
+            </Link>
           </div>
         </div>
         <div className="landing-bar">

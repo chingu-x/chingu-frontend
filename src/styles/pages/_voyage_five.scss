@@ -1,0 +1,24 @@
+.voyage-five {
+  margin: 0 auto;
+  margin-bottom: 4em;
+  max-width: 1400px;
+  min-height: 52vh;
+  h1 {
+    text-align: center;
+  }
+
+  @include media ("<small") {
+    margin: 0;
+  }
+
+  iframe {
+    width: 760px;
+
+    @include media("<tablet") {
+      width: 500px;
+    }
+    @include media("<small") {
+      width: 100%;
+    }
+  }
+}
