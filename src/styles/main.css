@@ -1118,6 +1118,9 @@ button:hover {
 @media (min-width: 566px) and (max-width: 1024px) {
   .landing .landing-top .tagline-box .tagline {
     font-size: 2em; } }
+      @media (max-width: 565px) {
+        .landing .landing-top .tagline-box .tagline {
+          font-size: 2.5em; } }
       .landing .landing-top .tagline-box .big-green-btn {
         margin: 1em 0;
         padding: 0.5em 1em;
