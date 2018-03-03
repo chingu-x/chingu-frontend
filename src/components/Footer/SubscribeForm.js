@@ -7,7 +7,7 @@ const Subscribe = (props) => {
         <div className="footer-subscribe-lower">
           <form onSubmit={props.onSubmit}>
             <input disabled type="text" className="footer-subscribe-input" name="email" placeholder="Email Address" onChange={props.onChange}/>
-            <button type="submit" className="subscribeBtn">Subscribe</button>
+            <button disabled type="submit" className="subscribeBtn">Subscribe</button>
           </form>
         </div>
       </div>

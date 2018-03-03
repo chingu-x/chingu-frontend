@@ -533,6 +533,20 @@ button:hover {
       text-decoration: none; }
       .footer .footer-linkbox .footer-link:hover, .footer .footer-linkbox .footer-link:focus {
         color: #15df89; }
+  .footer .sub-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .footer .sub-box a {
+      margin: 2em 0; }
+  .footer .patreon {
+    margin-top: 40px; }
+    @media (max-width: 1024px) {
+      .footer .patreon {
+        display: none; } }
+    @media (max-width: 768px) {
+      .footer .patreon {
+        display: flex; } }
   @media (max-width: 1023px) {
     .footer .footer-subscribe {
       width: 100%; } }
@@ -788,6 +802,33 @@ button:hover {
     position: absolute;
     left: 5px;
     color: #767676; }
+
+.contact-form {
+  margin: 0 auto;
+  margin-bottom: 4em;
+  max-width: 1400px;
+  min-height: 52vh; }
+  .contact-form h1 {
+    text-align: center; }
+  @media (max-width: 564px) {
+    .contact-form {
+      margin: 0; } }
+  .contact-form iframe {
+    width: 760px; }
+    @media (max-width: 767px) {
+      .contact-form iframe {
+        width: 500px; } }
+    @media (max-width: 564px) {
+      .contact-form iframe {
+        width: 100%; } }
+
+.current-programs {
+  margin: 0 auto;
+  margin-bottom: 4em;
+  max-width: 1400px;
+  min-height: 52vh; }
+  .current-programs h1, .current-programs h4, .current-programs p {
+    text-align: center; }
 
 .dashboard {
   display: flex;
@@ -1214,6 +1255,15 @@ button:hover {
     color: #15df89;
     text-align: center; }
 
+.privacy-page {
+  margin: 0 auto;
+  margin-bottom: 4em;
+  max-width: 1200px;
+  min-height: 52vh;
+  padding: 0 4em; }
+  .privacy-page h1 {
+    text-align: center; }
+
 .profile {
   margin: 0 auto;
   margin-top: 3em;
@@ -1502,3 +1552,22 @@ button:hover {
         .contributors .contributor-item .contributor-desc {
           width: 100%;
           text-align: center; } }
+
+.voyage-five {
+  margin: 0 auto;
+  margin-bottom: 4em;
+  max-width: 1400px;
+  min-height: 52vh; }
+  .voyage-five h1 {
+    text-align: center; }
+  @media (max-width: 564px) {
+    .voyage-five {
+      margin: 0; } }
+  .voyage-five iframe {
+    width: 760px; }
+    @media (max-width: 767px) {
+      .voyage-five iframe {
+        width: 500px; } }
+    @media (max-width: 564px) {
+      .voyage-five iframe {
+        width: 100%; } }
