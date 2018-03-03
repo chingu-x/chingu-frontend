@@ -50,7 +50,7 @@ class Landing extends Component {
             <div className="tagline">Code More</div>
             <div className="tagline">Learn More</div>
             <div className="tagline">Build More</div>
-            <Link to="/signup">
+            <Link to="/apply">
               <button className="big-green-btn">Apply</button>
             </Link>
           </div>
