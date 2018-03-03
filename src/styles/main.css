@@ -989,11 +989,14 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 800px;
+  width: 768px;
   margin: 0 auto;
   padding: 2rem 0;
   min-height: 80vh;
   cursor: pointer; }
+  @media (max-width: 768px) {
+    .faq {
+      width: 100%; } }
   .faq .faq-item {
     width: 100%; }
     .faq .faq-item .faq-question {
@@ -1006,6 +1009,11 @@ button:hover {
       font-size: 1.5em;
       border: 1px solid #d3d3d3;
       z-index: 2; }
+      @media (max-width: 768px) {
+        .faq .faq-item .faq-question {
+          min-height: 64px;
+          height: unset;
+          padding: 0.5rem 1rem; } }
     .faq .faq-item .faq-answer {
       display: none;
       background-color: white;
