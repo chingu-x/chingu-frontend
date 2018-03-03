@@ -13,6 +13,8 @@ class Header extends Component {
     window.location = "/";
   };
 
+  // Right nav link link to Dash is disabled while image structure being set up by backend team.
+  // Icon will need to be redirected to /myaccount once complete.
   renderRightNav() {
     let loggedIn = window.localStorage.token;
     let { error } = this.props.data;
@@ -25,7 +27,7 @@ class Header extends Component {
         <Link key="1" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/" onClick={e => this.handleLogout(e)}>
           Log Out
         </Link>,
-        <Link key="2" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/myaccount" >
+        <Link key="2" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/" >
           <i className="far fa-user fa-2x" />
         </Link>
       ];

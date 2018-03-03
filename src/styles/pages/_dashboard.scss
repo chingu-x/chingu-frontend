@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: column;
   background-color: mix(color-list("text-light"), color-list("primary"), 85%);
+  min-height: 80vh;
 
   .dashboard-header {
-    background-color: mix(color-list("text-light"), color-list("accent"), 50%);
-    color: color-list("primary");
+    // background-color: mix(color-list("text-light"), color-list("accent"), 50%);
+    background-color: color-list("accent");
+    color: color-list("text-light");
     text-align: center;
 
     h2 {

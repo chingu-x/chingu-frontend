@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
-import userQuery from "../../queries/profileQuery";
+import userQuery from "../../queries/userQuery";
 import CohortDisplay from "./CohortDisplay";
 import ProjectDisplay from "./ProjectDisplay";
 import userImage from "../../styles/assets/user-placeholder.png";
@@ -55,7 +55,9 @@ class Profile extends Component {
   render() {
     let { loading, error, user } = this.props.data;
     if (loading) {
-      return "";
+      return (
+        <div className="profile"></div>
+      );
     } else if (error) {
       return <h1>An error ocurred</h1>;
     } else if (!user) {

@@ -4,6 +4,7 @@ import { graphql, compose } from "react-apollo";
 import SignUpFormItem from "./SignUpFormItem";
 import registerUser from "../../mutations/registerUserMutation";
 import getCountries from "../../queries/getCountries";
+// import userQuery from "../../queries/userQuery";
 import formFields from "./formFields";
 
 class SignUpForm extends Component {
@@ -153,6 +154,7 @@ class SignUpForm extends Component {
       default:
         break;
     }
+
     this.setState(
       {
         formErrors: fieldValidationErrors,
@@ -215,6 +217,7 @@ class SignUpForm extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <form
         className="signup-form"
@@ -240,7 +243,6 @@ class SignUpForm extends Component {
         </div>
         <button
           className="submitBtn"
-          disabled={!this.state.formValid}
           type="submit"
         >
           register
@@ -249,6 +251,23 @@ class SignUpForm extends Component {
     );
   }
 }
+
+// const test = gql`
+//   query test($username: String!) {
+//     user(username: $username) {
+//       first_name
+//     }
+//   }
+// `;
+
+// const testQuery = graphql(test, {
+//   options: {
+//     variables: {
+//       username: "vannya"
+//     }
+//   },
+// })(SignUpForm);
+
 
 export default compose(
   graphql(registerUser),

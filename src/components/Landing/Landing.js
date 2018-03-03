@@ -1,10 +1,10 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import LandingIconItem from "./LandingIconItem";
 import LandingTestimonial from "./LandingTestimonial";
 import earth from "../../styles/assets/Global Image-02.png";
-import landingItems from "./landingItems";
+import landingItems from "../../static-api-elements/landingItems";
 
 class Landing extends Component {
   state = {};
@@ -50,9 +50,9 @@ class Landing extends Component {
             <div className="tagline">Code More</div>
             <div className="tagline">Learn More</div>
             <div className="tagline">Build More</div>
-            <Link to="/signup">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7eeorRF3kWj98X9Q342VrQdriGoDoBfu6ELOEeDuxrQ2wgw/viewform">
               <button className="big-green-btn">Apply</button>
-            </Link>
+            </a>
           </div>
         </div>
         <div className="landing-bar">
