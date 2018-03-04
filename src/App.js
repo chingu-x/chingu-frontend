@@ -36,7 +36,7 @@ class App extends Component {
         <Route exact path="/slack" component={SlackKey} />
         <Route exact path="/apply" component={VoyageFive} />
         <Route exact path="/applydev" component={Application} />
-        <Route exact path="/staff" component={Staff} />
+        <Route exact path="/team" component={Staff} />
         <Route exact path="/privacy" component={PrivacyPolicy} />
         <Route exact path="/companyfaq" render={() => <FAQ headerText="Company FAQs" data={companyFAQ} />} />
         <Route exact path="/programfaq" render={() => <FAQ headerText="Program FAQs" data={programFAQ} />} />
