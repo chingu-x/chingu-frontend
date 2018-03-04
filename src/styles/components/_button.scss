@@ -32,3 +32,16 @@
     color: color-list("text-light");
   }
 }
+
+.footer-btn {
+  width: 100%;
+  background-color: color-list("primary");
+  border: 1px solid color-list("accent");
+  color: color-list("accent");
+  font-size: 24px;
+  font-weight: 700;
+  @include hocus {
+    background-color: color-list("accent");
+    color: color-list("text-light");
+  }
+}
