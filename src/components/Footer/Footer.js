@@ -65,24 +65,24 @@ class Footer extends Component {
 
   renderSocialIcons() {
     return (
-      <div className="footer-social">
-        <a className="footer-social-icon" href="https://medium.com/chingu">
+      <div className="connection">
+        <a className="connection-icon" href="https://medium.com/chingu">
           <i className="fab fa-medium-m fa-2x" />
         </a>
         <a
-          className="footer-social-icon"
+          className="connection-icon"
           href="https://www.youtube.com/channel/UCS7zmJXbe7FgTC3sHlUf4jw"
         >
           <i className="fab fa-youtube fa-2x" />
         </a>
         <a
-          className="footer-social-icon"
+          className="connection-icon"
           href="https://github.com/Chingu-cohorts"
         >
           <i className="fab fa-github fa-2x" />
         </a>
         <a
-          className="footer-social-icon"
+          className="connection-icon"
           href="https://twitter.com/ChinguCollabs"
         >
           <i className="fab fa-twitter fa-2x" />

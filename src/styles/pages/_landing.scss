@@ -253,12 +253,15 @@
 
       .chingu-bar-title {
         font-size: 4.5em;
+        margin: 0;
         font-weight: bold;
         color: color-list("accent");
       }
 
       .chingu-bar-text {
         max-width: 300px;
+        font-size: 1em;
+        font-weight: unset;
       }
     }
   }
