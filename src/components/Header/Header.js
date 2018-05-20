@@ -16,14 +16,22 @@ class Header extends Component {
   // Right nav link link to Dash is disabled while image structure being set up by backend team.
   // Icon will need to be redirected to /myaccount once complete.
   renderRightNav() {
-    let loggedIn = window.localStorage.token;
+    let loggedIn = window.localStorage.token, loginMenuItems;
     let { error } = this.props.data;
+
+    let menu = [
+      <a href="https://medium.com/chingu" className={window.location.pathname === "/" ? "btn btn-light" : "btn"}>
+        Blog
+      </a>
+    ];
+
     if (error) {
       //do nothing.  this will throw an error when not logged in.  apollo client known issue.
       //this if statement will clear it out of the console for now.
     };
+
     if (!!loggedIn) {
-      return [
+      loginMenuItems = [
         <Link key="1" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/" onClick={e => this.handleLogout(e)}>
           Log Out
         </Link>,
@@ -32,7 +40,7 @@ class Header extends Component {
         </Link>
       ];
     } else {
-      return [
+      loginMenuItems = [
         <Link key="1" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/signup">
           Sign Up
         </Link>,
@@ -41,6 +49,10 @@ class Header extends Component {
         </Link>
       ];
     }
+
+    menu.push(...loginMenuItems);
+
+    return menu
   }
 
   render() {
