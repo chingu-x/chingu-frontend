@@ -167,7 +167,7 @@
     }
   }
 
-  .footer-social {
+  .connection {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -179,7 +179,7 @@
       margin: 2em 0;
     }
 
-    .footer-social-icon {
+    .connection-icon {
       margin-bottom: 1em;
       color: color-list("text-light");
       text-decoration: none;
