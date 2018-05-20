@@ -20,7 +20,7 @@ class Header extends Component {
     let { error } = this.props.data;
 
     let menu = [
-      <a href="https://medium.com/chingu" className={window.location.pathname === "/" ? "btn btn-light" : "btn"}>
+      <a key="1" href="https://medium.com/chingu" className={window.location.pathname === "/" ? "btn btn-light" : "btn"}>
         Blog
       </a>
     ];
@@ -32,19 +32,19 @@ class Header extends Component {
 
     if (!!loggedIn) {
       loginMenuItems = [
-        <Link key="1" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/" onClick={e => this.handleLogout(e)}>
+        <Link key="2" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/" onClick={e => this.handleLogout(e)}>
           Log Out
         </Link>,
-        <Link key="2" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/" >
+        <Link key="3" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/" >
           <i className="far fa-user fa-2x" />
         </Link>
       ];
     } else {
       loginMenuItems = [
-        <Link key="1" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/signup">
+        <Link key="2" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/signup">
           Sign Up
         </Link>,
-        <Link key="2" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/login">
+        <Link key="3" className={window.location.pathname === "/" ? "btn btn-light" : "btn"} to="/login">
           Log In
         </Link>
       ];
