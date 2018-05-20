@@ -1262,10 +1262,13 @@ button:hover {
           padding: 0; } }
       .landing .chingu-bar .chingu-bar-box .chingu-bar-title {
         font-size: 4.5em;
+        margin: 0;
         font-weight: bold;
         color: #15df89; }
       .landing .chingu-bar .chingu-bar-box .chingu-bar-text {
-        max-width: 300px; }
+        max-width: 300px;
+        font-size: 1em;
+        font-weight: unset; }
 
 .login {
   position: relative;
