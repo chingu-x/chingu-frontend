@@ -607,25 +607,25 @@ button:hover {
         font-size: 14px;
         font-weight: bold;
         text-transform: uppercase; }
-  .footer-wrapper .footer-social {
+  .footer-wrapper .connection {
     display: flex;
     flex-direction: column;
     align-items: flex-end; }
     @media (max-width: 1024px) {
-      .footer-wrapper .footer-social {
+      .footer-wrapper .connection {
         flex-direction: row;
         justify-content: center;
         align-items: flex-end;
         margin: 2em 0; } }
-    .footer-wrapper .footer-social .footer-social-icon {
+    .footer-wrapper .connection .connection-icon {
       margin-bottom: 1em;
       color: #ffffff;
       text-decoration: none;
       cursor: pointer; }
       @media (max-width: 1024px) {
-        .footer-wrapper .footer-social .footer-social-icon {
+        .footer-wrapper .connection .connection-icon {
           margin: 0 1em; } }
-      .footer-wrapper .footer-social .footer-social-icon:hover, .footer-wrapper .footer-social .footer-social-icon:focus {
+      .footer-wrapper .connection .connection-icon:hover, .footer-wrapper .connection .connection-icon:focus {
         color: #15df89; }
 
 .submitBtn {
@@ -1262,10 +1262,13 @@ button:hover {
           padding: 0; } }
       .landing .chingu-bar .chingu-bar-box .chingu-bar-title {
         font-size: 4.5em;
+        margin: 0;
         font-weight: bold;
         color: #15df89; }
       .landing .chingu-bar .chingu-bar-box .chingu-bar-text {
-        max-width: 300px; }
+        max-width: 300px;
+        font-size: 1em;
+        font-weight: unset; }
 
 .login {
   position: relative;
