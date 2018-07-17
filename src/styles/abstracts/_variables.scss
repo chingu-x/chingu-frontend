@@ -96,6 +96,16 @@ FORMS
 	text-align: left;
 }
 
+@mixin form-input {
+	border: 1px solid $light-grey;
+	padding: 5px;
+	color: $dark-grey;
+	font-size: 14px;
+	text-align: left;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
 /*
 ==========================
 ORIGINAL PROJECT VARIABLES
