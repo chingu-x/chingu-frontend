@@ -2,12 +2,172 @@
 //    Application-wide Variables
 //----------------------------------
 
-/// Regular font family
+/*
+==========================
+FONT
+==========================
+*/
 /// @type List
-$base-font-family: 'Raleway', sans-serif;
-$base-font-size: 16px;
+$base-font-family: 'Open Sans', 'Helvetica Neue', 'Raleway', sans-serif;
+$base-font-size: 14px;
+$portal-title-size: 40px;
+$portal-subcategory-size: 20px;
 $base-font-weight: 400;
+/*
+==========================
+COLORS
+==========================
+*/
+$theme-purple: #080A38;
+$light-purple: #71739B;
+$light-hover-purple: rgb(102, 104, 139);
+$theme-green: #15CF89;
+$theme-hover-green: rgb(25, 194, 129);
 
+$grey: #BBBBBB;
+$light-grey: #E6E6E6;
+$pale-grey: #EFEFEF;
+
+$health-green: #22B571;
+$health-yellow: #FFCC00;
+$health-red: #EF8585;
+/*
+==========================
+STYLING
+==========================
+*/
+$drop-shadow: 5px 5px 5px 10px $pale-grey;
+$border: 1px solid $light-grey;
+/*
+==========================
+ADMIN PORTALS
+==========================
+*/
+@mixin admin-portal-title {
+	color: $light-grey;
+	font-size: $portal-title-size;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	margin: 0 auto;
+	text-align: center;
+	display: block;
+	text-transform: uppercase;
+}
+
+@mixin admin-portal-subcategory {
+	color: $light-grey;
+	font-size: $portal-subcategory-size;
+	text-align: left;
+	text-transform: uppercase;
+	padding-bottom: 15px;
+}
+/*
+==========================
+ADMIN BTNS
+==========================
+*/
+@mixin admin-voyage-btn($color, $hover-color) {
+	background-color: $color;
+	color: white;
+	text-transform: uppercase;
+	padding: 10px;
+	font-size: 14px;
+	letter-spacing: 2px;
+	text-align: center;
+	&::hover {
+		background-color: $hover-color;
+	}
+}
+  
+@mixin admin-voyage-btn--sub($color) {
+	background-color: white;
+	color: $color;
+	border: 1px solid $color;
+	padding: 5px;
+	font-size: 14px;
+	text-align: center;
+	&::hover {
+		background-color: color;
+		color: white;
+	}
+}
+/*
+==========================
+CARDS & TABS
+==========================
+*/
+@mixin rounded-card {
+	border-radius: 20px;
+	background-color: white;
+	box-shadow: $drop-shadow;
+}
+@mixin half-rounded-tab($color) {
+	border-top-left-radius:  20px;
+	border-top-right-radius: 20px;
+	background-color: $color;
+	color: white;
+	text-align: center;
+	box-shadow: $drop-shadow;
+	font-size: 12px;
+	padding: 5px 10px;
+}
+/*
+==========================
+VOYAGE CARDS
+==========================
+*/
+@mixin voyage-card($color) {
+	width: 500px;
+	height: 300px;
+	border-radius: 20px;
+	background-color: $color;
+	color: $theme-purple;
+	box-shadow: $drop-shadow;
+}
+@mixin voyage-badge {
+	width: 186px;
+	height: 186px;
+	border-radius: 50%;
+	border: 15px solid $theme-purple;
+	color: $theme-purple;
+	background-color: white;
+}
+@mixin user-btn--apply {
+	background-color: $theme-green;
+	color: white;
+	text-transform: uppercase;
+	border-radius: 20px;
+	padding: 5px 10px;
+	letter-spacing: 2px;
+	text-align: center;
+}
+/*
+==========================
+FORMS
+==========================
+*/
+@mixin form-label {
+	color: $light-grey;
+	text-transform: uppercase;
+	font-size: 12px;
+	text-align: left;
+}
+
+@mixin form-input {
+	border: 1px solid $light-grey;
+	padding: 5px;
+	color: $dark-grey;
+	font-size: 14px;
+	text-align: left;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+/*
+==========================
+ORIGINAL PROJECT VARIABLES
+==========================
+*/
 /// Color Map
 /// @type List
 $color-list: (
