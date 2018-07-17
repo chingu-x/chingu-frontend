@@ -33,6 +33,13 @@ $health-yellow: #FFCC00;
 $health-red: #EF8585;
 /*
 ==========================
+STYLING
+==========================
+*/
+$drop-shadow: 5px 5px 5px 10px $pale-grey;
+$border: 1px solid $light-grey;
+/*
+==========================
 ADMIN PORTALS
 ==========================
 */
@@ -83,6 +90,46 @@ ADMIN BTNS
 		background-color: color;
 		color: white;
 	}
+}
+/*
+==========================
+CARDS
+==========================
+*/
+@mixin cards {
+	border-radius: 20px;
+	background-color: white;
+	box-shadow: $drop-shadow;
+}
+/*
+==========================
+VOYAGE CARDS
+==========================
+*/
+@mixin voyage-card($color) {
+	width: 500px;
+	height: 300px;
+	border-radius: 20px;
+	background-color: $color;
+	color: $theme-purple;
+	box-shadow: $drop-shadow;
+}
+@mixin voyage-badge {
+	width: 186px;
+	height: 186px;
+	border-radius: 50%;
+	border: 15px solid $theme-purple;
+	color: $theme-purple;
+	background-color: white;
+}
+@mixin user-btn--apply {
+	background-color: $theme-green;
+	color: white;
+	text-transform: uppercase;
+	border-radius: 20px;
+	padding: 5px 10px;
+	letter-spacing: 2px;
+	text-align: center;
 }
 /*
 ==========================
