@@ -1,4 +1,4 @@
-![Image alt text](https://i.imgur.com/qD4SvyR.png "Main Page")
+![Image alt text](https://i.imgur.com/Bbtlvom.png"Main Page")
 
 ## Introduction
 Chingu.io is a web app created with React, Apollo Client and GraphQL to interface with the Chingu API (Node/PostgreSQL). Chingu is a global collaboration platform and coding-cohort generator. We connect motivated learners with shared goals to learn, help and build together. 
