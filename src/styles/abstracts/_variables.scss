@@ -93,13 +93,23 @@ ADMIN BTNS
 }
 /*
 ==========================
-CARDS
+CARDS & TABS
 ==========================
 */
-@mixin cards {
+@mixin rounded-card {
 	border-radius: 20px;
 	background-color: white;
 	box-shadow: $drop-shadow;
+}
+@mixin half-rounded-tab($color) {
+	border-top-left-radius:  20px;
+	border-top-right-radius: 20px;
+	background-color: $color;
+	color: white;
+	text-align: center;
+	box-shadow: $drop-shadow;
+	font-size: 12px;
+	padding: 5px 10px;
 }
 /*
 ==========================
