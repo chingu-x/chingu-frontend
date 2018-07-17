@@ -20,7 +20,9 @@ COLORS
 */
 $theme-purple: #080A38;
 $light-purple: #71739B;
+$light-hover-purple: rgb(102, 104, 139);
 $theme-green: #15CF89;
+$theme-hover-green: rgb(25, 194, 129);
 
 $grey: #BBBBBB;
 $light-grey: #E6E6E6;
@@ -57,7 +59,7 @@ ADMIN PORTALS
 ADMIN BTNS
 ==========================
 */
-@mixin admin-voyage-btn($color) {
+@mixin admin-voyage-btn($color, $hover-color) {
 	background-color: $color;
 	color: white;
 	text-transform: uppercase;
@@ -65,6 +67,9 @@ ADMIN BTNS
 	font-size: 14px;
 	letter-spacing: 2px;
 	text-align: center;
+	&::hover {
+		background-color: $hover-color;
+	}
 }
   
 @mixin admin-voyage-btn--sub($color) {
@@ -74,6 +79,10 @@ ADMIN BTNS
 	padding: 5px;
 	font-size: 14px;
 	text-align: center;
+	&::hover {
+		background-color: color;
+		color: white;
+	}
 }
 /*
 ==========================
