@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import * as React from 'react';
 import { Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -9,6 +9,7 @@ import FAQ from "./components/Pages/FAQ";
 import companyFAQ from "./static-api-elements/companyFAQ";
 import programFAQ from "./static-api-elements/programFAQ";
 import CurrentPrograms from "./components/Pages/CurrentPrograms";
+import VoyageApplication from './components/Voyage-Application';
 
 // TODO: refactor / discard the following components
 // these are all using the old apollo setup
@@ -23,7 +24,7 @@ import CurrentPrograms from "./components/Pages/CurrentPrograms";
 
 // Dash disabled while image structure is being set up by backend team.
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <div className="App">
@@ -34,7 +35,7 @@ class App extends Component {
 
         {/*<Route path="/user/:username" component={Profile} />*/}
         {/*<Route path="/myaccount" component={Dashboard} />*/}
-        
+        <Route exact path='/voyage/application' component={VoyageApplication} />
         <Route exact path="/current" component={CurrentPrograms} />
         {/* <Route exact path="/slack" component={SlackKey} /> */}
         {/* <Route exact path="/apply" component={VoyageFive} /> */}

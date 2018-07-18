@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import * as React from 'react';
 import { Link } from "react-router-dom";
 import SubscribeForm from "./SubscribeForm";
 import patreon from "../../styles/assets/patreon.png";
 
-class Footer extends Component {
+class Footer extends React.Component {
   state = {
     email: "",
     isFooterDDShowing: false

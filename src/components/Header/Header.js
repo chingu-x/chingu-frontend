@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import * as React from 'react';
 import { Link } from "react-router-dom";
 import { graphql } from "react-apollo";
 
 import currentUserQuery from "../../queries/currentUserQuery";
 
-class Header extends Component {
+class Header extends React.Component {
   state = {};
 
   handleLogout(e){
