@@ -27,6 +27,7 @@ $theme-hover-green: rgb(25, 194, 129);
 $grey: #BBBBBB;
 $light-grey: #E6E6E6;
 $pale-grey: #EFEFEF;
+$palest-grey: #F8F8F8;
 
 $health-green: #22B571;
 $health-yellow: #FFCC00;
@@ -163,6 +164,7 @@ FORMS
 	margin-bottom: 5px;
 }
 
+
 /*
 ==========================
 ORIGINAL PROJECT VARIABLES
@@ -203,3 +205,5 @@ $max-width: 1180px !default;
 /// @example scss - When using a CDN
 ///   $base-url: 'http://cdn.example.com/assets/';
 $base-url: '/assets/' !default;
+
+
