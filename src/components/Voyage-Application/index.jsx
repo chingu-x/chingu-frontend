@@ -40,7 +40,7 @@ function radioAnswerCreator(answer, questionId, index, onFormChange, state) {
         </div>
     )
 }
-function questionCreator_checkbox(data, onFormChange, state) {
+function answerCreator_checkbox(data, onFormChange, state) {
     return (
         data.answers.map((answer, index) => {
             return checkboxAnswerCreator(answer, data.id, index, onFormChange, state)
@@ -48,7 +48,7 @@ function questionCreator_checkbox(data, onFormChange, state) {
     )
 }
 
-function questionCreator_radio(data, onFormChange, state) {
+function answerCreator_radio(data, onFormChange, state) {
     return (
         data.answers.map((answer, index) => {
             return radioAnswerCreator(answer, data.id, index, onFormChange, state)
@@ -56,7 +56,7 @@ function questionCreator_radio(data, onFormChange, state) {
     )
 }
 
-function questionCreator_input(data, onFormChange, state) {
+function answerCreator_input(data, onFormChange, state) {
     return (
         <input  type="text" 
                 name={data.id} 
@@ -67,18 +67,24 @@ function questionCreator_input(data, onFormChange, state) {
     )
 }
 
+function answerCreator_dropdown(data, onFormChange, state) {
+
+}
+
 function renderQAs(applicationData, onFormChange, state) {
     return applicationData.map((setOfQuestionAnswer) => {
         let answerComponent;
         switch (setOfQuestionAnswer.type) {
             case 'checkbox':
-                answerComponent = questionCreator_checkbox(setOfQuestionAnswer, onFormChange, state);
+                answerComponent = answerCreator_checkbox(setOfQuestionAnswer, onFormChange, state);
                 break;
             case 'input':
-                answerComponent = questionCreator_input(setOfQuestionAnswer, onFormChange, state);
+                answerComponent = answerCreator_input(setOfQuestionAnswer, onFormChange, state);
                 break;
             case 'radio':
-                answerComponent = questionCreator_radio(setOfQuestionAnswer, onFormChange, state);
+                answerComponent = answerCreator_radio(setOfQuestionAnswer, onFormChange, state);
+                break;
+            case 'dropdown':
                 break;
             default:
                 break;
