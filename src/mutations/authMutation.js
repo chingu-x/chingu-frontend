@@ -1,11 +1,11 @@
 import gql from "graphql-tag";
 
-const loginMutation = gql`
+const authMutation = gql`
   mutation userGithubAuth($code: String!) {
-    userGithubAuth(code: $code) {
-      jwt
+    userAuthGithub(code: $code) {
+      token: jwt
     }
   }
 `;
 
-export default loginMutation;
+export default authMutation;
