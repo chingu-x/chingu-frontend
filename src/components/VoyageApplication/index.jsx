@@ -1,6 +1,7 @@
 import * as React from 'react';
 import newUserApplicationData from './newUserApplication.data.js';
 import './VoyageApplication.css';
+import '../FormCreator/FormCreator.css';
 // import voyageApplicationData from './VoyageApplication.data.js';
 import { renderQAs } from '../FormCreator/answerCreators.js';
 
