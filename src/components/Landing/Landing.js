@@ -5,13 +5,14 @@ import LandingIconItem from "./LandingIconItem";
 import LandingTestimonial from "./LandingTestimonial";
 import earth from "../../styles/assets/Global Image-02.png";
 import landingItems from "../../static-api-elements/landingItems";
-import ChinguApplication from '../ChinguApplication';
-
+import Register from '../Register';
+import Login from "../Login";
 class Landing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      register: false
+      register: false,
+      login: false
     }
   }
 
@@ -19,7 +20,10 @@ class Landing extends React.Component {
     // if the URL has /register , it will set register to true
     console.log(window.location.pathname);
     if (window.location.pathname === '/register') {
-      this.setState({ register: true })
+      this.setState({ register: true, login: true })
+    }
+    if (window.location.pathname === '/login') {
+      this.setState({ login: true, register: false })
     }
   }
 
@@ -58,7 +62,8 @@ class Landing extends React.Component {
   render() {
     return (
       <div className="landing">
-        {this.state.register ? <ChinguApplication /> : null}
+        {this.state.login ? <Login /> : null}
+        {this.state.register ? <Register /> : null}
         <div className="landing-top">
           <img className="landing-img" src={earth} alt="" />
           <div className="tagline-box">

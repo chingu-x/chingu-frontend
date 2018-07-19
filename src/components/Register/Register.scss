@@ -10,7 +10,6 @@
 }
 
 .chingu-application-modal {
-    margin-top: 100px;
     display: block;
     z-index: 110;
     width: 350px;
@@ -18,5 +17,7 @@
     border-radius: 20px;
     box-shadow: $box-shadow;
     margin: 0 auto;
-    padding: 10px 20px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding: 20px;
 }

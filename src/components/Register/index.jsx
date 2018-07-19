@@ -1,8 +1,8 @@
 import * as React from "react";
-import chinguApplicationData from './chinguApplication.data';
+import { chinguApplicationData } from './chinguApplication.data';
 import { renderQAs } from '../FormCreator/answerCreators';
 
-class ChinguApplication extends React.Component {
+class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,3 +43,5 @@ class ChinguApplication extends React.Component {
         )
     }
 }
+
+export default Register;

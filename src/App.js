@@ -7,7 +7,6 @@ import PrivacyPolicy from "./components/Pages/PrivacyPolicy";
 import FAQ from "./components/Pages/FAQ";
 import companyFAQ from "./static-api-elements/companyFAQ";
 import programFAQ from "./static-api-elements/programFAQ";
-import Login from "./components/Login/Login";
 import CurrentPrograms from "./components/Pages/CurrentPrograms";
 
 class App extends React.Component {
@@ -15,7 +14,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Route exact path="/" component={Landing} />
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/login" component={Landing} />
         <Route exact path="/register" component={Landing} />
         <Route exact path="/current" component={CurrentPrograms} />
         <Route exact path="/team" component={Staff} />
