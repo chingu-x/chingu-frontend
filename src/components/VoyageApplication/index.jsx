@@ -34,7 +34,6 @@ class VoyageApplication extends React.Component {
 
     toggleValueInSet = (set, value) => {
         set.has(value) ? set.delete(value) : set.add(value);
-        console.log(this.state)
         return set;
     }
 
@@ -48,7 +47,6 @@ class VoyageApplication extends React.Component {
                 this.setState({ [name]: value });
                 break;
         }
-        console.log(this.state);
     }
     render() {
         return (

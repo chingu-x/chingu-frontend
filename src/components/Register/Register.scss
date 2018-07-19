@@ -12,7 +12,7 @@
 .chingu-application-modal {
     display: block;
     z-index: 110;
-    width: 350px;
+    width: 440px;
     background-color: white;
     border-radius: 20px;
     box-shadow: $box-shadow;
@@ -20,4 +20,30 @@
     margin-top: 100px;
     margin-bottom: 100px;
     padding: 20px;
+}
+
+.chingu-application-title {
+    font-size: 14px;
+    color: $grey;
+    width: calc(100% + 40px);
+    text-align: center;
+    background-color: $palest-grey;
+    text-transform: uppercase;
+    position: relative;
+    margin-left: -20px;
+}
+
+.chingu-application-btn {
+    color: white;
+    background-color: $theme-green;
+    border: none;
+    box-shadow: $box-shadow;
+    padding: 10px;
+    border-radius: 20px;
+    width: 150px;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }

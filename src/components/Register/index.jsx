@@ -34,11 +34,18 @@ class Register extends React.Component {
         console.log(this.state);
     }
 
+    onSubmit = (e) => {
+        e.preventDefault();
+        // save to user profile
+    }
+
     render() {
         return (
             <div className="chingu-application-container">
                 <div className="chingu-application-modal">
+                    <div className="chingu-application-title">New User Onboarding Survey</div>
                     {renderQAs(chinguApplicationData, this.onFormChange, this.state)}
+                    <button onClick={e => this.onSubmit(e)} className="chingu-application-btn">Save</button>
                 </div>
             </div>
         )
