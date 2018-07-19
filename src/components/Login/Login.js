@@ -39,27 +39,10 @@ class Login extends React.Component {
         <a
           href={`https://github.com/login/oauth/authorize?client_id=e015fd9cc874fa5a34bf`}
         >
-          <button>
-            Log in with Github
-        </button>
+         <button className="github-auth"><img src={require('https://i.imgur.com/UBZgVgQ.png')} />Log in with Github</button>
         </a>
       </div>
-    )
-  }
-}
-
-// const Login = () => {
-//   return (
-//     <div className="login">
-//       <div className="login-box">
-//       { console.log(ApolloConsumer) }
-//         <h1>CHINGU</h1>
-//         <a
-//           href={`https://github.com/login/oauth/authorize?client_id=${'e015fd9cc874fa5a34bf'}`}
-//         >Sign in with GitHub</a>
-//       </div>
-//     </div>
-//   );
-// };
+  );
+};
 
 export default Login;
