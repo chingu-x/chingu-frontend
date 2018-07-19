@@ -56,6 +56,55 @@ ORIGINAL PROJECT VARIABLES
 
 /*
 ==========================
+DROPDOWN w/ CHECKBOX
+==========================
+*/
+.search-input-box {
+  margin-bottom: 10px;
+  min-width: 180px;
+  border: none;
+  box-shadow: 0px 3px 6px #E6E6E6;
+  padding: 5px; }
+
+.search-input-box::placeholder {
+  color: #E6E6E6; }
+
+.filter-dropdown-box {
+  background-color: white;
+  border: 1px solid #E6E6E6;
+  width: 180px;
+  display: none;
+  position: absolute;
+  box-shadow: 0px 3px 6px #E6E6E6;
+  z-index: 10;
+  max-height: 120px;
+  overflow: scroll;
+  overflow-x: hidden;
+  text-align: left;
+  color: #757575;
+  font-size: 12px;
+  margin-left: -9px; }
+
+.filter-dropdown-hide {
+  display: none; }
+
+.filter-dropdown-btn-5,
+.filter-dropdown-btn-101 {
+  min-width: 180px;
+  color: #757575;
+  font-size: 12px;
+  background-color: white;
+  border: 1px solid #E6E6E6;
+  padding: 7px; }
+
+.filter-dropdown-btn-5:hover #dropdown_multiple-5 {
+  display: block; }
+
+.filter-dropdown-btn-101:hover #dropdown_multiple-101 {
+  display: block; }
+
+/*
+==========================
 CHECKBOX STYLING
 ==========================
 */

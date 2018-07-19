@@ -15,6 +15,68 @@
 }
 /*
 ==========================
+DROPDOWN w/ CHECKBOX
+==========================
+*/
+.search-input-box {
+    margin-bottom: 10px;
+    min-width: 180px;
+    border: none;
+    box-shadow: $box-shadow;
+    padding: 5px;
+}
+
+.search-input-box::placeholder {
+    color: $light-grey;
+}
+
+.filter-dropdown-box {
+    background-color: white;
+    border: 1px solid $light-grey;
+    width: 180px;
+    display: none;
+    position: absolute;
+    box-shadow: $box-shadow;
+    z-index: 10;
+    max-height: 120px;
+    overflow: scroll;
+    overflow-x: hidden;
+    text-align: left;
+    color: $dark-grey;
+    font-size: 12px;
+    margin-left: -9px;
+}
+
+.filter-dropdown-hide {
+    display: none;
+}
+
+.filter-dropdown-btn-5, 
+.filter-dropdown-btn-101 {
+    min-width: 180px;
+    color: $dark-grey;
+    font-size: 12px;
+    background-color: white;
+    border: 1px solid $light-grey;
+    padding: 7px;
+    // margin-left: 20px;
+    // margin-right: 20px;
+}
+
+.filter-dropdown-btn-5:hover {
+    #dropdown_multiple-5 {
+        display: block;
+    }
+}
+
+.filter-dropdown-btn-101:hover {
+    #dropdown_multiple-101 {
+        display: block;
+    }
+}
+
+/*
+==========================
 CHECKBOX STYLING
 ==========================
 */
