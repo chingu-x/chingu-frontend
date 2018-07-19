@@ -136,8 +136,8 @@ display: block;
 
 /* Style the checkmark/indicator */
 .checkbox-container .checkmark:after {
-left: 3.5px;
-top: 1px;
+left: 4px;
+top: 1.5px;
 width: 4px;
 height: 7px;
 border: solid white;
@@ -207,8 +207,8 @@ display: block;
 
 /* Style the indicator (dot/circle) */
 .radio-container .radio-checkmark:after {
-top: 3.5px;
-left: 3.5px;
+top: 2.5px;
+left: 2.5px;
 width: 7px;
 height: 7px;
 border-radius: 50%;
