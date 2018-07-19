@@ -1,33 +1,38 @@
 import * as React from 'react';
 
-function checkboxAnswerCreator(answer, questionId, index, onFormChange, state) {
-    return (
-        <div key={'checkbox-answer_' + questionId + '_' + index} className="checkbox-container">
-            <label className="voyage-application-answer" htmlFor="new-project-role-p">
-                {answer}
-                <input
-                    className="voyage-application-checkbox"
-                    type="checkbox"
-                    name={questionId}
-                    value={answer}
-                    checked={state[questionId].has(answer)}
-                    onChange={e => onFormChange(e)}
-                />
-                <span className="checkmark" />
-            </label>
-        </div>
-    )
+class CheckboxAnswerCreator extends React.Component {
+    render() {
+        const { answer, questionId, index, onFormChange, state } = this.props;
+        return (
+            <div key={'checkbox-answer_' + questionId + '_' + index} className="checkbox-container">
+                <label className="voyage-application-answer" htmlFor={questionId + '_' + index}>
+                    {answer}
+                    <input
+                        className="voyage-application-checkbox"
+                        type="checkbox"
+                        name={questionId}
+                        value={answer}
+                        id={questionId + '_' + index}
+                        checked={state[questionId].has(answer)}
+                        onChange={e => onFormChange(e)}
+                    />
+                    <span className="checkmark" />
+                </label>
+            </div>
+        )
+    }
 }
 
 function radioAnswerCreator(answer, questionId, index, onFormChange, state) {
     return (
         <div key={'radio-answer_' + questionId + '_' + index} className="radio-container">
-            <label className="voyage-application-answer" htmlFor="new-project-role-p">
+            <label className="voyage-application-answer" htmlFor={questionId + '_' + index}>
                 {answer}
                 <input
                     className="voyage-application-radio"
                     type="radio"
                     name={questionId}
+                    id={questionId + '_' + index}
                     value={answer}
                     checked={state[questionId]}
                     onChange={e => onFormChange(e)}
@@ -40,10 +45,11 @@ function radioAnswerCreator(answer, questionId, index, onFormChange, state) {
 function answerCreator_checkbox(data, onFormChange, state) {
     return (
         data.answers.map((answer, index) => {
-            return checkboxAnswerCreator(answer, data.id, index, onFormChange, state)
+            return <CheckboxAnswerCreator key={data.id + '_' + index} answer={answer} questionId={data.id} index={index} onFormChange={onFormChange} state={state} />
         })
     )
 }
+
 
 function answerCreator_radio(data, onFormChange, state) {
     return (
@@ -86,8 +92,8 @@ function answerCreator_dropdown(data, onFormChange, state) {
 function answerCreator_dropdown_multiple(data, onFormChange, state) {
     const renderMultiple = () => {
         return data.answers.map((answer, index) => {
-                return checkboxAnswerCreator(answer, data.id, index, onFormChange, state)
-            }
+            return <CheckboxAnswerCreator key={data.id + '_' + index} answer={answer} questionId={data.id} index={index} onFormChange={onFormChange} state={state} />
+        }
         );
     };
 

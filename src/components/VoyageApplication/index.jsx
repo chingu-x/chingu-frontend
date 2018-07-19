@@ -32,14 +32,16 @@ class VoyageApplication extends React.Component {
     }
 
     toggleValueInSet = (set, value) => {
-        return set.has(value) ? set.delete(value) : set.add(value);
+        set.has(value) ? set.delete(value) : set.add(value);
+        console.log(this.state)
+        return set;
     }
 
     onFormChange = (e) => {
         const { name, value, type } = e.currentTarget;
         switch (type) {
-            case 'checkbox' | 'dropdown-multiple':
-                this.setState({ [name]: this.toggleValueInSet(this.state[name], value) }, () => console.log(this.state));
+            case 'checkbox':
+                this.setState({ [name]: this.toggleValueInSet(this.state[name], value) });
                 break;
             default:
                 this.setState({ [name]: value });
