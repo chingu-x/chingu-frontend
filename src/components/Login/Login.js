@@ -9,40 +9,42 @@ import authMutation from "../../mutations/authMutation";
 class Login extends React.Component {
   state = { code: null }
   componentDidMount() {
-      const code = new URLSearchParams(window.location.search).get('code');
-      this.setState({ code });
+    const code = new URLSearchParams(window.location.search).get('code');
+    this.setState({ code });
   }
 
   userAuth = (client) => {
     // TODO: check state and clear before mutation
     client
-      .mutate({ mutation: authMutation, variables: { code: this.state.code }})
-        .then(({ data }) => window.localStorage.setItem("token", data.userAuthGithub))
-        .catch(console.error);
+      .mutate({ mutation: authMutation, variables: { code: this.state.code } })
+      .then(({ data }) => window.localStorage.setItem("token", data.userAuthGithub))
+      .catch(console.error);
   }
 
   render() {
     if (this.state.code) {
       return (
         <ApolloConsumer>
-          { client => {
+          {client => {
             this.userAuth(client);
             return <div>got it</div>
-          } }
+          }}
         </ApolloConsumer>
       )
     }
 
-    return (<div className="login-box">
-    <h1>CHINGU</h1>
-      <a
-        href={`https://github.com/login/oauth/authorize?client_id=e015fd9cc874fa5a34bf`}
-      >
-        <button>
-          Sign in bro
+    return (
+      <div className="login-box">
+        <div className="g>Github Authentication</div>
+        <a
+          href={`https://github.com/login/oauth/authorize?client_id=e015fd9cc874fa5a34bf`}
+        >
+          <button>
+            Sign in bro
         </button>
-      </a>
-  </div>)
+        </a>
+      </div>
+    )
   }
 }
 
