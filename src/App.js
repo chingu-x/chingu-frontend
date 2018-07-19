@@ -9,7 +9,7 @@ import FAQ from "./components/Pages/FAQ";
 import companyFAQ from "./static-api-elements/companyFAQ";
 import programFAQ from "./static-api-elements/programFAQ";
 import CurrentPrograms from "./components/Pages/CurrentPrograms";
-import VoyageApplication from './components/Voyage-Application';
+import VoyageApplication from './components/VoyageApplication';
 
 // TODO: refactor / discard the following components
 // these are all using the old apollo setup

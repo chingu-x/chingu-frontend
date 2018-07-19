@@ -86,22 +86,8 @@ function answerCreator_dropdown(data, onFormChange, state) {
 function answerCreator_dropdown_multiple(data, onFormChange, state) {
     const renderMultiple = () => {
         return data.answers.map((answer, index) => {
-            return (
-                <div className="checkbox-container" key={'dropdown_filter_' + index}>
-                    <label htmlFor={'tags_filter_id_' + index}>
-                        {answer}
-                        <input
-                            type="checkbox"
-                            name={data.id}
-                            id={data.id + '_' + index}
-                            value={answer}
-                            className="filter-options"
-                        />
-                        <span className="checkmark" />
-                    </label>
-                </div>
-            );
-        }
+                return checkboxAnswerCreator(answer, data.id, index, onFormChange, state)
+            }
         );
     };
 
@@ -121,11 +107,6 @@ function answerCreator_dropdown_multiple(data, onFormChange, state) {
     const inputBoxFilter = (e) => {
         e.persist();
         filter("dropdownSearch_" + data.id, data.id);
-        // const ENTER_KEY = 13;
-        // if (e.keyCode === ENTER_KEY) {
-        //     var value = document.getElementById('tagSearch').value;
-        //     this.setState({ state[data.id]: state[data.id].add(value) })
-        // }
     }
 
     const toggleDropdown = (e) => {
@@ -150,7 +131,6 @@ function answerCreator_dropdown_multiple(data, onFormChange, state) {
                     {renderMultiple()}
                 </div>
             </button>
-
         </React.Fragment>
     )
 }

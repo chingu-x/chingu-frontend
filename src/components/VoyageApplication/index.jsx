@@ -39,7 +39,7 @@ class VoyageApplication extends React.Component {
         const { name, value, type } = e.currentTarget;
         switch (type) {
             case 'checkbox' | 'dropdown-multiple':
-                this.setState({ [name]: this.toggleValueInSet(this.state[name], value) });
+                this.setState({ [name]: this.toggleValueInSet(this.state[name], value) }, () => console.log(this.state));
                 break;
             default:
                 this.setState({ [name]: value });
