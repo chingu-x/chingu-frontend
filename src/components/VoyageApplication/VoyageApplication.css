@@ -55,21 +55,46 @@ ORIGINAL PROJECT VARIABLES
   margin-top: 100px;
   box-shadow: 0px 3px 6px #E6E6E6; }
 
+/*
+==========================
+QUESTION & ANSWER UNIT
+==========================
+*/
 .voyage-application-QA {
   margin-top: 20px; }
 
+/*
+==========================
+QUESTION
+==========================
+*/
 .voyage-application-question {
   font-size: 14px;
   color: #757575; }
 
+/*
+==========================
+QUESTION SUBTEXT
+==========================
+*/
 .voyage-application-subtext {
   font-size: 12px;
   color: #BBBBBB; }
 
+/*
+==========================
+ANSWER FONT
+==========================
+*/
 .voyage-application-answer {
   font-size: 14px;
   color: #757575; }
 
+/*
+==========================
+INPUT & TEXTAREA
+==========================
+*/
 .voyage-application-input {
   display: block;
   width: 100%;
@@ -92,6 +117,11 @@ ORIGINAL PROJECT VARIABLES
   max-width: 100%;
   min-width: 100%; }
 
+/*
+==========================
+DROPDOWN
+==========================
+*/
 .voyage-application-dropdown {
   width: 100%;
   border: 1px solid #E6E6E6;
@@ -99,6 +129,9 @@ ORIGINAL PROJECT VARIABLES
   color: #757575;
   font-size: 12px;
   margin-top: 5px; }
+
+.voyage-application-dropdown > option {
+  width: 418px !important; }
 
 /*
 ==========================
