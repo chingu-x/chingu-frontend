@@ -35,12 +35,12 @@ class Login extends React.Component {
 
     return (
       <div className="login-box">
-        <div className="g>Github Authentication</div>
+        <div className="login-title">Github Authentication</div>
         <a
           href={`https://github.com/login/oauth/authorize?client_id=e015fd9cc874fa5a34bf`}
         >
           <button>
-            Sign in bro
+            Log in with Github
         </button>
         </a>
       </div>
