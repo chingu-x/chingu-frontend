@@ -1,4 +1,4 @@
-import React from '../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react';
+import * as React from 'react';
 
 const VoyageFive = () => {
   //Chrome throws error for iframes. Known bug.
