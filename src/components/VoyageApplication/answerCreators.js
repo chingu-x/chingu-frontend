@@ -72,11 +72,11 @@ function answerCreator_input(data, onFormChange, state) {
 
 function answerCreator_textarea(data, onFormChange, state) {
     return (
-        <input type="text"
+        <textarea type="text"
             name={data.id}
             value={state[data.id]}
             onChange={e => onFormChange(e)}
-            className="voyage-application-input"
+            className="voyage-application-text-area"
         />
     )
 }
@@ -93,7 +93,7 @@ function answerCreator_dropdown(data, onFormChange, state) {
         >
             {data.answers.map((answer, index) => {
                 return (
-                    <option value={answer} key={'dropdown_' + data.id + '_' + index}>{answer}</option>
+                    <option className="voyage-application-answer" value={answer} key={'dropdown_' + data.id + '_' + index}>{answer}</option>
                 )
             })}
         </select>

@@ -49,10 +49,56 @@ ORIGINAL PROJECT VARIABLES
 .voyage-application {
   width: 460px;
   background-color: white;
-  border-radius: 20px; }
+  border-radius: 20px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 100px;
+  box-shadow: 0px 3px 6px #E6E6E6; }
 
 .voyage-application-QA {
-  margin-top: 50px; }
+  margin-top: 20px; }
+
+.voyage-application-question {
+  font-size: 14px;
+  color: #757575; }
+
+.voyage-application-subtext {
+  font-size: 12px;
+  color: #BBBBBB; }
+
+.voyage-application-answer {
+  font-size: 14px;
+  color: #757575; }
+
+.voyage-application-input {
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  color: #757575;
+  padding: 5px;
+  margin-top: 5px;
+  border: 1px solid #E6E6E6; }
+
+.voyage-application-text-area {
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  color: #757575;
+  padding: 5px;
+  margin-top: 5px;
+  border: 1px solid #E6E6E6;
+  min-height: 50px;
+  max-height: 50px;
+  max-width: 100%;
+  min-width: 100%; }
+
+.voyage-application-dropdown {
+  width: 100%;
+  border: 1px solid #E6E6E6;
+  padding: 5px;
+  color: #757575;
+  font-size: 12px;
+  margin-top: 5px; }
 
 /*
 ==========================
