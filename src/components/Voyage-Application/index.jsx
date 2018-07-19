@@ -2,104 +2,7 @@ import * as React from 'react';
 import newUserApplicationData from './newUserApplication';
 import './VoyageApplication.css';
 // import voyageApplicationData from './VoyageApplication';
-
-function checkboxAnswerCreator(answer, questionId, index, onFormChange, state) {
-    return (
-        <div key={'checkbox-answer_' + questionId + '_' + index} className="checkbox-container">
-            <label className="voyage-application-answer" htmlFor="new-project-role-p">
-                {answer}
-                <input
-                    className="voyage-application-checkbox"
-                    type="checkbox"
-                    name={questionId}
-                    value={answer}
-                    checked={state[questionId].has(answer)}
-                    onChange={e => onFormChange(e)}
-                />
-                <span className="checkmark" />
-            </label>
-        </div>
-    )
-}
-
-function radioAnswerCreator(answer, questionId, index, onFormChange, state) {
-    return (
-        <div key={'radio-answer_' + questionId + '_' + index} className="radio-container">
-            <label className="voyage-application-answer" htmlFor="new-project-role-p">
-                {answer}
-                <input
-                    className="voyage-application-radio"
-                    type="radio"
-                    name={questionId}
-                    value={answer}
-                    checked={state[questionId]}
-                    onChange={e => onFormChange(e)}
-                />
-                <span className="radio-checkmark" />
-            </label>
-        </div>
-    )
-}
-function answerCreator_checkbox(data, onFormChange, state) {
-    return (
-        data.answers.map((answer, index) => {
-            return checkboxAnswerCreator(answer, data.id, index, onFormChange, state)
-        })
-    )
-}
-
-function answerCreator_radio(data, onFormChange, state) {
-    return (
-        data.answers.map((answer, index) => {
-            return radioAnswerCreator(answer, data.id, index, onFormChange, state)
-        })
-    )
-}
-
-function answerCreator_input(data, onFormChange, state) {
-    return (
-        <input  type="text" 
-                name={data.id} 
-                value={state[data.id]} 
-                onChange={e => onFormChange(e)} 
-                className="voyage-application-input" 
-        />
-    )
-}
-
-function answerCreator_dropdown(data, onFormChange, state) {
-
-}
-
-function renderQAs(applicationData, onFormChange, state) {
-    return applicationData.map((setOfQuestionAnswer) => {
-        let answerComponent;
-        switch (setOfQuestionAnswer.type) {
-            case 'checkbox':
-                answerComponent = answerCreator_checkbox(setOfQuestionAnswer, onFormChange, state);
-                break;
-            case 'input':
-                answerComponent = answerCreator_input(setOfQuestionAnswer, onFormChange, state);
-                break;
-            case 'radio':
-                answerComponent = answerCreator_radio(setOfQuestionAnswer, onFormChange, state);
-                break;
-            case 'dropdown':
-                break;
-            default:
-                break;
-        }
-        return (
-            <div key={'question_' + setOfQuestionAnswer.id} className="voyage-application-QA">
-                <label className="voyage-application-question">
-                    {setOfQuestionAnswer.question}
-                </label>
-                {setOfQuestionAnswer.subtext ? <div className="voyage-application-subtext">{setOfQuestionAnswer.subtext}</div> : null}
-                {answerComponent}
-            </div>
-        )
-    })
-}
+import { renderQAs } from './answerCreators';
 
 class VoyageApplication extends React.Component {
     constructor(props) {
@@ -109,7 +12,7 @@ class VoyageApplication extends React.Component {
             2: '',
             3: '',
             4: '',
-            5: '',
+            5: new Set(),
             6: '',
             7: '',
             8: '',
@@ -120,7 +23,7 @@ class VoyageApplication extends React.Component {
             13: '',
             14: '',
             100: '',
-            101: '',
+            101: new Set(),
             102: '',
             103: '',
             104: '',
@@ -135,12 +38,11 @@ class VoyageApplication extends React.Component {
     onFormChange = (e) => {
         const { name, value, type } = e.currentTarget;
         switch (type) {
-            case 'checkbox':
-                this.setState({ [name]: this.toggleValueInSet(this.state[name], value) })
+            case 'checkbox' | 'dropdown-multiple':
+                this.setState({ [name]: this.toggleValueInSet(this.state[name], value) });
                 break;
             default:
                 this.setState({ [name]: value });
-                console.log(this.state);
                 break;
         }
     }
@@ -150,7 +52,6 @@ class VoyageApplication extends React.Component {
                 <div className="voyage-application">
                     {renderQAs(newUserApplicationData, this.onFormChange, this.state)}
                 </div>
-
             </div>
         );
     }
