@@ -78,6 +78,10 @@ ANSWER FONT
   font-size: 14px;
   color: #757575; }
 
+.voyage-application-checkbox-answer {
+  font-size: 14px;
+  color: #757575; }
+
 /*
 ==========================
 INPUT & TEXTAREA
@@ -178,8 +182,9 @@ CHECKBOX STYLING
 .checkbox-container {
   display: block;
   position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
+  padding-left: 20px;
+  padding-top: -10px;
+  margin-bottom: 10px;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -195,21 +200,22 @@ CHECKBOX STYLING
 /* Create a custom checkbox */
 .checkmark {
   position: absolute;
-  margin-left: 10px;
+  margin-left: 0px;
+  margin-top: 5px;
   top: 0;
   left: 0;
   height: 14px;
   width: 14px;
   background-color: white;
-  border: 1px solid #15CF89; }
+  border: 1px solid #BBBBBB; }
 
 /* On mouse-over, add a grey background color */
 .checkbox-container:hover input ~ .checkmark {
-  background-color: #15CF89; }
+  background-color: #BBBBBB; }
 
 /* When the checkbox is checked, add a blue background */
 .checkbox-container input:checked ~ .checkmark {
-  background-color: #15CF89; }
+  background-color: #BBBBBB; }
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
@@ -232,6 +238,22 @@ CHECKBOX STYLING
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg); }
+
+/*
+==========================
+CHECKBOX STYLING (2 COLUMNS)
+==========================
+*/
+.checkbox-2-column-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: "a b"; }
+
+.checkbox-column-1 {
+  grid-area: a; }
+
+.checkbox-column-2 {
+  grid-area: b; }
 
 /*
 ==========================

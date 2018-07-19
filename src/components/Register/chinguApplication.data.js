@@ -2,13 +2,13 @@ import UTC from '../FormCreator/UTC.data';
 
 export const chinguApplicationData = [
     {
-        id: 1,
+        id: 201,
         type: 'input',
         question: 'Email Address'
     },
     {
-        id: 2,
-        type: 'checkbox',
+        id: 202,
+        type: 'checkbox-2-column',
         question: "Please check the features you're most excited about (max 3)",
         answers: [
             'Being in a group of friendly coders who share my goals', 
@@ -20,17 +20,17 @@ export const chinguApplicationData = [
         ]
     },
     {
-        id: 3,
+        id: 203,
         type: 'textarea',
         question: 'Why do you think joining Chingu will be valuable to you?'
     },
     {
-        id: 4,
+        id: 204,
         type: 'input',
         question: 'Where are you coding from? (ex. Toronto)',
     },
     {
-        id: 5,
+        id: 205,
         type: 'dropdown',
         question: 'What is the UTC timezone for where you will be coding from?',
         subtext: '(If unsure, just google "your-city UTC") Ex. Toronto = UTC-4',

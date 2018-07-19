@@ -18,8 +18,8 @@ class Landing extends React.Component {
 
   componentDidMount() {
     // if the URL has /register , it will set register to true
-    console.log(window.location.pathname);
-    if (window.location.pathname === '/register') {
+    console.log(window.location.pathname.includes('/register'));
+    if (window.location.pathname.includes('/register')) {
       this.setState({ register: true, login: true })
     }
     if (window.location.pathname === '/login') {

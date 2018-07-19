@@ -1,16 +1,17 @@
 import * as React from "react";
 import { chinguApplicationData } from './chinguApplication.data';
 import { renderQAs } from '../FormCreator/answerCreators';
-
+import './Register.css';
+import '../FormCreator/FormCreator.css';
 class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            1: '',
-            2: new Set(),
-            3: '',
-            4: '',
-            5: ''
+            201: '',
+            202: new Set(),
+            203: '',
+            204: '',
+            205: ''
         }
     }
 
