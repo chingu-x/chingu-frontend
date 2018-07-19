@@ -1,12 +1,12 @@
 import _ from "lodash";
-import React, { Component } from "react";
+import * as React from 'react';
 import { Link } from "react-router-dom";
 import LandingIconItem from "./LandingIconItem";
 import LandingTestimonial from "./LandingTestimonial";
 import earth from "../../styles/assets/Global Image-02.png";
 import landingItems from "../../static-api-elements/landingItems";
 
-class Landing extends Component {
+class Landing extends React.Component {
   state = {};
 
   renderProcessBar(){
