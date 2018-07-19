@@ -129,15 +129,10 @@ function answerCreator_dropdown_multiple(data, onFormChange, state) {
         filter("dropdownSearch_" + data.id, data.id);
     }
 
-    const toggleDropdown = (e) => {
-        e.preventDefault();
-        document.getElementById("dropdown_multiple-" + data.id).classList.toggle('show-dropdown');
-    }
     return (
         <React.Fragment>
             <button
                 className={"filter-dropdown-btn-" + data.id}
-                onClick={e => toggleDropdown(e)}
             >
                 {data.placeholder}
                 <div id={"dropdown_multiple-" + data.id} className="filter-dropdown-hide filter-dropdown-box">

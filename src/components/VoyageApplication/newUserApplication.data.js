@@ -1,5 +1,5 @@
-import UTC from './UTC.data';
-import techStack from './TechStack.data';
+import UTC from '../FormCreator/UTC.data';
+import techStack from '../FormCreator/TechStack.data';
 
 const newUserApplicationData = [
     {
