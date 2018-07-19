@@ -70,6 +70,17 @@ function answerCreator_input(data, onFormChange, state) {
     )
 }
 
+function answerCreator_textarea(data, onFormChange, state) {
+    return (
+        <input type="text"
+            name={data.id}
+            value={state[data.id]}
+            onChange={e => onFormChange(e)}
+            className="voyage-application-input"
+        />
+    )
+}
+
 function answerCreator_dropdown(data, onFormChange, state) {
     return (
         <select
@@ -162,6 +173,7 @@ export function renderQAs(applicationData, onFormChange, state) {
                 answerComponent = answerCreator_dropdown_multiple(setOfQuestionAnswer, onFormChange, state)
                 break;
             case 'textarea':
+                answerComponent = answerCreator_textarea(setOfQuestionAnswer, onFormChange, state)
                 break;
             default:
                 break;
