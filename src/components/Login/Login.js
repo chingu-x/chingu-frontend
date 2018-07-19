@@ -17,12 +17,8 @@ class Login extends React.Component {
     // TODO: check state and clear before mutation
     client
       .mutate({ mutation: authMutation, variables: { code: this.state.code }})
-      .then(console.log)
-      .catch(console.error);
-    // if (res.ok) {
-    //   const { data: { userGithubAuth: { token } } } = res;
-    //   window.localStorage.setItem('token', token);
-    // }
+        .then(({ data }) => window.localStorage.setItem("token", data.userAuthGithub))
+        .catch(console.error);
   }
 
   render() {
@@ -40,7 +36,7 @@ class Login extends React.Component {
     return (<div className="login-box">
     <h1>CHINGU</h1>
       <a
-        href={`https://github.com/login/oauth/authorize?client_id=${'e015fd9cc874fa5a34bf'}&state=ok`}
+        href={`https://github.com/login/oauth/authorize?client_id=e015fd9cc874fa5a34bf`}
       >
         <button>
           Sign in bro
