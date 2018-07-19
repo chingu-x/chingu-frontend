@@ -1,7 +1,6 @@
-import UTC from './UTC';
-import techStack from './TechStack';
+import techStack from '../FormCreator/TechStack.data';
 
-export const voyageApplicationData = [
+const voyageApplicationData = [
     {
         id: 100,
         page: 1,
@@ -78,3 +77,5 @@ export const voyageApplicationData = [
         ]
     }
 ]
+
+export default voyageApplicationData;
