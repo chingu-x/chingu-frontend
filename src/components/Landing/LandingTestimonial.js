@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from 'react';
 import landingImages from "../../styles/assets/landingImages";
 
 const LandingTestimonial = ({ username, image, testimonial }) => {

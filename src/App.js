@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import * as React from 'react';
 import { Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Landing from "./components/Landing/Landing";
@@ -9,6 +9,7 @@ import companyFAQ from "./static-api-elements/companyFAQ";
 import programFAQ from "./static-api-elements/programFAQ";
 import Login from "./components/Login/Login";
 import CurrentPrograms from "./components/Pages/CurrentPrograms";
+import VoyageApplication from './components/VoyageApplication';
 
 class App extends Component {
   render() {

@@ -24,9 +24,11 @@ $light-hover-purple: rgb(102, 104, 139);
 $theme-green: #15CF89;
 $theme-hover-green: rgb(25, 194, 129);
 
+$dark-grey: #757575;
 $grey: #BBBBBB;
 $light-grey: #E6E6E6;
 $pale-grey: #EFEFEF;
+$palest-grey: #F8F8F8;
 
 $health-green: #22B571;
 $health-yellow: #FFCC00;
@@ -36,7 +38,7 @@ $health-red: #EF8585;
 STYLING
 ==========================
 */
-$drop-shadow: 5px 5px 5px 10px $pale-grey;
+$box-shadow: 0px 3px 6px $light-grey;
 $border: 1px solid $light-grey;
 /*
 ==========================
@@ -163,6 +165,7 @@ FORMS
 	margin-bottom: 5px;
 }
 
+
 /*
 ==========================
 ORIGINAL PROJECT VARIABLES
@@ -203,3 +206,5 @@ $max-width: 1180px !default;
 /// @example scss - When using a CDN
 ///   $base-url: 'http://cdn.example.com/assets/';
 $base-url: '/assets/' !default;
+
+
