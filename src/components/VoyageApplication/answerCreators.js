@@ -23,24 +23,27 @@ class CheckboxAnswerCreator extends React.Component {
     }
 }
 
-function radioAnswerCreator(answer, questionId, index, onFormChange, state) {
-    return (
-        <div key={'radio-answer_' + questionId + '_' + index} className="radio-container">
-            <label className="voyage-application-answer" htmlFor={questionId + '_' + index}>
-                {answer}
-                <input
-                    className="voyage-application-radio"
-                    type="radio"
-                    name={questionId}
-                    id={questionId + '_' + index}
-                    value={answer}
-                    checked={state[questionId]}
-                    onChange={e => onFormChange(e)}
-                />
-                <span className="radio-checkmark" />
-            </label>
-        </div>
-    )
+class RadioAnswerCreator extends React.Component {
+    render() {
+        const { answer, questionId, index, onFormChange, state } = this.props;
+        return (
+            <div key={'radio-answer_' + questionId + '_' + index} className="radio-container">
+                <label className="voyage-application-answer" htmlFor={questionId + '_' + index}>
+                    {answer}
+                    <input
+                        className="voyage-application-radio"
+                        type="radio"
+                        name={questionId}
+                        id={questionId + '_' + index}
+                        value={answer}
+                        checked={state[questionId] === answer}
+                        onChange={e => onFormChange(e)}
+                    />
+                    <span className="radio-checkmark" />
+                </label>
+            </div>
+        )
+    }
 }
 function answerCreator_checkbox(data, onFormChange, state) {
     return (
@@ -54,7 +57,7 @@ function answerCreator_checkbox(data, onFormChange, state) {
 function answerCreator_radio(data, onFormChange, state) {
     return (
         data.answers.map((answer, index) => {
-            return radioAnswerCreator(answer, data.id, index, onFormChange, state)
+            return <RadioAnswerCreator key={data.id + '_' + index} answer={answer} questionId={data.id} index={index} onFormChange={onFormChange} state={state} />
         })
     )
 }
