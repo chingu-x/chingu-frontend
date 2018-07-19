@@ -1,7 +1,7 @@
 import * as React from 'react';
-import newUserApplicationData from './newUserApplication';
+import newUserApplicationData from './newUserApplication.data.js';
 import './VoyageApplication.css';
-// import voyageApplicationData from './VoyageApplication';
+// import voyageApplicationData from './VoyageApplication.data.js';
 import { renderQAs } from './answerCreators';
 
 class VoyageApplication extends React.Component {
