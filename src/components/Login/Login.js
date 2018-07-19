@@ -39,7 +39,7 @@ class Login extends React.Component {
         <a
           href={`https://github.com/login/oauth/authorize?client_id=e015fd9cc874fa5a34bf`}
         >
-          <button className="github-auth"><img src={'https://i.imgur.com/UBZgVgQ.png'} />Log in with Github</button>
+          <button className="github-auth"><img alt="github-icon" src={'https://i.imgur.com/UBZgVgQ.png'} />Log in with Github</button>
         </a>
       </div>
     );

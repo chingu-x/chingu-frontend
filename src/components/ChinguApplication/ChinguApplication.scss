@@ -1,0 +1,22 @@
+@import '../../styles/abstracts/_variables.scss';
+
+.chingu-application-container {
+    display: block;
+    position: absolute;
+    min-width: 100vw;
+    min-height: 100vh;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.164); 
+}
+
+.chingu-application-modal {
+    margin-top: 100px;
+    display: block;
+    z-index: 110;
+    width: 350px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: $box-shadow;
+    margin: 0 auto;
+    padding: 10px 20px;
+}

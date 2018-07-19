@@ -1,7 +1,8 @@
 import * as React from "react";
 import { chinguApplicationData } from './chinguApplication.data';
 import { renderQAs } from '../FormCreator/answerCreators';
-
+import '../VoyageApplication/VoyageApplication.css';
+import './ChinguApplication.css';
 class ChinguApplication extends React.Component {
     constructor(props) {
         super(props);

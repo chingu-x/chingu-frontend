@@ -5,9 +5,23 @@ import LandingIconItem from "./LandingIconItem";
 import LandingTestimonial from "./LandingTestimonial";
 import earth from "../../styles/assets/Global Image-02.png";
 import landingItems from "../../static-api-elements/landingItems";
+import ChinguApplication from '../ChinguApplication';
 
 class Landing extends React.Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      register: false
+    }
+  }
+
+  componentDidMount() {
+    // if the URL has /register , it will set register to true
+    console.log(window.location.pathname);
+    if (window.location.pathname === '/register') {
+      this.setState({ register: true })
+    }
+  }
 
   renderProcessBar(){
     return _.map(landingItems.process, ({title, image, description}) => {
@@ -44,6 +58,7 @@ class Landing extends React.Component {
   render() {
     return (
       <div className="landing">
+        {this.state.register ? <ChinguApplication /> : null}
         <div className="landing-top">
           <img className="landing-img" src={earth} alt="" />
           <div className="tagline-box">

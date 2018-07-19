@@ -9,7 +9,6 @@ import companyFAQ from "./static-api-elements/companyFAQ";
 import programFAQ from "./static-api-elements/programFAQ";
 import Login from "./components/Login/Login";
 import CurrentPrograms from "./components/Pages/CurrentPrograms";
-import ChinguApplication from './components/ChinguApplication';
 
 class App extends React.Component {
   render() {
@@ -17,7 +16,7 @@ class App extends React.Component {
       <div className="App">
         <Route exact path="/" component={Landing} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={ChinguApplication} />
+        <Route exact path="/register" component={Landing} />
         <Route exact path="/current" component={CurrentPrograms} />
         <Route exact path="/team" component={Staff} />
         <Route exact path="/privacy" component={PrivacyPolicy} />
