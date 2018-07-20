@@ -43,6 +43,11 @@ FORMS
 ORIGINAL PROJECT VARIABLES
 ==========================
 */
+/*
+==========================
+CONTAINER
+==========================
+*/
 .voyage-application-container {
   background-color: #F8F8F8; }
 
@@ -55,6 +60,11 @@ ORIGINAL PROJECT VARIABLES
   box-shadow: 0px 3px 6px #E6E6E6;
   margin-bottom: 100px; }
 
+/*
+==========================
+FORM PROGRESS BAR
+==========================
+*/
 .voyage-application-progress {
   width: 100px;
   height: 15px;
@@ -69,6 +79,11 @@ ORIGINAL PROJECT VARIABLES
   height: 15px;
   background-color: #15CF89; }
 
+/*
+==========================
+PAGE TITLE
+==========================
+*/
 .voyage-application-title {
   font-size: 40px;
   color: #E6E6E6;
@@ -77,6 +92,11 @@ ORIGINAL PROJECT VARIABLES
   margin-bottom: 30px;
   text-align: center; }
 
+/*
+==========================
+FORM TITLE
+==========================
+*/
 .voyage-application-subtitle {
   color: #BBBBBB;
   background-color: #F8F8F8;
@@ -87,6 +107,11 @@ ORIGINAL PROJECT VARIABLES
   display: inline-block;
   text-transform: uppercase; }
 
+/*
+==========================
+BUTTONS
+==========================
+*/
 .voyage-application-btn-container {
   display: grid;
   grid-template-areas: "a b";
@@ -116,6 +141,11 @@ ORIGINAL PROJECT VARIABLES
   justify-self: start;
   background-color: #E6E6E6; }
 
+/*
+==========================
+HORIZONTAL LINE
+==========================
+*/
 .hline {
   width: calc(100% + 40px);
   margin-left: -20px;
