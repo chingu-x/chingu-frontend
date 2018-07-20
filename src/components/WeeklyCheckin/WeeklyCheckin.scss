@@ -2,4 +2,29 @@
 
 .weekly-checkin-container {
     background-color: $palest-grey;
+    height: 100%;
+}
+
+.weekly-checkin-title {
+    @include form-title;
+}
+
+.weekly-checkin-form {
+    width: 460px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: $box-shadow;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 100px;
+}
+
+.hline {
+    @include hline;
+}
+
+.weekly-checkin-btn {
+    @include user-btn--apply;
+    margin: 0 auto;
+    margin-top: 20px;
 }

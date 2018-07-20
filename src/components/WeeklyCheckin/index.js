@@ -31,12 +31,21 @@ class WeeklyCheckin extends React.Component {
                 break;
         }
     }
+
+    submit = (e) => {
+        e.preventDefault();
+        // save data to database 
+        // redirect to thank you for completing card
+    }
     render() {
         return (
             <div className="weekly-checkin-container">
+                <div className="weekly-checkin-title">Weekly Checkin</div>
                 <div className="weekly-checkin-form">
                     {renderQAs(weeklyCheckinData, this.onFormChange, this.state)}
-                </div>  
+                    <hr className="hline" />
+                    <button onClick={e => this.submit(e)} className="weekly-checkin-btn">Submit</button>
+                </div>
             </div>
         )
     }
