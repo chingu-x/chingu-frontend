@@ -61,44 +61,56 @@ function answerCreator_radio(data, onFormChange, state) {
         })
     )
 }
-
-function answerCreator_radio_special_badge(data, onFormChange) {
-    const badges = [
-        {
-            img: require('../../assets/tier badges-01.png'),
-            className: 'badge',
-            btnClassName: 'badge--1'
-        },
-        {
-            img: require('../../assets/tier badges-02.png'),
-            className: 'badge',
-            btnClassName: 'badge--2'
-        },
-        {
-            img: require('../../assets/tier badges-03.png'),
-            className: 'badge',
-            btnClassName: 'badge--3'
-        }
-    ]
-    console.log(data.answers);
+class SpecialRadioBadgeAnswerCreator extends React.Component {
+    render() {
+        const badges = [
+            {
+                img: require('../../assets/tier badges-01.png'),
+                className: 'badge',
+                btnClassName: 'badge--1'
+            },
+            {
+                img: require('../../assets/tier badges-02.png'),
+                className: 'badge',
+                btnClassName: 'badge--2'
+            },
+            {
+                img: require('../../assets/tier badges-03.png'),
+                className: 'badge',
+                btnClassName: 'badge--3'
+            }
+        ]
+        const { answer, questionId, index, onFormChange, state } = this.props;
+        return (
+            <div className={badges[index].btnClassName + '-container'}>
+                <div key={'radio-answer_' + questionId + '_' + index} className="radio-container">
+                    <label className="voyage-application-answer" htmlFor={questionId + '_' + index}>
+                        <div className={badges[index].btnClassName}>
+                            <img className={badges[index].className} src={badges[index].img} alt={'badge-' + index} />
+                        </div>
+                        <div className="badge-title">{answer.title}</div>
+                        <div className="badge-subtext">{answer.subtext}</div>
+                        <input
+                            className="voyage-application-radio"
+                            type="radio"
+                            name={questionId}
+                            id={questionId + '_' + index}
+                            value={answer.title}
+                            checked={state[questionId] === answer.title}
+                            onChange={e => onFormChange(e)}
+                        />
+                        <span className="radio-checkmark--badge" />
+                    </label>
+                </div>
+            </div>
+        )
+    }
+}
+function answerCreator_radio_special_badge(data, onFormChange, state) {
     return (
         <div className="badge-container">
             {data.answers.map((answer, index) => {
-                return (
-                    <div className={badges[index].btnClassName + '-container'}>
-                        <button
-                            className={badges[index].btnClassName}
-                            type="submit"
-                            name={data.id}
-                            value={answer.title}
-                            onClick={e => onFormChange(e)}
-                        >
-                            <img className={badges[index].className} src={badges[index].img} alt={'badge-' + index} />
-                        </button>
-                        <div className="badge-title">{answer.title}</div>
-                        <div className="badge-subtext">{answer.subtext}</div>
-                    </div>
-                )
+                return <SpecialRadioBadgeAnswerCreator key={data.id + '_' + index} answer={answer} questionId={data.id} index={index} onFormChange={onFormChange} state={state} />
             })
             }
         </div>
@@ -248,7 +260,7 @@ export function renderQAs(applicationData, onFormChange, state) {
                 answerComponent = answerCreator_checkbox_2_column(setOfQuestionAnswer, onFormChange, state)
                 break;
             case 'radio-special-badge':
-                answerComponent = answerCreator_radio_special_badge(setOfQuestionAnswer, onFormChange)
+                answerComponent = answerCreator_radio_special_badge(setOfQuestionAnswer, onFormChange, state)
                 break;
             default:
                 break;
