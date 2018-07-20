@@ -108,73 +108,44 @@ class Landing extends React.Component {
   }
 
   render() {
-    return ( <
-      div className = "landing" >
-      <
-      div className = "landing-top" >
-      <
-      div className = "tagline-box" >
-      <
-      div className = "tagline" > Code More < /div> <
-      div className = "tagline" > Learn More < /div> <
-      div className = "tagline" > Build More < /div> <
-      Link to = "/login" >
-      <
-      button className = "big-green-btn" > Apply < /button> <
-      /Link> <
-      /div> <
-      img className = "landing-img"
-      src = {
-        earth
-      }
-      alt = "" / >
-
-      <
-      /div> <
-      div className = "landing-bar" >
-      <
-      div className = "landing-bar-title" > Chingu Process < /div> <
-      div className = "landing-bar-items" > {
-        this.renderProcessBar()
-      } <
-      /div> <
-      /div> <
-      div className = "cohorts-bar" >
-      <
-      div className = "cohorts-bar-title" > Current Cohorts < /div> <
-      div className = "cohorts-bar-items" > {
-        this.renderCohortsBar()
-      } <
-      /div> <
-      /div> <
-      div className = "landing-bar" >
-      <
-      div className = "landing-bar-title" > What people are saying about Chingu < /div> <
-      div className = "landing-bar-items" > {
-        this.renderTestimonialBar()
-      } <
-      /div> <
-      /div> <
-      div className = "projects-bar" >
-      <
-      div className = "projects-bar-title" > Past Projects < /div> <
-      div className = "projects-bar-items" > {
-        this.renderProjectsBar()
-      } <
-      /div> <
-      /div> <
-      div className = "chingu-bar" >
-      <
-      div className = "chingu-bar-box" >
-      <
-      div className = "chingu-bar-title" > Ready To Try Chingu ? < /div> <
-      Link to = "/login" >
-      <
-      button className = "chingu-green-btn" > Apply < /button> <
-      /Link> <
-      /div> <
-      /div> <
-      /div>
+    return ( 
+    <div className = "landing" >
+      <div className = "landing-top" >
+        <div className = "tagline-box" >
+        <div className = "tagline" > Code More </div> 
+        <div className = "tagline" > Learn More </div> 
+        <div className = "tagline" > Build More </div> 
+        <Link to = "/login" >
+          <button className = "big-green-btn" > Apply </button> 
+        </Link > 
+      </div> 
+        <img className = "landing-img" src = {earth} alt = "" />
+      </div> 
+      <div className = "landing-bar" >
+        <div className = "landing-bar-title" > Chingu Process </div> 
+        <div className = "landing-bar-items" > { this.renderProcessBar() } </div> 
+      </div > 
+      <div className = "cohorts-bar" >
+        <div className = "cohorts-bar-title" > Current Cohorts </div> 
+        <div className = "cohorts-bar-items" > {this.renderCohortsBar()} </div> 
+      </div > 
+      <div className = "landing-bar" >
+        <div className = "landing-bar-title" > What people are saying about Chingu </div> 
+        <div className = "landing-bar-items" > {this.renderTestimonialBar()} </div> 
+      </div > 
+      <div className = "projects-bar" >
+        <div className = "projects-bar-title" > Past Projects </div> 
+        <div className = "projects-bar-items" > {this.renderProjectsBar()} </div> 
+      </div > 
+      <div className = "chingu-bar" >
+      <div className = "chingu-bar-box" >
+        <div className = "chingu-bar-title" > Ready To Try Chingu ? </div>
+          <Link to = "/login" >
+            <button className = "chingu-green-btn" > Apply </button> 
+          </Link > 
+        </div>
+      </div> 
+    </div>
     );
   }
 }
