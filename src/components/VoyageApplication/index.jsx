@@ -5,8 +5,11 @@ import '../FormCreator/FormCreator.css';
 import voyageApplicationData from './VoyageApplication.data.js';
 import { renderQAs } from '../FormCreator/answerCreators.js';
 import { ApolloConsumer } from 'react-apollo';
-import gql from "graphql-tag";
-import { Query } from "react-apollo";;
+import ErrorPage from '../404/404';
+import Loader from '../Loader/Loader';
+
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 
 const newUserPage1 = newUserApplicationData.filter((data) => { return data.page === 1 });
 const newUserPage2 = newUserApplicationData.filter((data) => { return data.page === 2 });
@@ -17,11 +20,6 @@ const voyageApplicationPage2 = voyageApplicationData.filter((data) => { return d
 const newUserApplication = [newUserPage1, newUserPage2, newUserPage3, voyageApplicationPage1, voyageApplicationPage2];
 const voyageApplication = [voyageApplicationPage1, voyageApplicationPage2]
 
-const GET_USER_DATA = gql`{
-    user {
-        cohorts
-    }
-}`;
 
 // const SUBMIT_NEW_USER_VOYAGE_APPLICATION = gql`
 //     mutation submitNewUserVoyageApplication(
@@ -59,33 +57,13 @@ const GET_USER_DATA = gql`{
 //     ) {}
 // `
 
-// const ApplicationPages = ({state, goToNextPage, goBackAPage, onFormChange}) => (
-//     <Query query={GET_USER_DATA}>
-//         {({ loading, error, data }) => {
-//             if (loading) return <div className="voyage-application">Loading</div>;
-//             if (error) return <div className="voyage-application">{`Error! ${error.message}`}</div>;
-//             console.log(data);
-//             let pages = data.length === 0 ? newUserApplication : voyageApplication;
-//             return (
-//                 <div className="voyage-application">
-//                     {renderQAs(pages[state[state.currentPage]], onFormChange, state)}
-//                     <button onClick={e => goBackAPage(e)}>Previous</button>
-//                     {this.state.currentPage === this.state.application.length - 1
-//                         ? <button>Submit</button> // mutation component button
-//                         : <button onClick={e => goToNextPage(e)}>Next</button>
-//                     }
-//                 </div>
-//             )
-//         }}
-//     </Query>
-// )
 
 class VoyageApplication extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             applicationTitle: 'Voyage Application',
-            application: voyageApplication,
+            application: newUserApplication,
             gql: '',
             progressBar: { width: '1%' },
             currentPage: 0,
@@ -115,15 +93,16 @@ class VoyageApplication extends React.Component {
     componentDidMount() {
         // if this user has not been part of a voyage before
         // or was rejected before and not been part of a voyage
-        this.setState({
-            application: newUserApplication,
-            gql: 'SUBMIT_NEW_USER_VOYAGE_APPLICATION',
-            applicationTitle: 'New User Application'
-        });
-        // application = newUserApplication
-        // gql = SUBMIT_NEW_USER_VOYAGE_APPLICATION
-        // else application = voyageApplication
-        // gql = SUBMIT_VOYAGE_APPLICATION
+        console.log(this.props.userCohorts);
+        if (this.props.userCohorts.user && this.props.userCohorts.user.cohorts.length === 0) {
+            this.setState({
+                application: newUserApplication,
+                gql: 'SUBMIT_NEW_USER_VOYAGE_APPLICATION',
+                applicationTitle: 'New User Application'
+            });
+        }
+        let progress = ( 1 / this.state.application.length) * 100 + '%';
+        this.setState({ progressBar: {width: progress} })
     }
 
     toggleValueInSet = (set, value) => {
@@ -145,20 +124,32 @@ class VoyageApplication extends React.Component {
 
     goBackAPage = (e) => {
         e.preventDefault();
-        let progress = ((this.state.currentPage - 1) / this.state.application.length) * 100 + '%';
-        console.log(progress);
-        this.setState({ progressBar: { width: progress }, currentPage: this.state.currentPage - 1 });
+        this.setState({ currentPage: this.state.currentPage - 1 }, () => {
+            let progress = this.state.currentPage === 0 
+                        ? ( 1 / this.state.application.length) * 100 + '%'
+                        : ((this.state.currentPage - 1) / this.state.application.length) * 100 + '%'
+            this.setState({ progressBar: { width: progress } })
+        });
     }
 
     goToNextPage = (e) => {
         e.preventDefault();
-        let progress = ((this.state.currentPage + 1) / this.state.application.length) * 100 + '%';
-        console.log(progress);
-        this.setState({ progressBar: { width: progress }, currentPage: this.state.currentPage + 1 });
+        this.setState({ currentPage: this.state.currentPage + 1 }, () => {
+            let progress = this.state.currentPage === this.state.application.length - 1 
+                        ? '100%'
+                        : ((this.state.currentPage + 1) / this.state.application.length) * 100 + '%'
+            this.setState({ progressBar: { width: progress } })
+        });
     }
 
     render() {
-        console.log(this.state.application);
+        console.log(this.props);
+        if (this.props.userCohorts && this.props.userCohorts.loading) {
+            return <Loader />
+        }
+        if (this.props.userCohorts && this.props.userCohorts.loading) {
+            return <ErrorPage />
+        }
         return (
             <ApolloConsumer>
                 {client => (
@@ -196,6 +187,12 @@ class VoyageApplication extends React.Component {
     }
 }
 
+const GET_USER_DATA = gql`{
+    query GetUserData {
+        user {
+            cohorts
+        }
+    }
+}`;
 
-
-export default VoyageApplication;
+export default graphql(GET_USER_DATA, {name: 'userCohorts'})(VoyageApplication);
