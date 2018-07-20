@@ -87,3 +87,71 @@
     border-top: 1px solid $pale-grey;
     margin-top: 20px;
 }
+
+.badge-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: "a b c";
+    margin-top: 10px;
+}
+
+.badge {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border: none;
+}
+.badge--1-container {
+    grid-area: a;
+}
+
+.badge--2-container {
+    grid-area: b;
+}
+
+.badge--3-container {
+    grid-area: c;
+}
+.badge--1, .badge--2, .badge--3 {
+    border: none;
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto;
+}
+
+.badge--1 {
+    background-color: $badge-1;
+}
+
+.badge--1:hover {
+    background-color: $badge-1--hover;
+}
+
+.badge--2 {
+    background-color: $badge-2;
+}
+.badge--2:hover {
+    background-color: $badge-2--hover;
+}
+.badge--3 {
+    background-color: $badge-3;
+}
+.badge--3:hover {
+    background-color: $badge-3--hover;
+}
+
+.badge-title {
+    text-align: center;
+    font-size: 14px;
+    color: $med-grey;
+}
+
+.badge-subtext {
+    font-size: 10px;
+    text-align: center;
+    color: $grey;
+}
+
+.badge--chosen {
+    border: 2px solid $theme-green;
+}

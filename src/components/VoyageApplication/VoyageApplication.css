@@ -121,3 +121,61 @@ ORIGINAL PROJECT VARIABLES
   margin-left: -20px;
   border-top: 1px solid #EFEFEF;
   margin-top: 20px; }
+
+.badge-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "a b c";
+  margin-top: 10px; }
+
+.badge {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border: none; }
+
+.badge--1-container {
+  grid-area: a; }
+
+.badge--2-container {
+  grid-area: b; }
+
+.badge--3-container {
+  grid-area: c; }
+
+.badge--1, .badge--2, .badge--3 {
+  border: none;
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto; }
+
+.badge--1 {
+  background-color: #F5E3A1; }
+
+.badge--1:hover {
+  background-color: #f5db7e; }
+
+.badge--2 {
+  background-color: #CAEB95; }
+
+.badge--2:hover {
+  background-color: #b5db79; }
+
+.badge--3 {
+  background-color: #F1BA65; }
+
+.badge--3:hover {
+  background-color: #ecac4b; }
+
+.badge-title {
+  text-align: center;
+  font-size: 14px;
+  color: #9e9e9e; }
+
+.badge-subtext {
+  font-size: 10px;
+  text-align: center;
+  color: #BBBBBB; }
+
+.badge--chosen {
+  border: 2px solid #15CF89; }

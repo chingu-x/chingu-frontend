@@ -58,9 +58,18 @@ const voyageApplicationData = [
                     Note: If you are at the Tier-1 level, don't choose Tier-3. It will be obvious to your team-mates, 
                     they'll be annoyed with you and it'll create more work for us (as we'll have to remove you from that team).`,
         answers: [
-            'Tier 1 - HTML / Basic Javascript / Basic Algorithms (Landing Pages)',
-            'Tier 2 - Intermediate Algorithms / Front-end Projects (Front-End)',
-            'Tier 3 - Advanced Projects / Data Visualization / Back-end (Full-Stack)'
+            {
+                title: 'Tier 1',
+                subtext: 'HTML / Basic Javascript / Basic Algorithms (Landing Pages)'
+            },
+            {
+                title: 'Tier 2',
+                subtext: 'Intermediate Algorithms / Front-end Projects (Front-End)'
+            },
+            {
+                title: 'Tier 3',
+                subtext: 'Advanced Projects / Data Visualization / Back-end (Full-Stack)'
+            }
         ]
     },
     {

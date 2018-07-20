@@ -62,6 +62,49 @@ function answerCreator_radio(data, onFormChange, state) {
     )
 }
 
+function answerCreator_radio_special_badge(data, onFormChange) {
+    const badges = [
+        {
+            img: require('../../assets/tier badges-01.png'),
+            className: 'badge',
+            btnClassName: 'badge--1'
+        },
+        {
+            img: require('../../assets/tier badges-02.png'),
+            className: 'badge',
+            btnClassName: 'badge--2'
+        },
+        {
+            img: require('../../assets/tier badges-03.png'),
+            className: 'badge',
+            btnClassName: 'badge--3'
+        }
+    ]
+    console.log(data.answers);
+    return (
+        <div className="badge-container">
+            {data.answers.map((answer, index) => {
+                return (
+                    <div className={badges[index].btnClassName + '-container'}>
+                        <button
+                            className={badges[index].btnClassName}
+                            type="submit"
+                            name={data.id}
+                            value={answer.title}
+                            onClick={e => onFormChange(e)}
+                        >
+                            <img className={badges[index].className} src={badges[index].img} alt={'badge-' + index} />
+                        </button>
+                        <div className="badge-title">{answer.title}</div>
+                        <div className="badge-subtext">{answer.subtext}</div>
+                    </div>
+                )
+            })
+            }
+        </div>
+    )
+}
+
 function answerCreator_input(data, onFormChange, state) {
     return (
         <input type="text"
@@ -203,6 +246,9 @@ export function renderQAs(applicationData, onFormChange, state) {
                 break;
             case 'checkbox-2-column':
                 answerComponent = answerCreator_checkbox_2_column(setOfQuestionAnswer, onFormChange, state)
+                break;
+            case 'radio-special-badge':
+                answerComponent = answerCreator_radio_special_badge(setOfQuestionAnswer, onFormChange)
                 break;
             default:
                 break;
