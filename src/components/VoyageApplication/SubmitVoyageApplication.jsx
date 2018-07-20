@@ -56,22 +56,51 @@ class SubmitVoyageApplication extends React.Component {
     }
 }
 
+// const SUBMIT_VOYAGE_APPLICATION = gql`
+//     mutation SubmitVoyageApplication(
+//         $q100: String!,
+//         $q101: [String!]!,
+//         $q102: String!,
+//         $q103: String!,
+//         $q104: String!,
+//         $q105: String!
+//     ) {
+//         post($q100: String!,
+//             $q101: [String!]!,
+//             $q102: String!,
+//             $q103: String!,
+//             $q104: String!,
+//             $q105: String!
+//         ) {}
+//     }
+// `
+
 const SUBMIT_VOYAGE_APPLICATION = gql`
-    mutation SubmitVoyageApplication(
-        $q100: String!,
-        $q101: [String!]!,
-        $q102: String!,
-        $q103: String!,
-        $q104: String!,
-        $q105: String!
-    ) {
-        post($q100: String!,
+    query formVoyageInput: { 
+        voyage_form: { 
+            $q100: String!,
             $q101: [String!]!,
             $q102: String!,
             $q103: String!,
             $q104: String!,
-            $q105: String!
-        ) {}
+            $q105: String! 
+        }, 
+        new_user: { 
+            $q1: [String!]!,
+            $q2: String!,
+            $q3: String!,
+            $q4: String!,
+            $q5: [String!]!,
+            $q6: String!,
+            $q7: String!,
+            $q8: String!,
+            $q9: String!,
+            $q10: String!,
+            $q11: String!,
+            $q12: String!,
+            $q13: String!,
+            $q14: String!,
+        } 
     }
 `
 export default graphql(SUBMIT_VOYAGE_APPLICATION, {name: 'submitVoyageApplication'}) (SubmitVoyageApplication)
