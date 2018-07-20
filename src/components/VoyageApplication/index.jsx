@@ -4,8 +4,9 @@ import './VoyageApplication.css';
 import '../FormCreator/FormCreator.css';
 import voyageApplicationData from './VoyageApplication.data.js';
 import { renderQAs } from '../FormCreator/answerCreators.js';
-import ErrorPage from '../404/404';
+// import ErrorPage from '../404/404';
 import Loader from '../Loader/Loader';
+import SubmitVoyageApplication from './SubmitVoyageApplication';
 
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -18,44 +19,6 @@ const voyageApplicationPage2 = voyageApplicationData.filter((data) => { return d
 
 const newUserApplication = [newUserPage1, newUserPage2, newUserPage3, voyageApplicationPage1, voyageApplicationPage2];
 const voyageApplication = [voyageApplicationPage1, voyageApplicationPage2]
-
-
-// const SUBMIT_NEW_USER_VOYAGE_APPLICATION = gql`
-//     mutation submitNewUserVoyageApplication(
-//         $1: [String!]!
-//         $2: String!
-//         $3: String!
-//         $4: String!
-//         $5: [String!]!
-//         $6: String!
-//         $7: String!
-//         $9: String!
-//         $9: String!
-//         $10: String!
-//         $11: String!
-//         $12: String!
-//         $13: String!
-//         $14: String!
-//         $100: String!
-//         $101: [String!]!
-//         $102: String!
-//         $103: String!
-//         $104: String!
-//         $105: String!
-//     ) {}
-// `
-
-// const SUBMIT_VOYAGE_APPLICATION = gql`
-//     mutation submitVoyageApplication(
-//         $100: String!
-//         $101: [String!]!
-//         $102: String!
-//         $103: String!
-//         $104: String!
-//         $105: String!
-//     ) {}
-// `
-
 
 class VoyageApplication extends React.Component {
     constructor(props) {
@@ -170,7 +133,7 @@ class VoyageApplication extends React.Component {
                         }
                         {
                             this.state.currentPage === this.state.application.length - 1
-                                ? <button className="voyage-appliation-btn--green">Submit</button> // mutation component button
+                                ? <SubmitVoyageApplication state={this.state} /> // mutation component button
                                 : <button className="voyage-appliation-btn--green" onClick={e => this.goToNextPage(e)}>Next</button>
                         }
                     </div>
