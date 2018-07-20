@@ -4,7 +4,6 @@ import './VoyageApplication.css';
 import '../FormCreator/FormCreator.css';
 import voyageApplicationData from './VoyageApplication.data.js';
 import { renderQAs } from '../FormCreator/answerCreators.js';
-import { ApolloConsumer } from 'react-apollo';
 import ErrorPage from '../404/404';
 import Loader from '../Loader/Loader';
 
@@ -63,7 +62,7 @@ class VoyageApplication extends React.Component {
         super(props);
         this.state = {
             applicationTitle: 'Voyage Application',
-            application: newUserApplication,
+            application: voyageApplication,
             gql: '',
             progressBar: { width: '1%' },
             currentPage: 0,
@@ -143,46 +142,40 @@ class VoyageApplication extends React.Component {
     }
 
     render() {
-        console.log(this.props);
         if (this.props.userCohorts && this.props.userCohorts.loading) {
             return <Loader />
         }
-        if (this.props.userCohorts && this.props.userCohorts.loading) {
-            return <ErrorPage />
-        }
+        // if (this.props.userCohorts && this.props.userCohorts.error) {
+        //     return <ErrorPage />
+        // }
         return (
-            <ApolloConsumer>
-                {client => (
-                    <div className="voyage-application-container">
-                        <div className="voyage-application-title">Voyage Application</div>
-                        <div className="voyage-application">
-                            <div className="voyage-application-subtitle">
-                                {
-                                    this.state.currentPage > 2 ? 'Voyage Application' : this.state.applicationTitle
-                                }
-                            </div>
-                            <div className="voyage-application-progress">
-                                <div className="voyage-application-progress-bar" style={this.state.progressBar} />
-                            </div>
-                            {renderQAs(this.state.application[this.state.currentPage], this.onFormChange, this.state)}
-                            <hr className="hline" />
-                            <div className="voyage-application-btn-container">
-                                {
-                                    this.state.currentPage === 0
-                                        ? null
-                                        : <button className="voyage-appliation-btn--grey" onClick={e => this.goBackAPage(e)}>Previous</button>
-                                }
-                                {
-                                    this.state.currentPage === this.state.application.length - 1
-                                        ? <button className="voyage-appliation-btn--green">Submit</button> // mutation component button
-                                        : <button className="voyage-appliation-btn--green" onClick={e => this.goToNextPage(e)}>Next</button>
-                                }
-                            </div>
-
-                        </div>
+            <div className="voyage-application-container">
+                <div className="voyage-application-title">Voyage Application</div>
+                <div className="voyage-application">
+                    <div className="voyage-application-subtitle">
+                        {
+                            this.state.currentPage > 2 ? 'Voyage Application' : this.state.applicationTitle
+                        }
                     </div>
-                )}
-            </ApolloConsumer>
+                    <div className="voyage-application-progress">
+                        <div className="voyage-application-progress-bar" style={this.state.progressBar} />
+                    </div>
+                    {renderQAs(this.state.application[this.state.currentPage], this.onFormChange, this.state)}
+                    <hr className="hline" />
+                    <div className="voyage-application-btn-container">
+                        {
+                            this.state.currentPage === 0
+                                ? null
+                                : <button className="voyage-appliation-btn--grey" onClick={e => this.goBackAPage(e)}>Previous</button>
+                        }
+                        {
+                            this.state.currentPage === this.state.application.length - 1
+                                ? <button className="voyage-appliation-btn--green">Submit</button> // mutation component button
+                                : <button className="voyage-appliation-btn--green" onClick={e => this.goToNextPage(e)}>Next</button>
+                        }
+                    </div>
+                </div>
+            </div>
         );
     }
 }
@@ -190,9 +183,11 @@ class VoyageApplication extends React.Component {
 const GET_USER_DATA = gql`{
     query GetUserData {
         user {
-            cohorts
+            cohorts {
+                id
+            }
         }
     }
 }`;
 
-export default graphql(GET_USER_DATA, {name: 'userCohorts'})(VoyageApplication);
+export default graphql(GET_USER_DATA, {name: 'userCohorts'}) (VoyageApplication)
