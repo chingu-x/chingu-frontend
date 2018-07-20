@@ -81,8 +81,8 @@ class Landing extends Component {
         </div>
         <div className="chingu-bar">
           <div className="chingu-bar-box">          
-            <div className="chingu-bar-title">Chingu</div>
-            <div className="chingu-bar-text">Chingu is a global collaboration platform and coding-cohort generator. We connect motivated learners with shared goals to learn, help and build together.</div>
+            <h1 className="chingu-bar-title">Chingu</h1>
+            <h2 className="chingu-bar-text">Chingu is a global collaboration platform and coding-cohort generator. We connect motivated learners with shared goals to learn, help and build together.</h2>
           </div>
           </div>
       </div>
