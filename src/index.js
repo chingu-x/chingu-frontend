@@ -20,7 +20,7 @@ if (window.location.host.indexOf("chingu-staging") > -1 || window.location.host.
   // API_URI = "https://chingu-api-dev.herokuapp.com/graphql"; // TODO: update domain
   API_URI = "http://localhost:8008/graphql" // TODO: temporary - REMOVE
 } else {
-  API_URI = "https://chingu-api.herokuapp.com/graphql"; // TODO: update domain
+  API_URI = "https://api.chingu.io/graphql"; // TODO: update domain
 }
  
 const token = localStorage.getItem("token"); // auth token
