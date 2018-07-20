@@ -86,7 +86,7 @@ class VoyageApplication extends React.Component {
         this.state = {
             applicationTitle: 'Voyage Application',
             application: voyageApplication,
-            gql: '',
+            gql: 'SUBMIT_VOYAGE_APPLICATION',
             progressBar: { width: '1%' },
             currentPage: 0,
             1: new Set(),
@@ -119,11 +119,10 @@ class VoyageApplication extends React.Component {
             application: newUserApplication,
             gql: 'SUBMIT_NEW_USER_VOYAGE_APPLICATION',
             applicationTitle: 'New User Application'
+        }, () => {
+            let progress = (1 / this.state.application.length) * 100 + '%';
+            this.setState({ progressBar: {width: progress }})
         });
-        // application = newUserApplication
-        // gql = SUBMIT_NEW_USER_VOYAGE_APPLICATION
-        // else application = voyageApplication
-        // gql = SUBMIT_VOYAGE_APPLICATION
     }
 
     toggleValueInSet = (set, value) => {
@@ -152,7 +151,7 @@ class VoyageApplication extends React.Component {
 
     goToNextPage = (e) => {
         e.preventDefault();
-        let progress = ((this.state.currentPage + 1) / this.state.application.length) * 100 + '%';
+        let progress = ((this.state.currentPage + 2) / this.state.application.length) * 100 + '%';
         console.log(progress);
         this.setState({ progressBar: { width: progress }, currentPage: this.state.currentPage + 1 });
     }
