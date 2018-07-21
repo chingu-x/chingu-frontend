@@ -13,7 +13,6 @@ import "./styles/main.css";
 import registerServiceWorker from "./registerServiceWorker";
  
 const token = localStorage.getItem("token"); // auth token
-const httpLink = new HttpLink({ uri: 'https://api.chingu.io/graphql' });
 
 const client = new ApolloClient({
   uri: 'https://api.chingu.io/graphql',

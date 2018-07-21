@@ -29,7 +29,6 @@ class Register extends React.Component {
       .catch(console.error); // TODO: handle errors properly
   }
 
-
   toggleValueInSet = (set, value) => {
     set.has(value) ? set.delete(value) : set.add(value);
     return set;
