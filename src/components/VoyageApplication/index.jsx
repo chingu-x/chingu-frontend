@@ -1,6 +1,7 @@
 import * as React from 'react';
 import newUserApplicationData from './newUserApplication.data.js';
 import './VoyageApplication.css';
+import '../FormCreator/FormCreator.css';
 // import voyageApplicationData from './VoyageApplication.data.js';
 import { renderQAs } from '../FormCreator/answerCreators.js';
 
@@ -33,7 +34,6 @@ class VoyageApplication extends React.Component {
 
     toggleValueInSet = (set, value) => {
         set.has(value) ? set.delete(value) : set.add(value);
-        console.log(this.state)
         return set;
     }
 
@@ -47,7 +47,6 @@ class VoyageApplication extends React.Component {
                 this.setState({ [name]: value });
                 break;
         }
-        console.log(this.state);
     }
     render() {
         return (

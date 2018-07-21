@@ -7,9 +7,26 @@ import LandingIconItem from "./LandingIconItem";
 import LandingTestimonial from "./LandingTestimonial";
 import earth from "../../styles/assets/Global Image-02.png";
 import landingItems from "../../static-api-elements/landingItems";
-
+import Register from '../Register';
+import Login from "../Login";
 class Landing extends React.Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      register: false,
+      login: false
+    }
+  }
+
+  componentDidMount() {
+    // if the URL has /register , it will set register to true
+    if (window.location.pathname.includes('/register')) {
+      this.setState({ register: true, login: true })
+    }
+    if (window.location.pathname === '/login') {
+      this.setState({ login: true, register: false })
+    }
+  }
 
   renderProcessBar() {
     return _.map(landingItems.process, ({
@@ -110,6 +127,8 @@ class Landing extends React.Component {
   render() {
     return ( 
     <div className = "landing" >
+      {this.state.login ? <Login /> : null}
+        {this.state.register ? <Register /> : null}
       <div className = "landing-top" >
         <div className = "tagline-box" >
         <div className = "tagline" > Code More </div> 

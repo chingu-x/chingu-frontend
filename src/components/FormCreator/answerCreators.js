@@ -5,7 +5,7 @@ class CheckboxAnswerCreator extends React.Component {
         const { answer, questionId, index, onFormChange, state } = this.props;
         return (
             <div key={'checkbox-answer_' + questionId + '_' + index} className="checkbox-container">
-                <label className="voyage-application-answer" htmlFor={questionId + '_' + index}>
+                <label className="voyage-application-checkbox-answer" htmlFor={questionId + '_' + index}>
                     {answer}
                     <input
                         className="voyage-application-checkbox"
@@ -150,6 +150,34 @@ function answerCreator_dropdown_multiple(data, onFormChange, state) {
     )
 }
 
+function answerCreator_checkbox_2_column(data, onFormChange, state) {
+    let firstHalf = [];
+    let secondHalf = [];
+    console.log(data.answers)
+    for (var i = 0; i < (data.answers).length; i++) {
+        if (i < (data.answers).length / 2) {
+            firstHalf.push(data.answers[i]);
+        } else {
+            secondHalf.push(data.answers[i]);
+        }
+    }
+    return (
+        <div className="checkbox-2-column-container">
+            <div className="checkbox-column-1">
+                {firstHalf.map((answer, index) => {
+                    return <CheckboxAnswerCreator key={data.id + '_' + index} answer={answer} questionId={data.id} index={index} onFormChange={onFormChange} state={state} />
+                })}
+            </div>
+            <div className="checkbox-column-2">
+                {secondHalf.map((answer, index) => {
+                    return <CheckboxAnswerCreator key={data.id + '_' + index} answer={answer} questionId={data.id} index={index} onFormChange={onFormChange} state={state} />
+                })}
+            </div>
+        </div>
+
+
+    )
+}
 
 export function renderQAs(applicationData, onFormChange, state) {
     return applicationData.map((setOfQuestionAnswer) => {
@@ -172,6 +200,9 @@ export function renderQAs(applicationData, onFormChange, state) {
                 break;
             case 'textarea':
                 answerComponent = answerCreator_textarea(setOfQuestionAnswer, onFormChange, state)
+                break;
+            case 'checkbox-2-column':
+                answerComponent = answerCreator_checkbox_2_column(setOfQuestionAnswer, onFormChange, state)
                 break;
             default:
                 break;

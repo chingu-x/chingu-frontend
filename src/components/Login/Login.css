@@ -1,0 +1,97 @@
+/*
+==========================
+FONT
+==========================
+*/
+/*
+==========================
+COLORS
+==========================
+*/
+/*
+==========================
+STYLING
+==========================
+*/
+/*
+==========================
+ADMIN PORTALS
+==========================
+*/
+/*
+==========================
+ADMIN BTNS
+==========================
+*/
+/*
+==========================
+CARDS & TABS
+==========================
+*/
+/*
+==========================
+VOYAGE CARDS
+==========================
+*/
+/*
+==========================
+FORMS
+==========================
+*/
+/*
+==========================
+ORIGINAL PROJECT VARIABLES
+==========================
+*/
+.login-container {
+  display: block;
+  position: absolute;
+  min-width: 100vw;
+  min-height: 100vh;
+  z-index: 100;
+  background-color: rgba(158, 158, 158, 0.637); }
+
+.login-box {
+  display: block;
+  z-index: 110;
+  width: 350px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 3px 6px #757575;
+  margin: 0 auto;
+  margin-top: calc(50vh - 100px);
+  margin-bottom: 100px;
+  padding: 20px; }
+
+.login-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 10px;
+  color: #BBBBBB; }
+
+.github-auth {
+  text-align: center;
+  display: block;
+  background-color: #15CF89;
+  border: none;
+  color: white;
+  padding: 10px;
+  width: 275px;
+  border-radius: 20px;
+  box-shadow: 0px 3px 6px #E6E6E6;
+  margin: 0 auto;
+  text-decoration: none;
+  font-size: 14px; }
+
+.github-auth:hover {
+  background-color: #19c281; }
+
+.github-icon {
+  margin: 5px;
+  display: inline-block;
+  position: absolute;
+  margin-top: -3px;
+  margin-left: -30px;
+  width: 27px;
+  height: 27px; }
