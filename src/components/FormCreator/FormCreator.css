@@ -293,12 +293,30 @@ RADIO STYLING
   border-radius: 50%;
   border: 1px solid #BBBBBB; }
 
+.radio-checkmark--badge {
+  position: absolute;
+  margin-left: 110px;
+  margin-top: 75px;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid #BBBBBB; }
+
 /* On mouse-over, add a grey background color */
 .radio-container:hover input ~ .radio-checkmark {
   background-color: #BBBBBB; }
 
+.radio-container:hover input ~ .radio-checkmark--badge {
+  background-color: #9e9e9e; }
+
 /* When the radio button is checked, add a blue background */
 .radio-container input:checked ~ .radio-checkmark {
+  background-color: #BBBBBB; }
+
+.radio-container input:checked ~ .radio-checkmark--badge {
   background-color: #BBBBBB; }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -307,8 +325,16 @@ RADIO STYLING
   position: absolute;
   display: none; }
 
+.radio-checkmark--badge:after {
+  content: '';
+  position: absolute;
+  display: none; }
+
 /* Show the indicator (dot/circle) when checked */
 .radio-container input:checked ~ .radio-checkmark:after {
+  display: block; }
+
+.radio-container input:checked ~ .radio-checkmark--badge:after {
   display: block; }
 
 /* Style the indicator (dot/circle) */
@@ -319,3 +345,77 @@ RADIO STYLING
   height: 6px;
   border-radius: 50%;
   background: white; }
+
+.radio-container .radio-checkmark--badge:after {
+  margin-left: 3px;
+  margin-top: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white; }
+
+/*
+==========================
+CUSTOM BADGE QUESTION
+==========================
+*/
+.badge-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "a b c";
+  margin: 0 auto;
+  margin-left: -20px;
+  margin-top: 10px; }
+
+.badge {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border: none; }
+
+.badge--1-container {
+  grid-area: a; }
+
+.badge--2-container {
+  grid-area: b; }
+
+.badge--3-container {
+  grid-area: c; }
+
+.badge--1, .badge--2, .badge--3 {
+  border: none;
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0px 3px 6px #E6E6E6; }
+
+.badge--1 {
+  background-color: #F5E3A1; }
+
+.badge--1:hover {
+  background-color: #f5db7e; }
+
+.badge--2 {
+  background-color: #CAEB95; }
+
+.badge--2:hover {
+  background-color: #b5db79; }
+
+.badge--3 {
+  background-color: #F1BA65; }
+
+.badge--3:hover {
+  background-color: #ecac4b; }
+
+.badge-title {
+  text-align: center;
+  font-size: 14px;
+  color: #9e9e9e; }
+
+.badge-subtext {
+  font-size: 10px;
+  text-align: center;
+  color: #BBBBBB; }
+
+.badge--chosen {
+  border: 2px solid #15CF89; }
