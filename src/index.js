@@ -5,9 +5,6 @@ import { BrowserRouter } from "react-router-dom";
 
 import { ApolloProvider } from "react-apollo";
 import ApolloClient from 'apollo-boost';
-import { HttpLink } from 'apollo-link-http'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-
 import App from "./App";
 import ScrollToTop from "./ScrollToTop";
 import "./styles/fontawesome/webfonts/fontawesome-all.css";
@@ -19,8 +16,7 @@ const token = localStorage.getItem("token"); // auth token
 const httpLink = new HttpLink({ uri: 'https://api.chingu.io/graphql' });
 
 const client = new ApolloClient({
-  uri: httpLink,
-  cache: new InMemoryCache(),
+  uri: 'https://api.chingu.io/graphql',
   request: operation => operation.setContext({
     headers: {
       authorization: token ? `Bearer ${token}` : null,
