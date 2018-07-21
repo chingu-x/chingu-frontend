@@ -278,14 +278,34 @@ border-radius: 50%;
 border: 1px solid $grey;
 }
 
+.radio-checkmark--badge {
+    position: absolute;
+    margin-left: 110px;
+    margin-top: 75px;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid $grey;
+}
+
 /* On mouse-over, add a grey background color */
 .radio-container:hover input ~ .radio-checkmark {
 background-color: $grey;
+}
+.radio-container:hover input ~ .radio-checkmark--badge {
+    background-color: $med-grey;
 }
 
 /* When the radio button is checked, add a blue background */
 .radio-container input:checked ~ .radio-checkmark {
 background-color: $grey;
+}
+.radio-container input:checked ~ .radio-checkmark--badge {
+    background-color: $grey;
+    // border: 1px solid $theme-green;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -294,10 +314,18 @@ content: '';
 position: absolute;
 display: none;
 }
+.radio-checkmark--badge:after {
+    content: '';
+    position: absolute;
+    display: none;
+}
 
 /* Show the indicator (dot/circle) when checked */
 .radio-container input:checked ~ .radio-checkmark:after {
 display: block;
+}
+.radio-container input:checked ~ .radio-checkmark--badge:after {
+    display: block;
 }
 
 /* Style the indicator (dot/circle) */
@@ -308,4 +336,89 @@ width: 6px;
 height: 6px;
 border-radius: 50%;
 background: white;
+}
+
+.radio-container .radio-checkmark--badge:after {
+    margin-left: 3px;
+    margin-top: 3px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+}
+
+/*
+==========================
+CUSTOM BADGE QUESTION
+==========================
+*/
+.badge-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: "a b c";
+    margin: 0 auto;
+    margin-left: -20px;
+    margin-top: 10px;
+}
+
+.badge {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border: none;
+}
+.badge--1-container {
+    grid-area: a;
+}
+
+.badge--2-container {
+    grid-area: b;
+}
+
+.badge--3-container {
+    grid-area: c;
+}
+.badge--1, .badge--2, .badge--3 {
+    border: none;
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto;
+    box-shadow: $box-shadow;
+}
+
+.badge--1 {
+    background-color: $badge-1;
+}
+
+.badge--1:hover {
+    background-color: $badge-1--hover;
+}
+
+.badge--2 {
+    background-color: $badge-2;
+}
+.badge--2:hover {
+    background-color: $badge-2--hover;
+}
+.badge--3 {
+    background-color: $badge-3;
+}
+.badge--3:hover {
+    background-color: $badge-3--hover;
+}
+
+.badge-title {
+    text-align: center;
+    font-size: 14px;
+    color: $med-grey;
+}
+
+.badge-subtext {
+    font-size: 10px;
+    text-align: center;
+    color: $grey;
+}
+
+.badge--chosen {
+    border: 2px solid $theme-green;
 }

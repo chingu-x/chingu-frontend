@@ -966,6 +966,271 @@ ORIGINAL PROJECT VARIABLES
     left: 5px;
     color: #767676; }
 
+/*
+==========================
+FONT
+==========================
+*/
+/*
+==========================
+COLORS
+==========================
+*/
+/*
+==========================
+STYLING
+==========================
+*/
+/*
+==========================
+ADMIN PORTALS
+==========================
+*/
+/*
+==========================
+ADMIN BTNS
+==========================
+*/
+/*
+==========================
+CARDS & TABS
+==========================
+*/
+/*
+==========================
+VOYAGE CARDS
+==========================
+*/
+/*
+==========================
+FORMS
+==========================
+*/
+/*
+==========================
+ORIGINAL PROJECT VARIABLES
+==========================
+*/
+/**
+ * TODO:
+ * 1. use variables and mixins where possible
+ * 2. update class name to reflect component
+ **/
+.user-profile-container-personal {
+  color: #757575;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column; }
+  .user-profile-container-personal img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%; }
+  .user-profile-container-personal h1 {
+    font-weight: normal;
+    text-transform: uppercase;
+    color: #D9D9D9; }
+
+.user ul {
+  list-style: none;
+  padding: 0; }
+  .user ul span {
+    margin-right: 7px; }
+
+.photobox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px; }
+  .photobox p {
+    margin: 0; }
+  .photobox p:nth-of-type(1) {
+    margin-top: 10px;
+    font-weight: bold; }
+
+.user-background {
+  margin-top: 20px;
+  border-top: 1px solid #D9D9D9; }
+
+.user-coding-history {
+  margin-top: 20px;
+  border-top: 1px solid #D9D9D9; }
+
+.user-interests {
+  margin-top: 20px;
+  border-top: 1px solid #D9D9D9; }
+
+.user-links {
+  margin-top: 20px;
+  border-top: 1px solid #D9D9D9; }
+  .user-links ul {
+    list-style: none;
+    padding: 0; }
+  .user-links li {
+    display: inline-block;
+    margin: 0 1em 0 0;
+    color: #95989A; }
+    .user-links li a {
+      text-decoration: none;
+      color: #D9D9D9; }
+
+.user-skills {
+  margin-top: 20px;
+  border-top: 1px solid #D9D9D9; }
+  .user-skills ul {
+    list-style: none;
+    padding: 0; }
+  .user-skills li {
+    display: inline-block;
+    border: 1px solid #95989A;
+    padding: 0.3em 1em;
+    margin: 0.2em 0.3em 0.2em 0; }
+
+/*
+==========================
+FONT
+==========================
+*/
+/*
+==========================
+COLORS
+==========================
+*/
+/*
+==========================
+STYLING
+==========================
+*/
+/*
+==========================
+ADMIN PORTALS
+==========================
+*/
+/*
+==========================
+ADMIN BTNS
+==========================
+*/
+/*
+==========================
+CARDS & TABS
+==========================
+*/
+/*
+==========================
+VOYAGE CARDS
+==========================
+*/
+/*
+==========================
+FORMS
+==========================
+*/
+/*
+==========================
+ORIGINAL PROJECT VARIABLES
+==========================
+*/
+/*
+==========================
+CARD
+==========================
+*/
+.card {
+  margin: 5px;
+  padding: 25px;
+  width: 500px;
+  height: 300px;
+  display: inline-flex;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+  border-radius: 15px;
+  align-items: center;
+  justify-content: space-around;
+  background: #78D5B2; }
+
+.card-circle {
+  background: #fff;
+  width: 204px;
+  height: 204px;
+  border: 15px solid #080a38;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.card-info {
+  text-align: center;
+  flex-basis: 40%; }
+  .card-info h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    font-weight: 500; }
+  .card-info p {
+    margin: 5px 0px 15px 5px;
+    text-transform: uppercase; }
+  .card-info p:first-of-type {
+    font-weight: 500;
+    font-size: 1.3rem;
+    margin: 0;
+    padding-bottom: 10px; }
+
+.card-number {
+  font-weight: 400;
+  padding-top: 5px;
+  font-size: 5rem;
+  text-align: center;
+  line-height: 3rem;
+  transform: translateY(10px); }
+
+.card-label {
+  display: block;
+  text-transform: uppercase;
+  font-size: 1rem; }
+
+.card-left-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.card-right-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+/*
+==========================
+CARD ACTIONS
+==========================
+*/
+.action-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.action-button {
+  width: 150px;
+  height: 50px;
+  border-radius: 20px;
+  border: none;
+  background: #15CF89;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em; }
+
+.action-warning {
+  text-transform: uppercase;
+  color: #EF8585;
+  font-size: 0.8rem; }
+
+.weekly-checkin-container button {
+  width: 200px;
+  height: 35px;
+  border-radius: 20px;
+  background: #15CF89;
+  color: #fff;
+  border: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12); }
+
 .contact-form {
   margin: 0 auto;
   margin-bottom: 4em;
@@ -1575,6 +1840,76 @@ ORIGINAL PROJECT VARIABLES
     color: #767676; }
 
 /* ----- /CohortDisplay ----- */
+/*
+==========================
+FONT
+==========================
+*/
+/*
+==========================
+COLORS
+==========================
+*/
+/*
+==========================
+STYLING
+==========================
+*/
+/*
+==========================
+ADMIN PORTALS
+==========================
+*/
+/*
+==========================
+ADMIN BTNS
+==========================
+*/
+/*
+==========================
+CARDS & TABS
+==========================
+*/
+/*
+==========================
+VOYAGE CARDS
+==========================
+*/
+/*
+==========================
+FORMS
+==========================
+*/
+/*
+==========================
+ORIGINAL PROJECT VARIABLES
+==========================
+*/
+.voyage-portal {
+  padding: 120px 100px; }
+  .voyage-portal > h1 {
+    font-size: 40px;
+    font-weight: normal;
+    text-align: center;
+    color: #E6E6E6;
+    text-transform: uppercase; }
+
+.voyage-section {
+  margin-top: 55px; }
+  .voyage-section > p:first-child {
+    margin-bottom: 0;
+    color: #E6E6E6;
+    font-size: 20px;
+    text-transform: uppercase; }
+
+.voyage-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between; }
+  .voyage-card-list > div {
+    margin-top: 40px; }
+
 .signup-box {
   display: flex;
   flex-direction: column;
@@ -1727,6 +2062,70 @@ ORIGINAL PROJECT VARIABLES
         .contributors .contributor-item .contributor-desc {
           width: 100%;
           text-align: center; } }
+
+/*
+==========================
+FONT
+==========================
+*/
+/*
+==========================
+COLORS
+==========================
+*/
+/*
+==========================
+STYLING
+==========================
+*/
+/*
+==========================
+ADMIN PORTALS
+==========================
+*/
+/*
+==========================
+ADMIN BTNS
+==========================
+*/
+/*
+==========================
+CARDS & TABS
+==========================
+*/
+/*
+==========================
+VOYAGE CARDS
+==========================
+*/
+/*
+==========================
+FORMS
+==========================
+*/
+/*
+==========================
+ORIGINAL PROJECT VARIABLES
+==========================
+*/
+.user-profile-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 50px 100px;
+  grid-gap: 5px 50px; }
+
+.user-profile {
+  grid-column: 1 / 2; }
+
+.user-voyages {
+  grid-column: 2 / 4;
+  justify-self: center; }
+
+.user-voyage > p {
+  color: #D9D9D9;
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 300; }
 
 .voyage-five {
   margin: 0 auto;

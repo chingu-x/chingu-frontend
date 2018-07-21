@@ -43,6 +43,11 @@ FORMS
 ORIGINAL PROJECT VARIABLES
 ==========================
 */
+/*
+==========================
+CONTAINER
+==========================
+*/
 .voyage-application-container {
   background-color: #F8F8F8; }
 
@@ -52,5 +57,97 @@ ORIGINAL PROJECT VARIABLES
   border-radius: 20px;
   margin: 0 auto;
   padding: 20px;
-  margin-top: 100px;
-  box-shadow: 0px 3px 6px #E6E6E6; }
+  box-shadow: 0px 3px 6px #E6E6E6;
+  margin-bottom: 100px; }
+
+/*
+==========================
+FORM PROGRESS BAR
+==========================
+*/
+.voyage-application-progress {
+  width: 100px;
+  height: 15px;
+  background-color: white;
+  box-shadow: 0px 3px 6px #E6E6E6;
+  position: relative;
+  display: inline-block;
+  float: right;
+  margin-top: -25px; }
+
+.voyage-application-progress-bar {
+  height: 15px;
+  background-color: #15CF89; }
+
+/*
+==========================
+PAGE TITLE
+==========================
+*/
+.voyage-application-title {
+  font-size: 40px;
+  color: #E6E6E6;
+  text-transform: uppercase;
+  margin-top: 70px;
+  margin-bottom: 30px;
+  text-align: center; }
+
+/*
+==========================
+FORM TITLE
+==========================
+*/
+.voyage-application-subtitle {
+  color: #BBBBBB;
+  background-color: #F8F8F8;
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  padding: 5px;
+  padding-left: 20px;
+  display: inline-block;
+  text-transform: uppercase; }
+
+/*
+==========================
+BUTTONS
+==========================
+*/
+.voyage-application-btn-container {
+  display: grid;
+  grid-template-areas: "a b";
+  grid-template-columns: repeat(2, 1fr); }
+
+.voyage-appliation-btn--green,
+.voyage-appliation-btn--grey {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  border: none;
+  box-shadow: 0px 3px 6px #E6E6E6;
+  padding: 5px;
+  width: 150px;
+  border-radius: 20px;
+  display: inline-block;
+  position: relative;
+  margin-top: 15px; }
+
+.voyage-appliation-btn--green {
+  grid-area: b;
+  justify-self: end;
+  background-color: #15CF89; }
+
+.voyage-appliation-btn--grey {
+  grid-area: a;
+  justify-self: start;
+  background-color: #E6E6E6; }
+
+/*
+==========================
+HORIZONTAL LINE
+==========================
+*/
+.hline {
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  border-top: 1px solid #EFEFEF;
+  margin-top: 20px; }
