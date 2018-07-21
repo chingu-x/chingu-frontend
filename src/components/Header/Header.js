@@ -75,11 +75,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
-  // TODO Get auth state from Context/Provider
-  const auth = !!window.localStorage.getItem("token")
+class Header extends React.Component {
+  state = {
+    auth: !!window.localStorage.getItem("token"), // FIXME
+    dropDownShowing: true,
+  }
+
+  // componentDidMount() {
+  //   const auth = !!window.localStorage.getItem("token")
+
+  //   if (auth !== this.state.auth) {
+  //     this.setState({ auth })
+  //   }
+  // }
   
-  const handleLogout = e => {
+  handleLogout = e => {
     e.preventDefault();
     console.log("Logging out");
     window.localStorage.removeItem("token"); 
@@ -87,41 +97,66 @@ const Header = () => {
     window.location = "/";
   };
 
-  const renderPortalDropDown = () => {
-    return <div style={{"color": "white"}}>PORTAL DROPDOWN</div>
-  }
+  toggleDropDown = () => this.setState({ dropDownShowing: !this.state.dropDownShowing })
 
-  const renderAuthButtons = () => {
-    let button
-    
-    if (auth) {
-      button = <Link 
-        to="/" 
-        className="btn btn-light" 
-        onClick={e => handleLogout(e)}
-      >
-        Logout
-      </Link>
-    } else {
-      button = <Link to="/login" className="btn btn-light">Login</Link>
-    }
-    
-    return <div className="header-right">{button}</div>
-  }
-  
-  
-  return (
-    <div className="header header-dark">
-      <div className="header-left">
-        <div className="nav-logo">
-          <Link className="nav-light" to="/">CHINGU</Link>
+  renderPortalDropDown = () => {
+    return (
+      <div className="header-dropdown">
+        <button className="header-portal-btn" onClick={this.toggleDropDown}>
+          CHOOSE A PORTAL
+          <i className="fa fa-chevron-down"/>
+        </button>
+        <div 
+          id="headerDropDown" 
+          className="header-dropdown-content" 
+          style={{"display": this.state.dropDownShowing ? "block": "none"}}
+        >
+          <a href="#">Voyage 125</a>
+          <a href="#">Another Voyage</a>
+          <a href="#">User Profile</a>
+          <a href="#">Voyage 125</a>
+          <a href="#">Another Voyage</a>
         </div>
       </div>
-      {auth && renderPortalDropDown()}
-      {/* <div className="header-right">{this.renderRightNav()}</div> */}
-      {renderAuthButtons()}
-    </div>
-  )
+    )
+  }
+
+  renderAuthButtons = () => {
+    let buttons
+    
+    if (this.state.auth) {
+      buttons = <React.Fragment>
+        <Link 
+          to="/" 
+          className="btn btn-light" 
+          onClick={e => this.handleLogout(e)}
+        >
+          Logout
+        </Link>
+        <Link className="btn btn-light" to="/"><i className="far fa-user fa-2x" /></Link>
+      </React.Fragment>
+    } else {
+      buttons = <Link to="/login" className="btn btn-light">Login</Link>
+    }
+    
+    return <div className="header-right">{buttons}</div>
+  }
+  
+  
+  render() {
+    return (
+      <div className="header header-dark">
+        <div className="header-left">
+          <div className="nav-logo">
+            <Link className="nav-light" to="/">CHINGU</Link>
+          </div>
+        </div>
+        {this.state.auth && this.renderPortalDropDown()}
+        {/* <div className="header-right">{this.renderRightNav()}</div> */}
+        {this.renderAuthButtons()}
+      </div>
+    )
+  }
 }
 
 export default Header;
