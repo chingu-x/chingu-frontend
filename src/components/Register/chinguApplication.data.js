@@ -14,9 +14,9 @@ export const chinguApplicationData = [
             'Being in a group of friendly coders who share my goals', 
             'Having access to team project experiences', 
             'Pair-Programming opportunities', 
-            'Getting out of my comfort zone!', 
-            'Help when I get stuck on a coding problem',
-            'Motivation/ Accountability'
+            'Getting out of my comfort zone', 
+            'Help when I get stuck on coding problems',
+            'Motivation and accountability'
         ]
     },
     {
