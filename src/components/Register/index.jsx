@@ -29,20 +29,11 @@ class Register extends React.Component {
       .catch(console.error); // TODO: handle errors properly
   }
 
-<<<<<<< HEAD
   toggleValueInSet = (set, value) => {
     set.has(value) ? set.delete(value) : set.add(value);
     return set;
   }
 
-=======
-
-  toggleValueInSet = (set, value) => {
-    set.has(value) ? set.delete(value) : set.add(value);
-    return set;
-  }
-
->>>>>>> a124232473ba1184cd0748f60defa3162dc6e284
   onFormChange = (e) => {
     const { name, value, type } = e.currentTarget;
     switch (type) {
@@ -54,21 +45,12 @@ class Register extends React.Component {
         break;
     }
   }
-<<<<<<< HEAD
 
   onSubmit = (e) => {
     e.preventDefault();
     // save to user profile
   }
 
-=======
-
-  onSubmit = (e) => {
-    e.preventDefault();
-    // save to user profile
-  }
-
->>>>>>> a124232473ba1184cd0748f60defa3162dc6e284
   render() {
     return (
       this.state.code ?
