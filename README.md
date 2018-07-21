@@ -18,6 +18,20 @@ cd chingu-frontend/
 npm start
 ```
 
+## Testing GraphQL Queries & Mutations in the Playground
+- head to the [Chingu API Playground](https://api.chingu.io/graphql)
+- test your query and mutations against the schema
+- make sure to include your authorization token in the HTTP HEADERS section (on the bottom of the playgorund page). To retrieve your authorization token:
+      1. Sign in to your chingu account
+      2. Inspect any chingu page and head to the application tab
+      3. Look under your Local Storage tab and you should see a "token" saved there
+      4. Copy the token, and paste it into the HTTP HEADER section like the below code. For example, if your code is 123456, then it should be written as so:
+      ```
+      {
+        Authorization: "Bearer 123456"
+      }
+      ```
+
 ## Testing
 - To runs tests use the command `npm test`.
 - Use [Postman](https://www.getpostman.com/) app as an alternate/concurrent option for tests
