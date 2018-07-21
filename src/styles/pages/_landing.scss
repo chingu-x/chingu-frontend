@@ -1,54 +1,21 @@
+@import '../abstracts/_variables.scss';
+
 .landing {
   position: relative;
 
   .landing-top {
     position: relative;
-    background-color: color-list("primary");
-    color: color-list("text-light");
-
-    @include media(">large") {
-      height: 94vh;
-    }
-
-    @include media(">desktop", "<=large") {
-      height: 80vh;
-    }
-
-    @include media(">tablet", "<=desktop") {
-      height: 65vh;
-    }
-
-    @include media(">small", "<=tablet") {
-      height: 60vh;
-    }
-
-    @include media("<=small") {
-      height: 54vh;
-    }
+    background-color: $theme-purple;
+    color: white;
+    width: 100vw;
 
     .landing-img {
-      position: absolute;
-
-      @include media(">large") {
-        top: 30%;
-        right: 0;
-        height: 70%;
-        width: auto;
-      }
-
-      @include media(">desktop", "<=large") {
-        top: 40%;
-        right: 0;
-        height: 60%;
-        width: auto;
-      }
-
-      @include media(">small", "<=desktop") {
-        top: 50%;
-        right: 0;
-        height: 50%;
-        width: auto;
-      }
+      display: block;
+      position: relative;
+      height: auto;
+      width: 100vw;
+      max-width: 1180px;
+      margin: 0 auto;
 
       @include media("<=small") {
         display: none;
@@ -56,59 +23,31 @@
     }
 
     .tagline-box {
-      position: absolute;
-      text-align: right;
+      z-index: 10;
+      position: relative;
+      text-align: center;
       text-transform: uppercase;
+      display: block;
+      margin: 0 auto;
+      bottom: -200px;
 
-      @include media(">large") {
-        left: 150px;
-        top: 20%;
+      @media (max-width: 850px) {
+        bottom: -15vh;
       }
-
-      @include media(">desktop", "<=large") {
-        left: 100px;
-        top: 15%;
+      @media (max-width: 750px) {
+        bottom: -10vh;
       }
-
-      @include media(">tablet", "<=desktop") {
-        left: 75px;
-        top: 15%;
-      }
-
-      @include media(">small", "<=desktop") {
-        left: 50px;
-        top: 15%;
-      }
-
       @include media("<=small") {
-        position: relative;
-        top: 15%;
-        left: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        padding-bottom: 200px;
       }
 
       .tagline {
-        @include media(">large") {
-          font-size: 3em;
-        }
-
-        @include media(">desktop", "<=large") {
-          font-size: 2.5em;
-        }
-
-        @include media(">tablet", "<=desktop") {
+        @include media(">small") {
           font-size: 2.2em;
         }
 
-        @include media(">small", "<=desktop") {
-          font-size: 2em;
-        }
-
         @include media("<=small") {
-          font-size: 2.5em;
+          font-size: 2em;
         }
       }
 
@@ -116,7 +55,7 @@
         margin: 1em 0;
         padding: 0.5em 1em;
         width: 200px;
-        border-radius: 10px;
+        border-radius: 20px;
         background-color: color-list("accent");
         color: color-list("text-light");
         font-size: 1.5em;
@@ -140,7 +79,7 @@
       margin: 0 auto;
       padding: 0.5em 0;
       width: 100%;
-      color: color-list("accent");
+      color: $dark-grey;
       font-size: 1.4em;
       font-weight: bold;
       text-transform: uppercase;
@@ -151,6 +90,7 @@
       flex-direction: row;
       justify-content: center;
       align-items: flex-start;
+      color: $dark-grey;
       width: 100%;
       padding: 2em 0;
       @include media("<=desktop") {
@@ -171,8 +111,8 @@
       margin: 0 auto;
       padding: 0.5em 0;
       width: 100%;
-      background-color: color-list("primary");
-      color: color-list("text-light");
+      background-color: $grey;
+      color: white;
       font-size: 1.4em;
       font-weight: bold;
       text-transform: uppercase;
@@ -185,8 +125,8 @@
       align-items: flex-start;
       width: 100%;
       padding: 2em 0;
-      background-color: color-list("emphasis");
-      color: color-list("text-light");
+      background-color: $palest-grey;
+      color: $dark-grey;
       @include media("<=desktop") {
         justify-content: center;
         align-items: center;
@@ -207,8 +147,8 @@
       margin: 0 auto;
       padding: 0.5em 0;
       width: 100%;
-      background-color: color-list("primary");
-      color: color-list("text-light");
+      background-color: $grey;
+      color: white;
       font-size: 1.4em;
       font-weight: bold;
       text-transform: uppercase;
@@ -221,8 +161,8 @@
       align-items: flex-start;
       width: 100%;
       padding: 2em 0;
-      background-color: color-list("accent");
-      color: color-list("text-light");
+      background-color:  $palest-grey;
+      color: $dark-grey;
       @include media("<=desktop") {
         justify-content: center;
         align-items: center;
@@ -232,15 +172,14 @@
   }
 
   .chingu-bar {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 2em 0;
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    max-width: $max-width;
     width: 100%;
-    text-align: center;
-    min-height: 300px;
     text-align: left;
-    @include media("<=desktop") {
+    @media(max-width: 1180px) {
+      text-align: center;
       align-items: center;
     }
 
@@ -252,16 +191,25 @@
       
 
       .chingu-bar-title {
-        font-size: 4.5em;
+        font-size: 40px;
         margin: 0;
         font-weight: bold;
-        color: color-list("accent");
+        color: $dark-grey;
       }
 
-      .chingu-bar-text {
-        max-width: 300px;
-        font-size: 1em;
-        font-weight: unset;
+      .chingu-green-btn {
+        margin: 1em 0;
+        padding: 0.5em 1em;
+        width: 200px;
+        border-radius: 10px;
+        background-color: color-list("accent");
+        color: color-list("text-light");
+        font-size: 1.5em;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: none;
+        outline: none;
+        cursor: pointer;
       }
     }
   }

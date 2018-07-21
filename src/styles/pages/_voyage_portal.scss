@@ -1,0 +1,37 @@
+@import '../abstracts/variables';
+
+//TODO: use variables and mixins where possible
+
+.voyage-portal {
+  padding: 120px 100px;
+
+  > h1 {
+    font-size: 40px;
+    font-weight: normal;
+    text-align: center;
+    color: #E6E6E6;
+    text-transform: uppercase;
+  }
+}
+
+.voyage-section {
+  margin-top: 55px;
+
+  > p:first-child {
+    margin-bottom: 0;
+    color: #E6E6E6;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+}
+
+.voyage-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+
+   > div {
+    margin-top: 40px;
+  }
+}
