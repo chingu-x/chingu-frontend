@@ -589,19 +589,19 @@ button:hover {
 .header-portal-btn {
   background-color: transparent;
   color: white;
-  padding: 10px;
+  padding: 10px 0;
   font-size: 14px;
   border: none;
   cursor: pointer;
   border-bottom: 2px solid white; }
-  .header-portal-btn i {
-    margin-left: 15px; }
+  .header-portal-btn span {
+    margin: 50px; }
 
 .header-dropdown {
   position: relative;
   display: inline-block; }
-  .header-dropdown a:hover {
-    background-color: #ddd; }
+  .header-dropdown:hover .header-dropdown-content {
+    display: block; }
 
 .header-dropdown-content {
   display: none;

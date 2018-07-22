@@ -78,7 +78,7 @@ import { Link } from "react-router-dom";
 class Header extends React.Component {
   state = {
     auth: !!window.localStorage.getItem("token"), // FIXME
-    dropDownShowing: true,
+    dropDownShowing: false, // TODO remove - dropdown using CSS :hover
   }
 
   // componentDidMount() {
@@ -92,8 +92,9 @@ class Header extends React.Component {
   handleLogout = e => {
     e.preventDefault();
     console.log("Logging out");
-    window.localStorage.removeItem("token"); 
-    // TODO Update Context/Provider
+    window.localStorage.removeItem("token");
+    // TODO Update App auth state
+
     window.location = "/";
   };
 
@@ -103,13 +104,12 @@ class Header extends React.Component {
     return (
       <div className="header-dropdown">
         <button className="header-portal-btn" onClick={this.toggleDropDown}>
-          CHOOSE A PORTAL
+          <span>CHOOSE A PORTAL</span>
           <i className="fa fa-chevron-down"/>
         </button>
         <div 
           id="headerDropDown" 
-          className="header-dropdown-content" 
-          style={{"display": this.state.dropDownShowing ? "block": "none"}}
+          className="header-dropdown-content"
         >
           <a href="#">Voyage 125</a>
           <a href="#">Another Voyage</a>
