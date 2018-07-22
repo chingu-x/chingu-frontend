@@ -1,7 +1,7 @@
 import * as React from 'react';
 import landingImages from "../../styles/assets/landingImages";
 
-const LandingIconItem = ({image, title, description}) => {
+const LandingBarWithIcons = ({image, title, description}) => {
   return (
     <div className="landing-item">
       <img className="landing-item-image" src={landingImages[image]} alt=""/>
@@ -11,4 +11,4 @@ const LandingIconItem = ({image, title, description}) => {
   );
 }
 
-export default LandingIconItem;
+export default LandingBarWithIcons;

@@ -787,10 +787,47 @@ button:hover {
       .landing-item .landing-item-image {
         height: 180px;
         width: auto; } }
+  .landing-item .landing-item-project-image {
+    border: 1px solid #E6E6E6;
+    height: 200px;
+    width: 300px;
+    object-fit: cover; }
   .landing-item .landing-item-description {
     margin: 0 auto;
     max-width: 250px;
     margin-bottom: 20px; }
+  .landing-item .landing-item-project-info {
+    width: 300px;
+    border: 1px solid #E6E6E6;
+    padding: 10px;
+    text-align: left;
+    margin-top: -5px;
+    margin-bottom: 50px;
+    min-height: 190px; }
+  .landing-item .landing-item-project-title {
+    font-size: 14px;
+    text-transform: capitalize;
+    text-align: left;
+    font-weight: 600; }
+  .landing-item .landing-item-project-description {
+    text-align: left;
+    margin-bottom: 15px;
+    min-height: 60px; }
+  .landing-item .landing-item-project-tier,
+  .landing-item .landing-item-project-techStack {
+    font-size: 11px;
+    display: inline-block;
+    text-align: left;
+    padding: 5px;
+    left: 0;
+    margin-top: 5px;
+    margin-right: 5px; }
+  .landing-item .landing-item-project-tier {
+    color: white;
+    border: none;
+    background-color: #15CF89; }
+  .landing-item .landing-item-project-techStack {
+    border: 1px solid #E6E6E6; }
 
 /*
 ==========================
@@ -1560,8 +1597,9 @@ ORIGINAL PROJECT VARIABLES
       width: 100%;
       color: #757575;
       font-size: 1.4em;
-      font-weight: bold;
-      text-transform: uppercase; }
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px; }
     .landing .landing-bar .landing-bar-items {
       display: flex;
       flex-direction: row;
@@ -1587,8 +1625,9 @@ ORIGINAL PROJECT VARIABLES
       background-color: #BBBBBB;
       color: white;
       font-size: 1.4em;
-      font-weight: bold;
-      text-transform: uppercase; }
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px; }
     .landing .cohorts-bar .cohorts-bar-items {
       display: flex;
       flex-direction: row;

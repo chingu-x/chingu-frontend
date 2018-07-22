@@ -3,9 +3,9 @@ import * as React from 'react';
 import {
   Link
 } from "react-router-dom";
-import LandingIconItem from "./LandingIconItem";
+import LandingBarWithIcons from "./LandingBarWithIcons";
 import LandingTestimonial from "./LandingTestimonial";
-import earth from "../../styles/assets/Global Image-02.png";
+import LandingProjects from './LandingProjects';
 import landingItems from "../../static-api-elements/landingItems";
 import Register from '../Register';
 import Login from "../Login";
@@ -35,7 +35,7 @@ class Landing extends React.Component {
       description
     }) => {
       return ( <
-        LandingIconItem key = {
+        LandingBarWithIcons key = {
           title
         }
         title = {
@@ -52,14 +52,38 @@ class Landing extends React.Component {
     })
   }
 
-  renderCohortsBar() {
-    return _.map(landingItems.cohorts, ({
+  renderWhatMakesChinguUniqueBar() {
+    return _.map(landingItems.whatMakesChingUnique, ({
       title,
       image,
       description
     }) => {
       return ( <
-        LandingIconItem key = {
+        LandingBarWithIcons key = {
+          title
+        }
+        title = {
+          title
+        }
+        image = {
+          image
+        }
+        description = {
+          description
+        }
+        />
+      );
+    })
+  }
+
+  renderProgramOverview() {
+    return _.map(landingItems.programOverview, ({
+      title,
+      image,
+      description
+    }) => {
+      return ( <
+        LandingBarWithIcons key = {
           title
         }
         title = {
@@ -104,10 +128,12 @@ class Landing extends React.Component {
     return _.map(landingItems.projects, ({
       title,
       image,
-      description
+      description,
+      tier,
+      techStack
     }) => {
       return ( <
-        LandingIconItem key = {
+        LandingProjects key = {
           title
         }
         title = {
@@ -119,6 +145,12 @@ class Landing extends React.Component {
         description = {
           description
         }
+        tier = {
+          tier
+        }
+        techStack = {
+          techStack
+        }
         />
       );
     })
@@ -128,33 +160,36 @@ class Landing extends React.Component {
     return ( 
     <div className = "landing" >
       {this.state.login ? <Login /> : null}
-        {this.state.register ? <Register /> : null}
+      {this.state.register ? <Register /> : null}
       <div className = "landing-top" >
         <div className = "tagline-box" >
-        <div className = "tagline" > Code More </div> 
-        <div className = "tagline" > Learn More </div> 
-        <div className = "tagline" > Build More </div> 
+        <div className = "tagline" > Learn how to be a team developer. <br /> Boost your portfolio. </div> 
+        <div className = "tagline--subtext" > Gain real project experience with team opportunities </div> 
         <Link to = "/login" >
           <button className = "big-green-btn" > Apply </button> 
         </Link > 
       </div> 
-        <img className = "landing-img" src = {earth} alt = "" />
+        <img className = "landing-img" src = {require('../../assets/landingImage.png')} alt = "landingImage" />
       </div> 
+      <div className = "cohorts-bar" >
+        <div className = "cohorts-bar-title" > What Makes Chingu Unique? </div> 
+        <div className = "cohorts-bar-items" > {this.renderWhatMakesChinguUniqueBar()} </div> 
+      </div > 
       <div className = "landing-bar" >
         <div className = "landing-bar-title" > Chingu Process </div> 
         <div className = "landing-bar-items" > { this.renderProcessBar() } </div> 
       </div > 
       <div className = "cohorts-bar" >
-        <div className = "cohorts-bar-title" > Current Cohorts </div> 
-        <div className = "cohorts-bar-items" > {this.renderCohortsBar()} </div> 
+        <div className = "cohorts-bar-title" > Program Overview </div> 
+        <div className = "cohorts-bar-items" > {this.renderProgramOverview()} </div> 
       </div > 
       <div className = "landing-bar" >
+        <div className = "landing-bar-title" > Past Projects </div> 
+        <div className = "landing-bar-items" > {this.renderProjectsBar()} </div> 
+      </div > 
+      <div className = "cohorts-bar" >
         <div className = "landing-bar-title" > What people are saying about Chingu </div> 
         <div className = "landing-bar-items" > {this.renderTestimonialBar()} </div> 
-      </div > 
-      <div className = "projects-bar" >
-        <div className = "projects-bar-title" > Past Projects </div> 
-        <div className = "projects-bar-items" > {this.renderProjectsBar()} </div> 
       </div > 
       <div className = "chingu-bar" >
       <div className = "chingu-bar-box" >
