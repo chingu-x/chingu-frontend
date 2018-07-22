@@ -172,7 +172,7 @@ class Landing extends React.Component {
         <img className = "landing-img" src = {require('../../assets/landingImage.png')} alt = "landingImage" />
       </div> 
       <div className = "cohorts-bar" >
-        <div className = "cohorts-bar-title" > What Makes Chingu Unique? </div> 
+        <div className = "cohorts-bar-title" > What Makes Chingu Unique </div> 
         <div className = "cohorts-bar-items" > {this.renderWhatMakesChinguUniqueBar()} </div> 
       </div > 
       <div className = "landing-bar" >
@@ -185,11 +185,11 @@ class Landing extends React.Component {
         <div className = "cohorts-bar-items" > {this.renderProgramOverview()} </div> 
       </div > 
       <div className = "landing-bar" >
-        <div className = "landing-bar-title" > Passt Projects </div> 
+        <div className = "landing-bar-title" > Past Projects </div> 
         <div className = "landing-bar-items" > {this.renderProjectsBar()} </div> 
       </div > 
       <div className = "cohorts-bar" >
-        <div className = "cohorts-bar-title" > What people are saying about Chingu </div> 
+        <div className = "cohorts-bar-title" > What People Are Saying About Chingu </div> 
         <div className = "cohorts-bar-items" > {this.renderTestimonialBar()} </div> 
       </div > 
       <div className = "chingu-bar" >
