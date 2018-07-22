@@ -181,10 +181,11 @@ class Landing extends React.Component {
       </div > 
       <div className = "cohorts-bar" >
         <div className = "cohorts-bar-title" > Program Overview </div> 
+        <div className = "cohorts-bar-subtitle" > 8 Week Build To Learn Voyages <br /> Part-Time or Full-Time teams</div> 
         <div className = "cohorts-bar-items" > {this.renderProgramOverview()} </div> 
       </div > 
       <div className = "landing-bar" >
-        <div className = "landing-bar-title" > Past Projects </div> 
+        <div className = "landing-bar-title" > Passt Projects </div> 
         <div className = "landing-bar-items" > {this.renderProjectsBar()} </div> 
       </div > 
       <div className = "cohorts-bar" >

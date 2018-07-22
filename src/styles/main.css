@@ -1639,6 +1639,16 @@ ORIGINAL PROJECT VARIABLES
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 2px; }
+    .landing .cohorts-bar .cohorts-bar-subtitle {
+      background-color: #F8F8F8;
+      width: 100%;
+      margin: 0 auto;
+      padding-top: 50px;
+      font-size: 1.4em;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #757575; }
     .landing .cohorts-bar .cohorts-bar-items {
       display: flex;
       flex-direction: row;
