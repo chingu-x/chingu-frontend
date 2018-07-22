@@ -543,7 +543,10 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   height: 64px;
-  padding: 0 1.5em; }
+  padding: 0 1.5em;
+  position: fixed;
+  z-index: 14;
+  width: 100%; }
   .header.header-dark {
     background-color: #0f143a; }
 
@@ -555,7 +558,7 @@ button:hover {
   float: left;
   font-size: 2em;
   font-weight: bold;
-  margin-right: auto; }
+  margin-right: 20px; }
   .header-left .nav-logo a {
     background-color: transparent;
     text-decoration: none;
@@ -570,6 +573,16 @@ button:hover {
   justify-content: flex-end;
   align-items: center;
   float: right; }
+  .header-right .avatar {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    margin-top: auto;
+    margin-left: 20px;
+    border: 12px solid #0f143a;
+    border-radius: 100%;
+    object-fit: cover;
+    z-index: 10; }
   .header-right a {
     display: flex;
     align-items: center;

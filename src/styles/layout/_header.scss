@@ -9,6 +9,9 @@
   align-items: center;
   height: 64px;
   padding: 0 1.5em;
+  position: fixed;
+  z-index: 14;
+  width: 100%;
 
   &.header-dark {
     background-color: color-list("primary");
@@ -23,7 +26,7 @@
   float: left;
   font-size: 2em;
   font-weight: bold;
-  margin-right: auto;
+  margin-right: 20px;
 
   .nav-logo {
     a {
@@ -45,6 +48,19 @@
   justify-content: flex-end;
   align-items: center;
   float: right;
+
+  // Avatar
+  .avatar {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    margin-top: auto;
+    margin-left: 20px;
+    border: 12px solid color-list("primary");
+    border-radius: 100%;
+    object-fit: cover;
+    z-index: 10;
+  }
 
   a {
     display: flex;

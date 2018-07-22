@@ -74,7 +74,9 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { graphql } from "react-apollo";
 
+import gql from "graphql-tag"; // TODO Remove TEMP
 class Header extends React.Component {
   state = {
     auth: !!window.localStorage.getItem("token"), // FIXME
@@ -125,9 +127,10 @@ class Header extends React.Component {
   }
 
   renderAuthButtons = () => {
+    const { user } = this.props.data
     let buttons
     
-    if (this.state.auth) {
+    if (user) {
       buttons = <React.Fragment>
         <Link 
           to="/" 
@@ -136,7 +139,8 @@ class Header extends React.Component {
         >
           LOG OUT
         </Link>
-        <Link className="btn btn-light" to="/"><i className="far fa-user fa-2x" /></Link>
+        {/* <Link className="btn btn-light" to="/"><i className="far fa-user fa-2x" /></Link> */}
+        <img className="avatar" src={user.avatar} alt="user avatar"/>
       </React.Fragment>
     } else {
       buttons = <Link to="/login" className="header-btn green">LOG IN</Link>
@@ -147,6 +151,9 @@ class Header extends React.Component {
   
   
   render() {
+    // TODO remove
+    this.props.data.user && console.log(`Hello ${this.props.data.user.username}!`)
+
     return (
       <div className="header header-dark">
         <div className="header-left">
@@ -162,4 +169,15 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+// TODO remove TEMP
+const tempUserQuery = gql`
+  query currentUserQuery {
+    user(user_id:1) {
+      id,
+      avatar,
+      username
+    }
+  }
+`;
+
+export default graphql(tempUserQuery)(Header);
