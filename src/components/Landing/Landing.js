@@ -163,7 +163,7 @@ class Landing extends React.Component {
       {this.state.register ? <Register /> : null}
       <div className = "landing-top" >
         <div className = "tagline-box" >
-        <div className = "tagline" > Learn how to be a team developer. <br /> Boost your portfolio. </div> 
+        <div className = "tagline" > Learn how to be a team developer<br /> & boost your portfolio. </div> 
         <div className = "tagline--subtext" > Gain real project experience with team opportunities </div> 
         <Link to = "/login" >
           <button className = "big-green-btn" > Apply </button> 

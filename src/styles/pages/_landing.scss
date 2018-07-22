@@ -23,13 +23,16 @@
     }
 
     .tagline-box {
+      padding-top: 100px;
       z-index: 10;
       position: relative;
       text-align: center;
-      text-transform: uppercase;
+      // text-transform: capitalize;
       display: block;
       margin: 0 auto;
-      bottom: -200px;
+      bottom: -50px;
+      letter-spacing: 2px;
+      width: 700px;
 
       @media (max-width: 850px) {
         bottom: -15vh;
@@ -42,6 +45,8 @@
       }
 
       .tagline {
+        font-weight: 600;
+        letter-spacing: 3px;
         @include media(">small") {
           font-size: 2.2em;
         }
@@ -49,6 +54,10 @@
         @include media("<=small") {
           font-size: 2em;
         }
+      }
+      .tagline--subtext {
+        margin-top: 20px;
+        font-size: 20px;
       }
 
       .big-green-btn {
@@ -104,7 +113,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 2em 0;
+    // margin: 2em 0;
     width: 100%;
     text-align: center;
 

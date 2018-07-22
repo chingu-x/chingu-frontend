@@ -62,7 +62,7 @@
     padding: 10px;
     text-align: left;
     margin-top: -5px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     min-height: 190px;
   }
 
@@ -93,6 +93,8 @@
     color: white;
     border: none;
     background-color: $theme-green;
+    font-weight: 600;
+    letter-spacing: 2px;
   }
   .landing-item-project-techStack {
     border: 1px solid $light-grey;
