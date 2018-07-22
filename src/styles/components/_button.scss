@@ -33,6 +33,31 @@
   }
 }
 
+.header-btn {
+  // margin: 1em 0 0.5em 0;
+  line-height: 2em;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 0.5em;
+  border: none;
+  white-space: nowrap;
+  &.green {
+    background-color: color-list("accent");
+    color: color-list("text-light");
+    &:active {
+      color: color-list("primary");
+    }
+  }
+  &.grey {
+    background-color: color-list("borders");
+    color: coor-list("primary");
+    &:active {
+      color: color-list("text-light");
+    }
+  }
+}
+
 .footer-btn {
   width: 100%;
   background-color: color-list("primary");

@@ -78,7 +78,7 @@ import { Link } from "react-router-dom";
 class Header extends React.Component {
   state = {
     auth: !!window.localStorage.getItem("token"), // FIXME
-    dropDownShowing: false, // TODO remove - dropdown using CSS :hover
+    // dropDownShowing: false, // TODO remove - dropdown using CSS :hover
   }
 
   // componentDidMount() {
@@ -98,12 +98,15 @@ class Header extends React.Component {
     window.location = "/";
   };
 
-  toggleDropDown = () => this.setState({ dropDownShowing: !this.state.dropDownShowing })
+  // toggleDropDown = () => this.setState({ dropDownShowing: !this.state.dropDownShowing })
 
   renderPortalDropDown = () => {
     return (
       <div className="header-dropdown">
-        <button className="header-portal-btn" onClick={this.toggleDropDown}>
+        <button 
+          className="header-portal-btn" 
+          // onClick={this.toggleDropDown}
+        >
           <span>CHOOSE A PORTAL</span>
           <i className="fa fa-chevron-down"/>
         </button>
@@ -128,15 +131,15 @@ class Header extends React.Component {
       buttons = <React.Fragment>
         <Link 
           to="/" 
-          className="btn btn-light" 
+          className="header-btn grey" 
           onClick={e => this.handleLogout(e)}
         >
-          Logout
+          LOG OUT
         </Link>
         <Link className="btn btn-light" to="/"><i className="far fa-user fa-2x" /></Link>
       </React.Fragment>
     } else {
-      buttons = <Link to="/login" className="btn btn-light">Login</Link>
+      buttons = <Link to="/login" className="header-btn green">LOG IN</Link>
     }
     
     return <div className="header-right">{buttons}</div>
