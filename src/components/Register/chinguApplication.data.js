@@ -27,7 +27,7 @@ export const chinguApplicationData = [
     {
         id: 204,
         type: 'input',
-        question: 'Where are you coding from? (ex. Toronto)',
+        question: 'What country are you coding from?',
     },
     {
         id: 205,

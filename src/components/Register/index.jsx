@@ -10,19 +10,21 @@ import './Register.css';
 import '../FormCreator/FormCreator.css';
 
 const REGISTER_USER = gql`
-mutation userRegister($input:JSON!){
-  submitChinguApplicationForm(input:$input)
-}
+  mutation createUser($user_data: UserInput!, $application_data: JSON!){
+    createUser(user_data:$user_data, application_data:$application_data) {
+      id
+    }
+  }
 `
 class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      201: '',
-      202: new Set(),
-      203: '',
-      204: '',
-      205: '',
+      201: '', // email
+      202: new Set(), // exciting about Chingu
+      203: '', // value
+      204: '', // country
+      205: new Date().getTimezoneOffset(), // timezone
       code: new URLSearchParams(window.location.search).get('code')
     }
   }
@@ -54,17 +56,24 @@ class Register extends React.Component {
   }
 
   onSubmit = (client) => {
-    let input = {
+    const user_data = {
       email: this.state[201],
-      excitingAboutChingu: this.state[202],
-      valueOfChinguToUser: this.state[203],
       country: this.state[204],
       timezone: this.state[205]
-    }
+    };
+
+    const application_data = {
+      excitingAboutChingu: this.state[202],
+      valueOfChinguToUser: this.state[203],
+    };
+
     client
-    .mutate({ mutation: REGISTER_USER, variables: { input: input } })
-    .then(/*show success screen*/)
-    .catch(console.error); // TODO: handle errors properly
+      .mutate({
+        mutation: REGISTER_USER,
+        variables: { user_data, application_data: JSON.stringify(application_data) },
+      })
+      .then(/*show success screen*/)
+      .catch(console.error); // TODO: handle errors properly
   }
 
   render() {
@@ -72,13 +81,15 @@ class Register extends React.Component {
       this.state.code ?
         <ApolloConsumer>
           {(client) => {
-            this.userAuth(client);
+            // prevents userAuth from firing on component rendering once token is captured 
+            if (!window.localStorage.getItem("token")) this.userAuth(client);
+            
             return (
               <div className="chingu-application-container">
                 <div className="chingu-application-modal">
                   <div className="chingu-application-title">New User Onboarding Survey</div>
                   {renderQAs(chinguApplicationData, this.onFormChange, this.state)}
-                  <button onClick={this.onSubmit(client)} className="chingu-application-btn">Save</button>
+                  <button onClick={() => this.onSubmit(client)} className="chingu-application-btn">Save</button>
                 </div>
               </div>
             );
