@@ -14,7 +14,7 @@
   position: relative;
   height: 150px;
   width: 250px;
-  background-color: $palest-grey;
+  background-color: white;
   padding: 15px;
   display: flex;
   justify-content: center;
@@ -34,7 +34,7 @@
   
   &:before {
       border-right: 50px solid transparent;
-      border-top: 20px solid $palest-grey;
+      border-top: 20px solid white;
       z-index:1;
   }
 

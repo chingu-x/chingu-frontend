@@ -886,7 +886,7 @@ ORIGINAL PROJECT VARIABLES
   position: relative;
   height: 150px;
   width: 250px;
-  background-color: #F8F8F8;
+  background-color: white;
   padding: 15px;
   display: flex;
   justify-content: center;
@@ -902,7 +902,7 @@ ORIGINAL PROJECT VARIABLES
     content: ""; }
   .testimonial-box:before {
     border-right: 50px solid transparent;
-    border-top: 20px solid #F8F8F8;
+    border-top: 20px solid white;
     z-index: 1; }
   .testimonial-box .testimonial-text {
     color: #757575;
