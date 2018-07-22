@@ -1582,7 +1582,8 @@ ORIGINAL PROJECT VARIABLES
     position: relative;
     background-color: #080A38;
     color: white;
-    width: 100vw; }
+    width: 100vw;
+    max-width: 100%; }
     .landing .landing-top .landing-img {
       display: block;
       position: relative;

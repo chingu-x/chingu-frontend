@@ -1,4 +1,4 @@
-@import '../abstracts/_variables.scss';
+@import "../abstracts/_variables.scss";
 
 .landing {
   position: relative;
@@ -8,6 +8,7 @@
     background-color: $theme-purple;
     color: white;
     width: 100vw;
+    max-width: 100%;
 
     .landing-img {
       display: block;
@@ -183,7 +184,7 @@
       align-items: flex-start;
       width: 100%;
       padding: 2em 0;
-      background-color:  $palest-grey;
+      background-color: $palest-grey;
       color: $dark-grey;
       @include media("<=desktop") {
         justify-content: center;
@@ -200,7 +201,7 @@
     max-width: $max-width;
     width: 100%;
     text-align: left;
-    @media(max-width: 1180px) {
+    @media (max-width: 1180px) {
       text-align: center;
       align-items: center;
     }
@@ -210,7 +211,6 @@
       @include media("<=desktop") {
         padding: 0;
       }
-      
 
       .chingu-bar-title {
         font-size: 40px;
