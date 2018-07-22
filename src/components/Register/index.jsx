@@ -10,7 +10,7 @@ import './Register.css';
 import '../FormCreator/FormCreator.css';
 
 const REGISTER_USER = gql`
-  mutation createUser($user_data: UserInput!, $application_data: JSON!){
+  mutation createUser($user_data: UserCreateInput!, $application_data: JSON!){
     createUser(user_data:$user_data, application_data:$application_data) {
       id
     }
@@ -63,14 +63,14 @@ class Register extends React.Component {
     };
 
     const application_data = {
-      excitingAboutChingu: this.state[202],
-      valueOfChinguToUser: this.state[203],
+      exciting_about_chingu: this.state[202],
+      value_of_chingu: this.state[203],
     };
 
     client
       .mutate({
         mutation: REGISTER_USER,
-        variables: { user_data, application_data: JSON.stringify(application_data) },
+        variables: { user_data, application_data },
       })
       .then(/*show success screen*/)
       .catch(console.error); // TODO: handle errors properly
@@ -84,6 +84,7 @@ class Register extends React.Component {
             // prevents userAuth from firing on component rendering once token is captured 
             if (!window.localStorage.getItem("token")) this.userAuth(client);
             
+            // TODO: preselect the timezone using this.state[205]
             return (
               <div className="chingu-application-container">
                 <div className="chingu-application-modal">
