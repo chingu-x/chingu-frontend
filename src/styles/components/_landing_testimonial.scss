@@ -12,15 +12,15 @@
 
 .testimonial-box {
   position: relative;
-  height: 150px;
-  width: 250px;
-  background-color: $palest-grey;
-  padding: 15px;
+  height: 175px;
+  width: 320px;
+  background-color: white;
+  padding: 25px;
   display: flex;
   justify-content: center;
   box-shadow: $box-shadow;
   text-align: left;
- 
+  margin-top: 50px;
   
   &:before, :after {
       position: absolute;
@@ -34,14 +34,14 @@
   
   &:before {
       border-right: 50px solid transparent;
-      border-top: 20px solid $palest-grey;
+      border-top: 20px solid white;
       z-index:1;
   }
 
   .testimonial-text {
     // padding: 1em 1.5em;
     color: $dark-grey;
-    font-size: 1em;
+    font-size: 16px;
   }
 }
 
@@ -51,6 +51,7 @@
   align-items: center;
   flex-wrap: nowrap;
   margin: 2em -1em;
+  margin-bottom: 50px;
   
   .testimonial-img {
     height: 50px;

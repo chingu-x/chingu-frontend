@@ -9,5 +9,14 @@ module.exports = {
   "projects-01": require("./projects-01.jpg"),
   "projects-02": require("./projects-02.jpg"),
   "projects-03": require("./projects-03.jpg"),
-  "user-01": require("./user-01.jpg"),
+  "user-01": require("./user-placeholder.png"),
+  "challenge--landing": require("./challenge--landing.png"),
+  "earth--landing": require("./earth--landing.png"),
+  "grow--landing": require("./grow--landing.png"),
+  "coment": require("./coment.PNG"),
+  "sona": require("./sona.PNG"),
+  "ticketybot": require("./ticketybot.PNG"),
+  "tier-badges-01--landing": require("./tier-badges-01--landing.png"),
+  "tier-badges-02--landing": require("./tier-badges-02--landing.png"),
+  "tier-badges-03--landing": require("./tier-badges-03--landing.png")
 }
