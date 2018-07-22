@@ -825,9 +825,9 @@ button:hover {
   .landing-item .landing-item-project-tier {
     color: white;
     border: none;
-    background-color: #15CF89;
-    font-weight: 600;
-    letter-spacing: 2px; }
+    background-color: #757575;
+    font-weight: 500;
+    letter-spacing: 3px; }
   .landing-item .landing-item-project-techStack {
     border: 1px solid #E6E6E6; }
 
