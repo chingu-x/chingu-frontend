@@ -68,10 +68,8 @@ const Store = {
     mutationCreator: async (fnName, qgl, loader, error, params) => {
       loader();
       const fnReference = Store.mutations[fnName];
-      function mutateFn() { return client.mutate[fnReference] };
-      console.log(mutateFn);
       try {
-        const { data } = await mutateFn({
+        const { data } = await client.mutate[fnReference]({
           mutation: qgl,
           variables: params
         })
