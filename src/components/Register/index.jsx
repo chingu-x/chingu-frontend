@@ -15,7 +15,7 @@ class Register extends React.Component {
     super(props);
     this.state = {
       loading: false,
-      error: true,
+      error: false,
       errorMessage: '',
       success: false,
       code: new URLSearchParams(window.location.search).get('code'),
@@ -41,7 +41,14 @@ class Register extends React.Component {
   }
 
   errorHandling = (err) => {
-    this.setState({ error: true, errorMessage: err })
+    console.log('err=' + err);
+    try {
+      this.setState({ error: true})
+      .then(() => this.setState({ errorMessage: err }))
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
 
   componentDidMount() {
@@ -106,7 +113,7 @@ class Register extends React.Component {
       this.state.code
         ? <React.Fragment>
           {this.state.loading ? <Loading /> : null}
-          {this.state.error ? <Error error={this.state.errorMessage} /> : null}
+          {this.state.error ? <Error goBack={"/register"} error={this.state.errorMessage} /> : null}
           <div className="chingu-application-container">
             <div className="chingu-application-modal">
               {this.state.success
