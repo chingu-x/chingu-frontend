@@ -166,7 +166,8 @@ DROPDOWN w/ CHECKBOX
   font-size: 12px;
   background-color: white;
   border: 1px solid #E6E6E6;
-  padding: 7px; }
+  padding: 7px;
+  display: block; }
 
 .filter-dropdown-btn-5:hover #dropdown_multiple-5 {
   display: block; }
