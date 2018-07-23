@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './404.css';
 
-class ErrorPage extends React.Component {
+class Missing404Page extends React.Component {
   render() {
     return (
       <div className="error-page-container">
@@ -14,4 +14,4 @@ class ErrorPage extends React.Component {
   }
 }
 
-export default ErrorPage;
+export default Missing404Page;
