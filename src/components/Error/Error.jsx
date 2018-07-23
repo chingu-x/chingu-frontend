@@ -1,12 +1,13 @@
 import * as React from 'react';
-
+import './Error.css';
 class Error extends React.Component {
   render() {
-    console.log('history=' + this.props.history);
     return (
       <div className="error-page-container">
+        <img className="error-img" src={require('../../assets/error.png')}/>
         <div className="error-message">{this.props.error}</div>
-        <button onClick={() => this.props.history.goBack()} className="error-go-back-bt">
+        <hr className="error-hline"/>
+        <button onClick={() => this.props.history.goBack()} className="error-go-back-btn">
           Go back
         </button>
       </div>

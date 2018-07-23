@@ -1,0 +1,39 @@
+@import '../../styles/abstracts/_variables.scss';
+
+.error-page-container {
+    z-index: 200;
+    width: 460px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    color: $dark-grey;
+    font-size: 20px;
+    background-color: white;
+    box-shadow: $box-shadow;
+    position: absolute;
+}
+
+.error-img {
+    width: 200px;
+    height: 200px;
+    margin-top: 40px;
+}
+
+.error-hline {
+    border-top: 1px solid $light-grey;
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-top: 40px;
+}
+
+.error-go-back-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: $theme-green;
+    color: white;
+    border-radius: 20px;
+    width: 160px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}

@@ -8,13 +8,14 @@ import Error from '../Error/Error';
 import Loading from '../Loader/Loader';
 import Store from '../../AppGlobalStore';
 import { REGISTER_USER, AUTH_MUTATION } from './graphql/mutations';
-import { Link } from 'react-router-dom';
+import SuccessForm from '../Success/Success';
+
 class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
-      error: false,
+      error: true,
       errorMessage: '',
       success: false,
       code: new URLSearchParams(window.location.search).get('code'),
@@ -31,7 +32,7 @@ class Register extends React.Component {
     Store.registerStateChangeListener(this.globalStoreChanged);
   }
 
-  globalStoreChanged = ( prevState, newState ) => {
+  globalStoreChanged = (prevState, newState) => {
     this.render();
   }
 
@@ -103,23 +104,22 @@ class Register extends React.Component {
   render() {
     return (
       this.state.code
-        ? <div className="chingu-application-container">
+        ? <React.Fragment>
           {this.state.loading ? <Loading /> : null}
           {this.state.error ? <Error error={this.state.errorMessage} /> : null}
-          <div className="chingu-application-modal">
-            {this.state.success
-              ? <React.Fragment>
-                <div className="form-success">Thank you!</div>
-                <Link className="form-success-btn" to="/profile">Go To Profile</Link>
-              </React.Fragment>
-              : <React.Fragment>
-                <div className="chingu-application-title">New User Onboarding Survey</div>
-                {renderQAs(chinguApplicationData, this.onFormChange, this.state)}
-                <button onClick={() => this.onSubmit()} className="chingu-application-btn">Save</button>
-              </React.Fragment>
-            }
+          <div className="chingu-application-container">
+            <div className="chingu-application-modal">
+              {this.state.success
+                ? <SuccessForm />
+                : <React.Fragment>
+                  <div className="chingu-application-title">New User Onboarding Survey</div>
+                  {renderQAs(chinguApplicationData, this.onFormChange, this.state)}
+                  <button onClick={() => this.onSubmit()} className="chingu-application-btn">Save</button>
+                </React.Fragment>
+              }
+            </div>
           </div>
-        </div>
+        </React.Fragment>
         : <Redirect to='/login' />
     )
   }
