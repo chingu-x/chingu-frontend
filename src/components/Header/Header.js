@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { graphql } from "react-apollo";
 
-import gql from "graphql-tag"; // TODO Remove TEMP
+import currentUserQuery from "../../queries/currentUserQuery"
 
 const Header = props => {
-  const token = !!window.localStorage.getItem("token");
-
+  const { user } = props.data
+  
   const handleLogout = e => {
     e.preventDefault();
     console.log("Logging out");
@@ -38,10 +38,9 @@ const Header = props => {
   }
 
   const renderAuthButtons = () => {
-    const { user } = props.data
     let buttons
     
-    if (token && user) {
+    if (user) {
       buttons = <React.Fragment>
         <Link 
           to="/" 
@@ -50,8 +49,7 @@ const Header = props => {
         >
           LOG OUT
         </Link>
-        {/* <Link className="btn btn-light" to="/"><i className="far fa-user fa-2x" /></Link> */}
-        <img className="avatar big" src={user.avatar} alt="user avatar"/>
+        <img className="avatar" src={user.avatar} alt="user avatar"/>
       </React.Fragment>
     } else {
       buttons = <Link to="/login" className="header-btn green">LOG IN</Link>
@@ -68,21 +66,10 @@ const Header = props => {
             <Link className="nav-light" to="/">CHINGU</Link>
           </div>
         </div>
-        {props.data.user && renderPortalDropDown()}
+        {user && renderPortalDropDown()}
         {renderAuthButtons()}
       </div>
     )
 }
 
-// TODO remove TEMP
-const tempUserQuery = gql`
-  query currentUserQuery {
-    user(user_id:1) {
-      id,
-      avatar,
-      username
-    }
-  }
-`;
-
-export default graphql(tempUserQuery)(Header);
+export default graphql(currentUserQuery)(Header);
