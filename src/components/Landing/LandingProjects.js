@@ -9,9 +9,9 @@ const LandingProjects = ({ image, title, description, tier, techStack }) => {
         <div className="landing-item-project-title" >{title}</div>
         <div className="landing-item-project-description" >{description}</div>
         <div className="landing-item-project-tier" >{tier}</div>
-        {techStack.map(techStack => {
+        {techStack.map((techStack, index) => {
           return (
-            <div className="landing-item-project-techStack">{techStack}</div>
+            <div key={index} className="landing-item-project-techStack">{techStack}</div>
           )
         })}
       </div>
