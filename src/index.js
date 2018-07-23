@@ -13,8 +13,7 @@ import "./styles/main.css";
 import registerServiceWorker from "./registerServiceWorker";
 
 const client = new ApolloClient({
-  // uri: 'https://api.chingu.io/graphql',
-  uri: 'https://be243b86.ngrok.io/graphql',
+  uri: 'https://api.chingu.io/graphql',
   request: operation => operation.setContext({
     headers: {
       authorization: `Bearer ${localStorage.getItem("token")}`,
