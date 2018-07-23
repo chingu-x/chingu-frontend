@@ -534,9 +534,6 @@ button:hover {
   .basic-page h1 {
     text-align: center; }
 
-* {
-  outline: 1px solid orange; }
-
 .header {
   display: flex;
   flex-direction: row;
@@ -575,14 +572,17 @@ button:hover {
   float: right; }
   .header-right .avatar {
     display: inline-block;
-    width: 120px;
-    height: 120px;
+    width: 54px;
+    height: 54px;
     margin-top: auto;
     margin-left: 20px;
-    border: 12px solid #0f143a;
     border-radius: 100%;
-    object-fit: cover;
-    z-index: 10; }
+    object-fit: cover; }
+    .header-right .avatar.big {
+      width: 120px;
+      height: 120px;
+      border: 12px solid #0f143a;
+      z-index: 10; }
   .header-right a {
     display: flex;
     align-items: center;

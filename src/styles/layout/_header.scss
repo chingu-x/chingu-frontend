@@ -1,7 +1,3 @@
-* {
-  outline: 1px solid orange;
-}
-
 .header {
   display: flex;
   flex-direction: row;
@@ -52,14 +48,18 @@
   // Avatar
   .avatar {
     display: inline-block;
-    width: 120px;
-    height: 120px;
+    width: 54px;
+    height: 54px;
     margin-top: auto;
     margin-left: 20px;
-    border: 12px solid color-list("primary");
     border-radius: 100%;
     object-fit: cover;
-    z-index: 10;
+    &.big {
+      width: 120px;
+      height: 120px;
+      border: 12px solid color-list("primary");
+      z-index: 10;
+    }
   }
 
   a {
