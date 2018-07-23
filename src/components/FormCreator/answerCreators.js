@@ -50,12 +50,6 @@ class RadioWithInputAnswerCreator extends React.Component {
         const { answer, questionId, index, onFormChange, state } = this.props;
         return (
             <div key={'radio-answer_' + questionId + '_' + index} className="radio-container">
-                <input type="text"
-                    name={questionId}
-                    value={'Other: ' + state[questionId]}
-                    onChange={e => onFormChange(e)}
-                    className="voyage-application-input"
-                />
                 <label className="voyage-application-answer" htmlFor={questionId + '_' + index}>
                     {answer}
                     <input
@@ -64,7 +58,7 @@ class RadioWithInputAnswerCreator extends React.Component {
                         name={questionId}
                         id={questionId + '_' + index}
                         value={answer}
-                        checked={state[questionId].includes(answer)}
+                        checked={state[questionId] === answer}
                         onChange={e => onFormChange(e)}
                     />
                     <span className="radio-checkmark" />
@@ -72,6 +66,32 @@ class RadioWithInputAnswerCreator extends React.Component {
             </div>
         )
     }
+    // render() {
+    //     const { answer, questionId, index, onFormChange, state } = this.props;
+    //     return (
+    //         <div key={'radio-answer_' + questionId + '_' + index} className="radio-container">
+    //             <input type="text"
+    //                 name={questionId}
+    //                 value={'Other: ' + state[questionId]}
+    //                 onChange={e => onFormChange(e)}
+    //                 className="voyage-application-input"
+    //             />
+    //             <label className="voyage-application-answer" htmlFor={questionId + '_' + index}>
+    //                 {answer}
+    //                 <input
+    //                     className="voyage-application-radio"
+    //                     type="radio"
+    //                     name={questionId}
+    //                     id={questionId + '_' + index}
+    //                     value={answer}
+    //                     checked={state[questionId].includes(answer)}
+    //                     onChange={e => onFormChange(e)}
+    //                 />
+    //                 <span className="radio-checkmark" />
+    //             </label>
+    //         </div>
+    //     )
+    // }
 }
 
 function answerCreator_checkbox(data, onFormChange, state) {
