@@ -1,4 +1,3 @@
-import UTC from '../FormCreator/UTC.data';
 import techStack from '../FormCreator/TechStack.data';
 
 const newUserApplicationData = [

@@ -25,7 +25,7 @@ class VoyageApplication extends React.Component {
     super(props);
     this.state = {
       applicationTitle: 'Voyage Application',
-      application: newUserApplication,
+      application: voyageApplication,
       gql: '',
       progressBar: { width: '1%' },
       currentPage: 0,
