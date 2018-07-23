@@ -41,14 +41,7 @@ class Register extends React.Component {
   }
 
   errorHandling = (err) => {
-    console.log('err=' + err);
-    try {
-      this.setState({ error: true})
-      .then(() => this.setState({ errorMessage: err }))
-    }
-    catch (err) {
-      console.log(err);
-    }
+    this.setState({ error: true }, () => this.setState({ errorMessage: err }))
   }
 
   componentDidMount() {
