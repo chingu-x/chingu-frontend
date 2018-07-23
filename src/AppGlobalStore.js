@@ -67,8 +67,11 @@ const Store = {
   mutations: {
     mutationCreator: async (fnName, qgl, loader, error, params) => {
       loader();
+      const fnReference = Store.mutations[fnName];
+      function mutateFn() { return client.mutate[fnReference] };
+      console.log(mutateFn);
       try {
-        const { data } = await client.mutate[fnName]({
+        const { data } = await mutateFn({
           mutation: qgl,
           variables: params
         })
@@ -76,6 +79,7 @@ const Store = {
         return data;
       }
       catch (err) {
+        loader();
         return error(err)
       }
     },
