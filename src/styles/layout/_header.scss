@@ -1,3 +1,7 @@
+* {
+  outline: 1px solid orange;
+}
+
 .header {
   display: flex;
   flex-direction: row;
@@ -22,7 +26,6 @@
   float: left;
   font-size: 2em;
   font-weight: bold;
-  margin-right: 20px;
 
   .nav-logo {
     a {
@@ -46,14 +49,13 @@
   float: right;
 
   // Avatar
-  .avatar {
+  img.avatar {
     display: inline-block;
     width: 54px;
     height: 54px;
     margin-top: auto;
-    margin-left: 20px;
     border-radius: 100%;
-    object-fit: cover;
+    vertical-align: middle;
     &.big {
       width: 120px;
       height: 120px;
@@ -109,11 +111,11 @@
 .header-dropdown {
   position: relative;
   display: inline-block;
-  a:hover {
-    background-color: color-list("accent");
-  }
   &:hover .header-dropdown-content {
     display: block;
+  }
+  a:hover {
+    background-color: color-list("accent");
   }
 }
 
@@ -126,6 +128,7 @@
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 15;
+  white-space: nowrap;
   a {
     color: color-list("text-dark");
     padding: 12px 16px;

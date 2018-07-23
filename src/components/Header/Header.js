@@ -24,7 +24,6 @@ const Header = props => {
           <i className="fa fa-chevron-down"/>
         </button>
         <div 
-          id="headerDropDown" 
           className="header-dropdown-content"
         >
           <a href="#">Voyage 125</a>
@@ -37,39 +36,34 @@ const Header = props => {
     )
   }
 
-  const renderAuthButtons = () => {
-    let buttons
-    
-    if (user) {
-      buttons = <React.Fragment>
-        <Link 
-          to="/" 
-          className="header-btn grey" 
-          onClick={e => handleLogout(e)}
-        >
-          LOG OUT
-        </Link>
-        <img className="avatar" src={user.avatar} alt="user avatar"/>
-      </React.Fragment>
-    } else {
-      buttons = <Link to="/login" className="header-btn green">LOG IN</Link>
-    }
-    
-    return <div className="header-right">{buttons}</div>
-  }
-  
-  
+  const renderAvatar = () => {
     return (
-      <div className="header header-dark">
-        <div className="header-left">
-          <div className="nav-logo">
-            <Link className="nav-light" to="/">CHINGU</Link>
-          </div>
+      <div className="header-dropdown">
+        <img className="avatar" src={user.avatar} alt="user avatar"/>
+        <div className="header-dropdown-content avatar">
+          <Link to="/settings">Settings</Link>
+          <Link to="/" onClick={e => handleLogout(e)}>Log out</Link>
         </div>
-        {user && renderPortalDropDown()}
-        {renderAuthButtons()}
       </div>
     )
+  }
+  
+  return (
+    <div className="header header-dark">
+      <div className="header-left">
+        <div className="nav-logo">
+          <Link className="nav-light" to="/">CHINGU</Link>
+        </div>
+      </div>
+      
+      {user && renderPortalDropDown()}
+
+      <div className="header-right">
+        {user && renderAvatar()}
+        {!user && <Link to="/login" className="header-btn green">LOG IN</Link>}
+      </div>
+    </div>
+  )
 }
 
 export default graphql(currentUserQuery)(Header);
