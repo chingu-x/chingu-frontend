@@ -1631,7 +1631,8 @@ ORIGINAL PROJECT VARIABLES
       height: auto;
       width: 100vw;
       max-width: 1180px;
-      margin: 0 auto; }
+      margin: 0 auto;
+      max-width: 100%; }
       @media (max-width: 565px) {
         .landing .landing-top .landing-img {
           display: none; } }

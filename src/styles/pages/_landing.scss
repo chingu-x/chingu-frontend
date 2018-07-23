@@ -17,6 +17,7 @@
       width: 100vw;
       max-width: 1180px;
       margin: 0 auto;
+      max-width: 100%;
 
       @include media("<=small") {
         display: none;

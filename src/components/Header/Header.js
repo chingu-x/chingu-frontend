@@ -11,8 +11,6 @@ const Header = props => {
     e.preventDefault();
     console.log("Logging out");
     window.localStorage.removeItem("token");
-    // TODO Update App auth state
-
     window.location = "/";
   };
 
@@ -39,7 +37,7 @@ const Header = props => {
       <div className="header-dropdown">
         <img className="avatar" src={user.avatar} alt="user avatar"/>
         <div className="header-dropdown-content avatar">
-          <Link to="/settings">Settings</Link>
+          {/* <Link to="/settings">Settings</Link> */}
           <Link to="/" onClick={e => handleLogout(e)}>Log out</Link>
         </div>
       </div>
