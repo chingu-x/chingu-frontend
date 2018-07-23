@@ -11,14 +11,13 @@ import "./styles/fontawesome/webfonts/fontawesome-all.css";
 import "./styles/main.css";
 
 import registerServiceWorker from "./registerServiceWorker";
- 
-const token = localStorage.getItem("token"); // auth token
 
 const client = new ApolloClient({
-  uri: 'https://api.chingu.io/graphql',
+  // uri: 'https://api.chingu.io/graphql',
+  uri: 'https://be243b86.ngrok.io/graphql',
   request: operation => operation.setContext({
     headers: {
-      authorization: token ? `Bearer ${token}` : null,
+      authorization: `Bearer ${localStorage.getItem("token")}`,
     }
   })
 });
