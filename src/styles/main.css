@@ -787,10 +787,49 @@ button:hover {
       .landing-item .landing-item-image {
         height: 180px;
         width: auto; } }
+  .landing-item .landing-item-project-image {
+    border: 1px solid #E6E6E6;
+    height: 200px;
+    width: 300px;
+    object-fit: cover; }
   .landing-item .landing-item-description {
     margin: 0 auto;
     max-width: 250px;
     margin-bottom: 20px; }
+  .landing-item .landing-item-project-info {
+    width: 300px;
+    border: 1px solid #E6E6E6;
+    padding: 10px;
+    text-align: left;
+    margin-top: -5px;
+    margin-bottom: 20px;
+    min-height: 190px; }
+  .landing-item .landing-item-project-title {
+    font-size: 14px;
+    text-transform: capitalize;
+    text-align: left;
+    font-weight: 600; }
+  .landing-item .landing-item-project-description {
+    text-align: left;
+    margin-bottom: 15px;
+    min-height: 60px; }
+  .landing-item .landing-item-project-tier,
+  .landing-item .landing-item-project-techStack {
+    font-size: 11px;
+    display: inline-block;
+    text-align: left;
+    padding: 5px;
+    left: 0;
+    margin-top: 5px;
+    margin-right: 5px; }
+  .landing-item .landing-item-project-tier {
+    color: white;
+    border: none;
+    background-color: #757575;
+    font-weight: 500;
+    letter-spacing: 3px; }
+  .landing-item .landing-item-project-techStack {
+    border: 1px solid #E6E6E6; }
 
 /*
 ==========================
@@ -847,14 +886,15 @@ ORIGINAL PROJECT VARIABLES
 
 .testimonial-box {
   position: relative;
-  height: 150px;
-  width: 250px;
-  background-color: #F8F8F8;
-  padding: 15px;
+  height: 175px;
+  width: 320px;
+  background-color: white;
+  padding: 25px;
   display: flex;
   justify-content: center;
   box-shadow: 0px 3px 6px #E6E6E6;
-  text-align: left; }
+  text-align: left;
+  margin-top: 50px; }
   .testimonial-box:before, .testimonial-box :after {
     position: absolute;
     top: 100%;
@@ -865,18 +905,19 @@ ORIGINAL PROJECT VARIABLES
     content: ""; }
   .testimonial-box:before {
     border-right: 50px solid transparent;
-    border-top: 20px solid #F8F8F8;
+    border-top: 20px solid white;
     z-index: 1; }
   .testimonial-box .testimonial-text {
     color: #757575;
-    font-size: 1em; }
+    font-size: 16px; }
 
 .testimonial-lower {
   display: flex;
   flex-direction: row;
   align-items: center;
   flex-wrap: nowrap;
-  margin: 2em -1em; }
+  margin: 2em -1em;
+  margin-bottom: 50px; }
   .testimonial-lower .testimonial-img {
     height: 50px;
     width: 50px;
@@ -1513,13 +1554,15 @@ ORIGINAL PROJECT VARIABLES
         .landing .landing-top .landing-img {
           display: none; } }
     .landing .landing-top .tagline-box {
+      padding-top: 100px;
       z-index: 10;
       position: relative;
       text-align: center;
-      text-transform: uppercase;
       display: block;
       margin: 0 auto;
-      bottom: -200px; }
+      bottom: -50px;
+      letter-spacing: 2px;
+      width: 700px; }
       @media (max-width: 850px) {
         .landing .landing-top .tagline-box {
           bottom: -15vh; } }
@@ -1529,12 +1572,18 @@ ORIGINAL PROJECT VARIABLES
       @media (max-width: 565px) {
         .landing .landing-top .tagline-box {
           padding-bottom: 200px; } }
-      @media (min-width: 566px) {
-        .landing .landing-top .tagline-box .tagline {
-          font-size: 2.2em; } }
-      @media (max-width: 565px) {
-        .landing .landing-top .tagline-box .tagline {
-          font-size: 2em; } }
+      .landing .landing-top .tagline-box .tagline {
+        font-weight: 600;
+        letter-spacing: 3px; }
+        @media (min-width: 566px) {
+          .landing .landing-top .tagline-box .tagline {
+            font-size: 2.2em; } }
+        @media (max-width: 565px) {
+          .landing .landing-top .tagline-box .tagline {
+            font-size: 2em; } }
+      .landing .landing-top .tagline-box .tagline--subtext {
+        margin-top: 20px;
+        font-size: 20px; }
       .landing .landing-top .tagline-box .big-green-btn {
         margin: 1em 0;
         padding: 0.5em 1em;
@@ -1560,8 +1609,9 @@ ORIGINAL PROJECT VARIABLES
       width: 100%;
       color: #757575;
       font-size: 1.4em;
-      font-weight: bold;
-      text-transform: uppercase; }
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px; }
     .landing .landing-bar .landing-bar-items {
       display: flex;
       flex-direction: row;
@@ -1577,7 +1627,6 @@ ORIGINAL PROJECT VARIABLES
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 2em 0;
     width: 100%;
     text-align: center; }
     .landing .cohorts-bar .cohorts-bar-title {
@@ -1587,8 +1636,19 @@ ORIGINAL PROJECT VARIABLES
       background-color: #BBBBBB;
       color: white;
       font-size: 1.4em;
-      font-weight: bold;
-      text-transform: uppercase; }
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px; }
+    .landing .cohorts-bar .cohorts-bar-subtitle {
+      background-color: #F8F8F8;
+      width: 100%;
+      margin: 0 auto;
+      padding-top: 50px;
+      font-size: 1.4em;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #757575; }
     .landing .cohorts-bar .cohorts-bar-items {
       display: flex;
       flex-direction: row;
