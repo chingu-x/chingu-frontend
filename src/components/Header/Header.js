@@ -5,7 +5,7 @@ import { graphql } from "react-apollo";
 import currentUserQuery from "../../queries/currentUserQuery"
 
 const Header = props => {
-  const { user } = props.data
+  const { user, loading } = props.data
   
   const handleLogout = e => {
     e.preventDefault();
@@ -18,14 +18,12 @@ const Header = props => {
 
   const renderPortalDropDown = () => {
     return (
-      <div className="header-dropdown">
+      <div className="header-dropdown portal">
         <button className="header-portal-btn" >
           <span>CHOOSE A PORTAL</span>
           <i className="fa fa-chevron-down"/>
         </button>
-        <div 
-          className="header-dropdown-content"
-        >
+        <div className="header-dropdown-content portal">
           <a href="#">Voyage 125</a>
           <a href="#">Another Voyage</a>
           <a href="#">User Profile</a>
@@ -60,7 +58,7 @@ const Header = props => {
 
       <div className="header-right">
         {user && renderAvatar()}
-        {!user && <Link to="/login" className="header-btn green">LOG IN</Link>}
+        {!user && !loading && <Link to="/login" className="header-btn green">LOG IN</Link>}
       </div>
     </div>
   )
