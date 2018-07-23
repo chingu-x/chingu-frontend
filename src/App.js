@@ -10,16 +10,22 @@ import programFAQ from "./static-api-elements/programFAQ";
 import CurrentPrograms from "./components/Pages/CurrentPrograms";
 import VoyageApplication from './components/VoyageApplication';
 import UserProfile from './components/UserProfilePanel/UserProfilePanel.js';
+import Store from './AppGlobalStore';
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.store.getAuthedUser()
-      .then(() => this.props.store.updateUser({ new: 'stuff was added to user' }))
-      .then(() => console.log(this.props.store.state));
+    Store.getAuthedUser()
+      .then(() => Store.updateUser({ new: 'stuff was added to user' }))
+      .then(() => console.log(Store.state));
+      
+    Store.registerStateChangeListener(this.globalStoreChanged);
   }
+
+  globalStoreChanged = ( prevState, newState ) => {
+    this.render();
+  }
+
   render() {
-    // this.props.store.updateUser({ new: 'stuff was added to user' });
-    // console.log('after update: ', this.props.store.state.user);
     return (
       <div className="App">
         <Route exact path="/" component={Landing} />

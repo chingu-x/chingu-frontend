@@ -7,7 +7,7 @@ import { renderQAs } from '../FormCreator/answerCreators.js';
 // import ErrorPage from '../404/404';
 import Loader from '../Loader/Loader';
 // import SubmitVoyageApplication from './SubmitVoyageApplication';
-
+import Store from '../../AppGlobalStore.js';
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -19,6 +19,8 @@ const voyageApplicationPage2 = voyageApplicationData.filter((data) => { return d
 
 const newUserApplication = [newUserPage1, newUserPage2, newUserPage3, voyageApplicationPage1, voyageApplicationPage2];
 const voyageApplication = [voyageApplicationPage1, voyageApplicationPage2]
+
+
 
 class VoyageApplication extends React.Component {
   constructor(props) {
@@ -104,6 +106,10 @@ class VoyageApplication extends React.Component {
     });
   }
 
+  submit = (e) => {
+    Store.updateGlobalState("hello", "world");
+  }
+
   render() {
     if (this.props.userCohorts && this.props.userCohorts.loading) {
       return <Loader />
@@ -133,7 +139,7 @@ class VoyageApplication extends React.Component {
             }
             {
               this.state.currentPage === this.state.application.length - 1
-                ? null // <SubmitVoyageApplication state={this.state} /> // mutation component button
+                ? <button className="voyage-appliation-btn--green" onClick={e => this.submit(e)}>Submit</button> // mutation component button
                 : <button className="voyage-appliation-btn--green" onClick={e => this.goToNextPage(e)}>Next</button>
             }
           </div>
