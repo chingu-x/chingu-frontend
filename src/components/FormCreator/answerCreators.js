@@ -247,16 +247,20 @@ function answerCreator_checkbox_2_column(data, onFormChange, state) {
             secondHalf.push(data.answers[i]);
         }
     }
+
+    let idx = 0;
     return (
         <div className="checkbox-2-column-container">
             <div className="checkbox-column-1">
                 {firstHalf.map((answer, index) => {
-                    return <CheckboxAnswerCreator key={data.id + '_' + index} answer={answer} questionId={data.id} index={index} onFormChange={onFormChange} state={state} />
+                    const questionIdx = idx++;
+                    return <CheckboxAnswerCreator key={data.id + '_' + questionIdx} answer={answer} questionId={data.id} index={questionIdx} onFormChange={onFormChange} state={state} />
                 })}
             </div>
             <div className="checkbox-column-2">
                 {secondHalf.map((answer, index) => {
-                    return <CheckboxAnswerCreator key={data.id + '_' + index} answer={answer} questionId={data.id} index={index} onFormChange={onFormChange} state={state} />
+                    const questionIdx = idx++;
+                    return <CheckboxAnswerCreator key={data.id + '_' + questionIdx} answer={answer} questionId={data.id} index={questionIdx} onFormChange={onFormChange} state={state} />
                 })}
             </div>
         </div>
