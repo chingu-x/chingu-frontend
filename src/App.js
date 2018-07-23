@@ -12,7 +12,14 @@ import VoyageApplication from './components/VoyageApplication';
 import UserProfile from './components/UserProfilePanel/UserProfilePanel.js';
 
 class App extends React.Component {
+  componentDidMount() {
+    this.props.store.getAuthedUser()
+      .then(() => this.props.store.updateUser({ new: 'stuff was added to user' }))
+      .then(() => console.log(this.props.store.state));
+  }
   render() {
+    // this.props.store.updateUser({ new: 'stuff was added to user' });
+    // console.log('after update: ', this.props.store.state.user);
     return (
       <div className="App">
         <Route exact path="/" component={Landing} />
