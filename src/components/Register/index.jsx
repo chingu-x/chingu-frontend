@@ -27,6 +27,14 @@ class Register extends React.Component {
     }
   }
 
+  componentDidMount = () => {
+    Store.registerStateChangeListener(this.globalStoreChanged);
+  }
+
+  globalStoreChanged = ( prevState, newState ) => {
+    this.render();
+  }
+
   toggleLoading = () => {
     this.setState({ loading: !this.state.loading })
   }
