@@ -1,32 +1,31 @@
 @import '../../styles/abstracts/_variables.scss';
 
-.error-page-container {
-    background-color: $light-grey;
-    width: 100vw;
-    height: 100vh;
-  }
-  .error-image {
-    width: 1080px;
-    margin: 0 auto;
-    object-fit: contain;
-    display: block;
-    top: 30vh;
-    position: relative;
-  }
-  .error-goBack-btn {
-    border: none;
-    color: white;
-    background-color: $attention-red;
-    padding: 25px;
-    font-size: 25px;
-    font-weight: 700;
-    box-shadow: $box-shadow;
-    text-transform: uppercase;
-    text-align: center;
-    display: block;
-    position: relative;
-    top: 30vh;
-    margin: 0 auto;
-    cursor: pointer;
-  }
-  
+.p404-page-container {
+  background-color: $light-grey;
+  width: 100vw;
+  height: 100vh;
+}
+.p404-image {
+  width: 1080px;
+  margin: 0 auto;
+  object-fit: contain;
+  display: block;
+  top: 30vh;
+  position: relative;
+}
+.p404-goBack-btn {
+  border: none;
+  color: white;
+  background-color: $attention-red;
+  padding: 25px;
+  font-size: 25px;
+  font-weight: 700;
+  box-shadow: $box-shadow;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  position: relative;
+  top: 30vh;
+  margin: 0 auto;
+  cursor: pointer;
+}
