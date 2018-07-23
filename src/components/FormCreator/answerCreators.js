@@ -208,7 +208,6 @@ function answerCreator_dropdown_multiple(data, onFormChange, state) {
 function answerCreator_checkbox_2_column(data, onFormChange, state) {
     let firstHalf = [];
     let secondHalf = [];
-    console.log(data.answers)
     for (var i = 0; i < (data.answers).length; i++) {
         if (i < (data.answers).length / 2) {
             firstHalf.push(data.answers[i]);
