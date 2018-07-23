@@ -70,18 +70,18 @@ ORIGINAL PROJECT VARIABLES
   text-transform: uppercase;
   text-align: center;
   margin: 10px;
-  color: #BBBBBB; }
+  color: #bbbbbb; }
 
 .github-auth {
   text-align: center;
   display: block;
-  background-color: #15CF89;
+  background-color: #15cf89;
   border: none;
   color: white;
   padding: 10px;
   width: 275px;
   border-radius: 20px;
-  box-shadow: 0px 3px 6px #E6E6E6;
+  box-shadow: 0px 3px 6px #e6e6e6;
   margin: 0 auto;
   text-decoration: none;
   font-size: 14px; }

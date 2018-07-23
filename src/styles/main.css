@@ -576,11 +576,6 @@ button:hover {
     margin-top: auto;
     border-radius: 100%;
     vertical-align: middle; }
-    .header-right img.avatar.big {
-      width: 120px;
-      height: 120px;
-      border: 12px solid #0f143a;
-      z-index: 10; }
   .header-right a {
     display: flex;
     align-items: center;
@@ -600,41 +595,53 @@ button:hover {
   background-color: transparent;
   color: white;
   padding: 10px 0;
-  font-size: 14px;
+  font-size: 16px;
   border: none;
   cursor: pointer;
   border-bottom: 2px solid white;
   white-space: nowrap; }
   .header-portal-btn span {
-    margin: 50px; }
+    margin: 65px; }
   .header-portal-btn:hover {
     color: #15df89; }
 
 .header-dropdown {
   position: relative;
-  display: inline-block; }
-  .header-dropdown:hover .header-dropdown-content {
-    display: block; }
+  display: inline-block;
+  padding: 2px; }
   .header-dropdown a:hover {
-    background-color: #15df89; }
+    background-color: #e5e5e7; }
+  .header-dropdown:hover .header-dropdown-content {
+    visibility: visible; }
 
 .header-dropdown-content {
-  display: none;
+  visibility: hidden;
   position: absolute;
   width: 100%;
-  background-color: #f1f1f1;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  box-shadow: 0px 3px 6px #e6e6e6;
+  text-align: center;
   overflow: auto;
-  z-index: 15; }
+  z-index: z-indexes("dropdown"); }
   .header-dropdown-content a {
-    color: #000000;
-    padding: 12px 16px;
-    text-decoration: none;
     display: block;
-    white-space: nowrap; }
+    color: #757575;
+    font-size: 20px;
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 12px;
+    margin: 10px; }
+    .header-dropdown-content a .label {
+      color: #757575;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-size: 12px; }
   .header-dropdown-content.avatar {
     right: 0;
     width: fit-content; }
+  .header-dropdown-content hr {
+    border: 1px solid #efefef; }
 
 @media only screen and (max-width: 768px) {
   .header-dropdown.portal {
@@ -815,19 +822,13 @@ button:hover {
   font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
-  border-radius: 0.5em;
+  border-radius: 0.7em;
   border: none;
-  white-space: nowrap; }
-  .header-btn.green {
-    background-color: #15df89;
-    color: #ffffff; }
-    .header-btn.green:active {
-      color: #0f143a; }
-  .header-btn.grey {
-    background-color: #d3d3d3;
-    color: coor-list("primary"); }
-    .header-btn.grey:active {
-      color: #ffffff; }
+  white-space: nowrap;
+  background-color: #15df89;
+  color: #ffffff; }
+  .header-btn:active {
+    color: #0f143a; }
 
 .footer-btn {
   width: 100%;
@@ -869,7 +870,7 @@ button:hover {
         height: 180px;
         width: auto; } }
   .landing-item .landing-item-project-image {
-    border: 1px solid #E6E6E6;
+    border: 1px solid #e6e6e6;
     height: 200px;
     width: 300px;
     object-fit: cover; }
@@ -879,7 +880,7 @@ button:hover {
     margin-bottom: 20px; }
   .landing-item .landing-item-project-info {
     width: 300px;
-    border: 1px solid #E6E6E6;
+    border: 1px solid #e6e6e6;
     padding: 10px;
     text-align: left;
     margin-top: -5px;
@@ -910,7 +911,7 @@ button:hover {
     font-weight: 500;
     letter-spacing: 3px; }
   .landing-item .landing-item-project-techStack {
-    border: 1px solid #E6E6E6; }
+    border: 1px solid #e6e6e6; }
 
 /*
 ==========================
@@ -973,7 +974,7 @@ ORIGINAL PROJECT VARIABLES
   padding: 25px;
   display: flex;
   justify-content: center;
-  box-shadow: 0px 3px 6px #E6E6E6;
+  box-shadow: 0px 3px 6px #e6e6e6;
   text-align: left;
   margin-top: 50px; }
   .testimonial-box:before, .testimonial-box :after {
@@ -1621,7 +1622,7 @@ ORIGINAL PROJECT VARIABLES
   position: relative; }
   .landing .landing-top {
     position: relative;
-    background-color: #080A38;
+    background-color: #080a38;
     color: white;
     width: 100vw;
     max-width: 100%; }
@@ -1717,14 +1718,14 @@ ORIGINAL PROJECT VARIABLES
       margin: 0 auto;
       padding: 0.5em 0;
       width: 100%;
-      background-color: #BBBBBB;
+      background-color: #bbbbbb;
       color: white;
       font-size: 1.4em;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 2px; }
     .landing .cohorts-bar .cohorts-bar-subtitle {
-      background-color: #F8F8F8;
+      background-color: #f8f8f8;
       width: 100%;
       margin: 0 auto;
       padding-top: 50px;
@@ -1740,7 +1741,7 @@ ORIGINAL PROJECT VARIABLES
       align-items: flex-start;
       width: 100%;
       padding: 2em 0;
-      background-color: #F8F8F8;
+      background-color: #f8f8f8;
       color: #757575; }
       @media (max-width: 1024px) {
         .landing .cohorts-bar .cohorts-bar-items {
@@ -1758,7 +1759,7 @@ ORIGINAL PROJECT VARIABLES
       margin: 0 auto;
       padding: 0.5em 0;
       width: 100%;
-      background-color: #BBBBBB;
+      background-color: #bbbbbb;
       color: white;
       font-size: 1.4em;
       font-weight: bold;
@@ -1770,7 +1771,7 @@ ORIGINAL PROJECT VARIABLES
       align-items: flex-start;
       width: 100%;
       padding: 2em 0;
-      background-color: #F8F8F8;
+      background-color: #f8f8f8;
       color: #757575; }
       @media (max-width: 1024px) {
         .landing .projects-bar .projects-bar-items {

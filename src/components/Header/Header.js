@@ -6,6 +6,7 @@ import currentUserQuery from "../../queries/currentUserQuery"
 
 const Header = props => {
   const { user, loading } = props.data
+  const team = "Bears-Team-11";
   
   const handleLogout = e => {
     e.preventDefault();
@@ -22,11 +23,14 @@ const Header = props => {
           <i className="fa fa-chevron-down"/>
         </button>
         <div className="header-dropdown-content portal">
-          <a href="#">Voyage 125</a>
-          <a href="#">Another Voyage</a>
-          <a href="#">User Profile</a>
-          <a href="#">Voyage 125</a>
-          <a href="#">Another Voyage</a>
+          <Link to="/team">
+            <div className="label">Team Portal</div>
+            {team}
+          </Link>
+          <hr/>
+          <Link to="/voyage">Voyage Portal</Link>
+          <hr/>
+          <Link to="/profile">User Profile</Link>
         </div>
       </div>
     )
@@ -56,7 +60,7 @@ const Header = props => {
 
       <div className="header-right">
         {user && renderAvatar()}
-        {!user && !loading && <Link to="/login" className="header-btn green">LOG IN</Link>}
+        {!user && !loading && <Link to="/login" className="header-btn">LOG IN</Link>}
       </div>
     </div>
   )
