@@ -65,11 +65,10 @@ const Store = {
     onStateChangeListeners.push(listener);
   },
   mutations: {
-    mutationCreator: async (fnName, qgl, loader, error, params) => {
+    mutationCreator: async (qgl, loader, error, params) => {
       loader();
-      const fnReference = Store.mutations[fnName];
       try {
-        const { data } = await client.mutate[fnReference]({
+        const { data } = await client.mutate({
           mutation: qgl,
           variables: params
         })
@@ -77,15 +76,16 @@ const Store = {
         return data;
       }
       catch (err) {
+        console.log(err.message);
         loader();
-        return error(err)
+        return error(err.message)
       }
     },
     authUser: (loader, error, params, gql) => {
-      return Store.mutations.mutationCreator('authUser', gql, loader, error, params)
+      return Store.mutations.mutationCreator(gql, loader, error, params)
     },
     createUser: (loader, error, params, gql) => {
-      return Store.mutations.mutationCreator('createUser', gql, loader, error, params)
+      return Store.mutations.mutationCreator( gql, loader, error, params)
     },
   }
 }
