@@ -1,7 +1,7 @@
 @import '../../styles/abstracts/_variables.scss';
 
 .loader {
-    border: 16px solid $grey;
+    border: 16px solid $light-grey;
     border-top: 16px solid $theme-green;
     border-radius: 50%;
     width: 120px;
@@ -9,7 +9,9 @@
     animation: spin 2s linear infinite;
     display: block;
     margin: 0 auto;
-    top: 50%;
+    top: calc(50% - 60px);
+    position: absolute;
+    left: calc(50% - 60px);
 }
 
 @keyframes spin {

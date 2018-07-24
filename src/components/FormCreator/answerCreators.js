@@ -45,6 +45,55 @@ class RadioAnswerCreator extends React.Component {
         )
     }
 }
+class RadioWithInputAnswerCreator extends React.Component {
+    render() {
+        const { answer, questionId, index, onFormChange, state } = this.props;
+        return (
+            <div key={'radio-answer_' + questionId + '_' + index} className="radio-container">
+                <label className="voyage-application-answer" htmlFor={questionId + '_' + index}>
+                    {answer}
+                    <input
+                        className="voyage-application-radio"
+                        type="radio"
+                        name={questionId}
+                        id={questionId + '_' + index}
+                        value={answer}
+                        checked={state[questionId] === answer}
+                        onChange={e => onFormChange(e)}
+                    />
+                    <span className="radio-checkmark" />
+                </label>
+            </div>
+        )
+    }
+    // render() {
+    //     const { answer, questionId, index, onFormChange, state } = this.props;
+    //     return (
+    //         <div key={'radio-answer_' + questionId + '_' + index} className="radio-container">
+    //             <input type="text"
+    //                 name={questionId}
+    //                 value={'Other: ' + state[questionId]}
+    //                 onChange={e => onFormChange(e)}
+    //                 className="voyage-application-input"
+    //             />
+    //             <label className="voyage-application-answer" htmlFor={questionId + '_' + index}>
+    //                 {answer}
+    //                 <input
+    //                     className="voyage-application-radio"
+    //                     type="radio"
+    //                     name={questionId}
+    //                     id={questionId + '_' + index}
+    //                     value={answer}
+    //                     checked={state[questionId].includes(answer)}
+    //                     onChange={e => onFormChange(e)}
+    //                 />
+    //                 <span className="radio-checkmark" />
+    //             </label>
+    //         </div>
+    //     )
+    // }
+}
+
 function answerCreator_checkbox(data, onFormChange, state) {
     return (
         data.answers.map((answer, index) => {
@@ -57,6 +106,9 @@ function answerCreator_checkbox(data, onFormChange, state) {
 function answerCreator_radio(data, onFormChange, state) {
     return (
         data.answers.map((answer, index) => {
+            if (answer === 'Other') {
+                return <RadioWithInputAnswerCreator key={data.id + '_' + index} answer={answer} questionId={data.id} index={index} onFormChange={onFormChange} state={state} />
+            }
             return <RadioAnswerCreator key={data.id + '_' + index} answer={answer} questionId={data.id} index={index} onFormChange={onFormChange} state={state} />
         })
     )
@@ -130,12 +182,12 @@ function answerCreator_input(data, onFormChange, state) {
 
 function answerCreator_textarea(data, onFormChange, state) {
     return (
-        <textarea type="text"
-            name={data.id}
-            value={state[data.id]}
-            onChange={e => onFormChange(e)}
-            className="voyage-application-text-area"
-        />
+            <textarea type="text"
+                name={data.id}
+                value={state[data.id]}
+                onChange={e => onFormChange(e)}
+                className="voyage-application-text-area"
+            />
     )
 }
 
@@ -215,16 +267,20 @@ function answerCreator_checkbox_2_column(data, onFormChange, state) {
             secondHalf.push(data.answers[i]);
         }
     }
+
+    let idx = 0;
     return (
         <div className="checkbox-2-column-container">
             <div className="checkbox-column-1">
                 {firstHalf.map((answer, index) => {
-                    return <CheckboxAnswerCreator key={data.id + '_' + index} answer={answer} questionId={data.id} index={index} onFormChange={onFormChange} state={state} />
+                    const questionIdx = idx++;
+                    return <CheckboxAnswerCreator key={data.id + '_' + questionIdx} answer={answer} questionId={data.id} index={questionIdx} onFormChange={onFormChange} state={state} />
                 })}
             </div>
             <div className="checkbox-column-2">
                 {secondHalf.map((answer, index) => {
-                    return <CheckboxAnswerCreator key={data.id + '_' + index} answer={answer} questionId={data.id} index={index} onFormChange={onFormChange} state={state} />
+                    const questionIdx = idx++;
+                    return <CheckboxAnswerCreator key={data.id + '_' + questionIdx} answer={answer} questionId={data.id} index={questionIdx} onFormChange={onFormChange} state={state} />
                 })}
             </div>
         </div>
@@ -270,6 +326,7 @@ export function renderQAs(applicationData, onFormChange, state) {
                     {setOfQuestionAnswer.question}
                 </label>
                 {setOfQuestionAnswer.subtext ? <div className="voyage-application-subtext">{setOfQuestionAnswer.subtext}</div> : null}
+                {setOfQuestionAnswer.error ? <div className="errorText">// {setOfQuestionAnswer.error}</div> : null}
                 {answerComponent}
             </div>
         )

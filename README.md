@@ -138,7 +138,7 @@ export default Register;
 ```
 ## Creating Mutation Components
 What's the difference between using ApolloConsumer and a Mutation component for making mutations to the database?
-Essentially, if you are making a mutation and expecting data back, then you would use a mutation component. 
+Essentially, if you are making a mutation and expecting to render the data that comes back, then you may want to use a mutation component. 
 However, if you are posting data and not expecting data back (aka, like posting form data), then it may be easier and cleaner to just use ApolloConsumer.
 Here's a basic example of a Mutation Component which is wrapping a submit button. This component will then be inserted into its parent component.
 ```

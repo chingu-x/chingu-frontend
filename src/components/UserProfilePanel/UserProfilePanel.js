@@ -16,7 +16,7 @@ class UserProfile extends React.Component {
             <img
               className="user-photo"
               src="http://via.placeholder.com/250x250"
-              alt="user profile photo"
+              alt="userprofile"
             />
             <p>lilgangwolf</p>
             <p>Based in Los Angeles, CA</p>

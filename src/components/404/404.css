@@ -43,12 +43,12 @@ FORMS
 ORIGINAL PROJECT VARIABLES
 ==========================
 */
-.error-page-container {
+.p404-page-container {
   background-color: #E6E6E6;
   width: 100vw;
   height: 100vh; }
 
-.error-image {
+.p404-image {
   width: 1080px;
   margin: 0 auto;
   object-fit: contain;
@@ -56,7 +56,7 @@ ORIGINAL PROJECT VARIABLES
   top: 30vh;
   position: relative; }
 
-.error-goBack-btn {
+.p404-goBack-btn {
   border: none;
   color: white;
   background-color: #f37070;
