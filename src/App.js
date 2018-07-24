@@ -9,7 +9,7 @@ import companyFAQ from "./static-api-elements/companyFAQ";
 import programFAQ from "./static-api-elements/programFAQ";
 import CurrentPrograms from "./components/Pages/CurrentPrograms";
 import VoyageApplication from './components/VoyageApplication';
-import UserProfile from './components/UserProfilePanel/UserProfilePanel';
+import UserProfile from './components/UserProfile';
 import Missing404Page from './components/404/404';
 import Header from './components/Header/Header';
 
