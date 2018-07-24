@@ -25,6 +25,7 @@ class Register extends React.Component {
       203: '', // value
       204: '', // country
       205: new Date().getTimezoneOffset(), // timezone
+      206: '',
       code: new URLSearchParams(window.location.search).get('code')
     }
   }

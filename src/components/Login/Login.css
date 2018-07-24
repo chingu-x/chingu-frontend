@@ -48,6 +48,7 @@ ORIGINAL PROJECT VARIABLES
   position: absolute;
   min-width: 100vw;
   min-height: 100vh;
+  height: 100%;
   z-index: 100;
   background-color: rgba(158, 158, 158, 0.637); }
 
@@ -71,6 +72,9 @@ ORIGINAL PROJECT VARIABLES
   text-align: center;
   margin: 10px;
   color: #bbbbbb; }
+
+.login-link {
+  text-decoration: none; }
 
 .github-auth {
   text-align: center;
