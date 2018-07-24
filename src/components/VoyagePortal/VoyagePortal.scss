@@ -1,9 +1,11 @@
 @import '../../styles/abstracts/_variables.scss';
 
 .voyage-portal {
-  padding: 120px 100px;
+  max-width: $max-width;
+  margin: 0 auto;
 
   > h1 {
+    padding-top: 100px;
     font-size: 40px;
     font-weight: normal;
     text-align: center;
@@ -13,23 +15,40 @@
 }
 
 .voyage-section {
-  margin-top: 55px;
+  margin-bottom: 55px;
 
   > p:first-child {
-    margin-bottom: 0;
-    color: #E6E6E6;
-    font-size: 20px;
+    color: $grey;
+    font-size: 24px;
     text-transform: uppercase;
+    font-weight: 300;
+    margin: 0px;
+    margin-left: 5px;
   }
 }
 
 .voyage-card-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: space-between;
+  width: $max-width;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+}
 
-   > div {
-    margin-top: 40px;
+/*
+==========================
+MEDIA QUERY
+==========================
+*/
+@media (max-width: 1180px) {
+  .voyage-section {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 55px;
+  }
+  .voyage-card-list {
+    width: 100vw;
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
   }
 }
