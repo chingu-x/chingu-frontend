@@ -141,7 +141,7 @@ class SpecialRadioBadgeAnswerCreator extends React.Component {
                         <div className="badge-title">{answer.title}</div>
                         <div className="badge-subtext">{answer.subtext}</div>
                         <input
-                            className="voyage-application-radio"
+                            className="voyage-application-radio special-badge-input"
                             type="radio"
                             name={questionId}
                             id={questionId + '_' + index}
