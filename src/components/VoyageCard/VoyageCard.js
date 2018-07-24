@@ -79,6 +79,23 @@ export const ApplyForAVoyageCard = () => {
   );
 };
 
+export const NoVoyagesCard = () => {
+  return (
+    <VoyageCardCreator
+      backgroundColor={"#EFEFEF"}
+      leftPanel={() => <div className="card-circle card--no-voyage">
+        <h2 className="card-number">
+          ?
+        <span className="card-label">voyage</span>
+        </h2>
+      </div>}
+      rightPanel={() => <div className="card-info--no-voyage">
+        SORRY, LOOKS LIKE THERE AREN'T ANY VOYAGES YET. PLEASE CHECK BACK SOON
+      </div>}
+    />
+  );
+};
+
 export const CurrentVoyageCardWithTeam = ({
   voyageNumber,
   startDate,
