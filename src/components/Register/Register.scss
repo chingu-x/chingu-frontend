@@ -1,13 +1,7 @@
 @import '../../styles/abstracts/_variables.scss';
 
 .chingu-application-container {
-    display: block;
-    position: absolute;
-    min-width: 100vw;
-    min-height: 100vh;
-    height: 100%;
-    z-index: 100;
-    background-color: rgba(158, 158, 158, 0.637); 
+    @include transparent-background;
 }
 
 .chingu-application-modal {
