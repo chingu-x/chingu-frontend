@@ -29,7 +29,6 @@
       z-index: 10;
       position: relative;
       text-align: center;
-      // text-transform: capitalize;
       display: block;
       margin: 0 auto;
       bottom: -50px;
@@ -37,11 +36,11 @@
       width: 700px;
       max-width: 90%;
 
-      @media (max-width: 850px) {
-        bottom: -15vh;
+      @media (min-width: 750px) {
+        padding-bottom: 40px;
       }
-      @media (max-width: 750px) {
-        bottom: -10vh;
+      @media (max-width: 749px) {
+        padding-bottom: 60px;
       }
       @include media("<=small") {
         padding-bottom: 200px;
@@ -50,8 +49,11 @@
       .tagline {
         font-weight: 600;
         letter-spacing: 3px;
+        @media (min-width: 950px) {
+          font-size: 2em;
+        }
         @include media(">small") {
-          font-size: 2.2em;
+          font-size: 1.8em;
         }
 
         @include media("<=small") {
@@ -60,7 +62,18 @@
       }
       .tagline--subtext {
         margin-top: 20px;
+        margin-bottom: 20px;
         font-size: 20px;
+        @media (min-width: 950px) {
+          font-size: 1.3em;
+        }
+        @include media(">small") {
+          font-size: 1.2em;
+        }
+
+        @include media("<=small") {
+          font-size: 14px;
+        }
       }
 
       .big-green-btn {
