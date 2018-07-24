@@ -55,7 +55,7 @@ class VoyageApplication extends React.Component {
   componentDidMount() {
     // if this user has not been part of a voyage before
     // or was rejected before and not been part of a voyage
-    if (Store.state.user && Store.state.user.status !== 'voyage-ready') {
+    if (Store.state.user && Store.state.user.status !== 'voyage_ready') {
       this.setState({
         application: newUserApplication,
         gql: 'SUBMIT_NEW_USER_VOYAGE_APPLICATION',
