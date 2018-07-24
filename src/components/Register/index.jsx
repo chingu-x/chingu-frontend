@@ -50,13 +50,6 @@ class Register extends React.Component {
     }
   }
 
-  // componentDidUpdate(prevProps, props) {
-  //   if (Store.state.user.status === 'profile_complete') {
-  //     console.log('should rerender');
-  //     this.setState({ shouldRedirect: true })
-  //   }
-  // }
-
   globalStoreChanged = (prevState, newState) => {
     this.render();
   }
