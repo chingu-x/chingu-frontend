@@ -24,6 +24,7 @@ QUESTION SUBTEXT
 .voyage-application-subtext {
     font-size: 12px;
     color: $grey;
+    display: inline-block;
 }
 /*
 ==========================
@@ -66,7 +67,19 @@ INPUT & TEXTAREA
     max-width: 100%;
     min-width: 100%;
 }
-
+/*
+==========================
+ERROR TEXT
+==========================
+*/
+.errorText {
+    color: $attention-red--light;
+    position: relative;
+    margin-top: -20px;
+    display: inline-block;
+    // margin-left: 10px;
+    font-size: 12px;
+}
 /*
 ==========================
 DROPDOWN

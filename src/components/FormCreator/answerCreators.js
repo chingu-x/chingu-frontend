@@ -182,12 +182,12 @@ function answerCreator_input(data, onFormChange, state) {
 
 function answerCreator_textarea(data, onFormChange, state) {
     return (
-        <textarea type="text"
-            name={data.id}
-            value={state[data.id]}
-            onChange={e => onFormChange(e)}
-            className="voyage-application-text-area"
-        />
+            <textarea type="text"
+                name={data.id}
+                value={state[data.id]}
+                onChange={e => onFormChange(e)}
+                className="voyage-application-text-area"
+            />
     )
 }
 
@@ -326,6 +326,7 @@ export function renderQAs(applicationData, onFormChange, state) {
                     {setOfQuestionAnswer.question}
                 </label>
                 {setOfQuestionAnswer.subtext ? <div className="voyage-application-subtext">{setOfQuestionAnswer.subtext}</div> : null}
+                {setOfQuestionAnswer.error ? <div className="errorText">// {setOfQuestionAnswer.error}</div> : null}
                 {answerComponent}
             </div>
         )
