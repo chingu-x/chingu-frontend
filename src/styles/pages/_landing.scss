@@ -16,7 +16,7 @@
       height: auto;
       width: 80vw;
       margin: 0 auto;
-      max-width: $max-width;
+      max-width: 1200px;
       padding-bottom: 50px;
       @include media("<=small") {
         display: none;
