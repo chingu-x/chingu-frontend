@@ -13,6 +13,14 @@ import SuccessForm from '../Success/Success';
 class Register extends React.Component {
   constructor(props) {
     super(props);
+
+    let country = '';
+    chinguApplicationData.forEach(elem => {
+      if (elem.id === 204) {
+        country = elem.answers[0];
+      }
+    })
+
     this.state = {
       loading: false,
       error: false,
@@ -22,17 +30,11 @@ class Register extends React.Component {
       201: '', // email
       202: new Set(), // exciting about Chingu
       203: '', // value
-      204: '', // country
+      204: country, // country
       205: new Date().getTimezoneOffset(), // timezone // TODO: preselect the timezone using this.state[205]
       206: '',
       shouldRedirect: false
     }
-
-    chinguApplicationData.forEach(elem => {
-      if (elem.id === 204) {
-        this.state[204] = elem.answers[0];
-      }
-    })
   }
 
   componentDidMount = () => {
