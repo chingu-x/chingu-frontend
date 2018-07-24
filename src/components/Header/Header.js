@@ -7,11 +7,10 @@ import currentUserQuery from "../../queries/currentUserQuery"
 
 const Header = props => {
   const user = Store.state.user;
-  const team = "Bears-Team-11";
+  const team = [Store.state.user.teams];
 
   const handleLogout = e => {
     e.preventDefault();
-    console.log("Logging out");
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("store");
     window.location = "/";
@@ -25,11 +24,16 @@ const Header = props => {
           <i className="fa fa-chevron-down" />
         </button>
         <div className="header-dropdown-content--centered portal">
-          <Link to="/team">
-            <div className="label">Team Portal</div>
-            {team}
-          </Link>
-          <hr />
+          {team.length > 1
+            ? <React.Fragment>
+              <div className="label">Team Portal</div>
+              {team.map(team => {
+                return (<Link to={"/team" + team.id}>{team.title}</Link>)
+              })}
+              <hr />
+            </React.Fragment>
+            : null
+          }
           <Link to="/voyage">Voyage Portal</Link>
           <hr />
           <Link to="/profile">User Profile</Link>
@@ -42,7 +46,7 @@ const Header = props => {
     return (
       <div className="header-dropdown">
         <img className="avatar" src={user.avatar ? user.avatar : require('../../assets/blank image.png')} alt="user avatar" />
-         <div className="header-mask" />
+        <div className="header-mask" />
         <div className="header-dropdown-content avatar">
           {/* <Link to="/settings">Settings</Link> */}
           <Link to="/" onClick={e => handleLogout(e)}>Log out</Link>

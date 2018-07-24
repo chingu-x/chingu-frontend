@@ -27,6 +27,11 @@ const get_user = gql`
         id
         title
       }
+      teams {
+        id
+        title
+        cohort
+      }
     }
   }
 `
