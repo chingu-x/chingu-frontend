@@ -36,10 +36,18 @@ class Register extends React.Component {
     }
     // if the user has already filled out the register form
     // redirect to profile page
-    if (Store.state.user) {
-      
+    if (Store.state.user.status === 'profile_complete') {
+      console.log('should rerender');
+      this.setState({ shouldRedirect: true })
     }
   }
+
+  // componentDidUpdate(prevProps, props) {
+  //   if (Store.state.user.status === 'profile_complete') {
+  //     console.log('should rerender');
+  //     this.setState({ shouldRedirect: true })
+  //   }
+  // }
 
   globalStoreChanged = (prevState, newState) => {
     this.render();
