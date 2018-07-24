@@ -11,11 +11,13 @@ import CurrentPrograms from "./components/Pages/CurrentPrograms";
 import VoyageApplication from './components/VoyageApplication';
 import UserProfile from './components/UserProfilePanel/UserProfilePanel';
 import Missing404Page from './components/404/404';
+import Header from './components/Header/Header';
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <Header />
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Landing} />
