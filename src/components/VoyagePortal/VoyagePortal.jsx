@@ -3,7 +3,7 @@ import {
   CurrentVoyageCard,
   UpcomingVoyageCard
 } from "../VoyageCard/VoyageCard";
-
+import './VoyagePortal.css';
 /**
  * TODO:
  * 1. put card-lists in own section
