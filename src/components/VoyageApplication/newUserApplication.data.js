@@ -66,31 +66,36 @@ const newUserApplicationData = [
         page: 2,
         type: 'textarea',
         question: 'What is your background?',
+        error: '300 or less characters'
     },
     {
         id: 10,
         page: 3,
         type: 'textarea',
         question: 'What is your coding history?',
+        error: '300 or less characters'
     },
     {
         id: 11,
         page: 3,
         type: 'textarea',
         question: 'What are your interests?',
+        error: '300 or less characters'
     },
     {
         id: 12,
         page: 3,
         type: 'textarea',
         question: 'Given the choice of anyone in the world, whom would you want as a dinner guest? (optional: why that person?)',
+        error: '300 or less characters'
     },
     {
         id: 13,
         page: 3,
         type: 'textarea',
         question: 'What is the greatest accomplishment of your life?',
-        subtext: "Note: Doesn't have to be crazy :) - past members have answered 'my daughter', 'finishing the front-end cert', 'graduating', 'leaving my last job'), etc"
+        subtext: "Note: Doesn't have to be crazy :) - past members have answered 'my daughter', 'finishing the front-end cert', 'graduating', 'leaving my last job'), etc",
+        error: '300 or less characters'
     }
 ]
 
