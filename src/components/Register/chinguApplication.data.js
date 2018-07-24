@@ -36,4 +36,15 @@ export const chinguApplicationData = [
         subtext: '(If unsure, just google "your-city UTC") Ex. Toronto = UTC-4',
         answers: UTC
     },
+    {
+        id: 206,
+        type: 'radio',
+        question: 'Where did you hear about the Chingu cohorts?',
+        answers: [
+            'On Medium (an article)',
+            'Through a friend',
+            'The FreeCodeCamp forum',
+            'Other'
+        ]
+    },
 ]
