@@ -14,11 +14,10 @@
       display: block;
       position: relative;
       height: auto;
-      width: 100vw;
-      max-width: 1180px;
+      width: 80vw;
       margin: 0 auto;
-      max-width: 100%;
-
+      max-width: $max-width;
+      padding-bottom: 50px;
       @include media("<=small") {
         display: none;
       }
@@ -50,7 +49,7 @@
         font-weight: 600;
         letter-spacing: 3px;
         @media (min-width: 950px) {
-          font-size: 2em;
+          font-size: 2.2em;
         }
         @include media(">small") {
           font-size: 1.8em;
