@@ -23,6 +23,7 @@ class VoyageApplication extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: 0,
       loading: false,
       error: false,
       errorMessage: '',
@@ -53,8 +54,11 @@ class VoyageApplication extends React.Component {
   }
 
   componentDidMount() {
+    // set voyage ID in state
+
     // if this user has not been part of a voyage before
     // or was rejected before and not been part of a voyage
+    console.log(Store.state.user.status);
     if (Store.state.user && Store.state.user.status !== 'voyage_ready') {
       this.setState({
         application: newUserApplication,
@@ -119,13 +123,16 @@ class VoyageApplication extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
 
+    // need to pass in voyageID
+    // cohort { id }
+
     const user_form = {
       cohort_role: this.state[1],
       location_on_coding_journey: this.state[4],
       familiar_tech_stacks: this.state[5],
       commitment_to_goals: this.state[6],
       showcase_project_link: this.state[7],
-      // gender (Not supported)
+      gender: this.state[8],
       personal_background: this.state[9],
       coding_history: this.state[10],
       personal_interest: this.state[11],
@@ -133,6 +140,7 @@ class VoyageApplication extends React.Component {
       greatest_accomplishment: this.state[13],
     }
     const voyage_form = {
+      voyage_id: this.state.id,
       hours_per_week: this.state[100],
       preferred_tech_stack: this.state[101],
       voice_chat_preference: this.state[102],
