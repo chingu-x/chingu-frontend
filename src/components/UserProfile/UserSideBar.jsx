@@ -1,6 +1,6 @@
 import * as React from "react";
 import Store from '../../AppGlobalStore'
-
+import './UserSideBar.css'
 /**
  * TODO:
  * 1. remove hardcoded data
@@ -29,7 +29,7 @@ const USER_INFO_DOM_ELEMENTS = [
 class UserSideBar extends React.Component {
   render() {
     const user = Store.state.user;
-    
+
     let userInfoDOM = USER_INFO_DOM_ELEMENTS.map(elem => {
       if (user[elem.schemaKey] && user[elem.schemaKey].length > 0) {
         return (
@@ -50,7 +50,25 @@ class UserSideBar extends React.Component {
         <div className="user-skills">
           <h1>skills</h1>
           <ul>
-          {user.skills.map(elem => (<li>{elem}</li>))}
+            {user.skills.map(elem => (<li>{elem}</li>))}
+          </ul>
+        </div>
+      )
+    }
+
+    // once links are integrated again, render this
+    // check for fb/linkedin/gitub
+    let linkDOM = null;
+    if (user) {
+      linkDOM = (
+        <div className="user-links">
+          <h1>links</h1>
+          <ul>
+            <li>
+              <a target="_blank" href={"https://www.github.com/" + user.username}>
+                <i className="fab fa-github fa-3x" />
+              </a>
+            </li>
           </ul>
         </div>
       )
@@ -62,18 +80,18 @@ class UserSideBar extends React.Component {
           <div className="photobox">
             <img
               className="user-photo"
-              src="http://via.placeholder.com/250x250"
+              src={user ? user.avatar : require('../../assets/blank image.png')}
               alt="userprofile"
             />
             <p>{user.username}</p>
             <p>Based in {user.country}</p>
           </div>
           <ul className="positions">
-            <li className="position">
+            {/* <li className="position">
               <span>
                 <i className="fas fa-check" />
               </span>Designer
-            </li>
+            </li> */}
             <li className="position">
               <span>
                 <i className="fas fa-check" />
@@ -81,25 +99,9 @@ class UserSideBar extends React.Component {
             </li>
           </ul>
         </header>
-
         {skillDOM}
         {userInfoDOM}
-
-        <div className="user-links">
-          <h1>links</h1>
-          <ul>
-            <li>
-              <a href="">
-                <i className="fab fa-facebook fa-3x" />
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <i className="fab fa-google fa-3x" />
-              </a>
-            </li>
-          </ul>
-        </div>
+        {linkDOM}
       </div>
     );
   }
