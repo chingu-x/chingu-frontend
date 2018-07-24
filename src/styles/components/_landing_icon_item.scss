@@ -90,11 +90,11 @@
     margin-right: 5px;
   }
   .landing-item-project-tier {
-    color: white;
-    border: none;
-    background-color: $dark-grey;
-    font-weight: 500;
-    letter-spacing: 3px;
+    color: $theme-green;
+    border: 1px solid $theme-green;
+    background-color: white;
+    font-weight: 600;
+    letter-spacing: 2px;
   }
   .landing-item-project-techStack {
     border: 1px solid $light-grey;

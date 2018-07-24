@@ -202,8 +202,8 @@
     margin-bottom: 100px;
     max-width: $max-width;
     width: 100%;
-    text-align: left;
-    @media (max-width: 1180px) {
+    text-align: center;
+    @media(max-width: 1180px) {
       text-align: center;
       align-items: center;
     }
