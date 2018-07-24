@@ -12,6 +12,7 @@ const Header = props => {
     e.preventDefault();
     console.log("Logging out");
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("store");
     window.location = "/";
   };
 
