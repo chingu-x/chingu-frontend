@@ -61,17 +61,17 @@ module.exports = {
   testimonials: [
     {
       username: "Periman2",
-      image: "user-01",
+      image: "Periman",
       testimonial: "An amazing collaborative experience beyond my expectations."
     },
     {
       username: "Debasree",
-      image: "user-01",
+      image: "debasree",
       testimonial: "Chingu is an awesome and must-try platform for every programmer."
     },
     {
       username: "pankaja-shree",
-      image: "user-01",
+      image: "pankaja",
       testimonial:
         "Chingu cohorts is the best place for self learning web enthusiasts - to learn together, collaborate and work on real projects in remote teams."
     }

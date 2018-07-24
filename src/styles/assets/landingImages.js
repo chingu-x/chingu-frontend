@@ -18,5 +18,9 @@ module.exports = {
   "ticketybot": require("./ticketybot.PNG"),
   "tier-badges-01--landing": require("./tier-badges-01--landing.png"),
   "tier-badges-02--landing": require("./tier-badges-02--landing.png"),
-  "tier-badges-03--landing": require("./tier-badges-03--landing.png")
+  "tier-badges-03--landing": require("./tier-badges-03--landing.png"),
+  "pankaja": require('./pankaja.jpg'),
+  "Periman": require('./Periman.jpeg'),
+  "debasree": require('./debasree.jpg')
+
 }
