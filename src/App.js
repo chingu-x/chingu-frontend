@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Landing from "./components/Landing/Landing";
 import Staff from "./components/Pages/Staff";
@@ -21,17 +21,19 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/login" component={Landing} />
-        <Route exact path="/register" component={Landing} />
-        <Route exact path="/profile" component={UserProfile} />        
-        <Route exact path="/voyage/application" component={VoyageApplication} />
-        <Route exact path="/current" component={CurrentPrograms} />
-        <Route exact path="/team" component={Staff} />
-        <Route exact path="/privacy" component={PrivacyPolicy} />
-        <Route exact path="/companyfaq" render={() => <FAQ headerText="Company FAQs" data={companyFAQ} />} />
-        <Route exact path="/programfaq" render={() => <FAQ headerText="Program FAQs" data={programFAQ} />} />
-        <Route path="/*" component={Missing404Page} />
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/login" component={Landing} />
+          <Route exact path="/register" component={Landing} />
+          <Route exact path="/profile" component={UserProfile} />
+          <Route exact path="/voyage/application" component={VoyageApplication} />
+          <Route exact path="/current" component={CurrentPrograms} />
+          <Route exact path="/team" component={Staff} />
+          <Route exact path="/privacy" component={PrivacyPolicy} />
+          <Route exact path="/companyfaq" render={() => <FAQ headerText="Company FAQs" data={companyFAQ} />} />
+          <Route exact path="/programfaq" render={() => <FAQ headerText="Program FAQs" data={programFAQ} />} />
+          <Route path="*" exact component={Missing404Page} />
+        </Switch>
         <Footer />
       </div>
     );
