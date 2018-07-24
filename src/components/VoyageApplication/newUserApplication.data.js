@@ -1,4 +1,3 @@
-import UTC from '../FormCreator/UTC.data';
 import techStack from '../FormCreator/TechStack.data';
 
 const newUserApplicationData = [
@@ -8,20 +7,6 @@ const newUserApplicationData = [
         type: 'checkbox',
         question: 'Please select: I want to join a Chingu cohort as a...',
         answers: ['Coder', 'Designer', 'Data Scientist', 'Digital Marketer', 'Other']
-    },
-    {
-        id: 2,
-        page: 1,
-        type: 'input',
-        question: 'Where are you coding from? (ex. Toronto)',
-    },
-    {
-        id: 3,
-        page: 1,
-        type: 'dropdown',
-        question: 'What is the UTC timezone for where you will be coding from?',
-        subtext: '(If unsure, just google "your-city UTC") Ex. Toronto = UTC-4',
-        answers: UTC
     },
     {
         id: 4,
@@ -48,7 +33,7 @@ const newUserApplicationData = [
     },
     {
         id: 6,
-        page: 2,
+        page: 1,
         type: 'radio',
         question: 'How committed are you to completing your coding goals?',
         answers: [
@@ -81,44 +66,37 @@ const newUserApplicationData = [
         page: 2,
         type: 'textarea',
         question: 'What is your background?',
+        error: '300 or less characters'
     },
     {
         id: 10,
         page: 3,
         type: 'textarea',
         question: 'What is your coding history?',
+        error: '300 or less characters'
     },
     {
         id: 11,
         page: 3,
         type: 'textarea',
         question: 'What are your interests?',
+        error: '300 or less characters'
     },
     {
         id: 12,
         page: 3,
         type: 'textarea',
         question: 'Given the choice of anyone in the world, whom would you want as a dinner guest? (optional: why that person?)',
+        error: '300 or less characters'
     },
     {
         id: 13,
         page: 3,
         type: 'textarea',
         question: 'What is the greatest accomplishment of your life?',
-        subtext: "Note: Doesn't have to be crazy :) - past members have answered 'my daughter', 'finishing the front-end cert', 'graduating', 'leaving my last job'), etc"
-    },
-    {
-        id: 14,
-        page: 3,
-        type: 'radio',
-        question: 'Where did you hear about the Chingu cohorts?',
-        answers: [
-            'On Medium (an article)',
-            'From a from / someone I know',
-            'The FreeCodeCamp forum',
-            'Other'
-        ]
-    },
+        subtext: "Note: Doesn't have to be crazy :) - past members have answered 'my daughter', 'finishing the front-end cert', 'graduating', 'leaving my last job'), etc",
+        error: '300 or less characters'
+    }
 ]
 
 export default newUserApplicationData;

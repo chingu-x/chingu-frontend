@@ -2,29 +2,21 @@ import 'babel-polyfill';
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-
 import { ApolloProvider } from "react-apollo";
-import ApolloClient from 'apollo-boost';
 import App from "./App";
 import ScrollToTop from "./ScrollToTop";
 import "./styles/fontawesome/webfonts/fontawesome-all.css";
 import "./styles/main.css";
-
+import Store from './AppGlobalStore';
 import registerServiceWorker from "./registerServiceWorker";
 
-const client = new ApolloClient({
-  uri: 'https://api.chingu.io/graphql',
-  request: operation => operation.setContext({
-    headers: {
-      authorization: `Bearer ${localStorage.getItem("token")}`,
-    }
-  })
-});
+Store.getAuthedUser()
+    .then((user) => Store.updateUser(user))
 
 // ApolloProvider wraps the root component and provides ApolloClient features
 // to all child components. Similar to how the redux Provider does the same for state
 ReactDOM.render(
-    <ApolloProvider client={client}>
+    <ApolloProvider client={Store.client}>
       <BrowserRouter>
         <ScrollToTop>
           <App />

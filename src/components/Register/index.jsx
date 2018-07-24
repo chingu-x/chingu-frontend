@@ -1,42 +1,70 @@
 import * as React from "react";
 import { Redirect } from 'react-router-dom';
-import { ApolloConsumer } from 'react-apollo';
-import gql from "graphql-tag";
-
-import authMutation from "../../mutations/authMutation";
 import { chinguApplicationData } from './chinguApplication.data';
 import { renderQAs } from '../FormCreator/answerCreators';
 import './Register.css';
 import '../FormCreator/FormCreator.css';
+import Error from '../Error/Error';
+import Loading from '../Loader/Loader';
+import Store from '../../AppGlobalStore';
+import { REGISTER_USER, AUTH_MUTATION } from './Graphql/mutations';
+import SuccessForm from '../Success/Success';
 
-const REGISTER_USER = gql`
-  mutation createUser($user_data: UserCreateInput!, $application_data: JSON!){
-    createUser(user_data:$user_data, application_data:$application_data) {
-      id
-    }
-  }
-`
 class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
+      error: false,
+      errorMessage: '',
+      success: false,
+      code: new URLSearchParams(window.location.search).get('code'),
       201: '', // email
       202: new Set(), // exciting about Chingu
       203: '', // value
       204: '', // country
-      205: new Date().getTimezoneOffset(), // timezone
+      205: new Date().getTimezoneOffset(), // timezone // TODO: preselect the timezone using this.state[205]
       206: '',
-      code: new URLSearchParams(window.location.search).get('code')
+      shouldRedirect: false
     }
   }
 
-  userAuth = (client) => {
-    // TODO: FUTURE - check 'state' from localstorage and clear before mutation
-    // once we implement state passing
-    client
-      .mutate({ mutation: authMutation, variables: { code: this.state.code } })
-      .then(({ data }) => window.localStorage.setItem("token", data.userAuthGithub))
-      .catch(console.error); // TODO: handle errors properly
+  componentDidMount = () => {
+    Store.registerStateChangeListener(this.globalStoreChanged);
+    if (!window.localStorage.getItem("token")) {
+      this.authUser();
+    }
+    // if the user has already filled out the register form
+    // redirect to profile page
+    if (Store.state.user) {
+      
+    }
+  }
+
+  globalStoreChanged = (prevState, newState) => {
+    this.render();
+  }
+
+  toggleLoading = () => {
+    this.setState({ loading: !this.state.loading })
+  }
+
+  errorHandling = (err) => {
+    this.setState({ error: true, errorMessage: err })
+  }
+
+  authUser = () => {
+    Store.mutations.authUser(
+      this.toggleLoading,
+      this.errorHandling,
+      { code: this.state.code },
+      AUTH_MUTATION
+    )
+      .then(data => {
+        window.localStorage.setItem("token", data.userAuthGithub);
+        Store.updateGlobalState('id', data.id)
+      })
+      .catch(err => console.log(err));
   }
 
   toggleValueInSet = (set, value) => {
@@ -56,7 +84,7 @@ class Register extends React.Component {
     }
   }
 
-  onSubmit = (client) => {
+  onSubmit = () => {
     const user_data = {
       email: this.state[201],
       country: this.state[204],
@@ -66,37 +94,46 @@ class Register extends React.Component {
     const application_data = {
       exciting_about_chingu: this.state[202],
       value_of_chingu: this.state[203],
+      chingu_referral: this.state[206]
     };
 
-    client
-      .mutate({
-        mutation: REGISTER_USER,
-        variables: { user_data, application_data },
-      })
-      .then(/*show success screen*/)
-      .catch(console.error); // TODO: handle errors properly
+    Store.mutations.createUser(
+      this.toggleLoading,
+      this.errorHandling,
+      { user_data, application_data },
+      REGISTER_USER
+    )
+      .then(() => this.setState({ success: true }))
   }
 
   render() {
+    if (this.state.shouldRedirect) {
       return (
-      this.state.code ?
-        <ApolloConsumer>
-          {(client) => {
-            // prevents userAuth from firing on component rendering once token is captured 
-            if (!window.localStorage.getItem("token")) this.userAuth(client);
-            
-            // TODO: preselect the timezone using this.state[205]
-            return (
-              <div className="chingu-application-container">
-                <div className="chingu-application-modal">
+        <Redirect
+          push={true}
+          from="/register"
+          to={'/profile'}
+        />
+      );
+    }
+    return (
+      this.state.code
+        ? <React.Fragment>
+          {this.state.loading ? <Loading /> : null}
+          {this.state.errorMessage !== "" ? <Error goBack={"/register"} error={this.state.errorMessage} /> : null}
+          <div className="chingu-application-container">
+            <div className="chingu-application-modal">
+              {this.state.success
+                ? <SuccessForm />
+                : <React.Fragment>
                   <div className="chingu-application-title">New User Onboarding Survey</div>
                   {renderQAs(chinguApplicationData, this.onFormChange, this.state)}
-                  <button onClick={() => this.onSubmit(client)} className="chingu-application-btn">Save</button>
-                </div>
-              </div>
-            );
-          }}
-        </ApolloConsumer>
+                  <button onClick={() => this.onSubmit()} className="chingu-application-btn">Save</button>
+                </React.Fragment>
+              }
+            </div>
+          </div>
+        </React.Fragment>
         : <Redirect to='/login' />
     )
   }

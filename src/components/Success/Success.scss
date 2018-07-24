@@ -1,0 +1,34 @@
+@import '../../styles/abstracts/_variables.scss';
+
+.form-success {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    color: $dark-grey;
+    font-size: 20px;
+}
+
+.form-success-img {
+    width: 200px;
+    height: 200px;
+    margin-top: 40px;
+}
+
+.form-hline {
+    border-top: 1px solid $light-grey;
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-top: 40px;
+}
+
+.form-success-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: $theme-green;
+    color: white;
+    border-radius: 20px;
+    width: 160px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
