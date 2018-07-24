@@ -43,6 +43,9 @@ FORMS
 ORIGINAL PROJECT VARIABLES
 ==========================
 */
+a {
+  text-decoration: none; }
+
 .login-container {
   display: block;
   position: absolute;
@@ -50,19 +53,23 @@ ORIGINAL PROJECT VARIABLES
   min-height: 100vh;
   height: 100%;
   z-index: 100;
-  background-color: rgba(158, 158, 158, 0.637); }
+  background-color: rgba(158, 158, 158, 0.637);
+  cursor: default; }
 
 .login-box {
   display: block;
+  position: absolute;
   z-index: 110;
   width: 350px;
+  left: calc(50% - 175px);
   background-color: white;
   border-radius: 20px;
   box-shadow: 0px 3px 6px #757575;
   margin: 0 auto;
   margin-top: calc(50vh - 100px);
   margin-bottom: 100px;
-  padding: 20px; }
+  padding: 20px;
+  cursor: default; }
   .login-box a {
     text-decoration: none !important; }
 
@@ -71,7 +78,8 @@ ORIGINAL PROJECT VARIABLES
   text-transform: uppercase;
   text-align: center;
   margin: 10px;
-  color: #bbbbbb; }
+  color: #bbbbbb;
+  cursor: default; }
 
 .login-link {
   text-decoration: none; }
