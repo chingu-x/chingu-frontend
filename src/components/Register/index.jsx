@@ -7,7 +7,7 @@ import '../FormCreator/FormCreator.css';
 import Error from '../Error/Error';
 import Loading from '../Loader/Loader';
 import Store from '../../AppGlobalStore';
-import { REGISTER_USER, AUTH_MUTATION } from './Graphql/mutations';
+import { REGISTER_USER, AUTH_MUTATION } from './graphql/mutations';
 import SuccessForm from '../Success/Success';
 
 class Register extends React.Component {
