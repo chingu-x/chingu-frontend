@@ -10,6 +10,9 @@ import "./styles/main.css";
 import Store from './AppGlobalStore';
 import registerServiceWorker from "./registerServiceWorker";
 
+Store.getAuthedUser()
+    .then((user) => Store.updateUser(user))
+
 // ApolloProvider wraps the root component and provides ApolloClient features
 // to all child components. Similar to how the redux Provider does the same for state
 ReactDOM.render(

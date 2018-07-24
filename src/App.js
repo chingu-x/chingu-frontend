@@ -9,15 +9,10 @@ import companyFAQ from "./static-api-elements/companyFAQ";
 import programFAQ from "./static-api-elements/programFAQ";
 import CurrentPrograms from "./components/Pages/CurrentPrograms";
 import VoyageApplication from './components/VoyageApplication';
-import UserProfile from './components/UserProfilePanel/UserProfilePanel.js';
-import Store from './AppGlobalStore';
+import UserProfile from './components/UserProfilePanel/UserProfilePanel';
 import Missing404Page from './components/404/404';
 
 class App extends React.Component {
-  componentDidMount() {
-    Store.getAuthedUser()
-  }
-
   render() {
     return (
       <div className="App">

@@ -29,7 +29,12 @@ class Register extends React.Component {
   }
 
   componentDidMount = () => {
+    console.log('in component to mount!');
     Store.registerStateChangeListener(this.globalStoreChanged);
+    if (!window.localStorage.getItem("token")) {
+      console.log('dont have a token!');
+      this.authUser();
+    }
   }
 
   globalStoreChanged = (prevState, newState) => {
@@ -44,12 +49,6 @@ class Register extends React.Component {
     this.setState({error: true, errorMessage: err})
   }
 
-  componentDidMount() {
-    if (!window.localStorage.getItem("token")) {
-      this.authUser();
-    }
-  }
-
   authUser = () => {
     Store.mutations.authUser(
       this.toggleLoading,
@@ -57,10 +56,11 @@ class Register extends React.Component {
       { code: this.state.code },
       AUTH_MUTATION
     )
-      .then(({ data }) => {
+      .then(data  => {
         window.localStorage.setItem("token", data.userAuthGithub);
         Store.updateGlobalState('id', data.id)
       })
+      .catch(err => console.log(err));
   }
 
   toggleValueInSet = (set, value) => {
