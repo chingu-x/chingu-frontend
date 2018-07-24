@@ -38,6 +38,7 @@ ANSWER FONT
 .voyage-application-checkbox-answer {
     font-size: 12px;
     color: $med-grey;
+    width: fit-content;
 }
 /*
 ==========================
@@ -174,6 +175,7 @@ cursor: pointer;
 -moz-user-select: none;
 -ms-user-select: none;
 user-select: none;
+width: fit-content;
 }
 
 /* Hide the browser's default checkbox */
@@ -268,6 +270,7 @@ cursor: pointer;
 -moz-user-select: none;
 -ms-user-select: none;
 user-select: none;
+width: fit-content;
 }
 
 /* Hide the browser's default radio button */
