@@ -9,12 +9,12 @@ import LandingProjects from './LandingProjects';
 import landingItems from "../../static-api-elements/landingItems";
 import Register from '../Register';
 import Login from "../Login";
+import Store from "../../AppGlobalStore";
 class Landing extends React.Component {
   constructor(props) {
     super(props);
-    
-  }
 
+  }
   renderProcessBar() {
     return _.map(landingItems.process, ({
       title,
@@ -159,9 +159,12 @@ class Landing extends React.Component {
           <div className="tagline-box" >
             <div className="tagline" > Learn how to be a team developer<br /> & boost your portfolio. </div>
             <div className="tagline--subtext" > Gain real project experience with team opportunities </div>
-            <Link to="/login" >
-              <button className="big-green-btn" > Apply </button>
-            </Link >
+            {Store.state.user
+              ? null
+              : <Link to="/login" >
+                <button className="big-green-btn" > Apply </button>
+              </Link >
+            }
           </div>
           <img className="landing-img" src={require('../../assets/landingImage.png')} alt="landingImage" />
         </div>
@@ -186,14 +189,17 @@ class Landing extends React.Component {
           <div className="cohorts-bar-title" > What People Are Saying About Chingu </div>
           <div className="cohorts-bar-items" > {this.renderTestimonialBar()} </div>
         </div >
-        <div className="chingu-bar" >
-          <div className="chingu-bar-box" >
-            <div className="chingu-bar-title" > Ready To Try Chingu ? </div>
-            <Link to="/login" >
-              <button className="chingu-green-btn" > Apply </button>
-            </Link >
+        {Store.state.user
+          ? null
+          : <div className="chingu-bar" >
+            <div className="chingu-bar-box" >
+              <div className="chingu-bar-title" > Ready To Try Chingu ? </div>
+              <Link to="/login" >
+                <button className="chingu-green-btn" > Apply </button>
+              </Link >
+            </div>
           </div>
-        </div>
+        }
       </div>
     );
   }
