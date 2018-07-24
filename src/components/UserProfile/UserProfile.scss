@@ -1,0 +1,31 @@
+@import '../../styles/abstracts/_variables.scss';
+
+//TODO: use variables and mixins where possible
+
+.user-profile-container {
+  max-width: $max-width;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: "i i v v v";
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 50px 100px;
+  grid-gap: 50px;
+}
+
+.user-profile {
+  grid-area: i;
+}
+
+.user-voyages {
+ grid-area: v;
+ justify-self: center;
+}
+
+.user-voyage-title {
+    color: $grey;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-left: 5px;
+}
