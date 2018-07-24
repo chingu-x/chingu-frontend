@@ -1,0 +1,145 @@
+@import '../../styles/abstracts/_variables.scss';
+
+//TODO: use variables and mixins where possible
+
+/*
+==========================
+CARD
+==========================
+*/
+.card {
+  margin: 5px;
+  padding: 25px;
+  width: 500px;
+  height: 300px;
+  display: inline-flex;
+  box-shadow: $box-shadow;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: space-around;
+  background: $theme-green--light;
+}
+
+.card-circle {
+  background: #fff;
+  width: 204px;
+  height: 204px;
+  border: 15px solid $theme-purple;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card--no-voyage {
+  border: 15px solid $grey;
+  color: $grey;
+}
+.card-info {
+  text-align: center;
+  flex-basis: 40%;
+
+  h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  p {
+    margin: 5px 0px 15px 5px;
+    text-transform: uppercase;
+  }
+
+  p:first-of-type {
+    font-weight: 500;
+    font-size: 1.3rem;
+    margin: 0;
+    padding-bottom: 10px;
+  }
+}
+
+.card-info--no-voyage {
+  text-align: center;
+  flex-basis: 40%;
+  margin: 5px 0px 15px 5px;
+  text-transform: uppercase;
+  color: $grey;
+}
+.card-number {
+  font-weight: 400;
+  padding-top: 5px;
+  font-size: 5rem;
+  text-align: center;
+  line-height: 3rem;
+  transform: translateY(10px);
+}
+
+.card-label {
+  display: block;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.card-left-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-right-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*
+==========================
+CARD ACTIONS
+==========================
+*/
+.action-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.action-button {
+  width: 150px;
+  height: 50px;
+  border-radius: 20px;
+  border: none;
+  background: #15CF89;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.action-warning {
+  text-transform: uppercase;
+  color: #EF8585;
+  font-size: 0.8rem;
+}
+
+.action-button--to-Voyage {
+  background-color: $theme-green;
+  color: white;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+  padding: 10px 20px 10px 20px;
+  margin-top: 20px;
+}
+// TODO: move to own scss file
+.weekly-checkin-container {
+  button {
+    width: 200px;
+    height: 35px;
+    border-radius: 20px;
+    background: #15CF89;
+    color: #fff;
+    border: none;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+  }
+}
