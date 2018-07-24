@@ -87,6 +87,9 @@ const Store = {
     createUser: (loader, error, params, gql) => {
       return Store.mutations.mutationCreator( gql, loader, error, params)
     },
+    submitApplication: (loader, error, params, gql) => {
+      return Store.mutations.mutationCreator( gql, loader, error, params)
+    },
   }
 }
 
