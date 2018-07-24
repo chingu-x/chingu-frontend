@@ -10,11 +10,13 @@ import programFAQ from "./static-api-elements/programFAQ";
 import CurrentPrograms from "./components/Pages/CurrentPrograms";
 import VoyageApplication from './components/VoyageApplication';
 import UserProfile from './components/UserProfilePanel/UserProfilePanel.js';
+import Header from "./components/Header/Header"
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <Header/>
         <Route exact path="/" component={Landing} />
         <Route exact path="/login" component={Landing} />
         <Route exact path="/register" component={Landing} />
