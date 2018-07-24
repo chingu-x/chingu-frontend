@@ -45,7 +45,6 @@ class Register extends React.Component {
     // if the user has already filled out the register form
     // redirect to profile page
     if (Store.state.user.status === 'profile_complete') {
-      console.log('should rerender');
       this.setState({ shouldRedirect: true })
     }
   }
@@ -69,11 +68,6 @@ class Register extends React.Component {
       { code: this.state.code },
       AUTH_MUTATION
     )
-      .then(data => {
-        window.localStorage.setItem("token", data.userAuthGithub);
-        Store.updateGlobalState('id', data.id)
-      })
-      .catch(err => console.log(err));
   }
 
   toggleValueInSet = (set, value) => {

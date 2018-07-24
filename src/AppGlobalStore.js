@@ -100,6 +100,11 @@ const Store = {
     },
     authUser: (loader, error, params, gql) => {
       return Store.mutations.mutationCreator(gql, loader, error, params)
+      .then(data => {
+        window.localStorage.setItem("token", data.userAuthGithub);
+        Store.updateGlobalState('id', data.id)
+      })
+      .catch(err => console.log(err));
     },
     createUser: (loader, error, params, gql) => {
       return Store.mutations.mutationCreator( gql, loader, error, params)
