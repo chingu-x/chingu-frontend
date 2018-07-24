@@ -172,13 +172,13 @@ CHECKBOX STYLING
 display: block;
 position: relative;
 padding-left: 20px;
-padding-top: -10px;
 margin-bottom: 10px;
 -webkit-user-select: none;
 -moz-user-select: none;
 -ms-user-select: none;
 user-select: none;
 width: fit-content;
+height: min-content;
 }
 
 /* Hide the browser's default checkbox */
@@ -192,8 +192,7 @@ cursor: default;
 .checkmark {
 position: absolute;
 margin-left: 0px;
-margin-top: 5px;
-top: 0;
+top: 5px;
 left: 0;
 height: 14px;
 width: 14px;
@@ -287,8 +286,7 @@ cursor: default;
 .radio-checkmark {
 position: absolute;
 margin-left: 0px;
-margin-top: 5px;
-top: 0;
+top: 5px;
 left: 0;
 height: 14px;
 width: 14px;
