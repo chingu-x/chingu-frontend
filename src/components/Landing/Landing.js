@@ -12,6 +12,7 @@ import Login from "../Login";
 class Landing extends React.Component {
   constructor(props) {
     super(props);
+    
   }
 
   renderProcessBar() {
