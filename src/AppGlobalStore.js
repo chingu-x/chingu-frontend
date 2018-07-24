@@ -23,14 +23,16 @@ const get_user = gql`
       skills {
           name
       }
-      cohorts {
-        id
-        title
-      }
       teams {
         id
         title
-        cohort
+        cohort {
+          id
+          title
+          start_date
+          end_date
+          status
+        }
       }
     }
   }
@@ -105,17 +107,18 @@ const Store = {
     },
     authUser: (loader, error, params, gql) => {
       return Store.mutations.mutationCreator(gql, loader, error, params)
-      .then(data => {
-        window.localStorage.setItem("token", data.userAuthGithub);
-        Store.updateGlobalState('id', data.id)
-      })
-      .catch(err => console.log(err));
+        .then(data => {
+          window.localStorage.setItem("token", data.userAuthGithub)
+          Store.updateGlobalState('id', data.id)
+          Store.getAuthedUser();
+        })
+        .catch(err => console.log(err));
     },
     createUser: (loader, error, params, gql) => {
-      return Store.mutations.mutationCreator( gql, loader, error, params)
+      return Store.mutations.mutationCreator(gql, loader, error, params)
     },
     submitApplication: (loader, error, params, gql) => {
-      return Store.mutations.mutationCreator( gql, loader, error, params)
+      return Store.mutations.mutationCreator(gql, loader, error, params)
     },
   }
 }
