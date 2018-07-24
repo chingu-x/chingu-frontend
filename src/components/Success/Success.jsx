@@ -9,7 +9,7 @@ class SuccessForm extends React.Component {
                   <br />
                   Thank you!
                   <hr className="form-hline"/>
-                  <a className="form-success-btn" to="/profile">Go To Profile</a>
+                  <a className="form-success-btn" href="/profile">Go To Profile</a>
                 </div>
         )
     }

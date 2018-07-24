@@ -9,8 +9,7 @@ const voyageApplicationData = [
         answers: [
             'Full-time (20+ hours a week)',
             'Part time (10-20 hours per week)',
-            'I can commit 10 or less hours a week',
-            'Other'
+            'I can commit 10 or less hours a week'
         ]
     },
     {
