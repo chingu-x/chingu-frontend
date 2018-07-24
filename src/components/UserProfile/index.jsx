@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as Cards from "../VoyageCard/VoyageCard";
-import UserSideBar from "../UserProfile/UserProfile";
+import UserSideBar from "./UserSideBar";
 /**
  * TODO:
  * 1. put user-voyages in own section
