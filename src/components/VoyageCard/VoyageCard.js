@@ -3,6 +3,7 @@ import Badge from "./Badge";
 import Info from "./Info";
 import Action from "./Action";
 import WeeklyCheckInButton from "./WeeklyCheckIn";
+import './VoyageCard.css';
 
 /**
  * TODO:
@@ -31,9 +32,9 @@ const VoyageCardCreator = ({
 };
 
 export const CurrentVoyageCard = ({
-  voyageNumber = 6,
-  startDate = "Feb. 15th",
-  endDate = "Apr. 15th"
+  voyageNumber,
+  startDate,
+  endDate
 }) => {
   return (
     <VoyageCardCreator
@@ -44,9 +45,9 @@ export const CurrentVoyageCard = ({
 };
 
 export const UpcomingVoyageCard = ({
-  voyageNumber = 6,
-  startDate = "Feb. 15th",
-  endDate = "Apr. 15th"
+  voyageNumber,
+  startDate,
+  endDate
 }) => {
   return (
     <VoyageCardCreator
@@ -58,10 +59,31 @@ export const UpcomingVoyageCard = ({
   );
 };
 
+export const ApplyForAVoyageCard = () => {
+  return (
+    <VoyageCardCreator
+      backgroundColor={"#EFEFEF"}
+      leftPanel={() => <div className="card-circle card--no-voyage">
+        <h2 className="card-number">
+          ?
+        <span className="card-label">voyage</span>
+        </h2>
+      </div>}
+      rightPanel={() => <div className="card-info--no-voyage">
+        SORRY, LOOKS LIKE YOU AREN'T PART OF A VOYAGE YET!
+      </div>}
+      action={() => <div className="action-container">
+        <a href="/voyage" className="action-button--to-Voyage ">APPLY TO A VOYAGE</a>
+      </div>}
+    />
+  );
+};
+
 export const CurrentVoyageCardWithTeam = ({
-  voyageNumber = 6,
-  startDate = "Feb. 15th",
-  endDate = "Apr. 15th"
+  voyageNumber,
+  startDate,
+  endDate,
+  team,
 }) => {
   return (
     <VoyageCardCreator
@@ -69,18 +91,19 @@ export const CurrentVoyageCardWithTeam = ({
       rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
       team={() => (
         <p style={{ margin: "0 0 15px 0", fontSize: "24px", color: "#080A38" }}>
-          Bears-Team-11
+          {team ? team.title : null}
         </p>
       )}
-      action={() => <WeeklyCheckInButton />}
+      action={() => team ? <WeeklyCheckInButton teamId={team.id} /> : null}
     />
   );
 };
 
 export const PreviousVoyageCardWithTeam = ({
-  voyageNumber = 6,
-  startDate = "Feb. 15th",
-  endDate = "Apr. 15th"
+  voyageNumber,
+  startDate,
+  endDate,
+  team
 }) => {
   return (
     <VoyageCardCreator
@@ -89,7 +112,7 @@ export const PreviousVoyageCardWithTeam = ({
       rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
       team={() => (
         <p style={{ margin: "0 0 15px 0", fontSize: "24px", color: "#080A38" }}>
-          Bears-Team-11
+          {team ? team.title : null}
         </p>
       )}
     />
