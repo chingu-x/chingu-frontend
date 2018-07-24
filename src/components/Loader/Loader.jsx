@@ -4,7 +4,9 @@ import './Loader.css';
 class Loader extends React.Component {
   render() {
     return (
-      <div className="loader" />
+      <div className="loader-container">
+        <div className="loader" />
+      </div>
     );
   }
 }
