@@ -143,17 +143,17 @@ class Landing extends React.Component {
   }
 
   render() {
-    let modalMode = null;
+    let modalPrompt = null;
     if (window.location.pathname.includes('/register')) {
-      modalMode = <Register />;
+      modalPrompt = <Register />;
     }
     else if (window.location.pathname === '/login') {
-      modalMode = <Login />;
+      modalPrompt = <Login />;
     }
 
     return (
       <div className="landing" >
-        {modalMode}
+        {modalPrompt}
         <div className="landing-top" >
           <div className="tagline-box" >
             <div className="tagline" > Learn how to be a team developer<br /> & boost your portfolio. </div>

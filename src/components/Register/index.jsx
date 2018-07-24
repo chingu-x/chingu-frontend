@@ -27,6 +27,12 @@ class Register extends React.Component {
       206: '',
       shouldRedirect: false
     }
+
+    chinguApplicationData.forEach(elem => {
+      if (elem.id === 204) {
+        this.state[204] = elem.answers[0];
+      }
+    })
   }
 
   componentDidMount = () => {
