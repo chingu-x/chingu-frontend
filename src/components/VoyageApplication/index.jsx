@@ -32,8 +32,6 @@ class VoyageApplication extends React.Component {
       progressBar: { width: '1%' },
       currentPage: 0,
       1: new Set(),
-      2: '',
-      3: '',
       4: '',
       5: new Set(),
       6: '',
@@ -44,7 +42,6 @@ class VoyageApplication extends React.Component {
       11: '',
       12: '',
       13: '',
-      14: '',
       100: '',
       101: new Set(),
       102: '',
@@ -126,6 +123,17 @@ class VoyageApplication extends React.Component {
               this.state.currentPage > 2 ? 'Voyage Application' : this.state.applicationTitle
             }
           </div>
+          {this.state.application.length > 2 
+            ? <div className="new-user-application-notice">
+                <div className="new-user-application-notice-title">A Notice to Users</div>
+                <div className="new-user-application-notice-description">
+                Does the application seem a little long to you? <br /> Don't worry! We promise all of your 
+                answers are critical to your placement in the voyage. Also, the New Users Application 
+                only pops up in your initial Voyage application.
+                </div>
+              </div>
+            : null
+          }
           <div className="voyage-application-progress">
             <div className="voyage-application-progress-bar" style={this.state.progressBar} />
           </div>

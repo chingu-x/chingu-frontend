@@ -111,3 +111,44 @@ HORIZONTAL LINE
     border-top: 1px solid $pale-grey;
     margin-top: 20px;
 }
+/*
+==========================
+NEW USER NOTICE
+==========================
+*/
+.new-user-application-notice {
+    display: block;
+    position: absolute;
+    width: 180px;
+    border-radius: 20px;
+    background-color: white;
+    color: $grey;
+    font-size: 12px;
+    padding: 15px;
+    box-shadow: $box-shadow;
+
+    margin-left: 450px;
+    margin-top: -53px;
+}
+
+.new-user-application-notice-title {
+    margin-top: 7px;
+    text-align: center;
+    background-color: $attention-red--light;
+    color: white;
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    text-transform: uppercase;
+    padding: 6px;
+    margin-bottom: 8px;
+}
+/*
+==========================
+MEDIA QUERY
+==========================
+*/
+@media (max-width: 850px) {
+    .new-user-application-notice {
+        display: none;
+    }
+}
