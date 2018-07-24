@@ -11,10 +11,6 @@ import Register from '../Register';
 import Login from "../Login";
 import Store from "../../AppGlobalStore";
 class Landing extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
   renderProcessBar() {
     return _.map(landingItems.process, ({
       title,
