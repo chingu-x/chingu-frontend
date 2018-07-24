@@ -1,4 +1,4 @@
-@import '../../styles/abstracts/_variables.scss';
+@import "../../styles/abstracts/_variables.scss";
 
 .login-container {
     display: block;
@@ -9,25 +9,29 @@
     z-index: 100;
     background-color: rgba(158, 158, 158, 0.637); 
 }
+
 .login-box {
-    display: block;
-    z-index: 110;
-    width: 350px;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: $box-shadow-dark;
-    margin: 0 auto;
-    margin-top: calc(50vh - 100px);
-    margin-bottom: 100px;
-    padding: 20px;
+  display: block;
+  z-index: 110;
+  width: 350px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: $box-shadow-dark;
+  margin: 0 auto;
+  margin-top: calc(50vh - 100px);
+  margin-bottom: 100px;
+  padding: 20px;
+  a {
+    text-decoration: none !important;
+  }
 }
 
 .login-title {
-    font-size: 12px;
-    text-transform: uppercase;
-    text-align: center;
-    margin: 10px;
-    color: $grey;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 10px;
+  color: $grey;
 }
 
 .login-link {
@@ -35,30 +39,29 @@
 }
 
 .github-auth {
-    text-align: center;
-    display: block;
-    background-color: $theme-green;
-    border: none;
-    color: white;
-    padding: 10px;
-    width: 275px;
-    border-radius: 20px;
-    box-shadow: $box-shadow;
-    margin: 0 auto;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.github-auth:hover {
+  text-align: center;
+  display: block;
+  background-color: $theme-green;
+  border: none;
+  color: white;
+  padding: 10px;
+  width: 275px;
+  border-radius: 20px;
+  box-shadow: $box-shadow;
+  margin: 0 auto;
+  text-decoration: none;
+  font-size: 14px;
+  &:hover {
     background-color: $theme-green--hover;
+  }
 }
 
 .github-icon {
-    margin: 5px;
-    display: inline-block;
-    position: absolute;
-    margin-top: -3px;
-    margin-left: -30px;
-    width: 27px;
-    height: 27px;
+  margin: 5px;
+  display: inline-block;
+  position: absolute;
+  margin-top: -3px;
+  margin-left: -30px;
+  width: 27px;
+  height: 27px;
 }

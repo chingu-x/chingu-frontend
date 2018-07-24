@@ -58,7 +58,7 @@ ORIGINAL PROJECT VARIABLES
   width: 440px;
   background-color: white;
   border-radius: 20px;
-  box-shadow: 0px 3px 6px #E6E6E6;
+  box-shadow: 0px 3px 6px #e6e6e6;
   margin: 0 auto;
   margin-top: 100px;
   margin-bottom: 100px;
@@ -66,19 +66,19 @@ ORIGINAL PROJECT VARIABLES
 
 .chingu-application-title {
   font-size: 14px;
-  color: #BBBBBB;
+  color: #bbbbbb;
   width: calc(100% + 40px);
   text-align: center;
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
   text-transform: uppercase;
   position: relative;
   margin-left: -20px; }
 
 .chingu-application-btn {
   color: white;
-  background-color: #15CF89;
+  background-color: #15cf89;
   border: none;
-  box-shadow: 0px 3px 6px #E6E6E6;
+  box-shadow: 0px 3px 6px #e6e6e6;
   padding: 10px;
   border-radius: 20px;
   width: 150px;

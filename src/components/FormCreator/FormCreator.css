@@ -58,7 +58,7 @@ QUESTION
 */
 .voyage-application-question {
   font-size: 14px;
-  color: #BBBBBB; }
+  color: #bbbbbb; }
 
 /*
 ==========================
@@ -67,7 +67,7 @@ QUESTION SUBTEXT
 */
 .voyage-application-subtext {
   font-size: 12px;
-  color: #BBBBBB; }
+  color: #bbbbbb; }
 
 /*
 ==========================
@@ -94,7 +94,7 @@ INPUT & TEXTAREA
   color: #9e9e9e;
   padding: 5px;
   margin-top: 5px;
-  border: 1px solid #E6E6E6; }
+  border: 1px solid #e6e6e6; }
 
 .voyage-application-text-area {
   display: block;
@@ -103,7 +103,7 @@ INPUT & TEXTAREA
   color: #9e9e9e;
   padding: 5px;
   margin-top: 5px;
-  border: 1px solid #E6E6E6;
+  border: 1px solid #e6e6e6;
   min-height: 50px;
   max-height: 50px;
   max-width: 100%;
@@ -116,7 +116,7 @@ DROPDOWN
 */
 .voyage-application-dropdown {
   width: 100%;
-  border: 1px solid #E6E6E6;
+  border: 1px solid #e6e6e6;
   padding: 5px;
   color: #757575;
   font-size: 12px;
@@ -134,19 +134,19 @@ DROPDOWN w/ CHECKBOX
   margin-bottom: 10px;
   min-width: 180px;
   border: none;
-  box-shadow: 0px 3px 6px #E6E6E6;
+  box-shadow: 0px 3px 6px #e6e6e6;
   padding: 5px; }
 
 .search-input-box::placeholder {
-  color: #E6E6E6; }
+  color: #e6e6e6; }
 
 .filter-dropdown-box {
   background-color: white;
-  border: 1px solid #E6E6E6;
+  border: 1px solid #e6e6e6;
   width: 180px;
   display: none;
   position: absolute;
-  box-shadow: 0px 3px 6px #E6E6E6;
+  box-shadow: 0px 3px 6px #e6e6e6;
   z-index: 10;
   max-height: 120px;
   overflow: scroll;
@@ -208,15 +208,15 @@ CHECKBOX STYLING
   height: 14px;
   width: 14px;
   background-color: white;
-  border: 1px solid #BBBBBB; }
+  border: 1px solid #bbbbbb; }
 
 /* On mouse-over, add a grey background color */
 .checkbox-container:hover input ~ .checkmark {
-  background-color: #BBBBBB; }
+  background-color: #bbbbbb; }
 
 /* When the checkbox is checked, add a blue background */
 .checkbox-container input:checked ~ .checkmark {
-  background-color: #BBBBBB; }
+  background-color: #bbbbbb; }
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
@@ -292,7 +292,7 @@ RADIO STYLING
   width: 14px;
   background-color: white;
   border-radius: 50%;
-  border: 1px solid #BBBBBB; }
+  border: 1px solid #bbbbbb; }
 
 .radio-checkmark--badge {
   position: absolute;
@@ -304,21 +304,21 @@ RADIO STYLING
   width: 20px;
   background-color: white;
   border-radius: 50%;
-  border: 1px solid #BBBBBB; }
+  border: 1px solid #bbbbbb; }
 
 /* On mouse-over, add a grey background color */
 .radio-container:hover input ~ .radio-checkmark {
-  background-color: #BBBBBB; }
+  background-color: #bbbbbb; }
 
 .radio-container:hover input ~ .radio-checkmark--badge {
   background-color: #9e9e9e; }
 
 /* When the radio button is checked, add a blue background */
 .radio-container input:checked ~ .radio-checkmark {
-  background-color: #BBBBBB; }
+  background-color: #bbbbbb; }
 
 .radio-container input:checked ~ .radio-checkmark--badge {
-  background-color: #BBBBBB; }
+  background-color: #bbbbbb; }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
 .radio-checkmark:after {
@@ -388,22 +388,22 @@ CUSTOM BADGE QUESTION
   border-radius: 20px;
   display: block;
   margin: 0 auto;
-  box-shadow: 0px 3px 6px #E6E6E6; }
+  box-shadow: 0px 3px 6px #e6e6e6; }
 
 .badge--1 {
-  background-color: #F5E3A1; }
+  background-color: #f5e3a1; }
 
 .badge--1:hover {
   background-color: #f5db7e; }
 
 .badge--2 {
-  background-color: #CAEB95; }
+  background-color: #caeb95; }
 
 .badge--2:hover {
   background-color: #b5db79; }
 
 .badge--3 {
-  background-color: #F1BA65; }
+  background-color: #f1ba65; }
 
 .badge--3:hover {
   background-color: #ecac4b; }
@@ -416,7 +416,7 @@ CUSTOM BADGE QUESTION
 .badge-subtext {
   font-size: 10px;
   text-align: center;
-  color: #BBBBBB; }
+  color: #bbbbbb; }
 
 .badge--chosen {
-  border: 2px solid #15CF89; }
+  border: 2px solid #15cf89; }

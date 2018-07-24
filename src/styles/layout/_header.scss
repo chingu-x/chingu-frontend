@@ -2,8 +2,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   height: 64px;
   padding: 0 1.5em;
+  position: fixed;
+  z-index: 14;
+  width: 100%;
 
   &.header-dark {
     background-color: color-list("primary");
@@ -13,6 +17,7 @@
 .header-left {
   display: flex;
   flex-direction: row;
+  flex: 1;
   align-items: center;
   float: left;
   font-size: 2em;
@@ -34,8 +39,20 @@
 .header-right {
   display: flex;
   flex-direction: row;
+  flex: 1;
+  justify-content: flex-end;
   align-items: center;
   float: right;
+
+  // Avatar
+  img.avatar {
+    display: inline-block;
+    width: 54px;
+    height: 54px;
+    margin-top: auto;
+    border-radius: 100%;
+    vertical-align: middle;
+  }
 
   a {
     display: flex;
@@ -43,7 +60,6 @@
     height: 100%;
     padding: 0 1em;
     text-decoration: none;
-    color: color-list("text-dark");
   }
 
   .btn {
@@ -60,5 +76,76 @@
       background-color: transparent;
       color: color-list("accent");
     }
+  }
+}
+
+// HEDER PORTAL DROPDOWN
+
+.header-portal-btn {
+  background-color: transparent;
+  color: white;
+  padding: 10px 0;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid white;
+  white-space: nowrap;
+  span {
+    margin: 65px;
+  }
+  &:hover {
+    color: color-list("accent");
+  }
+}
+
+.header-dropdown {
+  position: relative;
+  display: inline-block;
+  padding: 2px;
+  a:hover {
+    background-color: $pale-purple--hover;
+  }
+  &:hover .header-dropdown-content {
+    visibility: visible;
+  }
+}
+
+.header-dropdown-content {
+  visibility: hidden;
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  box-shadow: $box-shadow;
+  text-align: center;
+  overflow: auto;
+  z-index: z-indexes("dropdown");
+  a {
+    display: block;
+    color: $dark-grey;
+    font-size: 20px;
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 12px;
+    margin: 10px;
+    .label {
+      color: $dark-grey;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+  }
+  &.avatar {
+    right: 0;
+    width: fit-content;
+  }
+  hr {
+    border: 1px solid $pale-grey;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .header-dropdown.portal {
+    display: none;
   }
 }

@@ -538,14 +538,19 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   height: 64px;
-  padding: 0 1.5em; }
+  padding: 0 1.5em;
+  position: fixed;
+  z-index: 14;
+  width: 100%; }
   .header.header-dark {
     background-color: #0f143a; }
 
 .header-left {
   display: flex;
   flex-direction: row;
+  flex: 1;
   align-items: center;
   float: left;
   font-size: 2em;
@@ -560,15 +565,23 @@ button:hover {
 .header-right {
   display: flex;
   flex-direction: row;
+  flex: 1;
+  justify-content: flex-end;
   align-items: center;
   float: right; }
+  .header-right img.avatar {
+    display: inline-block;
+    width: 54px;
+    height: 54px;
+    margin-top: auto;
+    border-radius: 100%;
+    vertical-align: middle; }
   .header-right a {
     display: flex;
     align-items: center;
     height: 100%;
     padding: 0 1em;
-    text-decoration: none;
-    color: #000000; }
+    text-decoration: none; }
   .header-right .btn:hover, .header-right .btn:focus {
     background-color: #0f143a;
     color: #ffffff; }
@@ -577,6 +590,62 @@ button:hover {
     .header-right .btn-light:hover, .header-right .btn-light:focus {
       background-color: transparent;
       color: #15df89; }
+
+.header-portal-btn {
+  background-color: transparent;
+  color: white;
+  padding: 10px 0;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid white;
+  white-space: nowrap; }
+  .header-portal-btn span {
+    margin: 65px; }
+  .header-portal-btn:hover {
+    color: #15df89; }
+
+.header-dropdown {
+  position: relative;
+  display: inline-block;
+  padding: 2px; }
+  .header-dropdown a:hover {
+    background-color: #e5e5e7; }
+  .header-dropdown:hover .header-dropdown-content {
+    visibility: visible; }
+
+.header-dropdown-content {
+  visibility: hidden;
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0px 3px 6px #e6e6e6;
+  text-align: center;
+  overflow: auto;
+  z-index: z-indexes("dropdown"); }
+  .header-dropdown-content a {
+    display: block;
+    color: #757575;
+    font-size: 20px;
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 12px;
+    margin: 10px; }
+    .header-dropdown-content a .label {
+      color: #757575;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-size: 12px; }
+  .header-dropdown-content.avatar {
+    right: 0;
+    width: fit-content; }
+  .header-dropdown-content hr {
+    border: 1px solid #efefef; }
+
+@media only screen and (max-width: 768px) {
+  .header-dropdown.portal {
+    display: none; } }
 
 .footer-wrapper {
   position: relative; }
@@ -748,6 +817,19 @@ button:hover {
     border: 3px solid red;
     color: #ffffff; }
 
+.header-btn {
+  line-height: 2em;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 0.7em;
+  border: none;
+  white-space: nowrap;
+  background-color: #15df89;
+  color: #ffffff; }
+  .header-btn:active {
+    color: #0f143a; }
+
 .footer-btn {
   width: 100%;
   background-color: #0f143a;
@@ -788,7 +870,7 @@ button:hover {
         height: 180px;
         width: auto; } }
   .landing-item .landing-item-project-image {
-    border: 1px solid #E6E6E6;
+    border: 1px solid #e6e6e6;
     height: 200px;
     width: 300px;
     object-fit: cover; }
@@ -798,7 +880,7 @@ button:hover {
     margin-bottom: 20px; }
   .landing-item .landing-item-project-info {
     width: 300px;
-    border: 1px solid #E6E6E6;
+    border: 1px solid #e6e6e6;
     padding: 10px;
     text-align: left;
     margin-top: -5px;
@@ -829,7 +911,7 @@ button:hover {
     font-weight: 500;
     letter-spacing: 3px; }
   .landing-item .landing-item-project-techStack {
-    border: 1px solid #E6E6E6; }
+    border: 1px solid #e6e6e6; }
 
 /*
 ==========================
@@ -892,7 +974,7 @@ ORIGINAL PROJECT VARIABLES
   padding: 25px;
   display: flex;
   justify-content: center;
-  box-shadow: 0px 3px 6px #E6E6E6;
+  box-shadow: 0px 3px 6px #e6e6e6;
   text-align: left;
   margin-top: 50px; }
   .testimonial-box:before, .testimonial-box :after {
@@ -1540,16 +1622,18 @@ ORIGINAL PROJECT VARIABLES
   position: relative; }
   .landing .landing-top {
     position: relative;
-    background-color: #080A38;
+    background-color: #080a38;
     color: white;
-    width: 100vw; }
+    width: 100vw;
+    max-width: 100%; }
     .landing .landing-top .landing-img {
       display: block;
       position: relative;
       height: auto;
       width: 100vw;
       max-width: 1180px;
-      margin: 0 auto; }
+      margin: 0 auto;
+      max-width: 100%; }
       @media (max-width: 565px) {
         .landing .landing-top .landing-img {
           display: none; } }
@@ -1562,7 +1646,8 @@ ORIGINAL PROJECT VARIABLES
       margin: 0 auto;
       bottom: -50px;
       letter-spacing: 2px;
-      width: 700px; }
+      width: 700px;
+      max-width: 90%; }
       @media (max-width: 850px) {
         .landing .landing-top .tagline-box {
           bottom: -15vh; } }
@@ -1633,14 +1718,14 @@ ORIGINAL PROJECT VARIABLES
       margin: 0 auto;
       padding: 0.5em 0;
       width: 100%;
-      background-color: #BBBBBB;
+      background-color: #bbbbbb;
       color: white;
       font-size: 1.4em;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 2px; }
     .landing .cohorts-bar .cohorts-bar-subtitle {
-      background-color: #F8F8F8;
+      background-color: #f8f8f8;
       width: 100%;
       margin: 0 auto;
       padding-top: 50px;
@@ -1656,7 +1741,7 @@ ORIGINAL PROJECT VARIABLES
       align-items: flex-start;
       width: 100%;
       padding: 2em 0;
-      background-color: #F8F8F8;
+      background-color: #f8f8f8;
       color: #757575; }
       @media (max-width: 1024px) {
         .landing .cohorts-bar .cohorts-bar-items {
@@ -1674,7 +1759,7 @@ ORIGINAL PROJECT VARIABLES
       margin: 0 auto;
       padding: 0.5em 0;
       width: 100%;
-      background-color: #BBBBBB;
+      background-color: #bbbbbb;
       color: white;
       font-size: 1.4em;
       font-weight: bold;
@@ -1686,7 +1771,7 @@ ORIGINAL PROJECT VARIABLES
       align-items: flex-start;
       width: 100%;
       padding: 2em 0;
-      background-color: #F8F8F8;
+      background-color: #f8f8f8;
       color: #757575; }
       @media (max-width: 1024px) {
         .landing .projects-bar .projects-bar-items {
