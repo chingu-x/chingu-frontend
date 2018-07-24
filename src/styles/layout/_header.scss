@@ -58,6 +58,9 @@
     border-radius: 100%;
     vertical-align: middle;
     float: right;
+    &:hover ~ .header-dropdown-content {
+    visibility: visible;
+  }
   }
 
   a {
@@ -95,8 +98,18 @@
   }
 }
 
-// HEDER PORTAL DROPDOWN
-
+.header-mask {
+  background-color: black;
+  float: right;
+  width: 30%;
+  height: 100px;
+  position: relative;
+  margin-right: -50px;
+  opacity: 0;
+  &:hover ~ .header-dropdown-content  {
+    visibility: visible;
+  }
+}
 .header-portal-btn {
   display: block;
   margin: 0 auto;
@@ -109,6 +122,7 @@
   border: none;
   cursor: pointer;
   border-bottom: 1px solid white;
+  height: 35px;
   white-space: nowrap;
   span {
     width: 100%;
@@ -116,6 +130,9 @@
   }
   &:hover {
     color: color-list("accent");
+  }
+  &:hover ~ .header-dropdown-content--centered {
+    visibility: visible;
   }
 }
 
@@ -126,10 +143,6 @@
   padding: 2px;
   a:hover {
     background-color: $pale-purple--hover;
-  }
-  &:hover .header-dropdown-content, 
-  &:hover .header-dropdown-content--centered {
-    visibility: visible;
   }
 }
 
@@ -160,6 +173,9 @@
       font-size: 12px;
     }
   }
+  &:hover {
+    visibility: visible;
+  }
   &.avatar {
     right: 0;
     width: fit-content;
@@ -172,7 +188,7 @@
 .header-dropdown-content {
   position: relative;
   margin-top: 60px;
-  margin-right: -5px;
+  margin-right: -120px;
 }
 
 @media only screen and (max-width: 768px) {

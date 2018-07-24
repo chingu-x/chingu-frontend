@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { graphql } from "react-apollo";
+import Store from '../../AppGlobalStore';
 
 import currentUserQuery from "../../queries/currentUserQuery"
 
 const Header = props => {
-  const { user, loading } = props.data
+  const user = Store.state.user;
   const team = "Bears-Team-11";
 
   const handleLogout = e => {
@@ -40,7 +41,8 @@ const Header = props => {
   const renderAvatar = () => {
     return (
       <div className="header-dropdown">
-        <img className="avatar" src={user.avatar} alt="user avatar" />
+        <img className="avatar" src={user.avatar ? user.avatar : require('../../assets/blank image.png')} alt="user avatar" />
+         <div className="header-mask" />
         <div className="header-dropdown-content avatar">
           {/* <Link to="/settings">Settings</Link> */}
           <Link to="/" onClick={e => handleLogout(e)}>Log out</Link>
@@ -62,7 +64,7 @@ const Header = props => {
 
         <div className="header-right">
           {user && renderAvatar()}
-          {!user && !loading && <Link to="/login" className="header-btn">LOG IN</Link>}
+          {!user && <Link to="/login" className="header-btn">LOG IN</Link>}
         </div>
       </div>
     </div>
