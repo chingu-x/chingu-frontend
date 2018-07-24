@@ -64,6 +64,23 @@ const Store = {
   registerStateChangeListener: (listener) => {
     onStateChangeListeners.push(listener);
   },
+  queries: {
+    queryCreator: async (qgl, loader, error) => {
+      loader();
+      try {
+        const { data } = await client.mutate({
+          query: qgl
+        })
+        loader();
+        return data;
+      }
+      catch (err) {
+        console.log(err.message);
+        loader();
+        return error(err.message)
+      }
+    }
+  },
   mutations: {
     mutationCreator: async (qgl, loader, error, params) => {
       loader();
