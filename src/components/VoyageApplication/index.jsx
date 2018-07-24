@@ -20,8 +20,6 @@ const voyageApplicationPage2 = voyageApplicationData.filter((data) => { return d
 const newUserApplication = [newUserPage1, newUserPage2, newUserPage3, voyageApplicationPage1, voyageApplicationPage2];
 const voyageApplication = [voyageApplicationPage1, voyageApplicationPage2]
 
-
-
 class VoyageApplication extends React.Component {
   constructor(props) {
     super(props);
@@ -157,14 +155,4 @@ class VoyageApplication extends React.Component {
   }
 }
 
-const GET_USER_DATA = gql`{
-    query GetUserData {
-        user {
-            cohorts {
-                id
-            }
-        }
-    }
-}`;
-
-export default graphql(GET_USER_DATA, { name: 'userCohorts' })(VoyageApplication)
+export default VoyageApplication;
