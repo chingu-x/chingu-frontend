@@ -25,15 +25,19 @@ class Register extends React.Component {
       204: '', // country
       205: new Date().getTimezoneOffset(), // timezone // TODO: preselect the timezone using this.state[205]
       206: '',
+      shouldRedirect: false
     }
   }
 
   componentDidMount = () => {
-    console.log('in component to mount!');
     Store.registerStateChangeListener(this.globalStoreChanged);
     if (!window.localStorage.getItem("token")) {
-      console.log('dont have a token!');
       this.authUser();
+    }
+    // if the user has already filled out the register form
+    // redirect to profile page
+    if (Store.state.user) {
+      
     }
   }
 
@@ -102,6 +106,15 @@ class Register extends React.Component {
   }
 
   render() {
+    if (this.state.shouldRedirect) {
+      return (
+        <Redirect
+          push={true}
+          from="/register"
+          to={'/profile'}
+        />
+      );
+    }
     return (
       this.state.code
         ? <React.Fragment>
