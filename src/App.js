@@ -13,7 +13,7 @@ import UserProfile from './components/UserProfile';
 import Missing404Page from './components/404/404';
 import Header from './components/Header/Header';
 import WeeklyCheckin from './components/WeeklyCheckin';
-
+import VoyagePortal from './components/VoyagePortal';
 
 class App extends React.Component {
   render() {
@@ -25,6 +25,7 @@ class App extends React.Component {
           <Route exact path="/login" component={Landing} />
           <Route exact path="/register" component={Landing} />
           <Route exact path="/profile" component={UserProfile} />
+          <Route exact path="/voyage" component={VoyagePortal} />
           <Route exact path="/voyage/application/:id" component={VoyageApplication} />
           <Route exact path="/team/checkin/:id" component={WeeklyCheckin} />
           <Route exact path="/current" component={CurrentPrograms} />
