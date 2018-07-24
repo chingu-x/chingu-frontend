@@ -164,11 +164,11 @@ class VoyageApplication extends React.Component {
         {this.state.loading ? <Loading /> : null}
         {this.state.errorMessage !== "" ? <Error goBack={"/voyage/application"} error={this.state.errorMessage} /> : null}
         <div className="voyage-application-container">
-          {this.state.success
-            ? <SuccessForm />
-            : <React.Fragment>
-              <div className="voyage-application-title">Voyage Application</div>
-              <div className="voyage-application">
+          <div className="voyage-application-title">Voyage Application</div>
+          <div className="voyage-application">
+            {this.state.success
+              ? <SuccessForm />
+              : <React.Fragment>
                 <div className="voyage-application-subtitle">
                   {
                     this.state.currentPage > 2 ? 'Voyage Application' : this.state.applicationTitle
@@ -202,10 +202,8 @@ class VoyageApplication extends React.Component {
                       : <button className="voyage-appliation-btn--green" onClick={e => this.goToNextPage(e)}>Next</button>
                   }
                 </div>
-              </div>
-            </React.Fragment>
-
-          }
+              </React.Fragment>}
+          </div>
         </div>
       </React.Fragment>
     );
