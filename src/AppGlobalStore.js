@@ -47,7 +47,7 @@ const Store = {
         .catch(err => console.log(err));
 
     if (user) {
-      Store.updateUser(user);
+      Store.updateUser(user.data.user);
     }
   },
   updateUser: newState => Store.updateGlobalState(
