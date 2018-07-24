@@ -8,10 +8,6 @@ const user = Store.state.user;
 
 const currentTeams = user && user.teams ? user.teams.filter(team => { return team.cohort.status === 'ongoing'}) : null;
 const pastTeams = user && user.teams  ? user.teams.filter(team => { return team.cohort.status === 'ended'}) : null;
-{/* <Cards.CurrentVoyageCardWithTeam />
-<Cards.PreviousVoyageCardWithTeam />
-<Cards.UpcomingVoyageCard />
-<Cards.CurrentVoyageCard /> */}
 
 class UserProfile extends React.Component {
   render() {
