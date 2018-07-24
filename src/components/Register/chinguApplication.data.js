@@ -1,4 +1,4 @@
-import UTC from '../FormCreator/UTC.data';
+import { countries } from './add_countries.data';
 
 export const chinguApplicationData = [
     {
@@ -26,16 +26,17 @@ export const chinguApplicationData = [
     },
     {
         id: 204,
-        type: 'input',
-        question: 'What country are you coding from?',
-    },
-    {
-        id: 205,
         type: 'dropdown',
-        question: 'What is the UTC timezone for where you will be coding from?',
-        subtext: '(If unsure, just google "your-city UTC") Ex. Toronto = UTC-4',
-        answers: UTC
+        question: 'What country are you coding from?',
+        answers: countries
     },
+    // {
+    //     id: 205,
+    //     type: 'dropdown',
+    //     question: 'What is the UTC timezone for where you will be coding from?',
+    //     subtext: '(If unsure, just google "your-city UTC") Ex. Toronto = UTC-4',
+    //     answers: UTC
+    // },
     {
         id: 206,
         type: 'radio',

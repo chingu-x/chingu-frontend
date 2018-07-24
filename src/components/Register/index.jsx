@@ -46,7 +46,7 @@ class Register extends React.Component {
   }
 
   errorHandling = (err) => {
-    this.setState({error: true, errorMessage: err})
+    this.setState({ error: true, errorMessage: err })
   }
 
   authUser = () => {
@@ -56,7 +56,7 @@ class Register extends React.Component {
       { code: this.state.code },
       AUTH_MUTATION
     )
-      .then(data  => {
+      .then(data => {
         window.localStorage.setItem("token", data.userAuthGithub);
         Store.updateGlobalState('id', data.id)
       })
