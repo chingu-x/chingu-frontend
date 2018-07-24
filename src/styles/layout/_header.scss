@@ -1,3 +1,5 @@
+@import '../abstracts/_variables.scss';
+
 .header {
   display: flex;
   flex-direction: row;
@@ -10,18 +12,28 @@
   width: 100%;
 
   &.header-dark {
-    background-color: color-list("primary");
+    background-color: $theme-purple;
   }
 }
 
+.header-container {
+  width: $max-width;
+  max-width: $max-width;
+  height: 50px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-areas: "l d p";
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .header-left {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  align-items: center;
+  grid-area: l;
+  align-items: start;
   float: left;
-  font-size: 2em;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  padding-top: 15px;
 
   .nav-logo {
     a {
@@ -37,21 +49,15 @@
 }
 
 .header-right {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  justify-content: flex-end;
-  align-items: center;
-  float: right;
+  grid-area: p;
 
   // Avatar
   img.avatar {
-    display: inline-block;
-    width: 54px;
-    height: 54px;
-    margin-top: auto;
+    width: 50px;
+    height: 50px;
     border-radius: 100%;
     vertical-align: middle;
+    float: right;
   }
 
   a {
@@ -62,9 +68,19 @@
     text-decoration: none;
   }
 
+  .header-btn {
+    float: right;
+    border: none;
+    background-color: $theme-purple;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
   .btn {
     @include hocus {
-      background-color: color-list("primary");
+      background-color: $theme-green;
       color: color-list("text-light");
     }
   }
@@ -82,16 +98,21 @@
 // HEDER PORTAL DROPDOWN
 
 .header-portal-btn {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  width: 70%;
   background-color: transparent;
   color: white;
   padding: 10px 0;
-  font-size: 16px;
+  font-size: 14px;
   border: none;
   cursor: pointer;
-  border-bottom: 2px solid white;
+  border-bottom: 1px solid white;
   white-space: nowrap;
   span {
-    margin: 65px;
+    width: 100%;
+    margin-right: 10px;
   }
   &:hover {
     color: color-list("accent");
@@ -99,33 +120,37 @@
 }
 
 .header-dropdown {
-  position: relative;
-  display: inline-block;
+  margin: 0 auto;
+  width: 100%;
+  float: right;
   padding: 2px;
   a:hover {
     background-color: $pale-purple--hover;
   }
-  &:hover .header-dropdown-content {
+  &:hover .header-dropdown-content, 
+  &:hover .header-dropdown-content--centered {
     visibility: visible;
   }
 }
 
-.header-dropdown-content {
+.header-dropdown-content, 
+.header-dropdown-content--centered  {
   visibility: hidden;
-  position: absolute;
-  width: 100%;
+  width: 70%;
+  margin: 0 auto;
+  display: block;
   background-color: white;
-  box-shadow: $box-shadow;
+  box-shadow: $box-shadow-dark;
   text-align: center;
   overflow: auto;
   z-index: z-indexes("dropdown");
   a {
     display: block;
     color: $dark-grey;
-    font-size: 20px;
+    font-size: 16px;
     text-decoration: none;
     white-space: nowrap;
-    padding: 12px;
+    padding: 6px;
     margin: 10px;
     .label {
       color: $dark-grey;
@@ -142,6 +167,12 @@
   hr {
     border: 1px solid $pale-grey;
   }
+}
+
+.header-dropdown-content {
+  position: relative;
+  margin-top: 60px;
+  margin-right: -5px;
 }
 
 @media only screen and (max-width: 768px) {
