@@ -149,13 +149,18 @@ VOYAGE CARDS
   background-color: white;
 }
 @mixin user-btn--apply {
-  background-color: $theme-green;
-  color: white;
-  text-transform: uppercase;
-  border-radius: 20px;
-  padding: 5px 10px;
-  letter-spacing: 2px;
-  text-align: center;
+	background-color: $theme-green;
+	color: white;
+	text-transform: uppercase;
+	border-radius: 20px;
+	padding: 10px 30px 10px 30px;
+	letter-spacing: 2px;
+	text-align: center;
+	border: none;
+	display: block;
+	&:hover{
+		background-color: $theme-green--hover;
+	}
 }
 /*
 ==========================
@@ -179,6 +184,21 @@ FORMS
   margin-bottom: 5px;
 }
 
+@mixin form-title {
+	font-size: 40px;
+    color: $light-grey;
+    text-transform: uppercase;
+    margin-top: 70px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+@mixin hline {
+	width: calc(100% + 40px);
+    margin-left: -20px;
+    border-top: 1px solid $pale-grey;
+    margin-top: 20px;
+}
 /*
 ==========================
 ORIGINAL PROJECT VARIABLES
