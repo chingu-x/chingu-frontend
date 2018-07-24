@@ -38,7 +38,7 @@ const voyageApplicationData = [
         id: 103,
         page: 1,
         type: 'radio',
-        question: 'Would you like to be a project manager?',
+        question: 'Do you have any interest in being a Project Manager for a Remote Dev Team?',
         answers: [
             'Yes',
             'No',

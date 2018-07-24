@@ -45,6 +45,7 @@ export const chinguApplicationData = [
             'On Medium (an article)',
             'Through a friend',
             'The FreeCodeCamp forum',
+            'Facebook',
             'Other'
         ]
     },

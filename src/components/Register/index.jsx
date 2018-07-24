@@ -7,7 +7,7 @@ import '../FormCreator/FormCreator.css';
 import Error from '../Error/Error';
 import Loading from '../Loader/Loader';
 import Store from '../../AppGlobalStore';
-import { REGISTER_USER, AUTH_MUTATION } from './graphql/mutations';
+import { REGISTER_USER, AUTH_MUTATION } from './Graphql/mutations';
 import SuccessForm from '../Success/Success';
 
 class Register extends React.Component {
@@ -90,6 +90,7 @@ class Register extends React.Component {
     const application_data = {
       exciting_about_chingu: this.state[202],
       value_of_chingu: this.state[203],
+      chingu_referral: this.state[206]
     };
 
     Store.mutations.createUser(
