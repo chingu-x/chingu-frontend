@@ -1,5 +1,8 @@
 import ApolloClient, { gql } from 'apollo-boost';
 
+// Increment version if the format of Store.state changes
+const STORE_STATE_LOCAL_STORAGE_VERSION = 1;
+
 const client = new ApolloClient({
   uri: 'https://api.chingu.io/graphql',
   request: operation => operation.setContext({
@@ -38,13 +41,20 @@ const get_user = gql`
   }
 `
 
-let stateFromLocalStorage = localStorage.getItem('store')
-  ? JSON.parse(localStorage.getItem('store'))
-  : {};
+function fetchStateFromLocalStorage() {
+  const stateFromLocalStorageJSON = localStorage.getItem('store');
+  if (stateFromLocalStorageJSON) {
+    let stateFromLocalStorage = JSON.parse(stateFromLocalStorageJSON);
+    if (stateFromLocalStorage.version === STORE_STATE_LOCAL_STORAGE_VERSION) {
+      return stateFromLocalStorage;
+    }
+  }
+  return {};
+}
 
 const Store = {
   client,
-  state: stateFromLocalStorage,
+  state: fetchStateFromLocalStorage(),
   getAuthedUser: async () => {
     const user =
       await Store.client.query({ query: get_user })
@@ -52,7 +62,7 @@ const Store = {
 
     if (user) {
       Store.state['user'] = user.data.user;
-      localStorage.setItem('store', JSON.stringify(Store.state));
+      localStorage.setItem('store', JSON.stringify( { 'version' : STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state } ));
     }
   },
 
