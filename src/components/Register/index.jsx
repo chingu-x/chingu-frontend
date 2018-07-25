@@ -22,6 +22,7 @@ class Register extends React.Component {
     })
 
     this.state = {
+      componentQueryingLoader: true,
       loading: false,
       error: false,
       errorMessage: '',
@@ -48,8 +49,9 @@ class Register extends React.Component {
         // if the user has already filled out the register form
         // redirect to profile page
         if (Store.state.user.status !== 'profile_incomplete') {
-          this.setState({ shouldRedirect: true })
+          this.setState({ componentQueryingLoader: false, shouldRedirect: true })
         }
+        this.setState({ componentQueryingLoader: false });
       });
     }
   }
@@ -102,6 +104,7 @@ class Register extends React.Component {
   }
 
   render() {
+    if (this.state.componentQueryingLoader) return <Loader />;
     if (this.state.shouldRedirect) {
       return (
         <Redirect
