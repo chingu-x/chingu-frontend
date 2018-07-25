@@ -106,13 +106,20 @@ CARD ACTIONS
 
 .action-button {
   width: 150px;
-  height: 50px;
+  // height: 50px;
   border-radius: 20px;
   border: none;
-  background: #15CF89;
+  padding: 10px;
+  background: $theme-green;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  text-align: center;
+  display: block;
+  box-shadow: $box-shadow;
+}
+.action-button:hover {
+  background-color: $theme-green--hover;
 }
 
 .action-warning {
