@@ -122,6 +122,9 @@ const Store = {
     submitApplication: (loader, error, params, gql) => {
       return Store.mutations.mutationCreator(gql, loader, error, params)
     },
+    submitWeeklyCheckin: (loader, error, params, gql) => {
+      return Store.mutations.mutationCreator(gql, loader, error, params)
+    },
   }
 }
 
