@@ -26,8 +26,8 @@ const Header = props => {
       teamsDOM = (
         <React.Fragment>
           <div className="label">Team Portal</div>
-          {teams.map(team => {
-            return (<Link to={"/team/" + team.id}>{team.title}</Link>)
+          {teams.map((team, index) => {
+            return (<Link key={index} to={"/team/" + team.id}>{team.title}</Link>)
           })}
           <hr />
         </React.Fragment>
