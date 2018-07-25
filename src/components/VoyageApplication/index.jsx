@@ -59,15 +59,19 @@ class VoyageApplication extends React.Component {
     this.setState({ id: this.props.match.params.id})
     // if this user has not been part of a voyage before
     // or was rejected before and not been part of a voyage
+    let progress = (1 / this.state.application.length) * 100 + '%';
     if (Store.state.user && Store.state.user.status !== 'voyage_ready') {
       this.setState({
         application: newUserApplication,
         gql: 'SUBMIT_NEW_USER_VOYAGE_APPLICATION',
         applicationTitle: 'New User Application'
+      }, () => {
+        progress = (1 / this.state.application.length) * 100 + '%';
+        this.setState({ progressBar: { width: progress } })
       });
+    } else {
+      this.setState({ progressBar: { width: progress } })
     }
-    let progress = (1 / this.state.application.length) * 100 + '%';
-    this.setState({ progressBar: { width: progress } })
   }
 
   toggleLoading = () => {
@@ -118,7 +122,7 @@ class VoyageApplication extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const user_form = {
+    const new_voyage_user_form = {
       cohort_role: this.state[1],
       location_on_coding_journey: this.state[4],
       familiar_tech_stacks: this.state[5],
@@ -144,7 +148,7 @@ class VoyageApplication extends React.Component {
     Store.mutations.submitApplication(
       this.toggleLoading,
       this.errorHandling,
-      this.state.application.length > 2 ? { voyage_form, user_form } : { voyage_form },
+      this.state.application.length === 2 ? { voyage_form } : { voyage_form, new_voyage_user_form },
       submitApplication
     )
       .then(() => this.setState({ success: true }))
@@ -154,7 +158,7 @@ class VoyageApplication extends React.Component {
     return (
       <React.Fragment>
         {this.state.loading ? <Loading /> : null}
-        {this.state.errorMessage !== "" ? <Error goBack={"/voyage/application"} error={this.state.errorMessage} /> : null}
+        {this.state.errorMessage !== "" ? <Error goBack={"/voyage"} error={this.state.errorMessage} /> : null}
         <div className="voyage-application-container">
           <div className="voyage-application-title">Voyage Application</div>
           <div className="voyage-application">

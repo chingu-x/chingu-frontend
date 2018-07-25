@@ -4,6 +4,7 @@ import Info from "./Info";
 import Action from "./Action";
 import WeeklyCheckInButton from "./WeeklyCheckIn";
 import './VoyageCard.css';
+import Title from './Title';
 
 /**
  * TODO:
@@ -108,9 +109,7 @@ export const CurrentVoyageCardWithTeam = ({
       leftPanel={() => <Badge number={voyageNumber} />}
       rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
       team={() => (
-        <p style={{ margin: "0 0 15px 0", fontSize: "24px", color: "#080A38" }}>
-          {team ? team.title : null}
-        </p>
+        <Title title={team.title ? team.title : null} />
       )}
       action={() => team ? <WeeklyCheckInButton teamId={team.id} /> : null}
     />
@@ -128,11 +127,7 @@ export const PreviousVoyageCardWithTeam = ({
       backgroundColor={"#EFEFEF"}
       leftPanel={() => <Badge number={voyageNumber} />}
       rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
-      team={() => (
-        <p style={{ margin: "0 0 15px 0", fontSize: "24px", color: "#080A38" }}>
-          {team ? team.title : null}
-        </p>
-      )}
+      team={() => (<Title title={team.title ? team.title : null} /> )}
     />
   );
 };
