@@ -8,7 +8,7 @@ import * as React from "react";
 const WeeklyCheckIn = () => {
   return (
     <div className="weekly-checkin-container">
-      <a href={"/team/checkin" + this.props.teamId}>Weekly Check-In</a>
+      <a href={"/team/checkin"}>Weekly Check-In</a>
     </div>
   );
 };
