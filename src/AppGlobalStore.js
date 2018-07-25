@@ -52,9 +52,11 @@ function fetchStateFromLocalStorage() {
   return {};
 }
 
+const State = fetchStateFromLocalStorage();
+
 const Store = {
   client,
-  state: fetchStateFromLocalStorage(),
+  state: State,
   getAuthedUser: async () => {
     const user =
       await Store.client.query({ query: get_user })
