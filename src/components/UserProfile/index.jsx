@@ -4,13 +4,13 @@ import UserSideBar from "./UserSideBar";
 import './UserProfile.css'
 import Store from '../../AppGlobalStore';
 
-const user = Store.state.user;
-
-const currentTeams = user && user.teams ? user.teams.filter(team => { return team.cohort.status === 'ongoing'}) : null;
-const pastTeams = user && user.teams  ? user.teams.filter(team => { return team.cohort.status === 'ended'}) : null;
-
 class UserProfile extends React.Component {
   render() {
+    const user = Store.state.user;
+
+    const currentTeams = user.teams.filter(team => { return team.cohort.status === 'ongoing'});
+    const pastTeams = user.teams.filter(team => { return team.cohort.status === 'ended' });
+    
     return (
       <div className="user-profile-container">
         <aside className="user-profile">

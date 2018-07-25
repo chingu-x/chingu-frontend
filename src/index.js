@@ -10,13 +10,10 @@ import "./styles/main.css";
 import Store from './AppGlobalStore';
 import registerServiceWorker from "./registerServiceWorker";
 
-if (localStorage.getItem('token')) {
-  Store.getAuthedUser()
-}
-
-// ApolloProvider wraps the root component and provides ApolloClient features
-// to all child components. Similar to how the redux Provider does the same for state
-ReactDOM.render(
+function RenderApp() {
+  // ApolloProvider wraps the root component and provides ApolloClient features
+  // to all child components. Similar to how the redux Provider does the same for state
+  ReactDOM.render(
     <ApolloProvider client={Store.client}>
       <BrowserRouter>
         <ScrollToTop>
@@ -24,7 +21,15 @@ ReactDOM.render(
         </ScrollToTop>
       </BrowserRouter>
     </ApolloProvider>,
-  document.getElementById("root")
-);
+    document.getElementById("root")
+  );
+}
+
+if (!Store.state.user && localStorage.getItem('token')) {
+  Store.getAuthedUser().then(() => { RenderApp(); });
+}
+else {
+  RenderApp();
+}
 
 registerServiceWorker();
