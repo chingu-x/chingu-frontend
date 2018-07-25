@@ -47,7 +47,7 @@ class Register extends React.Component {
       ).then(() => {
         // if the user has already filled out the register form
         // redirect to profile page
-        if (Store.state.user.status === 'profile_complete') {
+        if (Store.state.user.status !== 'profile_incomplete') {
           this.setState({ shouldRedirect: true })
         }
       });
