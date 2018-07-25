@@ -38,9 +38,6 @@ const get_user = gql`
   }
 `
 
-// Array of listener functions.
-let onStateChangeListeners = [];
-
 let stateFromLocalStorage = localStorage.getItem('store')
   ? JSON.parse(localStorage.getItem('store'))
   : {};
@@ -54,23 +51,10 @@ const Store = {
         .catch(err => console.log(err));
 
     if (user) {
-      Store.updateUser(user.data.user);
+      Store.state['user'] = user.data.user;
     }
   },
-  updateUser: newState => Store.updateGlobalState(
-    'user', { ...Store.state.user, ...newState },
-  ),
-  updateGlobalState: (key, value) => {
-    const prevState = { ...Store.state };
-    Store.state[key] = value;
-    onStateChangeListeners.forEach(listener => {
-      listener(prevState, Store.state);
-    });
-    localStorage.setItem('store', JSON.stringify(Store.state));
-  },
-  registerStateChangeListener: (listener) => {
-    onStateChangeListeners.push(listener);
-  },
+  
   queries: {
     queryCreator: async (qgl, loader, error) => {
       loader();
