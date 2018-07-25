@@ -56,9 +56,9 @@ class VoyageApplication extends React.Component {
   componentDidMount() {
     // set voyage ID in state
 
+    this.setState({ id: this.props.match.params.id})
     // if this user has not been part of a voyage before
     // or was rejected before and not been part of a voyage
-    console.log(Store.state.user.status);
     if (Store.state.user && Store.state.user.status !== 'voyage_ready') {
       this.setState({
         application: newUserApplication,
@@ -68,11 +68,6 @@ class VoyageApplication extends React.Component {
     }
     let progress = (1 / this.state.application.length) * 100 + '%';
     this.setState({ progressBar: { width: progress } })
-    Store.registerStateChangeListener(this.globalStoreChanged);
-  }
-
-  globalStoreChanged = (prevState, newState) => {
-    this.render();
   }
 
   toggleLoading = () => {
@@ -123,9 +118,6 @@ class VoyageApplication extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    // need to pass in voyageID
-    // cohort { id }
-
     const user_form = {
       cohort_role: this.state[1],
       location_on_coding_journey: this.state[4],
@@ -152,7 +144,7 @@ class VoyageApplication extends React.Component {
     Store.mutations.submitApplication(
       this.toggleLoading,
       this.errorHandling,
-      this.state.newUserForm ? { voyage_form } : { voyage_form, user_form },
+      this.state.application.length > 2 ? { voyage_form, user_form } : { voyage_form },
       submitApplication
     )
       .then(() => this.setState({ success: true }))
