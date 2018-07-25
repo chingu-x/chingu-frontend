@@ -75,7 +75,7 @@ const Store = {
     queryCreator: async (qgl, loader, error) => {
       loader();
       try {
-        const { data } = await client.mutate({
+        const { data } = await client.query({
           query: qgl
         })
         loader();
@@ -86,6 +86,9 @@ const Store = {
         loader();
         return error(err.message)
       }
+    },
+    queryVoyages: (loader, error, gql) => {
+      return Store.queries.queryCreator(gql, loader, error)
     }
   },
   mutations: {
