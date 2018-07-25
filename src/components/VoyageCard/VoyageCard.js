@@ -47,14 +47,15 @@ export const CurrentVoyageCard = ({
 export const UpcomingVoyageCard = ({
   voyageNumber,
   startDate,
-  endDate
+  endDate,
+  id
 }) => {
   return (
     <VoyageCardCreator
       backgroundColor={"#EFEFEF"}
       leftPanel={() => <Badge number={voyageNumber} />}
       rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
-      action={() => <Action />}
+      action={() => <Action id={id}/>}
     />
   );
 };

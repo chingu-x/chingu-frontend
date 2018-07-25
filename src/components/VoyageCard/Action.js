@@ -6,10 +6,10 @@ import * as React from "react";
  * 2. add way to navigate to apply page
  **/
 
-const Action = () => {
+const Action = ({ id }) => {
   return (
     <div className="action-container">
-      <button className="action-button">Apply</button>
+      <a href={"/voyage/application/" + id}className="action-button">Apply</a>
       <p className="action-warning">15 spots left</p>
     </div>
   );
