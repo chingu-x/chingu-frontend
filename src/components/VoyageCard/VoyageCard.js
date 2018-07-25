@@ -90,7 +90,7 @@ export const NoVoyagesCard = () => {
         </h2>
       </div>}
       rightPanel={() => <div className="card-info--no-voyage">
-        SORRY, LOOKS LIKE THERE AREN'T ANY VOYAGES YET. PLEASE CHECK BACK SOON
+        SORRY, LOOKS LIKE THERE AREN'T ANY VOYAGES YET. <br/> PLEASE CHECK BACK SOON
       </div>}
     />
   );
