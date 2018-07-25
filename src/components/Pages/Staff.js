@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import staffListing from "../../static-api-elements/staffListing";
 import contributorListing from "../../static-api-elements/contributorListing";
 import placeholder from "../../styles/assets/user-placeholder.png";

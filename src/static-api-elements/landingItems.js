@@ -22,61 +22,81 @@ module.exports = {
       description: "Get a job, keep building--or do both."
     }
   ],
-  cohorts: [
+  whatMakesChingUnique: [
     {
-      title: "Voyages",
-      image: "cohort-01",
-      description: "Voyages are a team of developers creating a project to build, learn and grow together as developers."
+      title: "Community",
+      image: "earth--landing",
+      description: "Join a motivated community who share your goals"
     },
     {
-      title: "Data Science",
-      image: "cohort-02",
-      description: "Data Science Cohorts are in development."
+      title: "Grow",
+      image: "grow--landing",
+      description: "Unlock your portfolio with team project opportunities"
     },
     {
-      title: "Roaming Designer",
-      image: "cohort-03",
+      title: "Challenge",
+      image: "challenge--landing",
       description:
-        "Become a Roaming Designer to put your skills to use in both Voyages and the Data Science Cohorts."
+        "Get out of your comfort zone and learn how to be accountable"
+    }
+  ],
+  programOverview: [
+    {
+      title: "Tier 1",
+      image: "tier-badges-01--landing",
+      description: "Teams with Basic HTML/CSS and Javascript. Usually builds projects like Landing Pages."
+    },
+    {
+      title: "Tier 2",
+      image: "tier-badges-02--landing",
+      description: "Teams with Intermediate Javascript and familiarity with Front-End frameworks such as React. Usually builds pure front-end projects."
+    },
+    {
+      title: "Tier 3",
+      image: "tier-badges-03--landing",
+      description:
+        "Teams with strong familiarity with Front and Back-End frameworks. Usually builds full-stack projects."
     }
   ],
   testimonials: [
     {
       username: "Periman2",
-      image: "user-01",
+      image: "Periman",
       testimonial: "An amazing collaborative experience beyond my expectations."
     },
     {
-      username: "P1xt",
-      image: "user-01",
-      testimonial: "I honestly don't believe I've seen any collaboration environment produce this much overall \"learning\" ever, really."
+      username: "Debasree",
+      image: "debasree",
+      testimonial: "Chingu is an awesome and must-try platform for every programmer."
     },
     {
       username: "pankaja-shree",
-      image: "user-01",
+      image: "pankaja",
       testimonial:
         "Chingu cohorts is the best place for self learning web enthusiasts - to learn together, collaborate and work on real projects in remote teams."
     }
   ],
   projects: [
     {
-      title: "MDNBot",
-      image: "projects-01",
-      description:
-        "A Slack bot can search and reference Mozilla Developers Network for you."
+      title: "TickyBot",
+      image: "ticketybot",
+      tier: 'Tier 1',
+      description: "Tickybot landing page",
+      techStack: ['HTML', 'CSS Grid', 'Flexbox', 'JavaScript']
     },
     {
-      title: "ChinguSort",
-      image: "projects-02",
-      description:
-        "A recommendation system for creating optimal learning groups using machine learning."
+      title: "Sona Sarovar Trust Non-profit",
+      image: "sona",
+      tier: 'Tier 2',
+      description: "A front-end redesign for a nonprofit in India.  ",
+      techStack: ['MongoDB', 'Express', 'Mongoose', 'React', 'Redux', 'Webpack', 'Eslint']
     },
     {
-      title: "Code Stories",
-      image: "projects-03",
-      description: "Remix of Humans of New York for the Free Code Camp community."
+      title: "CO/MENT ",
+      image: "coment",
+      tier: 'Tier 3',
+      description: "A full-stack app to connect mentors and mentees to accelerate your coding journey.",
+      techStack: ['MongoDB', 'Mongoose', 'Express', 'React', 'Node', 'Redux']
     }
   ]
-
-
 }

@@ -1,90 +1,201 @@
 import _ from "lodash";
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import LandingIconItem from "./LandingIconItem";
+import * as React from 'react';
+import {
+  Link
+} from "react-router-dom";
+import LandingBarWithIcons from "./LandingBarWithIcons";
 import LandingTestimonial from "./LandingTestimonial";
-import earth from "../../styles/assets/Global Image-02.png";
+import LandingProjects from './LandingProjects';
 import landingItems from "../../static-api-elements/landingItems";
-
-class Landing extends Component {
-  state = {};
-
-  renderProcessBar(){
-    return _.map(landingItems.process, ({title, image, description}) => {
-      return(
-        <LandingIconItem key={title} title={title} image={image} description={description}/>
+import Register from '../Register';
+import Login from "../Login";
+import Store from "../../AppGlobalStore";
+class Landing extends React.Component {
+  renderProcessBar() {
+    return _.map(landingItems.process, ({
+      title,
+      image,
+      description
+    }) => {
+      return (<
+        LandingBarWithIcons key={
+          title
+        }
+        title={
+          title
+        }
+        image={
+          image
+        }
+        description={
+          description
+        }
+      />
       );
     })
   }
 
-  renderCohortsBar(){
-    return _.map(landingItems.cohorts, ({title, image, description}) => {
-      return(
-        <LandingIconItem key={title} title={title} image={image} description={description}/>
+  renderWhatMakesChinguUniqueBar() {
+    return _.map(landingItems.whatMakesChingUnique, ({
+      title,
+      image,
+      description
+    }) => {
+      return (<
+        LandingBarWithIcons key={
+          title
+        }
+        title={
+          title
+        }
+        image={
+          image
+        }
+        description={
+          description
+        }
+      />
       );
     })
   }
 
-  renderTestimonialBar(){
-    return _.map(landingItems.testimonials, ({username, image, testimonial}) => {
-      return(
-        <LandingTestimonial key={username} username={username} image={image} testimonial={testimonial}/>
+  renderProgramOverview() {
+    return _.map(landingItems.programOverview, ({
+      title,
+      image,
+      description
+    }) => {
+      return (<
+        LandingBarWithIcons key={
+          title
+        }
+        title={
+          title
+        }
+        image={
+          image
+        }
+        description={
+          description
+        }
+      />
       );
     })
   }
 
-  renderProjectsBar(){
-    return _.map(landingItems.projects, ({title, image, description}) => {
-      return(
-        <LandingIconItem key={title} title={title} image={image} description={description}/>
+  renderTestimonialBar() {
+    return _.map(landingItems.testimonials, ({
+      username,
+      image,
+      testimonial
+    }) => {
+      return (<
+        LandingTestimonial key={
+          username
+        }
+        username={
+          username
+        }
+        image={
+          image
+        }
+        testimonial={
+          testimonial
+        }
+      />
+      );
+    })
+  }
+
+  renderProjectsBar() {
+    return _.map(landingItems.projects, ({
+      title,
+      image,
+      description,
+      tier,
+      techStack
+    }) => {
+      return (<
+        LandingProjects key={
+          title
+        }
+        title={
+          title
+        }
+        image={
+          image
+        }
+        description={
+          description
+        }
+        tier={
+          tier
+        }
+        techStack={
+          techStack
+        }
+      />
       );
     })
   }
 
   render() {
+    let modalPrompt = null;
+    if (window.location.pathname.includes('/register')) {
+      modalPrompt = <Register />;
+    }
+    else if (window.location.pathname === '/login') {
+      modalPrompt = <Login />;
+    }
+
     return (
-      <div className="landing">
-        <div className="landing-top">
-          <img className="landing-img" src={earth} alt="" />
-          <div className="tagline-box">
-            <div className="tagline">Code More</div>
-            <div className="tagline">Learn More</div>
-            <div className="tagline">Build More</div>
-            <Link to="/apply">
-              <button className="big-green-btn">Apply</button>
-            </Link>
+      <div className="landing" >
+        {modalPrompt}
+        <div className="landing-top" >
+          <div className="tagline-box" >
+            <div className="tagline" > Learn how to be a team developer<br /> & boost your portfolio. </div>
+            <div className="tagline--subtext" > Gain real project experience with team opportunities </div>
+            {Store.state.user
+              ? null
+              : <Link to="/login" >
+                <button className="big-green-btn" > Apply </button>
+              </Link >
+            }
           </div>
+          <img className="landing-img" src={require('../../assets/landingImage.png')} alt="landingImage" />
         </div>
-        <div className="landing-bar">
-          <div className="landing-bar-title">Chingu Process</div>
-          <div className="landing-bar-items">
-            {this.renderProcessBar()}
+        <div className="cohorts-bar" >
+          <div className="cohorts-bar-title" > What Makes Chingu Unique </div>
+          <div className="cohorts-bar-items" > {this.renderWhatMakesChinguUniqueBar()} </div>
+        </div >
+        <div className="landing-bar" >
+          <div className="landing-bar-title" > Chingu Process </div>
+          <div className="landing-bar-items" > {this.renderProcessBar()} </div>
+        </div >
+        <div className="cohorts-bar" >
+          <div className="cohorts-bar-title" > Program Overview </div>
+          <div className="cohorts-bar-subtitle" > 8 Week Build To Learn Voyages <br /> Part-Time or Full-Time teams</div>
+          <div className="cohorts-bar-items" > {this.renderProgramOverview()} </div>
+        </div >
+        <div className="landing-bar" >
+          <div className="landing-bar-title" > Past Projects </div>
+          <div className="landing-bar-items" > {this.renderProjectsBar()} </div>
+        </div >
+        <div className="cohorts-bar" >
+          <div className="cohorts-bar-title" > What People Are Saying About Chingu </div>
+          <div className="cohorts-bar-items" > {this.renderTestimonialBar()} </div>
+        </div >
+        {Store.state.user
+          ? null
+          : <div className="chingu-bar" >
+            <div className="chingu-bar-box" >
+              <div className="chingu-bar-title" > Ready To Try Chingu ? </div>
+              <Link to="/login" >
+                <button className="chingu-green-btn" > Apply </button>
+              </Link >
+            </div>
           </div>
-        </div>
-        <div className="cohorts-bar">
-          <div className="cohorts-bar-title">Current Cohorts</div>
-          <div className="cohorts-bar-items">
-            {this.renderCohortsBar()}
-          </div>
-        </div>
-        <div className="landing-bar">
-          <div className="landing-bar-title">What people are saying about Chingu</div>
-          <div className="landing-bar-items">
-            {this.renderTestimonialBar()}
-          </div>
-        </div>
-        <div className="projects-bar">
-          <div className="projects-bar-title">Past Projects</div>
-          <div className="projects-bar-items">
-            {this.renderProjectsBar()}
-          </div>
-        </div>
-        <div className="chingu-bar">
-          <div className="chingu-bar-box">          
-            <div className="chingu-bar-title">Chingu</div>
-            <div className="chingu-bar-text">Chingu is a global collaboration platform and coding-cohort generator. We connect motivated learners with shared goals to learn, help and build together.</div>
-          </div>
-          </div>
+        }
       </div>
     );
   }

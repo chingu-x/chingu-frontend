@@ -2,44 +2,250 @@
 //    Application-wide Variables
 //----------------------------------
 
-/// Regular font family
+/*
+==========================
+FONT
+==========================
+*/
 /// @type List
-$base-font-family: 'Raleway', sans-serif;
-$base-font-size: 16px;
+$base-font-family: "Open Sans", "Helvetica Neue", "Raleway", sans-serif;
+$base-font-size: 14px;
+$portal-title-size: 40px;
+$portal-subcategory-size: 20px;
 $base-font-weight: 400;
+/*
+==========================
+COLORS
+==========================
+*/
+$theme-purple: #080a38;
+$theme-purple--hover: rgb(7, 8, 44);
+$light-purple: #71739b;
+$light-purple--hover: rgb(102, 104, 139);
+$pale-purple--hover: rgb(229, 229, 231);
+$theme-green: #15cf89;
+$theme-green--hover: rgb(25, 194, 129);
+$theme-green--light: #78D5B2;
 
+$darker-grey: #4f4f4f;
+$dark-grey: #7f7f7f;
+$med-grey: rgb(158, 158, 158);
+$grey: #bbbbbb;
+$light-grey: #e6e6e6;
+$pale-grey: #efefef;
+$palest-grey: #f8f8f8;
+
+$attention-red: #f37070;
+$attention-red--light: #efb0b0;
+
+$health-green: #22b571;
+$health-yellow: #ffcc00;
+$health-red: #ef8585;
+
+$badge-1: #f5e3a1;
+$badge-1--hover: rgb(245, 219, 126);
+$badge-2: #caeb95;
+$badge-2--hover: rgb(181, 219, 121);
+$badge-3: #f1ba65;
+$badge-3--hover: rgb(236, 172, 75);
+
+$transparent-background: rgba(158, 158, 158, 0.637);
+@mixin transparent-background {
+  background-color: $transparent-background;
+  display: block;
+  position: absolute;
+  min-width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+  z-index: 100;
+}
+ 
+/*
+==========================
+STYLING
+==========================
+*/
+$box-shadow: 0px 3px 6px $light-grey;
+$box-shadow-dark: 0px 3px 6px $dark-grey;
+$border: 1px solid $light-grey;
+/*
+==========================
+ADMIN PORTALS
+==========================
+*/
+@mixin admin-portal-title {
+  color: $light-grey;
+  font-size: $portal-title-size;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+  text-transform: uppercase;
+}
+
+@mixin admin-portal-subcategory {
+  color: $light-grey;
+  font-size: $portal-subcategory-size;
+  text-align: left;
+  text-transform: uppercase;
+  padding-bottom: 15px;
+}
+/*
+==========================
+ADMIN BTNS
+==========================
+*/
+@mixin admin-voyage-btn($color, $hover-color) {
+  background-color: $color;
+  color: white;
+  text-transform: uppercase;
+  padding: 10px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-align: center;
+  &::hover {
+    background-color: $hover-color;
+  }
+}
+
+@mixin admin-voyage-btn--sub($color) {
+  background-color: white;
+  color: $color;
+  border: 1px solid $color;
+  padding: 5px;
+  font-size: 14px;
+  text-align: center;
+  &::hover {
+    background-color: color;
+    color: white;
+  }
+}
+/*
+==========================
+CARDS & TABS
+==========================
+*/
+@mixin rounded-card {
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: $drop-shadow;
+}
+@mixin half-rounded-tab($color) {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: $color;
+  color: white;
+  text-align: center;
+  box-shadow: $drop-shadow;
+  font-size: 12px;
+  padding: 5px 10px;
+}
+/*
+==========================
+VOYAGE CARDS
+==========================
+*/
+@mixin voyage-card($color) {
+  width: 500px;
+  height: 300px;
+  border-radius: 20px;
+  background-color: $color;
+  color: $theme-purple;
+  box-shadow: $drop-shadow;
+}
+@mixin voyage-badge {
+  width: 186px;
+  height: 186px;
+  border-radius: 50%;
+  border: 15px solid $theme-purple;
+  color: $theme-purple;
+  background-color: white;
+}
+@mixin user-btn--apply {
+	background-color: $theme-green;
+	color: white;
+	text-transform: uppercase;
+	border-radius: 20px;
+	padding: 10px 30px 10px 30px;
+	letter-spacing: 2px;
+	text-align: center;
+	border: none;
+	display: block;
+	&:hover{
+		background-color: $theme-green--hover;
+	}
+}
+/*
+==========================
+FORMS
+==========================
+*/
+@mixin form-label {
+  color: $light-grey;
+  text-transform: uppercase;
+  font-size: 12px;
+  text-align: left;
+}
+
+@mixin form-input {
+  border: 1px solid $light-grey;
+  padding: 5px;
+  color: $dark-grey;
+  font-size: 14px;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+@mixin form-title {
+	font-size: 40px;
+    color: $grey;
+    text-transform: uppercase;
+    margin-top: 120px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+@mixin hline {
+	width: calc(100% + 40px);
+    margin-left: -20px;
+    border-top: 1px solid $pale-grey;
+    margin-top: 20px;
+}
+/*
+==========================
+ORIGINAL PROJECT VARIABLES
+==========================
+*/
 /// Color Map
 /// @type List
 $color-list: (
-	'primary': #0f143a, 
-	'accent': #15df89,
-	'emphasis': #707399,
-	'borders': #d3d3d3,
-	'text-light': #ffffff,
-	'text-dark': #000000,
-	'text-muted': #767676,
+  "primary": #0f143a,
+  "accent": #15df89,
+  "emphasis": #707399,
+  "borders": #d3d3d3,
+  "text-light": #ffffff,
+  "text-dark": #000000,
+  "text-muted": #767676
 );
-
 
 /// Z-indexes
 /// @type List
 
 $z-indexes: (
-	'modal': 400,
-	'dropdown': 200,
-	'default': 1,
-	'below': -1, 
+  "modal": 400,
+  "dropdown": 200,
+  "default": 1,
+  "below": -1
 );
-
 
 /// Container's maximum width
 /// @type Length
 $max-width: 1180px !default;
 
-
-
 /// Relative or absolute URL where all assets are served from
 /// @type String
 /// @example scss - When using a CDN
 ///   $base-url: 'http://cdn.example.com/assets/';
-$base-url: '/assets/' !default;
+$base-url: "/assets/" !default;

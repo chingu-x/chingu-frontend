@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import * as React from 'react';
 import { Link } from "react-router-dom";
 import SubscribeForm from "./SubscribeForm";
 import patreon from "../../styles/assets/patreon.png";
 
-class Footer extends Component {
+class Footer extends React.Component {
   state = {
     email: "",
     isFooterDDShowing: false
@@ -65,24 +65,24 @@ class Footer extends Component {
 
   renderSocialIcons() {
     return (
-      <div className="footer-social">
-        <a className="footer-social-icon" href="https://medium.com/chingu">
+      <div className="connection">
+        <a className="connection-icon" href="https://medium.com/chingu">
           <i className="fab fa-medium-m fa-2x" />
         </a>
         <a
-          className="footer-social-icon"
+          className="connection-icon"
           href="https://www.youtube.com/channel/UCS7zmJXbe7FgTC3sHlUf4jw"
         >
           <i className="fab fa-youtube fa-2x" />
         </a>
         <a
-          className="footer-social-icon"
+          className="connection-icon"
           href="https://github.com/Chingu-cohorts"
         >
           <i className="fab fa-github fa-2x" />
         </a>
         <a
-          className="footer-social-icon"
+          className="connection-icon"
           href="https://twitter.com/ChinguCollabs"
         >
           <i className="fab fa-twitter fa-2x" />

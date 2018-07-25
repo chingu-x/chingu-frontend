@@ -33,9 +33,70 @@
       width: auto;
     }
   }
+
+  .landing-item-project-image {
+    border: 1px solid $light-grey;
+    height: 200px;
+    width: 300px;
+    object-fit: cover;
+    @include media(">large") {
+      // height: 200px;
+      // width: auto;
+    }
+  
+    @include media("<=large") {
+      // height: 180px;
+      // width: auto;
+    }
+  }
   
   .landing-item-description {
     margin: 0 auto;
     max-width: 250px;
+    margin-bottom: 20px;
+  }
+
+  .landing-item-project-info {
+    width: 300px;
+    border: 1px solid $light-grey;
+    padding: 10px;
+    text-align: left;
+    margin-top: -5px;
+    margin-bottom: 20px;
+    min-height: 190px;
+  }
+
+  .landing-item-project-title {
+    font-size: 14px;
+    text-transform: capitalize;
+    text-align: left;
+    font-weight: 600;
+  }
+
+  .landing-item-project-description {
+    text-align: left;
+    margin-bottom: 15px;
+    min-height: 60px;
+  }
+
+  .landing-item-project-tier,
+  .landing-item-project-techStack {
+    font-size: 11px;
+    display: inline-block;
+    text-align: left;
+    padding: 5px;
+    left: 0;
+    margin-top: 5px;
+    margin-right: 5px;
+  }
+  .landing-item-project-tier {
+    color: $theme-green;
+    border: 1px solid $theme-green;
+    background-color: white;
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+  .landing-item-project-techStack {
+    border: 1px solid $light-grey;
   }
 }

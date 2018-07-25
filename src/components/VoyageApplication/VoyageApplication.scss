@@ -1,0 +1,147 @@
+@import '../../styles/abstracts/_variables.scss';
+/*
+==========================
+CONTAINER
+==========================
+*/
+.voyage-application-container {
+    background-color: $palest-grey;
+}
+
+.voyage-application {
+    width: 460px;
+    background-color: white;
+    border-radius: 20px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: $box-shadow;
+    margin-bottom: 100px;
+}
+/*
+==========================
+FORM PROGRESS BAR
+==========================
+*/
+.voyage-application-progress {
+    width: 100px;
+    height: 15px;
+    background-color: white;
+    box-shadow: $box-shadow;
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-top: -25px;
+}
+.voyage-application-progress-bar {
+    // width: 1%;
+    height: 15px;
+    background-color: $theme-green;
+}
+/*
+==========================
+PAGE TITLE
+==========================
+*/
+.voyage-application-title {
+    @include form-title;
+}
+/*
+==========================
+FORM TITLE
+==========================
+*/
+.voyage-application-subtitle {
+    color: $grey;
+    background-color: $palest-grey;
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    padding: 5px;
+    padding-left: 20px;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+/*
+==========================
+BUTTONS
+==========================
+*/
+.voyage-application-btn-container {
+    display: grid;
+    grid-template-areas: "a b";
+    grid-template-columns: repeat(2, 1fr);
+}
+.voyage-appliation-btn--green, 
+.voyage-appliation-btn--grey {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    border: none;
+    box-shadow: $box-shadow;
+    padding: 5px;
+    width: 150px;
+    border-radius: 20px;
+    display: inline-block;
+    position: relative;
+    margin-top: 15px;
+}
+.voyage-appliation-btn--green {
+    grid-area: b;
+    justify-self: end;
+    background-color: $theme-green;
+}
+
+.voyage-appliation-btn--grey {
+    grid-area: a;
+    justify-self: start;
+    background-color: $light-grey;
+}
+/*
+==========================
+HORIZONTAL LINE
+==========================
+*/
+.hline {
+    @include hline;
+}
+/*
+==========================
+NEW USER NOTICE
+==========================
+*/
+.new-user-application-notice {
+    display: block;
+    position: absolute;
+    width: 180px;
+    border-radius: 20px;
+    background-color: white;
+    color: $med-grey;
+    font-size: 12.75px;
+    padding: 15px;
+    box-shadow: $box-shadow;
+
+    margin-left: 450px;
+    margin-top: -53px;
+}
+
+.new-user-application-notice-title {
+    margin-top: 7px;
+    text-align: center;
+    background-color: $attention-red--light;
+    color: white;
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    text-transform: uppercase;
+    padding: 6px;
+    margin-bottom: 8px;
+}
+/*
+==========================
+MEDIA QUERY
+==========================
+*/
+@media (max-width: 850px) {
+    .new-user-application-notice {
+        display: none;
+    }
+}
