@@ -1,15 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { graphql } from "react-apollo";
+import currentUserQuery from "../../queries/currentUserQuery";
 import Store from '../../AppGlobalStore';
 
-import currentUserQuery from "../../queries/currentUserQuery"
-
 const Header = props => {
-  const user = Store.state.user;
-  const team = [Store.state.user.teams];
-  console.log(team);
+  let teams = [];
+  let user = null;
 
+  if (Store.state.user) {
+    user = Store.state.user;
+    teams = Store.state.user.teams;
+  }
+  
   const handleLogout = e => {
     e.preventDefault();
     window.localStorage.removeItem("token");
@@ -18,6 +21,18 @@ const Header = props => {
   };
 
   const renderPortalDropDown = () => {
+    let teamsDOM = null;
+    if (user && teams.length) {
+      teamsDOM = (
+        <React.Fragment>
+          <div className="label">Team Portal</div>
+          {teams.map(team => {
+            return (<Link to={"/team/" + team.id}>{team.title}</Link>)
+          })}
+          <hr />
+        </React.Fragment>
+      )
+    }
     return (
       <div className="header-dropdown portal">
         <button className="header-portal-btn" >
@@ -25,16 +40,7 @@ const Header = props => {
           <i className="fa fa-chevron-down" />
         </button>
         <div className="header-dropdown-content--centered portal">
-          {team.length >= 1
-            ? <React.Fragment>
-              <div className="label">Team Portal</div>
-              {team.map(team => {
-                return (<Link to={"/team/" + team.id}>{team.title}</Link>)
-              })}
-              <hr />
-            </React.Fragment>
-            : null
-          }
+          {teamsDOM}
           <Link to="/voyage">Voyage Portal</Link>
           <hr />
           <Link to="/profile">User Profile</Link>
