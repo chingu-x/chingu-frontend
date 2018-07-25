@@ -1,8 +1,5 @@
 import * as React from "react";
-import {
-  CurrentVoyageCard,
-  UpcomingVoyageCard
-} from "../VoyageCard/VoyageCard";
+import * as Cards from "../VoyageCard/VoyageCard";
 import './VoyagePortal.css';
 import Store from '../../AppGlobalStore';
 import { get_voyages } from './graphql/query';
@@ -16,7 +13,9 @@ class VoyagePortal extends React.Component {
       loading: false,
       error: false,
       errorMessage: '',
-      voyage: []
+      voyage: [],
+      currentVoyages: [],
+      upcomingVoyages: []
     }
   }
   componentDidMount() {
@@ -25,7 +24,22 @@ class VoyagePortal extends React.Component {
       this.error,
       get_voyages
     ).then((data) => {
-      this.setState({ voyage: data.cohorts })
+      let currentVoyages = [];
+      let upcomingVoyages = [];
+      if (data.cohorts.length >= 1) {
+        data.cohorts.forEach((cohort) => {
+          if (cohort.status === 'ongoing') {
+            currentVoyages.push(cohort);
+          } else if (cohort.status === 'registration_open') {
+            upcomingVoyages.push(cohort);
+          }
+        })
+      }
+      this.setState({
+        voyage: data.cohorts,
+        currentVoyages: currentVoyages,
+        upcomingVoyages: upcomingVoyages
+      })
     })
   }
   toggleLoading = () => {
@@ -44,18 +58,39 @@ class VoyagePortal extends React.Component {
           <section className="voyage-section">
             <p>Current Voyages</p>
             <div className="voyage-card-list">
-              <CurrentVoyageCard />
+              {this.state.currentVoyages.length >= 1
+                ? this.state.currentVoyages.map((voyage, index) => {
+                  return (
+                    <Cards.CurrentVoyageCard
+                      key={index}
+                      voyageNumber={voyage.id}
+                      startDate={voyage.startDate}
+                      endDate={voyage.endDate}
+                    />
+                  )
+                })
+                : <Cards.NoVoyagesCard />
+              }
             </div>
           </section>
-          <section className="voyage-section">
-            <p>Upcoming Voyages</p>
-            <div className="voyage-card-list">
-              <UpcomingVoyageCard />
-              <UpcomingVoyageCard />
-              <UpcomingVoyageCard />
-              <UpcomingVoyageCard />
-            </div>
-          </section>
+          {this.state.upcomingVoyages.length >= 1
+            ? this.state.upcomingVoyages.map((voyage, index) => {
+              return (
+                <section className="voyage-section">
+                  <p>Upcoming Voyages</p>
+                  <div className="voyage-card-list">
+                    <Cards.UpcomingVoyageCard
+                      key={index}
+                      voyageNumber={voyage.id}
+                      startDate={voyage.startDate}
+                      endDate={voyage.endDate}
+                    />
+                  </div>
+                </section>
+              )
+            })
+            : null
+          }
         </div>
       </React.Fragment>
     );
