@@ -64,8 +64,8 @@ class VoyagePortal extends React.Component {
                     <Cards.CurrentVoyageCard
                       key={index}
                       voyageNumber={voyage.id}
-                      startDate={voyage.startDate}
-                      endDate={voyage.endDate}
+                      startDate={voyage.start_date}
+                      endDate={voyage.end_date}
                     />
                   )
                 })
@@ -76,20 +76,21 @@ class VoyagePortal extends React.Component {
           {this.state.upcomingVoyages.length >= 1
             ? this.state.upcomingVoyages.map((voyage, index) => {
               return (
-                <section className="voyage-section">
+                <section key={index} className="voyage-section">
                   <p>Upcoming Voyages</p>
                   <div className="voyage-card-list">
                     <Cards.UpcomingVoyageCard
                       key={index}
                       voyageNumber={voyage.id}
-                      startDate={voyage.startDate}
-                      endDate={voyage.endDate}
+                      startDate={voyage.start_date}
+                      endDate={voyage.end_date}
+                      id={voyage.id}
                     />
                   </div>
                 </section>
               )
             })
-            : null
+            : <Cards.NoVoyagesCard />
           }
         </div>
       </React.Fragment>
