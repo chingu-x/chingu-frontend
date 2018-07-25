@@ -117,6 +117,7 @@ DROPDOWN w/ CHECKBOX
     border: none;
     box-shadow: $box-shadow;
     padding: 5px;
+    display: none;
 }
 
 .search-input-box::placeholder {
@@ -126,7 +127,7 @@ DROPDOWN w/ CHECKBOX
 .filter-dropdown-box {
     background-color: white;
     border: 1px solid $light-grey;
-    width: 180px;
+    width: 420px;
     display: none;
     position: absolute;
     box-shadow: $box-shadow;
@@ -135,6 +136,7 @@ DROPDOWN w/ CHECKBOX
     overflow: scroll;
     overflow-x: hidden;
     text-align: left;
+    padding: 10px;
     color: $dark-grey;
     font-size: 12px;
     margin-left: -9px;
@@ -147,6 +149,7 @@ DROPDOWN w/ CHECKBOX
 .filter-dropdown-btn-5, 
 .filter-dropdown-btn-101 {
     min-width: 180px;
+    width: 100%;
     color: $dark-grey;
     font-size: 12px;
     background-color: white;
