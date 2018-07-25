@@ -449,3 +449,51 @@ CUSTOM BADGE QUESTION
 .badge--chosen {
     border: 2px solid $theme-green;
 }
+
+/*
+==========================
+BTN (3)
+==========================
+*/
+.btn-container--3 {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 auto;
+}
+.btn-3 {
+    background-color: white;
+    border: 1px solid $grey;
+    margin: 0 auto;
+    width: 90%;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 10px;
+    color: $grey;
+    box-shadow: $box-shadow;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-3:hover {
+    background-color: $theme-green--light;
+    color: white;
+    border: none;
+}
+
+.btn-3--green {
+    background-color: $health-green;
+    color: white;
+    border: none;
+}
+.btn-3--yellow {
+    background-color: $health-yellow;
+    color: white;
+    border: none;
+}
+.btn-3--red {
+    background-color: $health-red;
+    color: white;
+    border: none;
+}
