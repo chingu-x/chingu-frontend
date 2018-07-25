@@ -4,7 +4,7 @@ const client = new ApolloClient({
   uri: 'https://api.chingu.io/graphql',
   request: operation => operation.setContext({
     headers: {
-      authorization: `Bearer ${localStorage.getItem("token")}`,
+      authorization: `Bearer ${localStorage.getItem('token')}`,
     }
   })
 });
@@ -52,9 +52,10 @@ const Store = {
 
     if (user) {
       Store.state['user'] = user.data.user;
+      localStorage.setItem('store', JSON.stringify(Store.state));
     }
   },
-  
+
   queries: {
     queryCreator: async (qgl, loader, error) => {
       loader();
@@ -96,7 +97,7 @@ const Store = {
       return Store.mutations.mutationCreator(gql, loader, error, params)
         .then(data => {
           window.localStorage.setItem("token", data.userAuthGithub)
-          Store.getAuthedUser();
+          return Store.getAuthedUser();
         })
         .catch(err => console.log(err));
     },

@@ -38,19 +38,20 @@ class Register extends React.Component {
   }
 
   componentDidMount = () => {
-    Store.registerStateChangeListener(this.globalStoreChanged);
     if (!window.localStorage.getItem("token")) {
-      this.authUser();
+      Store.mutations.authUser(
+        this.toggleLoading,
+        this.errorHandling,
+        { code: this.state.code },
+        AUTH_MUTATION
+      ).then(() => {
+        // if the user has already filled out the register form
+        // redirect to profile page
+        if (Store.state.user.status === 'profile_complete') {
+          this.setState({ shouldRedirect: true })
+        }
+      });
     }
-    // if the user has already filled out the register form
-    // redirect to profile page
-    if (Store.state.user.status === 'profile_complete') {
-      this.setState({ shouldRedirect: true })
-    }
-  }
-
-  globalStoreChanged = (prevState, newState) => {
-    this.render();
   }
 
   toggleLoading = () => {
@@ -59,15 +60,6 @@ class Register extends React.Component {
 
   errorHandling = (err) => {
     this.setState({ error: true, errorMessage: err })
-  }
-
-  authUser = () => {
-    Store.mutations.authUser(
-      this.toggleLoading,
-      this.errorHandling,
-      { code: this.state.code },
-      AUTH_MUTATION
-    )
   }
 
   toggleValueInSet = (set, value) => {

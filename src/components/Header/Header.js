@@ -1,14 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { graphql } from "react-apollo";
+import currentUserQuery from "../../queries/currentUserQuery";
 import Store from '../../AppGlobalStore';
 
-import currentUserQuery from "../../queries/currentUserQuery"
-
 const Header = props => {
-  const user = Store.state.user;
-  const team = [Store.state.user.teams];
+  let team = [];
+  let user = null;
 
+  if (Store.state.user) {
+    user = Store.state.user;
+    team = [Store.state.user.team];
+  }
+  
   const handleLogout = e => {
     e.preventDefault();
     window.localStorage.removeItem("token");
