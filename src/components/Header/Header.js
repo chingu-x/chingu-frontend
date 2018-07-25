@@ -8,6 +8,7 @@ import currentUserQuery from "../../queries/currentUserQuery"
 const Header = props => {
   const user = Store.state.user;
   const team = [Store.state.user.teams];
+  console.log(team);
 
   const handleLogout = e => {
     e.preventDefault();
@@ -24,11 +25,11 @@ const Header = props => {
           <i className="fa fa-chevron-down" />
         </button>
         <div className="header-dropdown-content--centered portal">
-          {team.length > 1
+          {team.length >= 1
             ? <React.Fragment>
               <div className="label">Team Portal</div>
               {team.map(team => {
-                return (<Link to={"/team" + team.id}>{team.title}</Link>)
+                return (<Link to={"/team/" + team.id}>{team.title}</Link>)
               })}
               <hr />
             </React.Fragment>
