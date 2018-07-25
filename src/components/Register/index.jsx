@@ -5,7 +5,7 @@ import { renderQAs } from '../FormCreator/answerCreators';
 import './Register.css';
 import '../FormCreator/FormCreator.css';
 import Error from '../Error/Error';
-import Loading from '../Loader/Loader';
+import Loader from '../Loader/Loader';
 import Store from '../../AppGlobalStore';
 import { REGISTER_USER, AUTH_MUTATION } from './graphql/mutations';
 import SuccessForm from '../Success/Success';
@@ -114,7 +114,7 @@ class Register extends React.Component {
     return (
       this.state.code
         ? <React.Fragment>
-          {this.state.loading ? <Loading /> : null}
+          {this.state.loading ? <Loader /> : null}
           {this.state.errorMessage !== "" ? <Error goBack={"/register"} error={this.state.errorMessage} /> : null}
           <div className="chingu-application-container">
             <div className="chingu-application-modal">
