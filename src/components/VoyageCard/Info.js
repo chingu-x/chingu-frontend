@@ -9,11 +9,10 @@ function dateFormatter (timestamp) {
 const Info = ({startDate, endDate}) => {
   return (
     <div className="card-info">
-      <h2>8 Weeks</h2>
-      <p>Build to Learn</p>
-      <p>
+      <div className="card-info--header">8 Weeks <br />Build to Learn</div>
+      <div className="card-info--date">
         {dateFormatter(startDate) }  -  { dateFormatter(endDate)}
-      </p>
+      </div>
     </div>
   )
 }

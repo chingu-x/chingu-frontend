@@ -5,8 +5,8 @@ import * as React from "react";
  * 1. allow title to take in arguments
  **/
 
-const Title = () => {
-  return <p>Turtles-Team-11</p>;
+const Title = ({ title }) => {
+  return <div className="card-info--teamTitle">{title}</div>;
 };
 
 export default Title;

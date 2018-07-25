@@ -41,13 +41,14 @@ CARD
 
   h2 {
     margin: 0;
+    margin-top: 25px;
     font-size: 1.3rem;
     text-transform: uppercase;
     font-weight: 500;
   }
 
   p {
-    margin: 5px 0px 15px 5px;
+    margin: 5px 0px 10px 5px;
     text-transform: uppercase;
   }
 
@@ -59,6 +60,25 @@ CARD
   }
 }
 
+.card-info--header {
+  font-size: 20px;
+  text-transform: uppercase;
+  color: $theme-purple;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.card-info--date {
+  text-transform: uppercase;
+  color: $theme-purple;
+  font-size: 14px;
+  margin: 20px;
+}
+.card-info--teamTitle {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: $theme-purple;
+  letter-spacing: 2px;
+}
 .card-info--no-voyage {
   text-align: center;
   flex-basis: 40%;
@@ -137,6 +157,10 @@ CARD ACTIONS
   text-align: center;
   padding: 10px 20px 10px 20px;
   margin-top: 20px;
+  a {
+    color: white;
+    text-decoration: none;
+  }
 }
 // TODO: move to own scss file
 .weekly-checkin-container {

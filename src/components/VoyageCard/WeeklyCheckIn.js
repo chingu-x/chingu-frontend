@@ -7,7 +7,7 @@ import * as React from "react";
 
 const WeeklyCheckIn = () => {
   return (
-    <div className="weekly-checkin-container">
+    <div className="action-button--to-Voyage">
       <a href={"/team/checkin"}>Weekly Check-In</a>
     </div>
   );
