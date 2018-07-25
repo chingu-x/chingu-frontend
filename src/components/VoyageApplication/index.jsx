@@ -158,7 +158,7 @@ class VoyageApplication extends React.Component {
     return (
       <React.Fragment>
         {this.state.loading ? <Loading /> : null}
-        {this.state.errorMessage !== "" ? <Error goBack={"/voyage/application"} error={this.state.errorMessage} /> : null}
+        {this.state.errorMessage !== "" ? <Error goBack={"/voyage"} error={this.state.errorMessage} /> : null}
         <div className="voyage-application-container">
           <div className="voyage-application-title">Voyage Application</div>
           <div className="voyage-application">
