@@ -129,7 +129,7 @@
     margin-right: 10px;
   }
   &:hover {
-    color: color-list("accent");
+    color: white;
   }
   &:hover ~ .header-dropdown-content--centered {
     visibility: visible;
@@ -143,6 +143,7 @@
   padding: 2px;
   a:hover {
     background-color: $pale-purple--hover;
+    color: white;
   }
 }
 .header-dropdown-content--centered {
@@ -158,6 +159,14 @@
   text-align: center;
   overflow: auto;
   z-index: z-indexes("dropdown");
+  .label {
+    color: $theme-purple;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    font-size: 12px;
+  }
   a {
     display: block;
     color: $dark-grey;
@@ -167,9 +176,10 @@
     padding: 6px;
     margin: 10px;
     .label {
-      color: $dark-grey;
+      color: $theme-purple;
       text-align: center;
       text-transform: uppercase;
+      margin-top: 12px;
       margin-bottom: 12px;
       font-size: 12px;
     }
