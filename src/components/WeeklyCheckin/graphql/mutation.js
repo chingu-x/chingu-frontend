@@ -1,9 +1,15 @@
 import gql from "graphql-tag";
 
 export const weeklyCheckinForm = gql`
-mutation createStandup($standup_data:CohortTeamCohortUserStandupCreateInput){
-  cohortTeamCohortUserStandupCreate(standup_data :$standup_data) {
-    worked_on
+mutation submitStandup(
+  $standup_data:CohortTeamCohortUserStandupCreateInput!
+  $cohort_id:ID!
+) {
+  cohortTeamCohortUserStandupSubmit(
+    standup_data:$standup_data
+    cohort_id:$cohort_id
+  ) {
+    expiration
   }
 }
 `
