@@ -12,6 +12,7 @@ class WeeklyCheckin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      cohort_id: 0,
       300: '',
       301: '',
       302: '',
@@ -22,6 +23,10 @@ class WeeklyCheckin extends React.Component {
       errorMessage: '',
       success: false
     }
+  }
+
+  componentDidMount() {
+    this.setState({ cohort_id: this.props.match.params.id });
   }
 
   toggleValueInSet = (set, value) => {
@@ -69,16 +74,18 @@ class WeeklyCheckin extends React.Component {
 
   submit = (e) => {
     e.preventDefault();
-    let answerObject = {
+    let standup_data = {
       progress_sentinment: this.state[300],
       worked_on: this.state[301],
       working_on: this.state[302],
       blocked_on: this.state[303]
     }
+    let cohort_id = this.state.cohort_id;
+    
     Store.mutations.submitApplication(
       this.toggleLoading,
       this.errorHandling,
-      answerObject,
+      {standup_data, cohort_id},
       weeklyCheckinForm
     ).then(() => { if (this.state.error === false) { this.setState({ success: true })}});
   }
