@@ -36,7 +36,7 @@ class VoyagePortal extends React.Component {
             upcomingVoyages.push(cohort);
           }
           cohort.members.map(member => {
-            if (member.user.id === Store.state.user.id && member.user.status === 'pending_approval') {
+            if (member.user.id === Store.state.user.id && member.status === 'pending_approval') {
               this.setState({ alreadyApplied: true })
             }
           })
