@@ -46,5 +46,16 @@ MEDIA QUERY
     margin-top: 100px;
     padding: 0px;
     grid-gap: 100px;
+    // justify-content: center;
+  }
+  .user-profile-container-personal {
+    margin: 0 auto;
+    max-width: 500px;
+  }
+  .user-voyage {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    margin-bottom: 100px;
   }
 }
