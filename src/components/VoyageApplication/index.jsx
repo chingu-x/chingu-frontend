@@ -151,7 +151,7 @@ class VoyageApplication extends React.Component {
       this.state.application.length === 2 ? { voyage_form } : { voyage_form, new_voyage_user_form },
       submitApplication
     )
-      .then(() => this.setState({ success: true }))
+      .then(() => { if (this.state.error === false) { return this.setState({ success: true })}})
   }
 
   render() {
