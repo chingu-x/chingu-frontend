@@ -5,7 +5,7 @@ import Action from "./Action";
 import WeeklyCheckInButton from "./WeeklyCheckIn";
 import './VoyageCard.css';
 import Title from './Title';
-
+import CheckInDone from './CheckInDone';
 /**
  * TODO:
  * 1. think about alternate ways to style
@@ -105,6 +105,7 @@ export const CurrentVoyageCardWithTeam = ({
   endDate,
   team,
 }) => {
+  let currentStandUp = team.standups.filter((standup) => standup.expiration > Number(new Date()));
   return (
     <VoyageCardCreator
       leftPanel={() => <Badge number={voyageNumber} />}
@@ -112,7 +113,7 @@ export const CurrentVoyageCardWithTeam = ({
       team={() => (
         <Title title={team.title ? team.title : null} />
       )}
-      action={() => team ? <WeeklyCheckInButton team={team} /> : null}
+      action={() => currentStandUp[0] && currentStandUp[0].progress_sentiment ? <CheckInDone /> : <WeeklyCheckInButton team={team} />}
     />
   );
 };
