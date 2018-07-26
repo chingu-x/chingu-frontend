@@ -75,13 +75,13 @@ class WeeklyCheckin extends React.Component {
   submit = (e) => {
     e.preventDefault();
     let standup_data = {
-      progress_sentinment: this.state[300],
+      progress_sentiment: this.state[300],
       worked_on: this.state[301],
       working_on: this.state[302],
       blocked_on: this.state[303]
     }
     let cohort_id = this.state.cohort_id;
-    
+
     Store.mutations.submitApplication(
       this.toggleLoading,
       this.errorHandling,
@@ -96,14 +96,16 @@ class WeeklyCheckin extends React.Component {
         {this.state.errorMessage !== "" ? <Error goBack={"/profile"} error={this.state.errorMessage} /> : null}
         <div className="weekly-checkin-container">
           <div className="weekly-checkin-title">Weekly Checkin</div>
+          <div className="weekly-checkin-form">
           {this.state.success
             ? <SuccessForm />
-            : <div className="weekly-checkin-form">
-              {renderQAs(weeklyCheckinData, this.onFormChange, this.state)}
-              <hr className="hline" />
-              <button onClick={e => this.submit(e)} className="weekly-checkin-btn">Submit</button>
-            </div>
+            : <React.Fragment>
+                {renderQAs(weeklyCheckinData, this.onFormChange, this.state)}
+                <hr className="hline" />
+                <button onClick={e => this.submit(e)} className="weekly-checkin-btn">Submit</button>
+              </React.Fragment> 
           }
+          </div>
         </div>
       </React.Fragment>
     )
