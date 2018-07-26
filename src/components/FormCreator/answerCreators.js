@@ -174,6 +174,7 @@ function answerCreator_input(data, onFormChange, state) {
       value={state[data.id]}
       onChange={e => onFormChange(e)}
       className="voyage-application-input"
+      minLength={10}
     />
   )
 }
@@ -185,6 +186,7 @@ function answerCreator_textarea(data, onFormChange, state) {
       value={state[data.id]}
       onChange={e => onFormChange(e)}
       className="voyage-application-text-area"
+      minLength={10}
     />
   )
 }
