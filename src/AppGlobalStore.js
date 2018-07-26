@@ -5,7 +5,7 @@ const STORE_STATE_LOCAL_STORAGE_VERSION = 3;
 // https://d07c9835.ngrok.io/graphql
 // https://api.chingu.io/graphql
 const client = new ApolloClient({
-  uri: 'https://api.chingu.io/graphql',
+  uri: 'https://fb.api.chingu.io/graphql',
   request: operation => operation.setContext({
     headers: {
       authorization: `Bearer ${localStorage.getItem('token')}`,
