@@ -71,10 +71,13 @@ const Store = {
   queries: {
     queryCreator: async (qgl, loader, error) => {
       loader();
+      console.log('in query');
       try {
+        console.log('trying');
         const { data } = await client.query({
           query: qgl
         })
+        console.log('data=' + data);
         loader();
         return data;
       }
@@ -86,7 +89,19 @@ const Store = {
     },
     queryVoyages: (loader, error, gql) => {
       return Store.queries.queryCreator(gql, loader, error)
-    }
+    },
+    getAuthedUser: (loader, error, gql) => {
+      return Store.queries.queryCreator(gql, loader, error)
+      .then(data => {
+        console.log(data);
+        if (data.user === null) {
+          return null;
+        }
+        Store.state['user'] = data.user;
+        console.log(data.user);
+        return localStorage.setItem('store', JSON.stringify({ 'version': STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state }));
+      })
+    },
   },
   mutations: {
     mutationCreator: async (qgl, loader, error, params) => {
@@ -108,10 +123,9 @@ const Store = {
     authUser: (loader, error, params, gql) => {
       return Store.mutations.mutationCreator(gql, loader, error, params)
         .then(data => {
-          window.localStorage.setItem("token", data.userAuthGithub)
-          return Store.getAuthedUser();
+          window.localStorage.setItem("token", data.userAuthGithub);
+          return Store.queries.getAuthedUser(loader, error, get_user);
         })
-        .catch(err => console.log(err));
     },
     createUser: (loader, error, params, gql) => {
       return Store.mutations.mutationCreator(gql, loader, error, params)

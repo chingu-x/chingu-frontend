@@ -153,12 +153,12 @@ class Landing extends React.Component {
         {modalPrompt}
         <div className="landing-top" >
           <div className="tagline-box" >
-            <div className="tagline" > Learn how to be a team developer<br /> & boost your portfolio. </div>
-            <div className="tagline--subtext" > Gain real project experience with team opportunities </div>
+            <div className="tagline" >Get out of tutorial purgatory. </div>
+            <div className="tagline--subtext" >Learn how to be a team developer & boost your portfolio.</div>
             {Store.state.user
               ? null
               : <Link to="/login" >
-                <button className="big-green-btn" > Apply </button>
+                <button className="big-green-btn">Apply</button>
               </Link >
             }
           </div>

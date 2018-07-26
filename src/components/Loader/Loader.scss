@@ -12,9 +12,9 @@
     animation: spin 2s linear infinite;
     display: block;
     margin: 0 auto;
-    top: calc(50% - 90px);
+    top: calc(50vh - 90px);
     position: absolute;
-    left: calc(50% - 90px);
+    left: calc(50vw - 90px);
     z-index: 1000;
 }
 

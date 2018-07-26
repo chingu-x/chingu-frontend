@@ -15,7 +15,8 @@ class VoyagePortal extends React.Component {
       errorMessage: '',
       voyage: [],
       currentVoyages: [],
-      upcomingVoyages: []
+      upcomingVoyages: [],
+      alreadyApplied: false
     }
   }
   componentDidMount() {
@@ -27,12 +28,18 @@ class VoyagePortal extends React.Component {
       let currentVoyages = [];
       let upcomingVoyages = [];
       if (data.cohorts.length >= 1) {
+        console.log(data);
         data.cohorts.forEach((cohort) => {
           if (cohort.status === 'ongoing') {
             currentVoyages.push(cohort);
           } else if (cohort.status === 'registration_open') {
             upcomingVoyages.push(cohort);
           }
+          cohort.members.map(member => {
+            if (member.user.id === Store.state.user.id && member.user.status === 'pending_approval') {
+              this.setState({ alreadyApplied: true })
+            }
+          })
         })
       }
       this.setState({
@@ -85,6 +92,7 @@ class VoyagePortal extends React.Component {
                       startDate={voyage.start_date}
                       endDate={voyage.end_date}
                       id={voyage.id}
+                      alreadyApplied={this.state.alreadyApplied}
                     />
                   </div>
                 </section>
