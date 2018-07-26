@@ -58,30 +58,26 @@ const Store = {
   client,
   state: State,
   getAuthedUser: async () => {
-    console.log('in getAuthedUser');
-    try {
-      const { data } = await client.query({ query: get_user });
-      console.log('done waiting=' + data);
-      if (data.user === null) {
-        return null;
-      }
-      Store.state['user'] = data.user;
+    const user =
+      await Store.client.query({ query: get_user })
+        .catch(err => console.log(err));
+
+    if (user) {
+      Store.state['user'] = user.data.user;
       localStorage.setItem('store', JSON.stringify( { 'version' : STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state } ));
-      return Store.state.user;
-    }
-    catch (err) {
-      localStorage.clear();
-      return console.log('Error=' + err);
     }
   },
 
   queries: {
     queryCreator: async (qgl, loader, error) => {
       loader();
+      console.log('in query');
       try {
+        console.log('trying');
         const { data } = await client.query({
           query: qgl
         })
+        console.log('data=' + data);
         loader();
         return data;
       }
@@ -93,7 +89,19 @@ const Store = {
     },
     queryVoyages: (loader, error, gql) => {
       return Store.queries.queryCreator(gql, loader, error)
-    }
+    },
+    getAuthedUser: (loader, error, gql) => {
+      return Store.queries.queryCreator(gql, loader, error)
+      .then(data => {
+        console.log(data);
+        if (data.user === null) {
+          return null;
+        }
+        Store.state['user'] = data.user;
+        localStorage.setItem('store', JSON.stringify({ 'version': STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state }));
+        return Store.state.user;
+      })
+    },
   },
   mutations: {
     mutationCreator: async (qgl, loader, error, params) => {
@@ -115,8 +123,8 @@ const Store = {
     authUser: (loader, error, params, gql) => {
       return Store.mutations.mutationCreator(gql, loader, error, params)
         .then(data => {
-          window.localStorage.setItem("token", data.userAuthGithub)
-          return Store.getAuthedUser();
+          window.localStorage.setItem("token", data.userAuthGithub);
+          Store.queries.getAuthedUser(loader, error, get_user);
         })
     },
     createUser: (loader, error, params, gql) => {

@@ -34,7 +34,8 @@ class Register extends React.Component {
       204: country, // country
       205: new Date().getTimezoneOffset(), // timezone // TODO: preselect the timezone using this.state[205]
       206: '',
-      shouldRedirect: false
+      shouldRedirect: false,
+      failedRegistration: false
     }
   }
 
@@ -45,10 +46,10 @@ class Register extends React.Component {
         this.errorHandling,
         { code: this.state.code },
         AUTH_MUTATION
-      ).then((status) => {
-        console.log(status);
-        if (status === null) {
-          this.setState({ componentQueryingLoader: false, shouldRedirect: true })
+      ).then((data) => {
+        console.log('received=' + data);
+        if (Store.state.user && Store.state.user.id) {
+          this.setState({ shouldRedirect: true })
         }
         this.setState({ componentQueryingLoader: false });
       })
