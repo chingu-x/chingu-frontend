@@ -5,9 +5,22 @@ import './UserProfile.css'
 import Store from '../../AppGlobalStore';
 
 class UserProfile extends React.Component {
-  render() {
-    const user = Store.state.user;
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {
+        teams: []
+      }
+    }
+  }
 
+  componentDidMount() {
+    let user = Store.getUserState();
+    console.log(user);
+    this.setState({ user: user });
+  }
+  render() {
+    let user = this.state.user;
     const currentTeams = user.teams.filter(team => { return team.cohort.status === 'ongoing'});
     const pastTeams = user.teams.filter(team => { return team.cohort.status === 'ended' });
     

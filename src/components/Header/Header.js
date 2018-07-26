@@ -8,10 +8,15 @@ const Header = props => {
   let teams = [];
   let user = null;
 
-  if (Store.state.user) {
-    user = Store.state.user;
-    teams = Store.state.user.teams;
+  if (Store.state.user && localStorage.getItem('token')) {
+    let StoreUser = Store.getUserState();
+    user = StoreUser;
+    teams = StoreUser.teams;
   }
+  // if (Store.state.user) {
+  //   user = Store.state.user;
+  //   teams = Store.state.user.teams;
+  // }
   
   const handleLogout = e => {
     e.preventDefault();

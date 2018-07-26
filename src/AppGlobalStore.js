@@ -64,6 +64,19 @@ function fetchStateFromLocalStorage() {
   return {};
 }
 
+const shouldRefresh = () => {
+  const lastChecked = window.localStorage.getItem('lastChecked');
+  if (!lastChecked) return true;
+  const difference = Number(new Date()) - Number(lastChecked);
+  const minutes = 1; // change this to affect refresh time
+
+  return difference > (minutes * 60 * 1000);
+}
+
+const updateLastChecked = () => {
+  window.localStorage.setItem('lastChecked', JSON.stringify(Number(new Date())));
+}
+
 const State = fetchStateFromLocalStorage();
 
 const Store = {
@@ -77,7 +90,14 @@ const Store = {
     if (user) {
       Store.state['user'] = user.data.user;
       localStorage.setItem('store', JSON.stringify({ 'version' : STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state } ));
+      updateLastChecked();
     }
+  },
+  getUserState: () => {
+    if (shouldRefresh()) {
+      Store.getAuthedUser();
+    }
+    return Store.state.user;
   },
 
   queries: {
@@ -92,7 +112,8 @@ const Store = {
       }
       catch (err) {
         loader();
-        return error(err.message)
+        console.log(err);
+        throw error(err.message)
       }
     },
     queryVoyages: (loader, error, gql) => {
@@ -101,11 +122,11 @@ const Store = {
     getAuthedUser: (loader, error, gql) => {
       return Store.queries.queryCreator(gql, loader, error)
       .then(data => {
-        if (data.user) {
+        if (data && data.user) {
           Store.state['user'] = data.user;
           return localStorage.setItem('store', JSON.stringify({ 'version': STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state }));
         }
-      })
+      });
     },
   },
   mutations: {
