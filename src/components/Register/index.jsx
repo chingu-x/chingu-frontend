@@ -34,13 +34,13 @@ class Register extends React.Component {
       204: country, // country
       205: new Date().getTimezoneOffset(), // timezone // TODO: preselect the timezone using this.state[205]
       206: '',
-      shouldRedirect: false,
-      failedRegistration: false
+      redirectTarget: null,
+      failedRegistration: false,
     }
   }
 
   componentDidMount = () => {
-    if (!window.localStorage.getItem("token")) {
+    if (!window.localStorage.getItem('token')) {
       Store.mutations.authUser(
         this.toggleLoading,
         this.errorHandling,
@@ -48,10 +48,23 @@ class Register extends React.Component {
         AUTH_MUTATION
       ).then(() => {
         if (Store.state.user && Store.state.user.status !== 'profile_incomplete') {
-          this.setState({ shouldRedirect: true })
+          this.setState({ redirectTarget: '/profile' })
+        } else if (Store.state.user === null && window.localStorage.getItem("token")) {
+          this.errorHandling(true);
         }
         this.setState({ componentQueryingLoader: false });
       })
+    }
+    else {
+      Store.getAuthedUser()
+      .then(() => {
+        if (Store.state.user && Store.state.user.status !== 'profile_incomplete') {
+          this.setState({ redirectTarget: '/profile' })
+        } else if (Store.state.user === null && window.localStorage.getItem("token")) {
+          this.errorHandling(true);
+        }
+        this.setState({ componentQueryingLoader: false });
+      });
     }
   }
 
@@ -105,12 +118,12 @@ class Register extends React.Component {
 
   render() {
     if (this.state.componentQueryingLoader) return <Loader />;
-    if (this.state.shouldRedirect) {
+    if (this.state.redirectTarget) {
       return (
         <Redirect
           push={true}
           from="/register"
-          to={'/profile'}
+          to={this.state.redirectTarget}
         />
       );
     }
