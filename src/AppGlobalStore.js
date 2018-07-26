@@ -1,7 +1,7 @@
 import ApolloClient, { gql } from 'apollo-boost';
 
 // Increment version if the format of Store.state changes
-const STORE_STATE_LOCAL_STORAGE_VERSION = 3;
+const STORE_STATE_LOCAL_STORAGE_VERSION = 5;
 // https://d07c9835.ngrok.io/graphql
 // https://api.chingu.io/graphql
 const client = new ApolloClient({
@@ -17,40 +17,49 @@ const client = new ApolloClient({
 });
 
 const get_user = gql`
-  query getStateUser {
-    user {
+query getStateUser {
+  user {
+    id
+    avatar
+    username
+    status
+    background
+    interests
+    coding_history
+    country
+    skills {
+        name
+    }
+    cohorts {
       id
-      avatar
-      username
       status
-      background
-      interests
-      coding_history
-      country
-      skills {
-          name
-      }
-      cohorts {
-        id
-      }
-      teams {
-        id
-        title
-        standups {
-          progress_sentiment
-          expiration
+      start_date
+      end_date
+      members {
+        status
+        user {
+          username
         }
-        cohort {
-          id
-          title
-          start_date
-          end_date
-          status
-        }
-        
       }
     }
+    teams {
+      id
+      title
+      standups {
+        progress_sentiment
+        expiration
+      }
+      cohort {
+        id
+        title
+        start_date
+        end_date
+        status
+      }
+      
+    }
   }
+}
 `
 
 function fetchStateFromLocalStorage() {

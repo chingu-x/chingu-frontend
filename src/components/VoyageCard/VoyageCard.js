@@ -6,6 +6,7 @@ import WeeklyCheckInButton from "./WeeklyCheckIn";
 import './VoyageCard.css';
 import Title from './Title';
 import CheckInDone from './CheckInDone';
+import Pending from './Pending';
 /**
  * TODO:
  * 1. think about alternate ways to style
@@ -114,6 +115,21 @@ export const CurrentVoyageCardWithTeam = ({
         <Title title={team.title ? team.title : null} />
       )}
       action={() => currentStandUp[0] && currentStandUp[0].progress_sentiment ? <CheckInDone /> : <WeeklyCheckInButton team={team} />}
+    />
+  );
+};
+
+export const PendingApprovalVoyageCard = ({
+  voyageNumber,
+  startDate,
+  endDate,
+  cohort
+}) => {
+  return (
+    <VoyageCardCreator
+      leftPanel={() => <Badge number={voyageNumber} />}
+      rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
+      action={() => <Pending status={"Pending Approval"} />}
     />
   );
 };
