@@ -38,28 +38,28 @@ class Footer extends React.Component {
         <Link className="footer-link" to="/team">
           Our Team
         </Link>
-        <a className="footer-link" href="/">
+        {/* <a className="footer-link" href="/">
           Press
-        </a>
+        </a> */}
         <a className="footer-link" href="/privacy">
           Privacy Policy
         </a>
-        <Link className="footer-link" to="/companyfaq">
+        {/* <Link className="footer-link" to="/companyfaq">
           FAQ
-        </Link>
+        </Link> */}
       </div>,
-      <div key="3" className="footer-linkbox">
-        <div className="footer-subtitle">Programs</div>
-        <Link className="footer-link" to="/current">
-          Current Programs
-        </Link>
-        <Link className="footer-link" to="/apply">
-          Application
-        </Link>
-        <Link className="footer-link" to="/programfaq">
-          FAQ
-        </Link>
-      </div>
+      // <div key="3" className="footer-linkbox">
+      //   <div className="footer-subtitle">Programs</div>
+      //   <Link className="footer-link" to="/current">
+      //     Current Programs
+      //   </Link>
+      //   <Link className="footer-link" to="/apply">
+      //     Application
+      //   </Link>
+      //   {/* <Link className="footer-link" to="/programfaq">
+      //     FAQ
+      //   </Link> */}
+      // </div>
     ];
   }
 
