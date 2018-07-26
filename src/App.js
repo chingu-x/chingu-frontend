@@ -27,7 +27,7 @@ class App extends React.Component {
           <Route exact path="/profile" component={UserProfile} />
           <Route exact path="/voyage" component={VoyagePortal} />
           <Route exact path="/voyage/application/:id" component={VoyageApplication} />
-          <Route exact path="/team/checkin" component={WeeklyCheckin} />
+          <Route exact path="/team/checkin/:id" component={WeeklyCheckin} />
           <Route exact path="/current" component={CurrentPrograms} />
           <Route exact path="/team" component={Staff} />
           <Route exact path="/privacy" component={PrivacyPolicy} />

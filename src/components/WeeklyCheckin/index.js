@@ -12,6 +12,7 @@ class WeeklyCheckin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      cohort_id: 0,
       300: '',
       301: '',
       302: '',
@@ -24,6 +25,10 @@ class WeeklyCheckin extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({ cohort_id: this.props.match.params.id });
+  }
+
   toggleValueInSet = (set, value) => {
     set.has(value) ? set.delete(value) : set.add(value);
     return set;
@@ -33,7 +38,7 @@ class WeeklyCheckin extends React.Component {
   }
 
   errorHandling = (err) => {
-    this.setState({ error: true, errorMessage: err })
+    this.setState({ error: true, errorMessage: ' ' })
   }
 
   onFormChange = (e) => {
@@ -69,18 +74,20 @@ class WeeklyCheckin extends React.Component {
 
   submit = (e) => {
     e.preventDefault();
-    let answerObject = {
-      progress_sentinment: this.state[300],
+    let standup_data = {
+      progress_sentiment: this.state[300],
       worked_on: this.state[301],
       working_on: this.state[302],
       blocked_on: this.state[303]
     }
+    let cohort_id = this.state.cohort_id;
+
     Store.mutations.submitApplication(
       this.toggleLoading,
       this.errorHandling,
-      answerObject,
+      {standup_data, cohort_id},
       weeklyCheckinForm
-    ).then(() => { this.setState({ success: true })});
+    ).then(() => { if (this.state.error === false) { this.setState({ success: true })}});
   }
   render() {
     return (
@@ -89,14 +96,16 @@ class WeeklyCheckin extends React.Component {
         {this.state.errorMessage !== "" ? <Error goBack={"/profile"} error={this.state.errorMessage} /> : null}
         <div className="weekly-checkin-container">
           <div className="weekly-checkin-title">Weekly Checkin</div>
+          <div className="weekly-checkin-form">
           {this.state.success
             ? <SuccessForm />
-            : <div className="weekly-checkin-form">
-              {renderQAs(weeklyCheckinData, this.onFormChange, this.state)}
-              <hr className="hline" />
-              <button onClick={e => this.submit(e)} className="weekly-checkin-btn">Submit</button>
-            </div>
+            : <React.Fragment>
+                {renderQAs(weeklyCheckinData, this.onFormChange, this.state)}
+                <hr className="hline" />
+                <button onClick={e => this.submit(e)} className="weekly-checkin-btn">Submit</button>
+              </React.Fragment> 
           }
+          </div>
         </div>
       </React.Fragment>
     )

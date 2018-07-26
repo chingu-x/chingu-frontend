@@ -5,7 +5,7 @@ import { renderQAs } from '../FormCreator/answerCreators';
 import './Register.css';
 import '../FormCreator/FormCreator.css';
 import Error from '../Error/Error';
-import Loading from '../Loader/Loader';
+import Loader from '../Loader/Loader';
 import Store from '../../AppGlobalStore';
 import { REGISTER_USER, AUTH_MUTATION } from './graphql/mutations';
 import SuccessForm from '../Success/Success';
@@ -22,6 +22,7 @@ class Register extends React.Component {
     })
 
     this.state = {
+      componentQueryingLoader: true,
       loading: false,
       error: false,
       errorMessage: '',
@@ -33,7 +34,8 @@ class Register extends React.Component {
       204: country, // country
       205: new Date().getTimezoneOffset(), // timezone // TODO: preselect the timezone using this.state[205]
       206: '',
-      shouldRedirect: false
+      shouldRedirect: false,
+      failedRegistration: false
     }
   }
 
@@ -45,12 +47,11 @@ class Register extends React.Component {
         { code: this.state.code },
         AUTH_MUTATION
       ).then(() => {
-        // if the user has already filled out the register form
-        // redirect to profile page
-        if (Store.state.user.status === 'profile_complete') {
+        if (Store.state.user && Store.state.user.status !== 'profile_incomplete') {
           this.setState({ shouldRedirect: true })
         }
-      });
+        this.setState({ componentQueryingLoader: false });
+      })
     }
   }
 
@@ -59,6 +60,7 @@ class Register extends React.Component {
   }
 
   errorHandling = (err) => {
+    localStorage.clear();
     this.setState({ error: true, errorMessage: err })
   }
 
@@ -102,6 +104,7 @@ class Register extends React.Component {
   }
 
   render() {
+    if (this.state.componentQueryingLoader) return <Loader />;
     if (this.state.shouldRedirect) {
       return (
         <Redirect
@@ -114,8 +117,8 @@ class Register extends React.Component {
     return (
       this.state.code
         ? <React.Fragment>
-          {this.state.loading ? <Loading /> : null}
-          {this.state.errorMessage !== "" ? <Error goBack={"/register"} error={this.state.errorMessage} /> : null}
+          {this.state.loading ? <Loader /> : null}
+          {this.state.errorMessage !== "" ? <Error goBack={"/"} error={this.state.errorMessage} /> : null}
           <div className="chingu-application-container">
             <div className="chingu-application-modal">
               {this.state.success

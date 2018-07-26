@@ -1,12 +1,19 @@
 import ApolloClient, { gql } from 'apollo-boost';
 
+// Increment version if the format of Store.state changes
+const STORE_STATE_LOCAL_STORAGE_VERSION = 3;
+// https://d07c9835.ngrok.io/graphql
+// https://api.chingu.io/graphql
 const client = new ApolloClient({
   uri: 'https://api.chingu.io/graphql',
   request: operation => operation.setContext({
     headers: {
       authorization: `Bearer ${localStorage.getItem('token')}`,
     }
-  })
+  }),
+  onError: (err) => {
+    console.log('Apollo query error:\n' + err);
+  }
 });
 
 const get_user = gql`
@@ -23,9 +30,16 @@ const get_user = gql`
       skills {
           name
       }
+      cohorts {
+        id
+      }
       teams {
         id
         title
+        standups {
+          progress_sentiment
+          expiration
+        }
         cohort {
           id
           title
@@ -33,18 +47,28 @@ const get_user = gql`
           end_date
           status
         }
+        
       }
     }
   }
 `
 
-let stateFromLocalStorage = localStorage.getItem('store')
-  ? JSON.parse(localStorage.getItem('store'))
-  : {};
+function fetchStateFromLocalStorage() {
+  const stateFromLocalStorageJSON = localStorage.getItem('store');
+  if (stateFromLocalStorageJSON) {
+    let stateFromLocalStorage = JSON.parse(stateFromLocalStorageJSON);
+    if (stateFromLocalStorage.version === STORE_STATE_LOCAL_STORAGE_VERSION) {
+      return stateFromLocalStorage;
+    }
+  }
+  return {};
+}
+
+const State = fetchStateFromLocalStorage();
 
 const Store = {
   client,
-  state: stateFromLocalStorage,
+  state: State,
   getAuthedUser: async () => {
     const user =
       await Store.client.query({ query: get_user })
@@ -52,7 +76,7 @@ const Store = {
 
     if (user) {
       Store.state['user'] = user.data.user;
-      localStorage.setItem('store', JSON.stringify(Store.state));
+      localStorage.setItem('store', JSON.stringify({ 'version' : STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state } ));
     }
   },
 
@@ -67,14 +91,22 @@ const Store = {
         return data;
       }
       catch (err) {
-        console.log(err.message);
         loader();
         return error(err.message)
       }
     },
     queryVoyages: (loader, error, gql) => {
       return Store.queries.queryCreator(gql, loader, error)
-    }
+    },
+    getAuthedUser: (loader, error, gql) => {
+      return Store.queries.queryCreator(gql, loader, error)
+      .then(data => {
+        if (data.user) {
+          Store.state['user'] = data.user;
+          return localStorage.setItem('store', JSON.stringify({ 'version': STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state }));
+        }
+      })
+    },
   },
   mutations: {
     mutationCreator: async (qgl, loader, error, params) => {
@@ -82,13 +114,12 @@ const Store = {
       try {
         const { data } = await client.mutate({
           mutation: qgl,
-          variables: params
+          variables: params,
         })
         loader();
         return data;
       }
       catch (err) {
-        console.log(err.message);
         loader();
         return error(err.message)
       }
@@ -96,10 +127,9 @@ const Store = {
     authUser: (loader, error, params, gql) => {
       return Store.mutations.mutationCreator(gql, loader, error, params)
         .then(data => {
-          window.localStorage.setItem("token", data.userAuthGithub)
-          return Store.getAuthedUser();
+          window.localStorage.setItem("token", data.userAuthGithub);
+          return Store.queries.getAuthedUser(loader, error, get_user);
         })
-        .catch(err => console.log(err));
     },
     createUser: (loader, error, params, gql) => {
       return Store.mutations.mutationCreator(gql, loader, error, params)
