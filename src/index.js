@@ -28,7 +28,10 @@ function RenderApp() {
 if (!Store.state.user && localStorage.getItem('token')) {
   Store.getAuthedUser().then(() => { RenderApp(); });
 }
-RenderApp();
+else {
+  RenderApp();
+}
+
 
 
 registerServiceWorker();

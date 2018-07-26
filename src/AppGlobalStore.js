@@ -10,7 +10,10 @@ const client = new ApolloClient({
     headers: {
       authorization: `Bearer ${localStorage.getItem('token')}`,
     }
-  })
+  }),
+  onError: (err) => {
+    console.log('Apollo query error:\n' + err);
+  }
 });
 
 const get_user = gql`
