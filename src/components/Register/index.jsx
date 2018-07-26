@@ -47,8 +47,7 @@ class Register extends React.Component {
         { code: this.state.code },
         AUTH_MUTATION
       ).then((data) => {
-        console.log('received=' + data);
-        if (Store.state.user && Store.state.user.id) {
+        if (Store.state.user && Store.state.user.status !== 'profile_incomplete') {
           this.setState({ shouldRedirect: true })
         }
         this.setState({ componentQueryingLoader: false });

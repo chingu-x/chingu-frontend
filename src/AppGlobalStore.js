@@ -98,8 +98,8 @@ const Store = {
           return null;
         }
         Store.state['user'] = data.user;
-        localStorage.setItem('store', JSON.stringify({ 'version': STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state }));
-        return Store.state.user;
+        console.log(data.user);
+        return localStorage.setItem('store', JSON.stringify({ 'version': STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state }));
       })
     },
   },
@@ -124,7 +124,7 @@ const Store = {
       return Store.mutations.mutationCreator(gql, loader, error, params)
         .then(data => {
           window.localStorage.setItem("token", data.userAuthGithub);
-          Store.queries.getAuthedUser(loader, error, get_user);
+          return Store.queries.getAuthedUser(loader, error, get_user);
         })
     },
     createUser: (loader, error, params, gql) => {
