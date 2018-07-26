@@ -72,6 +72,37 @@ class VoyageApplication extends React.Component {
     } else {
       this.setState({ progressBar: { width: progress } })
     }
+
+    this.setState(this.withPersistedFormData(this.state));
+  }
+
+  withPersistedFormData(state) {
+    const formData = window.localStorage.getItem('formData');
+    let formDataObject = {};
+
+    if(formData) {
+      try {
+        formDataObject = JSON.parse(formData);
+      } catch (e) {
+        // Invalid so clear it
+        window.localStorage.setItem('formData', '');
+        return state;
+      }
+    }
+
+    const newState = Object.assign({}, state);
+
+    for( const key in formDataObject) {
+      const formElement = formDataObject[key];
+
+      if(formElement.constructor === Array){
+        newState[key] = new Set(formElement);
+      } else {
+        newState[key] = formElement;
+      }
+    }
+
+    return newState;
   }
 
   toggleLoading = () => {
@@ -99,6 +130,17 @@ class VoyageApplication extends React.Component {
     }
   }
 
+  getFormState = () => {
+    const keys = [1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 100, 101, 102, 103, 104, 105];
+    const formState = {}
+
+    keys.forEach(key => {
+      formState[key] = this.state[key];
+    });
+
+    return formState;
+  }
+
   goBackAPage = (e) => {
     e.preventDefault();
     this.setState({ currentPage: this.state.currentPage - 1 }, () => {
@@ -121,6 +163,7 @@ class VoyageApplication extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    window.localStorage.setItem("formData", JSON.stringify(this.getFormState()));
 
     const new_voyage_user_form = {
       cohort_role: this.state[1],
