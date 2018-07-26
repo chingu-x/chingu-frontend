@@ -33,7 +33,7 @@ class WeeklyCheckin extends React.Component {
   }
 
   errorHandling = (err) => {
-    this.setState({ error: true, errorMessage: err })
+    this.setState({ error: true, errorMessage: ' ' })
   }
 
   onFormChange = (e) => {
@@ -80,7 +80,7 @@ class WeeklyCheckin extends React.Component {
       this.errorHandling,
       answerObject,
       weeklyCheckinForm
-    ).then(() => { this.setState({ success: true })});
+    ).then(() => { if (this.state.error === false) { this.setState({ success: true })}});
   }
   render() {
     return (
