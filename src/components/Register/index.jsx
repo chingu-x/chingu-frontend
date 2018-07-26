@@ -45,14 +45,13 @@ class Register extends React.Component {
         this.errorHandling,
         { code: this.state.code },
         AUTH_MUTATION
-      ).then(() => {
-        // if the user has already filled out the register form
-        // redirect to profile page
-        if (Store.state.user.status !== 'profile_incomplete') {
+      ).then((status) => {
+        console.log(status);
+        if (status === null) {
           this.setState({ componentQueryingLoader: false, shouldRedirect: true })
         }
         this.setState({ componentQueryingLoader: false });
-      });
+      })
     }
   }
 
@@ -118,7 +117,7 @@ class Register extends React.Component {
       this.state.code
         ? <React.Fragment>
           {this.state.loading ? <Loader /> : null}
-          {this.state.errorMessage !== "" ? <Error goBack={"/register"} error={this.state.errorMessage} /> : null}
+          {this.state.errorMessage !== "" ? <Error goBack={"/"} error={this.state.errorMessage} /> : null}
           <div className="chingu-application-container">
             <div className="chingu-application-modal">
               {this.state.success

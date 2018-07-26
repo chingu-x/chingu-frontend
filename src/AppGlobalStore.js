@@ -58,13 +58,20 @@ const Store = {
   client,
   state: State,
   getAuthedUser: async () => {
-    const user =
-      await Store.client.query({ query: get_user })
-        .catch(err => console.log(err));
-
-    if (user) {
-      Store.state['user'] = user.data.user;
+    console.log('in getAuthedUser');
+    try {
+      const { data } = await client.query({ query: get_user });
+      console.log('done waiting=' + data);
+      if (data.user === null) {
+        return null;
+      }
+      Store.state['user'] = data.user;
       localStorage.setItem('store', JSON.stringify( { 'version' : STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state } ));
+      return Store.state.user;
+    }
+    catch (err) {
+      localStorage.clear();
+      return console.log('Error=' + err);
     }
   },
 
@@ -111,7 +118,6 @@ const Store = {
           window.localStorage.setItem("token", data.userAuthGithub)
           return Store.getAuthedUser();
         })
-        .catch(err => console.log(err));
     },
     createUser: (loader, error, params, gql) => {
       return Store.mutations.mutationCreator(gql, loader, error, params)
