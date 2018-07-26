@@ -2,7 +2,8 @@ import ApolloClient, { gql } from 'apollo-boost';
 
 // Increment version if the format of Store.state changes
 const STORE_STATE_LOCAL_STORAGE_VERSION = 1;
-
+// https://d07c9835.ngrok.io/graphql
+// https://api.chingu.io/graphql
 const client = new ApolloClient({
   uri: 'https://api.chingu.io/graphql',
   request: operation => operation.setContext({
@@ -71,18 +72,14 @@ const Store = {
   queries: {
     queryCreator: async (qgl, loader, error) => {
       loader();
-      console.log('in query');
       try {
-        console.log('trying');
         const { data } = await client.query({
           query: qgl
         })
-        console.log('data=' + data);
         loader();
         return data;
       }
       catch (err) {
-        console.log(err.message);
         loader();
         return error(err.message)
       }
@@ -93,13 +90,10 @@ const Store = {
     getAuthedUser: (loader, error, gql) => {
       return Store.queries.queryCreator(gql, loader, error)
       .then(data => {
-        console.log(data);
-        if (data.user === null) {
-          return null;
+        if (data.user) {
+          Store.state['user'] = data.user;
+          return localStorage.setItem('store', JSON.stringify({ 'version': STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state }));
         }
-        Store.state['user'] = data.user;
-        console.log(data.user);
-        return localStorage.setItem('store', JSON.stringify({ 'version': STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state }));
       })
     },
   },
@@ -107,15 +101,17 @@ const Store = {
     mutationCreator: async (qgl, loader, error, params) => {
       loader();
       try {
-        const { data } = await client.mutate({
+        const { data, errors } = await client.mutate({
           mutation: qgl,
-          variables: params
+          variables: params,
         })
         loader();
+        if (errors) {
+          return error(error)
+        }
         return data;
       }
       catch (err) {
-        console.log(err.message);
         loader();
         return error(err.message)
       }
