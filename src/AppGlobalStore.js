@@ -1,11 +1,11 @@
 import ApolloClient, { gql } from 'apollo-boost';
 
 // Increment version if the format of Store.state changes
-const STORE_STATE_LOCAL_STORAGE_VERSION = 1;
+const STORE_STATE_LOCAL_STORAGE_VERSION = 3;
 // https://d07c9835.ngrok.io/graphql
 // https://api.chingu.io/graphql
 const client = new ApolloClient({
-  uri: 'https://d07c9835.ngrok.io/graphql',
+  uri: 'https://api.chingu.io/graphql',
   request: operation => operation.setContext({
     headers: {
       authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -30,9 +30,16 @@ const get_user = gql`
       skills {
           name
       }
+      cohorts {
+        id
+      }
       teams {
         id
         title
+        standups {
+          progress_sentiment
+          expiration
+        }
         cohort {
           id
           title
@@ -40,6 +47,7 @@ const get_user = gql`
           end_date
           status
         }
+        
       }
     }
   }
