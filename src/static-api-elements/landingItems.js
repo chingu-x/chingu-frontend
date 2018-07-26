@@ -29,7 +29,7 @@ module.exports = {
       description: "Join a motivated community who share your goals"
     },
     {
-      title: "Grow",
+      title: "Growth",
       image: "grow--landing",
       description: "Unlock your portfolio with team project opportunities"
     },
