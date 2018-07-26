@@ -5,7 +5,7 @@ const STORE_STATE_LOCAL_STORAGE_VERSION = 1;
 // https://d07c9835.ngrok.io/graphql
 // https://api.chingu.io/graphql
 const client = new ApolloClient({
-  uri: 'https://api.chingu.io/graphql',
+  uri: 'https://d07c9835.ngrok.io/graphql',
   request: operation => operation.setContext({
     headers: {
       authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -68,7 +68,7 @@ const Store = {
 
     if (user) {
       Store.state['user'] = user.data.user;
-      localStorage.setItem('store', JSON.stringify( { 'version' : STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state } ));
+      localStorage.setItem('store', JSON.stringify({ 'version' : STORE_STATE_LOCAL_STORAGE_VERSION, ...Store.state } ));
     }
   },
 
@@ -104,14 +104,11 @@ const Store = {
     mutationCreator: async (qgl, loader, error, params) => {
       loader();
       try {
-        const { data, errors } = await client.mutate({
+        const { data } = await client.mutate({
           mutation: qgl,
           variables: params,
         })
         loader();
-        if (errors) {
-          return error(error)
-        }
         return data;
       }
       catch (err) {
