@@ -110,6 +110,7 @@ class VoyageApplication extends React.Component {
   }
 
   errorHandling = (err) => {
+    window.localStorage.setItem("formData", JSON.stringify(this.getFormState()));
     this.setState({ error: true, errorMessage: err })
   }
 
@@ -163,7 +164,6 @@ class VoyageApplication extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    window.localStorage.setItem("formData", JSON.stringify(this.getFormState()));
 
     const new_voyage_user_form = {
       cohort_role: this.state[1],
@@ -194,7 +194,10 @@ class VoyageApplication extends React.Component {
       this.state.application.length === 2 ? { voyage_form } : { voyage_form, new_voyage_user_form },
       submitApplication
     )
-      .then(() => { if (this.state.error === false) { return this.setState({ success: true })}})
+      .then(() => { if (this.state.error === false) {
+        window.localStorage.setItem('formData', '');
+        return this.setState({ success: true });
+      }})
   }
 
   render() {
