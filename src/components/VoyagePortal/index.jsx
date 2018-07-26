@@ -80,12 +80,12 @@ class VoyagePortal extends React.Component {
               }
             </div>
           </section>
-          {this.state.upcomingVoyages.length >= 1
-            ? this.state.upcomingVoyages.map((voyage, index) => {
-              return (
-                <section key={index} className="voyage-section">
-                  <p>Upcoming Voyages</p>
-                  <div className="voyage-card-list">
+          <section className="voyage-section">
+            <p>Upcoming Voyages</p>
+            <div className="voyage-card-list">
+              {this.state.upcomingVoyages.length >= 1
+                ? this.state.upcomingVoyages.map((voyage, index) => {
+                  return (
                     <Cards.UpcomingVoyageCard
                       key={index}
                       voyageNumber={voyage.id}
@@ -94,12 +94,12 @@ class VoyagePortal extends React.Component {
                       id={voyage.id}
                       alreadyApplied={this.state.alreadyApplied}
                     />
-                  </div>
-                </section>
-              )
-            })
-            : <Cards.NoVoyagesCard />
-          }
+                  )
+                })
+                : <Cards.NoVoyagesCard />
+              }
+            </div>
+          </section>
         </div>
       </React.Fragment>
     );
