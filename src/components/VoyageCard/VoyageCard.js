@@ -112,7 +112,7 @@ export const CurrentVoyageCardWithTeam = ({
       team={() => (
         <Title title={team.title ? team.title : null} />
       )}
-      action={() => team ? <WeeklyCheckInButton teamId={team.id} /> : null}
+      action={() => team ? <WeeklyCheckInButton team={team} /> : null}
     />
   );
 };
