@@ -46,7 +46,7 @@ class Register extends React.Component {
         this.errorHandling,
         { code: this.state.code },
         AUTH_MUTATION
-      ).then((data) => {
+      ).then(() => {
         if (Store.state.user && Store.state.user.status !== 'profile_incomplete') {
           this.setState({ shouldRedirect: true })
         }
@@ -60,6 +60,7 @@ class Register extends React.Component {
   }
 
   errorHandling = (err) => {
+    localStorage.clear();
     this.setState({ error: true, errorMessage: err })
   }
 
