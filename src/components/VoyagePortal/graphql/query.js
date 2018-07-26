@@ -7,6 +7,13 @@ export const get_voyages = gql`
         start_date
         end_date
         status
+        members {
+          id
+          status
+          user {
+            id
+          }
+        }
     }
   }
 `

@@ -5,7 +5,7 @@ import Action from "./Action";
 import WeeklyCheckInButton from "./WeeklyCheckIn";
 import './VoyageCard.css';
 import Title from './Title';
-
+import CheckInDone from './CheckInDone';
 /**
  * TODO:
  * 1. think about alternate ways to style
@@ -49,14 +49,15 @@ export const UpcomingVoyageCard = ({
   voyageNumber,
   startDate,
   endDate,
-  id
+  id,
+  alreadyApplied
 }) => {
   return (
     <VoyageCardCreator
       backgroundColor={"#EFEFEF"}
       leftPanel={() => <Badge number={voyageNumber} />}
       rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
-      action={() => <Action id={id}/>}
+      action={() => alreadyApplied ? null : <Action id={id}/>}
     />
   );
 };
@@ -104,6 +105,7 @@ export const CurrentVoyageCardWithTeam = ({
   endDate,
   team,
 }) => {
+  let currentStandUp = team.standups.filter((standup) => standup.expiration > Number(new Date()));
   return (
     <VoyageCardCreator
       leftPanel={() => <Badge number={voyageNumber} />}
@@ -111,7 +113,7 @@ export const CurrentVoyageCardWithTeam = ({
       team={() => (
         <Title title={team.title ? team.title : null} />
       )}
-      action={() => team ? <WeeklyCheckInButton teamId={team.id} /> : null}
+      action={() => currentStandUp[0] && currentStandUp[0].progress_sentiment ? <CheckInDone /> : <WeeklyCheckInButton team={team} />}
     />
   );
 };

@@ -141,7 +141,6 @@ CARD ACTIONS
 .action-button:hover {
   background-color: $theme-green--hover;
 }
-
 .action-warning {
   text-transform: uppercase;
   color: #EF8585;
@@ -161,6 +160,9 @@ CARD ACTIONS
     color: white;
     text-decoration: none;
   }
+}
+.action-btn-done {
+  background-color: $grey;
 }
 // TODO: move to own scss file
 .weekly-checkin-container {

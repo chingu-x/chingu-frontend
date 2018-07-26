@@ -15,7 +15,8 @@ class VoyagePortal extends React.Component {
       errorMessage: '',
       voyage: [],
       currentVoyages: [],
-      upcomingVoyages: []
+      upcomingVoyages: [],
+      alreadyApplied: false
     }
   }
   componentDidMount() {
@@ -27,12 +28,18 @@ class VoyagePortal extends React.Component {
       let currentVoyages = [];
       let upcomingVoyages = [];
       if (data.cohorts.length >= 1) {
+        console.log(data);
         data.cohorts.forEach((cohort) => {
           if (cohort.status === 'ongoing') {
             currentVoyages.push(cohort);
           } else if (cohort.status === 'registration_open') {
             upcomingVoyages.push(cohort);
           }
+          cohort.members.map(member => {
+            if (member.user.id === Store.state.user.id && member.status === 'pending_approval') {
+              this.setState({ alreadyApplied: true })
+            }
+          })
         })
       }
       this.setState({
@@ -73,25 +80,26 @@ class VoyagePortal extends React.Component {
               }
             </div>
           </section>
-          {this.state.upcomingVoyages.length >= 1
-            ? this.state.upcomingVoyages.map((voyage, index) => {
-              return (
-                <section key={index} className="voyage-section">
-                  <p>Upcoming Voyages</p>
-                  <div className="voyage-card-list">
+          <section className="voyage-section">
+            <p>Upcoming Voyages</p>
+            <div className="voyage-card-list">
+              {this.state.upcomingVoyages.length >= 1
+                ? this.state.upcomingVoyages.map((voyage, index) => {
+                  return (
                     <Cards.UpcomingVoyageCard
                       key={index}
                       voyageNumber={voyage.id}
                       startDate={voyage.start_date}
                       endDate={voyage.end_date}
                       id={voyage.id}
+                      alreadyApplied={this.state.alreadyApplied}
                     />
-                  </div>
-                </section>
-              )
-            })
-            : <Cards.NoVoyagesCard />
-          }
+                  )
+                })
+                : <Cards.NoVoyagesCard />
+              }
+            </div>
+          </section>
         </div>
       </React.Fragment>
     );

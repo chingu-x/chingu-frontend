@@ -29,3 +29,12 @@
   margin: 0 auto;
   cursor: pointer;
 }
+@media (max-width: 1180px) {
+  .p404-image {
+    width: 80vw;
+  }
+  .p404-goBack-btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

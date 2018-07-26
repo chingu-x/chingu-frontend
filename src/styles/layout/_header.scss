@@ -145,12 +145,13 @@
     background-color: $pale-purple--hover;
   }
 }
-
+.header-dropdown-content--centered {
+  margin: 0 auto;
+}
 .header-dropdown-content, 
 .header-dropdown-content--centered  {
   visibility: hidden;
   width: 70%;
-  margin: 0 auto;
   display: block;
   background-color: white;
   box-shadow: $box-shadow-dark;
@@ -188,7 +189,8 @@
 .header-dropdown-content {
   position: relative;
   margin-top: 60px;
-  margin-right: -120px;
+  float: right;
+  margin-right: -30%;
 }
 
 @media only screen and (max-width: 768px) {

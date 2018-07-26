@@ -5,10 +5,10 @@ import * as React from "react";
  * 1. add way to navigate to check in page
  **/
 
-const WeeklyCheckIn = () => {
+const WeeklyCheckIn = ({ team }) => {
   return (
     <div className="action-button--to-Voyage">
-      <a href={"/team/checkin"}>Weekly Check-In</a>
+      <a href={"/team/checkin/" + team.cohort.id}>Weekly Check-In</a>
     </div>
   );
 };
