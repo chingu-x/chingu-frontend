@@ -11,7 +11,7 @@ FONT
 $base-font-family: "Open Sans", "Helvetica Neue", "Raleway", sans-serif;
 $base-font-size: 14px;
 $portal-title-size: 40px;
-$portal-subcategory-size: 20px;
+$portal-subcategory-size: 24px;
 $base-font-weight: 400;
 /*
 ==========================
@@ -68,112 +68,121 @@ STYLING
 $box-shadow: 0px 3px 6px $light-grey;
 $box-shadow-dark: 0px 3px 6px $dark-grey;
 $border: 1px solid $light-grey;
+$border-radius: 20px;
 /*
 ==========================
-ADMIN PORTALS
+PORTALS
 ==========================
 */
-@mixin admin-portal-title {
+@mixin portal-title {
   color: $light-grey;
   font-size: $portal-title-size;
-  padding-top: 40px;
-  padding-bottom: 40px;
   margin: 0 auto;
+  margin-top: 120px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
   text-align: center;
   display: block;
-  text-transform: uppercase;
 }
 
-@mixin admin-portal-subcategory {
+@mixin portal-subcategory {
   color: $light-grey;
   font-size: $portal-subcategory-size;
   text-align: left;
   text-transform: uppercase;
-  padding-bottom: 15px;
-}
-/*
-==========================
-ADMIN BTNS
-==========================
-*/
-@mixin admin-voyage-btn($color, $hover-color) {
-  background-color: $color;
-  color: white;
-  text-transform: uppercase;
-  padding: 10px;
-  font-size: 14px;
-  letter-spacing: 2px;
-  text-align: center;
-  &::hover {
-    background-color: $hover-color;
-  }
+  font-weight: 300;
 }
 
-@mixin admin-voyage-btn--sub($color) {
-  background-color: white;
-  color: $color;
-  border: 1px solid $color;
-  padding: 5px;
-  font-size: 14px;
-  text-align: center;
-  &::hover {
-    background-color: color;
-    color: white;
-  }
+@mixin portal-description {
+  color: $dark-grey;
+  font-size: $base-font-size;
+  text-align: left;
 }
 /*
 ==========================
-CARDS & TABS
+CARDS
 ==========================
 */
-@mixin rounded-card {
-  border-radius: 20px;
+@mixin card {
+  margin: 5px;
+  padding: 20px;
+  box-shadow: $box-shadow;
+  border-radius: $border-radius;
+  align-items: center;
+  justify-content: space-around;
+  color: $dark-grey;
   background-color: white;
-  box-shadow: $drop-shadow;
 }
-@mixin half-rounded-tab($color) {
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  background-color: $color;
-  color: white;
-  text-align: center;
-  box-shadow: $drop-shadow;
-  font-size: 12px;
-  padding: 5px 10px;
+
+@mixin voyage-card($color) {
+  @include card;
+  color: $theme-purple;
+  width: 500px;
+  height: 300px;
+  display: inline-flex;
+  background: $color;
+}
+
+@mixin voyage-card--admin-actions($color) {
+  @include voyage-card($color);
+  border-radius: 20px 20px 0px 0px;
+}
+
+@mixin form-card {
+  @include card;
+  width: 460px;
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+
+@mixin form-card--left {
+  @include card;
+  display: inline-block;
+  width: 460px;
+  margin-bottom: 100px;
+}
+@mixin form-card--right {
+  @include card;
+  display: inline-block;
+  width: 300px;
+  margin-bottom: 100px;
 }
 /*
 ==========================
 VOYAGE CARDS
 ==========================
 */
-@mixin voyage-card($color) {
-  width: 500px;
-  height: 300px;
-  border-radius: 20px;
-  background-color: $color;
-  color: $theme-purple;
-  box-shadow: $drop-shadow;
-}
-@mixin voyage-badge {
-  width: 186px;
-  height: 186px;
+@mixin voyage-badge($border-color) {
+  width: 204px;
+  height: 204px;
   border-radius: 50%;
-  border: 15px solid $theme-purple;
+  border: 15px solid $border-color;
   color: $theme-purple;
   background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-@mixin user-btn--apply {
-	background-color: $theme-green;
+/*
+==========================
+MAIN BUTTONS
+==========================
+*/
+@mixin system-button($background, $hover) {
+  width: 150px;
+  font-size: 14px;
+	background-color: $background;
 	color: white;
 	text-transform: uppercase;
-	border-radius: 20px;
-	padding: 10px 30px 10px 30px;
-	letter-spacing: 2px;
+	border-radius: $border-radius;
+	padding: 10px;
+	letter-spacing: 0.1em;
 	text-align: center;
 	border: none;
-	display: block;
+  display: block;
+  box-shadow: $box-shadow;
 	&:hover{
-		background-color: $theme-green--hover;
+		background-color: $hover;
 	}
 }
 /*

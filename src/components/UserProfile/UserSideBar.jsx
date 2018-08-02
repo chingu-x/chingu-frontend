@@ -34,7 +34,7 @@ class UserSideBar extends React.Component {
       if (user[elem.schemaKey] && user[elem.schemaKey].length > 0) {
         return (
           <div className={elem.divClassName}>
-            <h1>{elem.desc}</h1>
+            <h1 className="user-sidebar-subcategory">{elem.desc}</h1>
             <p>{user[elem.schemaKey]}</p>
           </div>
         )
@@ -48,7 +48,7 @@ class UserSideBar extends React.Component {
     if (user.skills && user.skills.length > 0) {
       skillDOM = (
         <div className="user-skills">
-          <h1>skills</h1>
+          <h1 className="user-sidebar-subcategory">skills</h1>
           <ul>
             {user.skills.map(elem => (<li>{elem}</li>))}
           </ul>
@@ -62,7 +62,7 @@ class UserSideBar extends React.Component {
     if (user) {
       linkDOM = (
         <div className="user-links">
-          <h1>links</h1>
+          <h1 className="user-sidebar-subcategory">links</h1>
           <ul>
             <li>
               <a target="_blank" href={"https://www.github.com/" + user.username}>

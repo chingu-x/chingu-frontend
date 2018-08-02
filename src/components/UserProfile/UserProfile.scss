@@ -1,7 +1,5 @@
 @import '../../styles/abstracts/_variables.scss';
 
-//TODO: use variables and mixins where possible
-
 .user-profile-container {
   max-width: $max-width;
   display: grid;
@@ -23,11 +21,9 @@
 }
 
 .user-voyage-title {
-    color: $grey;
-    font-size: 24px;
-    text-transform: uppercase;
-    font-weight: 300;
+    @include portal-subcategory;
     margin-left: 5px;
+    margin-bottom: 10px;
 }
 .user-voyage {
   margin-bottom: 50px;
@@ -46,7 +42,6 @@ MEDIA QUERY
     margin-top: 100px;
     padding: 0px;
     grid-gap: 100px;
-    // justify-content: center;
   }
   .user-profile-container-personal {
     margin: 0 auto;
