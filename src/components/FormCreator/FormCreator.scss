@@ -33,6 +33,18 @@ QUESTION SUBTEXT
 }
 /*
 ==========================
+SUBMIT BUTTON
+==========================
+*/
+.form-btn {
+    @include system-button($theme-green, $theme-green--hover);
+}
+
+.hline {
+    @include hline;
+}
+/*
+==========================
 ANSWER FONT
 ==========================
 */
