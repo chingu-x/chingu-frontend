@@ -69,7 +69,7 @@ const FormContainer = ({ variables }) => (
       if (loading) return "<Loading />";
       else if (error) return !console.log(error) && "<Error error={error} />";
       const { form: { purpose, version, questions } } = data;
-      return <Form purpose={purpose} version={version} questions={questions} />
+      return <DynamicForm purpose={purpose} version={version} questions={questions} />
     }
   }
   </Query>
@@ -99,7 +99,7 @@ const FormSubmit = ({ onSubmit, variables, redirect }) => (
 );
 
 // this is the actual Form component (manages form state / rendering question components)
-class Form extends React.Component {
+class DynamicForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -118,6 +118,15 @@ class Form extends React.Component {
     const { name, value } = currentTarget;
     const form_data = { ...this.state.form_data };
     form_data[name] = value;
+    this.setState({ form_data });
+  }
+
+  onCheckboxClick = (name, value) => {
+    const form_data = { ...this.state.form_data };
+    value in form_data[name] ?
+      form_data[name].splice(form_data[name].indexOf(value), 1) :
+      form_data[name].push(value)
+
     this.setState({ form_data });
   }
 
