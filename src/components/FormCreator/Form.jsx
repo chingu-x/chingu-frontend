@@ -3,6 +3,8 @@ import { renderQAs } from './answerCreators';
 import { Query, Mutation } from "react-apollo";
 import { gql } from "apollo-boost";
 import './FormCreator.css';
+import Loader from '../Loader/Loader';
+import Error from '../Error/Error';
 
 const formQuery = gql`
 query getForm(
@@ -66,8 +68,11 @@ const FormContainer = ({ variables }) => (
   <Query query={formQuery} variables={variables}>
     {
       ({ data, loading, error }) => {
-        if (loading) return "<Loading />";
-        else if (error) return !console.log(error) && "<Error error={error} />";
+        if (loading) return <Loader />;
+        if (error) { 
+          console.log(error); 
+          return <Error error={error.message} />;
+        };
         const { form: { purpose, version, questions } } = data;
         return <Form purpose={purpose} version={version} questions={questions} />
       }
@@ -81,8 +86,11 @@ const FormSubmit = ({ onSubmit, variables }) => (
   <Mutation mutation={submitForm}>
     {
       (submitMutation, { loading, error }) => {
-        if (loading) return "<Loading />";
-        if (error) return "<Error error={error} />";
+        if (loading) return <Loader />;
+        if (error) { 
+          console.log(error); 
+          return <Error error={error.message} />;
+        };
         return (
           <button
             className="form-btn"
@@ -131,19 +139,20 @@ class Form extends React.Component {
         if (!form_data[name]) {
           form_data[name] = new Set();
         }
-        form_data[name] =  this.toggleValueInSet(form_data[name], value);
+        form_data[name] = this.toggleValueInSet(form_data[name], value);
         break;
       default:
         form_data[name] = value;
         break;
     }
-
     this.setState({ form_data });
   }
 
   onSubmit = (submitMutation, variables) => submitMutation({ variables });
 
   render() {
+    console.log('rendering questions=' + this.state.questions);
+    console.log(this.state.form_data);
     const { purpose, version, questions, form_data } = this.state;
     return (
       <div>
