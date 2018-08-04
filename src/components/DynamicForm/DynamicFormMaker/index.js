@@ -9,7 +9,7 @@ import {
   questionComponent_dropdown_multiple,
   questionComponent_checkbox_2_column,
   questionComponent_btn_3_options
-} from './AnswerTypes/AnswerTypes';
+} from './QuestionComponents';
 
 export function DynamicFormMaker(questions, onFormChange, form_data) {
   return questions.map((question) => {
