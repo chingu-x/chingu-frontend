@@ -173,7 +173,6 @@ export function questionComponent_radio_special_badge(data, onFormChange, form_d
 }
 
 export function questionComponent_input(data, onFormChange, form_data) {
-  console.log(data)
   return (
     <input type={data.input_type}
       name={data.field_name}

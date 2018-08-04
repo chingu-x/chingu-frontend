@@ -45,6 +45,8 @@ export function DynamicFormMaker(questions, onFormChange, form_data) {
       case 'button_3_colors':
         QuestionComponent = questionComponent_btn_3_options;
         break;
+      case 'hidden':
+        return null;
       default:
         break;
     }
