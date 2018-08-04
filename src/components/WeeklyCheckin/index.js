@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './WeeklyCheckin.css';
 import '../FormCreator/FormCreator.css';
-import FormContainer from '../FormCreator/Form';
+import DynamicForm from '../FormCreator/Form';
 // import weeklyCheckinData from './weeklyCheckin.data';
 // import { renderQAs } from '../FormCreator/answerCreators.js';
 // import Store from '../../AppGlobalStore';
@@ -28,7 +28,7 @@ class WeeklyCheckin extends React.Component {
         <div className="weekly-checkin-container">
           <div className="weekly-checkin-title">Weekly Checkin</div>
           <div className="weekly-checkin-form">
-            <FormContainer variables={{purpose: "weekly-checkin"}} />
+            <DynamicForm variables={{purpose: "chingu_application"}} />
           </div>
         </div>
     )
