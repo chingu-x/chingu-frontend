@@ -2,36 +2,38 @@ import * as React from "react";
 import { DynamicFormMaker } from './DynamicFormMaker';
 import { Query, Mutation } from "react-apollo";
 import { gql } from "apollo-boost";
+import * as qs from "query-string";
 import './DynamicForm.css';
 import Loader from '../Loader/Loader';
 import Error from '../Error/Error';
 
 // this is the actual export
-const DynamicForm = ({ purpose, version }) => {
+const DynamicForm = ({ purpose, version, queryString }) => {
   const dynamicFormQuery = gql`
-  query getDynamicForm(
-    $purpose:FormPurposeEnum!
-    $version:Int){
-    form(
-      purpose:$purpose
-      version: $version
-    ) {
-      id
-      purpose
-      version
-      questions {
+    query getDynamicForm(
+      $purpose:FormPurposeEnum!
+      $version:Int){
+      form(
+        purpose:$purpose
+        version: $version
+      ) {
         id
-        field_name
-        text
-        subtext
-        input_type
-        options
-        minlength
-        maxlength
+        purpose
+        version
+        questions {
+          id
+          field_name
+          text
+          subtext
+          input_type
+          options
+          minlength
+          maxlength
+        }
       }
     }
-  }
   `;
+  
   return (
     <Query query={dynamicFormQuery} variables={{ purpose, version }}>
       {
@@ -42,7 +44,12 @@ const DynamicForm = ({ purpose, version }) => {
             return <Error error={error.message} />;
           };
           const { form: { purpose, version, questions } } = data;
-          return <DynamicFormContainer purpose={purpose} version={version} questions={questions} />
+          return <DynamicFormContainer
+            purpose={purpose}
+            version={version}
+            questions={questions}
+            queryString={qs.parse(queryString)}
+          />
         }
       }
     </Query>
@@ -113,11 +120,19 @@ class DynamicFormContainer extends React.Component {
 
   mapFormDataFields = (questions) => questions.reduce(
     (form_data, { field_name, input_type }) => {
+      // creates a Set for multiple answers
       if (
         // add other multiple answer types here
         ['checkbox', 'checkbox_2_column'].includes(input_type)
       ) form_data[field_name] = new Set();
       else form_data[field_name] = '';
+
+      // insert hidden field values from query string params
+      if (input_type === 'hidden') {
+        const qsValue = this.props.queryString[field_name];
+        if (!qsValue) console.error(`Missing query string parameter ${field_name}`);
+        form_data[field_name] = qsValue;
+      }
       return form_data;
     },
     {},
