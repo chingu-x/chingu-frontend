@@ -8,12 +8,15 @@ import FAQ from "./components/Pages/FAQ";
 import companyFAQ from "./static-api-elements/companyFAQ";
 import programFAQ from "./static-api-elements/programFAQ";
 import CurrentPrograms from "./components/Pages/CurrentPrograms";
-import VoyageApplication from './components/VoyageApplication';
+// TODO: refactor for dynamic forms then uncomment
+// import VoyageApplication from './components/VoyageApplication';
 import UserProfile from './components/UserProfile';
 import Missing404Page from './components/404/404';
 import Header from './components/Header/Header';
 import WeeklyCheckin from './components/WeeklyCheckin';
 import VoyagePortal from './components/VoyagePortal';
+// TODO: remove after testing
+import DynamicForm from './components/DynamicForm';
 
 class App extends React.Component {
   render() {
@@ -26,13 +29,16 @@ class App extends React.Component {
           <Route exact path="/register" component={Landing} />
           <Route exact path="/profile" component={UserProfile} />
           <Route exact path="/voyage" component={VoyagePortal} />
-          <Route exact path="/voyage/application/:id" component={VoyageApplication} />
+          {/* TODO: uncomment when refactored to handle dynamic form */}
+          {/* <Route exact path="/voyage/application/:id" component={VoyageApplication} /> */}
           <Route exact path="/team/checkin/:id" component={WeeklyCheckin} />
           <Route exact path="/current" component={CurrentPrograms} />
           <Route exact path="/team" component={Staff} />
           <Route exact path="/privacy" component={PrivacyPolicy} />
           <Route exact path="/companyfaq" render={() => <FAQ headerText="Company FAQs" data={companyFAQ} />} />
           <Route exact path="/programfaq" render={() => <FAQ headerText="Program FAQs" data={programFAQ} />} />
+          {/* TODO: remove after testing */}
+          <Route exact path="/form" render={() => <DynamicForm purpose="chingu_application" /> } />
           <Route path="*" exact component={Missing404Page} />
         </Switch>
         <Footer />

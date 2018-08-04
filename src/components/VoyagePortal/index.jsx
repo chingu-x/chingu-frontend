@@ -61,9 +61,9 @@ class VoyagePortal extends React.Component {
         {this.state.loading ? <Loading /> : null}
         {this.state.errorMessage !== "" ? <Error goBack={"/voyage"} error={this.state.errorMessage} /> : null}
         <div className="voyage-portal">
-          <h1>VOYAGES</h1>
+          <h1 className="voyage-portal-title">VOYAGES</h1>
           <section className="voyage-section">
-            <p>Current Voyages</p>
+            <p className="voyage-portal-subcategory">Current Voyages</p>
             <div className="voyage-card-list">
               {this.state.currentVoyages.length >= 1
                 ? this.state.currentVoyages.map((voyage, index) => {
@@ -81,7 +81,7 @@ class VoyagePortal extends React.Component {
             </div>
           </section>
           <section className="voyage-section">
-            <p>Upcoming Voyages</p>
+            <p className="voyage-portal-subcategory">Upcoming Voyages</p>
             <div className="voyage-card-list">
               {this.state.upcomingVoyages.length >= 1
                 ? this.state.upcomingVoyages.map((voyage, index) => {

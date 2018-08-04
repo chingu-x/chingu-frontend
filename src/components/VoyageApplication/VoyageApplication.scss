@@ -9,13 +9,7 @@ CONTAINER
 }
 
 .voyage-application {
-    width: 460px;
-    background-color: white;
-    border-radius: 20px;
-    margin: 0 auto;
-    padding: 20px;
-    box-shadow: $box-shadow;
-    margin-bottom: 100px;
+    @include form-card;
 }
 /*
 ==========================
@@ -48,7 +42,7 @@ PAGE TITLE
 /*
 ==========================
 FORM TITLE
-==========================
+==========================s
 */
 .voyage-application-subtitle {
     color: $grey;
@@ -71,30 +65,24 @@ BUTTONS
     grid-template-areas: "a b";
     grid-template-columns: repeat(2, 1fr);
 }
-.voyage-appliation-btn--green, 
-.voyage-appliation-btn--grey {
-    color: white;
-    font-size: 20px;
-    text-align: center;
-    border: none;
-    box-shadow: $box-shadow;
-    padding: 5px;
-    width: 150px;
-    border-radius: 20px;
-    display: inline-block;
-    position: relative;
-    margin-top: 15px;
-}
+
 .voyage-appliation-btn--green {
     grid-area: b;
     justify-self: end;
-    background-color: $theme-green;
+    @include system-button($theme-green, $theme-green--hover);
 }
 
 .voyage-appliation-btn--grey {
     grid-area: a;
     justify-self: start;
-    background-color: $light-grey;
+    @include system-button($light-grey, $grey);
+}
+.voyage-appliation-btn--green, 
+.voyage-appliation-btn--grey {
+    padding: 5px;
+    display: inline-block;
+    position: relative;
+    margin-top: 15px;
 }
 /*
 ==========================

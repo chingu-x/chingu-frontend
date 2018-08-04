@@ -23,7 +23,13 @@ const weeklyCheckinData = [
         id: 303,
         type: 'textarea',
         question: 'What are your blockers this week?',
-    }
+    },
+    {
+        id: 304,
+        type: 'checkbox',
+        question: 'Please select: I want to join a Chingu cohort as a...',
+        answers: ['Coder', 'Designer', 'Data Scientist', 'Digital Marketer', 'Other']
+    },
 ]
 
 export default weeklyCheckinData;

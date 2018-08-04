@@ -3,30 +3,17 @@
 .voyage-portal {
   max-width: $max-width;
   margin: 0 auto;
-
-  > h1 {
-    padding-top: 100px;
-    font-size: 40px;
-    font-weight: normal;
-    text-align: center;
-    color: #E6E6E6;
-    text-transform: uppercase;
-  }
 }
-
+.voyage-portal-title {
+  @include portal-title;
+}
 .voyage-section {
   margin-bottom: 55px;
-
-  > p:first-child {
-    color: $grey;
-    font-size: 24px;
-    text-transform: uppercase;
-    font-weight: 300;
-    margin: 0px;
-    margin-left: 5px;
-  }
 }
-
+.voyage-portal-subcategory {
+  @include portal-subcategory;
+  margin-left: 5px;
+}
 .voyage-card-list {
   width: $max-width;
   display: grid;

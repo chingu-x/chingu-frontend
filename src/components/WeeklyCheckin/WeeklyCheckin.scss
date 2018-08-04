@@ -10,13 +10,7 @@
 }
 
 .weekly-checkin-form {
-    width: 460px;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: $box-shadow;
-    margin: 0 auto;
-    padding: 20px;
-    margin-bottom: 100px;
+    @include form-card;
 }
 
 .hline {
@@ -24,7 +18,7 @@
 }
 
 .weekly-checkin-btn {
-    @include user-btn--apply;
+    @include system-button($theme-green, $theme-green--hover);
     margin: 0 auto;
     margin-top: 20px;
 }
