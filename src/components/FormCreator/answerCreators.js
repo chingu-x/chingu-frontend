@@ -11,10 +11,10 @@ import {
   answerCreator_btn_3_options
 } from './AnswerTypes/AnswerTypes';
 
-export function renderQAs(applicationData, onFormChange, state) {
-  return applicationData.map((setOfQuestionAnswer) => {
+export function renderQAs(questions, onFormChange, form_data) {
+  return questions.map((question) => {
     let answerComponent;
-    switch (setOfQuestionAnswer.type) {
+    switch (question.input_type) {
       case 'checkbox':
         answerComponent = answerCreator_checkbox;
         break;
@@ -46,12 +46,13 @@ export function renderQAs(applicationData, onFormChange, state) {
         break;
     }
     return (
-      <div key={'question_' + setOfQuestionAnswer.id} className="form-QA">
+      <div key={'question_' + question.name} className="form-QA">
         <label className="form-question">
-          {setOfQuestionAnswer.question}
+          {/* {question.field_name} */}
+          {question.text}
         </label>
-        {setOfQuestionAnswer.subtext ? <div className="form-subtext">{setOfQuestionAnswer.subtext}</div> : null}
-        {answerComponent(setOfQuestionAnswer, onFormChange, state)}
+        {question.subtext ? <div className="form-subtext">{question.subtext}</div> : null}
+        {answerComponent(question, onFormChange, form_data)}
       </div>
     )
   })
