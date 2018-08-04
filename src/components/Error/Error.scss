@@ -1,11 +1,7 @@
 @import '../../styles/abstracts/_variables.scss';
 
 .error-page-container {
-    position: absolute;
-    z-index: 200;
-    background-color: $palest-grey;
-    width: 100%;
-    height: 100%;
+    @include modal--solid-background;
 }
 .error-page-modal {
     z-index: 210;
