@@ -7,7 +7,8 @@ import LandingBarWithIcons from "./LandingBarWithIcons";
 import LandingTestimonial from "./LandingTestimonial";
 import LandingProjects from './LandingProjects';
 import landingItems from "../../static-api-elements/landingItems";
-import Register from '../Register';
+// TODO: uncomment after refactoring for dynamic forms
+// import Register from '../Register';
 import Login from "../Login";
 import Store from "../../AppGlobalStore";
 class Landing extends React.Component {
@@ -142,7 +143,8 @@ class Landing extends React.Component {
   render() {
     let modalPrompt = null;
     if (window.location.pathname.includes('/register')) {
-      modalPrompt = <Register />;
+      // TODO: uncomment after refactoring to dynamic forms
+      // modalPrompt = <Register />;
     }
     else if (window.location.pathname === '/login') {
       modalPrompt = <Login />;

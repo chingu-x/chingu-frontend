@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './WeeklyCheckin.css';
-import '../FormCreator/FormCreator.css';
-import DynamicForm from '../FormCreator/Form';
+import '../DynamicForm/DynamicForm.css';
+import DynamicForm from '../DynamicForm';
 // import weeklyCheckinData from './weeklyCheckin.data';
 // import { renderQAs } from '../FormCreator/answerCreators.js';
 // import Store from '../../AppGlobalStore';

@@ -1,3 +1,4 @@
+// TODO: refactor with dynamic form
 import * as React from 'react';
 import newUserApplicationData from './newUserApplication.data.js';
 import './VoyageApplication.css';
