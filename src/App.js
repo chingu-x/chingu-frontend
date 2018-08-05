@@ -15,8 +15,11 @@ import Missing404Page from './components/404/404';
 import Header from './components/Header/Header';
 import WeeklyCheckin from './components/WeeklyCheckin';
 import VoyagePortal from './components/VoyagePortal';
+
 // TODO: remove after testing
 import DynamicForm from './components/DynamicForm';
+import Register from './components/Register';
+// TODO: remove after testing
 
 class App extends React.Component {
   render() {
@@ -38,7 +41,9 @@ class App extends React.Component {
           <Route exact path="/companyfaq" render={() => <FAQ headerText="Company FAQs" data={companyFAQ} />} />
           <Route exact path="/programfaq" render={() => <FAQ headerText="Program FAQs" data={programFAQ} />} />
           {/* TODO: remove after testing */}
-          <Route exact path="/form" render={() => <DynamicForm purpose="chingu_application" /> } />
+          <Route exact path="/form" render={({ location: { search }}) => <DynamicForm purpose="chingu_application" queryString={search} /> } />
+          <Route exact path="/form/register" render={({ location: { search }}) => <Register queryString={search} />} />
+          {/* TODO: remove after testing */}
           <Route path="*" exact component={Missing404Page} />
         </Switch>
         <Footer />
