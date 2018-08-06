@@ -19,6 +19,7 @@ import VoyagePortal from './components/VoyagePortal';
 // TODO: remove after testing
 import DynamicForm from './components/DynamicForm';
 import Register from './components/Register';
+import Login from './components/Login';
 // TODO: remove after testing
 
 class App extends React.Component {
@@ -28,7 +29,10 @@ class App extends React.Component {
         <Header />
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/login" component={Landing} />
+          {/* TODO: fix after testing */}
+          {/* <Route exact path="/login" component={Landing} /> */}
+    <Route exact path="/login" render={({ location: { search } }) => <Login queryString={search} />} />
+          {/* TODO: fix after testing */}
           <Route exact path="/register" component={Landing} />
           <Route exact path="/profile" component={UserProfile} />
           <Route exact path="/voyage" component={VoyagePortal} />
@@ -41,8 +45,8 @@ class App extends React.Component {
           <Route exact path="/companyfaq" render={() => <FAQ headerText="Company FAQs" data={companyFAQ} />} />
           <Route exact path="/programfaq" render={() => <FAQ headerText="Program FAQs" data={programFAQ} />} />
           {/* TODO: remove after testing */}
-          <Route exact path="/form" render={({ location: { search }}) => <DynamicForm purpose="chingu_application" queryString={search} /> } />
-          <Route exact path="/form/register" render={({ location: { search }}) => <Register queryString={search} />} />
+    <Route exact path="/form" render={({ location: { search }}) => <DynamicForm purpose="chingu_application" queryString={search} /> } />
+    <Route exact path="/form/register" render={({ location: { search }}) => <Register queryString={search} />} />
           {/* TODO: remove after testing */}
           <Route path="*" exact component={Missing404Page} />
         </Switch>

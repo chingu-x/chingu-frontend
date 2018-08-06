@@ -5,7 +5,9 @@ const STORE_STATE_LOCAL_STORAGE_VERSION = 5;
 // https://d07c9835.ngrok.io/graphql
 // https://api.chingu.io/graphql
 const client = new ApolloClient({
-  uri: 'https://api.chingu.io/graphql',
+  // uri: 'https://api.chingu.io/graphql',
+  // TODO: remove after testing. we should use NODE_ENV switch
+  uri: 'http://localhost:8008/graphql',
   request: operation => operation.setContext({
     headers: {
       authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -27,9 +29,6 @@ query getStateUser {
     interests
     coding_history
     country
-    skills {
-        name
-    }
     cohorts {
       id
       status
@@ -55,8 +54,7 @@ query getStateUser {
         start_date
         end_date
         status
-      }
-      
+      }  
     }
   }
 }
