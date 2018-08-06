@@ -10,8 +10,8 @@ class Error extends React.Component {
           <img alt="error" className="error-img" src={require('../../assets/error.png')} />
           <div className="error-message">{this.props.error}</div>
           <hr className="error-hline" />
-            <a className="error-go-back-btn" href={"/profile"} >
-              Go back
+          <a className="error-go-back-btn" href={this.props.goBack || "/profile"} >
+            Go back
           </a>
         </div>
       </div>

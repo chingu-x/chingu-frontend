@@ -4,6 +4,7 @@ import { graphql } from "react-apollo";
 import currentUserQuery from "../../queries/currentUserQuery";
 import Store from '../../AppGlobalStore';
 
+// TODO: refactor to Query link state
 const Header = props => {
   let teams = [];
   let user = null;
@@ -87,4 +88,4 @@ const Header = props => {
   )
 }
 
-export default graphql(currentUserQuery)(Header);
+export default Header;
