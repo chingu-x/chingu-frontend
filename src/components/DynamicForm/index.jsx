@@ -1,6 +1,7 @@
 import * as React from "react";
 import { DynamicFormMaker } from './DynamicFormMaker';
 import { Query, Mutation } from "react-apollo";
+import { Redirect } from "react-router-dom";
 import { gql } from "apollo-boost";
 import * as qs from "query-string";
 import './DynamicForm.css';
@@ -78,12 +79,11 @@ const DynamicFormSubmit = ({ onSubmit, variables }) => {
   return (
     <Mutation mutation={submitDynamicFormMutation}>
       {
-        (submitMutation, { loading, error }) => {
+        (submitMutation, { loading, error, data }) => {
           if (loading) return <Loader />;
-          if (error) { 
-            console.log(error); 
-            return <Error error={error.message} />;
-          };
+          if (error) return <Error error={error.message} />;
+          // TODO: option to pass a redirect path on submit?
+          if (data) return <Redirect to="/profile" />
           return (
             <button
               className="form-btn"
@@ -93,7 +93,9 @@ const DynamicFormSubmit = ({ onSubmit, variables }) => {
                 e.preventDefault();
                 onSubmit(submitMutation, variables);
               }}
-            >Submit</button>
+            >
+              Submit
+            </button>
           );
         }
       }
