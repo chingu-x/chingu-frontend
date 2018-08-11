@@ -4,7 +4,7 @@ import { Query } from "react-apollo";
 import Loading from "../Loader/Loader";
 import Error from "../Error/Error";
 
-export default ({ query, component, load }) => { console.log(query, component); return (
+export default ({ query, component, load }) => (
   <Query query={query}>
   {
     ({ data, loading, error }) => {
@@ -14,4 +14,4 @@ export default ({ query, component, load }) => { console.log(query, component); 
     }
   }
   </Query>
-);}
+);
