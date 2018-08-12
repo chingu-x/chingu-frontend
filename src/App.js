@@ -8,12 +8,14 @@ import FAQ from "./components/Pages/FAQ";
 import companyFAQ from "./static-api-elements/companyFAQ";
 import programFAQ from "./static-api-elements/programFAQ";
 import CurrentPrograms from "./components/Pages/CurrentPrograms";
-import VoyageApplication from './components/VoyageApplication';
 import UserProfile from './components/UserProfile';
 import Missing404Page from './components/404/404';
 import Header from './components/Header/Header';
 import WeeklyCheckin from './components/WeeklyCheckin';
 import VoyagePortal from './components/VoyagePortal';
+import VoyageApplication from './components/VoyageApplication';
+import Register from './components/Register';
+import Login from './components/Login';
 
 class App extends React.Component {
   render() {
@@ -22,11 +24,32 @@ class App extends React.Component {
         <Header />
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/login" component={Landing} />
-          <Route exact path="/register" component={Landing} />
+          <Route
+            exact path="/login"
+            render={
+              ({ location: { search } }) => <Login queryString={search} />
+            }
+          />
+          <Route
+            exact path="/register"
+            render={
+              () => <Register version={null} /> // set custom 'chingu_application' version here
+            }
+          />
           <Route exact path="/profile" component={UserProfile} />
           <Route exact path="/voyage" component={VoyagePortal} />
-          <Route exact path="/voyage/application/:id" component={VoyageApplication} />
+          <Route
+            exact path="/voyage/application/:voyage_id"
+            render={
+              ({ match: { params: { voyage_id } } }) => (
+                <VoyageApplication
+                  voyage_id={voyage_id}
+                  voyageVersion={null} // set custom 'voyage_application' version here
+                  newUserVersion={null} // set custom 'new_voyage_user' version here
+                />
+              )
+            }
+          />
           <Route exact path="/team/checkin/:id" component={WeeklyCheckin} />
           <Route exact path="/current" component={CurrentPrograms} />
           <Route exact path="/team" component={Staff} />

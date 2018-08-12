@@ -16,7 +16,9 @@ class UserProfile extends React.Component {
   }
 
   componentDidMount() {
-    let user = Store.getUserState();
+    // let user = Store.getUserState();
+    // TODO: Query link state when implemented
+    const { user } = JSON.parse(window.localStorage.getItem('store'));
     this.setState({ user: user }, () => {
       // let pendingApproval = user.cohorts.filter((cohort) => {
       //   let member = cohort.members.filter((member) => member.user.username === Store.state.user.username && member.status === 'pending_approval');
