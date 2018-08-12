@@ -59,7 +59,7 @@ const DynamicForm = (
               submitRedirect={submitRedirect}
               hiddenData={
                 queryString || hiddenData ?
-                  Object.assign(hiddenData, queryString) :
+                  Object.assign(hiddenData, qs.parse(queryString)) :
                   null
               }
             />
