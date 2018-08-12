@@ -123,15 +123,22 @@ export class SpecialRadioBadgeComponent extends React.Component {
             <div className={badges[index].btnClassName}>
               <img className={badges[index].className} src={badges[index].img} alt={'badge-' + index} />
             </div>
-            <div className="badge-title">{answer.title}</div>
-            <div className="badge-subtext">{answer.subtext}</div>
+            <div className="badge-title">{`Tier ${answer}`}</div>
+            {/* im sorry... */}
+            <div className="badge-subtext">
+              {
+                answer === "1" && <p>HTML / Basic Javascript / Basic Algorithms (Landing Pages)</p> ||
+                answer === "2" && <p>Intermediate Algorithms / Front-end Projects (Front-End)</p> ||
+                answer === "3" && <p>Advanced Projects / Data Visualization / Back-end (Full-Stack)</p>
+              }
+            </div>
             <input
               className="form-radio special-badge-input"
               type="radio"
               name={field_name}
               id={field_name + '_' + index}
-              value={answer.title}
-              checked={form_data[field_name] === answer.title}
+              value={answer}
+              checked={form_data[field_name] === answer}
               onChange={e => onFormChange(e)}
             />
             <span className="radio-checkmark--badge" />
@@ -163,11 +170,35 @@ export function questionComponent_radio(data, onFormChange, form_data) {
 
 export function questionComponent_radio_special_badge(data, onFormChange, form_data) {
   return (
-    <div className="badge-container">
-      {data.options.map((answer, index) => {
-        return <SpecialRadioBadgeComponent key={data.field_name + '_' + index} answer={answer} field_name={data.field_name} index={index} onFormChange={onFormChange} form_data={form_data} />
-      })
-      }
+    <div>
+      <div className="form-subtext">
+        *IMPORTANT* Please read carefully - this has a big influence on your team placement.
+        <br /> 
+        In Chingu we split teams into 3 broad tiers:
+        <br />
+        - Tier-3 (Bears) teams typically build full-stack applications. 
+        <br />
+        - Tier-2 (Geckos) teams typically build front-end projects. 
+        <br />
+        - Tier-1 (Toucans) teams typically build landing pages.
+        <br /> 
+        Note: If you are at the Tier-1 level, don't choose Tier-3. It will be obvious to your team-mates, 
+        they'll be annoyed with you and it'll create more work for us (as we'll have to remove you from that team).
+      </div>
+      <div className="badge-container">
+        {data.options.map(
+          (answer, index) => (
+            <SpecialRadioBadgeComponent
+              key={data.field_name + '_' + index}
+              answer={answer}
+              field_name={data.field_name}
+              index={index}
+              onFormChange={onFormChange}
+              form_data={form_data}
+            />
+          )
+        )}
+      </div>
     </div>
   )
 }
@@ -217,11 +248,19 @@ export function questionComponent_dropdown(data, onFormChange, form_data) {
     </select>
   )
 }
-
 export function questionComponent_dropdown_multiple(data, onFormChange, form_data) {
   const renderMultiple = () => {
     return data.options.map((answer, index) => {
-      return <CheckboxComponent key={data.field_name + '_' + index} answer={answer} field_name={data.field_name} index={index} onFormChange={onFormChange} form_data={form_data} />
+      return (
+        <CheckboxComponent
+          key={data.field_name + '_' + index}
+          answer={answer}
+          field_name={data.field_name}
+          index={index}
+          onFormChange={onFormChange}
+          form_data={form_data}
+        />
+      );
     }
     );
   };

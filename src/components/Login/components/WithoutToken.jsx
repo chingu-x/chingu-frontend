@@ -12,7 +12,7 @@ const redirectSelector = ({ status }) => {
   let path;
   switch (status) {
     case 'new_user':
-      path = '/form/register';
+      path = '/register';
       break;
     case 'profile_incomplete':
       path = '/profile/update';
