@@ -57,7 +57,11 @@ const DynamicForm = (
               version={version}
               questions={questions}
               submitRedirect={submitRedirect}
-              hiddenData={queryString ? qs.parse(queryString) : hiddenData}
+              hiddenData={
+                queryString || hiddenData ?
+                  Object.assign(hiddenData, queryString) :
+                  null
+              }
             />
           );
         }
