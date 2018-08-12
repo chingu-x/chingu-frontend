@@ -1,6 +1,8 @@
 import React from "react";
+
 import './Login.css';
-import { WithToken, WithoutToken } from "./components";
+import WithToken from "./components/WithToken";
+import WithoutToken from "./components/WithoutToken";
 
 // TODO: add state generator
 //   generate state and store in local storage
@@ -29,7 +31,7 @@ import { WithToken, WithoutToken } from "./components";
 const Login = ({ queryString }) => (
   window.localStorage.getItem('token') ?
     <WithToken /> :
-    <WithoutToken queryString={queryString}/>
+    <WithoutToken queryString={queryString} />
 );
 
 export default Login;
