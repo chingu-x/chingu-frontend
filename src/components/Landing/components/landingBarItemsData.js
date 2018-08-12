@@ -1,3 +1,4 @@
+// TODO: this is where Landing page text / images can be updated
 module.exports = {
   process: [
     {

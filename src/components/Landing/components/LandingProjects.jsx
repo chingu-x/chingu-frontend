@@ -1,7 +1,7 @@
 import * as React from 'react';
-import landingImages from "../../styles/assets/landingImages";
+import landingImages from "../../../styles/assets/landingImages";
 
-const LandingProjects = ({ image, title, description, tier, techStack }) => {
+export default ({ image, title, description, tier, techStack }) => {
   return (
     <div className="landing-item">
       <img className="landing-item-project-image" src={landingImages[image]} alt="" />
@@ -18,5 +18,3 @@ const LandingProjects = ({ image, title, description, tier, techStack }) => {
     </div>
   );
 }
-
-export default LandingProjects;
