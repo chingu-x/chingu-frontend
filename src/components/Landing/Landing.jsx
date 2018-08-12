@@ -21,7 +21,7 @@ import {
   WhatMakesChinguUniqueBar,
 } from "./components/landingBarRenderers";
 
-export default ({ user }) => (
+export default (user) => (
   <div className="landing" >
     <LandingTop user={user} />
     <CohortsBar
