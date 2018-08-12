@@ -9,7 +9,15 @@ import Loader from '../Loader/Loader';
 import Error from '../Error/Error';
 
 // this is the actual export
-const DynamicForm = ({ purpose, version, queryString }) => {
+const DynamicForm = (
+  {
+    purpose,
+    version,
+    hiddenData,
+    queryString,
+    submitRedirect,
+  },
+) => {
   const dynamicFormQuery = gql`
     query getDynamicForm(
       $purpose:FormPurposeEnum!
@@ -40,17 +48,18 @@ const DynamicForm = ({ purpose, version, queryString }) => {
       {
         ({ data, loading, error }) => {
           if (loading) return <Loader />;
-          if (error) { 
-            console.log(error); 
-            return <Error error={error.message} />;
-          };
+          if (error) return <Error error={error.message} />;
+
           const { form: { purpose, version, questions } } = data;
-          return <DynamicFormContainer
-            purpose={purpose}
-            version={version}
-            questions={questions}
-            queryString={qs.parse(queryString)}
-          />
+          return (
+            <DynamicFormContainer
+              purpose={purpose}
+              version={version}
+              questions={questions}
+              submitRedirect={submitRedirect}
+              hiddenData={queryString ? qs.parse(queryString) : hiddenData}
+            />
+          );
         }
       }
     </Query>
@@ -59,7 +68,7 @@ const DynamicForm = ({ purpose, version, queryString }) => {
 
 
 // this is a mutation-wrapped "submit" button
-const DynamicFormSubmit = ({ onSubmit, variables }) => {
+const DynamicFormSubmit = ({ onSubmit, submitRedirect, variables }) => {
   const submitDynamicFormMutation = gql`
     mutation submitForm(
       $purpose: FormPurposeEnum!
@@ -82,8 +91,7 @@ const DynamicFormSubmit = ({ onSubmit, variables }) => {
         (submitMutation, { loading, error, data }) => {
           if (loading) return <Loader />;
           if (error) return <Error error={error.message} />;
-          // TODO: option to pass a redirect path on submit?
-          if (data) return <Redirect to="/profile" />
+          if (data) return <Redirect to={submitRedirect || "/profile"} />
           return (
             <button
               className="form-btn"
@@ -125,15 +133,20 @@ class DynamicFormContainer extends React.Component {
       // creates a Set for multiple answers
       if (
         // add other multiple answer types here
-        ['checkbox', 'checkbox_2_column'].includes(input_type)
+        [
+          'checkbox',
+          'checkbox_2_column',
+          'dropdown_multiple',
+        ].includes(input_type)
       ) form_data[field_name] = new Set();
       else form_data[field_name] = '';
 
-      // insert hidden field values from query string params
+      // insert hidden field values from hiddenData
+        // passed as hiddenData or queryString prop into <DynamicForm>
       if (input_type === 'hidden') {
-        const qsValue = this.props.queryString[field_name];
-        if (!qsValue) console.error(`Missing query string parameter ${field_name}`);
-        form_data[field_name] = qsValue;
+        const hiddenValue = this.props.hiddenData[field_name];
+        if (!hiddenValue) console.error(`Missing hiddenData: ${field_name}`);
+        form_data[field_name] = hiddenValue;
       }
       return form_data;
     },
@@ -166,6 +179,7 @@ class DynamicFormContainer extends React.Component {
         <hr className="hline" />
         <DynamicFormSubmit
           onSubmit={this.onSubmit}
+          submitRedirect={this.props.submitRedirect}
           variables={{ purpose, version, form_data }}
         />
       </div>
