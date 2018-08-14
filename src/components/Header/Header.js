@@ -105,7 +105,7 @@ const Header = ({ loading, user }) => {
 
         <div className="header-right">
           {user && renderAvatar(user.avatar)}
-          {!loading && <Link to="/login" className="header-btn">LOG IN</Link>} 
+          {!loading && !user && <Link to="/login" className="header-btn">LOG IN</Link>} 
         </div>
       </div>
     </div>
