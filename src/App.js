@@ -18,6 +18,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Loader from "./components/Loader/Loader"
 import Error from "./components/Error/Error"
+import currentUserQuery from "./queries/currentUserQuery"
 
 // TODO remove
 import { Query } from "react-apollo"
@@ -87,6 +88,8 @@ const App = () => {
       <Query query={initialQuery}>
         {
           (({loading, error, data, client, networkStatus}) => {
+            console.log("App fetching");
+            
             console.log("App", {loading, error, data, networkStatus})
 
             if(networkStatus === 7) {

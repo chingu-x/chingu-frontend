@@ -8,12 +8,12 @@ import Error from "../Error/Error";
 // controls whether Loading component is rendered or not
 export default ({ query, component, load }) => (
   <Query query={query}>
-  {
-    ({ data, loading, error }) => {
-      if (loading) return load ? <Loading /> : null;
-      if (error) return <Error error={error.message} />;
-      return component(data.user);
+    {
+      ({ data, loading, error }) => {
+        if (loading) return load ? <Loading /> : null;
+        if (error) return <Error error={error.message} />;
+        return component(data.user);
+      }
     }
-  }
   </Query>
 );

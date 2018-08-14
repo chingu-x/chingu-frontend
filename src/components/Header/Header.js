@@ -7,6 +7,7 @@ import Store from '../../AppGlobalStore';
 // TODO remove
 import { Query } from "react-apollo"
 import { gql } from "apollo-boost"
+import AuthQuery from "../utilities/AuthQuery"
 
 const headerQuery = gql`
   {
@@ -20,7 +21,8 @@ const headerQuery = gql`
 `
 
 // TODO: refactor to Query link state
-const Header = () => {
+const HeaderView = props => {
+  const { user, loading } = props
   // let teams = [];
   // let user = null;
 
@@ -84,34 +86,26 @@ const Header = () => {
   }
 
   return (
-    <Query query={headerQuery}>
-      {
-        (({loading, error, data, data: { user }, networkStatus}) => {
-          console.log("Header", { loading, error, data, networkStatus})
+    <div className="header header-dark">  
+      <div className="header-container">
+        <div className="header-left">
+          <div className="nav-logo">
+            <Link className="nav-light" to="/">CHINGU</Link>
+          </div>
+        </div>
 
-          return (
-            <div className="header header-dark">  
-              <div className="header-container">
-                <div className="header-left">
-                  <div className="nav-logo">
-                    <Link className="nav-light" to="/">CHINGU</Link>
-                  </div>
-                </div>
+        {user && renderPortalDropDown(user.teams)}
 
-                {user && renderPortalDropDown(user.teams)}
-
-                <div className="header-right">
-                  {user && renderAvatar(user.avatar)}
-                  {!localStorage.token && !loading && <Link to="/login" className="header-btn">LOG IN</Link>} 
-                </div>
-              </div>
-            </div>
-          )
-        })
-      }
-    </Query>
-    
+        <div className="header-right">
+          {user && renderAvatar(user.avatar)}
+          {/* Check for token because cache.writeData is async and there is a brief period between !loading and setting the data*/}
+          {!localStorage.token && !loading && <Link to="/login" className="header-btn">LOG IN</Link>} 
+        </div>
+      </div>
+    </div>
   )
 }
+
+const Header = () => <AuthQuery query={headerQuery}><HeaderView/></AuthQuery>
 
 export default Header;
