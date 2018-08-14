@@ -20,10 +20,9 @@ const headerQuery = gql`
   }
 `
 
-// TODO: refactor to Query link state
-const HeaderView = ({client}) => {
+const Header = ({client, loading, user}) => {
+  
 
-  const { user, loading } = client.data
   // let teams = [];
   // let user = null;
 
@@ -37,11 +36,17 @@ const HeaderView = ({client}) => {
   //   teams = Store.state.user.teams;
   // }
   
-  const handleLogout = e => {
+  const logout = e => {
     e.preventDefault();
+    console.log("Clearing localStorage");
+    
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("store");
-    window.location = "/";
+
+    // console.log("Resetting store");
+    // client.resetStore() // refetches all queries!!
+    
+    window.location = "/"; // TODO reset store and redirect without reload
   };
 
   const renderPortalDropDown = teams => {
@@ -80,7 +85,8 @@ const HeaderView = ({client}) => {
         <div className="header-mask" />
         <div className="header-dropdown-content avatar">
           {/* <Link to="/settings">Settings</Link> */}
-          <Link to="/" onClick={e => handleLogout(e)}>Log out</Link>
+          <Link to="/" onClick={e => logout(e)}>Log out</Link>
+          
         </div>
       </div>
     )
@@ -107,6 +113,4 @@ const HeaderView = ({client}) => {
   )
 }
 
-const Header = () => <AuthQuery query={headerQuery}><HeaderView/></AuthQuery>
-
-export default Header;
+export default () => <AuthQuery query={headerQuery}><Header/></AuthQuery>
