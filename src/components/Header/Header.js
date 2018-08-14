@@ -20,7 +20,8 @@ const headerQuery = gql`
   }
 `
 
-const Header = ({client, loading, user}) => {
+const Header = ({ loading, user }) => {
+  console.log("header", {loading, user})
   
   // let teams = [];
   // let user = null;
@@ -104,8 +105,7 @@ const Header = ({client, loading, user}) => {
 
         <div className="header-right">
           {user && renderAvatar(user.avatar)}
-          {/* Check for token because cache.writeData is async and there is a brief period between !loading and setting the data*/}
-          {!localStorage.token && !loading && <Link to="/login" className="header-btn">LOG IN</Link>} 
+          {!loading && <Link to="/login" className="header-btn">LOG IN</Link>} 
         </div>
       </div>
     </div>

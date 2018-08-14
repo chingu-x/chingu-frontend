@@ -1,26 +1,34 @@
 import * as React from "react";
 import { Query } from "react-apollo";
+import { Redirect } from "react-router-dom"
 
 import Loading from "../Loader/Loader";
 import Error from "../Error/Error";
 
 // optional boolean load parameter
 // controls whether Loading component is rendered or not
-export default ({ query, children, load }) => {
-  if (!localStorage.token) return children
+export default ({ query, children, load, requireAuth }) => {
+  if (!localStorage.token) {
+    return requireAuth ? <Redirect to="/login" /> : children
+  }
   else {
     return <Query query={query}>
       {
         client => {
           const { loading, error, data } = client
-          if (error) return <Error error={error.message} />;
+          console.log("AuthQuery status", { loading, error, user: data.user })
           if (loading) return load ? <Loading /> : null;
+          if (error) return <Error error={error.message} />;
 
-          const UserComponents = React.Children.map(children, (child) => {
-            return React.cloneElement(child, { client, loading, user: data.user })
-          })
+          if (data.user) {
+            const UserComponents = React.Children.map(children, (child) => {
+              return React.cloneElement(child, { loading, user: data.user })
+            })
+            return <div>{UserComponents}</div>
+          }
 
-          return <div>{UserComponents}</div>
+          return null
+
         }
       }
     </Query>
