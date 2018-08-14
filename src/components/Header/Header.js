@@ -4,10 +4,25 @@ import { graphql } from "react-apollo";
 import currentUserQuery from "../../queries/currentUserQuery";
 import Store from '../../AppGlobalStore';
 
+// TODO remove
+import { Query } from "react-apollo"
+import { gql } from "apollo-boost"
+
+const headerQuery = gql`
+  {
+    user @client {
+      id
+      username
+      avatar
+      teams
+    }
+  }
+`
+
 // TODO: refactor to Query link state
-const Header = props => {
-  let teams = [];
-  let user = null;
+const Header = () => {
+  // let teams = [];
+  // let user = null;
 
   // if (Store.state.user && localStorage.getItem('token')) {
   //   let StoreUser = Store.getUserState();
@@ -26,9 +41,9 @@ const Header = props => {
     window.location = "/";
   };
 
-  const renderPortalDropDown = () => {
+  const renderPortalDropDown = teams => {
     let teamsDOM = null;
-    if (user && teams.length) {
+    if (teams && teams.length) {
       teamsDOM = (
         <React.Fragment>
           <div className="label">Team Portal</div>
@@ -55,10 +70,10 @@ const Header = props => {
     )
   }
 
-  const renderAvatar = () => {
+  const renderAvatar = avatar => {
     return (
       <div className="header-dropdown">
-        <img className="avatar" src={user.avatar ? user.avatar : require('../../assets/blank image.png')} alt="user avatar" />
+        <img className="avatar" src={avatar ? avatar : require('../../assets/blank image.png')} alt="user avatar" />
         <div className="header-mask" />
         <div className="header-dropdown-content avatar">
           {/* <Link to="/settings">Settings</Link> */}
@@ -69,22 +84,33 @@ const Header = props => {
   }
 
   return (
-    <div className="header header-dark">
-      <div className="header-container">
-        <div className="header-left">
-          <div className="nav-logo">
-            <Link className="nav-light" to="/">CHINGU</Link>
-          </div>
-        </div>
+    <Query query={headerQuery}>
+      {
+        (({loading, error, data, data: { user }, networkStatus}) => {
+          console.log("Header", { loading, error, data, networkStatus})
 
-        {user && renderPortalDropDown()}
+          return (
+            <div className="header header-dark">  
+              <div className="header-container">
+                <div className="header-left">
+                  <div className="nav-logo">
+                    <Link className="nav-light" to="/">CHINGU</Link>
+                  </div>
+                </div>
 
-        <div className="header-right">
-          {user && renderAvatar()}
-          {!user && <Link to="/login" className="header-btn">LOG IN</Link>}
-        </div>
-      </div>
-    </div>
+                {user && renderPortalDropDown(user.teams)}
+
+                <div className="header-right">
+                  {user && renderAvatar(user.avatar)}
+                  {!localStorage.token && !loading && <Link to="/login" className="header-btn">LOG IN</Link>} 
+                </div>
+              </div>
+            </div>
+          )
+        })
+      }
+    </Query>
+    
   )
 }
 
