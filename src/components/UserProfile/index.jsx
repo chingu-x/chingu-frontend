@@ -2,46 +2,8 @@ import * as React from "react";
 import * as Cards from "../VoyageCard/VoyageCard";
 import UserSideBar from "./UserSideBar";
 import './UserProfile.css'
-// import Store from '../../AppGlobalStore';
-
 import AuthQuery from "../utilities/AuthQuery"
-import { gql } from "apollo-boost"
-
-// TODO Check query
-const userProfileQuery = gql`
-  {
-    user @client {
-      id
-      username
-      avatar
-      country
-      teams {
-        id
-        title
-        cohort {
-          id
-          status
-          start_date
-          end_date
-        }
-      }
-      cohorts {
-        id
-        title
-        start_date
-        end_date
-        members {
-          id
-          status
-          user {
-            username
-          }
-        }
-      }
-
-    }
-  }
-`
+// import Store from '../../AppGlobalStore';
 
 class UserProfile extends React.Component {
   // constructor(props) {
@@ -56,7 +18,6 @@ class UserProfile extends React.Component {
 
   // componentDidMount() {
   //   // let user = Store.getUserState();
-  //   // TODO: Query link state when implemented
   //   const { user } = JSON.parse(window.localStorage.getItem('store'));
   //   this.setState({ user: user }, () => {
   //     // let pendingApproval = user.cohorts.filter((cohort) => {

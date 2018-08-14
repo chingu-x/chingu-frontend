@@ -1,24 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { graphql } from "react-apollo";
-import currentUserQuery from "../../queries/currentUserQuery";
-import Store from '../../AppGlobalStore';
-
-// TODO remove
-import { Query } from "react-apollo"
-import { gql } from "apollo-boost"
 import AuthQuery from "../utilities/AuthQuery"
-
-const headerQuery = gql`
-  {
-    user @client {
-      id
-      username
-      avatar
-      teams
-    }
-  }
-`
+import headerQuery from "../../queries/headerQuery"
+// import Store from '../../AppGlobalStore';
 
 const Header = ({ loading, user }) => {
   console.log("header", {loading, user})

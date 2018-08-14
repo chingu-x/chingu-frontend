@@ -14,6 +14,7 @@ const getAuthedUser = gql`
         cohorts {
           id
           status
+          status
           start_date
           end_date
           members {
