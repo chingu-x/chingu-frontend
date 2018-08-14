@@ -1,4 +1,4 @@
-import ApolloClient, { gql } from 'apollo-boost';
+/* import ApolloClient, { gql } from 'apollo-boost';
 
 // Increment version if the format of Store.state changes
 const STORE_STATE_LOCAL_STORAGE_VERSION = 5;
@@ -171,4 +171,4 @@ const Store = {
   }
 }
 
-export default Store;
+export default Store; */
