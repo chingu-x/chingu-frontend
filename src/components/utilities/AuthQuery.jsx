@@ -11,12 +11,13 @@ export default ({ query, children, load }) => {
   else {
     return <Query query={query}>
       {
-        ({ data, loading, error }) => {
-          if (loading) return load ? <Loading /> : null;
+        client => {
+          const { loading, error } = client
           if (error) return <Error error={error.message} />;
+          if (loading) return load ? <Loading /> : null;
 
           const UserComponents = React.Children.map(children, (child) => {
-            return React.cloneElement(child, { user: data.user, loading }) // Also pass loading state for possible small loading indicators
+            return React.cloneElement(child, { client })
           })
 
           return <div>{UserComponents}</div>

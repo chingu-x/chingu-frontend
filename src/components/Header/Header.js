@@ -21,8 +21,9 @@ const headerQuery = gql`
 `
 
 // TODO: refactor to Query link state
-const HeaderView = props => {
-  const { user, loading } = props
+const HeaderView = ({client}) => {
+
+  const { user, loading } = client.data
   // let teams = [];
   // let user = null;
 
