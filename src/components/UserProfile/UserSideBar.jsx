@@ -30,7 +30,8 @@ class UserSideBar extends React.Component {
   render() {
     // const user = Store.state.user;
     // TODO: Query link state when implemented
-    const { user } = JSON.parse(window.localStorage.getItem('store'));
+    // const { user } = JSON.parse(window.localStorage.getItem('store'));
+    const { user } = this.props
 
     let userInfoDOM = USER_INFO_DOM_ELEMENTS.map(elem => {
       if (user[elem.schemaKey] && user[elem.schemaKey].length > 0) {
