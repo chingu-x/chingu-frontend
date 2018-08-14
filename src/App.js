@@ -156,7 +156,7 @@ export default () => (
     <Query query={initialQuery} skip={!window.localStorage.token}>
       {
         (({loading, error, data, client}) => {
-          if (loading) return <Loader/>
+          if (localStorage.token && loading) return <Loader/> // workaround for stuck on loading
           if (error) return <Error error={error.message}/>
 
           client.writeData({data: {user: {__typename: "User", ...data.user}}})
