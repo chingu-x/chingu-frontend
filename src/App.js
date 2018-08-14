@@ -37,7 +37,82 @@ const initialQuery = gql`
   }
 `
 
-const Routes = ({children}) => (
+// const Routes = ({children}) => (
+//   <div className="App">
+//     <Header />
+//     <Switch>
+//       <Route exact path="/" component={Landing} />
+//       <Route
+//         exact path="/login"
+//         render={
+//           ({ location: { search } }) => <Login queryString={search} />
+//         }
+//       />
+//       <Route
+//         exact path="/register"
+//         render={
+//           () => <Register version={null} /> // set custom 'chingu_application' version here
+//         }
+//       />
+//       <Route exact path="/profile" component={UserProfile} />
+//       <Route exact path="/voyage" component={VoyagePortal} />
+//       <Route
+//         exact path="/voyage/application/:voyage_id"
+//         render={
+//           ({ match: { params: { voyage_id } } }) => (
+//             <VoyageApplication
+//               voyage_id={voyage_id}
+//               voyageVersion={null} // set custom 'voyage_application' version here
+//               newUserVersion={null} // set custom 'new_voyage_user' version here
+//             />
+//           )
+//         }
+//       />
+//       <Route exact path="/team/checkin/:id" component={WeeklyCheckin} />
+//       <Route exact path="/current" component={CurrentPrograms} />
+//       <Route exact path="/team" component={Staff} />
+//       <Route exact path="/privacy" component={PrivacyPolicy} />
+//       <Route exact path="/companyfaq" render={() => <FAQ headerText="Company FAQs" data={companyFAQ} />} />
+//       <Route exact path="/programfaq" render={() => <FAQ headerText="Program FAQs" data={programFAQ} />} />
+//       <Route path="*" exact component={Missing404Page} />
+//     </Switch>
+//     <Footer />
+//     {children}
+//   </div>
+// )
+
+// const App = () => {
+//   if (!window.localStorage.token) return <Routes/>
+//   else {
+//     return (
+//       <Query query={initialQuery}>
+//         {
+//           (({loading, error, data, client, networkStatus}) => {
+//             console.log("App fetching");
+            
+//             console.log("App", {loading, error, data, networkStatus})
+
+//             if(networkStatus === 7) {
+//               client.writeData({ data: {
+//                 user: { __typename: "User", ...data.user }
+//               }})
+//             }
+            
+//             return (
+//               <Routes>
+//                 {networkStatus === 1 && <Loader/>}
+//                 {networkStatus === 8 && <Error error={error.message}/>}
+//               </Routes>
+//             )
+//           })
+//         }
+//       </Query>
+//     )
+//   }
+// }
+
+
+export default () => (
   <div className="App">
     <Header />
     <Switch>
@@ -77,39 +152,18 @@ const Routes = ({children}) => (
       <Route path="*" exact component={Missing404Page} />
     </Switch>
     <Footer />
-    {children}
+    {/* {children} */}
+    <Query query={initialQuery} skip={!window.localStorage.token}>
+      {
+        (({loading, error, data, client}) => {
+          if (loading) return <Loader/>
+          if (error) return <Error error={error.message}/>
+
+          client.writeData({data: {user: {__typename: "User", ...data.user}}})
+
+          return null
+        })
+      }
+    </Query>
   </div>
 )
-
-const App = () => {
-  if (!window.localStorage.token) return <Routes/>
-  else {
-    return (
-      <Query query={initialQuery}>
-        {
-          (({loading, error, data, client, networkStatus}) => {
-            console.log("App fetching");
-            
-            console.log("App", {loading, error, data, networkStatus})
-
-            if(networkStatus === 7) {
-              client.writeData({ data: {
-                user: { __typename: "User", ...data.user }
-              }})
-            }
-            
-            return (
-              <Routes>
-                {networkStatus === 1 && <Loader/>}
-                {networkStatus === 8 && <Error error={error.message}/>}
-              </Routes>
-            )
-          })
-        }
-      </Query>
-    )
-  }
-}
-
-
-export default App;
