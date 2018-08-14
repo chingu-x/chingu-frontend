@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AuthQuery from "../utilities/AuthQuery"
+import GetUser from "../utilities/GetUser"
 import headerQuery from "../../queries/headerQuery"
 // import Store from '../../AppGlobalStore';
 
@@ -96,4 +96,4 @@ const Header = ({ loading, user }) => {
   )
 }
 
-export default () => <AuthQuery query={headerQuery}><Header/></AuthQuery>
+export default () => <GetUser query={headerQuery}><Header/></GetUser>

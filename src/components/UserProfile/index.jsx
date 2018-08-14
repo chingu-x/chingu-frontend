@@ -2,7 +2,8 @@ import * as React from "react";
 import * as Cards from "../VoyageCard/VoyageCard";
 import UserSideBar from "./UserSideBar";
 import './UserProfile.css'
-import AuthQuery from "../utilities/AuthQuery"
+import GetUser from "../utilities/GetUser"
+import userProfileQuery from "../../queries/userProfileQuery"
 // import Store from '../../AppGlobalStore';
 
 class UserProfile extends React.Component {
@@ -108,4 +109,4 @@ class UserProfile extends React.Component {
   }
 }
 
-export default () => <AuthQuery query={userProfileQuery} load requireAuth><UserProfile /></AuthQuery>;
+export default () => <GetUser query={userProfileQuery} load requireAuth><UserProfile /></GetUser>;
