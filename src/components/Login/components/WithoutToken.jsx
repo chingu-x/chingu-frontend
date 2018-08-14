@@ -96,8 +96,9 @@ const WithoutToken = ({ queryString }) => (
   <Mutation mutation={userAuthGithub}>
     {
       (authenticate, { data, error, loading }) => {
+        console.log("Logging in without token")
         if (loading) return <Loading />;
-        if (error) return <Error error={error.message} goBack="/login" /> 
+        if (error) return <Error error={error.message} goBack="/login" />
         if (data) {
           const { userAuthGithub: { user, access_token } } = data;
           storeToken(access_token);
@@ -106,13 +107,13 @@ const WithoutToken = ({ queryString }) => (
           // TODO: write to link state
           return redirectSelector(user);
         }
-        
+
         if (queryString) {
           const { code } = qs.parse(queryString);
           authenticate({ variables: { code } });
         }
-        return <GithubLoginModal clientID="e015fd9cc874fa5a34bf"/>
-      } 
+        return <GithubLoginModal clientID="e015fd9cc874fa5a34bf" />
+      }
     }
   </Mutation>
 );

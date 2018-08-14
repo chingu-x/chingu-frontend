@@ -22,7 +22,6 @@ const headerQuery = gql`
 
 const Header = ({client, loading, user}) => {
   
-
   // let teams = [];
   // let user = null;
 

@@ -18,24 +18,9 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Loader from "./components/Loader/Loader"
 import Error from "./components/Error/Error"
-import currentUserQuery from "./queries/currentUserQuery"
+import getAuthedUser from "./queries/getAuthedUser"
 
-// TODO remove
 import { Query } from "react-apollo"
-import { gql } from "apollo-boost"
-
-const initialQuery = gql`
-  {
-    user {
-      id
-      username
-      avatar
-      teams {
-        id
-      }
-    }
-  }
-`
 
 // const Routes = ({children}) => (
 //   <div className="App">
@@ -153,7 +138,7 @@ export default () => (
     </Switch>
     <Footer />
     {/* {children} */}
-    <Query query={initialQuery} skip={!window.localStorage.token}>
+    <Query query={getAuthedUser} skip={!window.localStorage.token}>
       {
         (({loading, error, data, client}) => {
           if (localStorage.token && loading) return <Loader/> // workaround for stuck on loading

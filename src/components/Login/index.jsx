@@ -3,6 +3,7 @@ import React from "react";
 import './Login.css';
 import WithToken from "./components/WithToken";
 import WithoutToken from "./components/WithoutToken";
+import { Redirect } from "react-router-dom"
 
 // TODO: add state generator
 //   generate state and store in local storage
@@ -28,10 +29,12 @@ import WithoutToken from "./components/WithoutToken";
 */
 
 // -- MUTATION -- //
-const Login = ({ queryString }) => (
-  window.localStorage.getItem('token') ?
-    <WithToken /> :
-    <WithoutToken queryString={queryString} />
-);
+// const Login = ({ queryString }) => (
+//   window.localStorage.getItem('token') ?
+//     <WithToken /> :
+//     <WithoutToken queryString={queryString} />
+// );
+
+const Login = ({ queryString }) => localStorage.token ? <Redirect to="/profile" /> : <WithoutToken queryString={queryString} />
 
 export default Login;
