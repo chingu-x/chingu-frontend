@@ -96,4 +96,4 @@ const Header = ({ loading, user }) => {
   )
 }
 
-export default () => <GetUser query={headerQuery}><Header/></GetUser>
+export default props => <GetUser query={headerQuery}><Header {...props}/></GetUser>

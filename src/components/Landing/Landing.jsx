@@ -23,8 +23,9 @@ import {
   WhatMakesChinguUniqueBar,
 } from "./components/landingBarRenderers";
 
-const Landing = ({ user }) => {
-  console.log("landing", { user })
+const Landing = props => {
+  console.log("landing", { props })
+  const { user } = props
   return (
     <div className="landing" >
       <LandingTop user={user} />
@@ -59,5 +60,5 @@ const Landing = ({ user }) => {
   )
 }
 
-export default () =>
-  <GetUser query={landingQuery}><Landing /></GetUser>
+export default props =>
+  <GetUser query={landingQuery}><Landing {...props} /></GetUser>

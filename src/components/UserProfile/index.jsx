@@ -109,4 +109,4 @@ class UserProfile extends React.Component {
   }
 }
 
-export default () => <GetUser query={userProfileQuery} load requireAuth><UserProfile /></GetUser>;
+export default props => <GetUser query={userProfileQuery} load><UserProfile {...props} /></GetUser>;
