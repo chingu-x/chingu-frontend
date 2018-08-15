@@ -95,7 +95,7 @@ const GithubLoginModal = ({ clientID }) => (
 const WithoutToken = ({ queryString }) => (
   <Mutation mutation={userAuthGithub}>
     {
-      (authenticate, { data, error, loading }) => {
+      (authenticate, { data, error, loading, client }) => {
         console.log("Logging in without token")
         if (loading) return <Loading />;
         if (error) return <Error error={error.message} goBack="/login" />
@@ -103,6 +103,8 @@ const WithoutToken = ({ queryString }) => (
           const { userAuthGithub: { user, access_token } } = data;
           storeToken(access_token);
           // TODO: write to link state when implemented
+          // client.writeData({ data: { user: {__typename: "User", ...data.user}}}) 
+          // Unnecessary ? App fetches user on reload.
           window.localStorage.setItem('store', JSON.stringify({ version: 5, user }));
           // TODO: write to link state
           return redirectSelector(user);
