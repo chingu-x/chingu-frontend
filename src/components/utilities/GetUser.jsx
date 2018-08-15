@@ -22,6 +22,7 @@ export default ({ query, children, load }) => {
 
           // Render if data ready OR children doesn't require it
           if (data.user || !load) {
+            // TODO keep prev props !!!! Maybe turn into HOC?
             const UserComponents = React.Children.map(children, (child) => {
               return React.cloneElement(child, { loading, user: data.user })
             })
