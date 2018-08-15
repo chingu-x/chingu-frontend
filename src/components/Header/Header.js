@@ -89,7 +89,7 @@ const Header = ({ loading, user }) => {
 
         <div className="header-right">
           {user && renderAvatar(user.avatar)}
-          {!loading && !user && <Link to="/login" className="header-btn">LOG IN</Link>} 
+          {!localStorage.token && !loading && <Link to="/login" className="header-btn">LOG IN</Link>} 
         </div>
       </div>
     </div>

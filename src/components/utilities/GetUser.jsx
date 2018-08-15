@@ -7,9 +7,9 @@ import Error from "../Error/Error";
 
 // optional boolean load parameter
 // controls whether Loading component is rendered or not
-export default ({ query, children, load, requireAuth }) => {
+export default ({ query, children, load }) => {
   if (!localStorage.token) {
-    return requireAuth ? <Redirect to="/login" /> : children
+    return load ? <Redirect to="/login" /> : children
   }
   else {
     return <Query query={query}>
@@ -20,7 +20,8 @@ export default ({ query, children, load, requireAuth }) => {
           if (loading) return load ? <Loading /> : null;
           if (error) return <Error error={error.message} />;
 
-          if (data.user) {
+          // Render if data ready OR children doesn't require it
+          if (data.user || !load) {
             const UserComponents = React.Children.map(children, (child) => {
               return React.cloneElement(child, { loading, user: data.user })
             })
