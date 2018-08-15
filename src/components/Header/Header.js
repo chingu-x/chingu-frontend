@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import GetUser from "../utilities/GetUser"
 import headerQuery from "../../queries/headerQuery"
 // import Store from '../../AppGlobalStore';
+import { client } from "../../index"
 
-const Header = ({ loading, user }) => {
+const Header = ({ loading, user, history }) => {
   console.log("header", {loading, user})
   
   // let teams = [];
@@ -22,15 +23,19 @@ const Header = ({ loading, user }) => {
   
   const logout = e => {
     e.preventDefault();
-    console.log("Clearing localStorage");
-    
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("store");
 
-    // console.log("Resetting store");
-    // client.resetStore() // refetches all queries!!
+    /* 
+    TODOS
+    Fix state updates error
+    Find better way to reset cache
+    Do server logout logic
+    */
     
-    window.location = "/"; // TODO reset store and redirect without reload
+    // client.resetStore() // Executes all queries
+    client.cache.reset()
+    history.push("/")
   };
 
   const renderPortalDropDown = teams => {
@@ -96,4 +101,4 @@ const Header = ({ loading, user }) => {
   )
 }
 
-export default props => <GetUser query={headerQuery}><Header {...props}/></GetUser>
+export default withRouter(props => <GetUser query={headerQuery}><Header {...props}/></GetUser>)
