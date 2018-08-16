@@ -17,11 +17,13 @@ export default class extends React.Component {
   close = () => this.setState({ show: false })
   
   render() {
-    console.log(this.state.show ? "opening modal" : "closing modal")
-    console.log(this.props.children)
+    console.log(this.props)
     return this.state.show &&
     ReactDOM.createPortal(
-      <div className="modal" onClick={this.props.onModalClick}>
+      <div
+        onClick={this.props.onModalClick}
+        className={`modal ${this.props.background || ""}`} 
+      >
         {/* <div className="modal-child">{this.props.children}</div> */}
         { this.props.children }
       </div>, 

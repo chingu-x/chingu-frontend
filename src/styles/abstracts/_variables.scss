@@ -49,6 +49,8 @@ $badge-2--hover: rgb(181, 219, 121);
 $badge-3: #f1ba65;
 $badge-3--hover: rgb(236, 172, 75);
 
+$modal-background: rgba(158, 158, 158, 0.637);
+
 $transparent-background: rgba(158, 158, 158, 0.637);
 @mixin transparent-background {
   background-color: $transparent-background;

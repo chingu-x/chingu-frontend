@@ -48,7 +48,7 @@ button {
 
 #modal-root {
   position: relative;
-  z-index: map-get($z-indexes, modal);
+  z-index: $z-modal;
 }
 
 .modal {
@@ -62,6 +62,10 @@ button {
   justify-content: center;
   > * {
     margin: auto;
+  }
+  &.gray,
+  &.grey {
+    background-color: $modal-background;
   }
 }
 
