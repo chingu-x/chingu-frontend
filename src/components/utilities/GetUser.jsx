@@ -4,17 +4,18 @@ import { Redirect } from "react-router-dom"
 
 import Loading from "../Loader/Loader";
 import Error from "../Error/Error";
+import Landing from "./../Landing/Landing"
 
 //-- USAGE --//
-// export default props => <GetUser query={query} load={Boolean}><ChildComponent {...props}/></GetUser>
-
-// TODO Maybe change into HOC?
+// export default props => <GetUser query={QUERY} load={BOOLEAN}><ChildComponent {...props}/></GetUser>
 
 // optional boolean load parameter
 // controls whether Loading component is rendered or not
 export default ({ query, children, load }) => {
   if (!localStorage.token) {
-    return load ? <Redirect to="/login" /> : children
+    return load
+      ? <Landing openLoginModal />
+      : children
   }
   else {
     return <Query query={query}>

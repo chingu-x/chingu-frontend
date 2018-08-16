@@ -6,6 +6,8 @@ import CohortsBar from "./components/CohortsBar";
 import LandingBar from "./components/LandingBar";
 import LandingTop from "./components/LandingTop";
 import LandingBottom from "./components/LandingBottom";
+import Modal from "../common/Modal"
+import GithubLogin from "../Login/components/WithoutToken"
 
 import {
   process,
@@ -28,6 +30,8 @@ const Landing = props => {
   const { user } = props
   return (
     <div className="landing" >
+      <Modal open={props.openLoginModal} background="gray"><GithubLogin queryString={props.queryString} /></Modal>
+
       <LandingTop user={user} />
       <CohortsBar
         title="What Makes Chingu Unique"

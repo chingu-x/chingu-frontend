@@ -1,9 +1,10 @@
-import React from "react";
+import React from "react"
 
-import './Login.css';
-import WithToken from "./components/WithToken";
-import WithoutToken from "./components/WithoutToken";
+import "./Login.css"
+import WithToken from "./components/WithToken"
+import WithoutToken from "./components/WithoutToken"
 import { Redirect } from "react-router-dom"
+import Landing from "../Landing/Landing"
 
 // TODO: add state generator
 //   generate state and store in local storage
@@ -12,13 +13,13 @@ import { Redirect } from "react-router-dom"
 /**
  * Component exists on:
  *  - /login
- *  - GitHub redirects to /login?code='' 
- * 
+ *  - GitHub redirects to /login?code=''
+ *
  * Goal
  * - component to load displaying a LOGIN WITH GITHUB button
  * - login -> redirects user to GitHub auth page
  * - redirects back to Login component with 'code' qs param
- * 
+ *
  * - get code from url and initiate the userAuthGithub mutation
  * - retrive user and access_token from response payload
  * - store access_token in local storage
@@ -26,7 +27,7 @@ import { Redirect } from "react-router-dom"
  *  - new_user -> Redirect to Register view
  *  - profile_complete -> Redirect to User portal view
  *  - [future] profile_incomplete -> Redirect to User update view
-*/
+ */
 
 // -- MUTATION -- //
 // const Login = ({ queryString }) => (
@@ -35,6 +36,9 @@ import { Redirect } from "react-router-dom"
 //     <WithoutToken queryString={queryString} />
 // );
 
-const Login = ({ queryString }) => localStorage.token ? <Redirect to="/profile" /> : <WithoutToken queryString={queryString} />
+const Login = ({ queryString }) =>
+  localStorage.token
+    ? <Redirect to="/profile" />
+    : <Landing openLoginModal queryString={queryString} />
 
-export default Login;
+export default Login
