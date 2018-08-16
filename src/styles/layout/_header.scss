@@ -50,6 +50,10 @@
 
 .header-right {
   grid-area: p;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
 
   // Avatar
   img.avatar {
@@ -65,21 +69,24 @@
   }
 
   a {
-    display: flex;
-    align-items: center;
     height: 100%;
     padding: 0 1em;
     text-decoration: none;
   }
 
   .header-btn {
-    float: right;
+    display: flex;
+    // float: right;
     border: none;
     background-color: $theme-purple;
     color: white;
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 1px;
+    padding: 0 1em;
+    height: 100%;
+    align-items: center;
+    cursor: pointer;
   }
 
   .btn {

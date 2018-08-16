@@ -6,6 +6,10 @@
 *	Box Model Setup
 */
 
+* {
+  outline: 1px dotted orange;
+}
+
 html {
   box-sizing: border-box;
 }
@@ -56,6 +60,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  > * {
+    margin: auto;
+  }
 }
 
 .modal-peek {

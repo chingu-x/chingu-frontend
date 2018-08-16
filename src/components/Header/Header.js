@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import ModalBackground from "../common/Modal"
+import Modal from "../common/Modal"
 import GetUser from "../utilities/GetUser"
 import headerQuery from "../../queries/headerQuery"
 // import Store from '../../AppGlobalStore';
 import { client } from "../../index"
+import WithoutToken from "../Login/components/WithoutToken"
 
 class Header extends React.Component {
   constructor(props) {
@@ -15,7 +16,10 @@ class Header extends React.Component {
       showUserDropdown: false
     }
   }
-
+  
+  closeLoginModal = () => this.refs.loginModal.close()
+  openLoginModal =() => this.refs.loginModal.open()
+  
   handleModalClick = () => this.setState({ showPortalDropdown: false, showUserDropdown: false }) // Close both dropdowns
 
   handlePortalDropdown = e => {
@@ -139,8 +143,11 @@ class Header extends React.Component {
       <Fragment>
         {
           isDropdownOpen &&
-          <ModalBackground onModalClick={this.handleModalClick}/>
+          <Modal onModalClick={this.handleModalClick}/>
         }
+        <Modal onModalClick={this.closeLoginModal} ref="loginModal">
+          <WithoutToken/>
+        </Modal>
         <div
           onClick={this.handleModalClick} 
           className={`header header-dark ${isDropdownOpen ? "modal-peek" : ""}`}>  
@@ -155,7 +162,7 @@ class Header extends React.Component {
     
             <div className="header-right">
               {user && this.renderAvatar()}
-              {!localStorage.token && !loading && <Link to="/login" className="header-btn">LOG IN</Link>} 
+              {!localStorage.token && !loading && <div onClick={this.openLoginModal} className="header-btn">LOG IN</div>} 
             </div>
           </div>
         </div>
