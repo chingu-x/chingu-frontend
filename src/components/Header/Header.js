@@ -5,8 +5,12 @@ import headerQuery from "../../queries/headerQuery"
 // import Store from '../../AppGlobalStore';
 import { client } from "../../index"
 
-const Header = ({ loading, user, history }) => {
-  console.log("header", {loading, user})
+class Header extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {}
+  }
   
   // let teams = [];
   // let user = null;
@@ -21,7 +25,7 @@ const Header = ({ loading, user, history }) => {
   //   teams = Store.state.user.teams;
   // }
   
-  const logout = async (e) => {
+  logout = async (e) => {
     e.preventDefault();
     
     console.log("cached user", client.cache.data.data["User:4"]) // TODO remove
@@ -43,10 +47,11 @@ const Header = ({ loading, user, history }) => {
     // TODO remove
     console.log("cacheafter reset", client.cache.data.data)
     
-    history.push("/")
+    this.props.history.push("/")
   };
 
-  const renderPortalDropDown = teams => {
+  renderPortalDropDown = () => {
+    const { teams } = this.props.user
     let teamsDOM = null;
     if (teams && teams.length) {
       teamsDOM = (
@@ -75,38 +80,44 @@ const Header = ({ loading, user, history }) => {
     )
   }
 
-  const renderAvatar = avatar => {
+  renderAvatar = () => {
+    const { avatar } = this.props.user
     return (
       <div className="header-dropdown">
         <img className="avatar" src={avatar ? avatar : require('../../assets/blank image.png')} alt="user avatar" />
         <div className="header-mask" />
         <div className="header-dropdown-content avatar">
           {/* <Link to="/settings">Settings</Link> */}
-          <Link to="/" onClick={e => logout(e)}>Log out</Link>
+          <Link to="/" onClick={e => this.logout(e)}>Log out</Link>
           
         </div>
       </div>
     )
   }
 
-  return (
-    <div className="header header-dark">  
-      <div className="header-container">
-        <div className="header-left">
-          <div className="nav-logo">
-            <Link className="nav-light" to="/">CHINGU</Link>
+  render() {
+    const { loading, user } = this.props
+    console.log("header", {loading, user})
+
+    return (
+      <div className="header header-dark">  
+        <div className="header-container">
+          <div className="header-left">
+            <div className="nav-logo">
+              <Link className="nav-light" to="/">CHINGU</Link>
+            </div>
+          </div>
+  
+          {user && this.renderPortalDropDown()}
+  
+          <div className="header-right">
+            {user && this.renderAvatar()}
+            {!localStorage.token && !loading && <Link to="/login" className="header-btn">LOG IN</Link>} 
           </div>
         </div>
-
-        {user && renderPortalDropDown(user.teams)}
-
-        <div className="header-right">
-          {user && renderAvatar(user.avatar)}
-          {!localStorage.token && !loading && <Link to="/login" className="header-btn">LOG IN</Link>} 
-        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default withRouter(props => <GetUser query={headerQuery}><Header {...props}/></GetUser>)
