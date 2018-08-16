@@ -3,15 +3,22 @@ import ReactDOM from "react-dom";
 
 // -- USAGE -- //
 /*
-render <Modal onModalClick={HANDLER} background={BACKGROUND_COLOR} ref={REF_NAME}/>
-Then use this.refs.REF_NAME.open or .close in component methods
-Background color is transparent by default
+render <Modal open={BOOL} onModalClick={HANDLER} background={BACKGROUND_COLOR} ref={REF_NAME}/>
+Use this.refs.REF_NAME.open or .close in parent component methods
+
+onModalClick is optionsl. By default closes modal
+background is optional. Default is transparent
+open is optional. Default is false
  */
 
 export default class extends React.Component {
   constructor(props) {
     super(props)
     this.state = { show: false }
+  }
+
+  componentDidMount() {
+    this.props.open && this.open()
   }
 
   open = () => this.setState({ show: true })
@@ -22,7 +29,7 @@ export default class extends React.Component {
     return this.state.show &&
     ReactDOM.createPortal(
       <div
-        onClick={this.props.onModalClick}
+        onClick={this.props.onModalClick || this.close}
         className={`modal ${this.props.background || ""}`} 
       >
         {/* <div className="modal-child">{this.props.children}</div> */}

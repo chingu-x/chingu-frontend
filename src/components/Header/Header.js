@@ -5,7 +5,7 @@ import GetUser from "../utilities/GetUser"
 import headerQuery from "../../queries/headerQuery"
 // import Store from '../../AppGlobalStore';
 import { client } from "../../index"
-import WithoutToken from "../Login/components/WithoutToken"
+import GithubLoginModal from "../Login/components/WithoutToken"
 
 class Header extends React.Component {
   constructor(props) {
@@ -17,7 +17,6 @@ class Header extends React.Component {
     }
   }
   
-  closeLoginModal = () => this.refs.loginModal.close()
   openLoginModal = () => this.refs.loginModal.open()
   
   closeDropdowns = () => {
@@ -153,8 +152,9 @@ class Header extends React.Component {
     return (
       <Fragment>
         <Modal onModalClick={this.closeDropdowns} ref="dropdownModal"/>
-        <Modal onModalClick={this.closeLoginModal} background="grey" ref="loginModal">
-          <WithoutToken/>
+        <Modal background="gray" ref="loginModal">
+        {/* TODO add querystring */}
+          <GithubLoginModal/> 
         </Modal>
         <div
           onClick={this.closeDropdowns} 
