@@ -18,25 +18,36 @@ class Header extends React.Component {
   }
   
   closeLoginModal = () => this.refs.loginModal.close()
-  openLoginModal =() => this.refs.loginModal.open()
+  openLoginModal = () => this.refs.loginModal.open()
   
-  handleModalClick = () => this.setState({ showPortalDropdown: false, showUserDropdown: false }) // Close both dropdowns
+  closeDropdowns = () => {
+    this.refs.dropdownModal.close()
+    this.setState({ showPortalDropdown: false, showUserDropdown: false })
+  }
 
   handlePortalDropdown = e => {
     e.stopPropagation()
-    this.setState({ 
+    this.state.showPortalDropdown 
+      ? this.refs.dropdownModal.close() 
+      : this.refs.dropdownModal.open()
+    
+      this.setState({ 
       showPortalDropdown: !this.state.showPortalDropdown,
       showUserDropdown: false
      })
   }
   
-   handleUserDropdown = e => {
-     e.stopPropagation()
-     this.setState({
+  handleUserDropdown = e => {
+    this.state.showUserDropdown 
+      ? this.refs.dropdownModal.close() 
+      : this.refs.dropdownModal.open()
+    
+    e.stopPropagation()
+    this.setState({
       showPortalDropdown: false,
       showUserDropdown: !this.state.showUserDropdown
     })
-   }
+  }
 
   
   // let teams = [];
@@ -141,15 +152,12 @@ class Header extends React.Component {
 
     return (
       <Fragment>
-        {
-          isDropdownOpen &&
-          <Modal onModalClick={this.handleModalClick}/>
-        }
-        <Modal onModalClick={this.closeLoginModal} ref="loginModal">
+        <Modal onModalClick={this.closeDropdowns} ref="dropdownModal"/>
+        <Modal onModalClick={this.closeLoginModal} background="grey" ref="loginModal">
           <WithoutToken/>
         </Modal>
         <div
-          onClick={this.handleModalClick} 
+          onClick={this.closeDropdowns} 
           className={`header header-dark ${isDropdownOpen ? "modal-peek" : ""}`}>  
           <div className="header-container">
             <div className="header-left">
