@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
+import ModalBackground from "../common/Modal"
 import GetUser from "../utilities/GetUser"
 import headerQuery from "../../queries/headerQuery"
 // import Store from '../../AppGlobalStore';
@@ -9,8 +10,30 @@ class Header extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+      showPortalDropdown: false,
+      showUserDropdown: false
+    }
   }
+
+  handleModalClick = () => this.setState({ showPortalDropdown: false, showUserDropdown: false }) // Close both dropdowns
+
+  handlePortalDropdown = e => {
+    e.stopPropagation()
+    this.setState({ 
+      showPortalDropdown: !this.state.showPortalDropdown,
+      showUserDropdown: false
+     })
+  }
+  
+   handleUserDropdown = e => {
+     e.stopPropagation()
+     this.setState({
+      showPortalDropdown: false,
+      showUserDropdown: !this.state.showUserDropdown
+    })
+   }
+
   
   // let teams = [];
   // let user = null;
@@ -66,16 +89,21 @@ class Header extends React.Component {
     }
     return (
       <div className="header-dropdown portal">
-        <button className="header-portal-btn" >
+        <button 
+          onClick={this.handlePortalDropdown}
+          className="header-portal-btn">
           <span>CHOOSE A PORTAL</span>
           <i className="fa fa-chevron-down" />
         </button>
-        <div className="header-dropdown-content--centered portal">
-          {teamsDOM}
-          <Link to="/voyage">Voyage Portal</Link>
-          <hr />
-          <Link to="/profile">User Profile</Link>
-        </div>
+        {
+          this.state.showPortalDropdown && 
+          <div className="header-dropdown-content--centered portal">
+            {teamsDOM}
+            <Link to="/voyage">Voyage Portal</Link>
+            <hr />
+            <Link to="/profile">User Profile</Link>
+          </div>
+        }
       </div>
     )
   }
@@ -84,38 +112,54 @@ class Header extends React.Component {
     const { avatar } = this.props.user
     return (
       <div className="header-dropdown">
-        <img className="avatar" src={avatar ? avatar : require('../../assets/blank image.png')} alt="user avatar" />
-        <div className="header-mask" />
-        <div className="header-dropdown-content avatar">
-          {/* <Link to="/settings">Settings</Link> */}
-          <Link to="/" onClick={e => this.logout(e)}>Log out</Link>
-          
-        </div>
+        <img
+          onClick={this.handleUserDropdown}
+          className="avatar" src={avatar ? avatar : require('../../assets/blank image.png')} alt="user avatar" />
+        
+        { this.state.showUserDropdown &&
+          <Fragment>
+            <div className="header-mask" />
+            <div className="header-dropdown-content avatar">
+              {/* <Link to="/settings">Settings</Link> */}
+              <Link to="/" onClick={e => this.logout(e)}>Log out</Link>
+            </div>
+          </Fragment>
+        }
       </div>
     )
   }
 
   render() {
     const { loading, user } = this.props
+    const { showPortalDropdown, showUserDropdown } = this.state
+    const isDropdownOpen = showPortalDropdown || showUserDropdown
     console.log("header", {loading, user})
 
     return (
-      <div className="header header-dark">  
-        <div className="header-container">
-          <div className="header-left">
-            <div className="nav-logo">
-              <Link className="nav-light" to="/">CHINGU</Link>
+      <Fragment>
+        {
+          isDropdownOpen &&
+          <ModalBackground onModalClick={this.handleModalClick}/>
+        }
+        <div
+          onClick={this.handleModalClick} 
+          className={`header header-dark ${isDropdownOpen ? "modal-peek" : ""}`}>  
+          <div className="header-container">
+            <div className="header-left">
+              <div className="nav-logo">
+                <Link className="nav-light" to="/">CHINGU</Link>
+              </div>
+            </div>
+    
+            {user && this.renderPortalDropDown()}
+    
+            <div className="header-right">
+              {user && this.renderAvatar()}
+              {!localStorage.token && !loading && <Link to="/login" className="header-btn">LOG IN</Link>} 
             </div>
           </div>
-  
-          {user && this.renderPortalDropDown()}
-  
-          <div className="header-right">
-            {user && this.renderAvatar()}
-            {!localStorage.token && !loading && <Link to="/login" className="header-btn">LOG IN</Link>} 
-          </div>
         </div>
-      </div>
+      </Fragment>
     )
   }
 }

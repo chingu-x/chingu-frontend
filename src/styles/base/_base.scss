@@ -44,11 +44,10 @@ button {
 
 #modal-root {
   position: relative;
-  z-index: 999;
+  z-index: map-get($z-indexes, modal);
 }
 
 .modal {
-  background-color: rgba(150, 0, 0, 0.5); // TODO change color
   position: fixed;
   height: 100%;
   width: 100%;
@@ -57,4 +56,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.modal-peek {
+  // position: relative;
+  z-index: $z-modal-peek !important;
 }
