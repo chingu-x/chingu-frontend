@@ -21,20 +21,28 @@ const Header = ({ loading, user, history }) => {
   //   teams = Store.state.user.teams;
   // }
   
-  const logout = e => {
+  const logout = async (e) => {
     e.preventDefault();
+    
+    console.log("cached user", client.cache.data.data["User:4"]) // TODO remove
+    
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("store");
-
+    
     /* 
     TODOS
     Fix state updates error
     Find better way to reset cache
     Do server logout logic
     */
+   
+    // TODO check which is correct      
+    // await client.resetStore()
+    await client.cache.reset()
+
+    // TODO remove
+    console.log("cacheafter reset", client.cache.data.data)
     
-    // client.resetStore() // Executes all queries
-    client.cache.reset()
     history.push("/")
   };
 
