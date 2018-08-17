@@ -25,43 +25,54 @@ import {
   WhatMakesChinguUniqueBar,
 } from "./components/landingBarRenderers";
 
-const Landing = props => {
-  console.log("landing", { props })
-  const { user } = props
-  return (
-    <div className="landing" >
-      <Modal open={props.openLoginModal} background="gray"><GithubLogin queryString={props.queryString} /></Modal>
+class Landing extends React.Component {
+  openLoginModal = () => this.refs.loginModal.open()
 
-      <LandingTop user={user} />
-      <CohortsBar
-        title="What Makes Chingu Unique"
-        data={whatMakesChingUnique}
-        renderItems={WhatMakesChinguUniqueBar}
-      />
-      <LandingBar
-        title="Chingu Process"
-        data={process}
-        renderItems={ProcessBar}
-      />
-      <CohortsBar
-        title="Program Overview"
-        subtext={["8 Week Build To Learn Voyages", "Part-Time or Full-Time teams"]}
-        data={programOverview}
-        renderItems={ProgramOverview}
-      />
-      <LandingBar
-        title="Past Projects"
-        data={projects}
-        renderItems={ProjectsBar}
-      />
-      <CohortsBar
-        title="What People Are Saying About Chingu"
-        data={testimonials}
-        renderItems={TestimonialBar}
-      />
-      {!user && <LandingBottom />}
-    </div>
-  )
+  render() {
+    console.log("landing", { props: this.props })
+    const { user } = this.props
+    return (
+      <div className="landing" >
+        <Modal
+          open={this.props.openLoginModal}
+          background="gray"
+          ref="loginModal"
+        >
+          <GithubLogin queryString={this.props.queryString} />
+        </Modal>
+
+        <LandingTop user={user} onApplyClick={this.openLoginModal} />
+        <CohortsBar
+          title="What Makes Chingu Unique"
+          data={whatMakesChingUnique}
+          renderItems={WhatMakesChinguUniqueBar}
+        />
+        <LandingBar
+          title="Chingu Process"
+          data={process}
+          renderItems={ProcessBar}
+        />
+        <CohortsBar
+          title="Program Overview"
+          subtext={["8 Week Build To Learn Voyages", "Part-Time or Full-Time teams"]}
+          data={programOverview}
+          renderItems={ProgramOverview}
+        />
+        <LandingBar
+          title="Past Projects"
+          data={projects}
+          renderItems={ProjectsBar}
+        />
+        <CohortsBar
+          title="What People Are Saying About Chingu"
+          data={testimonials}
+          renderItems={TestimonialBar}
+        />
+        {!user && <LandingBottom onApplyClick={this.openLoginModal} />}
+      </div>
+    )
+  }
+
 }
 
 export default props =>
