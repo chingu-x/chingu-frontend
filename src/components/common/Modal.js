@@ -30,11 +30,14 @@ export default class extends React.Component {
     this.props.open && this.open()
   }
 
+  toggle = () => this.state.show ? this.close() : this.open()
   open = () => this.setState({ show: true })
   close = () => this.setState({ show: false })
   
   render() {
     console.log(this.props)
+
+    // TODO Listen to events
     return this.state.show &&
     ReactDOM.createPortal(
       <div

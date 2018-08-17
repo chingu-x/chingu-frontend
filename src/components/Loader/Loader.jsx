@@ -14,8 +14,8 @@ import Modal from "../common/Modal"
 
 // export default Loader;
 
-export default () => (
-  <Modal open persist background="gray">
+export default props => (
+  <Modal open persist background={props.background || "gray"}>
     <div className="loader" />
   </Modal>
 )
