@@ -19,8 +19,17 @@ import Login from './components/Login';
 import Loader from "./components/Loader/Loader"
 import Error from "./components/Error/Error"
 import getAuthedUser from "./queries/getAuthedUser"
-
 import { Query } from "react-apollo"
+
+// Private route that renders login modal with landing page in backgrund if no token
+// TODO: do a better auth check
+const Private = ({ component: Component, ...props }) => (
+  <Route { ...props } render={props => (
+    window.localStorage.token
+      ? <Component { ...props }/>
+      : <Landing {...props } loginModal/>
+  )}/>
+)
 
 export default () => (
   <div className="App">
@@ -39,7 +48,7 @@ export default () => (
           () => <Register version={null} /> // set custom 'chingu_application' version here
         }
       />
-      <Route exact path="/profile" component={UserProfile} />
+      <Private exact path="/profile" component={UserProfile} />
       <Route exact path="/voyage" component={VoyagePortal} />
       <Route
         exact path="/voyage/application/:voyage_id"

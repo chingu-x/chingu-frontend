@@ -27,6 +27,10 @@ import {
 
 class Landing extends React.Component {
   openLoginModal = () => this.refs.loginModal.open()
+  handleModalClick = () => {
+    this.refs.loginModal.close()
+    this.props.history.push("/")
+  }
 
   render() {
     console.log("landing", { props: this.props })
@@ -34,7 +38,8 @@ class Landing extends React.Component {
     return (
       <div className="landing" >
         <Modal
-          open={this.props.openLoginModal}
+          onModalClick={this.handleModalClick}
+          open={this.props.loginModal}
           background="gray"
           ref="loginModal"
         >
@@ -75,5 +80,5 @@ class Landing extends React.Component {
 
 }
 
-export default props =>
-  <GetUser query={landingQuery}><Landing {...props} /></GetUser>
+
+export default Landing
