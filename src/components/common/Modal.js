@@ -32,7 +32,6 @@ export default class extends React.Component {
         onClick={this.props.onModalClick || this.close}
         className={`modal ${this.props.background || ""}`} 
       >
-        {/* <div className="modal-child">{this.props.children}</div> */}
         { this.props.children }
       </div>, 
       document.querySelector("#modal-root")

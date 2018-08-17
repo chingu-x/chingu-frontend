@@ -78,7 +78,7 @@ const userAuthGithub = gql`
 // -- COMPONENTS -- //
 // TODO: refactor styles
 const GithubLoginModal = ({ clientID }) => (
-  <div className="login-box">
+  <div className="login-box" onClick={e => e.stopPropagation()}>
     <div className="login-title">Github Authentication</div>
     <a
       className="login-link"
