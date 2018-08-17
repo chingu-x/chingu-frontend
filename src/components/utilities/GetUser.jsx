@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom"
 
 import Loading from "../Loader/Loader";
 import Error from "../Error/Error";
-import Landing from "./../Landing/Landing"
+import Landing from "./../Landing"
 
 //-- USAGE --//
 // export default props => <GetUser query={QUERY} load={BOOLEAN}><ChildComponent {...props}/></GetUser>

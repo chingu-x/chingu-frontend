@@ -4,7 +4,7 @@ import "./Login.css"
 import WithToken from "./components/WithToken"
 import WithoutToken from "./components/WithoutToken"
 import { Redirect } from "react-router-dom"
-import Landing from "../Landing/Landing"
+import Landing from "../Landing"
 
 // TODO: add state generator
 //   generate state and store in local storage

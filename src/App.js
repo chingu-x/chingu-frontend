@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Switch, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
-import Landing from "./components/Landing/Landing";
+import Landing from "./components/Landing";
 import Staff from "./components/Pages/Staff";
 import PrivacyPolicy from "./components/Pages/PrivacyPolicy";
 import FAQ from "./components/Pages/FAQ";
