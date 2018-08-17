@@ -5,6 +5,8 @@ import WithToken from "./components/WithToken"
 import WithoutToken from "./components/WithoutToken"
 import { Redirect } from "react-router-dom"
 import Landing from "../Landing"
+import qs from "query-string"
+import AuthenticateWithGithub from "./components/GithubAuth";
 
 // TODO: add state generator
 //   generate state and store in local storage
@@ -36,9 +38,21 @@ import Landing from "../Landing"
 //     <WithoutToken queryString={queryString} />
 // );
 
-const Login = ({ queryString }) =>
-  localStorage.token
-    ? <Redirect to="/profile" />
-    : <Landing openLoginModal queryString={queryString} />
+/**
+ * /login is only used by github callback and manually:
+ * If there is a code parsed from queryString, authenticate/reauthenticate with Github. (Consider adding token check to disable reauthentication)
+ * Otherwise redirect to /profile. This works because /profile is a Private route and will show login modal if no token found.
+ */
+
+const Login = ({ queryString }) => {
+  if (queryString) {
+    var { code } = qs.parse(queryString)
+    var { redirect } = qs.parse(queryString)
+  }
+
+  return code
+    ? <AuthenticateWithGithub code={code} redirect={redirect} />
+    : <Redirect to="/profile" />
+}
 
 export default Login
