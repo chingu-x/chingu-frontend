@@ -40,7 +40,7 @@ import AuthenticateWithGithub from "./components/GithubAuth";
 
 /**
  * /login is only used by github callback and manually:
- * If there is a code parsed from queryString, authenticate/reauthenticate with Github. (Consider adding token check to disable reauthentication)
+ * If there is a code parsed from queryString, authenticate with Github.
  * Otherwise redirect to /profile. This works because /profile is a Private route and will show login modal if no token found.
  */
 
@@ -50,7 +50,7 @@ const Login = ({ queryString }) => {
     var { redirect } = qs.parse(queryString)
   }
 
-  return code
+  return !localStorage.token && code
     ? <AuthenticateWithGithub code={code} redirect={redirect} />
     : <Redirect to="/profile" />
 }

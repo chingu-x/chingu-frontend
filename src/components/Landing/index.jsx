@@ -7,7 +7,7 @@ import LandingBar from "./components/LandingBar";
 import LandingTop from "./components/LandingTop";
 import LandingBottom from "./components/LandingBottom";
 import Modal from "../common/Modal"
-import GithubLogin from "../Login/components/WithoutToken"
+import GithubLoginModal from "../Login/components/GithubLoginModal"
 
 import {
   process,
@@ -43,7 +43,7 @@ class Landing extends React.Component {
           background="gray"
           ref="loginModal"
         >
-          <GithubLogin queryString={this.props.queryString} />
+          <GithubLoginModal redirect={window.location.pathname} />
         </Modal>
 
         <LandingTop user={user} onApplyClick={this.openLoginModal} />

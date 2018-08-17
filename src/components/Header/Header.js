@@ -5,7 +5,7 @@ import GetUser from "../utilities/GetUser"
 import headerQuery from "../../queries/headerQuery"
 // import Store from '../../AppGlobalStore';
 import { client } from "../../index"
-import GithubLoginModal from "../Login/components/WithoutToken"
+import GithubLoginModal from "../Login/components/GithubLoginModal"
 
 class Header extends React.Component {
   constructor(props) {
