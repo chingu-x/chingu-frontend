@@ -38,7 +38,7 @@ export default class extends React.Component {
     return this.state.show &&
     ReactDOM.createPortal(
       <div
-        onClick={!!this.props.onModalClick && !this.props.persist ? this.props.onModalClick : this.close}
+        onClick={!!this.props.onModalClick || this.props.persist ? this.props.onModalClick : this.close}
         className={`modal ${this.props.background || ""}`} 
       >
         { this.props.children }
