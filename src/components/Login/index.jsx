@@ -39,9 +39,9 @@ import AuthenticateWithGithub from "./components/GithubAuth";
 // );
 
 /**
- * /login is only used by github callback and manually:
- * If there is a code parsed from queryString, authenticate with Github.
- * Otherwise redirect to /profile. This works because /profile is a Private route and will show login modal if no token found.
+ * /login route is only loaded by github callback (or manually)
+ * If there is a code found in querystring, try to authenticate with Github.
+ * Otherwise redirect to /profile which will render the UserPage or show the login modal depending localStorage.token
  */
 
 const Login = ({ queryString }) => {
@@ -51,7 +51,7 @@ const Login = ({ queryString }) => {
   }
 
   return !localStorage.token && code
-    ? <AuthenticateWithGithub code={code} redirect={redirect} />
+    ? <AuthenticateWithGithub code={code} prevPath={redirect} />
     : <Redirect to="/profile" />
 }
 

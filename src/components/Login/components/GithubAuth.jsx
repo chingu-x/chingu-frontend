@@ -28,8 +28,7 @@ const redirectSelector = ({ status }) => {
   return <Redirect to={path} />
 }
 
-// TODO Split query to load app faster
-
+// TODO: Query splitting for faster auth: Initially fetch only id, username, avatar, status
 // -- MUTATION -- //
 const userAuthGithub = gql`
   mutation authUser($code: String!) {
@@ -77,12 +76,12 @@ const userAuthGithub = gql`
 `
 
 
-const AuthenticateWithGithub = ({ code, prevPath = "/" }) => (
+const AuthenticateWithGithub = ({ code, prevPath }) => (
   <Mutation
     mutation={userAuthGithub}
     variables={{ code }}
     update={(store, { data: { userAuthGithub } }) => {
-      // TODO: store.writeFragment for query splitting and faster auth
+      // TODO: store.writeFragment 
       store.writeQuery({
         query: getUser,
         data: userAuthGithub.user
@@ -112,7 +111,7 @@ const AuthenticateWithGithub = ({ code, prevPath = "/" }) => (
         // const {redirect} = qs.parse(queryString);
         return (
           prevPath
-            ? <Redirect to={prevPath} /> // TODO: consider rename of 'redirect' to previousPath or something more explicit
+            ? <Redirect to={prevPath} />
             : redirectSelector(user)
         );
       }
