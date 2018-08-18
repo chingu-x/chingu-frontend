@@ -18,8 +18,19 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Loader from "./components/Loader/Loader"
 import Error from "./components/Error/Error"
-import getAuthedUser from "./queries/getAuthedUser"
+// import getUser from "./queries/getAuthedUser"
 import { Query } from "react-apollo"
+import { gql } from "apollo-boost"
+
+const query = gql`
+  query getUser {
+    user {
+      id
+      avatar
+      username
+    }
+  }
+`
 
 // Private route that renders login modal with landing page in backgrund if no token
 // TODO: do a better auth check
@@ -72,7 +83,7 @@ export default () => (
     </Switch>
     <Footer />
     
-    <Query query={getAuthedUser} skip={!window.localStorage.token}>
+    {/* <Query query={user} skip={!window.localStorage.token}>
       {
         (({loading, error, data, client}) => {
           if (localStorage.token && loading) return <Loader/> // workaround for stuck in loading state
@@ -83,7 +94,7 @@ export default () => (
           return null
         })
       }
-    </Query>
+    </Query> */}
 
   </div>
 )
