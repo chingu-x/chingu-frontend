@@ -78,8 +78,6 @@ class Header extends React.Component {
   logout = async (e) => {
     e.preventDefault();
     
-    console.log("cached user", client.cache.data.data["User:4"]) // TODO remove
-    
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("store");
     
@@ -94,8 +92,7 @@ class Header extends React.Component {
     // await client.resetStore()
     await client.cache.reset()
 
-    // TODO remove
-    console.log("cacheafter reset", client.cache.data.data)
+    if (!client.cache.data.data["User:4"]) console.log("Cache emptied") // TODO Remove
     
     this.props.history.push("/")
   };
@@ -156,45 +153,48 @@ class Header extends React.Component {
     )
   }
 
-  render() {
-    // const { loading, user } = this.props
-    const { showPortalDropdown, showUserDropdown } = this.state
-    const isDropdownOpen = showPortalDropdown || showUserDropdown
+  renderHeader = user => {
+    const isDropdownOpen = this.state.showPortalDropdown || this.state.showUserDropdown
+    return (
+      <div
+      onClick={this.closeDropdowns} 
+      className={`header header-dark ${isDropdownOpen ? "modal-peek" : ""}`}>  
+      <div className="header-container">
+        <div className="header-left">
+          <div className="nav-logo">
+            <Link className="nav-light" to="/">CHINGU</Link>
+          </div>
+        </div>
 
+        {user && this.renderPortalDropDown(user.teams)}
+
+        <div className="header-right">
+          {user && this.renderAvatar(user.avatar)}
+          {!localStorage.token && !user && <div onClick={this.openLoginModal} className="header-btn">LOG IN</div>} 
+        </div>
+      </div>
+    </div>
+   )
+}
+  
+  render() {
     return (
       <Fragment>
         <Modal onModalClick={this.closeDropdowns} ref="dropdownModal"/>
         <Modal background="gray" ref="loginModal"><GithubLoginModal/> </Modal>
-        <Query query={ query }>
+        {
+          !localStorage.token
+            ? this.renderHeader()
+            :  <Query query={ query }>
           {
             // TODO: Skip the query if no token found
             (({ loading, error, data = {} }) => {
               console.log("header status", { loading, error, data })
               // if (error) return <Error error={error.message} goBack={"/"}/>
-              
-              return (
-                <div
-                  onClick={this.closeDropdowns} 
-                  className={`header header-dark ${isDropdownOpen ? "modal-peek" : ""}`}>  
-                  <div className="header-container">
-                    <div className="header-left">
-                      <div className="nav-logo">
-                        <Link className="nav-light" to="/">CHINGU</Link>
-                      </div>
-                    </div>
-            
-                    {data.user && this.renderPortalDropDown(data.user.teams)}
-            
-                    <div className="header-right">
-                      {data.user && this.renderAvatar(data.user.avatar)}
-                      {!data.user && <div onClick={this.openLoginModal} className="header-btn">LOG IN</div>} 
-                    </div>
-                  </div>
-                </div>
-              )
+              return this.renderHeader(data.user)
             })
           }
-        </Query>
+        </Query>}
       </Fragment>
     )
   }

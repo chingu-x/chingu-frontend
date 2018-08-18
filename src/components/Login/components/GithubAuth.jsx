@@ -4,7 +4,7 @@ import { Mutation } from "react-apollo"
 import { gql } from "apollo-boost"
 import getUser from "../../../queries/getAuthedUser"
 
-import Loading from "../../Loader/Loader"
+import Loader from "../../Loader/Loader"
 import Error from "../../Error/Error"
 import Landing from "../../Landing"
 
@@ -76,12 +76,12 @@ const userAuthGithub = gql`
   }
 `
 
-const AuthenticateWithGithub = ({ code, prevPath }) => (
+
+const AuthenticateWithGithub = ({ code, prevPath = "/" }) => (
   <Mutation
     mutation={userAuthGithub}
     variables={{ code }}
     update={(store, { data: { userAuthGithub } }) => {
-      console.log("auth complete", { userAuthGithub })
       // TODO: store.writeFragment for query splitting and faster auth
       store.writeQuery({
         query: getUser,
@@ -91,24 +91,24 @@ const AuthenticateWithGithub = ({ code, prevPath }) => (
     }
   >
     {(authenticate, { called, data, error, loading, client }) => {
-      // authenticate()
-      if (loading) return <Loading background="white" />
+      // TODO: Fix state update error on login
+      console.log("ghAuth status:", { called, loading, error, data })
+
+      if (loading) return <Loader background="white" />
       if (error) return <Error error={error.message} goBack="/login" />
 
-      console.log("ghAuth status:", { called, loading, error, data })
 
       if (data) {
         const {
           userAuthGithub: { user, access_token }
         } = data
-        window.localStorage.setItem("token", access_token)        // TODO: write to link state when implemented
-        // client.writeData({data: {user: {__typename: "User", ...data.user}}})
-        // Unnecessary ? App fetches user on reload.
+        window.localStorage.setItem("token", access_token)
         window.localStorage.setItem(
           "store",
           JSON.stringify({ version: 5, user })
         )
         // TODO: write to link state
+        // client.writeData({data: {user: {__typename: "User", ...data.user}}})
         // const {redirect} = qs.parse(queryString);
         return (
           prevPath
@@ -117,23 +117,18 @@ const AuthenticateWithGithub = ({ code, prevPath }) => (
         );
       }
 
-      authenticate({ variables: { code } })
-
-
-      return null
-
-
       // if (code) {
       //   // const { code } = qs.parse(queryString)
       //   authenticate({ variables: { code } })
       // }
-
+      authenticate({ variables: { code } })
 
       // return (
       //   <GithubLoginModal
       //     clientID="e015fd9cc874fa5a34bf" queryString={queryString}
       //   />
       // )
+      return null
     }}
   </Mutation>
 )
