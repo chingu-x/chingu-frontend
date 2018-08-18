@@ -94,7 +94,7 @@ class Header extends React.Component {
 
     if (!client.cache.data.data["User:4"]) console.log("Cache emptied") // TODO Remove
     
-    this.props.history.push("/")
+    this.props.history.replace("/")
   };
 
   renderPortalDropDown = teams => {

@@ -2,9 +2,50 @@ import * as React from "react";
 import * as Cards from "../VoyageCard/VoyageCard";
 import UserSideBar from "./UserSideBar";
 import './UserProfile.css'
-import GetUser from "../utilities/GetUser"
-import userProfileQuery from "../../queries/userProfileQuery"
+// import GetUser from "../utilities/GetUser"
+// import userProfileQuery from "../../queries/userProfileQuery"
 // import Store from '../../AppGlobalStore';
+
+import { Query } from "react-apollo"
+import { gql } from "apollo-boost"
+
+import Loader from "../Loader/Loader"
+import Error from "../Error/Error"
+
+const query = gql`
+  query profileQuery {
+    user {
+      id
+      username
+      avatar
+      country
+      teams {
+        id
+        title
+        cohort {
+          id
+          status
+          start_date
+          end_date
+        }
+      }
+      cohorts {
+        id
+        title
+        start_date
+        end_date
+        members {
+          id
+          status
+          user {
+            username
+          }
+        }
+      }
+
+    }
+  }
+`
 
 class UserProfile extends React.Component {
   // constructor(props) {
@@ -30,11 +71,8 @@ class UserProfile extends React.Component {
   //     // console.log(pendingApproval);
   //   });
   // }
-  render() {
-    const { loading, user } = this.props
-    console.log("profile", { loading, user })
-    // let user = this.state.user;
-    // const user = this.props.user
+
+  renderPage = user => {
     const currentTeams = user.teams.filter(team => { return team.cohort.status === 'ongoing' });
     const pastTeams = user.teams.filter(team => { return team.cohort.status === 'ended' });
 
@@ -107,6 +145,21 @@ class UserProfile extends React.Component {
       </div>
     );
   }
+  render() {
+    return (
+      <Query query={query}>
+        {
+          (({ loading, error, data }) => {
+            if (loading) return <Loader background="white" />
+            if (error) return <Error error={error.message} />
+            return localStorage.token ? this.renderPage(data.user) : null
+          })
+        }
+      </Query>
+    )
+  }
 }
 
-export default props => <GetUser query={userProfileQuery} load><UserProfile {...props} /></GetUser>;
+// export default props => <GetUser query={userProfileQuery} load><UserProfile {...props} /></GetUser>;
+
+export default UserProfile
