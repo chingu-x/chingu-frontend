@@ -30,19 +30,21 @@ class Landing extends React.Component {
   openLoginModal = () => this.refs.loginModal.open()
   handleModalClick = () => {
     this.refs.loginModal.close()
-    this.props.history.push("/")
+    // this.props.history.push("/")
   }
 
   render() {
     const authed = !!localStorage.token
+    const loginModal = this.props.location.state && this.props.location.state.loginModal
+    const prevPath = this.props.location.state && this.props.location.state.from
     return (
       <div className="landing" >
         <Modal
           onModalClick={this.handleModalClick}
-          open={this.props.loginModal}
+          open={loginModal}
           ref="loginModal"
         >
-          <GithubLoginModal />
+          <GithubLoginModal prevPath={prevPath} />
         </Modal>
 
         <LandingTop authed={authed} onApplyClick={this.handleApplyClick} />

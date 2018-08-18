@@ -51,7 +51,7 @@ const Login = ({ queryString }) => {
   }
 
   return !localStorage.token && code
-    ? <AuthenticateWithGithub code={code} prevPath={redirect} />
+    ? <AuthenticateWithGithub code={code} />
     : <Redirect to="/profile" />
 }
 

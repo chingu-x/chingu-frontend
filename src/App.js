@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Landing from "./components/Landing";
 import Staff from "./components/Pages/Staff";
@@ -38,7 +38,14 @@ const Private = ({ component: Component, ...props }) => (
   <Route { ...props } render={props => (
     window.localStorage.token
       ? <Component { ...props }/>
-      : <Landing {...props } loginModal/>
+      // : <Landing {...props } loginModal/>
+      : <Redirect to={{
+        pathname: "/",
+        state: { 
+          // Pass private route pathname to use in Github redirect after login
+          from: props.location.pathname, 
+          loginModal: true }
+      }}/>
   )}/>
 )
 
@@ -61,7 +68,7 @@ export default () => (
       />
       <Private exact path="/profile" component={UserProfile} />
       <Private exact path="/voyage" component={VoyagePortal} />
-      <Private
+      <Route
         exact path="/voyage/application/:voyage_id"
         render={
           ({ match: { params: { voyage_id } } }) => (
