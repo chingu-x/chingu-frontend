@@ -26,6 +26,7 @@ import {
 } from "./components/landingBarRenderers";
 
 class Landing extends React.Component {
+  handleApplyClick = () => !!localStorage.token ? this.props.history.push("/voyage") : this.openLoginModal()
   openLoginModal = () => this.refs.loginModal.open()
   handleModalClick = () => {
     this.refs.loginModal.close()
@@ -33,7 +34,6 @@ class Landing extends React.Component {
   }
 
   render() {
-    console.log("landing", { props: this.props })
     const authed = !!localStorage.token
     return (
       <div className="landing" >
@@ -42,10 +42,10 @@ class Landing extends React.Component {
           open={this.props.loginModal}
           ref="loginModal"
         >
-          <GithubLoginModal redirect={window.location.pathname} />
+          <GithubLoginModal />
         </Modal>
 
-        <LandingTop authed={authed} onApplyClick={this.openLoginModal} />
+        <LandingTop authed={authed} onApplyClick={this.handleApplyClick} />
         <CohortsBar
           title="What Makes Chingu Unique"
           data={whatMakesChingUnique}
@@ -72,7 +72,7 @@ class Landing extends React.Component {
           data={testimonials}
           renderItems={TestimonialBar}
         />
-        {authed && <LandingBottom onApplyClick={this.openLoginModal} />}
+        {!authed && <LandingBottom onApplyClick={this.handleApplyClick} />}
       </div>
     )
   }

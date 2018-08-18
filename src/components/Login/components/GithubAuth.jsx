@@ -35,19 +35,21 @@ const userAuthGithub = gql`
     userAuthGithub(code: $code) {
       user {
         id
-        avatar
         username
+        avatar
+        country
         status
         background
         interests
         coding_history
-        country
         cohorts {
           id
+          title
           status
           start_date
           end_date
           members {
+            id
             status
             user {
               username

@@ -60,8 +60,8 @@ export default () => (
         }
       />
       <Private exact path="/profile" component={UserProfile} />
-      <Route exact path="/voyage" component={VoyagePortal} />
-      <Route
+      <Private exact path="/voyage" component={VoyagePortal} />
+      <Private
         exact path="/voyage/application/:voyage_id"
         render={
           ({ match: { params: { voyage_id } } }) => (

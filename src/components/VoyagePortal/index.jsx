@@ -188,8 +188,12 @@ const VoyagePortal = props => {
           console.log("/voyage query status", { loading, error, data })
           if (loading) return <Loading background="opaque" />
           if (error) return <Error error={error.message} />
-          const { cohorts, user: { id: userId } } = data
-          return localStorage.token && renderPage({ cohorts, userId })
+          return !localStorage.token
+            ? null
+            : renderPage({
+              cohorts: data.cohorts,
+              userId: data.user.id
+            })
 
         })
       }
