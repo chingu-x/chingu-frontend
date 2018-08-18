@@ -1,51 +1,13 @@
 import * as React from "react";
 import * as Cards from "../VoyageCard/VoyageCard";
 import UserSideBar from "./UserSideBar";
-import './UserProfile.css'
 // import GetUser from "../utilities/GetUser"
-// import userProfileQuery from "../../queries/userProfileQuery"
-// import Store from '../../AppGlobalStore';
-
 import { Query } from "react-apollo"
-import { gql } from "apollo-boost"
-
 import Loader from "../Loader/Loader"
 import Error from "../Error/Error"
-
-const query = gql`
-  query profileQuery {
-    user {
-      id
-      username
-      avatar
-      country
-      teams {
-        id
-        title
-        cohort {
-          id
-          status
-          start_date
-          end_date
-        }
-      }
-      cohorts {
-        id
-        title
-        start_date
-        end_date
-        members {
-          id
-          status
-          user {
-            username
-          }
-        }
-      }
-
-    }
-  }
-`
+import profileQuery from "../../queries/userProfileQuery"
+import './UserProfile.css'
+// import Store from '../../AppGlobalStore';
 
 class UserProfile extends React.Component {
   // constructor(props) {
@@ -147,7 +109,7 @@ class UserProfile extends React.Component {
   }
   render() {
     return (
-      <Query query={query}>
+      <Query query={profileQuery}>
         {
           (({ loading, error, data }) => {
             if (loading) return <Loader background="opaque" />

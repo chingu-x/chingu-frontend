@@ -1,9 +1,8 @@
 import { gql } from "apollo-boost"
 
-// TODO Check query
-const userProfileQuery = gql`
-  {
-    user @client {
+const profileQuery = gql`
+  query profileQuery {
+    user {
       id
       username
       avatar
@@ -36,4 +35,4 @@ const userProfileQuery = gql`
   }
 `
 
-export default userProfileQuery
+export default profileQuery

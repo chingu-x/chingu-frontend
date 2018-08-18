@@ -3,18 +3,20 @@ import { Link, withRouter } from "react-router-dom";
 import { Query } from "react-apollo"
 import { gql } from "apollo-boost"
 import Modal from "../common/Modal"
-import GetUser from "../utilities/GetUser"
-import Error from "../Error/Error.scss"
-// import headerQuery from "../../queries/headerQuery"
-// import Store from '../../AppGlobalStore';
-import { client } from "../../index"
 import GithubLoginModal from "../Login/components/GithubLoginModal"
+import Error from "../Error/Error"
+// import Store from '../../AppGlobalStore';
+// import GetUser from "../utilities/GetUser"
+import profileQuery from "../../queries/userProfileQuery"
 
 const query = gql`
   query getUser {
     user {
       id
-      username
+      teams {
+        id
+        title
+      }
       avatar
     }
   }
@@ -75,7 +77,7 @@ class Header extends React.Component {
   //   teams = Store.state.user.teams;
   // }
   
-  logout = async (e) => {
+  logout = async (e, client) => {
     e.preventDefault();
     
     window.localStorage.removeItem("token");
@@ -97,7 +99,7 @@ class Header extends React.Component {
     this.props.history.replace("/")
   };
 
-  renderPortalDropDown = teams => {
+  renderPortalDropDown = ({teams, client}) => {
     // const { teams } = this.props.user
     let teamsDOM = null;
     if (teams && teams.length) {
@@ -111,6 +113,7 @@ class Header extends React.Component {
         </React.Fragment>
       )
     }
+
     return (
       <div className="header-dropdown portal">
         <button 
@@ -123,16 +126,26 @@ class Header extends React.Component {
           this.state.showPortalDropdown && 
           <div className="header-dropdown-content--centered portal">
             {teamsDOM}
-            <Link to="/voyage">Voyage Portal</Link>
+            <Link 
+              to="/voyage"
+              // onMouseOver={() => client.query({ query )} // TODO: voyage prefetch
+            >
+              Voyage Portal
+            </Link>
             <hr />
-            <Link to="/profile">User Profile</Link>
+            <Link 
+              to="/profile"
+              onMouseOver={() => client.query({ query: profileQuery })}
+            >
+              User Profile
+            </Link>
           </div>
         }
       </div>
     )
   }
 
-  renderAvatar = avatar => {
+  renderAvatar = ({avatar, client}) => {
     // const { avatar } = this.props.user
     return (
       <div className="header-dropdown">
@@ -145,7 +158,8 @@ class Header extends React.Component {
             <div className="header-mask" />
             <div className="header-dropdown-content avatar">
               {/* <Link to="/settings">Settings</Link> */}
-              <Link to="/" onClick={e => this.logout(e)}>Log out</Link>
+              {/* TODO: server logout logic */}
+              <Link to="/" onClick={e => this.logout(e, client)}>Log out</Link>
             </div>
           </Fragment>
         }
@@ -153,29 +167,35 @@ class Header extends React.Component {
     )
   }
 
-  renderHeader = user => {
+  renderHeader = ({user, client} = {}) => {
+    let avatar, teams
+    if (user) {
+      ({teams, avatar} = user) 
+      // teams = user.teams
+      // avatar = user.avatar
+    }
     const isDropdownOpen = this.state.showPortalDropdown || this.state.showUserDropdown
     return (
       <div
-      onClick={this.closeDropdowns} 
-      className={`header header-dark ${isDropdownOpen ? "modal-peek" : ""}`}>  
-      <div className="header-container">
-        <div className="header-left">
-          <div className="nav-logo">
-            <Link className="nav-light" to="/">CHINGU</Link>
+        onClick={this.closeDropdowns} 
+        className={`header header-dark ${isDropdownOpen ? "modal-peek" : ""}`}>  
+        <div className="header-container">
+          <div className="header-left">
+            <div className="nav-logo">
+              <Link className="nav-light" to="/">CHINGU</Link>
+            </div>
+          </div>
+
+          {user && this.renderPortalDropDown({client, teams})}
+
+          <div className="header-right">
+            {user && this.renderAvatar({client, avatar})}
+            {!localStorage.token && !user && <div onClick={this.openLoginModal} className="header-btn">LOG IN</div>} 
           </div>
         </div>
-
-        {user && this.renderPortalDropDown(user.teams)}
-
-        <div className="header-right">
-          {user && this.renderAvatar(user.avatar)}
-          {!localStorage.token && !user && <div onClick={this.openLoginModal} className="header-btn">LOG IN</div>} 
-        </div>
       </div>
-    </div>
-   )
-}
+    )
+  }
   
   render() {
     return (
@@ -188,10 +208,10 @@ class Header extends React.Component {
             : <Query query={ query }>
           {
             // TODO: Skip the query if no token found
-            (({ loading, error, data = {} }) => {
+            (({ client, loading, error, data = {} }) => {
               console.log("header status", { loading, error, data })
               // if (error) return <Error error={error.message} goBack={"/"}/>
-              return this.renderHeader(data.user)
+              return this.renderHeader({user: data.user, client})
             })
           }
         </Query>}

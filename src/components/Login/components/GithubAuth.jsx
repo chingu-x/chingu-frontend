@@ -2,8 +2,6 @@ import * as React from "react"
 import { Redirect } from "react-router-dom"
 import { Mutation } from "react-apollo"
 import { gql } from "apollo-boost"
-import getUser from "../../../queries/getAuthedUser"
-
 import Loader from "../../Loader/Loader"
 import Error from "../../Error/Error"
 import Landing from "../../Landing"
@@ -33,49 +31,60 @@ const redirectSelector = ({ status }) => {
 const userAuthGithub = gql`
   mutation authUser($code: String!) {
     userAuthGithub(code: $code) {
+      access_token
       user {
         id
-        username
-        avatar
-        country
         status
-        background
-        interests
-        coding_history
-        cohorts {
-          id
-          title
-          status
-          start_date
-          end_date
-          members {
-            id
-            status
-            user {
-              username
-            }
-          }
-        }
-        teams {
-          id
-          title
-          standups {
-            progress_sentiment
-            expiration
-          }
-          cohort {
-            id
-            title
-            start_date
-            end_date
-            status
-          }
-        }
       }
-      access_token
     }
   }
 `
+// const userAuthGithub = gql`
+//   mutation authUser($code: String!) {
+//     userAuthGithub(code: $code) {
+//       user {
+//         id
+//         username
+//         avatar
+//         country
+//         status
+//         background
+//         interests
+//         coding_history
+//         cohorts {
+//           id
+//           title
+//           status
+//           start_date
+//           end_date
+//           members {
+//             id
+//             status
+//             user {
+//               username
+//             }
+//           }
+//         }
+//         teams {
+//           id
+//           title
+//           standups {
+//             progress_sentiment
+//             expiration
+//           }
+//           cohort {
+//             id
+//             title
+//             start_date
+//             end_date
+//             status
+//           }
+//         }
+//       }
+//       access_token
+//     }
+//   }
+// `
 
 
 const AuthenticateWithGithub = ({ code, prevPath }) => (
@@ -104,10 +113,10 @@ const AuthenticateWithGithub = ({ code, prevPath }) => (
           userAuthGithub: { user, access_token }
         } = data
         window.localStorage.setItem("token", access_token)
-        window.localStorage.setItem(
-          "store",
-          JSON.stringify({ version: 5, user })
-        )
+        // window.localStorage.setItem(
+        //   "store",
+        //   JSON.stringify({ version: 5, user })
+        // )
         // TODO: write to link state
         // client.writeData({data: {user: {__typename: "User", ...data.user}}})
         // const {redirect} = qs.parse(queryString);

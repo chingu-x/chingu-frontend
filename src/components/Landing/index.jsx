@@ -1,7 +1,5 @@
 import * as React from 'react';
-import GetUser from "../utilities/GetUser"
-import landingQuery from "../../queries/landingQuery"
-
+// import GetUser from "../utilities/GetUser"
 import CohortsBar from "./components/CohortsBar";
 import LandingBar from "./components/LandingBar";
 import LandingTop from "./components/LandingTop";

@@ -18,19 +18,18 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Loader from "./components/Loader/Loader"
 import Error from "./components/Error/Error"
-// import getUser from "./queries/getAuthedUser"
 import { Query } from "react-apollo"
-import { gql } from "apollo-boost"
+// import { gql } from "apollo-boost"
 
-const query = gql`
-  query getUser {
-    user {
-      id
-      avatar
-      username
-    }
-  }
-`
+// const query = gql`
+//   query getUser {
+//     user {
+//       id
+//       avatar
+//       username
+//     }
+//   }
+// `
 
 // Private route that renders login modal with landing page in backgrund if no token
 // TODO: do a better auth check
