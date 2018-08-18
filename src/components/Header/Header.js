@@ -1,11 +1,24 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
+import { Query } from "react-apollo"
+import { gql } from "apollo-boost"
 import Modal from "../common/Modal"
 import GetUser from "../utilities/GetUser"
-import headerQuery from "../../queries/headerQuery"
+import Error from "../Error/Error.scss"
+// import headerQuery from "../../queries/headerQuery"
 // import Store from '../../AppGlobalStore';
 import { client } from "../../index"
 import GithubLoginModal from "../Login/components/GithubLoginModal"
+
+const query = gql`
+  query getUser {
+    user {
+      id
+      username
+      avatar
+    }
+  }
+`
 
 class Header extends React.Component {
   constructor(props) {
@@ -87,8 +100,8 @@ class Header extends React.Component {
     this.props.history.push("/")
   };
 
-  renderPortalDropDown = () => {
-    const { teams } = this.props.user
+  renderPortalDropDown = teams => {
+    // const { teams } = this.props.user
     let teamsDOM = null;
     if (teams && teams.length) {
       teamsDOM = (
@@ -122,8 +135,8 @@ class Header extends React.Component {
     )
   }
 
-  renderAvatar = () => {
-    const { avatar } = this.props.user
+  renderAvatar = avatar => {
+    // const { avatar } = this.props.user
     return (
       <div className="header-dropdown">
         <img
@@ -144,39 +157,48 @@ class Header extends React.Component {
   }
 
   render() {
-    const { loading, user } = this.props
+    // const { loading, user } = this.props
     const { showPortalDropdown, showUserDropdown } = this.state
     const isDropdownOpen = showPortalDropdown || showUserDropdown
-    console.log("header", {loading, user})
 
     return (
       <Fragment>
         <Modal onModalClick={this.closeDropdowns} ref="dropdownModal"/>
-        <Modal background="gray" ref="loginModal">
-        {/* TODO add querystring */}
-          <GithubLoginModal/> 
-        </Modal>
-        <div
-          onClick={this.closeDropdowns} 
-          className={`header header-dark ${isDropdownOpen ? "modal-peek" : ""}`}>  
-          <div className="header-container">
-            <div className="header-left">
-              <div className="nav-logo">
-                <Link className="nav-light" to="/">CHINGU</Link>
-              </div>
-            </div>
-    
-            {user && this.renderPortalDropDown()}
-    
-            <div className="header-right">
-              {user && this.renderAvatar()}
-              {!localStorage.token && !loading && <div onClick={this.openLoginModal} className="header-btn">LOG IN</div>} 
-            </div>
-          </div>
-        </div>
+        <Modal background="gray" ref="loginModal"><GithubLoginModal/> </Modal>
+        <Query query={ query }>
+          {
+            // TODO: Skip the query if no token found
+            (({ loading, error, data = {} }) => {
+              console.log("header status", { loading, error, data })
+              // if (error) return <Error error={error.message} goBack={"/"}/>
+              
+              return (
+                <div
+                  onClick={this.closeDropdowns} 
+                  className={`header header-dark ${isDropdownOpen ? "modal-peek" : ""}`}>  
+                  <div className="header-container">
+                    <div className="header-left">
+                      <div className="nav-logo">
+                        <Link className="nav-light" to="/">CHINGU</Link>
+                      </div>
+                    </div>
+            
+                    {data.user && this.renderPortalDropDown(data.user.teams)}
+            
+                    <div className="header-right">
+                      {data.user && this.renderAvatar(data.user.avatar)}
+                      {!data.user && <div onClick={this.openLoginModal} className="header-btn">LOG IN</div>} 
+                    </div>
+                  </div>
+                </div>
+              )
+            })
+          }
+        </Query>
       </Fragment>
     )
   }
 }
 
-export default withRouter(props => <GetUser query={headerQuery}><Header {...props}/></GetUser>)
+// export default withRouter(props => <GetUser query={headerQuery}><Header {...props}/></GetUser>)
+export default withRouter(Header)
