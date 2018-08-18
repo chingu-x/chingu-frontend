@@ -8,14 +8,14 @@ render <Modal
   onModalClick={HANDLER} 
   open={BOOL} 
   persist={BOOL}
-  background={BACKGROUND_COLOR} 
+  background={BACKGROUND_OPACITY} options: opaque / transparent 
   />
 Use this.refs.REF_NAME.open or .close in parent component methods
 
 open opens modal on mount. Default false. 
 persist keeps modal on background click. Default is false. Overriden by onModalClick (// TODO FIXME)
 onModalClick enables aditional functionality beyond closing. Default closes modal
-background is transparent by default. 
+background OPTIONS: transparent/opaque. Default is semitransparent. Use opaque for full screen content blocking and transparetn for dropdowns
 
 // TODO: Add z-index classes to show in front of / behind header
 // TODO: Make modals receive component5 props instead of children
@@ -36,13 +36,13 @@ export default class extends React.Component {
   close = () => this.setState({ show: false })
   
   render() {
-
+    const { background = "semitransparent" } = this.props
     // TODO Listen to events
     return this.state.show &&
     ReactDOM.createPortal(
       <div
         onClick={!!this.props.onModalClick || this.props.persist ? this.props.onModalClick : this.close}
-        className={`modal ${this.props.background || ""}`} 
+        className={`modal ${background}`}
       >
         { this.props.children }
       </div>, 

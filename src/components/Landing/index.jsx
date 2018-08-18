@@ -40,7 +40,6 @@ class Landing extends React.Component {
         <Modal
           onModalClick={this.handleModalClick}
           open={this.props.loginModal}
-          background="gray"
           ref="loginModal"
         >
           <GithubLoginModal redirect={window.location.pathname} />

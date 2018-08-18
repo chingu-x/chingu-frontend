@@ -11,16 +11,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: $z-modal;
+  z-index: $z-middle;
   > * {
     margin: auto;
   }
-  &.gray,
-  &.grey {
+  &.semitransparent {
     background-color: $modal-background;
+    z-index: $z-modal;
   }
-  &.white {
+  &.opaque {
     background-color: white;
+    // z-index: 10;
+  }
+  &.transparent {
+    background-color: rgba(0,0,0,0);
   }
 }
 

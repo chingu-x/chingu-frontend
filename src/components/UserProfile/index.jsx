@@ -150,7 +150,7 @@ class UserProfile extends React.Component {
       <Query query={query}>
         {
           (({ loading, error, data }) => {
-            if (loading) return <Loader background="white" />
+            if (loading) return <Loader background="opaque" />
             if (error) return <Error error={error.message} />
             return localStorage.token ? this.renderPage(data.user) : null
           })

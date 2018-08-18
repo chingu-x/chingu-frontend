@@ -80,20 +80,20 @@ const AuthenticateWithGithub = ({ code, prevPath }) => (
   <Mutation
     mutation={userAuthGithub}
     variables={{ code }}
-    update={(store, { data: { userAuthGithub } }) => {
-      // TODO: store.writeFragment 
-      store.writeQuery({
-        query: getUser,
-        data: userAuthGithub.user
-      })
-    }
-    }
+  // update={(store, { data: { userAuthGithub } }) => {
+  //   // TODO: store.writeFragment 
+  //   store.writeQuery({
+  //     query: getUser,
+  //     data: userAuthGithub.user
+  //   })
+  // }
+  // }
   >
     {(authenticate, { called, data, error, loading, client }) => {
       // TODO: Fix state update error on login
       console.log("ghAuth status:", { called, loading, error, data })
 
-      if (loading) return <Loader background="white" />
+      if (loading) return <Loader background="opaque" />
       if (error) return <Error error={error.message} goBack="/login" />
 
 

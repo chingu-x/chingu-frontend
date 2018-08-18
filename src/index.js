@@ -21,7 +21,7 @@ const client = new ApolloClient({
   request: async operation => {
     const token = localStorage.getItem('token')
     // TODO check cache
-    // console.log({previousState: client.cache.data})
+    console.log({previousState: client.cache.data.data})
     // localStorage.setItem('store', client.cache.data)
     operation.setContext({
       headers: {

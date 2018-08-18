@@ -180,8 +180,8 @@ class Header extends React.Component {
   render() {
     return (
       <Fragment>
-        <Modal onModalClick={this.closeDropdowns} ref="dropdownModal"/>
-        <Modal background="gray" ref="loginModal"><GithubLoginModal/> </Modal>
+        <Modal onModalClick={this.closeDropdowns} background="transparent" ref="dropdownModal"/>
+        <Modal ref="loginModal"><GithubLoginModal/> </Modal>
         {
           !localStorage.token
             ? this.renderHeader()
