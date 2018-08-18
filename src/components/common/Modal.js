@@ -17,7 +17,8 @@ persist keeps modal on background click. Default is false. Overriden by onModalC
 onModalClick enables aditional functionality beyond closing. Default closes modal
 background is transparent by default. 
 
-// TODO Add z-index classes to show in front of / behind header
+// TODO: Add z-index classes to show in front of / behind header
+// TODO: Make modals receive component5 props instead of children
  */
 
 export default class extends React.Component {
@@ -35,7 +36,6 @@ export default class extends React.Component {
   close = () => this.setState({ show: false })
   
   render() {
-    console.log(this.props)
 
     // TODO Listen to events
     return this.state.show &&

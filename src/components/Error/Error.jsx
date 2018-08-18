@@ -22,13 +22,13 @@ import Modal from "../common/Modal"
 
 // export default Error;
 
-export default ({ goBack, error }) => (
+export default ({ goBack = "/profile", error }) => (
   <Modal open persist background="white">
     <div className="error-page-modal">
       <img alt="error" className="error-img" src={require('../../assets/error.png')} />
       <div className="error-message">{error}</div>
       <hr className="error-hline" />
-      <a className="error-go-back-btn" href={goBack || "/profile"} >
+      <a className="error-go-back-btn" href={goBack} >
         Go back
       </a>
     </div>

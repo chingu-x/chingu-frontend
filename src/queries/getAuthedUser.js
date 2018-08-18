@@ -1,7 +1,7 @@
 import { gql } from "apollo-boost";
 
-const getAuthedUser = gql`
-    query getUserFromToken {
+const getUser = gql`
+    query getUser {
       user {
         id
         avatar
@@ -43,4 +43,4 @@ const getAuthedUser = gql`
     }
   `;
 
-  export default getAuthedUser
+  export default getUser
