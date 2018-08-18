@@ -34,7 +34,7 @@ class Landing extends React.Component {
 
   render() {
     console.log("landing", { props: this.props })
-    const { user } = this.props
+    const authed = !!localStorage.token
     return (
       <div className="landing" >
         <Modal
@@ -46,7 +46,7 @@ class Landing extends React.Component {
           <GithubLoginModal redirect={window.location.pathname} />
         </Modal>
 
-        <LandingTop user={user} onApplyClick={this.openLoginModal} />
+        <LandingTop authed={authed} onApplyClick={this.openLoginModal} />
         <CohortsBar
           title="What Makes Chingu Unique"
           data={whatMakesChingUnique}
@@ -73,7 +73,7 @@ class Landing extends React.Component {
           data={testimonials}
           renderItems={TestimonialBar}
         />
-        {!user && <LandingBottom onApplyClick={this.openLoginModal} />}
+        {authed && <LandingBottom onApplyClick={this.openLoginModal} />}
       </div>
     )
   }

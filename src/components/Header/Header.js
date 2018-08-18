@@ -185,7 +185,7 @@ class Header extends React.Component {
         {
           !localStorage.token
             ? this.renderHeader()
-            :  <Query query={ query }>
+            : <Query query={ query }>
           {
             // TODO: Skip the query if no token found
             (({ loading, error, data = {} }) => {

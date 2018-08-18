@@ -9,7 +9,7 @@ export default props => {
         <div className="tagline" >Get out of tutorial purgatory. </div>
         <div className="tagline--subtext" >Learn how to be a team developer & boost your portfolio.</div>
         {
-          !props.user && <button onClick={props.onApplyClick} className="big-green-btn">Apply</button>
+          props.authed && <button onClick={props.onApplyClick} className="big-green-btn">Apply</button>
         }
       </div>
       <img className="landing-img" src={require('../../../assets/landingImage.png')} alt="landingImage" />
