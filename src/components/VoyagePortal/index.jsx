@@ -6,29 +6,7 @@ import { get_voyages } from './graphql/query';
 import Error from '../Error/Error';
 import Loading from '../Loader/Loader';
 import { Query } from "react-apollo"
-import { gql } from "apollo-boost"
-
-export const query = gql`
-  query getVoyages {
-    user {
-      id
-    }
-    cohorts {
-        id
-        title
-        start_date
-        end_date
-        status
-        members {
-          id
-          status
-          user {
-            id
-          }
-        }
-    }
-  }
-`
+import voyagesQuery from "../../queries/voyagesQuery"
 
 // class OldVoyagePortal extends React.Component {
 //   constructor(props) {
@@ -182,7 +160,7 @@ const VoyagePortal = props => {
   }
 
   return (
-    <Query query={query}>
+    <Query query={voyagesQuery}>
       {
         (({ loading, error, data }) => {
           console.log("/voyage query status", { loading, error, data })

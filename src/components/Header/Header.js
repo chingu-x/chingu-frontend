@@ -8,6 +8,7 @@ import Error from "../Error/Error"
 // import Store from '../../AppGlobalStore';
 // import GetUser from "../utilities/GetUser"
 import profileQuery from "../../queries/userProfileQuery"
+import voyagesQuery from "../../queries/voyagesQuery"
 
 const query = gql`
   query getUser {
@@ -128,7 +129,7 @@ class Header extends React.Component {
             {teamsDOM}
             <Link 
               to="/voyage"
-              // onMouseOver={() => client.query({ query )} // TODO: voyage prefetch
+              onMouseOver={() => client.query({ query: voyagesQuery })}
             >
               Voyage Portal
             </Link>
