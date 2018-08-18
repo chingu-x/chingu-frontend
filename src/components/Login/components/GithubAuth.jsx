@@ -2,6 +2,7 @@ import * as React from "react"
 import { Redirect } from "react-router-dom"
 import { Mutation } from "react-apollo"
 import { gql } from "apollo-boost"
+import getUser from "../../../queries/getAuthedUser"
 
 import Loading from "../../Loader/Loader"
 import Error from "../../Error/Error"
@@ -76,7 +77,19 @@ const userAuthGithub = gql`
 `
 
 const AuthenticateWithGithub = ({ code, prevPath }) => (
-  <Mutation mutation={userAuthGithub} variables={{ code }}>
+  <Mutation
+    mutation={userAuthGithub}
+    variables={{ code }}
+    update={(store, { data: { userAuthGithub } }) => {
+      console.log("auth complete", { userAuthGithub })
+      // TODO: store.writeFragment for query splitting and faster auth
+      store.writeQuery({
+        query: getUser,
+        data: userAuthGithub.user
+      })
+    }
+    }
+  >
     {(authenticate, { called, data, error, loading, client }) => {
       // authenticate()
       if (loading) return <Loading background="white" />
