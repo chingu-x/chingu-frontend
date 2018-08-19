@@ -8,7 +8,7 @@ render <Modal
   onModalClick={HANDLER} 
   open={BOOL} 
   persist={BOOL}
-  background={BACKGROUND_OPACITY} options: opaque / transparent 
+  background={BACKGROUND_OPACITY} options: none / transparent 
   />
 Use this.refs.REF_NAME.open or .close in parent component methods
 
@@ -36,7 +36,7 @@ export default class extends React.Component {
   close = () => this.setState({ show: false })
   
   render() {
-    const { background = "semitransparent" } = this.props
+    const { background = "" } = this.props
     // TODO Listen to events
     return this.state.show &&
     ReactDOM.createPortal(

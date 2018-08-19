@@ -104,7 +104,7 @@ const AuthenticateWithGithub = ({ code, prevPath }) => (
       // TODO: Fix state update error on login
       console.log("ghAuth status:", { called, loading, error, data })
 
-      if (loading) return <Loader background="opaque" />
+      if (loading) return <Loader />
       if (error) return <Error error={error.message} goBack="/login" />
 
 

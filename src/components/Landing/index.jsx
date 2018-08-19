@@ -40,6 +40,7 @@ class Landing extends React.Component {
         <Modal
           onModalClick={this.handleModalClick}
           open={loginModal}
+          background="transparent"
           ref="loginModal"
         >
           <GithubLoginModal prevPath={prevPath} />

@@ -61,7 +61,7 @@ const VoyageApplicationContainer = (
     <Query query={VoyageApplicationUserQuery} >
       {
         ({ data, loading, error }) => {
-          if (loading) return <Loader background="opaque" />;
+          if (loading) return <Loader />;
           if (error) return <Error error={error.message} />;
 
           const { user: { status } } = data;

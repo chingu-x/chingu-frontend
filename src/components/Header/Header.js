@@ -163,8 +163,8 @@ class Header extends React.Component {
     const { client, data: { user: { avatar, teams } = {}} = {}} = this.props
     return  (
       <Fragment>
-        <Modal onModalClick={this.closeDropdowns} background="transparent" ref="dropdownModal"/>
-        <Modal ref="loginModal"><GithubLoginModal/> </Modal>
+        <Modal onModalClick={this.closeDropdowns} background="none" ref="dropdownModal"/>
+        <Modal ref="loginModal" background="transparent"><GithubLoginModal/> </Modal>
         <div
           onClick={this.closeDropdowns} 
           className={`header header-dark ${isDropdownOpen ? "modal-peek" : ""}`}>  

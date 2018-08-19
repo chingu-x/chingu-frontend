@@ -24,7 +24,7 @@ export default ({ component: Component, query, variables, load, ...props }) => (
     {
       queryResult => {
         const { loading, error, data } = queryResult
-        if (loading) return load ? <Loader background="opaque" /> : null // TODO: pass background prop
+        if (loading) return load ? <Loader /> : null // TODO: pass background prop
         if (error) return <Error error={error.message} /> // TODO: Pass goBack prop
 
         return <Component {...props} {...queryResult} />

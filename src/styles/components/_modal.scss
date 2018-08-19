@@ -12,18 +12,15 @@
   align-items: center;
   justify-content: center;
   z-index: $z-middle;
+  background-color: white;
   > * {
     margin: auto;
   }
-  &.semitransparent {
+  &.transparent {
     background-color: $modal-background;
     z-index: $z-modal;
   }
-  &.opaque {
-    background-color: white;
-    // z-index: 10;
-  }
-  &.transparent {
+  &.none {
     background-color: rgba(0,0,0,0);
   }
 }
