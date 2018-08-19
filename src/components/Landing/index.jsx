@@ -35,6 +35,10 @@ class Landing extends React.Component {
     const authed = !!localStorage.token
     const loginModal = this.props.location.state && this.props.location.state.loginModal
     const prevPath = this.props.location.state && this.props.location.state.from
+
+    // Routed here from....
+    console.log(`Came here ${prevPath ? "from " + prevPath : "by myself"}`)
+
     return (
       <div className="landing" >
         <Modal

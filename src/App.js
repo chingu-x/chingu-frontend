@@ -37,7 +37,7 @@ export default () => (
       />
       <Private exact path="/profile" component={UserProfile} />
       <Private exact path="/voyage" component={VoyagePortal} />
-      <Route
+      <Private
         exact path="/voyage/application/:voyage_id"
         render={
           ({ match: { params: { voyage_id } } }) => (
@@ -49,7 +49,7 @@ export default () => (
           )
         }
       />
-      <Route exact path="/team/checkin/:id" component={WeeklyCheckin} />
+      <Private exact path="/team/checkin/:id" component={WeeklyCheckin} />
       <Route exact path="/current" component={CurrentPrograms} />
       <Route exact path="/team" component={Staff} />
       <Route exact path="/privacy" component={PrivacyPolicy} />
