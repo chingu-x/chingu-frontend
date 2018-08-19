@@ -1,25 +1,12 @@
 import * as React from "react";
 import * as Cards from "../VoyageCard/VoyageCard";
 import UserSideBar from "./UserSideBar";
-// import GetUser from "../utilities/GetUser"
-import { Query } from "react-apollo"
-import Loader from "../Loader/Loader"
-import Error from "../Error/Error"
+import GetData from "../utilities/GetData"
 import profileQuery from "./graphql/profileQuery"
 import './UserProfile.css'
 // import Store from '../../AppGlobalStore';
 
 class UserProfile extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     user: {
-  //       teams: [],
-  //       cohorts: []
-  //     }
-  //   }
-  // }
-
   // componentDidMount() {
   //   // let user = Store.getUserState();
   //   const { user } = JSON.parse(window.localStorage.getItem('store'));
@@ -34,7 +21,8 @@ class UserProfile extends React.Component {
   //   });
   // }
 
-  renderPage = user => {
+  render() {
+    const { user } = this.props.data
     const currentTeams = user.teams.filter(team => { return team.cohort.status === 'ongoing' });
     const pastTeams = user.teams.filter(team => { return team.cohort.status === 'ended' });
 
@@ -66,6 +54,9 @@ class UserProfile extends React.Component {
               })
               : <Cards.ApplyForAVoyageCard />
             }
+          </section>
+          <section className="user-voyage">
+            <div className="user-voyage-title">Upcoming Voyages</div>
             {
               pendingApproval.length > 0
                 ? pendingApproval.map((cohort, index) => {
@@ -105,23 +96,13 @@ class UserProfile extends React.Component {
           }
         </main>
       </div>
-    );
-  }
-  render() {
-    return (
-      <Query query={profileQuery}>
-        {
-          (({ loading, error, data }) => {
-            if (loading) return <Loader background="opaque" />
-            if (error) return <Error error={error.message} />
-            return localStorage.token ? this.renderPage(data.user) : null
-          })
-        }
-      </Query>
     )
   }
 }
 
-// export default props => <GetUser query={userProfileQuery} load><UserProfile {...props} /></GetUser>;
-
-export default UserProfile
+export default props =>
+  <GetData
+    component={UserProfile}
+    query={profileQuery}
+    load
+    {...props} />

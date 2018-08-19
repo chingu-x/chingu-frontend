@@ -1,16 +1,15 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { Query } from "react-apollo"
 import { gql } from "apollo-boost"
+import GetData from "../utilities/GetData"
 import Modal from "../common/Modal"
 import GithubLoginModal from "../Login/components/GithubLoginModal"
-import Error from "../Error/Error"
-// import Store from '../../AppGlobalStore';
-// import GetUser from "../utilities/GetUser"
+import isAuthed from "../utilities/checkAuth"
 import profileQuery from "../UserProfile/graphql/profileQuery"
 import voyagesQuery from "../VoyagePortal/graphql/voyagesQuery"
+// import Store from '../../AppGlobalStore';
 
-const query = gql`
+const headerQuery = gql`
   query getUser {
     user {
       id
@@ -22,7 +21,6 @@ const query = gql`
     }
   }
 `
-
 class Header extends React.Component {
   constructor(props) {
     super(props)
@@ -33,6 +31,7 @@ class Header extends React.Component {
     }
   }
   
+  // TODO: Refactor Header methods
   openLoginModal = () => this.refs.loginModal.open()
   
   closeDropdowns = () => {
@@ -53,18 +52,17 @@ class Header extends React.Component {
   }
   
   handleUserDropdown = e => {
+    e.stopPropagation()
     this.state.showUserDropdown 
       ? this.refs.dropdownModal.close() 
       : this.refs.dropdownModal.open()
     
-    e.stopPropagation()
     this.setState({
       showPortalDropdown: false,
       showUserDropdown: !this.state.showUserDropdown
     })
   }
 
-  
   // let teams = [];
   // let user = null;
 
@@ -80,36 +78,27 @@ class Header extends React.Component {
   
   logout = async (e, client) => {
     e.preventDefault();
-    
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("store");
+    // TODO: Server logout logic
     
-    /* 
-    TODOS
-    Fix state updates error
-    Find better way to reset cache
-    Do server logout logic
-    */
-   
-    // TODO check which is correct      
-    // await client.resetStore()
-    await client.cache.reset()
-
-    if (!client.cache.data.data["User:4"]) console.log("Cache emptied") // TODO Remove
-    
+    // TODO: Redirect only if current page is private. 
+    // Explanation: client.resetStore() will refetch active queries and cannot be used on private pages
+    // Alternatively use client.cache.reset() which does not refetch active queries
     this.props.history.replace("/")
+    await client.resetStore()
+    // await client.cache.reset()
   };
 
   renderPortalDropDown = ({teams, client}) => {
-    // const { teams } = this.props.user
     let teamsDOM = null;
     if (teams && teams.length) {
+      // TODO: Prefetch teams page
+      const teamsList = teams.map((team, index) => <Link key={index} to={"/team/" + team.id}>{team.title}</Link>)
       teamsDOM = (
         <React.Fragment>
           <div className="label">Team Portal</div>
-          {teams.map((team, index) => {
-            return (<Link key={index} to={"/team/" + team.id}>{team.title}</Link>)
-          })}
+          { teamsList }
           <hr />
         </React.Fragment>
       )
@@ -127,6 +116,7 @@ class Header extends React.Component {
           this.state.showPortalDropdown && 
           <div className="header-dropdown-content--centered portal">
             {teamsDOM}
+            
             <Link 
               to="/voyage"
               onMouseOver={() => client.query({ query: voyagesQuery })}
@@ -134,6 +124,7 @@ class Header extends React.Component {
               Voyage Portal
             </Link>
             <hr />
+            
             <Link 
               to="/profile"
               onMouseOver={() => client.query({ query: profileQuery })}
@@ -146,80 +137,63 @@ class Header extends React.Component {
     )
   }
 
-  renderAvatar = ({avatar, client}) => {
-    // const { avatar } = this.props.user
-    return (
-      <div className="header-dropdown">
-        <img
-          onClick={this.handleUserDropdown}
-          className="avatar" src={avatar ? avatar : require('../../assets/blank image.png')} alt="user avatar" />
-        
-        { this.state.showUserDropdown &&
-          <Fragment>
-            <div className="header-mask" />
-            <div className="header-dropdown-content avatar">
-              {/* <Link to="/settings">Settings</Link> */}
-              {/* TODO: server logout logic */}
-              <Link to="/" onClick={e => this.logout(e, client)}>Log out</Link>
-            </div>
-          </Fragment>
-        }
-      </div>
-    )
-  }
-
-  renderHeader = ({user, client} = {}) => {
-    let avatar, teams
-    if (user) {
-      ({teams, avatar} = user) 
-      // teams = user.teams
-      // avatar = user.avatar
-    }
-    const isDropdownOpen = this.state.showPortalDropdown || this.state.showUserDropdown
-    return (
-      <div
-        onClick={this.closeDropdowns} 
-        className={`header header-dark ${isDropdownOpen ? "modal-peek" : ""}`}>  
-        <div className="header-container">
-          <div className="header-left">
-            <div className="nav-logo">
-              <Link className="nav-light" to="/">CHINGU</Link>
-            </div>
+  renderAvatar = ({avatar, client}) => (
+    <div className="header-dropdown">
+      <img
+        onClick={this.handleUserDropdown}
+        className="avatar" 
+        src={avatar ? avatar : require('../../assets/blank image.png')} alt="user avatar" 
+      />
+      
+      {
+        this.state.showUserDropdown &&
+        <Fragment>
+          <div className="header-mask" />
+          <div className="header-dropdown-content avatar">
+            {/* <Link to="/settings">Settings</Link> */}
+            <Link to="/" onClick={e => this.logout(e, client)}>Log out</Link>
           </div>
+        </Fragment>
+      }
+    </div>
+  )
 
-          {user && this.renderPortalDropDown({client, teams})}
-
-          <div className="header-right">
-            {user && this.renderAvatar({client, avatar})}
-            {!localStorage.token && !user && <div onClick={this.openLoginModal} className="header-btn">LOG IN</div>} 
-          </div>
-        </div>
-      </div>
-    )
-  }
-  
   render() {
-    return (
+    const isDropdownOpen = this.state.showPortalDropdown || this.state.showUserDropdown
+    const { client, data: { user: { avatar, teams } = {}} = {}} = this.props
+    return  (
       <Fragment>
         <Modal onModalClick={this.closeDropdowns} background="transparent" ref="dropdownModal"/>
         <Modal ref="loginModal"><GithubLoginModal/> </Modal>
-        {
-          !localStorage.token
-            ? this.renderHeader()
-            : <Query query={ query }>
-          {
-            // TODO: Skip the query if no token found
-            (({ client, loading, error, data = {} }) => {
-              console.log("header status", { loading, error, data })
-              // if (error) return <Error error={error.message} goBack={"/"}/>
-              return this.renderHeader({user: data.user, client})
-            })
-          }
-        </Query>}
+        <div
+          onClick={this.closeDropdowns} 
+          className={`header header-dark ${isDropdownOpen ? "modal-peek" : ""}`}>  
+          <div className="header-container">
+            <div className="header-left">
+              <div className="nav-logo">
+                <Link className="nav-light" to="/">CHINGU</Link>
+              </div>
+            </div>
+
+            {teams && this.renderPortalDropDown({client, teams})}
+
+            <div className="header-right">
+              {avatar && this.renderAvatar({client, avatar})}
+              {!localStorage.token && !avatar && <div onClick={this.openLoginModal} className="header-btn">LOG IN</div>} 
+            </div>
+          </div>
+        </div>
       </Fragment>
     )
   }
 }
 
-// export default withRouter(props => <GetUser query={headerQuery}><Header {...props}/></GetUser>)
-export default withRouter(Header)
+export default withRouter(props => (
+  !isAuthed() 
+    ? <Header {...props}/>
+    : <GetData
+        component={Header}
+        query={headerQuery}
+        {...props} />
+      )
+)
