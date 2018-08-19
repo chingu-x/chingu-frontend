@@ -1,12 +1,11 @@
 import * as React from "react";
 import * as Cards from "../VoyageCard/VoyageCard";
 import './VoyagePortal.css';
-import Store from '../../AppGlobalStore';
-import { get_voyages } from './graphql/query';
+// import Store from '../../AppGlobalStore';
 import Error from '../Error/Error';
 import Loading from '../Loader/Loader';
 import { Query } from "react-apollo"
-import voyagesQuery from "../../queries/voyagesQuery"
+import voyagesQuery from "./graphql/voyagesQuery"
 
 // class OldVoyagePortal extends React.Component {
 //   constructor(props) {

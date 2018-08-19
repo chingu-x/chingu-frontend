@@ -5,7 +5,7 @@ import UserSideBar from "./UserSideBar";
 import { Query } from "react-apollo"
 import Loader from "../Loader/Loader"
 import Error from "../Error/Error"
-import profileQuery from "../../queries/userProfileQuery"
+import profileQuery from "./graphql/profileQuery"
 import './UserProfile.css'
 // import Store from '../../AppGlobalStore';
 

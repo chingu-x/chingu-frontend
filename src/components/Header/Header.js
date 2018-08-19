@@ -7,8 +7,8 @@ import GithubLoginModal from "../Login/components/GithubLoginModal"
 import Error from "../Error/Error"
 // import Store from '../../AppGlobalStore';
 // import GetUser from "../utilities/GetUser"
-import profileQuery from "../../queries/userProfileQuery"
-import voyagesQuery from "../../queries/voyagesQuery"
+import profileQuery from "../UserProfile/graphql/profileQuery"
+import voyagesQuery from "../VoyagePortal/graphql/voyagesQuery"
 
 const query = gql`
   query getUser {
