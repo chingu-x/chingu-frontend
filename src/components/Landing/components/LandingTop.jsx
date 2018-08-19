@@ -11,7 +11,7 @@ export default props => (
       <button
         className="big-green-btn"
         onClick={props.onApplyClick}
-        onMouseOver={() => client.query({ query: voyagesQuery })}
+        onMouseOver={() => localStorage.token && client.query({ query: voyagesQuery })}
       >
         Apply
       </button>

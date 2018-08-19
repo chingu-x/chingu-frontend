@@ -26,6 +26,7 @@ const profileQuery = gql`
           id
           status
           user {
+            id
             username
           }
         }
