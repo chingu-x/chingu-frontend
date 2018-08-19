@@ -1,5 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom"
+import { client } from "../../index"
+import profileQuery from "../UserProfile/graphql/profileQuery"
 import './Success.css';
 
 class SuccessForm extends React.Component {
@@ -10,7 +12,11 @@ class SuccessForm extends React.Component {
         <br />
         Thank you!
         <hr className="form-hline" />
-        <Link className="form-success-btn" to="/profile">Go To Profile</Link>
+        <Link
+          to="/profile"
+          className="form-success-btn"
+          onMouseOver={() => client.query({ query: profileQuery })}
+        > Go To Profile</Link>
       </div>
     )
   }
