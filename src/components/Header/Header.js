@@ -13,6 +13,7 @@ const headerQuery = gql`
   query getUser {
     user {
       id
+      status
       teams {
         id
         title

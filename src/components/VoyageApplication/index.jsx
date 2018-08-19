@@ -1,11 +1,8 @@
-// TODO: refactor with dynamic form
 import * as React from 'react';
 import './VoyageApplication.css';
 import DynamicForm from "../DynamicForm";
-import Loader from '../Loader/Loader';
-import Error from '../Error/Error';
+import GetData from "../utilities/GetData"
 import { gql } from "apollo-boost";
-import { Query } from "react-apollo";
 import { Redirect } from "react-router-dom";
 
 const VoyageApplicationUserQuery = gql`
@@ -31,45 +28,29 @@ const VoyageApplicationUserQuery = gql`
  *    status is 'profile_incomplete' -> Redirect /profile/update
  */
 const VoyageApplicationContainer = (
-  { voyage_id, voyageVersion, newUserVersion },
+  { voyage_id, voyageVersion, newUserVersion, data: { user: { status } } },
 ) => {
-  this.redirectSwitch = (status) => {
-    switch (status) {
-      case 'voyage_ready':
-        return (
-          <VoyageApplication
-            version={voyageVersion}
-            voyage_id={voyage_id}
-          />
-        );
-      case 'profile_complete':
-        return (
-          <VoyageApplication
-            version={newUserVersion}
-            voyage_id={voyage_id}
-            newUser
-          />
-        );
-      case 'profile_incomplete':
-        return <Redirect to={"/profile/update"} />;
-      default:
-        return <Redirect to={"/voyage"} />;
-    }
+  switch (status) {
+    case 'voyage_ready':
+      return (
+        <VoyageApplication
+          version={voyageVersion}
+          voyage_id={voyage_id}
+        />
+      );
+    case 'profile_complete':
+      return (
+        <VoyageApplication
+          version={newUserVersion}
+          voyage_id={voyage_id}
+          newUser
+        />
+      );
+    case 'profile_incomplete':
+      return <Redirect to={"/profile/update"} />;
+    default:
+      return <Redirect to={"/voyage"} />;
   }
-
-  return (
-    <Query query={VoyageApplicationUserQuery} >
-      {
-        ({ data, loading, error }) => {
-          if (loading) return <Loader />;
-          if (error) return <Error error={error.message} />;
-
-          const { user: { status } } = data;
-          return this.redirectSwitch(status);
-        }
-      }
-    </Query>
-  );
 }
 
 const VoyageApplication = ({ version, voyage_id, newUser }) => (
@@ -88,4 +69,9 @@ const VoyageApplication = ({ version, voyage_id, newUser }) => (
   </div>
 );
 
-export default VoyageApplicationContainer;
+export default props =>
+  <GetData
+    component={VoyageApplicationContainer}
+    query={VoyageApplicationUserQuery}
+    load
+    {...props} />
