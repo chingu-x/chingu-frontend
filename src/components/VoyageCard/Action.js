@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom"
 
 /**
  * TODO:
@@ -9,7 +10,7 @@ import * as React from "react";
 const Action = ({ id, action }) => {
   return (
     <div className="action-container">
-      <a href={"/voyage/application/" + id}className="action-button">Apply</a>
+      <Link to={"/voyage/application/" + id}className="action-button">Apply</Link>
       <p className="action-warning">{action}</p>
     </div>
   );

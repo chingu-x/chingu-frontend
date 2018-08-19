@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom"
 import Badge from "./Badge";
 import Info from "./Info";
 import Action from "./Action";
@@ -77,7 +78,8 @@ export const ApplyForAVoyageCard = () => {
         SORRY, LOOKS LIKE YOU AREN'T PART OF A VOYAGE YET!
       </div>}
       action={() => <div className="action-container">
-        <a href="/voyage" className="action-button--to-Voyage ">APPLY TO A VOYAGE</a>
+      {/* TODO: prefetch */}
+        <Link to="/voyage" className="action-button--to-Voyage ">APPLY TO A VOYAGE</Link>
       </div>}
     />
   );
