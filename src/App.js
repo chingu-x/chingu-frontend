@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Landing from "./components/Landing";
 import Staff from "./components/Pages/Staff";
@@ -16,37 +16,7 @@ import VoyagePortal from './components/VoyagePortal';
 import VoyageApplication from './components/VoyageApplication';
 import Register from './components/Register';
 import Login from './components/Login';
-import Loader from "./components/Loader/Loader"
-import Error from "./components/Error/Error"
-import { Query } from "react-apollo"
-// import { gql } from "apollo-boost"
-
-// const query = gql`
-//   query getUser {
-//     user {
-//       id
-//       avatar
-//       username
-//     }
-//   }
-// `
-
-// Private route that renders login modal with landing page in backgrund if no token
-// TODO: do a better auth check
-const Private = ({ component: Component, ...props }) => (
-  <Route { ...props } render={props => (
-    window.localStorage.token
-      ? <Component { ...props }/>
-      // : <Landing {...props } loginModal/>
-      : <Redirect to={{
-        pathname: "/",
-        state: { 
-          // Pass private route pathname to use in Github redirect after login
-          from: props.location.pathname, 
-          loginModal: true }
-      }}/>
-  )}/>
-)
+import Private from "./components/utilities/PrivateRoute"
 
 export default () => (
   <div className="App">
@@ -88,19 +58,5 @@ export default () => (
       <Route path="*" exact component={Missing404Page} />
     </Switch>
     <Footer />
-    
-    {/* <Query query={user} skip={!window.localStorage.token}>
-      {
-        (({loading, error, data, client}) => {
-          if (localStorage.token && loading) return <Loader/> // workaround for stuck in loading state
-          if (error) return <Error error={error.message}/>
-
-          client.writeData({data: {user: {__typename: "User", ...data.user}}})
-
-          return null
-        })
-      }
-    </Query> */}
-
   </div>
 )
