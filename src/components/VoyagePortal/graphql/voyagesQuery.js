@@ -4,6 +4,7 @@ export const voyagesQuery = gql`
   query getVoyages {
     user {
       id
+      status
     }
     cohorts {
         id
@@ -16,6 +17,7 @@ export const voyagesQuery = gql`
           status
           user {
             id
+            status
           }
         }
     }

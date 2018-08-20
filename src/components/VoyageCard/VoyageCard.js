@@ -54,14 +54,15 @@ export const UpcomingVoyageCard = ({
   startDate,
   endDate,
   id,
-  alreadyApplied
+  alreadyApplied,
+  userStatus
 }) => {
   return (
     <VoyageCardCreator
       backgroundColor={"#EFEFEF"}
       leftPanel={() => <Badge number={voyageNumber} />}
       rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
-      action={() => alreadyApplied ? null : <Action id={id}/>}
+      action={() => alreadyApplied ? null : <Action routeId={id} userStatus={userStatus}/>}
     />
   );
 };

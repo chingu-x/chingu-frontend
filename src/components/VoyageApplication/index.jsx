@@ -4,6 +4,7 @@ import DynamicForm from "../DynamicForm";
 import GetData from "../utilities/GetData"
 import { gql } from "apollo-boost";
 import { Redirect } from "react-router-dom";
+import { voyageApplicationSwitch } from "../utilities/switches"
 
 const VoyageApplicationUserQuery = gql`
   query VoyageApplicationUserQuery {
@@ -30,6 +31,7 @@ const VoyageApplicationUserQuery = gql`
 const VoyageApplicationContainer = (
   { voyage_id, voyageVersion, newUserVersion, data: { user: { status } } },
 ) => {
+  // TODO: Redirect if with :voyage_id from route params is not available for application
   switch (status) {
     case 'voyage_ready':
       return (

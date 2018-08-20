@@ -105,7 +105,7 @@ import voyagesQuery from "./graphql/voyagesQuery"
 //   }
 // }
 
-const VoyagePortal = ({ data: { cohorts, user: { id: userId } } }) => {
+const VoyagePortal = ({ data: { cohorts, user, user: { id: userId, status: userStatus } } }) => {
   // TODO: Assign in one pass
   const currentVoyages = cohorts.filter(cohort => cohort.status === "ongoing")
   const upcomingVoyages = cohorts.filter(cohort => cohort.status === "registration_open")
@@ -143,6 +143,7 @@ const VoyagePortal = ({ data: { cohorts, user: { id: userId } } }) => {
                   startDate={voyage.start_date}
                   endDate={voyage.end_date}
                   id={voyage.id}
+                  userStatus={userStatus}
                   alreadyApplied={""/*alreadyApplied*/} // TODO: Temp disabled to make application available
                 />
               )

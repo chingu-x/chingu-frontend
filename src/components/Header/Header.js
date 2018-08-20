@@ -7,21 +7,9 @@ import GithubLoginModal from "../Login/components/GithubLoginModal"
 import isAuthed from "../utilities/checkAuth"
 import profileQuery from "../UserProfile/graphql/profileQuery"
 import voyagesQuery from "../VoyagePortal/graphql/voyagesQuery"
+import userBaseQuery from "./userBaseQuery"
 // import Store from '../../AppGlobalStore';
 
-const headerQuery = gql`
-  query getUser {
-    user {
-      id
-      status
-      teams {
-        id
-        title
-      }
-      avatar
-    }
-  }
-`
 class Header extends React.Component {
   constructor(props) {
     super(props)
@@ -194,7 +182,7 @@ export default withRouter(props => (
     ? <Header {...props}/>
     : <GetData
         component={Header}
-        query={headerQuery}
+        query={userBaseQuery}
         {...props} />
       )
 )

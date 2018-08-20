@@ -2,11 +2,38 @@ import * as React from "react";
 import { DynamicFormMaker } from './DynamicFormMaker';
 import { Query, Mutation } from "react-apollo";
 import { Redirect } from "react-router-dom";
+import GetData from "../utilities/GetData"
+import dynamicFormQuery from "./graphql/dynamicFormQuery"
 import { gql } from "apollo-boost";
 import * as qs from "query-string";
 import './DynamicForm.css';
 import Loader from '../Loader/Loader';
 import Error from '../Error/Error';
+
+// const dynamicFormQuery = gql`
+//   query getDynamicForm(
+//     $purpose:FormPurposeEnum!
+//     $version:Int){
+//     form(
+//       purpose:$purpose
+//       version: $version
+//     ) {
+//       id
+//       purpose
+//       version
+//       questions {
+//         id
+//         field_name
+//         text
+//         subtext
+//         input_type
+//         options
+//         minlength
+//         maxlength
+//       }
+//     }
+//   }
+// `;
 
 // this is the actual export
 const DynamicForm = (
@@ -16,57 +43,21 @@ const DynamicForm = (
     hiddenData,
     queryString,
     submitRedirect,
+    data
   },
 ) => {
-  const dynamicFormQuery = gql`
-    query getDynamicForm(
-      $purpose:FormPurposeEnum!
-      $version:Int){
-      form(
-        purpose:$purpose
-        version: $version
-      ) {
-        id
-        purpose
-        version
-        questions {
-          id
-          field_name
-          text
-          subtext
-          input_type
-          options
-          minlength
-          maxlength
-        }
-      }
-    }
-  `;
-  
   return (
-    <Query query={dynamicFormQuery} variables={{ purpose, version }}>
-      {
-        ({ data, loading, error }) => {
-          if (loading) return <Loader />;
-          if (error) return <Error error={error.message} />;
-
-          const { form: { purpose, version, questions } } = data;
-          return (
-            <DynamicFormContainer
-              purpose={purpose}
-              version={version}
-              questions={questions}
-              submitRedirect={submitRedirect}
-              hiddenData={
-                queryString || hiddenData ?
-                  Object.assign(hiddenData, qs.parse(queryString)) :
-                  null
-              }
-            />
-          );
-        }
+    <DynamicFormContainer
+      purpose={purpose}
+      version={data.form.version}
+      questions={data.form.questions}
+      submitRedirect={submitRedirect}
+      hiddenData={
+        queryString || hiddenData ?
+          Object.assign(hiddenData, qs.parse(queryString)) :
+          null
       }
-    </Query>
+    />
   );
 }
 
@@ -93,7 +84,7 @@ const DynamicFormSubmit = ({ onSubmit, submitRedirect, variables }) => {
     <Mutation mutation={submitDynamicFormMutation}>
       {
         (submitMutation, { loading, error, data }) => {
-          if (loading) return <Loader />;
+          // if (loading) return <Loader />;
           if (error) return <Error error={error.message} />;
           if (data) return <Redirect to={submitRedirect || "/profile"} />
           return (
@@ -106,7 +97,7 @@ const DynamicFormSubmit = ({ onSubmit, submitRedirect, variables }) => {
                 onSubmit(submitMutation, variables);
               }}
             >
-              Submit
+              {loading ? "Submitting..." : "Submit"}
             </button>
           );
         }
@@ -116,6 +107,7 @@ const DynamicFormSubmit = ({ onSubmit, submitRedirect, variables }) => {
 }
 
 // this is the actual Form component (manages form state / rendering question components)
+// TODO: Use local store to persist form_data
 class DynamicFormContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -146,7 +138,7 @@ class DynamicFormContainer extends React.Component {
       else form_data[field_name] = '';
 
       // insert hidden field values from hiddenData
-        // passed as hiddenData or queryString prop into <DynamicForm>
+      // passed as hiddenData or queryString prop into <DynamicForm>
       if (input_type === 'hidden') {
         const hiddenValue = this.props.hiddenData[field_name];
         if (!hiddenValue) console.error(`Missing hiddenData: ${field_name}`);
@@ -191,4 +183,11 @@ class DynamicFormContainer extends React.Component {
   }
 };
 
-export default DynamicForm;
+export default props => (
+  <GetData
+    component={DynamicForm}
+    query={dynamicFormQuery}
+    variables={{ purpose: props.purpose, version: props.version }}
+    load
+    {...props} />
+)
