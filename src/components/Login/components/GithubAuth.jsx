@@ -5,26 +5,27 @@ import { gql } from "apollo-boost"
 import Loader from "../../Loader/Loader"
 import Error from "../../Error/Error"
 import Landing from "../../Landing"
+import { loginRedirectSwitch } from "../../utilities/switches"
 
-// -- UTILITIES -- //
-const redirectSelector = ({ status }) => {
-  let path
-  switch (status) {
-    case "new_user":
-      path = "/register"
-      break
-    case "profile_incomplete":
-      path = "/profile/update"
-      break
-    case "profile_complete":
-      path = "/profile"
-      break
-    default:
-      path = "/"
-      break
-  }
-  return <Redirect to={path} />
-}
+// // -- UTILITIES -- //
+// const redirectSelector = ({ status }) => {
+//   let path
+//   switch (status) {
+//     case "new_user":
+//       path = "/register"
+//       break
+//     case "profile_incomplete":
+//       path = "/profile/update"
+//       break
+//     case "profile_complete":
+//       path = "/profile"
+//       break
+//     default:
+//       path = "/"
+//       break
+//   }
+//   return <Redirect to={path} />
+// }
 
 // TODO: Query splitting for faster auth: Initially fetch only id, username, avatar, status
 // -- MUTATION -- //
@@ -123,7 +124,7 @@ const AuthenticateWithGithub = ({ code, prevPath }) => (
         return (
           prevPath
             ? <Redirect to={prevPath} />
-            : redirectSelector(user)
+            : <Redirect to={loginRedirectSwitch[user.status] || "/"} />
         );
       }
 
