@@ -16,6 +16,7 @@ import VoyagePortal from './components/VoyagePortal';
 import VoyageApplication from './components/VoyageApplication';
 import Register from './components/Register';
 import Login from './components/Login';
+import ProjectPortal from './components/Pages/ProjectPortal';
 
 class App extends React.Component {
   render() {
@@ -56,6 +57,7 @@ class App extends React.Component {
           <Route exact path="/privacy" component={PrivacyPolicy} />
           <Route exact path="/companyfaq" render={() => <FAQ headerText="Company FAQs" data={companyFAQ} />} />
           <Route exact path="/programfaq" render={() => <FAQ headerText="Program FAQs" data={programFAQ} />} />
+          <Route exact path="/project/:projectId" component={ProjectPortal} />
           <Route path="*" exact component={Missing404Page} />
         </Switch>
         <Footer />
