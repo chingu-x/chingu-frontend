@@ -1,0 +1,58 @@
+@import '../abstracts/variables';
+
+.project-portal {
+  // TODO: Remove header positioning property
+  padding-top: 64px + 21px; // to account for header
+  max-width: 1080px;
+  margin: 15px 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.project-portal__toolbar {
+  grid-column: 1 / -1;
+  justify-self: end;
+  a {
+    margin-left: 15px;
+    text-decoration: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    color: #ffffff;
+    background-color: $light-purple;
+  }
+  span {
+    margin-right: 0.5em;
+  }
+}
+
+.project-portal__preview {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-gap: 25px;
+  grid-template-columns: repeat(3, 1fr);
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.project-portal__about {
+  grid-column: 1 / -1;
+}
+
+
+.project-portal__team {
+  grid-column: 1 / -1;
+  ul {
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin-right: 15px;
+  }
+}
+
+.project-portal__profile {
+  grid-column: 1 / -1;
+  img {
+    border-radius: 50%;
+  }
+}
