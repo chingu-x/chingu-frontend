@@ -17,10 +17,12 @@ import VoyageApplication from './components/VoyageApplication';
 import Register from './components/Register';
 import Login from './components/Login';
 import Private from "./components/utilities/PrivateRoute"
+import Loader from "./components/Loader/Loader"
 
 export default () => (
   <div className="App">
     <Header />
+    <Loader />
     <Switch>
       <Route exact path="/" component={Landing} />
       <Route

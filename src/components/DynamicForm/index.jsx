@@ -9,6 +9,7 @@ import * as qs from "query-string";
 import './DynamicForm.css';
 import Loader from '../Loader/Loader';
 import Error from '../Error/Error';
+import { client } from "../../index"
 
 // const dynamicFormQuery = gql`
 //   query getDynamicForm(
@@ -188,6 +189,6 @@ export default props => (
     component={DynamicForm}
     query={dynamicFormQuery}
     variables={{ purpose: props.purpose, version: props.version }}
-    load
+    loader
     {...props} />
 )

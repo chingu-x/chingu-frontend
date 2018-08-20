@@ -8,6 +8,7 @@ import isAuthed from "../utilities/checkAuth"
 import profileQuery from "../UserProfile/graphql/profileQuery"
 import voyagesQuery from "../VoyagePortal/graphql/voyagesQuery"
 import userBaseQuery from "./userBaseQuery"
+import { client } from "../../index"
 // import Store from '../../AppGlobalStore';
 
 class Header extends React.Component {
@@ -65,7 +66,7 @@ class Header extends React.Component {
   //   teams = Store.state.user.teams;
   // }
   
-  logout = async (e, client) => {
+  logout = async e => {
     e.preventDefault();
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("store");
@@ -79,7 +80,7 @@ class Header extends React.Component {
     // await client.cache.reset()
   };
 
-  renderPortalDropDown = ({teams, client}) => {
+  renderPortalDropDown = teams => {
     let teamsDOM = null;
     if (teams && teams.length) {
       // TODO: Prefetch teams page
@@ -126,7 +127,7 @@ class Header extends React.Component {
     )
   }
 
-  renderAvatar = ({avatar, client}) => (
+  renderAvatar = avatar => (
     <div className="header-dropdown">
       <img
         onClick={this.handleUserDropdown}
@@ -140,7 +141,7 @@ class Header extends React.Component {
           <div className="header-mask" />
           <div className="header-dropdown-content avatar">
             {/* <Link to="/settings">Settings</Link> */}
-            <Link to="/" onClick={e => this.logout(e, client)}>Log out</Link>
+            <Link to="/" onClick={e => this.logout(e)}>Log out</Link>
           </div>
         </Fragment>
       }
@@ -149,7 +150,7 @@ class Header extends React.Component {
 
   render() {
     const isDropdownOpen = this.state.showPortalDropdown || this.state.showUserDropdown
-    const { client, data: { user: { avatar, teams } = {}} = {}} = this.props
+    const { data: { user: { avatar, teams } = {}} = {}} = this.props
     return  (
       <Fragment>
         <Modal onModalClick={this.closeDropdowns} background="none" ref="dropdownModal"/>
@@ -164,10 +165,10 @@ class Header extends React.Component {
               </div>
             </div>
 
-            {teams && this.renderPortalDropDown({client, teams})}
+            {teams && this.renderPortalDropDown(teams)}
 
             <div className="header-right">
-              {avatar && this.renderAvatar({client, avatar})}
+              {avatar && this.renderAvatar(avatar)}
               {!localStorage.token && !avatar && <div onClick={this.openLoginModal} className="header-btn">LOG IN</div>} 
             </div>
           </div>

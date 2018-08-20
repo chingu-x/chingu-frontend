@@ -5,7 +5,7 @@ import { gql } from "apollo-boost"
 import Loader from "../../Loader/Loader"
 import Error from "../../Error/Error"
 import Landing from "../../Landing"
-import { loginRedirectSwitch } from "../../utilities/switches"
+import toggleLoader from "../../utilities/toggleLoader"
 
 // // -- UTILITIES -- //
 // const redirectSelector = ({ status }) => {
@@ -27,19 +27,10 @@ import { loginRedirectSwitch } from "../../utilities/switches"
 //   return <Redirect to={path} />
 // }
 
+
 // TODO: Query splitting for faster auth: Initially fetch only id, username, avatar, status
 // -- MUTATION -- //
-const userAuthGithub = gql`
-  mutation authUser($code: String!) {
-    userAuthGithub(code: $code) {
-      access_token
-      user {
-        id
-        status
-      }
-    }
-  }
-`
+
 // const userAuthGithub = gql`
 //   mutation authUser($code: String!) {
 //     userAuthGithub(code: $code) {
@@ -88,27 +79,34 @@ const userAuthGithub = gql`
 // `
 
 
+const loginRedirectSwitch = {
+  "new_user": "/register",
+  "profile_incomplete": "/profile/update",
+  "profile_complete": "/profile",
+}
+
+const userAuthGithub = gql`
+  mutation authUser($code: String!) {
+    userAuthGithub(code: $code) {
+      access_token
+      user {
+        id
+        status
+      }
+    }
+  }
+`
+
 const AuthenticateWithGithub = ({ code, prevPath }) => (
   <Mutation
     mutation={userAuthGithub}
     variables={{ code }}
-  // update={(store, { data: { userAuthGithub } }) => {
-  //   // TODO: store.writeFragment 
-  //   store.writeQuery({
-  //     query: getUser,
-  //     data: userAuthGithub.user
-  //   })
-  // }
-  // }
   >
-    {(authenticate, { called, data, error, loading, client }) => {
+    {(authenticate, { data, error, loading }) => {
       // TODO: Fix state update error on login
-      console.log("ghAuth status:", { called, loading, error, data })
-
-      if (loading) return <Loader />
+      toggleLoader(loading)
+      if (loading) return null // TODO: Remove
       if (error) return <Error error={error.message} goBack="/login" />
-
-
       if (data) {
         const {
           userAuthGithub: { user, access_token }

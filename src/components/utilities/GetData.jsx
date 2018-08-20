@@ -1,7 +1,10 @@
 import React from "react"
 import { Query } from "react-apollo"
-import Loader from "../Loader/Loader"
+// import { gql } from "apollo-boost"
+// import Loader from "../Loader/Loader"
 import Error from "..//Error/Error"
+import toggleLoader from "../utilities/toggleLoader"
+import { gql } from "apollo-boost"
 
 /**
  * USAGE
@@ -15,19 +18,36 @@ import Error from "..//Error/Error"
  * />
  * 
  * Component receives props passed to it as well as all query results (client, loading, error, data)
- * 
- * TODO: Consider controlling auth requirement through requireAuth or similar prop. At the moment handled in Component view. 
  */
 
-export default ({ component: Component, query, variables, load, ...props }) => (
+// Not working  - saves any query to localStorage.lastChecked
+// const shouldFetch = query => {
+//   let lastChecked = localStorage.lastChecked
+//   console.log({ query })
+//   const current = Date.now()
+//   const interval = 3000
+
+//   localStorage.lastChecked = current
+//   console.log("Should fetch", current - lastChecked)
+//   return current >= lastChecked + interval
+//     ? "network-only"
+//     : "cache-only"
+// }
+
+export default ({ component: Component, query, variables, loader, ...props }) => (
   <Query query={query} variables={variables}>
     {
-      queryResult => {
-        const { loading, error, data } = queryResult
-        if (loading) return load ? <Loader /> : null // TODO: pass background prop
-        if (error) return <Error error={error.message} /> // TODO: Pass goBack prop
+      ({ loading, error, data }) => {
+        loader && toggleLoader(loading)
 
-        return <Component {...props} {...queryResult} />
+        if (loading && loader) return null
+        if (error) return <Error error={error.message} /> // TODO: Pass goBack prop
+        return <Component {...props} data={data} />
+
+        // loader && toggleLoader(loading)
+        // !loader && loading return <Loader />
+        // if (error) return <Error error={error.message} /> // TODO: Pass goBack prop
+        // return !loading ? <Component {...props} data={data} /> : null
       }
     }
   </Query>

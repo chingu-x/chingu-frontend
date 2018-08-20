@@ -160,7 +160,7 @@ export default props => (
   <GetData
     component={VoyagePortal}
     query={voyagesQuery}
-    load
+    loader
     {...props}
   />
 )

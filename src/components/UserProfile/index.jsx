@@ -1,4 +1,5 @@
 import * as React from "react";
+import { client } from "../../index"
 import * as Cards from "../VoyageCard/VoyageCard";
 import UserSideBar from "./UserSideBar";
 import GetData from "../utilities/GetData"
@@ -104,5 +105,5 @@ export default props =>
   <GetData
     component={UserProfile}
     query={profileQuery}
-    load
+    loader
     {...props} />

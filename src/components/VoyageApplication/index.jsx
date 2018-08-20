@@ -5,6 +5,7 @@ import GetData from "../utilities/GetData"
 import { gql } from "apollo-boost";
 import { Redirect } from "react-router-dom";
 import { voyageApplicationSwitch } from "../utilities/switches"
+import { client } from "../../index"
 
 const VoyageApplicationUserQuery = gql`
   query VoyageApplicationUserQuery {
@@ -75,5 +76,5 @@ export default props =>
   <GetData
     component={VoyageApplicationContainer}
     query={VoyageApplicationUserQuery}
-    load
+    loader
     {...props} />

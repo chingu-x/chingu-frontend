@@ -23,15 +23,7 @@ const voyageActionSwitch = (userStatus, routeId) => {
   }
   }
 
-const loginRedirectSwitch = {
-  "new_user": "/register",
-  "profile_incomplete": "/profile/update",
-  "profile_complete": "/profile",
-  "voyage_ready": "/"
-}
-
-
 // TODO: switch queries based on routes
 const querySwitch = {}
 
-export { voyageActionSwitch, loginRedirectSwitch, querySwitch }
+export { voyageActionSwitch, querySwitch }

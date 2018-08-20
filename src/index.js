@@ -33,12 +33,28 @@ const client = new ApolloClient({
   clientState: {
     // This is the default state that your application starts with
     defaults: {
-      user: {
-        __typename: "User"
+      loaderState: {
+        __typename: "LoaderState",
+        isShowing: false
       }
     }, 
     // The resolvers for your local mutations
-    resolvers: {} 
+    resolvers: {
+      Query: {},  
+      Mutation: {
+        toggleLoader: (_, { isShowing }, { cache}) => {
+          cache.writeData({
+            data: {
+              loaderState: {
+                __typename: "LoaderState",
+                isShowing
+              }
+            }
+          })
+          return null
+        }
+      }
+    } 
   }
 })
 // function RenderApp() {
