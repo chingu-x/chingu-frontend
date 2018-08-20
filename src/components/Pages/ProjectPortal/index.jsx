@@ -1,15 +1,24 @@
 import * as React from "react";
 
 class ProjectPortal extends React.Component {
+  state = {
+    isEditing: false
+  };
+
+  edit = () => {
+    this.setState({ isEditing: !this.state.isEditing });
+  };
+
   render() {
     return (
       <div className="project-portal">
         <Banner />
-        <Toolbar />
+        <Toolbar edit={this.edit} />
         <Preview />
         <About />
         <Team />
         <ExternalLinks />
+        {this.state.isEditing && <EditProjectForm edit={this.edit} />}
       </div>
     );
   }
@@ -27,10 +36,10 @@ function Banner() {
   );
 }
 
-function Toolbar() {
+function Toolbar({ edit }) {
   return (
     <div className="project-portal__toolbar">
-      <a href="#">
+      <a href="#" onClick={edit}>
         <span>Edit</span>
         <i class="far fa-edit" />
       </a>
@@ -141,6 +150,29 @@ function ExternalLinks() {
           <a href="#">Live Preview</a>
         </li>
       </ul>
+    </div>
+  );
+}
+
+function EditProjectForm({ edit }) {
+  return (
+    <div className="project-portal__edit-form">
+      <form action="">
+        <div>
+          <h2>Project Name</h2>
+          <input type="text" />
+        </div>
+        <div>
+          <h2>Description</h2>
+          <textarea defaultValue="Markdown Stuff" />
+        </div>
+        <div>
+          <h2>Links</h2>
+          <textarea defaultValue="Markdown Stuff" />
+        </div>
+        <button>Save Changes</button>
+        <button onClick={edit}>Cancel</button>
+      </form>
     </div>
   );
 }

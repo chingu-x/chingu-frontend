@@ -74,7 +74,45 @@
 }
 
 .project-portal__edit-form {
-  grid-column: 1 / -1;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.3);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  z-index: 9999;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    padding: 20px 50px;
+    width: 540px;
+    background: white;
+  }
+
+  div {
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    text-transform: uppercase;
+    margin: 0;
+    font-size: 0.9em;
+    font-weight: 400;
+    color: $med-grey;
+  }
+
+  textarea {
+    width: 100%;
+    border: 1px solid $light-grey;
+    color: $darker-grey;
+    min-height: 100px;
+  }
+
+  input {
+    width: 100%;
+    border: 1px solid $light-grey;
+    color: $darker-grey;
+  }
 }
