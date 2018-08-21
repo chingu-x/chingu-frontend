@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Link } from "react-router-dom";
 import { client } from "../../../index"
 import voyagesQuery from "../../VoyagePortal/graphql/voyagesQuery"
 
@@ -11,6 +10,7 @@ export default props => (
       <button
         className="big-green-btn"
         onClick={props.onApplyClick}
+        // Prefetch /voyage route only on auth
         onMouseOver={() => localStorage.token && client.query({ query: voyagesQuery })}
       >
         Apply

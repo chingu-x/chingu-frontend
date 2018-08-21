@@ -1,15 +1,14 @@
 import * as React from "react";
 import { DynamicFormMaker } from './DynamicFormMaker';
-import { Query, Mutation } from "react-apollo";
+import { Mutation } from "react-apollo";
 import { Redirect } from "react-router-dom";
-import GetData from "../utilities/GetData"
+import Request from "../utilities/Request"
 import dynamicFormQuery from "./graphql/dynamicFormQuery"
 import { gql } from "apollo-boost";
 import * as qs from "query-string";
 import './DynamicForm.css';
-import Loader from '../Loader/Loader';
-import Error from '../Error/Error';
-import { client } from "../../index"
+// import Loader from '../Loader';
+import Error from '../Error';
 
 // const dynamicFormQuery = gql`
 //   query getDynamicForm(
@@ -98,7 +97,7 @@ const DynamicFormSubmit = ({ onSubmit, submitRedirect, variables }) => {
                 onSubmit(submitMutation, variables);
               }}
             >
-              {loading ? "Submitting..." : "Submit"}
+              {loading ? "Submitting..." : "Submit"} {/*TODO: Testing. Revert to loader. */}
             </button>
           );
         }
@@ -108,7 +107,6 @@ const DynamicFormSubmit = ({ onSubmit, submitRedirect, variables }) => {
 }
 
 // this is the actual Form component (manages form state / rendering question components)
-// TODO: Use local store to persist form_data
 class DynamicFormContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -185,7 +183,7 @@ class DynamicFormContainer extends React.Component {
 };
 
 export default props => (
-  <GetData
+  <Request
     component={DynamicForm}
     query={dynamicFormQuery}
     variables={{ purpose: props.purpose, version: props.version }}

@@ -1,30 +1,44 @@
 import React from "react"
+import PropTypes from "prop-types"
 import ReactDOM from "react-dom";
 
 // -- USAGE -- //
-/*
-render <Modal 
-  ref={REF_NAME}
-  onModalClick={HANDLER} 
-  open={BOOL} 
-  persist={BOOL}
-  background={BACKGROUND_OPACITY} options: none / transparent 
-  />
-Use this.refs.REF_NAME.open or .close in parent component methods
-
-open opens modal on mount. Default false. 
-persist keeps modal on background click. Default is false. Overriden by onModalClick (// TODO FIXME)
-onModalClick enables aditional functionality beyond closing. Default closes modal
-background OPTIONS: transparent/opaque. Default is semitransparent. Use opaque for full screen content blocking and transparetn for dropdowns
-
-// TODO: Add z-index classes to show in front of / behind header
-// TODO: Make modals receive component5 props instead of children
+/**
+ * render <Modal 
+ * ref={REF_NAME}
+ * onModalClick={HANDLER} 
+ * open={BOOL} 
+ * persist={BOOL}
+ * background={BACKGROUND} options: none / transparent 
+ * />
+ *
+ * Use this.refs.REF_NAME.open or .close in parent component methods to open/close child modal
+ * open opens modal on mount. Default false. 
+ * persist keeps modal open on background click. Default is false. Overriden by onModalClick // TODO: FIXME
+ * onModalClick enables parent to add functionality beyond just closing the child modal. Default closes modal
+ * background OPTIONS: none/transparent. Default is solid white. 
+ * 
+ * // TODO: Make modals receive component prop instead of children
  */
 
 export default class extends React.Component {
   constructor(props) {
     super(props)
     this.state = { show: false }
+  }
+
+  static propTypes = {
+    open: PropTypes.bool,
+    persist: PropTypes.bool,
+    background: PropTypes.oneOf(["none", "transparent", ""]),
+    onModalClick: PropTypes.func
+  }
+  
+  static defaultProps = {
+    open: false,
+    persist: true,
+    background: "",
+    onModalClick: () => {}
   }
 
   componentDidMount() {
@@ -36,7 +50,7 @@ export default class extends React.Component {
   close = () => this.setState({ show: false })
   
   render() {
-    const { background = "" } = this.props
+    const { background } = this.props
     // TODO Listen to events
     return this.state.show &&
     ReactDOM.createPortal(

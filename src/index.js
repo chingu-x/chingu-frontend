@@ -23,6 +23,7 @@ const client = new ApolloClient({
     // TODO check cache
     console.log({previousState: client.cache.data.data})
     // localStorage.setItem('store', client.cache.data)
+    // TODO :Check apollo-cache-persist for using localStorage
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : ''

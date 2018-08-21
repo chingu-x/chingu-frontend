@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import GetUser from "../utilities/GetUser"
 import CohortsBar from "./components/CohortsBar";
 import LandingBar from "./components/LandingBar";
 import LandingTop from "./components/LandingTop";
@@ -26,23 +25,15 @@ import {
 class Landing extends React.Component {
   handleApplyClick = () => !!localStorage.token ? this.props.history.push("/voyage") : this.openLoginModal()
   openLoginModal = () => this.refs.loginModal.open()
-  handleModalClick = () => {
-    this.refs.loginModal.close()
-    // this.props.history.push("/")
-  }
 
   render() {
     const authed = !!localStorage.token
     const loginModal = this.props.location.state && this.props.location.state.loginModal
     const prevPath = this.props.location.state && this.props.location.state.from
 
-    // Routed here from....
-    console.log(`Came here ${prevPath ? "from " + prevPath : "by myself"}`)
-
     return (
       <div className="landing" >
         <Modal
-          onModalClick={this.handleModalClick}
           open={loginModal}
           background="transparent"
           ref="loginModal"
@@ -81,8 +72,6 @@ class Landing extends React.Component {
       </div>
     )
   }
-
 }
-
 
 export default Landing

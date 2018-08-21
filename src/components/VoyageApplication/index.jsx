@@ -1,11 +1,9 @@
 import * as React from 'react';
 import './VoyageApplication.css';
 import DynamicForm from "../DynamicForm";
-import GetData from "../utilities/GetData"
+import Request from "../utilities/Request"
 import { gql } from "apollo-boost";
 import { Redirect } from "react-router-dom";
-import { voyageApplicationSwitch } from "../utilities/switches"
-import { client } from "../../index"
 
 const VoyageApplicationUserQuery = gql`
   query VoyageApplicationUserQuery {
@@ -29,10 +27,11 @@ const VoyageApplicationUserQuery = gql`
  *      submitRedirect -> /voyage/applicaton/${this.state.voyage_id}      
  *    status is 'profile_incomplete' -> Redirect /profile/update
  */
+
 const VoyageApplicationContainer = (
   { voyage_id, voyageVersion, newUserVersion, data: { user: { status } } },
 ) => {
-  // TODO: Redirect if with :voyage_id from route params is not available for application
+  // TODO: Redirect if :voyage_id from route params is not available for application
   switch (status) {
     case 'voyage_ready':
       return (
@@ -73,7 +72,7 @@ const VoyageApplication = ({ version, voyage_id, newUser }) => (
 );
 
 export default props =>
-  <GetData
+  <Request
     component={VoyageApplicationContainer}
     query={VoyageApplicationUserQuery}
     loader

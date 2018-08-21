@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './Loader.css';
 import Modal from "../common/Modal"
-import { Query, Mutation } from "react-apollo"
+import { Query } from "react-apollo"
 import { gql } from "apollo-boost"
 
 const loaderQuery = gql`
@@ -11,6 +11,12 @@ const loaderQuery = gql`
     }
   }
 `
+
+/**
+ * Global Loader instance checks the isShowing flag in local store.loaderState
+ * To toggle the flag usetoggleLoader utility in componenzs/utilities/toggleLoader and pass it the loading state from Queries/Mutations
+ */
+
 export default ({ background }) => (
   <Query query={loaderQuery}>
     {

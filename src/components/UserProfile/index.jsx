@@ -1,8 +1,7 @@
 import * as React from "react";
-import { client } from "../../index"
 import * as Cards from "../VoyageCard/VoyageCard";
 import UserSideBar from "./UserSideBar";
-import GetData from "../utilities/GetData"
+import Request from "../utilities/Request"
 import profileQuery from "./graphql/profileQuery"
 import './UserProfile.css'
 // import Store from '../../AppGlobalStore';
@@ -23,6 +22,7 @@ class UserProfile extends React.Component {
   // }
 
   render() {
+    // TODO: Check filters
     const { user } = this.props.data
     const currentTeams = user.teams.filter(team => { return team.cohort.status === 'ongoing' });
     const pastTeams = user.teams.filter(team => { return team.cohort.status === 'ended' });
@@ -102,7 +102,7 @@ class UserProfile extends React.Component {
 }
 
 export default props =>
-  <GetData
+  <Request
     component={UserProfile}
     query={profileQuery}
     loader

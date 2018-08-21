@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as Cards from "../VoyageCard/VoyageCard";
-import GetData from "../utilities/GetData"
+import Request from "../utilities/Request"
 import './VoyagePortal.css';
 import voyagesQuery from "./graphql/voyagesQuery"
 // import Store from '../../AppGlobalStore';
@@ -144,7 +144,7 @@ const VoyagePortal = ({ data: { cohorts, user, user: { id: userId, status: userS
                   endDate={voyage.end_date}
                   id={voyage.id}
                   userStatus={userStatus}
-                  alreadyApplied={""/*alreadyApplied*/} // TODO: Temp disabled to make application available
+                  alreadyApplied={""/*alreadyApplied*/} // TODO: Temp disabled
                 />
               )
             })
@@ -157,7 +157,7 @@ const VoyagePortal = ({ data: { cohorts, user, user: { id: userId, status: userS
 }
 
 export default props => (
-  <GetData
+  <Request
     component={VoyagePortal}
     query={voyagesQuery}
     loader

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link } from "react-router-dom"
 import './Error.css';
 import Modal from "../common/Modal"
+
 // class Error extends React.Component {
 //   render() {
 //     console.log(this.props.goBack);

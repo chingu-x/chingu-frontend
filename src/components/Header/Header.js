@@ -1,15 +1,12 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { gql } from "apollo-boost"
-import GetData from "../utilities/GetData"
+import Request from "../utilities/Request"
 import Modal from "../common/Modal"
 import GithubLoginModal from "../Login/components/GithubLoginModal"
-import isAuthed from "../utilities/checkAuth"
 import profileQuery from "../UserProfile/graphql/profileQuery"
 import voyagesQuery from "../VoyagePortal/graphql/voyagesQuery"
 import userBaseQuery from "./userBaseQuery"
 import { client } from "../../index"
-// import Store from '../../AppGlobalStore';
 
 class Header extends React.Component {
   constructor(props) {
@@ -53,31 +50,16 @@ class Header extends React.Component {
     })
   }
 
-  // let teams = [];
-  // let user = null;
-
-  // if (Store.state.user && localStorage.getItem('token')) {
-  //   let StoreUser = Store.getUserState();
-  //   user = StoreUser;
-  //   teams = StoreUser.teams;
-  // }
-  // if (Store.state.user) {
-  //   user = Store.state.user;
-  //   teams = Store.state.user.teams;
-  // }
-  
   logout = async e => {
     e.preventDefault();
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("store");
-    // TODO: Server logout logic
     
+    // TODO: Server logout logic
     // TODO: Redirect only if current page is private. 
-    // Explanation: client.resetStore() will refetch active queries and cannot be used on private pages
-    // Alternatively use client.cache.reset() which does not refetch active queries
+    
     this.props.history.replace("/")
     await client.resetStore()
-    // await client.cache.reset()
   };
 
   renderPortalDropDown = teams => {
@@ -179,9 +161,9 @@ class Header extends React.Component {
 }
 
 export default withRouter(props => (
-  !isAuthed() 
+  !localStorage.token 
     ? <Header {...props}/>
-    : <GetData
+    : <Request
         component={Header}
         query={userBaseQuery}
         {...props} />

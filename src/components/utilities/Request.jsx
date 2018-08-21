@@ -1,15 +1,17 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { Query } from "react-apollo"
-// import { gql } from "apollo-boost"
+import Error from "../Error"
+import toggleLoader from "./toggleLoader"
 // import Loader from "../Loader/Loader"
-import Error from "..//Error/Error"
-import toggleLoader from "../utilities/toggleLoader"
-import { gql } from "apollo-boost"
+// import { gql } from "apollo-boost"
+
 
 /**
  * USAGE
+ * 
  * export default props => 
- *  <GetData
+ *  <Request
  *  component={COMPONENT}
  *  query={QUERY}
  *  variables={VARIABLES}
@@ -20,7 +22,7 @@ import { gql } from "apollo-boost"
  * Component receives props passed to it as well as all query results (client, loading, error, data)
  */
 
-// Not working  - saves any query to localStorage.lastChecked
+// TODO: Not working  - saves any query to localStorage.lastChecked
 // const shouldFetch = query => {
 //   let lastChecked = localStorage.lastChecked
 //   console.log({ query })
@@ -34,7 +36,7 @@ import { gql } from "apollo-boost"
 //     : "cache-only"
 // }
 
-export default ({ component: Component, query, variables, loader, ...props }) => (
+const Request = ({ component: Component, query, variables, loader, ...props }) => (
   <Query query={query} variables={variables}>
     {
       ({ loading, error, data }) => {
@@ -52,3 +54,17 @@ export default ({ component: Component, query, variables, loader, ...props }) =>
     }
   </Query>
 )
+
+Request.propTypes = {
+  component: PropTypes.func.isRequired,
+  query: PropTypes.object.isRequired,
+  loader: PropTypes.bool,
+  variables: PropTypes.object,
+}
+
+Request.defaultProps = {
+  loader: false
+}
+
+
+export default Request

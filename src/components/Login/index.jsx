@@ -1,12 +1,8 @@
 import React from "react"
-
-import "./Login.css"
-import WithToken from "./components/WithToken"
-import WithoutToken from "./components/WithoutToken"
 import { Redirect } from "react-router-dom"
-import Landing from "../Landing"
 import qs from "query-string"
 import AuthenticateWithGithub from "./components/GithubAuth";
+import "./Login.css"
 
 // TODO: add state generator
 //   generate state and store in local storage
@@ -39,17 +35,20 @@ import AuthenticateWithGithub from "./components/GithubAuth";
 // );
 
 /**
- * /login route is only loaded by github callback (or manually)
+ * NOTES
+ * /login route is only used by github callback (or manually).
  * If there is a code found in querystring, try to authenticate with Github.
- * Otherwise redirect to /profile which will render the UserPage or show the login modal depending localStorage.token
+ * Otherwise redirect to /profile which will show the Login modal. If authed, redirects to /profile.
  */
 
 const Login = ({ queryString }) => {
   if (queryString) {
     var { code } = qs.parse(queryString)
     var { redirect } = qs.parse(queryString)
+    console.log({ redirect })
   }
 
+  // TODO: Pass redirect queryString for post-login redirect
   return !localStorage.token && code
     ? <AuthenticateWithGithub code={code} />
     : <Redirect to="/profile" />

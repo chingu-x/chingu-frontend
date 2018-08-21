@@ -17,7 +17,7 @@ import VoyageApplication from './components/VoyageApplication';
 import Register from './components/Register';
 import Login from './components/Login';
 import Private from "./components/utilities/PrivateRoute"
-import Loader from "./components/Loader/Loader"
+import Loader from "./components/Loader"
 
 export default () => (
   <div className="App">
