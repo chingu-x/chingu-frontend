@@ -3,15 +3,22 @@
 .project-portal {
   // TODO: Remove header positioning property
   padding-top: 64px + 21px; // to account for header
-  max-width: 1080px;
+  max-width: $max-width;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "banner banner banner" "image image image-carousel" "description description cards";
+  grid-gap: 40px;
 }
-
+/*
+==========================
+BANNER WTIH PROJECT TITLE
+& ELEVATOR PITCH
+==========================
+*/
 .project-portal__banner {
   width: 100vw;
-  grid-column: 1 / -1;
+  grid-area: banner;
   transform:translateY(-21px); // to account for header
   justify-self: center;
   text-align: center;
@@ -20,7 +27,12 @@
   padding-top: 25px;
   background: linear-gradient(to right , #3b3c62,#74d6b1);
 }
-
+/*
+==========================
+TOOLBAR WITH PROJECT EDIT
+& PROJECT SUBMIT BUTTONS
+==========================
+*/
 .project-portal__toolbar {
   grid-column: 1 / -1;
   justify-self: end;
@@ -36,18 +48,102 @@
     margin-right: 0.5em;
   }
 }
-
+/*
+==========================
+IMAGE-CAROUSEL (PREVIEW)
+==========================
+*/
 .project-portal__preview {
-  grid-column: 1 / -1;
+  grid-area: image-carousel;
   display: grid;
-  grid-gap: 25px;
-  grid-template-columns: repeat(3, 1fr);
-  max-height: 60vh;
+  grid-gap: 5px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  max-height: 45vh;
+  overflow-x: hidden;
   overflow-y: auto;
+  background-color: $pale-grey;
 }
 
+.project-portal__slide {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.project-portal__img--preview {
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+  background-color: white;
+  margin-top: 10px;
+}
+.project-portal__caption--preview {
+  font-size: 12px;
+  text-align: center;
+  color: $grey;
+}
+/*
+==========================
+MAIN IMAGE
+==========================
+*/
+
+.project-portal__main-image {
+  grid-area: image;
+  width: 100%;
+  background-color: $palest-grey;
+  margin: 0 auto;
+}
+.project-portal__slide--main {
+  text-align: center;
+  margin: 0 auto;
+}
+.project-portal__img--main {
+  width: 650px;
+  height: 400px;
+  object-fit: contain;
+}
+.project-portal__caption--main {
+  margin-top: -50px;
+}
+
+
+/*
+==========================
+CARDS (PROJECT SIDEBAR)
+==========================
+*/
+.project-side-panel {
+  grid-area: cards;
+}
+
+.project-subcategory-title {
+  @include portal-subcategory;
+}
+.project-subcategory {
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    border: 1px solid $grey;
+    padding: 0.3em 1em;
+    margin: 0.2em 0.3em 0.2em 0;
+  }
+  margin-bottom: 40px;
+}
+.project-side-panel--hline {
+  border-top: 1px solid $light-grey;
+}
+/*
+==========================
+PROJECT DESCRIPTION
+==========================
+*/
 .project-portal__about {
-  grid-column: 1 / -1;
+  grid-area: description;
 }
 
 

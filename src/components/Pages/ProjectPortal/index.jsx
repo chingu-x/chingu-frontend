@@ -1,4 +1,6 @@
 import * as React from "react";
+import ProjectSideBar from './ProjectSideBar';
+import ProjectImages from './ProjectImages';
 
 class ProjectPortal extends React.Component {
   state = {
@@ -14,10 +16,9 @@ class ProjectPortal extends React.Component {
       <div className="project-portal">
         <Banner />
         <Toolbar edit={this.edit} />
-        <Preview />
-        <About />
-        <Team />
-        <ExternalLinks />
+        <ProjectImages />
+        <ProjectDescription />
+        <ProjectSideBar />
         {this.state.isEditing && <EditProjectForm edit={this.edit} />}
       </div>
     );
@@ -51,25 +52,8 @@ function Toolbar({ edit }) {
   );
 }
 
-function Preview() {
-  return (
-    <div className="project-portal__preview">
-      <Slide />
-      <Slide />
-    </div>
-  );
-}
 
-function Slide() {
-  return (
-    <div className="project-portal__slide">
-      <img src="https://via.placeholder.com/350x150" alt="" />
-      <p>This is just a placeholder!</p>
-    </div>
-  );
-}
-
-function About() {
+function ProjectDescription() {
   return (
     <div className="project-portal__about">
       <h2>Chingu</h2>
@@ -113,46 +97,8 @@ function About() {
   );
 }
 
-function Team() {
-  return (
-    <div className="project-portal__team">
-      <h3>Team</h3>
-      <ul>
-        <li>
-          <Profile />
-        </li>
-        <li>
-          <Profile />
-        </li>
-      </ul>
-    </div>
-  );
-}
 
-function Profile() {
-  return (
-    <div className="project-portal__profile">
-      <img src="https://via.placeholder.com/50x50" alt="" />
-      <p>Cool Cat</p>
-    </div>
-  );
-}
 
-function ExternalLinks() {
-  return (
-    <div className="project-portal__external-links">
-      <h3>Links</h3>
-      <ul>
-        <li>
-          <a href="#">GitHub Repo</a>
-        </li>
-        <li>
-          <a href="#">Live Preview</a>
-        </li>
-      </ul>
-    </div>
-  );
-}
 
 function EditProjectForm({ edit }) {
   return (
