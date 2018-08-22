@@ -1,2 +1,41 @@
 @import '../../styles/abstracts/_variables.scss';
 
+* {
+  outline: 2px solid orange; // TODO: remove
+}
+
+// CONTAINERS //
+.view-container {
+  background-color: steelblue;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1180px;
+}
+
+.portal-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 100px auto;
+}
+
+// PANELS //
+@mixin panel {
+  margin: 20px;
+  
+  // TODO remove
+  min-height: 500px;
+  background-color: teal;
+}
+
+.portal-panel__sidebar {
+  @include panel;
+  flex: 1 3 360px;
+  min-width: 150px;
+  max-width: 360px;
+}
+
+.portal-panel__feed {
+  @include panel;
+  flex: 1 2 720px;
+  max-width: 720px;
+}
