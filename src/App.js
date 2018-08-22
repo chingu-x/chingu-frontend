@@ -16,6 +16,7 @@ import VoyagePortal from './components/VoyagePortal';
 import VoyageApplication from './components/VoyageApplication';
 import Register from './components/Register';
 import Login from './components/Login';
+import FeedPortal from "./components/FeedPortal"
 
 class App extends React.Component {
   render() {
@@ -50,6 +51,8 @@ class App extends React.Component {
               )
             }
           />
+          {/* TODO: Change to private route */}
+          <Route exact path="/feed" component={FeedPortal} /> 
           <Route exact path="/team/checkin/:id" component={WeeklyCheckin} />
           <Route exact path="/current" component={CurrentPrograms} />
           <Route exact path="/team" component={Staff} />
