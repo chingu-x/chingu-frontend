@@ -1,4 +1,4 @@
-@import '../abstracts/_variables.scss';
+@import "../abstracts/_variables.scss";
 
 .header {
   display: flex;
@@ -8,7 +8,7 @@
   height: 64px;
   padding: 0 1.5em;
   position: fixed;
-  z-index: 14;
+  z-index: $z-header;
   width: 100%;
 
   &.header-dark {
@@ -50,6 +50,10 @@
 
 .header-right {
   grid-area: p;
+  display: flex;
+  // align-items: center;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
 
   // Avatar
   img.avatar {
@@ -58,27 +62,31 @@
     border-radius: 100%;
     vertical-align: middle;
     float: right;
-    &:hover ~ .header-dropdown-content {
-    visibility: visible;
-  }
+    z-index: $z-modal-peek;
+    // &:hover ~ .header-dropdown-content {
+    //   visibility: visible;
+    // }
   }
 
   a {
-    display: flex;
-    align-items: center;
     height: 100%;
     padding: 0 1em;
     text-decoration: none;
   }
 
   .header-btn {
-    float: right;
+    display: flex;
+    // float: right;
     border: none;
     background-color: $theme-purple;
     color: white;
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 1px;
+    padding: 0 1em;
+    height: 100%;
+    align-items: center;
+    cursor: pointer;
   }
 
   .btn {
@@ -106,9 +114,10 @@
   position: relative;
   margin-right: -50px;
   opacity: 0;
-  &:hover ~ .header-dropdown-content  {
-    visibility: visible;
-  }
+  // visibility: visible;
+  // &:hover ~ .header-dropdown-content {
+  //   visibility: visible;
+  // }
 }
 .header-portal-btn {
   display: block;
@@ -131,9 +140,9 @@
   &:hover {
     color: white;
   }
-  &:hover ~ .header-dropdown-content--centered {
-    visibility: visible;
-  }
+  // &:hover ~ .header-dropdown-content--centered {
+  //   visibility: visible;
+  // }
 }
 
 .header-dropdown {
@@ -149,16 +158,15 @@
 .header-dropdown-content--centered {
   margin: 0 auto;
 }
-.header-dropdown-content, 
-.header-dropdown-content--centered  {
-  visibility: hidden;
+.header-dropdown-content,
+.header-dropdown-content--centered {
+  // visibility: hidden;
   width: 70%;
   display: block;
   background-color: white;
   box-shadow: $box-shadow-dark;
   text-align: center;
   overflow: auto;
-  z-index: z-indexes("dropdown");
   .label {
     color: $theme-purple;
     text-align: center;
@@ -184,9 +192,9 @@
       font-size: 12px;
     }
   }
-  &:hover {
-    visibility: visible;
-  }
+  // &:hover {
+  //   visibility: visible;
+  // }
   &.avatar {
     right: 0;
     width: fit-content;

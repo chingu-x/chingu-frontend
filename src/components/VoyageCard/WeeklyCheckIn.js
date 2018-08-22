@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom"
 
 /**
  * TODO:
@@ -8,7 +9,7 @@ import * as React from "react";
 const WeeklyCheckIn = ({ team }) => {
   return (
     <div className="action-button--to-Voyage">
-      <a href={"/team/checkin/" + team.cohort.id}>Weekly Check-In</a>
+      <Link to={"/team/checkin/" + team.cohort.id}>Weekly Check-In</Link>
     </div>
   );
 };
