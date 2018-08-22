@@ -53,13 +53,14 @@ $transparent-background: rgba(158, 158, 158, 0.637);
 @mixin transparent-background {
   background-color: $transparent-background;
   display: block;
-  position: absolute;
+  position: fixed;
+  height: 100%;
   min-width: 100vw;
   min-height: 100vh;
-  height: 100%;
   z-index: 100;
   top: 0px;
   left: 0px;
+  bottom: 0px;
 }
  
 @mixin modal--solid-background {

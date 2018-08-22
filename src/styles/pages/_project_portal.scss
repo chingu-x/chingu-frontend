@@ -4,6 +4,7 @@
   // TODO: Remove header positioning property
   padding-top: 64px + 21px; // to account for header
   margin: 0 auto;
+  height: 100%;
 }
 /*
 ==========================
@@ -49,10 +50,10 @@ OVERALL IMAGE CONTAINER
 */
 .project-image-container {
   display: grid;
-  grid-template-areas: "image image image image-carousel image-carousel";
-  grid-template-columns: repeat(5, 1fr);
-  // max-height: 50vh;
+  grid-template-areas: "image image image image image image image-carousel image-carousel image-carousel";
+  grid-template-columns: repeat(9, 1fr);
   height: 500px;
+  overflow-x: hidden;
 }
 /*
 ==========================
@@ -85,12 +86,24 @@ IMAGE-CAROUSEL (PREVIEW)
   object-fit: cover;
   background-color: white;
   margin-top: 10px;
+  box-shadow: $box-shadow;
 }
 .project-portal__caption--preview {
   font-size: 12px;
   text-align: center;
   color: $dark-grey;
   margin-top: -4px;
+}
+/*
+==========================
+OPEN IMAGE MODAL BTN
+==========================
+*/
+.project-btn {
+  @include system-button($theme-green, $theme-green--hover);
+  grid-column: 1 / -1;
+  margin: 0 auto;
+  height: 40px;
 }
 /*
 ==========================
@@ -103,22 +116,45 @@ UPLOAD IMAGE BTN
 	opacity: 0;
 	overflow: hidden;
 	position: absolute;
-	z-index: -1;
+  z-index: -1;
 }
 .project-upload-image-btn + label {
   color: white;
   background-color: $theme-green;
   text-transform: uppercase;
-  margin: 0 auto;
   grid-column: 1 / -1;
   padding: 10px 30px;
-  margin-bottom: 20px;
+  height: 40px;
   border-radius: $border-radius;
   cursor: pointer;
   box-shadow: $box-shadow;
   &:hover{
     background-color: $theme-green--hover;
   }
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+/*
+==========================
+UPLOAD IMAGE MODAL
+==========================
+*/ 
+.project-image-upload-background {
+  @include transparent-background;
+}
+.project-image-upload-container {
+  display: block;
+  position: absolute;
+  z-index: 110;
+  width: 460px;
+  left: calc(50% - 230px);
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: $box-shadow-dark;
+  margin: 0 auto;
+  margin-top: calc(50vh - 100px);
+  margin-bottom: 100px;
+  padding: 20px;
 }
 /*
 ==========================
@@ -134,20 +170,22 @@ MAIN IMAGE
   margin: 0 auto;
   width: 720px;
   height: 100%;
-  margin-right: 10px;
+  margin-right: 50px;
 }
 .project-portal__slide--main {
   text-align: center;
   height: 500px;
 }
 .project-portal__img--main {
+  margin-top: 20px;
   width: 650px;
-  height: 90%;
+  height: 88%;
   object-fit: cover;
+  box-shadow: $box-shadow;
 }
 .project-portal__caption--main {
   color: $dark-grey;
-  margin-top: -4px;
+  margin-top: -5px;
 }
 /*
 ==========================
@@ -182,9 +220,11 @@ CARDS (PROJECT SIDEBAR)
 
   li {
     display: inline-block;
-    border: 1px solid $grey;
+    border: 1px solid $dark-grey;
     padding: 0.3em 1em;
     margin: 0.2em 0.3em 0.2em 0;
+    background-color: white;
+    color: $dark-grey;
   }
   margin-bottom: 40px;
 }

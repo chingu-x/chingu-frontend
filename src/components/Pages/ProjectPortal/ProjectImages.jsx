@@ -1,65 +1,110 @@
 import * as React from "react";
+import ImageUploadModal from './ImgUploadModal';
 
-export default function ProjectImages() {
-  return (
-    <div className="project-image-container">
-      <MainImage />
-      <Preview />
-    </div>
-  )
+export default class ProjectImages extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mainImgSrc: require('../../../assets/[ADMIN] Applicant Review - Overview.png'),
+      mainImgCptn: '',
+      files: [
+        { imgCptn: 'Test', imgSrc: require('../../../assets/[ADMIN] Applicant Review - Overview.png') }
+      ],
+      unsavedFiles: [],
+      visibleImgUploadModal: false
+    }
+  }
+
+  displayLargeImg = (src) => {
+    this.setState({ largeImgSrc: src });
+  }
+
+  toggleImgModal = (e) => {
+    e.stopPropagation();
+    this.setState({ visibleImgUploadModal: !this.state.visibleImgUploadModal });
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        {this.state.visibleImgUploadModal
+          ? <ImageUploadModal unsavedFiles={this.state.unsavedFiles} files={this.state.files} toggleImgModal={this.toggleImgModal} />
+          : null
+        }
+        <div className="project-image-container">
+          <MainImageContainer imageSrc={this.state.mainImgSrc} imageCptn={this.state.mainImgCptn} />
+          <ImgPreviewContainer toggleImgModal={this.toggleImgModal} files={this.state.files} displayLargeImg={this.displayLargeImg} />
+        </div>
+      </React.Fragment>
+    )
+  }
 }
 
 
-function MainImage() {
-  return (
-    <div className="project-portal__main-color">
-      <div className="project-portal__main-image">
-        <MainSlide />
+
+class MainImageContainer extends React.Component {
+  render() {
+    return (
+      <div className="project-portal__main-color">
+        <div className="project-portal__main-image">
+          <div className="project-portal__slide--main">
+            <img className="project-portal__img--main" src={this.props.imageSrc} />
+            <p className="project-portal__caption--main" >{this.props.imageCptn}</p>
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
-function Preview() {
-  return (
-    <div className="project-portal__preview-color">
-      <div className="project-portal__preview">
-        <input 
-          className="project-upload-image-btn"
-          type="file"
-          name="project-images"
-          accept="image/png, image/jpeg"
-          multiple={true}
-          id="project-upload-images"
-        />
-        <label for="project-upload-images">Upload Images</label>
-        <Slide />
-        <Slide />
-        <Slide />
-        <Slide />
-        <Slide />
-        <Slide />
-        <Slide />
-        <Slide />
+class ImgPreviewContainer extends React.Component {
+  render() {
+    return (
+      <div className="project-portal__preview-color">
+        <div className="project-portal__preview">
+          <input
+            type="button"
+            value="Update Images"
+            className="project-btn"
+            onClick={(e) => this.props.toggleImgModal(e)}
+          />
+          <ImgPreviews files={this.props.files} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
-function Slide() {
-  return (
-    <div className="project-portal__slide">
-      <img className="project-portal__img--preview" src={require('../../../assets/landingImage.png')} alt="" />
-      <p className="project-portal__caption--preview" >This is just a placeholder!</p>
-    </div>
-  );
+class ImgPreviews extends React.Component {
+  render() {
+    let renderedImages = (
+      this.props.files
+        ? this.props.files.map((file, index) => {
+          return (
+            <ImgThumbnail
+              displayLargeImg={this.displayLargeImg}
+              key={index}
+              imgSrc={file.imgSrc}
+              imgCptn={file.imgCptn}
+            />
+          )
+        })
+        : null
+    )
+    return (
+      <React.Fragment>
+        {renderedImages}
+      </React.Fragment>
+    )
+  }
 }
-
-function MainSlide() {
-  return (
-    <div className="project-portal__slide--main">
-      <img className="project-portal__img--main" src={require('../../../assets/landingImage.png')} />
-      <p className="project-portal__caption--main" >This is just a placeholder!</p>
-    </div>
-  );
+class ImgThumbnail extends React.Component {
+  render() {
+    return (
+      <div className="project-portal__slide" onClick={(e) => this.props.displayLargeImg(this.props.imgSrc)}>
+        <img className="project-portal__img--preview" src={this.props.imgSrc} alt="" />
+        <p className="project-portal__caption--preview" >{this.props.imgCptn}</p>
+      </div>
+    );
+  }
 }
