@@ -16,28 +16,34 @@ class FeedPortal extends React.Component {
       <div className="view-container">
         <div className="portal-container">
 
-          <aside className="portal-panel__sidebar">
-            <div className="sidebar-userinfo__container">
-              <img
-                className="sidebar-userinfo__avatar"
-                src={" http://placehold.it/150x150"}
-                alt="User Avatar" />
-              <div
-                className="sidebar-userinfo__username">
-                UsernameHere</div>
+          <aside className="sidebar-container">
+            <div className="portal-panel__sidebar">
+              <div className="sidebar-userinfo__container">
+                <img
+                  className="sidebar-userinfo__avatar"
+                  src={" http://placehold.it/150x150"}
+                  alt="User Avatar" />
+                <div
+                  className="sidebar-userinfo__username">
+                  UsernameHere</div>
+              </div>
+
+              <SidebarBtn lbl="All News" />
+
+              <hr className="hl" />
+              <labelv className="sidebar-nav__label">Your Teams</labelv>
+              <SidebarBtn lbl="Voyage-4/Bears-Team-11" active />
+              <SidebarBtn lbl="Voyage-2/Turtles-Team-11" />
+              <hr className="hl" />
             </div>
-
-            <SidebarBtn lbl="All News" />
-
-            <hr className="hl" />
-            <labelv className="sidebar-nav__label">Your Teams</labelv>
-            <SidebarBtn lbl="Voyage-4/Bears-Team-11" active />
-            <SidebarBtn lbl="Voyage-2/Turtles-Team-11" />
-            <hr className="hl" />
           </aside>
 
-          <main className="portal-panel__feed">
-            Feed
+          <main className="main-container">
+            <div className="title">NEWS FEED</div>
+            <main className="portal-panel__feed">
+              Feed
+            <hr className="hl" />
+            </main>
           </main>
         </div>
       </div>
