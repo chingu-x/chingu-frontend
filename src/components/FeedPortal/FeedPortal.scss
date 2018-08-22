@@ -4,7 +4,6 @@
 //   outline: 2px solid orange; // TODO: remove
 // }
 
-// UTILITIES // 
 @mixin center-align {
   display: flex;
   justify-content: center;
@@ -14,6 +13,8 @@
 
 .hl {
   border: 1px solid #E6E6E6;
+  margin: 0;
+  padding: 0;
 }
 
 // CONTAINERS //
@@ -76,4 +77,27 @@
   font-size: 20px;
   color: #757575;
   padding: 6px;
+}
+
+// SIDEBAR ITEMS // 
+
+@mixin sidebar-item {
+  font: 18px 400 "open sans", sans-serif;
+  line-height: 3em;
+  padding-left: 1em;
+}
+
+.sidebar-nav__btn {
+  @include sidebar-item;
+  color: #15CF89;
+  cursor: pointer;
+  &.active {
+    background-color: #DAF8ED;
+  }
+}
+
+.sidebar-nav__label {
+  @include sidebar-item()
+  font-weight: 700;
+  color: #5A5A5A
 }
