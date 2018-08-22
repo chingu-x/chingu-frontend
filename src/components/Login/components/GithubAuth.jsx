@@ -26,16 +26,7 @@ const userAuthGithub = gql`
   }
 `
 
-/**
- * NOTES
- * Authenticates with Github
- * Saves access_token to localStorage.token
- * 
- * // TODO: Svae user to localStorage.store ===
- * // TODO: Receive prevPath string for post-login redirect
- */
-
-const AuthenticateWithGithub = ({ code, prevPath }) => (
+const AuthenticateWithGithub = ({ code }) => (
   <Mutation
     mutation={userAuthGithub}
     variables={{ code }}
@@ -57,8 +48,8 @@ const AuthenticateWithGithub = ({ code, prevPath }) => (
         // )
 
         return (
-          prevPath
-            ? <Redirect to={prevPath} />
+          localStorage.redirect
+            ? <Redirect to={localStorage.redirect} />
             : <Redirect to={loginRedirectSwitch[user.status] || "/"} />
         );
       }

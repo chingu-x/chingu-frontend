@@ -28,17 +28,14 @@ class Landing extends React.Component {
 
   render() {
     const authed = !!localStorage.token
-    const loginModal = this.props.location.state && this.props.location.state.loginModal
-    const prevPath = this.props.location.state && this.props.location.state.from
-
     return (
       <div className="landing" >
         <Modal
-          open={loginModal}
+          open={!localStorage.token && !!localStorage.redirect}
           background="transparent"
           ref="loginModal"
         >
-          <GithubLoginModal prevPath={prevPath} />
+          <GithubLoginModal />
         </Modal>
 
         <LandingTop authed={authed} onApplyClick={this.handleApplyClick} />

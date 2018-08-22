@@ -56,7 +56,6 @@ class Header extends React.Component {
     window.localStorage.removeItem("store");
     
     // TODO: Server logout logic
-    // TODO: Redirect only if current page is private. 
     
     this.props.history.replace("/")
     await client.resetStore()
@@ -133,10 +132,11 @@ class Header extends React.Component {
   render() {
     const isDropdownOpen = this.state.showPortalDropdown || this.state.showUserDropdown
     const { data: { user: { avatar, teams } = {}} = {}} = this.props
+    window.location.pathname === localStorage.redirect && delete localStorage.redirect // Clears the post-login redirect path
     return  (
       <Fragment>
         <Modal onModalClick={this.closeDropdowns} background="none" ref="dropdownModal"/>
-        <Modal ref="loginModal" background="transparent"><GithubLoginModal/> </Modal>
+        <Modal ref="loginModal" background="transparent"><GithubLoginModal/></Modal>
         <div
           onClick={this.closeDropdowns} 
           className={`header header-dark ${isDropdownOpen ? "modal-peek" : ""}`}>  

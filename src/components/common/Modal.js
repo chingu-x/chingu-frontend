@@ -31,14 +31,14 @@ export default class extends React.Component {
     open: PropTypes.bool,
     persist: PropTypes.bool,
     background: PropTypes.oneOf(["none", "transparent", ""]),
-    onModalClick: PropTypes.func
+    onModalClick: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([false])])
   }
   
   static defaultProps = {
     open: false,
-    persist: true,
+    persist: false,
     background: "",
-    onModalClick: () => {}
+    onModalClick: false
   }
 
   componentDidMount() {
@@ -47,15 +47,21 @@ export default class extends React.Component {
 
   toggle = () => this.state.show ? this.close() : this.open()
   open = () => this.setState({ show: true })
-  close = () => this.setState({ show: false })
+  close = () => !this.props.persist && this.setState({ show: false })
+  handleModalClick = () => {
+    delete localStorage.redirect
+    if (!!this.props.onModalClick) this.props.onModalClick()
+    else if (!this.props.persist) this.close()
+  }
   
   render() {
+    console.log({ props: this.props}, !!this.props.onModalClick)
     const { background } = this.props
     // TODO Listen to events
     return this.state.show &&
     ReactDOM.createPortal(
       <div
-        onClick={!!this.props.onModalClick || this.props.persist ? this.props.onModalClick : this.close}
+        onClick={this.handleModalClick}
         className={`modal ${background}`}
       >
         { this.props.children }

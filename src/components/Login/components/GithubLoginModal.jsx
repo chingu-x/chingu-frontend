@@ -2,7 +2,6 @@ import React from "react"
 
 // TODO: refactor styles
 const GithubLoginModal = ({
-  prevPath,
   clientID = "e015fd9cc874fa5a34bf"
 }) => {
   const githubAuthURL = `https://github.com/login/oauth/authorize?client_id=${clientID}`;
@@ -14,12 +13,7 @@ const GithubLoginModal = ({
       <div className="login-title">Github Authentication</div>
       <a
         className="login-link"
-        href={
-          // !prevPath // TODO: Implement on Github
-          true
-            ? githubAuthURL
-            : `${githubAuthURL}&redirect_uri=${prevPath}`
-        }>
+        href={githubAuthURL}>
         <button className="github-auth">
           <img
             alt="github-icon"

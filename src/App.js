@@ -19,7 +19,7 @@ import Login from './components/Login';
 import Private from "./components/utilities/PrivateRoute"
 import Loader from "./components/Loader"
 
-export default () => (
+export default () => ( 
   <div className="App">
     <Header />
     <Loader />
@@ -30,13 +30,13 @@ export default () => (
         render={
           ({ location: { search } }) => <Login queryString={search} />
         }
-      />
+        />
       <Route
         exact path="/register"
         render={
           () => <Register version={null} /> // set custom 'chingu_application' version here
         }
-      />
+        />
       <Private exact path="/profile" component={UserProfile} />
       <Private exact path="/voyage" component={VoyagePortal} />
       <Private
@@ -44,13 +44,13 @@ export default () => (
         render={
           ({ match: { params: { voyage_id } } }) => (
             <VoyageApplication
-              voyage_id={voyage_id}
-              voyageVersion={null} // set custom 'voyage_application' version here
-              newUserVersion={null} // set custom 'new_voyage_user' version here
+            voyage_id={voyage_id}
+            voyageVersion={null} // set custom 'voyage_application' version here
+            newUserVersion={null} // set custom 'new_voyage_user' version here
             />
           )
         }
-      />
+        />
       <Private exact path="/team/checkin/:id" component={WeeklyCheckin} />
       <Route exact path="/current" component={CurrentPrograms} />
       <Route exact path="/team" component={Staff} />
@@ -61,4 +61,4 @@ export default () => (
     </Switch>
     <Footer />
   </div>
-)
+  )
