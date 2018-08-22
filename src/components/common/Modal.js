@@ -55,7 +55,6 @@ export default class extends React.Component {
   }
   
   render() {
-    console.log({ props: this.props}, !!this.props.onModalClick)
     const { background } = this.props
     // TODO Listen to events
     return this.state.show &&

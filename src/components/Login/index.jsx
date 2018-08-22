@@ -34,7 +34,6 @@ const Login = ({ queryString }) => {
   if (queryString) {
     var { code } = qs.parse(queryString)
     var { redirect } = qs.parse(queryString)
-    console.log({ redirect })
   }
 
   // TODO: Pass redirect queryString for post-login redirect

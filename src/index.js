@@ -8,12 +8,9 @@ import App from "./App";
 import ScrollToTop from "./ScrollToTop";
 import "./styles/fontawesome/webfonts/fontawesome-all.css";
 import "./styles/main.css";
-// import Store from './AppGlobalStore';
 import registerServiceWorker from "./registerServiceWorker";
-// import defaults from './models'
 
-// console.log(defaults)
-const mode = 'dev6666666666'
+const mode = 'dev66666666666'
 // create a new Apollo Client Instance
 const client = new ApolloClient({
   // The URL for your graphql server
@@ -22,8 +19,6 @@ const client = new ApolloClient({
     const token = localStorage.getItem('token')
     // TODO check cache
     console.log({previousState: client.cache.data.data})
-    // localStorage.setItem('store', client.cache.data)
-    // TODO :Check apollo-cache-persist for using localStorage
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : ''
@@ -58,29 +53,17 @@ const client = new ApolloClient({
     } 
   }
 })
-// function RenderApp() {
-  // ApolloProvider wraps the root component and provides ApolloClient features
-  // to all child components. Similar to how the redux Provider does the same for state
-  ReactDOM.render(
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <ScrollToTop>
-          <App />
-        </ScrollToTop>
-      </BrowserRouter>
-    </ApolloProvider>,
-    document.getElementById("root")
-  );
-// }
 
-// if (!Store.state.user && localStorage.getItem('token')) {
-//   Store.getAuthedUser().then(() => { RenderApp(); });
-// }
-// else {
-//   RenderApp();
-// }
-
-
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <BrowserRouter>
+      <ScrollToTop>
+        <App />
+      </ScrollToTop>
+    </BrowserRouter>
+  </ApolloProvider>,
+  document.getElementById("root")
+);
 
 registerServiceWorker();
 
