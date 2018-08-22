@@ -1,6 +1,11 @@
-import gql from "graphql-tag";
-export const get_voyages = gql`
+import { gql } from "apollo-boost"
+
+export const voyagesQuery = gql`
   query getVoyages {
+    user {
+      id
+      status
+    }
     cohorts {
         id
         title
@@ -12,8 +17,11 @@ export const get_voyages = gql`
           status
           user {
             id
+            status
           }
         }
     }
   }
 `
+
+export default voyagesQuery

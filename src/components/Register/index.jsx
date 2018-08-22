@@ -6,13 +6,13 @@ const Register = ({ version }) => {
   // get users local timezone
   const timezone = new Date().getTimezoneOffset();
   return (
-    <div className="chingu-application-container">
+    <div className="voyage-application-container">
       <div className="chingu-application-modal">
         <div className="chingu-application-title">New User Onboarding Survey</div>
         <DynamicForm
           purpose="chingu_application"
           version={version}
-          hiddenData={ { timezone } }
+          hiddenData={{ timezone }}
         />
       </div>
     </div>

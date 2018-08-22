@@ -9,12 +9,15 @@
 html {
   box-sizing: border-box;
 }
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
-body, button {
-  color: color-list('text-dark');
+body,
+button {
+  color: color-list("text-dark");
   font-size: $base-font-size;
   font-family: $base-font-family;
   font-weight: $base-font-weight;
