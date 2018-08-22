@@ -16,6 +16,7 @@ import VoyagePortal from './components/VoyagePortal';
 import VoyageApplication from './components/VoyageApplication';
 import Register from './components/Register';
 import Login from './components/Login';
+import FeedPortal from "./components/FeedPortal"
 import Private from "./components/utilities/PrivateRoute"
 import Loader from "./components/Loader"
 
@@ -51,6 +52,7 @@ export default () => (
           )
         }
         />
+      <Private exact path="/feed" component={FeedPortal} /> 
       <Private exact path="/team/checkin/:id" component={WeeklyCheckin} />
       <Route exact path="/current" component={CurrentPrograms} />
       <Route exact path="/team" component={Staff} />
@@ -62,3 +64,4 @@ export default () => (
     <Footer />
   </div>
   )
+
