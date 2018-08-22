@@ -1,4 +1,4 @@
-import { client } from "../../index"
+import { client } from "../.."
 import { gql } from "apollo-boost"
 
 const toggleLoaderQuery = gql`
@@ -24,7 +24,7 @@ const toggleLoaderQuery = gql`
  * </Query>
  */
 
-const toggleLoader = loading => {
+const toggleGlobalLoader = loading => {
   client.mutate({
     mutation: toggleLoaderQuery,
     variables: { isShowing: !!loading }
@@ -32,4 +32,4 @@ const toggleLoader = loading => {
   return !!loading
 }
 
-export default toggleLoader
+export default toggleGlobalLoader

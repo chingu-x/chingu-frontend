@@ -4,7 +4,7 @@ import { Mutation } from "react-apollo"
 import { gql } from "apollo-boost"
 // import Loader from "../../Loader"
 import Error from "../../Error"
-import toggleLoader from "../../utilities/toggleLoader"
+import toggleGlobalLoader from "../../utilities/toggleGlobalLoader"
 
 // // -- UTILITIES -- //
 const loginRedirectSwitch = {
@@ -33,7 +33,7 @@ const AuthenticateWithGithub = ({ code }) => (
   >
     {(authenticate, { data, error, loading }) => {
       // TODO: Fix state update error on login
-      toggleLoader(loading)
+      toggleGlobalLoader(loading)
       if (loading) return null // TODO: Remove
       if (error) return <Error error={error.message} goBack="/login" />
       if (data) {
@@ -41,12 +41,6 @@ const AuthenticateWithGithub = ({ code }) => (
           userAuthGithub: { user, access_token }
         } = data
         window.localStorage.setItem("token", access_token)
-
-        // window.localStorage.setItem(
-        //   "store",
-        //   JSON.stringify({ version: 5, user })
-        // )
-
         return (
           localStorage.redirect
             ? <Redirect to={localStorage.redirect} />

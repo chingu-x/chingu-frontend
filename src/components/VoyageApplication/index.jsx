@@ -75,5 +75,5 @@ export default props =>
   <Request
     component={VoyageApplicationContainer}
     query={VoyageApplicationUserQuery}
-    loader
+    globalLoader
     {...props} />

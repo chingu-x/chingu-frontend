@@ -4,10 +4,6 @@ import qs from "query-string"
 import AuthenticateWithGithub from "./components/GithubAuth";
 import "./Login.css"
 
-// TODO: add state generator
-//   generate state and store in local storage
-//   on redirect confirm state match and remove
-
 /**
  * Component exists on:
  *  - /login
@@ -26,13 +22,6 @@ import "./Login.css"
  *  - profile_complete -> Redirect to User portal view
  *  - [future] profile_incomplete -> Redirect to User update view
  */
-
-// -- MUTATION -- //
-// const Login = ({ queryString }) => (
-//   window.localStorage.getItem('token') ?
-//     <WithToken /> :
-//     <WithoutToken queryString={queryString} />
-// );
 
 /**
  * NOTES

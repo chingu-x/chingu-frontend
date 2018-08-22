@@ -187,6 +187,6 @@ export default props => (
     component={DynamicForm}
     query={dynamicFormQuery}
     variables={{ purpose: props.purpose, version: props.version }}
-    loader
+    globalLoader
     {...props} />
 )
