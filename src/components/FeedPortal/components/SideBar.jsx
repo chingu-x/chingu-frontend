@@ -3,10 +3,10 @@ import sidebarQuery from '../graphql/sidebarQuery';
 import Request from "../../utilities/Request"
 
 const SidebarBtn = ({ lbl, active, team }) => (
-  <Fragment>
+  <div className="sidebar-nav__btn-ctn">
     {team ? <img className="sidebar-nav__btn-icon" src={require('../../../assets/team-icon.png')} alt="team-icon" /> : null}
     <div className={`sidebar-nav__btn ${active ? "active" : null}`}>{lbl}</div>
-  </Fragment>
+  </div>
 )
 
 const TeamLinks = teams => {
@@ -25,7 +25,7 @@ const TeamLinks = teams => {
     return <SidebarBtn team key={idx} lbl={team.cohort.title + "/" + team.title} />
   })
 
-  return <Fragment>{renderedTeamLinks}</Fragment>
+  return <Fragment>{renderedTeamLinks || null}</Fragment>
 }
 
 const SideBar = ({ data: { user } }) => {
@@ -45,8 +45,6 @@ const SideBar = ({ data: { user } }) => {
         <hr className="hl" />
 
         <label className="sidebar-nav__label">Your Teams</label>
-        <hr className="hl" />
-
 
         <TeamLinks teams={user.teams} />
         <hr className="hl" />
