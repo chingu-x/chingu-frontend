@@ -25,7 +25,7 @@ class FeedPortal extends React.Component {
                   alt="User Avatar" />
                 <div
                   className="sidebar-userinfo__username">
-                  UsernameHere</div>
+                  {test}</div>
               </div>
 
               <SidebarBtn lbl="All News" />
