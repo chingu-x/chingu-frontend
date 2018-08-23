@@ -86,7 +86,7 @@
   font-family: "Open Sans";
   font-weight: 700;
   font-size: 20px;
-  color: #757575;
+  color: $dark-grey;
   padding: 6px;
 }
 
@@ -99,7 +99,7 @@
 
 .sidebar-nav__btn {
   @include sidebar-item;
-  color: #15CF89;
+  color: $theme-green;
   cursor: pointer;
   &.active {
     background-color: #DAF8ED;
@@ -107,7 +107,7 @@
 }
 
 .sidebar-nav__label {
-  @include sidebar-item()
+  @include sidebar-item;
   font-weight: 700;
   color: #5A5A5A
 }
