@@ -2,19 +2,18 @@ import React, { Fragment } from "react"
 import sidebarQuery from '../graphql/sidebarQuery';
 import Request from "../../utilities/Request"
 
-const SidebarBtn = ({ lbl, active }) => (
+const SidebarBtn = ({ lbl, active, team }) => (
   <Fragment>
     <hr className="hl" />
-    <div
-      className={`sidebar-nav__btn ${active ? "active" : null}`}>
-      {lbl}</div>
+    {team ? <img className="sidebar-nav__btn-icon" src={require('../../../assets/team-icon.png')} alt="team-icon" /> : null}
+    <div className={`sidebar-nav__btn ${active ? "active" : null}`}>{lbl}</div>
   </Fragment>
 )
 
 const TeamLinks = ({ teams }) => {
   let renderedTeamLinks = teams.map((team, idx) => {
     return (
-      <SidebarBtn key={idx} lbl={team.cohort.title + "/" + team.title} />
+      <SidebarBtn team={true} key={idx} lbl={team.cohort.title + "/" + team.title} />
     )
   })
   return (
