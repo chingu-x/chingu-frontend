@@ -17,7 +17,7 @@ const TeamLinks = ({ teams }) => {
     )
   })
   return (
-    <React.Fragment>{renderedTeamLinks}</React.Fragment>
+    <Fragment>{renderedTeamLinks}</Fragment>
   )
 }
 const SideBar = ({ data: { user } }) => {
