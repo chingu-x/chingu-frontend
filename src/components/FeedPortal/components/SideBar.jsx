@@ -9,7 +9,7 @@ const SidebarBtn = ({ lbl, active, team }) => (
   </Fragment>
 )
 
-const TeamLinks = ({ teams }) => {
+const TeamLinks = teams => {
   // TEMP REMOVE for people withr no teams !!!!!
   if (!teams.length) {
     teams = [{
