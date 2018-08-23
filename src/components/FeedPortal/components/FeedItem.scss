@@ -1,0 +1,9 @@
+@import '../../../styles/abstracts/_variables.scss';
+
+// merge with FeedPortal.scss
+
+.feed-item__container {
+  height: 100px; // TODO: remove
+  width: 100%;
+  background-color: teal;
+}
