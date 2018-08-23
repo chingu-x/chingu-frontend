@@ -3,6 +3,7 @@ import { gql } from "apollo-boost"
 const teamQuery = gql`
 query teamQuery {
   user {
+    id
     username
     avatar
     teams {
@@ -16,6 +17,7 @@ query teamQuery {
         end_date
       }
       tier {
+        id
           title
           level
       }
@@ -24,10 +26,12 @@ query teamQuery {
           title
           description
           users {
-              username
-              avatar
+            id
+            username
+            avatar
           }
           skills {
+            id
               name
           }
       }

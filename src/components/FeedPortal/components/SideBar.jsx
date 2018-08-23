@@ -11,15 +11,24 @@ const SidebarBtn = ({ lbl, active, team }) => (
 )
 
 const TeamLinks = ({ teams }) => {
+  // TEMP REMOVE for people withr no teams !!!!!
+  if (!teams.length) {
+    teams = [{
+      title: "bears11",
+      cohort: { title: "voyage1" }
+    }, {
+      title: "dragons3",
+      cohort: { title: "voyage11" }
+    }]
+  }
+
   let renderedTeamLinks = teams.map((team, idx) => {
-    return (
-      <SidebarBtn team={true} key={idx} lbl={team.cohort.title + "/" + team.title} />
-    )
+    return <SidebarBtn team key={idx} lbl={team.cohort.title + "/" + team.title} />
   })
-  return (
-    <Fragment>{renderedTeamLinks}</Fragment>
-  )
+
+  return <Fragment>{renderedTeamLinks}</Fragment>
 }
+
 const SideBar = ({ data: { user } }) => {
   return (
     <aside className="sidebar-container">
@@ -35,9 +44,9 @@ const SideBar = ({ data: { user } }) => {
         <SidebarBtn lbl="All News" />
 
         <hr className="hl" />
-
         <label className="sidebar-nav__label">Your Teams</label>
-        <TeamLinks />
+
+        <TeamLinks teams={user.teams} />
 
       </div>
     </aside>
