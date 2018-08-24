@@ -69,13 +69,15 @@ const teamsMock = [{
 
 
 // -- SIDEBAR HEADER -- // 
-const SidebarBtn = ({ lbl, active, team }) => (
-  <div className="sidebar-nav__btn-ctn">
-    {team ? <img className="sidebar-nav__btn-icon" src={require('../../../assets/team-icon.png')} alt="team-icon" /> : null}
-    <div className={`sidebar-nav__btn ${active ? "active" : null}`}>{lbl}</div>
-  </div>
-)
-
+const SidebarBtn = ({ lbl, active, team, toggleNewsFeed }) => {
+  console.log("Clicked")
+  return (
+    <div className="sidebar-nav__btn-ctn">
+      {team ? <img className="sidebar-nav__btn-icon" src={require('../../../assets/team-icon.png')} alt="team-icon" /> : null}
+      <div onClick={toggleNewsFeed} className={`sidebar-nav__btn ${active ? "active" : null}`}>{lbl}</div>
+    </div>
+  )
+}
 const SidebarHeader = ({ data }) => {
   if (!data) return "Loading..." // TODO: Insert small inline loader
   const { user: { username, avatar } } = data
@@ -98,7 +100,7 @@ const TeamLinks = ({ data, toggleNewsFeed, team_id }) => {
     <SidebarBtn
       team
       key={idx}
-      onClick={() => toggleNewsFeed("TEAM")}
+      toggleNewsFeed={() => toggleNewsFeed("TEAM", team_id)}
       lbl={team.cohort.title + "/" + team.title}
       active={team.id === team_id} />
   ))
@@ -117,7 +119,7 @@ const SideBar = ({ toggleNewsFeed, team_id }) => {
         <hr className="hl" />
 
         <SidebarBtn
-          onClick={() => toggleNewsFeed("ALL")}
+          toggleNewsFeed={() => toggleNewsFeed("ALL")}
           lbl="All News"
           active={team_id === null} />
         <hr className="hl" />
@@ -142,7 +144,8 @@ SideBar.propTypes = {
 }
 
 SideBar.defaultProps = {
-  team_id: null
+  team_id: null,
+  toggleNewsFeed: console.log
 }
 
 export default SideBar
