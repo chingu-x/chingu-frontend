@@ -137,8 +137,8 @@ const SideBar = ({ toggleNewsFeed, team_id }) => {
 }
 
 SideBar.propTypes = {
-  toggleNewsFeed: PropTypes.func.isRequired,
-  team_id: PropTypes.oneOfType([null, PropTypes.number])
+  team_id: PropTypes.number,
+  toggleNewsFeed: PropTypes.func.isRequired
 }
 
 SideBar.defaultProps = {
