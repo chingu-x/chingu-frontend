@@ -1,22 +1,51 @@
 @import '../../styles/abstracts/_variables.scss';
 
+
+@mixin spinner {
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+  margin: 0 auto;
+  z-index: 1000;
+}
+
+// -- DEFAULT (LARGE)-- //
 .loader-container {
     @include transparent-background;
 }
+
 .loader {
-    border: 20px solid white;
-    border-top: 20px solid $theme-green;
-    border-radius: 50%;
-    width: 180px;
-    height: 180px;
-    animation: spin 2s linear infinite;
-    display: block;
-    margin: 0 auto;
-    top: calc(50vh - 90px);
-    position: absolute;
-    left: calc(50vw - 90px);
-    z-index: 1000;
+  @include spinner;
+  border: 20px solid white;
+  border-top: 20px solid $theme-green;
+  width: 180px;
+  height: 180px;
+  display: block;
+  top: calc(50vh - 90px);
+  position: absolute;
+  left: calc(50vw - 90px);
 }
+
+// -- MEIDUM -- //
+.loader-medium-container {
+  height: 100px; // TODO: remove
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 500;
+}
+
+.loader--medium {
+  @include spinner;
+  border: 5px solid white;
+  border-top: 5px solid $theme-green;
+  width: 3em;
+  height: 3em;
+  top: calc(100% - 1.5px);
+  left: calc(100% - 1.5px);
+}
+
+
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
