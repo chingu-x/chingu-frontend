@@ -27,12 +27,12 @@
 
 // -- MEIDUM -- //
 .loader-medium-container {
-  height: 100px; // TODO: remove
+  height: 180px; // TODO: remove
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 500;
+  z-index: $z-middle;
 }
 
 .loader--medium {
@@ -43,6 +43,7 @@
   height: 3em;
   top: calc(100% - 1.5px);
   left: calc(100% - 1.5px);
+  z-index: $z-middle;
 }
 
 
