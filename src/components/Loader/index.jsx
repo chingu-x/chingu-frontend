@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from "prop-types"
 import './Loader.css';
 import Modal from "../common/Modal"
 import { Query } from "react-apollo"
@@ -12,12 +13,7 @@ const loaderQuery = gql`
   }
 `
 
-/**
- * Global Loader instance checks the isShowing flag in local store.loaderState
- * To toggle the flag usetoggleLoader utility in componenzs/utilities/toggleLoader and pass it the loading state from Queries/Mutations
- */
-
-export default ({ background }) => (
+const GlobalLoader = ({ background, style }) => (
   <Query query={loaderQuery}>
     {
       ({ data: { loaderState: { isShowing } } }) => {
@@ -28,3 +24,25 @@ export default ({ background }) => (
     }
   </Query>
 )
+
+
+const LoaderContainer = ({ background, style }) => {
+  console.log({ style })
+  if (style === "medium") {
+    return <div className="loader-medium-container"><div className="loader--medium" /></div>
+  }
+
+  else return <GlobalLoader background={background} />
+}
+
+LoaderContainer.propTypes = {
+  background: PropTypes.oneOf(["none", "transparent", ""]),
+  style: PropTypes.oneOf(["medium"])
+}
+
+LoaderContainer.proptypes = {
+  background: "",
+  style: ""
+}
+
+export default LoaderContainer
