@@ -1,8 +1,7 @@
 import * as React from 'react';
 import './TeamStandupCard.css';
 
-const TeamStandupComponent = ({ userStandup }) => {
-  let standup = userStandup.standup;
+const TeamStandupComponent = ({ standup }) => {
   let healthStatus;
   switch (standup.progress_sentiment) {
     case 'red':
@@ -25,12 +24,12 @@ const TeamStandupComponent = ({ userStandup }) => {
     { label: 'blockers', data: standup.blocked_on }
   ]
 
-  let renderedStandup = standupObjects.map((standup, idx) => {
-    let className = standup.label === 'health status' ? "team-standup-answer team-standup-status--" + userStandup.standup.progress_sentiment : "team-standup-answer";
+  let renderedStandup = standupObjects.map((object, idx) => {
+    let className = object.label === 'health status' ? "team-standup-answer team-standup-status--" + standup.progress_sentiment : "team-standup-answer";
     return (
       <div key={"team-standup_" + idx} className="team-standup-data">
-        <div className="team-standup-label">{standup.label} :</div>
-        <div className={className}>{standup.data}</div>
+        <div className="team-standup-label">{object.label} :</div>
+        <div className={className}>{object.data}</div>
       </div>
 
     )
