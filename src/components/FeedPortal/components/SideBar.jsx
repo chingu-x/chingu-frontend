@@ -116,7 +116,10 @@ const SideBar = ({ toggleNewsFeed, team_id }) => {
           query={sidebarHeaderQuery} />
         <hr className="hl" />
 
-        <SidebarBtn lbl="All News" onClick={() => toggleNewsFeed("ALL")} />
+        <SidebarBtn
+          onClick={() => toggleNewsFeed("ALL")}
+          lbl="All News"
+          active={team_id === null} />
         <hr className="hl" />
 
         <label className="sidebar-nav__label">Your Teams</label>
