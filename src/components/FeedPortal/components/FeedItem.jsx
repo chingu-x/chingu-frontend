@@ -3,46 +3,42 @@ import PropTypes from "prop-types"
 import timeSince from "../../utilities/timeSince"
 import "./FeedItem.css"
 
-const FeedItemContainer = ({
-  component: Component,
-  feed,
-  timestamp,
-  title,
-  avatar,
-  ...props
-}) => {
+const FeedItemContainer = ({ component: Component, item }) => {
+  const header = type => {
+    switch (type) {
+      case "NewsfeedVoyage":
+        return [item.voyage.title]
+      case "NewsfeedStandup":
+        return [item.user.username, item.user.avatar];
+      case "GithubActivityIssue":
+        return [item.repo.repo_name, item.repo.issue.user.avatar];
+      case "GithubActivityPullRequest":
+        return [item.repo.repo_name, item.repo.pull_requests.user.avatar]
+      default:
+        return "Chingu"
+    }
+  }
+  const [title, avatar] = header(item.type)
   return (
     <Fragment>
       <div className="feed-item__container">
         <div className="feed-item__header-content">
           <div className="feed-item__header--left">
             <div>{title}</div>
-            <img alt="update-user-avatar" src={avatar}
-              className="feed-item__header-avatar" />
+            {avatar && <img alt="update-user-avatar" src={avatar}
+              className="feed-item__header-avatar" />}
           </div>
-          <div className="feed-item__header--right">{timeSince(timestamp) + " ago"} </div>
+          <div className="feed-item__header--right">{timeSince(item.timestamp) + " ago"} </div>
         </div>
       </div>
-      <Component {...feed} {...props} />
+      <Component {...item} />
     </Fragment>
   )
 }
 
 FeedItemContainer.propTypes = {
   component: PropTypes.func.isRequired,
-  feed: PropTypes.object.isRequired,
-  timestamp: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  avatar: PropTypes.string,
-}
-
-// TODO: Cleanup default props
-FeedItemContainer.defaultProps = {
-  component: () => <div style={{ width: "100%", minHeight: "150px", backgroundColor: "#F8F8F8" }} />,
-  feed: {},
-  timestamp: 1535090610661,
-  title: "Halloween Voyage/the-vampiire",
-  avatar: "https://avatars3.githubusercontent.com/u/25523682?v=4"
+  item: PropTypes.object.isRequired
 }
 
 export default FeedItemContainer
