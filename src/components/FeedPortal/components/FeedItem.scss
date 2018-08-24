@@ -1,9 +1,21 @@
 @import '../../../styles/abstracts/_variables.scss';
 
-// merge with FeedPortal.scss
+.feed-item__header-content {
+  font: 400 14px "open sans", sans-serif;
+  color: #5A5A5A;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-.feed-item__container {
-  height: 100px; // TODO: remove
-  width: 100%;
-  background-color: teal;
+.feed-item__header--left {
+  display: flex;
+  align-items: center
+}
+
+.feed-item__header-avatar {
+  height: 30px;
+  width: 3opx;
+  border-radius: 50%;
+  margin: 0 7px;
 }
