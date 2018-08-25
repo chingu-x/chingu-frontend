@@ -1,62 +1,116 @@
 import React, { Fragment } from "react"
-import sidebarQuery from '../graphql/sidebarQuery';
+import PropTypes from "prop-types"
+import { gql } from "apollo-boost"
 import Request from "../../utilities/Request"
+import Loader from "../../Loader"
 
-const SidebarBtn = ({ lbl, active, team }) => (
-  <div className="sidebar-nav__btn-ctn">
-    {team ? <img className="sidebar-nav__btn-icon" src={require('../../../assets/team-icon.png')} alt="team-icon" /> : null}
-    <div className={`sidebar-nav__btn ${active ? "active" : null}`}>{lbl}</div>
-  </div>
-)
-
-const TeamLinks = teams => {
-  // TEMP REMOVE for people withr no teams !!!!!
-  if (!teams.length) {
-    teams = [{
-      title: "bears11",
-      cohort: { title: "voyage1" }
-    }, {
-      title: "dragons3",
-      cohort: { title: "voyage11" }
-    }]
+// -- QUERIES -- // 
+const sidebarHeaderQuery = gql`
+ query getSidebarUser{
+    user {
+      id
+      username
+      avatar
+    }
   }
+`
+const sidebarTeamsQuery = gql`
+  query getSidebarTeams{
+    user {
+      id
+      teams {
+        id
+        title
+        cohort {
+          id
+          title
+        }
+        tier {
+          id
+          level
+        }
+      }
+    }
+  }
+`
 
-  let renderedTeamLinks = teams.map((team, idx) => {
-    return <SidebarBtn team key={idx} lbl={team.cohort.title + "/" + team.title} />
-  })
+// -- SIDEBAR HEADER -- // 
+const SidebarBtn = ({ lbl, active, team, toggleNewsFeed }) => {
+  return (
+    <div onClick={toggleNewsFeed} className="sidebar-nav__btn-ctn">
+      {team ? <img className="sidebar-nav__btn-icon" src={require('../../../assets/team-icon.png')} alt="team-icon" /> : null}
+      <div className={`sidebar-nav__btn ${active ? "active" : null}`}>{lbl}</div>
+    </div>
+  )
+}
+const SidebarHeader = ({ loading, data }) => {
+  if (loading) return <div style={{ height: "180.8px" }}><Loader style="medium" /></div>
+  const { user: { username, avatar } } = data
+  return (
+    <div className="sidebar-userinfo__container">
+      <img
+        className="sidebar-userinfo__avatar"
+        src={avatar}
+        alt="User Avatar" />
+      <div className="sidebar-userinfo__username">{username}</div>
+    </div>
+  )
+}
+
+const TeamLinks = ({ loading, data, toggleNewsFeed, team_id }) => {
+  if (loading) return null
+
+  const renderedTeamLinks = data.user.teams.map((team, idx) => (
+    <SidebarBtn
+      team
+      key={idx}
+      toggleNewsFeed={() => toggleNewsFeed("TEAM", team.id)}
+      lbl={team.cohort.title + "/" + team.title}
+      active={team.id === team_id} />
+  ))
 
   return <Fragment>{renderedTeamLinks || null}</Fragment>
 }
 
-const SideBar = ({ data: { user } }) => {
+// -- SIDEBAR CONTAINER -- //
+const SideBar = ({ toggleNewsFeed, team_id }) => {
   return (
-    <aside className="sidebar-container">
+    <div className="sidebar-container">
       <div className="portal-panel__sidebar">
-        <div className="sidebar-userinfo__container">
-          <img
-            className="sidebar-userinfo__avatar"
-            src={user.avatar}
-            alt="User Avatar" />
-          <div className="sidebar-userinfo__username">{user.username}</div>
-        </div>
+
+        <Request
+          component={SidebarHeader}
+          query={sidebarHeaderQuery} />
         <hr className="hl" />
 
-        <SidebarBtn lbl="All News" />
+        <SidebarBtn
+          toggleNewsFeed={() => toggleNewsFeed("ALL")}
+          lbl="All News"
+          active={team_id === null} />
         <hr className="hl" />
 
         <label className="sidebar-nav__label">Your Teams</label>
 
-        <TeamLinks teams={user.teams} />
+        <Request
+          component={TeamLinks}
+          query={sidebarTeamsQuery}
+          toggleNewsFeed={toggleNewsFeed}
+          team_id={team_id} />
         <hr className="hl" />
 
       </div>
-    </aside>
+    </div>
   )
 }
 
-export default props =>
-  <Request
-    component={SideBar}
-    query={sidebarQuery}
-    globalLoader
-    {...props} />
+SideBar.propTypes = {
+  team_id: PropTypes.number,
+  toggleNewsFeed: PropTypes.func.isRequired
+}
+
+SideBar.defaultProps = {
+  team_id: null,
+  toggleNewsFeed: console.log
+}
+
+export default SideBar
