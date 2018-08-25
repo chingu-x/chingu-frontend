@@ -50,11 +50,22 @@ class NewsFeed extends React.Component {
   }
 }
 
-export default NewsFeed;
-// export default props =>
-//   <Request
-//     component={NewsFeed}
-//     query={sidebarQuery}
-//     globalLoader
-//     {...props} />
+const NewsFeedRequest = ({ variables }) =>
+  <Request
+    component={NewsFeed}
+    query={newsfeedQuery}
+    variables={{ input: { limit: 12, ...variables } }}
+    {...variables} />
 
+NewsFeedRequest.propTypes = {
+  variables: PropTypes.shape({
+    type: PropTypes.oneOf(["ALL", "TEAM"]),
+    team_id: PropTypes.number
+  })
+}
+
+NewsFeedRequest.defaultProps = {
+  variables: { type: "ALL" }
+}
+
+export default NewsFeedRequest
