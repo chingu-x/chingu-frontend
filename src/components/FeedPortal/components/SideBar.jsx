@@ -34,39 +34,6 @@ const sidebarTeamsQuery = gql`
   }
 `
 
-// TODO: Remove mock teams
-const teamsMock = [{
-  id: 2,
-  title: "vampires Team B",
-  cohort: {
-    id: 2,
-    title: "Voyage B",
-    start_date: Date.now() - 400,
-    end_date: Date.now() - 200
-  }
-},
-{
-  id: 3,
-  title: "vampires Team C",
-  cohort: {
-    id: 3,
-    title: "Voyage C",
-    start_date: Date.now() - 100,
-    end_date: Date.now() + 100
-  }
-}, {
-  id: 1,
-  title: "vampires Team A",
-  cohort: {
-    id: 1,
-    title: "Voyage A",
-    start_date: Date.now() - 700,
-    end_date: Date.now() - 500,
-  }
-},]
-
-
-
 // -- SIDEBAR HEADER -- // 
 const SidebarBtn = ({ lbl, active, team, toggleNewsFeed }) => {
   return (
@@ -93,8 +60,7 @@ const SidebarHeader = ({ loading, data }) => {
 const TeamLinks = ({ loading, data, toggleNewsFeed, team_id }) => {
   if (loading) return null
 
-  // TODO: use data.user.teams to map over
-  const renderedTeamLinks = teamsMock.map((team, idx) => (
+  const renderedTeamLinks = data.user.teams.map((team, idx) => (
     <SidebarBtn
       team
       key={idx}
@@ -102,6 +68,7 @@ const TeamLinks = ({ loading, data, toggleNewsFeed, team_id }) => {
       lbl={team.cohort.title + "/" + team.title}
       active={team.id === team_id} />
   ))
+
   return <Fragment>{renderedTeamLinks || null}</Fragment>
 }
 
