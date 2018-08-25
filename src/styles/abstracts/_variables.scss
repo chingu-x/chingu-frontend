@@ -42,7 +42,9 @@ $attention-red--light: #efb0b0;
 
 $health-green: #22b571;
 $health-yellow: #ffcc00;
+$health-yellow--light: #FFFAB7;
 $health-red: #ef8585;
+$health-red--light: #FCC4C4;
 
 $badge-1: #f5e3a1;
 $badge-1--hover: rgb(245, 219, 126);
@@ -249,6 +251,38 @@ FORMS
   margin-left: -20px;
   border-top: 1px solid $pale-grey;
   margin-top: 20px;
+}
+
+/*
+==========================
+NEWSFEED CARDS
+==========================
+*/
+@mixin newsfeed-card {
+  padding: 20px;
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 20px;
+  text-transform: none;
+  margin-bottom: 20px;
+}
+@mixin newsfeed-card--icon {
+  width: 40px;
+    height: 40px;
+    grid-column: 1 / 2;
+    margin: 0 auto;
+    align-self: center;
+}
+
+@mixin newsfeed-card-text-container {
+  grid-column: 2 / -1;
+}
+
+@mixin newsfeed-card-text {
+  font-size: 14px;
+    line-height: 28px;
 }
 /*
 ==========================
