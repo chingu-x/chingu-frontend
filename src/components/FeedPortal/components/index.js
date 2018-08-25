@@ -1,9 +1,9 @@
 import { GithubActivityPullRequest, GithubActivityIssue } from './GithubActivity';
+import { NewsfeedVoyage } from './ChinguCards';
 import TeamStandupCard from './TeamStandupCard';
-// i deleted the reference to it here? but it wasnt being used
 
 const NewsfeedItems = {
-    // NewsfeedVoyage: NewsfeedVoyage,
+    NewsfeedVoyage: NewsfeedVoyage,
     NewsfeedStandup: TeamStandupCard,
     GithubActivityIssue: GithubActivityIssue,
     GithubActivityPullRequest: GithubActivityPullRequest
