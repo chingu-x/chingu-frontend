@@ -96,13 +96,8 @@ let newsFeedData = {
 
 class NewsFeed extends React.Component {
   renderNewsfeedItems = () => {
-    // yeah doesnt seem to call it at all
-    console.log('items:' + newsFeedData.newsfeed.items);
-    // yeah, nothing in the console log
-    // newsFeedData.newsfeed.items.map(  ({ item, item: { type } }) => NewsfeedItems[type]({...item}) );
-    newsFeedData.newsfeed.items.map((item) => {
-      console.log('item: 565+23' + item);
-      return FeedItemContainer({ component: NewsfeedItems[item.type], ...item });
+    return newsFeedData.newsfeed.items.map((item) => {
+      return FeedItemContainer({ component: NewsfeedItems[item.type], item: item });
     });
   }
   render() {
