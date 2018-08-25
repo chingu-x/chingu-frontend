@@ -7,7 +7,7 @@ const FeedItemContainer = ({ component: Component, item }) => {
   const header = type => {
     switch (type) {
       case "NewsfeedVoyage":
-        return [item.voyage.title]
+        return ["Chingu"]
       case "NewsfeedStandup":
         return [item.user.username, item.user.avatar];
       case "GithubActivityIssue":
