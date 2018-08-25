@@ -2,9 +2,16 @@ import * as React from 'react';
 import dateFormatter from '../../utilities/dateFormatter';
 import { Link } from "react-router-dom"
 import './TeamCard.css';
+import teamQuery from '../graphql/teamQuery';
+import Request from "../../utilities/Request";
 
-const TeamCard = ({ team }) => {
-  const InfoComponents = () => {
+const TeamCard = ({ team_id, data: { user: { teams } } }) => {
+  let teamData = teams.filter((indivTeam) => indivTeam.id == team_id);
+  teamData = teamData[0];
+  const InfoComponents = ({ team }) => {
+    if (!team) {
+      return null;
+    }
     let cohort = team.cohort;
     let project = team.project;
     let infoObjects = [
@@ -28,7 +35,6 @@ const TeamCard = ({ team }) => {
                 <img className="team-card-avatar-img" src={user.avatar ? user.avatar : require('../../../assets/blank image.png')} alt={user.username} />
                 <div className="team-card-username">{user.username}</div>
               </div>
-
             )
           })
           break;
@@ -55,15 +61,20 @@ const TeamCard = ({ team }) => {
   return (
     <div className="team-card-container">
       <div className="team-card-info-container">
-        <InfoComponents />
+        <InfoComponents team={teamData} />
       </div>
       <div className="team-card-buttons-container">
-        <Link to={"/project/" + team.project.id + "/workspace"} className="user-btn">Team Workspace</Link>
-        <Link to={"/project/" + team.project.id} className="user-btn">Project Showcase</Link>
-        <Link className="user-btn" to={"/team/checkin/" + team.cohort.id}>Weekly Check-In</Link>
+        <Link to={"/project/" + teamData.project.id + "/workspace"} className="user-btn">Team Workspace</Link>
+        <Link to={"/project/" + teamData.project.id} className="user-btn">Project Showcase</Link>
+        <Link className="user-btn" to={"/team/checkin/" + teamData.cohort.id}>Weekly Check-In</Link>
       </div>
     </div>
   )
 }
 
-export default TeamCard;
+export default props =>
+  <Request
+    component={TeamCard}
+    query={teamQuery}
+    globalLoader
+    {...props} />
