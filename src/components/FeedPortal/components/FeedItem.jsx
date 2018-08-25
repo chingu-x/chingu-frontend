@@ -11,11 +11,11 @@ const FeedItemContainer = ({ component: Component, item }) => {
       case "NewsfeedStandup":
         return [item.user.username, item.user.avatar];
       case "GithubActivityIssue":
-        return [item.repo.repo_name, item.repo.issue.user.avatar];
+        return [item.repo.repo_name, item.issue.user.avatar];
       case "GithubActivityPullRequest":
-        return [item.repo.repo_name, item.repo.pull_requests.user.avatar]
+        return [item.repo.repo_name, item.pull_requests.user.avatar]
       default:
-        return "Chingu"
+        return ["Chingu"]
     }
   }
   const [title, avatar] = header(item.type)
