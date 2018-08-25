@@ -6,7 +6,7 @@ import Loader from "../../Loader"
 
 // -- QUERIES -- // 
 const sidebarHeaderQuery = gql`
-  {
+ query getSidebarUser{
     user {
       id
       username
@@ -15,7 +15,7 @@ const sidebarHeaderQuery = gql`
   }
 `
 const sidebarTeamsQuery = gql`
-  {
+  query getSidebarTeams{
     user {
       id
       teams {
