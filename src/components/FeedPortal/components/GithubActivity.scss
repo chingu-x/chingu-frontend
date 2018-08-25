@@ -8,7 +8,7 @@
     @include newsfeed-card--icon;
 }
 .github-activity-text {
-    @include newsfeed-card--text-container;
+    @include newsfeed-card-text-container;
 }
 
 .github-activity-title, 
