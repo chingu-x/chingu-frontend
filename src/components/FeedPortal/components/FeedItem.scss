@@ -1,5 +1,9 @@
 @import '../../../styles/abstracts/_variables.scss';
 
+.feed-item-component-container {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
 .feed-item__header-content {
   font: 400 14px "open sans", sans-serif;
   color: #5A5A5A;
@@ -17,5 +21,10 @@
   height: 30px;
   width: 3opx;
   border-radius: 50%;
-  margin: 0 7px;
+  margin-right: 10px;
 }
+
+.feed-item__container {
+  margin-bottom: 5px;
+}
+

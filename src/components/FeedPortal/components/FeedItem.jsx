@@ -20,19 +20,19 @@ const FeedItemContainer = ({ component: Component, item }) => {
   }
   const [title, avatar] = header(item.type)
   return (
-    <Fragment>
+    <div className="feed-item-component-container">
       <div className="feed-item__container">
         <div className="feed-item__header-content">
           <div className="feed-item__header--left">
-            <div>{title}</div>
             {avatar && <img alt="update-user-avatar" src={avatar}
               className="feed-item__header-avatar" />}
+            <div>{title}</div>
           </div>
           <div className="feed-item__header--right">{timeSince(item.timestamp) + " ago"} </div>
         </div>
       </div>
       <Component {...item} />
-    </Fragment>
+    </div>
   )
 }
 
