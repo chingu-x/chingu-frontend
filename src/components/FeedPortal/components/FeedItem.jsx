@@ -4,7 +4,7 @@ import timeSince from "../../utilities/timeSince"
 import "./FeedItem.css"
 import newsfeedDateFormatter from '../../utilities/newsfeedDateFormatter';
 
-const FeedItemContainer = ({ component: Component, item }) => {
+const FeedItemContainer = ({ component: Component, item, key }) => {
   const header = type => {
     switch (type) {
       case "NewsfeedVoyage":
@@ -21,7 +21,7 @@ const FeedItemContainer = ({ component: Component, item }) => {
   }
   const [title, avatar] = header(item.type)
   return (
-    <div className="feed-item-component-container">
+    <div key={key} className="feed-item-component-container">
       <div className="feed-item__container">
         <div className="feed-item__header-content">
           <div className="feed-item__header--left">

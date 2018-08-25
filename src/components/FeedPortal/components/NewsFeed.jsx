@@ -33,7 +33,7 @@ class NewsFeed extends React.Component {
   }
   renderNewsfeedItems = (array) => {
     return array.map((item) => {
-      return FeedItemContainer({ component: NewsfeedItems[item.type], item: item });
+      return FeedItemContainer({ component: NewsfeedItems[item.type], item, key: item.id });
     });
   }
   render() {
