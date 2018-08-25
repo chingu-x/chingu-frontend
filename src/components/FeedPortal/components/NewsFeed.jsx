@@ -1,10 +1,23 @@
 import * as React from "react"
+import PropTypes from "prop-types"
+import Request from "../../utilities/Request"
 import NewsfeedItems from './index';
 import FeedItemContainer from './FeedItem';
 import newsFeedData from './newsfeedData.mock';
 import TeamCard from './TeamCard';
 
 class NewsFeed extends React.Component {
+  static propTypes = {
+    type: PropTypes.oneOf(["ALL", "TEAM"]).isRequired,
+    team_id: PropTypes.number,
+    data: PropTypes.shape({
+      newsfeed: PropTypes.object
+    })
+  }
+  static defaultProps = {
+    type: "ALL",
+    team_id: null
+  }
   constructor(props) {
     super(props);
     this.state = {
