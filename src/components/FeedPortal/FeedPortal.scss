@@ -56,6 +56,8 @@
 .portal-panel__sidebar {
   @include panel;
   padding: 40px 0px;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 .portal-panel__feed {
@@ -124,4 +126,22 @@
   object-fit: cover;
   display: inline-block;
   vertical-align: middle;
+}
+/*
+==========================
+MEDIA QUERY
+==========================
+*/
+@media (max-width: 1180px) {
+  .portal-container {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: "navi news news";
+  }
+}
+
+@media (max-width: 850px) {
+  .portal-container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "navi"  "news";
+  }
 }
