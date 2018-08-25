@@ -1,10 +1,12 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import Request from "../../utilities/Request"
+import Loader from "../../Loader"
 import NewsfeedItems from './index';
 import FeedItemContainer from './FeedItem';
-import newsFeedData from './newsfeedData.mock';
 import TeamCard from './TeamCard';
+import newsFeedData from './newsfeedData.mock';
+import newsfeedQuery from "../graphql/newsfeedQuery"
 
 class NewsFeed extends React.Component {
   static propTypes = {
@@ -50,15 +52,19 @@ class NewsFeed extends React.Component {
     });
   }
   render() {
+    // TODO: Remove
+    // console.log("newsfeed", { ...this.props }, this.state.renderTeamCard)
+    const { loading } = this.props
     return (
       <main className="main-container">
         <div className="title">NEWS FEED</div>
         <main className="portal-panel__feed">
-          {this.state.renderTeamCard ? <TeamCard team_id={this.props.team_id} /> : this.renderNewsfeedItems(this.state.chinguItems)}
+          {loading && <div style={{ height: "320.4px" }}><Loader style="medium" /></div>}
+          {!loading && (this.state.renderTeamCard ? <TeamCard team_id={this.props.team_id} /> : this.renderNewsfeedItems(this.state.chinguItems))}
           <hr className="hl" />
-          {this.renderNewsfeedItems(this.state.teamActivity)}
-        </main>
+          {!loading && this.renderNewsfeedItems(this.state.teamItems)}
       </main>
+      </main >
     )
   }
 }
