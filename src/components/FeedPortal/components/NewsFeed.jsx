@@ -6,20 +6,20 @@ let newsFeedData = {
   "newsfeed": {
     "id": "TVRGMmIzbGhaMlU9YWxs",
     "items": [
-      // {
-      //   "id": "MTF2b3lhZ2U=",
-      //   "type": "NewsfeedVoyage",
-      //   "timestamp": 1535090610661,
-      //   "user": {
-      //     "id": "6",
-      //     "username": "the-vampiire",
-      //     "avatar": "https://avatars3.githubusercontent.com/u/25523682?v=4"
-      //   },
-      //   "voyage": {
-      //     "id": "11",
-      //     "title": "Halloween Voyage"
-      //   }
-      // },
+      {
+        "id": "MTF2b3lhZ2U=",
+        "type": "NewsfeedVoyage",
+        "timestamp": 1535090610661,
+        "user": {
+          "id": "6",
+          "username": "the-vampiire",
+          "avatar": "https://avatars3.githubusercontent.com/u/25523682?v=4"
+        },
+        "voyage": {
+          "id": "11",
+          "title": "Halloween Voyage"
+        }
+      },
       {
         "id": "MXN0YW5kdXA=",
         "type": "NewsfeedStandup",
