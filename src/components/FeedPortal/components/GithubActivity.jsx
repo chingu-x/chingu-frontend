@@ -14,24 +14,22 @@ const IssueIcon = () => {
 }
 
 export const GithubActivityPullRequest = ( data ) => {
-  let pull_requests = data.pull_requests;
   return (
-    <a href={pull_requests.url} target="_blank" className="github-activity-container">
+    <a href={data.url} target="_blank" className="github-activity-container">
       <PRIcon />
       <div className="github-activity-text">
-        <div className="github-activity-title">{pull_requests.title}</div>
+        <div className="github-activity-title">{data.title}</div>
         <div className="github-activity-subtitle">You review was requested {newsfeedDateFormatter(data.timestamp)} ago</div>
       </div>
     </a>
   )
 }
 export const GithubActivityIssue = ( data ) => {
-  let issue = data.issue;
   return (
-    <a href={issue.url} target="_blank" className="github-activity-container">
+    <a href={data.url} target="_blank" className="github-activity-container">
       <IssueIcon />
       <div className="github-activity-text">
-        <div className="github-activity-title">{issue.title}</div>
+        <div className="github-activity-title">{data.title}</div>
         <div className="github-activity-subtitle">You review was requested  {newsfeedDateFormatter(data.timestamp)} ago</div>
       </div>
     </a>

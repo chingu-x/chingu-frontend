@@ -2,6 +2,7 @@ import React, { Fragment } from "react"
 import PropTypes from "prop-types"
 import timeSince from "../../utilities/timeSince"
 import "./FeedItem.css"
+import newsfeedDateFormatter from '../../utilities/newsfeedDateFormatter';
 
 const FeedItemContainer = ({ component: Component, item }) => {
   const header = type => {
@@ -11,9 +12,9 @@ const FeedItemContainer = ({ component: Component, item }) => {
       case "NewsfeedStandup":
         return [item.user.username, item.user.avatar];
       case "GithubActivityIssue":
-        return [item.repo.repo_name, item.issue.user.avatar];
+        return [item.repo.repo_name, item.user.avatar];
       case "GithubActivityPullRequest":
-        return [item.repo.repo_name, item.pull_requests.user.avatar]
+        return [item.repo.repo_name, item.user.avatar]
       default:
         return ["Chingu"]
     }
@@ -28,7 +29,7 @@ const FeedItemContainer = ({ component: Component, item }) => {
               className="feed-item__header-avatar" />}
             <div>{title}</div>
           </div>
-          <div className="feed-item__header--right">{timeSince(item.timestamp) + " ago"} </div>
+          <div className="feed-item__header--right">{newsfeedDateFormatter(item.timestamp) + " ago"} </div>
         </div>
       </div>
       <Component {...item} />
