@@ -1,9 +1,8 @@
 import React, { Fragment } from "react"
-// import sidebarQuery from '../graphql/sidebarQuery';
-import Request from "../../utilities/Request"
 import PropTypes from "prop-types"
 import { gql } from "apollo-boost"
-
+import Request from "../../utilities/Request"
+import Loader from "../../Loader"
 
 // -- QUERIES -- // 
 const sidebarHeaderQuery = gql`
@@ -70,16 +69,15 @@ const teamsMock = [{
 
 // -- SIDEBAR HEADER -- // 
 const SidebarBtn = ({ lbl, active, team, toggleNewsFeed }) => {
-  console.log("Clicked")
   return (
-    <div className="sidebar-nav__btn-ctn">
+    <div onClick={toggleNewsFeed} className="sidebar-nav__btn-ctn">
       {team ? <img className="sidebar-nav__btn-icon" src={require('../../../assets/team-icon.png')} alt="team-icon" /> : null}
-      <div onClick={toggleNewsFeed} className={`sidebar-nav__btn ${active ? "active" : null}`}>{lbl}</div>
+      <div className={`sidebar-nav__btn ${active ? "active" : null}`}>{lbl}</div>
     </div>
   )
 }
-const SidebarHeader = ({ data }) => {
-  if (!data) return "Loading..." // TODO: Insert small inline loader
+const SidebarHeader = ({ loading, data }) => {
+  if (loading) return <div style={{ height: "180.8px" }}><Loader style="medium" /></div>
   const { user: { username, avatar } } = data
   return (
     <div className="sidebar-userinfo__container">
@@ -92,15 +90,15 @@ const SidebarHeader = ({ data }) => {
   )
 }
 
-const TeamLinks = ({ data, toggleNewsFeed, team_id }) => {
-  if (!data) return "Loading..." // TODO: Small loader
+const TeamLinks = ({ loading, data, toggleNewsFeed, team_id }) => {
+  if (loading) return null
 
   // TODO: use data.user.teams to map over
   const renderedTeamLinks = teamsMock.map((team, idx) => (
     <SidebarBtn
       team
       key={idx}
-      toggleNewsFeed={() => toggleNewsFeed("TEAM", team_id)}
+      toggleNewsFeed={() => toggleNewsFeed("TEAM", team.id)}
       lbl={team.cohort.title + "/" + team.title}
       active={team.id === team_id} />
   ))
