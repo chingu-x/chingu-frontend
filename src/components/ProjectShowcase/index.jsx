@@ -2,6 +2,8 @@ import * as React from "react";
 import ProjectImages from './components/ProjectImages';
 import ProjectInfo from './components/ProjectInfo';
 import './ProjectShowcase.css';
+import getProjectQuery from './graphql/getProjectQuery';
+import Request from "../utilities/Request";
 
 class ProjectShowcase extends React.Component {
   state = {
@@ -13,6 +15,7 @@ class ProjectShowcase extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div className="project-portal">
         <Banner />
@@ -42,11 +45,11 @@ function Toolbar({ edit }) {
     <div className="project-portal__toolbar">
       <a href="#" onClick={edit}>
         <span>Edit</span>
-        <i class="far fa-edit" />
+        <i className="far fa-edit" />
       </a>
       <a href="#">
         <span>Submit Project</span>
-        <i class="fas fa-check" />
+        <i className="fas fa-check" />
       </a>
     </div>
   );
@@ -76,4 +79,11 @@ function EditProjectForm({ edit }) {
   );
 }
 
-export default ProjectShowcase;
+export default props =>
+  <Request
+    {...props}
+    component={ProjectShowcase}
+    query={getProjectQuery}
+    variables={{ input: "vampires Team 0 Project" }}
+    loader={true}
+  />
