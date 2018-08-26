@@ -1,28 +1,32 @@
 import * as React from 'react';
+import propTypes from 'prop-types';
 import Thumbnail from './Thumbnail';
 
-class Thumbnails extends React.Component {
-  render() {
-    let renderedImages = (
-      this.props.files
-        ? this.props.files.map((file, index) => {
-          return (
-            <Thumbnail
-              displayLargeImg={this.displayLargeImg}
-              key={index}
-              imgSrc={file.imgSrc}
-              imgCptn={file.imgCptn}
-            />
-          )
-        })
-        : null
-    )
-    return (
-      <React.Fragment>
-        {renderedImages}
-      </React.Fragment>
-    )
-  }
+function Thumbnails(props) {
+  function renderedImages() {
+    props.files
+      ? props.files.map((file, index) => {
+        return (
+          <Thumbnail />
+        )
+      })
+      : null
+    }
+  
+  return (
+    <React.Fragment>
+      {renderedImages()}
+    </React.Fragment>
+  )
 }
+
+Thumbnails.propTypes = {
+  files: propTypes.array,
+};
+
+Thumbnails.defaultProps = {
+  files: []
+};
+
 
 export default Thumbnails;

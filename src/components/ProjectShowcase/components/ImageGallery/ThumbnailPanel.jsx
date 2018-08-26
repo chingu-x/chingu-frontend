@@ -12,7 +12,7 @@ function ThumbnailPanel(props) {
             className="project-btn"
             onClick={(e) => props.toggleImgModal(e)}
           />
-          <Thumbnails files={props.files} />
+          {/* <Thumbnails files={props.files} /> */}
         </div>
       </div>
     );
