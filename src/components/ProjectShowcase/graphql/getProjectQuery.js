@@ -1,9 +1,9 @@
 import { gql } from "apollo-boost"
 
 const getProjectQuery = gql`
-query getProjectQuery($input: String!) {
-    projects(title: $input) {
-			id
+query getProject($input: String!) {
+  getProject(title: $input) @client {
+	    id
       title
       description
       project_url
@@ -22,3 +22,22 @@ query getProjectQuery($input: String!) {
 `
 
 export default getProjectQuery
+
+// query getProject($input: String!) {
+//   projects(title: $input) @client {
+//     id
+//     title
+//     description
+//     project_url
+//     github_url
+//     users {
+//       id
+//       username
+//       avatar
+//     }
+//     skills {
+//       id
+//       name
+//     }
+//   }
+// }
