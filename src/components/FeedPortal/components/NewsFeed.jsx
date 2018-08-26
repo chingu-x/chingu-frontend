@@ -8,6 +8,9 @@ import TeamCard from './TeamCard';
 import newsfeedQuery from "../graphql/newsfeedQuery"
 
 const NewsFeed = ({ type, loading, data }) => {
+  const getTitle = (team) => `
+    ${team ? `${team.title.toUpperCase()}` : "ALL"} NEWS
+  `;
 
   const renderNewsfeedItems = items => items.map(
     item => FeedItemContainer({
@@ -33,7 +36,9 @@ const NewsFeed = ({ type, loading, data }) => {
 
   return (
     <div className="main-container">
-      <div className="title">NEWS FEED</div>
+      <div className="title">
+        {!loading && getTitle(data.newsfeed.team)}
+      </div>
       <div className="portal-panel__feed">
         {
           loading
