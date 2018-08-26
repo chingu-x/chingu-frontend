@@ -57,10 +57,22 @@ NewsFeed.defaultProps = {
 }
 
 
-export default props =>
-  <Request
-    component={NewsFeed}
-    query={newsfeedQuery}
-    variables={{ input: { limit: 12, ...props.variables } }}
-    options={{ pollInterval: 5 * 60 * 1000 }}
-    {...props} />
+export default (props) => {
+  const variables = {
+    input: {
+      type: props.type,
+      team_id: props.team_id,
+      limit: 12,
+    }
+  }
+  return (
+    <Request
+      {...props}
+      fromNewsfeed
+      component={NewsFeed}
+      query={newsfeedQuery}
+      variables={variables}
+      options={{ pollInterval: 0 * 60 * 1000 }}
+    />
+  )
+}
