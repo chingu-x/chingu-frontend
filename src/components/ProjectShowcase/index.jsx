@@ -1,9 +1,18 @@
 import * as React from "react";
 import ProjectImages from './components/ProjectImages';
 import ProjectInfo from './components/ProjectInfo';
+import Banner from './components/Banner';
+import Toolbar from './components/Toolbar';
+import EditProjectForm from './components/EditProjectForm';
 import './ProjectShowcase.css';
 import getProjectQuery from './graphql/getProjectQuery';
 import Request from "../utilities/Request";
+
+/*
+
+This component should only be concerned with the overall layout of the page and whether it is being edited or not. It should also control the permissions for edits based on if user is logged in and if they are a part of this project.
+
+*/
 
 class ProjectShowcase extends React.Component {
   state = {
@@ -28,57 +37,6 @@ class ProjectShowcase extends React.Component {
   }
 }
 
-function Banner() {
-  return (
-    <div className="project-portal__banner">
-      <h1>Chingu</h1>
-      <p>
-        Chingu facilitates global collaboration on projects in a structure
-        focused on improving remote development skills
-      </p>
-    </div>
-  );
-}
-
-function Toolbar({ edit }) {
-  return (
-    <div className="project-portal__toolbar">
-      <a href="#" onClick={edit}>
-        <span>Edit</span>
-        <i className="far fa-edit" />
-      </a>
-      <a href="#">
-        <span>Submit Project</span>
-        <i className="fas fa-check" />
-      </a>
-    </div>
-  );
-}
-
-
-function EditProjectForm({ edit }) {
-  return (
-    <div className="project-portal__edit-form">
-      <form action="">
-        <div>
-          <h2>Project Name</h2>
-          <input type="text" />
-        </div>
-        <div>
-          <h2>Description</h2>
-          <textarea defaultValue="Markdown Stuff" />
-        </div>
-        <div>
-          <h2>Links</h2>
-          <textarea defaultValue="Markdown Stuff" />
-        </div>
-        <button>Save Changes</button>
-        <button onClick={edit}>Cancel</button>
-      </form>
-    </div>
-  );
-}
-
 export default props =>
   <Request
     {...props}
@@ -87,3 +45,4 @@ export default props =>
     variables={{ input: "vampires Team 0 Project" }}
     loader={true}
   />
+
