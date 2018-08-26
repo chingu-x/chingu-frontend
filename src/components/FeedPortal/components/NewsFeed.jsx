@@ -5,86 +5,74 @@ import Loader from "../../Loader"
 import NewsfeedItems from './index';
 import FeedItemContainer from './FeedItem';
 import TeamCard from './TeamCard';
-import newsFeedData from './newsfeedData.mock';
 import newsfeedQuery from "../graphql/newsfeedQuery"
 
-class NewsFeed extends React.Component {
-  state = {
-    chinguItems: [],
-    teamItems: [],
-    renderTeamCard: false
-  }
+const NewsFeed = ({ type, loading, data }) => {
 
-  static propTypes = {
-    type: PropTypes.oneOf(["ALL", "TEAM"]).isRequired,
-    team_id: PropTypes.number,
-    data: PropTypes.shape({
-      newsfeed: PropTypes.object
-    })
-  }
+  const renderNewsfeedItems = items => items.map(
+    item => FeedItemContainer({
+      component: NewsfeedItems[item.type],
+      item,
+      key: item.id,
+    }),
+  );
 
-  static defaultProps = {
-    type: "ALL",
-    team_id: null
-  }
-
-  static getDerivedStateFromProps(props) {
-    const teamItems = [];
-    const chinguItems = [];
-    // filter data per team vs chingu related news
-    newsFeedData.newsfeed.items.map((item) => {
-      switch (item.type) {
-        case 'NewsfeedVoyage':
-          chinguItems.push(item);
-          break;
-        default:
-          teamItems.push(item);
-          break;
+  // TODO: Check where is team coming from in the new query response
+  const renderFeed = ({ newsfeed: { chingu, other, team } }) => (
+    <React.Fragment>
+      {
+        type === "TEAM"
+          ? <TeamCard team={team} />
+          : renderNewsfeedItems(chingu)
       }
-    });
-    return props.type === 'ALL'
-      ? { chinguItems, teamItems, renderTeamCard: false }
-      : { teamItems, renderTeamCard: true }
-  }
+      <hr className="hl" />
+      {renderNewsfeedItems(other)}
+    </React.Fragment>
+  )
 
-  renderNewsfeedItems = (array) => {
-    return array.map((item) => {
-      return FeedItemContainer({ component: NewsfeedItems[item.type], item, key: item.id });
-    });
-  }
 
-  render() {
-    const { loading } = this.props
-    return (
-      <main className="main-container">
-        <div className="title">NEWS FEED</div>
-        <main className="portal-panel__feed">
-          {loading && <div style={{ height: "600px" }}><Loader style="medium" /></div>}
-          {!loading && (this.state.renderTeamCard ? <TeamCard team_id={this.props.team_id} /> : this.renderNewsfeedItems(this.state.chinguItems))}
-          <hr className="hl" />
-          {!loading && this.renderNewsfeedItems(this.state.teamItems)}
-        </main>
-      </main >
-    )
-  }
+  return (
+    <div className="main-container">
+      <div className="title">NEWS FEED</div>
+      <div className="portal-panel__feed">
+        {
+          loading
+            ? <div style={{ height: "600px" }}><Loader style="medium" /></div>
+            : renderFeed(data)
+        }
+      </div>
+    </div >
+  )
 }
 
-const NewsFeedRequest = ({ variables }) =>
-  <Request
-    component={NewsFeed}
-    query={newsfeedQuery}
-    variables={{ input: { limit: 12, ...variables } }}
-    {...variables} />
-
-NewsFeedRequest.propTypes = {
-  variables: PropTypes.shape({
-    type: PropTypes.oneOf(["ALL", "TEAM"]),
-    team_id: PropTypes.number
+NewsFeed.propTypes = {
+  type: PropTypes.oneOf(["ALL", "TEAM"]).isRequired,
+  data: PropTypes.shape({
+    newsfeed: PropTypes.object
   })
 }
 
-NewsFeedRequest.defaultProps = {
-  variables: { type: "ALL" }
+NewsFeed.defaultProps = {
+  type: "ALL",
 }
 
-export default NewsFeedRequest
+
+export default (props) => {
+  const variables = {
+    input: {
+      type: props.type,
+      team_id: props.team_id,
+      limit: 12,
+    }
+  }
+  return (
+    <Request
+      {...props}
+      fromNewsfeed
+      component={NewsFeed}
+      query={newsfeedQuery}
+      variables={variables}
+      options={{ pollInterval: 0 * 60 * 1000 }}
+    />
+  )
+}

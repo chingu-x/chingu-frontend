@@ -19,7 +19,7 @@ class FeedPortal extends Component {
       <div className="view-container">
         <div className="portal-container">
           <SideBar toggleNewsFeed={this.toggleNewsFeed} team_id={team_id} />
-          <NewsFeed variables={this.state.newsfeed} team_id={team_id} type={type} />
+          <NewsFeed type={type} team_id={team_id} />
         </div>
       </div>
     )

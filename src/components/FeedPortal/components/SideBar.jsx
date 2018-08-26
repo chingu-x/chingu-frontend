@@ -9,18 +9,7 @@ const SidebarBtn = ({ lbl, active, team }) => (
   </div>
 )
 
-const TeamLinks = teams => {
-  // TEMP REMOVE for people withr no teams !!!!!
-  if (!teams.length) {
-    teams = [{
-      title: "bears11",
-      cohort: { title: "voyage1" }
-    }, {
-      title: "dragons3",
-      cohort: { title: "voyage11" }
-    }]
-  }
-
+const TeamLinks = ({ teams }) => {
   let renderedTeamLinks = teams.map((team, idx) => {
     return <SidebarBtn team key={idx} lbl={team.cohort.title + "/" + team.title} />
   })
@@ -56,7 +45,8 @@ const SideBar = ({ data: { user } }) => {
 
 export default props =>
   <Request
+    {...props} 
     component={SideBar}
     query={sidebarQuery}
     globalLoader
-    {...props} />
+   />
