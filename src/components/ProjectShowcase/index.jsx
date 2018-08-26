@@ -1,8 +1,9 @@
 import * as React from "react";
-import ProjectImages from './ProjectImages';
-import ProjectInfo from './ProjectInfo';
+import ProjectImages from './components/ProjectImages';
+import ProjectInfo from './components/ProjectInfo';
+import './ProjectShowcase.css';
 
-class ProjectPortal extends React.Component {
+class ProjectShowcase extends React.Component {
   state = {
     isEditing: false
   };
@@ -75,4 +76,4 @@ function EditProjectForm({ edit }) {
   );
 }
 
-export default ProjectPortal;
+export default ProjectShowcase;
