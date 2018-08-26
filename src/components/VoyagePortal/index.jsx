@@ -57,9 +57,9 @@ const VoyagePortal = ({ data: { cohorts, user, user: { id: userId, status: userS
 
 export default props => (
   <Request
+    {...props}
     component={VoyagePortal}
     query={voyagesQuery}
     globalLoader
-    {...props}
   />
 )

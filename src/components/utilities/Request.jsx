@@ -9,18 +9,28 @@ import toggleGlobalLoader from "./toggleGlobalLoader"
  * 
  * export default props => 
  *  <Request
+ *  { ...props } - props passed to the component that will render
+ *    PROPS MUST BE SPREAD FIRST
+ *      allow component to overwrite any similarly named props passed from parent
  *  component={COMPONENT}
  *  query={QUERY}
  *  variables={VARIABLES}
  *  options={OPTIONS}
  *  globalLoader - determines if fullscreen loader will be shown while fetching data
- *  { ...props } - props passed to the component that will render
+ *  
  * />
  * 
  * Component receives props passed to it as well as data and the loading state, so that components which don't require the globalLoader can still handle the loading in some way
  */
 
-const Request = ({ component: Component, query, variables, options, globalLoader, ...props }) => (
+const Request = ({
+  ...props,
+  component: Component,
+  query,
+  variables,
+  options, // TODO: unused?
+  globalLoader,
+}) => (
   <Query query={query} variables={variables}>
     {
       ({ loading, error, data }) => {
@@ -31,7 +41,7 @@ const Request = ({ component: Component, query, variables, options, globalLoader
       }
     }
   </Query>
-)
+);
 
 Request.propTypes = {
   component: PropTypes.func.isRequired,

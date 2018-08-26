@@ -1,24 +1,30 @@
-import React, { Fragment } from "react"
+import React, { Component, Fragment } from "react"
 import "./FeedPortal.css"
-import teamQuery from './graphql/teamQuery';
-import Request from "../utilities/Request"
 import SideBar from './components/SideBar';
 import NewsFeed from './components/NewsFeed';
 
-const FeedPortal = ({ data: { user } }) => {
-  return (
-    <div className="view-container">
-      <div className="portal-container">
-        <SideBar />
-        <NewsFeed />
+class FeedPortal extends Component {
+  state = {
+    newsfeed: {
+      type: "ALL",
+      team_id: null
+    }
+  }
+
+  toggleNewsfeed = (type, team_id) => this.setState({ newsfeed: { type, team_id } })
+
+  render() {
+    const { type, team_id } = this.state.newsfeed
+    return (
+      <div className="view-container">
+        <div className="portal-container">
+          <SideBar toggleNewsfeed={this.toggleNewsfeed} team_id={team_id} />
+          <NewsFeed type={type} team_id={team_id} />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
-export default props =>
-  <Request
-    component={FeedPortal}
-    query={teamQuery}
-    globalLoader
-    {...props} />
+export default FeedPortal
+

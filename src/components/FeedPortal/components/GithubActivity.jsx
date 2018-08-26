@@ -4,7 +4,11 @@ import './GithubActivity.css';
 
 const PRIcon = () => {
   return (
-    <img className="github-activity-icon" alt="pr-icon" src={require('../../../assets/github-PR-icon.png')} />
+    <img
+      className="github-activity-icon"
+      alt="pr-icon"
+      src={require('../../../assets/github-PR-icon.png')}
+    />
   )
 }
 const IssueIcon = () => {
@@ -13,34 +17,25 @@ const IssueIcon = () => {
   )
 }
 
-const GithubActivity = ({ githubActivity }) => {
-  let data = githubActivity;
-  let icon;
-  let title;
-  let url;
-  switch (data.type) {
-    case 'GithubActivityPullRequest':
-      icon = <PRIcon />;
-      title = data.pull_requests.title;
-      url = data.pull_requests.url;
-      break;
-    case 'GithubActivityIssue':
-      icon = <IssueIcon />;
-      title = data.issue.title;
-      url = data.issue.url;
-      break;
-    default:
-      break;
-  }
+export const GithubActivityPullRequest = ( data ) => {
   return (
-    <a href={url} target="_blank" className="github-activity-container">
-      {icon}
+    <a href={data.url} target="_blank" className="github-activity-container">
+      <PRIcon />
       <div className="github-activity-text">
-        <div className="github-activity-title">{title}</div>
+        <div className="github-activity-title">{data.title}</div>
         <div className="github-activity-subtitle">You review was requested {newsfeedDateFormatter(data.timestamp)} ago</div>
       </div>
     </a>
   )
 }
-
-export default GithubActivity;
+export const GithubActivityIssue = ( data ) => {
+  return (
+    <a href={data.url} target="_blank" className="github-activity-container">
+      <IssueIcon />
+      <div className="github-activity-text">
+        <div className="github-activity-title">{data.title}</div>
+        <div className="github-activity-subtitle">You review was requested  {newsfeedDateFormatter(data.timestamp)} ago</div>
+      </div>
+    </a>
+  )
+}
