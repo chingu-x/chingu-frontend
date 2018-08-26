@@ -5,6 +5,8 @@ import Banner from './components/Banner';
 import Toolbar from './components/Toolbar';
 import EditProjectForm from './components/EditProjectForm';
 import './ProjectShowcase.css';
+import getProjectQuery from './graphql/getProjectQuery';
+import Request from "../utilities/Request";
 
 /*
 
@@ -22,6 +24,7 @@ class ProjectShowcase extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div className="project-portal">
         <Banner />
@@ -34,4 +37,12 @@ class ProjectShowcase extends React.Component {
   }
 }
 
-export default ProjectShowcase;
+export default props =>
+  <Request
+    {...props}
+    component={ProjectShowcase}
+    query={getProjectQuery}
+    variables={{ input: "vampires Team 0 Project" }}
+    loader={true}
+  />
+
