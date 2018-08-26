@@ -1,4 +1,6 @@
 import * as React from "react";
+import { Link } from "react-router-dom"
+import { client } from "../../index"
 import Badge from "./Badge";
 import Info from "./Info";
 import Action from "./Action";
@@ -7,6 +9,7 @@ import './VoyageCard.css';
 import Title from './Title';
 import CheckInDone from './CheckInDone';
 import Pending from './Pending';
+import voyagesQuery from "../VoyagePortal/graphql/voyagesQuery"
 /**
  * TODO:
  * 1. think about alternate ways to style
@@ -51,14 +54,15 @@ export const UpcomingVoyageCard = ({
   startDate,
   endDate,
   id,
-  alreadyApplied
+  alreadyApplied,
+  userStatus
 }) => {
   return (
     <VoyageCardCreator
       backgroundColor={"#EFEFEF"}
       leftPanel={() => <Badge number={voyageNumber} />}
       rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
-      action={() => alreadyApplied ? null : <Action id={id}/>}
+      action={() => alreadyApplied ? null : <Action routeId={id} userStatus={userStatus}/>}
     />
   );
 };
@@ -77,7 +81,11 @@ export const ApplyForAVoyageCard = () => {
         SORRY, LOOKS LIKE YOU AREN'T PART OF A VOYAGE YET!
       </div>}
       action={() => <div className="action-container">
-        <a href="/voyage" className="action-button--to-Voyage ">APPLY TO A VOYAGE</a>
+        <Link 
+          to="/voyage" 
+          className="action-button--to-Voyage "
+          onMouseOver={() => client.query({ query: voyagesQuery })}
+        >APPLY TO A VOYAGE</Link>
       </div>}
     />
   );

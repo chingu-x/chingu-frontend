@@ -11,7 +11,8 @@ const CurrentPrograms = () => {
       <section>
         <p>Voyage 4 is underway, but it's never too early to sign up for Voyage 5!</p>
         <p>Click the link below to apply for the next build-to-learn cohort starting in May.</p>
-        <Link to="/apply"><Button type="button" text="Apply For The Next Voyage" classname="submitBtn" /></Link>
+        {/* Direct to correct route */}
+        <Link to="/apply"><Button type="button" text="Apply For The Next Voyage" classname="submitBtn" /></Link> 
       </section>
       <section>
         <h4>Check back in the future for more information and program updates!</h4>
