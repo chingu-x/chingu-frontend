@@ -13,36 +13,61 @@ const loaderQuery = gql`
   }
 `
 
-const GlobalLoader = ({ background, style }) => (
+const GlobalLoader = () => (
   <Query query={loaderQuery}>
     {
       ({ data: { loaderState: { isShowing } } }) => {
+        console.log("global")
         return !isShowing
           ? null
-          : <Modal open persist background={background}><div className="loader" /></Modal>
+          : <Modal
+            open
+            persist
+            background="white">
+            <div className="loader--large" />
+          </Modal>
       }
     }
   </Query>
 )
 
+// CONTAINER //
+const LoaderContainer = ({
+  size,
+  height,
+  backgroundColor,
+  color: borderTopColor }) => {
+  // TODO: Small
 
-const LoaderContainer = ({ background, style }) => {
-  console.log({ style })
-  if (style === "medium") {
-    return <div className="loader-medium-container"><div className="loader--medium" /></div>
+  // Medium
+  if (size === "medium") {
+    return (
+      <div
+        style={{ height, backgroundColor }}
+        className="loader__container--medium"
+      >
+        <div
+          style={{ borderTopColor }}
+          className="loader--medium"
+        />
+      </div>
+    )
   }
 
-  else return <GlobalLoader background={background} />
+  // Global
+  if (size === "global") return <GlobalLoader />
 }
 
 LoaderContainer.propTypes = {
-  background: PropTypes.oneOf(["none", "transparent", ""]),
-  style: PropTypes.oneOf(["medium"])
+  size: PropTypes.string,
+  color: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  height: PropTypes.string, // Height of a container
 }
 
-LoaderContainer.proptypes = {
-  background: "",
-  style: ""
+LoaderContainer.defaultProps = {
+  size: "medium",
+  backgroundColor: "#00000000"
 }
 
 export default LoaderContainer

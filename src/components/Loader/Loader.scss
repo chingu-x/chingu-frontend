@@ -5,6 +5,9 @@
   border-radius: 50%;
   animation: spin 2s linear infinite;
   margin: 0 auto;
+  border-style: solid;
+  border-color: #00000000;
+  border-top-color: $theme-green;
   z-index: 1000;
 }
 
@@ -13,10 +16,10 @@
     @include transparent-background;
 }
 
-.loader {
+.loader--large {
   @include spinner;
-  border: 20px solid white;
-  border-top: 20px solid $theme-green;
+  border-width: 20px;
+  // border-top: 20px solid $theme-green;
   width: 180px;
   height: 180px;
   display: block;
@@ -26,7 +29,7 @@
 }
 
 // -- MEIDUM -- //
-.loader-medium-container {
+.loader__container--medium {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,8 +39,8 @@
 
 .loader--medium {
   @include spinner;
-  border: 5px solid white;
-  border-top: 5px solid $theme-green;
+  border-width: 5px;
+  // border-top: 5px solid $theme-green;
   width: 3em;
   height: 3em;
   top: calc(100% - 1.5px);
