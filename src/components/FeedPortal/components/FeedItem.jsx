@@ -4,22 +4,23 @@ import timeSince from "../../utilities/timeSince"
 import "./FeedItem.css"
 import newsfeedDateFormatter from '../../utilities/newsfeedDateFormatter';
 
-const FeedItemContainer = ({ component: Component, item, key }) => {
-  const header = type => {
-    switch (type) {
-      case "NewsfeedVoyage":
-        return ["Chingu"]
-      case "NewsfeedStandup":
-        return [item.user.username, item.user.avatar];
-      case "GithubActivityIssue":
-        return [item.repo.repo_name, item.user.avatar];
-      case "GithubActivityPullRequest":
-        return [item.repo.repo_name, item.user.avatar]
-      default:
-        return ["Chingu"]
-    }
+const header = ({ type, user, repo })=> {
+  switch (type) {
+    case "NewsfeedVoyage":
+      return ["Chingu"]
+    case "NewsfeedStandup":
+      return [user.username, user.avatar];
+    case "GithubActivityIssue":
+      return [repo.repo_name, user.avatar];
+    case "GithubActivityPullRequest":
+      return [repo.repo_name, user.avatar]
+    default:
+      return ["Chingu"]
   }
-  const [title, avatar] = header(item.type)
+}
+
+const FeedItemContainer = ({ component: Component, item, key }) => {
+  const [title, avatar] = header(item);
   return (
     <div key={key} className="feed-item-component-container">
       <div className="feed-item__container">
