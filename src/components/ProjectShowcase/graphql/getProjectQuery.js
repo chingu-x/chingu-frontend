@@ -22,22 +22,3 @@ query getProject($input: String!) {
 `
 
 export default getProjectQuery
-
-// query getProject($input: String!) {
-//   projects(title: $input) @client {
-//     id
-//     title
-//     description
-//     project_url
-//     github_url
-//     users {
-//       id
-//       username
-//       avatar
-//     }
-//     skills {
-//       id
-//       name
-//     }
-//   }
-// }
