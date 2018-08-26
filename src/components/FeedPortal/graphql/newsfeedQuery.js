@@ -1,10 +1,10 @@
 import { gql } from "apollo-boost"
 
 const getNewsfeed = gql`
-query getNewsfeed($input: NewsfeedInput!) {
+  query getNewsfeed($input: NewsfeedInput!) {
     newsfeed(input: $input) {
       id
-      items {
+      chingu {
         id
         type: __typename
         timestamp
@@ -20,12 +20,25 @@ query getNewsfeed($input: NewsfeedInput!) {
             title
           }
         }
-        
+      }
+      
+      other {
+        id
+        type: __typename
+        timestamp
+        user {
+          id
+          username
+          avatar
+        }
         ... on NewsfeedStandup {
           standup {
             id
             is_expired
             progress_sentiment
+            worked_on
+            working_on
+            blocked_on
             expiration
             cohort_team {
               id
@@ -35,27 +48,23 @@ query getNewsfeed($input: NewsfeedInput!) {
         }
         
         ... on GithubActivityItem {
-              repo {
+            title
+            url
+            repo {
               id
-              repo_name
             }
           
             ... on GithubActivityIssue {
-              id
-              url
-              title
+              status
               created_at
               updated_at
             }
-  
-          ... on GithubActivityPullRequest {
-            id
-            url
-            title
-            status
-            files_changed
-          }
-        }  
+
+            ... on GithubActivityPullRequest {
+              status
+              files_changed
+            }
+        }
       }
     }
   }
