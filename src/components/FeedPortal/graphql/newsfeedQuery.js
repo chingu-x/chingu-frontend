@@ -52,6 +52,7 @@ const getNewsfeed = gql`
             url
             repo {
               id
+              repo_name
             }
           
             ... on GithubActivityIssue {
