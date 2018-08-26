@@ -11,14 +11,14 @@ class FeedPortal extends Component {
     }
   }
 
-  toggleNewsFeed = (type, team_id) => this.setState({ newsfeed: { type, team_id } })
+  toggleNewsfeed = (type, team_id) => this.setState({ newsfeed: { type, team_id } })
 
   render() {
     const { type, team_id } = this.state.newsfeed
     return (
       <div className="view-container">
         <div className="portal-container">
-          <SideBar toggleNewsFeed={this.toggleNewsFeed} team_id={team_id} />
+          <SideBar toggleNewsfeed={this.toggleNewsfeed} team_id={team_id} />
           <NewsFeed type={type} team_id={team_id} />
         </div>
       </div>
