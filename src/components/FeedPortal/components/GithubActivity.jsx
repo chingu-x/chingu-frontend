@@ -4,7 +4,11 @@ import './GithubActivity.css';
 
 const PRIcon = () => {
   return (
-    <img className="github-activity-icon" alt="pr-icon" src={require('../../../assets/github-PR-icon.png')} />
+    <img
+      className="github-activity-icon"
+      alt="pr-icon"
+      src={require('../../../assets/github-PR-icon.png')}
+    />
   )
 }
 const IssueIcon = () => {

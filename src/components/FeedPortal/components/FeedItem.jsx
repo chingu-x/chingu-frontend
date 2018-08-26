@@ -1,6 +1,5 @@
 import React, { Fragment } from "react"
 import PropTypes from "prop-types"
-import timeSince from "../../utilities/timeSince"
 import "./FeedItem.css"
 import newsfeedDateFormatter from '../../utilities/newsfeedDateFormatter';
 
@@ -30,7 +29,9 @@ const FeedItemContainer = ({ component: Component, item, key }) => {
               className="feed-item__header-avatar" />}
             <div>{title}</div>
           </div>
-          <div className="feed-item__header--right">{newsfeedDateFormatter(item.timestamp) + " ago"} </div>
+          <div className="feed-item__header--right">
+            {newsfeedDateFormatter(item.timestamp) + " ago"}
+          </div>
         </div>
       </div>
       <Component {...item} />
