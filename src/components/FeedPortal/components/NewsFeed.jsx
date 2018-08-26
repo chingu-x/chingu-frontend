@@ -30,7 +30,7 @@ const NewsFeed = ({ type, loading, data }) => {
             ? <TeamCard team={team} />
             : renderNewsfeedItems(chingu)
         }
-        <hr className="hl" />
+        {(chingu || team) && <hr className="hl" />}
         {renderNewsfeedItems(other)}
       </React.Fragment>
     );
