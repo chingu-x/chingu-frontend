@@ -75,7 +75,8 @@ const InfoComponents = ({ team }) => {
 
 export default props =>
   <Request
+    {...props} 
     component={TeamCard}
     query={teamQuery}
     globalLoader
-    {...props} />
+  />

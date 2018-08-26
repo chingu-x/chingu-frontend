@@ -85,7 +85,8 @@ const UserProfile = ({ data: { user } }) => {
 
 export default props =>
   <Request
+    {...props} 
     component={UserProfile}
     query={profileQuery}
     globalLoader
-    {...props} />
+  />
