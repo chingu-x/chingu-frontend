@@ -1,0 +1,30 @@
+#modal-root {
+  position: relative;
+}
+
+.modal {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: $z-middle;
+  background-color: white;
+  > * {
+    margin: auto;
+  }
+  &.transparent {
+    background-color: $modal-background;
+    z-index: $z-modal;
+  }
+  &.none {
+    background-color: rgba(0,0,0,0);
+  }
+}
+
+.modal-peek {
+  z-index: $z-modal-peek !important;
+}
