@@ -1,38 +1,41 @@
 import React, { Fragment } from "react"
 import PropTypes from "prop-types"
-import timeSince from "../../utilities/timeSince"
 import "./FeedItem.css"
+import newsfeedDateFormatter from '../../utilities/newsfeedDateFormatter';
 
-const FeedItemContainer = ({ component: Component, item }) => {
-  const header = type => {
-    switch (type) {
-      case "NewsfeedVoyage":
-        return [item.voyage.title]
-      case "NewsfeedStandup":
-        return [item.user.username, item.user.avatar];
-      case "GithubActivityIssue":
-        return [item.repo.repo_name, item.repo.issue.user.avatar];
-      case "GithubActivityPullRequest":
-        return [item.repo.repo_name, item.repo.pull_requests.user.avatar]
-      default:
-        return "Chingu"
-    }
+const header = ({ type, user, repo })=> {
+  switch (type) {
+    case "NewsfeedVoyage":
+      return ["Chingu"]
+    case "NewsfeedStandup":
+      return [user.username, user.avatar];
+    case "GithubActivityIssue":
+      return [repo.repo_name, user.avatar];
+    case "GithubActivityPullRequest":
+      return [repo.repo_name, user.avatar]
+    default:
+      return ["Chingu"]
   }
-  const [title, avatar] = header(item.type)
+}
+
+const FeedItemContainer = ({ component: Component, item, key }) => {
+  const [title, avatar] = header(item);
   return (
-    <Fragment>
+    <div key={key} className="feed-item-component-container">
       <div className="feed-item__container">
         <div className="feed-item__header-content">
           <div className="feed-item__header--left">
-            <div>{title}</div>
             {avatar && <img alt="update-user-avatar" src={avatar}
               className="feed-item__header-avatar" />}
+            <div>{title}</div>
           </div>
-          <div className="feed-item__header--right">{timeSince(item.timestamp) + " ago"} </div>
+          <div className="feed-item__header--right">
+            {newsfeedDateFormatter(item.timestamp) + " ago"}
+          </div>
         </div>
       </div>
       <Component {...item} />
-    </Fragment>
+    </div>
   )
 }
 

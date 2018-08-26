@@ -56,6 +56,9 @@
 .portal-panel__sidebar {
   @include panel;
   padding: 40px 0px;
+  min-width: 300px;
+  max-width: 350px;
+  margin: 0 auto;
 }
 
 .portal-panel__feed {
@@ -93,10 +96,11 @@
 
 .sidebar-nav__btn-ctn {
   display: block;
-  margin-left: 20px;
-  margin-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   &:hover {
     background-color: $theme-green--palest;
+    cursor: pointer;
   }
 }
 
@@ -118,10 +122,28 @@
 }
 
 .sidebar-nav__btn-icon {
-  width: 35px;
+  width: 30px;
   height: 30px;
   margin-right: 20px;
   object-fit: cover;
   display: inline-block;
   vertical-align: middle;
+}
+/*
+==========================
+MEDIA QUERY
+==========================
+*/
+@media (max-width: 1180px) {
+  .portal-container {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: "navi news news";
+  }
+}
+
+@media (max-width: 850px) {
+  .portal-container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "navi"  "news";
+  }
 }

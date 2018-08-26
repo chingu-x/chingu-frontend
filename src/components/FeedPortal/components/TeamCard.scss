@@ -2,13 +2,11 @@
 
 .team-card-container {
     width: 100%;
-    border-radius: $border-radius $border-radius 0px 0px;
     background-color: white;
-    padding: 40px 30px;
+    padding: 40px 0px 40px 30px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
-    box-shadow: $box-shadow;
 }
 
 /*

@@ -1,116 +1,89 @@
 import React, { Fragment } from "react"
-import PropTypes from "prop-types"
-import { gql } from "apollo-boost"
+import sidebarQuery from '../graphql/sidebarQuery';
 import Request from "../../utilities/Request"
-import Loader from "../../Loader"
 
-// -- QUERIES -- // 
-const sidebarHeaderQuery = gql`
- query getSidebarUser{
-    user {
-      id
-      username
-      avatar
-    }
-  }
-`
-const sidebarTeamsQuery = gql`
-  query getSidebarTeams{
-    user {
-      id
-      teams {
-        id
-        title
-        cohort {
-          id
-          title
-        }
-        tier {
-          id
-          level
-        }
-      }
-    }
-  }
-`
+// TODO: implement 'active' prop
+// check team_id === team.id
 
-// -- SIDEBAR HEADER -- // 
-const SidebarBtn = ({ lbl, active, team, toggleNewsFeed }) => {
-  return (
-    <div onClick={toggleNewsFeed} className="sidebar-nav__btn-ctn">
-      {team ? <img className="sidebar-nav__btn-icon" src={require('../../../assets/team-icon.png')} alt="team-icon" /> : null}
-      <div className={`sidebar-nav__btn ${active ? "active" : null}`}>{lbl}</div>
-    </div>
-  )
-}
-const SidebarHeader = ({ loading, data }) => {
-  if (loading) return <div style={{ height: "180.8px" }}><Loader style="medium" /></div>
-  const { user: { username, avatar } } = data
-  return (
-    <div className="sidebar-userinfo__container">
+const SidebarBtn = ({ lbl, team, activeTeamId, action }) => (
+  <div
+    className="sidebar-nav__btn-ctn"
+    onClick={
+      () => action(
+        team ? 'TEAM' : 'ALL',
+        team && team.id,
+      )
+    }
+  >
+    {
+      team &&
       <img
-        className="sidebar-userinfo__avatar"
-        src={avatar}
-        alt="User Avatar" />
-      <div className="sidebar-userinfo__username">{username}</div>
+        className="sidebar-nav__btn-icon"
+        src={require('../../../assets/team-icon.png')}
+        alt="team-icon"
+      />
+    }
+    <div
+      className={
+        `sidebar-nav__btn ${team && (activeTeamId === team.id && "active")}`
+      }
+    >
+      {lbl}
     </div>
-  )
-}
+  </div>
+)
 
-const TeamLinks = ({ loading, data, toggleNewsFeed, team_id }) => {
-  if (loading) return null
-
-  const renderedTeamLinks = data.user.teams.map((team, idx) => (
-    <SidebarBtn
-      team
-      key={idx}
-      toggleNewsFeed={() => toggleNewsFeed("TEAM", team.id)}
-      lbl={team.cohort.title + "/" + team.title}
-      active={team.id === team_id} />
-  ))
+const TeamLinks = ({ teams, toggleNewsfeed, activeTeamId }) => {
+  let renderedTeamLinks = teams.map((team, idx) => {
+    return (
+      <SidebarBtn
+        action={toggleNewsfeed}
+        team={team}
+        key={idx}
+        activeTeamId={activeTeamId}
+        lbl={team.cohort.title + "/" + team.title}
+      />
+    );
+  })
 
   return <Fragment>{renderedTeamLinks || null}</Fragment>
 }
 
-// -- SIDEBAR CONTAINER -- //
-const SideBar = ({ toggleNewsFeed, team_id }) => {
+const SideBar = ({ data: { user }, toggleNewsfeed, team_id }) => {
   return (
-    <div className="sidebar-container">
+    <aside className="sidebar-container">
       <div className="portal-panel__sidebar">
-
-        <Request
-          component={SidebarHeader}
-          query={sidebarHeaderQuery} />
+        <div className="sidebar-userinfo__container">
+          <img
+            className="sidebar-userinfo__avatar"
+            src={user.avatar}
+            alt="User Avatar" />
+          <div className="sidebar-userinfo__username">{user.username}</div>
+        </div>
         <hr className="hl" />
 
-        <SidebarBtn
-          toggleNewsFeed={() => toggleNewsFeed("ALL")}
-          lbl="All News"
-          active={team_id === null} />
+        <SidebarBtn action={toggleNewsfeed} lbl="All News" />
         <hr className="hl" />
 
         <label className="sidebar-nav__label">Your Teams</label>
 
-        <Request
-          component={TeamLinks}
-          query={sidebarTeamsQuery}
-          toggleNewsFeed={toggleNewsFeed}
-          team_id={team_id} />
+        <TeamLinks
+          activeTeamId={team_id}
+          teams={user.teams}
+          toggleNewsfeed={toggleNewsfeed}
+        />
         <hr className="hl" />
 
       </div>
-    </div>
+    </aside>
   )
 }
 
-SideBar.propTypes = {
-  team_id: PropTypes.number,
-  toggleNewsFeed: PropTypes.func.isRequired
-}
-
-SideBar.defaultProps = {
-  team_id: null,
-  toggleNewsFeed: console.log
-}
-
-export default SideBar
+export default props => (
+  <Request
+    {...props} 
+    component={SideBar}
+    query={sidebarQuery}
+    globalLoader
+  />
+);
