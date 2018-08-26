@@ -1,55 +1,29 @@
-@charset 'UTF-8';  
+@charset 'UTF-8';
 
 //1. Abstract
-@import
-	'abstracts/variables',
-	'abstracts/functions',
-	'abstracts/mixins',
-	'abstracts/placeholders';
+@import "abstracts/variables", "abstracts/functions", "abstracts/mixins",
+  "abstracts/placeholders";
 
 //2. Vendors
 
-@import 
-	'vendors/normalize',
-	'vendors/include-media';
+@import "vendors/normalize", "vendors/include-media";
 
 //3. Base
-@import
-  'base/base',
-  'base/fonts',
-  'base/typography',
-  'base/helpers';
+@import "base/base", "base/fonts", "base/typography", "base/helpers";
 
 //4. Layout
-@import
-	'layout/basic-page',
-	'layout/header',
-	'layout/footer';
+@import "layout/basic-page", "layout/header", "layout/footer";
 
 //5. Components
-@import
-	'components/button.scss',
-	'components/landing_icon_item',
-	'components/landing_testimonial',
-	'components/login_form',
-	'components/login_form_item',
-	'components/signup_form',
-	'components/signup_form_item';
-	
+@import "components/button.scss", "components/landing_icon_item",
+  "components/landing_testimonial", "components/login_form",
+  "components/login_form_item", "components/signup_form",
+  "components/signup_form_item", "components/modal";
+
 //6. Page
-@import
-	'pages/contact_form',
-	'pages/current_programs',
-	'pages/dashboard',
-	'pages/faq',
-	'pages/landing',
-	'pages/login',
-	'pages/privacy_page',
-	'pages/project_portal',
-	'pages/profile',
-	'pages/signup',
-	'pages/slack',
-	'pages/staff',
-	'pages/voyage_five';
+@import "pages/contact_form", "pages/current_programs", "pages/dashboard",
+  "pages/faq", "pages/landing", "pages/login", "pages/privacy_page",
+  "pages/profile", "pages/signup", "pages/slack", "pages/staff",
+  "pages/voyage_five";
 
 //7. Themes

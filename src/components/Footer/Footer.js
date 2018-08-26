@@ -41,9 +41,9 @@ class Footer extends React.Component {
         {/* <a className="footer-link" href="/">
           Press
         </a> */}
-        <a className="footer-link" href="/privacy">
+        <Link className="footer-link" to="/privacy">
           Privacy Policy
-        </a>
+        </Link>
         {/* <Link className="footer-link" to="/companyfaq">
           FAQ
         </Link> */}
