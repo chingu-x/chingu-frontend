@@ -57,7 +57,7 @@ const client = new ApolloClient({
             "project_url": `fb.chingu.io`,
             "github_url": `https://github.com/luoto/chingu-frontend`,
             "users": [{ "id": "6", "username": "serpient", "avatar": "https://avatars0.githubusercontent.com/u/29721784?v=4" }],
-            "skills": []
+            "skills": [{ "id": "1", "name": "react"}]
           }
         }
       },
