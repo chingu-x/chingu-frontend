@@ -1,14 +1,14 @@
 import * as React from "react";
-import ImageUploadModal from './ImgUploadModal';
+import ImageUploadModal from '../ImgUploadModal';
 
 export default class ProjectImages extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mainImgSrc: require('../../../assets/404-03.png'),
+      mainImgSrc: 'https://via.placeholder.com/350x150',
       mainImgCptn: '',
       files: [
-        { imgCptn: 'Test', imgSrc: require('../../../assets/404-03.png') }
+        { imgCptn: 'Test', imgSrc: 'https://via.placeholder.com/350x150' }
       ],
       unsavedFiles: [],
       visibleImgUploadModal: false
