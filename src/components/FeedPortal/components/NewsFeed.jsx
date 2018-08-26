@@ -20,7 +20,6 @@ const NewsFeed = ({ type, loading, data }) => {
     }),
   );
 
-  // TODO: Check where is team coming from in the new query response
   const renderFeed = ({ newsfeed: { chingu, other, team } }) => (
     <React.Fragment>
       {
@@ -73,11 +72,10 @@ export default (props) => {
   return (
     <Request
       {...props}
-      fromNewsfeed
       component={NewsFeed}
       query={newsfeedQuery}
       variables={variables}
-      options={{ pollInterval: 0 * 60 * 1000 }}
+      options={{ pollInterval: 5 * 60 * 1000 }}
     />
   )
 }
