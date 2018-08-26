@@ -24,7 +24,7 @@ const GlobalLoader = () => (
             open
             persist
             background="white">
-            <div className="loader--large" />
+            <div className="loader--global" />
           </Modal>
       }
     }
@@ -32,42 +32,43 @@ const GlobalLoader = () => (
 )
 
 // CONTAINER //
-const LoaderContainer = ({
-  size,
-  height,
-  backgroundColor,
-  color: borderTopColor }) => {
-  // TODO: Small
+const LoaderContainer = props => {
+  const {
+    size,
+    height, // height of the container
+    background: backgroundColor, // background of the container
+    color: borderTopColor
+  } = props
 
-  // Medium
-  if (size === "medium") {
-    return (
-      <div
-        style={{ height, backgroundColor }}
-        className="loader__container--medium"
-      >
-        <div
-          style={{ borderTopColor }}
-          className="loader--medium"
-        />
-      </div>
-    )
+  // Global fullscreen loader
+  if (size === "global") {
+    return <GlobalLoader />
   }
 
-  // Global
-  if (size === "global") return <GlobalLoader />
+  // Otherwise return styled
+  return (
+    <div
+      style={{ height, backgroundColor }}
+      className="loader__container--flex"
+    >
+      <div
+        style={{ borderTopColor }}
+        className={`loader--${size}`}
+      />
+    </div>
+  )
 }
 
 LoaderContainer.propTypes = {
-  size: PropTypes.string,
-  color: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  height: PropTypes.string, // Height of a container
+  size: PropTypes.oneOf(["small", "medium", "large", "global"]),
+  height: PropTypes.string, // Flex container height
+  color: PropTypes.string, // Loader color
+  background: PropTypes.string // Container background color
 }
 
 LoaderContainer.defaultProps = {
-  size: "medium",
-  backgroundColor: "#00000000"
+  size: "small",
+  background: "#00000000"
 }
 
 export default LoaderContainer

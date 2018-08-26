@@ -11,12 +11,21 @@
   z-index: 1000;
 }
 
-// -- DEFAULT (LARGE)-- //
-.loader-container {
-    @include transparent-background;
-}
 
-.loader--large {
+.loader__container--flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  z-index: $z-middle; // Hides blow header on scroll
+}
+// .loader-container {
+//     @include transparent-background;
+// }
+
+
+// -- GLOBAL (FULLSCREEN) -- //
+.loader--global {
   @include spinner;
   border-width: 20px;
   // border-top: 20px solid $theme-green;
@@ -28,26 +37,38 @@
   left: calc(50vw - 90px);
 }
 
-// -- MEIDUM -- //
-.loader__container--medium {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  z-index: $z-middle; // Hides blow header on scroll
-}
-
+// -- MEDIUM -- //
 .loader--medium {
   @include spinner;
-  border-width: 5px;
+  border-width: 20px;
+  width: 180px;
+  height: 180px;
   // border-top: 5px solid $theme-green;
-  width: 3em;
-  height: 3em;
-  top: calc(100% - 1.5px);
-  left: calc(100% - 1.5px);
-  z-index: $z-middle;
+  // top: calc(100% - 90px);
+  // left: calc(100% - 90px);
 }
 
+// -- MEDIUM -- //
+.loader--medium {
+  @include spinner;
+  border-width: .66em;
+  width: 6em;
+  height: 6em;
+  // border-top: 5px solid $theme-green;
+  // top: calc(100% - 3em);
+  // left: calc(100% - 3em);
+} 
+
+// -- SMALL-- //
+.loader--small {
+  @include spinner;
+  border-width: .33em;
+  width: 3em;
+  height: 3em;
+  // border-top: 5px solid $theme-green;
+  // top: calc(100% - 1.5px);
+  // left: calc(100% - 1.5px);
+}
 
 
 @keyframes spin {
