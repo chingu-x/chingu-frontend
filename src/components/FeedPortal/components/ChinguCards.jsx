@@ -14,7 +14,7 @@ export const NewsfeedVoyage = ({ voyage: { id, title } }) => {
         alt="green"
       />
       <div className="newsfeed-voyage-text">
-        {title} {id} Applications are open! Click here to apply.
+        {title} Applications are open! Click here to apply.
       </div>
     </Link>
   )
