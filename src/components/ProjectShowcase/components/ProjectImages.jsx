@@ -5,10 +5,10 @@ export default class ProjectImages extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mainImgSrc: require('../../../assets/[ADMIN] Applicant Review - Overview.png'),
+      mainImgSrc: require('../../../assets/404-03.png'),
       mainImgCptn: '',
       files: [
-        { imgCptn: 'Test', imgSrc: require('../../../assets/[ADMIN] Applicant Review - Overview.png') }
+        { imgCptn: 'Test', imgSrc: require('../../../assets/404-03.png') }
       ],
       unsavedFiles: [],
       visibleImgUploadModal: false
