@@ -2,22 +2,54 @@ import React, { Fragment } from "react"
 import sidebarQuery from '../graphql/sidebarQuery';
 import Request from "../../utilities/Request"
 
-const SidebarBtn = ({ lbl, active, team }) => (
-  <div className="sidebar-nav__btn-ctn">
-    {team ? <img className="sidebar-nav__btn-icon" src={require('../../../assets/team-icon.png')} alt="team-icon" /> : null}
-    <div className={`sidebar-nav__btn ${active ? "active" : null}`}>{lbl}</div>
+// TODO: implement 'active' prop
+// check team_id === team.id
+
+const SidebarBtn = ({ lbl, team, activeTeamId, action }) => (
+  <div
+    className="sidebar-nav__btn-ctn"
+    onClick={
+      () => action(
+        team ? 'TEAM' : 'ALL',
+        team && team.id,
+      )
+    }
+  >
+    {
+      team &&
+      <img
+        className="sidebar-nav__btn-icon"
+        src={require('../../../assets/team-icon.png')}
+        alt="team-icon"
+      />
+    }
+    <div
+      className={
+        `sidebar-nav__btn ${team && (activeTeamId === team.id && "active")}`
+      }
+    >
+      {lbl}
+    </div>
   </div>
 )
 
-const TeamLinks = ({ teams }) => {
+const TeamLinks = ({ teams, toggleNewsfeed, activeTeamId }) => {
   let renderedTeamLinks = teams.map((team, idx) => {
-    return <SidebarBtn team key={idx} lbl={team.cohort.title + "/" + team.title} />
+    return (
+      <SidebarBtn
+        action={toggleNewsfeed}
+        team={team}
+        key={idx}
+        activeTeamId={activeTeamId}
+        lbl={team.cohort.title + "/" + team.title}
+      />
+    );
   })
 
   return <Fragment>{renderedTeamLinks || null}</Fragment>
 }
 
-const SideBar = ({ data: { user } }) => {
+const SideBar = ({ data: { user }, toggleNewsfeed, team_id }) => {
   return (
     <aside className="sidebar-container">
       <div className="portal-panel__sidebar">
@@ -30,12 +62,16 @@ const SideBar = ({ data: { user } }) => {
         </div>
         <hr className="hl" />
 
-        <SidebarBtn lbl="All News" />
+        <SidebarBtn action={toggleNewsfeed} lbl="All News" />
         <hr className="hl" />
 
         <label className="sidebar-nav__label">Your Teams</label>
 
-        <TeamLinks teams={user.teams} />
+        <TeamLinks
+          activeTeamId={team_id}
+          teams={user.teams}
+          toggleNewsfeed={toggleNewsfeed}
+        />
         <hr className="hl" />
 
       </div>
@@ -43,10 +79,11 @@ const SideBar = ({ data: { user } }) => {
   )
 }
 
-export default props =>
+export default props => (
   <Request
     {...props} 
     component={SideBar}
     query={sidebarQuery}
     globalLoader
-   />
+  />
+);

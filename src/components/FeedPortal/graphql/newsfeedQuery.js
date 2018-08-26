@@ -4,6 +4,35 @@ const getNewsfeed = gql`
   query getNewsfeed($input: NewsfeedInput!) {
     newsfeed(input: $input) {
       id
+
+      team {
+        id
+        title
+        cohort {
+          id
+          title
+          status
+          start_date
+          end_date
+        }
+        tier {
+            title
+            level
+        }
+        project {
+            id
+            title
+            description
+            users {
+                username
+                avatar
+            }
+            skills {
+                name
+            }
+        }
+      }
+
       chingu {
         id
         type: __typename
