@@ -7,84 +7,60 @@ import FeedItemContainer from './FeedItem';
 import TeamCard from './TeamCard';
 import newsfeedQuery from "../graphql/newsfeedQuery"
 
-class NewsFeed extends React.Component {
-  state = {
-    chinguItems: [],
-    teamItems: [],
-    renderTeamCard: false
-  }
+const NewsFeed = ({ type, loading, data }) => {
 
-  static propTypes = {
-    type: PropTypes.oneOf(["ALL", "TEAM"]).isRequired,
-    team_id: PropTypes.number,
-    data: PropTypes.shape({
-      newsfeed: PropTypes.object
-    })
-  }
-
-  static defaultProps = {
-    type: "ALL",
-    team_id: null
-  }
-
-  renderNewsfeedItems = items => items.map(
+  const renderNewsfeedItems = items => items.map(
     item => FeedItemContainer({
       component: NewsfeedItems[item.type],
       item,
       key: item.id,
     }),
   );
-  
 
-  renderFeed = ({ newsfeed: { chingu, other } }) => {
-    const { renderTeamCard } = this.state;
-    const { team_id } = this.props;
-    return (
-      <React.Fragment>
+  // TODO: Check where is team coming from in the new query response
+  const renderFeed = ({ newsfeed: { chingu, other, team } }) => (
+    <React.Fragment>
+      {
+        type === "TEAM"
+          ? <TeamCard team={team} />
+          : renderNewsfeedItems(chingu)
+      }
+      <hr className="hl" />
+      {renderNewsfeedItems(other)}
+    </React.Fragment>
+  )
+
+
+  return (
+    <div className="main-container">
+      <div className="title">NEWS FEED</div>
+      <div className="portal-panel__feed">
         {
-          renderTeamCard
-            ? <TeamCard team_id={team_id} />
-            : this.renderNewsfeedItems(chingu)
+          loading
+            ? <div style={{ height: "600px" }}><Loader style="medium" /></div>
+            : renderFeed(data)
         }
-        <hr className="hl" />
-        {this.renderNewsfeedItems(other)}
-      </React.Fragment>
-    );
-  }
-
-  render() {
-    const { loading, data } = this.props
-    return (
-      <main className="main-container">
-        <div className="title">NEWS FEED</div>
-        <main className="portal-panel__feed">
-          {
-            loading
-              ? <div style={{ height: "600px" }}><Loader style="medium" /></div>
-              : this.renderFeed(data)
-          }
-        </main>
-      </main >
-    )
-  }
+      </div>
+    </div >
+  )
 }
 
-const NewsFeedRequest = ({ variables }) =>
-  <Request
-    component={NewsFeed}
-    query={newsfeedQuery}
-    variables={{ input: { limit: 12, ...variables } }}
-    {...variables} />
-
-NewsFeedRequest.propTypes = {
-  variables: PropTypes.shape({
-    type: PropTypes.oneOf(["ALL", "TEAM"]),
-    team_id: PropTypes.number
+NewsFeed.propTypes = {
+  type: PropTypes.oneOf(["ALL", "TEAM"]).isRequired,
+  data: PropTypes.shape({
+    newsfeed: PropTypes.object
   })
 }
 
-NewsFeedRequest.defaultProps = {
-  variables: { type: "ALL" }
+NewsFeed.defaultProps = {
+  type: "ALL",
 }
 
-export default NewsFeedRequest
+
+export default props =>
+  <Request
+    component={NewsFeed}
+    query={newsfeedQuery}
+    variables={{ input: { limit: 12, ...props.variables } }}
+    options={{ pollInterval: 5 * 60 * 1000 }}
+    {...props} />
