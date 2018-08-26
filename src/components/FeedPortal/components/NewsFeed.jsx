@@ -5,7 +5,6 @@ import Loader from "../../Loader"
 import NewsfeedItems from './index';
 import FeedItemContainer from './FeedItem';
 import TeamCard from './TeamCard';
-import newsFeedData from './newsfeedData.mock';
 import newsfeedQuery from "../graphql/newsfeedQuery"
 
 class NewsFeed extends React.Component {
@@ -28,41 +27,42 @@ class NewsFeed extends React.Component {
     team_id: null
   }
 
-  static getDerivedStateFromProps(props) {
-    const teamItems = [];
-    const chinguItems = [];
-    // filter data per team vs chingu related news
-    newsFeedData.newsfeed.items.map((item) => {
-      switch (item.type) {
-        case 'NewsfeedVoyage':
-          chinguItems.push(item);
-          break;
-        default:
-          teamItems.push(item);
-          break;
-      }
-    });
-    return props.type === 'ALL'
-      ? { chinguItems, teamItems, renderTeamCard: false }
-      : { teamItems, renderTeamCard: true }
-  }
+  renderNewsfeedItems = items => items.map(
+    item => FeedItemContainer({
+      component: NewsfeedItems[item.type],
+      item,
+      key: item.id,
+    }),
+  );
+  
 
-  renderNewsfeedItems = (array) => {
-    return array.map((item) => {
-      return FeedItemContainer({ component: NewsfeedItems[item.type], item, key: item.id });
-    });
+  renderFeed = ({ newsfeed: { chingu, other } }) => {
+    const { renderTeamCard } = this.state;
+    const { team_id } = this.props;
+    return (
+      <React.Fragment>
+        {
+          renderTeamCard
+            ? <TeamCard team_id={team_id} />
+            : this.renderNewsfeedItems(chingu)
+        }
+        <hr className="hl" />
+        {this.renderNewsfeedItems(other)}
+      </React.Fragment>
+    );
   }
 
   render() {
-    const { loading } = this.props
+    const { loading, data } = this.props
     return (
       <main className="main-container">
         <div className="title">NEWS FEED</div>
         <main className="portal-panel__feed">
-          {loading && <div style={{ height: "600px" }}><Loader style="medium" /></div>}
-          {!loading && (this.state.renderTeamCard ? <TeamCard team_id={this.props.team_id} /> : this.renderNewsfeedItems(this.state.chinguItems))}
-          <hr className="hl" />
-          {!loading && this.renderNewsfeedItems(this.state.teamItems)}
+          {
+            loading
+              ? <div style={{ height: "600px" }}><Loader style="medium" /></div>
+              : this.renderFeed(data)
+          }
         </main>
       </main >
     )
