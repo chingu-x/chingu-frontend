@@ -1,0 +1,18 @@
+@import '../../../styles/abstracts/_variables.scss';
+
+.no-news-card--container {
+    @include newsfeed-card;
+    background-color: $palest-grey;
+    color: $dark-grey;
+}
+
+.no-news-card--icon {
+    @include newsfeed-card--icon;
+}
+
+.no-news-text {
+    @include newsfeed-card-text-container;
+    align-self: center;
+    font-size: 20px;
+    font-weight: 600;
+}
