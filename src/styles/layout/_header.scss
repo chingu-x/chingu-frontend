@@ -63,6 +63,7 @@
     vertical-align: middle;
     float: right;
     z-index: $z-modal-peek;
+    cursor: pointer;
     // &:hover ~ .header-dropdown-content {
     //   visibility: visible;
     // }
