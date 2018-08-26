@@ -1,5 +1,5 @@
 import * as React from "react";
-import ProjectImages from './components/ProjectImages';
+import ImageGallery from './components/ImageGallery';
 import ProjectInfo from './components/ProjectInfo';
 import Banner from './components/Banner';
 import Toolbar from './components/Toolbar';
@@ -26,7 +26,7 @@ class ProjectShowcase extends React.Component {
       <div className="project-portal">
         <Banner />
         <Toolbar edit={this.edit} />
-        <ProjectImages />
+        <ImageGallery />
         <ProjectInfo />
         {this.state.isEditing && <EditProjectForm edit={this.edit} />}
       </div>
