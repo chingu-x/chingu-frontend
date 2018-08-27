@@ -31,9 +31,14 @@ function TechStack() {
   return (
     <div className="project-subcategory">
       <h1 className="project-subcategory-title">skills</h1>
-      <ul>
-        <li>React</li>
-      </ul>
+      <div className="project-tags-container">
+        <li className="project-tags">React</li>
+        <li className="project-tags">React</li>
+        <li className="project-tags">React</li>
+        <li className="project-tags">React</li>
+        <li className="project-tags">React</li>
+        <li className="project-tags">React</li>
+      </div>
     </div>
   )
 }
@@ -42,9 +47,9 @@ function Tags() {
   return (
     <div className="project-subcategory">
       <h1 className="project-subcategory-title">tags</h1>
-      <ul>
-        <li>Developer Tools</li>
-      </ul>
+      <div className="project-tags-container">
+        <li className="project-tags">Developer Tools</li>
+      </div>
     </div>
   )
 }

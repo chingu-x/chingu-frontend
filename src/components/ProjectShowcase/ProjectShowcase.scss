@@ -111,6 +111,7 @@ BUTTONS
   @include system-button($theme-green, $theme-green--hover);
   width: 100%;
 }
+
 /*
 ==========================
 OPEN IMAGE MODAL BTN
@@ -230,23 +231,23 @@ CARDS (PROJECT SIDEBAR)
   @include portal-subcategory;
 }
 .project-subcategory {
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    border: 1px solid $dark-grey;
-    padding: 0.3em 1em;
-    margin: 0.2em 0.3em 0.2em 0;
-    background-color: white;
-    color: $dark-grey;
-  }
   margin-bottom: 40px;
 }
 .project-side-panel--hline {
   border-top: 1px solid $light-grey;
+}
+/*
+==========================
+TAGS
+==========================
+*/
+.project-tags {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  color: $dark-grey;
+  border: 1px solid $grey;
+  padding: 5px 10px;
 }
 /*
 ==========================
