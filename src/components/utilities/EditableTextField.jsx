@@ -58,8 +58,11 @@ class EditableTextField extends React.Component {
   
 
   handleUpdateData = ({ data }) => {
-    const { Type, fieldName } = this.props;
-    this.setState({ updatedData: data[Type][fieldName], edit: false });
+    const { mutationName, fieldName } = this.props;
+    this.setState({
+      updatedData: data[mutationName][fieldName],
+      edit: false,
+    });
   }
 
   handleSubmit = () => {
@@ -97,7 +100,7 @@ class EditableTextField extends React.Component {
       const { value } = currentTarget;
       const { variables } = this.state;
       const { fieldName } = this.props;
-      console.log(value)
+
       variables.input[fieldName] = value;
       this.setState({ variables });
     },
@@ -143,7 +146,7 @@ EditableTextField.propTypes = {
   large: PropTypes.bool, // simple text input vs textarea
   // mutation variables expects shape { input: { fieldName: fieldData } }
   mutation: PropTypes.object, // mutation to update the Type
-  Type: PropTypes.string, // the GraphQL Type that is being edited
+  mutationName: PropTypes.string, // the GraphQL Type that is being edited
   fieldName: PropTypes.string, // the field of the Type to be edited
   fieldData: PropTypes.string, // the existing data for the field of the Type
   hasPermission: PropTypes.bool, // viewing User has permission to edit
