@@ -4,8 +4,10 @@
   // TODO: Remove header positioning property
   padding-top: 64px + 21px; // to account for header
   margin: 0 auto;
+  min-height: 100vh;
   height: 100%;
   background-color: white;
+ 
 }
 /*
 ==========================
@@ -249,6 +251,12 @@ TAGS
   border: 1px solid $grey;
   padding: 5px 10px;
 }
+/*
+==========================
+TEAM / USER
+==========================
+*/
+
 /*
 ==========================
 PROJECT DESCRIPTION
