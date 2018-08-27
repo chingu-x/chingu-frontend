@@ -2,14 +2,13 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 
-let md = `
+const md = `
 **Tell us about your project**
 
 What inspired you? What was the problem that you were trying to solve? What did you learn by completing this project?
 
 (Feel free to use Markdown)
 `
-
 class ProjectDescription extends React.Component {
   static propTypes = {
     text: PropTypes.string,
@@ -17,7 +16,7 @@ class ProjectDescription extends React.Component {
   }
 
   static defaultProps = {
-    text: md,
+    text: '',
     editable: false
   }
 
@@ -31,7 +30,11 @@ class ProjectDescription extends React.Component {
 
   render() {
     const { isEditing } = this.state;
-    const { text } = this.props;
+    let { text } = this.props;
+
+    if (!text) {
+      text = md;
+    }
 
     return (
       <div className="project-portal__about">

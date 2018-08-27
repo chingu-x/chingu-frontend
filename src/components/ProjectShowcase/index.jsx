@@ -72,6 +72,7 @@ class ProjectShowcase extends React.Component {
                 />
               <div className="project-info-container">
                   <ProjectDescription
+                    text={project.description}
                     editable={this.isEditable(user, project)} />
                   <ProjectSideBar />
               </div>
