@@ -74,11 +74,12 @@ const client = new ApolloClient({
           return null
         },
         // TODO: Remove when API available
-        updateProject: (_, {title, elevator_pitch}, { cache}) => {
+        updateProject: (_, {title, elevator_pitch, text}, { cache}) => {
           return {
             __typename: "Project",
             title,
-            elevator_pitch
+            elevator_pitch,
+            text
           }
         }
       }
