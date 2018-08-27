@@ -6,6 +6,7 @@ import NewsfeedItems from './index';
 import FeedItemContainer from './FeedItem';
 import TeamCard from './TeamCard';
 import newsfeedQuery from "../graphql/newsfeedQuery"
+import NoNews from './NoNews';
 
 const NewsFeed = ({ type, loading, data }) => {
   const getTitle = (team) => `
@@ -20,33 +21,36 @@ const NewsFeed = ({ type, loading, data }) => {
     }),
   );
 
-  const renderFeed = ({ newsfeed: { chingu, other, team } }) => (
-    <React.Fragment>
-      {
-        type === "TEAM"
-          ? <TeamCard team={team} />
-          : renderNewsfeedItems(chingu)
-      }
-      <hr className="hl" />
-      {renderNewsfeedItems(other)}
-    </React.Fragment>
-  )
-
-
-  return (
-    <div className="main-container">
-      <div className="title">
-        {!loading && getTitle(data.newsfeed.team)}
-      </div>
-      <div className="portal-panel__feed">
+  // TODO: Check where is team coming from in the new query response
+  const renderFeed = ({ newsfeed: { chingu, other, team } }) => {
+    let dataToRender = (
+      <React.Fragment>
         {
-          loading
-            ? <div style={{ height: "600px" }}><Loader style="medium" /></div>
-            : renderFeed(data)
+          type === "TEAM"
+            ? <TeamCard team={team} />
+            : renderNewsfeedItems(chingu)
         }
-      </div>
-    </div >
-  )
+        {(other && chingu.length > 0) || (other && team.length > 0 ) && <hr className="hl" />}
+        {renderNewsfeedItems(other)}
+      </React.Fragment>
+    );
+    return (!other && !chingu ? <NoNews /> : dataToRender);
+  }
+
+return (
+  <div className="main-container">
+    <div className="title">
+      {!loading && getTitle(data.newsfeed.team)}
+    </div>
+    <div className="portal-panel__feed">
+      {
+        loading
+          ? <div style={{ height: "600px" }}><Loader style="medium" /></div>
+          : renderFeed(data)
+      }
+    </div>
+  </div >
+)
 }
 
 NewsFeed.propTypes = {
