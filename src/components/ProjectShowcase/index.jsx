@@ -1,8 +1,7 @@
 import * as React from "react";
-import ImageGallery from './components/ImageGallery';
-import ProjectInfo from './components/ProjectInfo';
 import Banner from './components/Banner';
-import Toolbar from './components/Toolbar';
+import ProjectSideBar from './components/ProjectSideBar';
+import ProjectDescription from './components/ProjectDescription';
 import EditProjectForm from './components/EditProjectForm';
 import './ProjectShowcase.css';
 
@@ -24,11 +23,13 @@ class ProjectShowcase extends React.Component {
   render() {
     return (
       <div className="project-portal">
-        <Banner />
-        <Toolbar edit={this.edit} />
-        <ImageGallery />
-        <ProjectInfo />
         {this.state.isEditing && <EditProjectForm edit={this.edit} />}
+        <Banner />
+        <div className="project-info-container">
+            <ProjectDescription />
+            <ProjectSideBar />
+        </div>
+        
       </div>
     );
   }
