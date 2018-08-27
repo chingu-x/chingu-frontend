@@ -4,14 +4,6 @@ import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 import ReactMarkdown from "react-markdown";
 
-const updateProject = gql`
-  mutation updateProject($text: String) {
-    updateProject(text: $text) @client {
-      text
-    }
-  }
-`;
-
 const md = `
 **Tell us about your project**
 
@@ -36,13 +28,13 @@ class ProjectDescription extends React.Component {
     text: this.props.text || md
   };
 
-  toggleEditWithSave = mutation => {
+  toggleEditWithSave = () => {
     let { isEditing } = this.state;
 
     this.setState({ isEditing: !isEditing });
 
     if (isEditing) {
-      this.handleMutation(mutation);
+      this.makeMutation();
     }
   };
 
@@ -54,9 +46,9 @@ class ProjectDescription extends React.Component {
     });
   };
 
-  handleMutation = mutation => {
+  makeMutation = () => {
     const { text } = this.state;
-    mutation({ variables: { text } });
+    this.props.mutation({ variables: { text } });
   };
 
   render() {
@@ -66,35 +58,58 @@ class ProjectDescription extends React.Component {
     // FIXME: Error handling
     // FIXME: Save data to cache
     return (
-      <Mutation mutation={updateProject}>
-        {(updateProject, { data }) => {
-          return (
-            <div className="project-portal__about">
-              {editable && (
-                <button
-                  style={{ margin: "10px 20px" }}
-                  onClick={() => this.toggleEditWithSave(updateProject)}
-                >
-                  {isEditing ? "Done" : "Edit"}
-                </button>
-              )}
+      <div className="project-portal__about">
+        {editable && (
+          <button
+            style={{ margin: "10px 20px" }}
+            onClick={() => this.toggleEditWithSave()}
+          >
+            {isEditing ? "Done" : "Edit"}
+          </button>
+        )}
 
-              {isEditing ? (
-                <textarea
-                  name="text"
-                  value={this.state.text}
-                  style={{ width: "100%", minHeight: "500px" }}
-                  onChange={this.handleChange}
-                />
-              ) : (
-                <ReactMarkdown source={this.state.text} />
-              )}
-            </div>
-          );
-        }}
-      </Mutation>
+        {isEditing ? (
+          <textarea
+            name="text"
+            value={this.state.text}
+            style={{ width: "100%", minHeight: "500px" }}
+            onChange={this.handleChange}
+          />
+        ) : (
+          <ReactMarkdown source={this.state.text} />
+        )}
+      </div>
     );
   }
 }
 
-export default ProjectDescription;
+function withMutation(Component) {
+  const updateProject = gql`
+    mutation updateProject($text: String) {
+      updateProject(text: $text) @client {
+        text
+      }
+    }
+  `;
+
+  return props => (
+    <Mutation mutation={updateProject}>
+      {(updateProject, { error, loading, data }) => {
+        console.log("data from mutation", data);
+
+        if (error) {
+          return null;
+        }
+        if (loading) {
+          return null;
+        }
+
+        const text = data ? data.updateProject.text : props.text;
+
+        return <Component {...props} mutation={updateProject} text={text} />;
+      }}
+    </Mutation>
+  );
+}
+
+export default withMutation(ProjectDescription);
