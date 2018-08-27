@@ -28,20 +28,20 @@ const Request = ({
   component: Component,
   query,
   variables,
-  options, // TODO: unused?
+  options,
   globalLoader,
 }) => (
-  <Query query={query} variables={variables}>
-    {
-      ({ loading, error, data }) => {
-        if (error) return <Error error={error.message} /> // TODO: Pass goBack prop
-        globalLoader && toggleGlobalLoader(loading)
-        if (loading && globalLoader) return null
-        return <Component {...props} data={data} loading={loading} />
+    <Query query={query} variables={variables} {...options}>
+      {
+        ({ loading, error, data }) => {
+          if (error) return <Error error={error.message} /> // TODO: Pass goBack prop
+          globalLoader && toggleGlobalLoader(loading)
+          if (loading && globalLoader) return null
+          return <Component {...props} data={data} loading={loading} />
+        }
       }
-    }
-  </Query>
-);
+    </Query>
+  );
 
 Request.propTypes = {
   component: PropTypes.func.isRequired,
