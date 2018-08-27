@@ -6,16 +6,12 @@ import './ProjectShowcase.css';
 
 /*
 
-This component should only be concerned with the overall layout of the page and whether it is being edited or not. It should also control the permissions for edits based on if user is logged in and if they are a part of this project.
+This component should only be concerned with the overall layout of the page and whether it is editable.
 
 */
 class ProjectShowcase extends React.Component {
   state = {
-    isEditing: false
-  };
-
-  edit = () => {
-    this.setState({ isEditing: !this.state.isEditing });
+    editable: false
   };
 
   render() {
