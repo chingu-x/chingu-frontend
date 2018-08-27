@@ -3,26 +3,19 @@ import PropTypes from "prop-types";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 
-const updateProject = gql`
-  mutation updateProject($title: String, $elevator_pitch: String) {
-    updateProject(title: $title, elevator_pitch: $elevator_pitch) @client {
-      title
-      elevator_pitch
-    }
-  }
-`;
-
 class Banner extends React.Component {
   static propTypes = {
     editable: PropTypes.bool,
     title: PropTypes.string,
-    elevatorPitch: PropTypes.string
+    elevatorPitch: PropTypes.string,
+    mutation: PropTypes.func
   };
 
   static defaultProps = {
     editable: false,
     title: "",
-    elevatorPitch: ""
+    elevatorPitch: "",
+    mutation: console.log
   };
 
   state = {
@@ -31,13 +24,14 @@ class Banner extends React.Component {
     elevatorPitch: this.props.elevatorPitch
   };
 
-  toggleEditWithSave = mutation => {
+  toggleEditWithSave = () => {
     let { isEditing } = this.state;
-    this.setState({ isEditing: !isEditing });
 
     if (isEditing) {
-      this.handleMutation(mutation);
+      this.makeMutation();
     }
+
+    this.setState({ isEditing: !isEditing });
   };
 
   handleChange = e => {
@@ -47,58 +41,88 @@ class Banner extends React.Component {
     });
   };
 
-  handleMutation = mutation => {
+  makeMutation = () => {
     const { title, elevatorPitch } = this.state;
+    const { mutation } = this.props;
+
     mutation({ variables: { title, elevator_pitch: elevatorPitch } });
   };
 
   render() {
+    console.log("component props", this.props);
+
     const { isEditing, title, elevatorPitch } = this.state;
     const { editable } = this.props;
 
     return (
-      // FIXME: Error handling
-      // FIXME: Save data to cache
-      <Mutation mutation={updateProject}>
-        {(updateProject, { data }) => {
-          return (
-            <div className="project-portal__banner">
-              {editable && (
-                <button
-                  style={{ margin: "10px 20px" }}
-                  onClick={() => this.toggleEditWithSave(updateProject)}
-                >
-                  {isEditing ? "Done" : "Edit"}
-                </button>
-              )}
-              <h1>
-                {isEditing ? (
-                  <input
-                    name="title"
-                    value={title}
-                    onChange={this.handleChange}
-                  />
-                ) : (
-                  title
-                )}
-              </h1>
-              <p>
-                {isEditing ? (
-                  <input
-                    name="elevatorPitch"
-                    value={elevatorPitch}
-                    onChange={this.handleChange}
-                  />
-                ) : (
-                  elevatorPitch
-                )}
-              </p>
-            </div>
-          );
-        }}
-      </Mutation>
+      <div className="project-portal__banner">
+        {editable && (
+          <button
+            style={{ margin: "10px 20px" }}
+            onClick={() => this.toggleEditWithSave()}
+          >
+            {isEditing ? "Done" : "Edit"}
+          </button>
+        )}
+        <h1>
+          {isEditing ? (
+            <input name="title" value={title} onChange={this.handleChange} />
+          ) : (
+            title
+          )}
+        </h1>
+        <p>
+          {isEditing ? (
+            <input
+              name="elevatorPitch"
+              value={elevatorPitch}
+              onChange={this.handleChange}
+            />
+          ) : (
+            elevatorPitch
+          )}
+        </p>
+      </div>
     );
   }
 }
 
-export default Banner;
+function withMutation(Component) {
+  const updateProject = gql`
+    mutation updateProject($title: String, $elevator_pitch: String) {
+      updateProject(title: $title, elevator_pitch: $elevator_pitch) @client {
+        title
+        elevator_pitch
+      }
+    }
+  `;
+
+  return props => (
+    <Mutation mutation={updateProject}>
+      {(updateProject, { error, loading, data }) => {
+        if (error) {
+          return null;
+        }
+        if (loading) {
+          return null;
+        }
+
+        const title = data ? data.updateProject.title : props.title;
+        const elevator_pitch = data
+          ? data.updateProject.elevator_pitch
+          : props.elevatorPitch;
+
+        return (
+          <Component
+            {...props}
+            mutation={updateProject}
+            title={title}
+            elevatorPitch={elevator_pitch}
+          />
+        );
+      }}
+    </Mutation>
+  );
+}
+
+export default withMutation(Banner);
