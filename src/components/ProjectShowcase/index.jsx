@@ -54,6 +54,7 @@ class ProjectShowcase extends React.Component {
     return (
       <Query
       query={getProjectAndUser}
+      // FIXME[1]
       variable={{title: 'vampires Team 0 Project'}}>
         {({ error, loading, data}) => {
           
