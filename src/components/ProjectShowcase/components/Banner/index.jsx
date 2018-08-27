@@ -1,7 +1,13 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
+/*
 
+TODO:
+- Make mutations to update Project.title and Project.elevator_pitch
+- Styling
+
+*/
 class Banner extends React.Component {
   static propTypes = {
     editable: PropTypes.bool,

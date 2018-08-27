@@ -2,6 +2,15 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 
+
+/*
+
+TODO:
+- Make mutations to update Project.description
+- Styling
+
+*/
+
 const md = `
 **Tell us about your project**
 
