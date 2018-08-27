@@ -2,8 +2,8 @@ import * as React from "react";
 import Banner from './components/Banner';
 import ProjectSideBar from './components/ProjectSideBar';
 import ProjectDescription from './components/ProjectDescription';
+import getProjectAndUser from './graphql/getProjectAndUser';
 import { Query } from 'react-apollo';
-import { gql } from 'apollo-boost';
 import './ProjectShowcase.css';
 
 /*
@@ -11,29 +11,6 @@ import './ProjectShowcase.css';
 This component should only be concerned with the overall layout of the page and whether it is editable.
 
 */
-const getProjectAndUser = gql`
-  query getProjectAndUser($title: String) {
-    user {
-      id
-    }
-    projects(title: $title) { # FIXME[1]: Update query for retrieving a single Project based on route params
-      id
-      title
-      description
-      project_url
-      github_url
-      users {
-        id
-        username
-        avatar
-      }
-      skills{
-        id
-        name
-      }
-    }
-  }
-`
 
 class ProjectShowcase extends React.Component {
   state = {
@@ -63,20 +40,22 @@ class ProjectShowcase extends React.Component {
           
           const {user, projects} = data;
           const project = projects[0]; // FIXME[1]
-
+          console.log(project);
           return (
             <div className="project-portal">
               <Banner
-                editable={this.isEditable(user, project)}
+                editable={true}
+                // editable={this.isEditable(user, project)}
                 title={project.title}
                 elevatorPitch={project.elevatorPitch}
               />
               <div className="project-info-container">
                   <ProjectDescription
-                    editable={this.isEditable(user, project)}
+                    // editable={this.isEditable(user, project)}
+                    editable={true}
                     text={project.description}
                   />
-                  <ProjectSideBar />
+                  <ProjectSideBar project={project} />
               </div>
             </div>
           );
