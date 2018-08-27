@@ -1,13 +1,17 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { gql } from 'apollo-boost';
+import { Mutation } from 'react-apollo';
 
-/*
+const updateProject = gql`
+  mutation updateProject($title: String, $elevator_pitch: String) {
+    updateProject(title: $title, elevator_pitch: $elevator_pitch) @client {
+      title,
+      elevator_pitch
+    }
+  }
+`;
 
-TODO:
-- Make mutations to update Project.title and Project.elevator_pitch
-- Styling
-
-*/
 class Banner extends React.Component {
   static propTypes = {
     editable: PropTypes.bool,
@@ -27,8 +31,13 @@ class Banner extends React.Component {
     elevatorPitch: this.props.elevatorPitch
   };
 
-  toggleEdit = () => {
-    this.setState({ isEditing: !this.state.isEditing});
+  toggleEditWithSave = (mutation) => {
+    let { isEditing } = this.state;
+    this.setState({ isEditing: !isEditing});
+
+    if (isEditing) {
+      this.handleMutation(mutation);
+    }    
   }
 
   handleChange = (e) => {
@@ -38,20 +47,34 @@ class Banner extends React.Component {
     });
   }
 
+  handleMutation = (mutation) => {
+    const { title, elevatorPitch } = this.state;
+    mutation({variables: { title, elevator_pitch: elevatorPitch}});
+  }
+
   render() {
     const { isEditing, title, elevatorPitch} = this.state;
     const { editable } = this.props;
 
     return (
-      <div className="project-portal__banner">
-        { editable && <button style={{ margin: '10px 20px'}} onClick={this.toggleEdit}>{isEditing ? 'Done' : 'Edit'}</button> }
-        <h1>{isEditing ? <input name="title" value={title} onChange={this.handleChange} /> : title}</h1>
-        <p>
-          {isEditing ? <input name="elevatorPitch" value={elevatorPitch} onChange={this.handleChange} /> : elevatorPitch}
-        </p>
-      </div>
+      // FIXME: Error handling
+      // FIXME: Save data to cache
+      <Mutation mutation={updateProject}>
+        {(updateProject, { data }) => {
+          return (
+            <div className="project-portal__banner">
+              { editable && <button style={{ margin: '10px 20px'}} onClick={() => this.toggleEditWithSave(updateProject)}>{isEditing ? 'Done' : 'Edit'}</button> }
+              <h1>{isEditing ? <input name="title" value={title} onChange={this.handleChange} /> : title}</h1>
+              <p>
+                {isEditing ? <input name="elevatorPitch" value={elevatorPitch} onChange={this.handleChange} /> : elevatorPitch}
+              </p>
+            </div>
+          );
+        }}
+      </Mutation>
     );
   }
 }
+
 
 export default Banner;
