@@ -23,7 +23,6 @@ class ProjectShowcase extends React.Component {
   render() {
     return (
       <div className="project-portal">
-        {this.state.isEditing && <EditProjectForm edit={this.edit} />}
         <Banner />
         <div className="project-info-container">
             <ProjectDescription />
