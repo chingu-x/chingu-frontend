@@ -55,8 +55,6 @@ class ProjectDescription extends React.Component {
     let { isEditing, text } = this.state;
     let { editable } = this.props;
 
-    // FIXME: Error handling
-    // FIXME: Save data to cache
     return (
       <div className="project-portal__about">
         {editable && (
@@ -71,7 +69,7 @@ class ProjectDescription extends React.Component {
         {isEditing ? (
           <textarea
             name="text"
-            value={this.state.text}
+            value={text}
             style={{ width: "100%", minHeight: "500px" }}
             onChange={this.handleChange}
           />
