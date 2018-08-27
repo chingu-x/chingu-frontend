@@ -53,7 +53,6 @@ INFO CONTAINER
     font-size: 14px;
     color: $lighter-grey;
     text-transform: uppercase;
-
 }
 
 .team-card-info--data {
@@ -61,10 +60,11 @@ INFO CONTAINER
     font-size: 14px;
     color: $dark-grey;
     max-height: 100px;
-    align-self: start;
+    align-items: start;
 }
 
 .team-card-techstack {
+    grid-column: 1 / -1;
     display: inline-block;
     font-size: 12px;
     color: $dark-grey;
@@ -79,8 +79,9 @@ USER IMAGES
 */
 .team-card-user {
     width: 45px;
+    height: 60px;
     display: inline-block;
-    margin-right: 20px;
+    margin-right: 14px;
     margin-bottom: 10px;
 }
 .team-card-avatar-img {
@@ -94,6 +95,7 @@ USER IMAGES
     font-size: 9px;
     color: $grey;
     text-align: center;
-
+    height: 30px;
+    display: none;
 }
 
