@@ -5,11 +5,20 @@ import { Mutation } from "react-apollo";
 import ReactMarkdown from "react-markdown";
 
 const md = `
-**Tell us about your project**
+## Tell us about your project here!
 
-What inspired you? What was the problem that you were trying to solve? What did you learn by completing this project?
+Here are some things to help guide your description:
+- What inspired you? 
+- What was the problem that you were trying to solve? 
+- What did each of you work on?
+- What did you learn by completing this project?
 
-(Feel free to use Markdown)
+This panel is markdown supported (like github), so feel free to use 
+text formatting as needed! For example, markdown images and code blocks 
+are ok~ Check out this link for more formatting info: 
+[Github Syntax](https://help.github.com/articles/basic-writing-and-formatting-syntax/)
+
+**We are all looking forward to reading about your projects!**
 `;
 
 class ProjectDescription extends React.Component {
