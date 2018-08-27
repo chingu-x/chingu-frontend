@@ -26,6 +26,7 @@ $pale-purple--hover: rgb(206, 206, 224);
 $theme-green: #15cf89;
 $theme-green--hover: rgb(25, 194, 129);
 $theme-green--light: #78d5b2;
+$theme-green--lightest: rgb(233, 247, 242);
 
 $darker-grey: #4f4f4f;
 $dark-grey: #7f7f7f;
@@ -206,6 +207,24 @@ MAIN BUTTONS
   letter-spacing: 0.1em;
   text-align: center;
   border: none;
+  display: block;
+  box-shadow: $box-shadow;
+  &:hover {
+    background-color: $hover;
+  }
+}
+
+@mixin system-button--sub($accent-color, $hover) {
+  width: 150px;
+  font-size: 14px;
+  background-color: white;
+  color: $accent-color;
+  text-transform: uppercase;
+  border-radius: $border-radius;
+  padding: 10px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  border: 1px solid $accent-color;
   display: block;
   box-shadow: $box-shadow;
   &:hover {

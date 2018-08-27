@@ -56,26 +56,37 @@ class ProjectDescription extends React.Component {
     let { editable } = this.props;
 
     return (
-      <div className="project-portal__about">
-        {editable && (
-          <button
-            style={{ margin: "10px 20px" }}
-            onClick={() => this.toggleEditWithSave()}
-          >
-            {isEditing ? "Done" : "Edit"}
-          </button>
-        )}
-
-        {isEditing ? (
-          <textarea
-            name="text"
-            value={text}
-            style={{ width: "100%", minHeight: "500px" }}
-            onChange={this.handleChange}
-          />
-        ) : (
-          <ReactMarkdown source={this.state.text} />
-        )}
+      <div className="project-portal__about-container">
+        <h1 className="project-subcategory-title">Project Description</h1>
+        <div className="project-portal__about">
+          {editable && (
+            <React.Fragment>
+              <button
+                className="project-portal__edit-button project-portal__positioning-1"
+                onClick={() => this.toggleEditWithSave()}
+              >
+                <div className="project-portal__edit-button--text">
+                  <img 
+                    className="project-portal__edit-button--img"
+                    src={require('../../../assets/edit-green.png')} 
+                    alt="edit" />
+                  {isEditing ? "Done" : "Edit"}
+                </div>
+              </button>
+              <hr className="project-side-panel--hline" />
+            </React.Fragment>
+          )}
+          {isEditing ? (
+            <textarea
+              name="text"
+              value={text}
+              style={{ width: "100%", minHeight: "500px" }}
+              onChange={this.handleChange}
+            />
+          ) : (
+              <ReactMarkdown source={this.state.text} />
+            )}
+        </div>
       </div>
     );
   }

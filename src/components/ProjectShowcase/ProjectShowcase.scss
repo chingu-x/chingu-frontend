@@ -238,6 +238,9 @@ CARDS (PROJECT SIDEBAR)
 .project-side-panel--hline {
   border-top: 1px solid $light-grey;
 }
+.project-portal__external-links {
+  grid-column: 1 / -1;
+}
 /*
 ==========================
 TAGS
@@ -280,59 +283,83 @@ TEAM / USER
 .project-portal__user-username {
   text-align: center;
 }
+
 /*
 ==========================
 PROJECT DESCRIPTION
 ==========================
 */
-.project-portal__about {
+.project-portal__about-container {
   grid-area: description;
 }
-
-.project-portal__external-links {
-  grid-column: 1 / -1;
+.project-portal__about {
+  background-color: white;
+  box-shadow: $box-shadow;
+  border-radius: $border-radius;
+  padding: 20px;
 }
 
-.project-portal__edit-form {
-  position: fixed;
-  background: rgba(0, 0, 0, 0.3);
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  right: 0;
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  form {
-    padding: 20px 50px;
-    width: 540px;
-    background: white;
-  }
-
-  div {
-    margin-bottom: 20px;
-  }
-
-  h2 {
-    text-transform: uppercase;
-    margin: 0;
-    font-size: 0.9em;
-    font-weight: 400;
-    color: $med-grey;
-  }
-
-  textarea {
-    width: 100%;
-    border: 1px solid $light-grey;
-    color: $darker-grey;
-    min-height: 100px;
-  }
-
-  input {
-    width: 100%;
-    border: 1px solid $light-grey;
-    color: $darker-grey;
-  }
+.project-portal__edit-button {
+  @include system-button--sub($theme-green, $theme-green--lightest);
+  width: 120px;
 }
+
+.project-portal__positioning-1  {
+  margin: 0 auto;
+  margin-right: 0px;
+  margin-bottom: 20px;
+}
+.project-portal__edit-button--text {
+  // display: inline-block;
+  text-align: center;
+}
+.project-portal__edit-button--img {
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
+
+// .project-portal__edit-form {
+//   position: fixed;
+//   background: rgba(0, 0, 0, 0.3);
+//   width: 100vw;
+//   height: 100vh;
+//   top: 0;
+//   right: 0;
+//   z-index: 9999;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+
+//   form {
+//     padding: 20px 50px;
+//     width: 540px;
+//     background: white;
+//   }
+
+//   div {
+//     margin-bottom: 20px;
+//   }
+
+//   h2 {
+//     text-transform: uppercase;
+//     margin: 0;
+//     font-size: 0.9em;
+//     font-weight: 400;
+//     color: $med-grey;
+//   }
+
+//   textarea {
+//     width: 100%;
+//     border: 1px solid $light-grey;
+//     color: $darker-grey;
+//     min-height: 100px;
+//   }
+
+//   input {
+//     width: 100%;
+//     border: 1px solid $light-grey;
+//     color: $darker-grey;
+//   }
+// }
