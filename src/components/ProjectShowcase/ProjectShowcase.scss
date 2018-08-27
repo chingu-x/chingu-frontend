@@ -256,7 +256,30 @@ TAGS
 TEAM / USER
 ==========================
 */
-
+.project-team-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: start;
+  grid-gap: 10px;
+}
+.project-portal__profile {
+  color: $dark-grey;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  justify-items: center;
+}
+.project-portal__user-avatar {
+  width: 75px;
+  height: 75px;
+  box-shadow: $box-shadow;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 50%;
+}
+.project-portal__user-username {
+  text-align: center;
+}
 /*
 ==========================
 PROJECT DESCRIPTION
@@ -264,25 +287,6 @@ PROJECT DESCRIPTION
 */
 .project-portal__about {
   grid-area: description;
-}
-
-
-.project-portal__team {
-  grid-column: 1 / -1;
-  ul {
-    padding: 0;
-  }
-  li {
-    display: inline-block;
-    margin-right: 15px;
-  }
-}
-
-.project-portal__profile {
-  grid-column: 1 / -1;
-  img {
-    border-radius: 50%;
-  }
 }
 
 .project-portal__external-links {
