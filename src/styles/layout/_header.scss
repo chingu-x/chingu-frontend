@@ -33,7 +33,7 @@
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 2px;
-  padding-top: 15px;
+  padding-top: 11px;
 
   .nav-logo {
     a {
@@ -63,6 +63,7 @@
     vertical-align: middle;
     float: right;
     z-index: $z-modal-peek;
+    cursor: pointer;
     // &:hover ~ .header-dropdown-content {
     //   visibility: visible;
     // }

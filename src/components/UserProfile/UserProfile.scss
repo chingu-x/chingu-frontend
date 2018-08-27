@@ -1,14 +1,18 @@
 @import '../../styles/abstracts/_variables.scss';
 
+.user-profile-background-color {
+  background-color: white;
+}
 .user-profile-container {
+  background: white;
   max-width: $max-width;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-areas: "i i v v v";
   margin: 0 auto;
-  margin-top: 100px;
-  padding: 50px 100px;
+  margin-top: 150px;
   grid-gap: 100px;
+  min-height: 100vh;
 }
 
 .user-profile {
