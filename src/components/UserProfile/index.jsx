@@ -33,7 +33,7 @@ const UserProfile = ({ data: { user } }) => {
                     voyageNumber={team.id}
                     startDate={team.cohort.start_date}
                     endDate={team.cohort.end_date}
-                    team={team.title}
+                    team={team}
                   />
                 )
               })
