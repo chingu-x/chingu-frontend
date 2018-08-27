@@ -76,11 +76,10 @@ export default (props) => {
   return (
     <Request
       {...props}
-      fromNewsfeed
       component={NewsFeed}
       query={newsfeedQuery}
       variables={variables}
-      options={{ pollInterval: 0 * 60 * 1000 }}
+      options={{ pollInterval: 5 * 60 * 1000 }}
     />
   )
 }

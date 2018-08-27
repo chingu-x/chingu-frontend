@@ -98,9 +98,13 @@
   display: block;
   padding-left: 20px;
   padding-right: 20px;
+  cursor: pointer;
+  &.active {
+    background-color: $theme-green--palest;
+    cursor: default;
+  }
   &:hover {
     background-color: $theme-green--palest;
-    cursor: pointer;
   }
 }
 
@@ -109,7 +113,6 @@
   padding: 5px 20px 5px 0px;
   color: $theme-green;
   display: inline-block;
-  cursor: pointer;
 }
 
 .sidebar-nav__label {
