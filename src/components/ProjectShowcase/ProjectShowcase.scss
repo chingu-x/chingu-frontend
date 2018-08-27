@@ -23,7 +23,7 @@ BANNER WTIH PROJECT TITLE
   color: #ffffff;
   min-height: 200px;
   padding-top: 30px;
-  background: linear-gradient(to right , #3b3c62,#74d6b1);
+  background: linear-gradient(to right , #74ebd5,#ACB6E5);
 }
 /*
 ==========================
@@ -327,6 +327,56 @@ PROJECT DESCRIPTION
   padding: 10px;
   resize: vertical;
   overflow: auto;
+  cursor: text;
+}
+
+.markdown {
+  color: $dark-grey;
+  h1 {
+    font-size: 36px;
+    border-bottom: 1px solid $light-grey;
+  }
+  h2 {
+    font-size: 30px;
+    border-bottom: 1px solid $light-grey;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+  h5 {
+    font-size: 14px;
+  }
+  h6 {
+    font-size: 10px;
+  }
+  blockquote {
+    border-left: 8px solid $light-grey;
+    p {
+      margin-left: 8px;
+    }
+  }
+  pre {
+    background-color: $palest-grey;
+    padding: 10px;
+  }
+  p {
+    font-size: 14px;
+
+    img {
+      max-width: 100%;
+    }
+
+    a {
+      color: $theme-green;
+    }
+  }
+  table {
+    border-color: $dark-grey;
+    color: $dark-grey;
+  }
 }
 // .project-portal__edit-form {
 //   position: fixed;

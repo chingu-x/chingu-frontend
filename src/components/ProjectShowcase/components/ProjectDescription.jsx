@@ -66,9 +66,9 @@ class ProjectDescription extends React.Component {
                 onClick={() => this.toggleEditWithSave()}
               >
                 <div className="project-portal__edit-button--text">
-                  <img 
+                  <img
                     className="project-portal__edit-button--img"
-                    src={require('../../../assets/edit-green.png')} 
+                    src={require('../../../assets/edit-green.png')}
                     alt="edit" />
                   {isEditing ? "Done" : "Edit"}
                 </div>
@@ -81,11 +81,13 @@ class ProjectDescription extends React.Component {
               name="text"
               value={text}
               className="project-portal__edit-box"
-              style={{ width: "100%", minHeight: "500px" }}
               onChange={this.handleChange}
             />
           ) : (
-              <ReactMarkdown source={this.state.text} />
+              <div className="markdown">
+                <ReactMarkdown source={this.state.text} />
+              </div>
+
             )}
         </div>
       </div>
