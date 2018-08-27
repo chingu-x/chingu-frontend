@@ -23,6 +23,7 @@ const NewsFeed = ({ type, loading, data }) => {
 
   // TODO: Check where is team coming from in the new query response
   const renderFeed = ({ newsfeed: { chingu, other, team } }) => {
+    console.log('chingu=' + chingu);
     let dataToRender = (
       <React.Fragment>
         {
@@ -30,11 +31,11 @@ const NewsFeed = ({ type, loading, data }) => {
             ? <TeamCard team={team} />
             : renderNewsfeedItems(chingu)
         }
-        {(other && chingu.length > 0) || (other && team.length > 0 ) && <hr className="hl" />}
+        {(other && chingu.length > 0 ||  team) && <hr className="hl" />}
         {renderNewsfeedItems(other)}
       </React.Fragment>
     );
-    return (!other && !chingu ? <NoNews /> : dataToRender);
+    return ((other.length === 0 && chingu.length === 0) ? <NoNews /> : dataToRender);
   }
 
 return (

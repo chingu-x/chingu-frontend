@@ -12,7 +12,7 @@ const NoNews = () => {
         alt="sad"
       />
       <div className="no-news-text">
-        No News Yet -- Please Check Back Later!
+        No News Yet - Please Check Back Later!
       </div>
     </div>
   )
