@@ -80,6 +80,7 @@ class ProjectDescription extends React.Component {
             <textarea
               name="text"
               value={text}
+              className="project-portal__edit-box"
               style={{ width: "100%", minHeight: "500px" }}
               onChange={this.handleChange}
             />

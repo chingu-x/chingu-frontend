@@ -319,7 +319,15 @@ PROJECT DESCRIPTION
   height: 20px;
   margin-right: 6px;
 }
-
+.project-portal__edit-box {
+  width: 100%;
+  min-height: 500px;
+  box-shadow: $box-shadow;
+  border: 1px solid $light-grey;
+  padding: 10px;
+  resize: vertical;
+  overflow: auto;
+}
 // .project-portal__edit-form {
 //   position: fixed;
 //   background: rgba(0, 0, 0, 0.3);
