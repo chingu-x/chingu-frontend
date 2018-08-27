@@ -19,14 +19,10 @@ function ExternalLinks() {
   return (
     <div className="project-subcategory">
       <h1 className="project-subcategory-title">Links</h1>
-      <ul>
-        <li>
-          <a href="#">GitHub Repo</a>
-        </li>
-        <li>
-          <a href="#">Live Preview</a>
-        </li>
-      </ul>
+      <div className="project-buttons-container">
+        <a className="project-buttons" href="#">GitHub Repo</a>
+        <a className="project-buttons" href="#">Live Preview</a>
+      </div>
     </div>
   );
 }

@@ -97,6 +97,22 @@ IMAGE-CAROUSEL (PREVIEW)
 }
 /*
 ==========================
+BUTTONS
+==========================
+*/
+.project-buttons-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-items: center;
+  grid-gap: 10px;
+}
+.project-buttons {
+  @include system-button($theme-green, $theme-green--hover);
+  width: 100%;
+}
+/*
+==========================
 OPEN IMAGE MODAL BTN
 ==========================
 */
