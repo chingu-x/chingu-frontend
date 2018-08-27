@@ -9,6 +9,7 @@ What inspired you? What was the problem that you were trying to solve? What did 
 
 (Feel free to use Markdown)
 `
+
 class ProjectDescription extends React.Component {
   static propTypes = {
     text: PropTypes.string,
@@ -30,7 +31,7 @@ class ProjectDescription extends React.Component {
 
   render() {
     const { isEditing } = this.state;
-    let { text } = this.props;
+    let { text, editable } = this.props;
 
     if (!text) {
       text = md;
@@ -38,7 +39,8 @@ class ProjectDescription extends React.Component {
 
     return (
       <div className="project-portal__about">
-        <button style={{ margin: '10px 20px'}}onClick={this.toggleEdit}>{isEditing ? 'Done' : 'Edit'}</button>
+        { editable && <button style={{ margin: '10px 20px'}}onClick={this.toggleEdit}>{isEditing ? 'Done' : 'Edit'}</button> }
+        
         { 
           isEditing
           ? <textarea style={{width: '100%', minHeight: '500px'}}>{text}</textarea>
