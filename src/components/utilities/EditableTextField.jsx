@@ -146,7 +146,7 @@ EditableTextField.propTypes = {
   large: PropTypes.bool, // simple text input vs textarea
   // mutation variables expects shape { input: { fieldName: fieldData } }
   mutation: PropTypes.object, // mutation to update the Type
-  mutationName: PropTypes.string, // the GraphQL Type that is being edited
+  mutationName: PropTypes.string, // the name of the mutation for accessing response data
   fieldName: PropTypes.string, // the field of the Type to be edited
   fieldData: PropTypes.string, // the existing data for the field of the Type
   hasPermission: PropTypes.bool, // viewing User has permission to edit
