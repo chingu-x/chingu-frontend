@@ -32,7 +32,7 @@ export default () => (
           ({ location: { search } }) => <Login queryString={search} />
         }
         />
-      <Route
+      <Private
         exact path="/register"
         render={
           () => <Register version={null} /> // set custom 'chingu_application' version here
