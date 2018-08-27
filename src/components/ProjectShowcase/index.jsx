@@ -2,6 +2,7 @@ import * as React from "react";
 import Banner from './components/Banner';
 import ProjectSideBar from './components/ProjectSideBar';
 import ProjectDescription from './components/ProjectDescription';
+import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import './ProjectShowcase.css';
 
@@ -39,15 +40,34 @@ class ProjectShowcase extends React.Component {
     editable: false
   };
 
+  isEditable = (user, project) => {
+    return project.users.some((teamMember) => {
+      return user.id === teamMember.id;
+    });
+  }
+
+  getProjectId = () => {
+    return this.props.match.params.projectId;
+  }
+
   render() {
     return (
-      <div className="project-portal">
-        <Banner />
-        <div className="project-info-container">
-            <ProjectDescription />
-            <ProjectSideBar />
-        </div>
-      </div>
+      <Query
+      query={getProjectAndUser}
+      variable={{title: 'vampires Team 0 Project'}}>
+        {({ error, loading, data}) => {
+          
+          if (error) { return null; }
+          if (loading) { return null; }
+          
+          const {user, projects} = data;
+          const project = projects[0]; // FIXME[1]
+
+          return (
+            <div className="project-portal">
+              <Banner editable={this.isEditable(user, project)}/>
+              <div className="project-info-container">
+                  <ProjectDescription editable={this.isEditable(user, project)}/>
                   <ProjectSideBar />
               </div>
             </div>
