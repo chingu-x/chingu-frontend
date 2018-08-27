@@ -2,7 +2,7 @@ import * as React from "react";
 import Banner from './components/Banner';
 import ProjectSideBar from './components/ProjectSideBar';
 import ProjectDescription from './components/ProjectDescription';
-import EditProjectForm from './components/EditProjectForm';
+import HeroImage from './components/HeroImage';
 import './ProjectShowcase.css';
 
 /*
