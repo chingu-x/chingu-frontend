@@ -38,6 +38,8 @@ SUBMIT BUTTON
 */
 .form-btn {
     @include system-button($theme-green, $theme-green--hover);
+    margin: 0 auto;
+    margin-top: 20px;
 }
 
 .hline {
