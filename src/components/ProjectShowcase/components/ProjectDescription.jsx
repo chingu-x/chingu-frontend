@@ -22,20 +22,25 @@ class ProjectDescription extends React.Component {
   }
 
   state = {
-    isEditing: false
+    isEditing: false,
+    text: this.props.text || md,
   };
 
   toggleEdit = () => {
     this.setState({ isEditing: !this.state.isEditing});
   }
 
-  render() {
-    const { isEditing } = this.state;
-    let { text, editable } = this.props;
+  handleChange = (e) => {
+    const { value, name } = e.target;
 
-    if (!text) {
-      text = md;
-    }
+    this.setState({
+      [name]: value
+    });
+  }
+
+  render() {
+    let { isEditing, text } = this.state;
+    let { editable } = this.props;
 
     return (
       <div className="project-portal__about">
@@ -43,8 +48,8 @@ class ProjectDescription extends React.Component {
         
         { 
           isEditing
-          ? <textarea style={{width: '100%', minHeight: '500px'}}>{text}</textarea>
-          : <ReactMarkdown source={text} />
+          ? <textarea name="text" value={this.state.text} style={{width: '100%', minHeight: '500px'}} onChange={this.handleChange} />
+          : <ReactMarkdown source={this.state.text} />
         }
       </div>
     );
