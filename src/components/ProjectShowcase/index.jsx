@@ -5,8 +5,6 @@ import ProjectDescription from './components/ProjectDescription';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import './ProjectShowcase.css';
-import getProjectQuery from './graphql/getProjectQuery';
-import Request from "../utilities/Request";
 
 /*
 
@@ -53,7 +51,6 @@ class ProjectShowcase extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Query
       query={getProjectAndUser}
@@ -88,12 +85,4 @@ class ProjectShowcase extends React.Component {
   }
 }
 
-export default props =>
-  <Request
-    {...props}
-    component={ProjectShowcase}
-    query={getProjectQuery}
-    variables={{ input: "vampires Team 0 Project" }}
-    loader={true}
-  />
-
+export default ProjectShowcase;
