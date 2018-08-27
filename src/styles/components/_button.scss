@@ -33,6 +33,21 @@
   }
 }
 
+.header-btn {
+  line-height: 2em;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 0.7em;
+  border: none;
+  white-space: nowrap;
+  background-color: color-list("accent");
+  color: color-list("text-light");
+  &:active {
+    color: color-list("primary");
+  }
+}
+
 .footer-btn {
   width: 100%;
   background-color: color-list("primary");

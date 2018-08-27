@@ -1,114 +1,71 @@
+@import "../abstracts/_variables.scss";
+
 .landing {
   position: relative;
 
   .landing-top {
     position: relative;
-    background-color: color-list("primary");
-    color: color-list("text-light");
-
-    @include media(">large") {
-      height: 94vh;
-    }
-
-    @include media(">desktop", "<=large") {
-      height: 80vh;
-    }
-
-    @include media(">tablet", "<=desktop") {
-      height: 65vh;
-    }
-
-    @include media(">small", "<=tablet") {
-      height: 60vh;
-    }
-
-    @include media("<=small") {
-      height: 54vh;
-    }
+    background-color: $theme-purple;
+    color: white;
+    width: 100vw;
+    max-width: 100%;
 
     .landing-img {
-      position: absolute;
-
-      @include media(">large") {
-        top: 30%;
-        right: 0;
-        height: 70%;
-        width: auto;
-      }
-
-      @include media(">desktop", "<=large") {
-        top: 40%;
-        right: 0;
-        height: 60%;
-        width: auto;
-      }
-
-      @include media(">small", "<=desktop") {
-        top: 50%;
-        right: 0;
-        height: 50%;
-        width: auto;
-      }
-
+      display: block;
+      position: relative;
+      height: auto;
+      width: 80vw;
+      margin: 0 auto;
+      max-width: 1200px;
+      padding-bottom: 50px;
       @include media("<=small") {
         display: none;
       }
     }
 
     .tagline-box {
-      position: absolute;
-      text-align: right;
-      text-transform: uppercase;
+      padding-top: 100px;
+      z-index: 10;
+      position: relative;
+      text-align: center;
+      display: block;
+      margin: 0 auto;
+      bottom: -50px;
+      letter-spacing: 2px;
+      width: 700px;
+      max-width: 90%;
 
-      @include media(">large") {
-        left: 150px;
-        top: 20%;
+      @media (min-width: 750px) {
+        padding-bottom: 40px;
       }
-
-      @include media(">desktop", "<=large") {
-        left: 100px;
-        top: 15%;
+      @media (max-width: 749px) {
+        padding-bottom: 60px;
       }
-
-      @include media(">tablet", "<=desktop") {
-        left: 75px;
-        top: 15%;
-      }
-
-      @include media(">small", "<=desktop") {
-        left: 50px;
-        top: 15%;
-      }
-
       @include media("<=small") {
-        position: relative;
-        top: 15%;
-        left: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        padding-bottom: 200px;
       }
 
       .tagline {
-        @include media(">large") {
-          font-size: 3em;
-        }
-
-        @include media(">desktop", "<=large") {
-          font-size: 2.5em;
-        }
-
-        @include media(">tablet", "<=desktop") {
-          font-size: 2.2em;
-        }
-
-        @include media(">small", "<=desktop") {
-          font-size: 2em;
+        font-weight: 600;
+        letter-spacing: 3px;
+        @include media(">small") {
+          font-size: 2.7em;
         }
 
         @include media("<=small") {
-          font-size: 2.5em;
+          font-size: 2em;
+        }
+      }
+      .tagline--subtext {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 20px;
+        @include media(">small") {
+          font-size: 1.4em;
+        }
+
+        @include media("<=small") {
+          font-size: 14px;
         }
       }
 
@@ -116,7 +73,7 @@
         margin: 1em 0;
         padding: 0.5em 1em;
         width: 200px;
-        border-radius: 10px;
+        border-radius: 20px;
         background-color: color-list("accent");
         color: color-list("text-light");
         font-size: 1.5em;
@@ -140,10 +97,11 @@
       margin: 0 auto;
       padding: 0.5em 0;
       width: 100%;
-      color: color-list("accent");
+      color: $dark-grey;
       font-size: 1.4em;
-      font-weight: bold;
+      font-weight: 500;
       text-transform: uppercase;
+      letter-spacing: 2px;
     }
 
     .landing-bar-items {
@@ -151,6 +109,7 @@
       flex-direction: row;
       justify-content: center;
       align-items: flex-start;
+      color: $dark-grey;
       width: 100%;
       padding: 2em 0;
       @include media("<=desktop") {
@@ -163,7 +122,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 2em 0;
+    // margin: 2em 0;
     width: 100%;
     text-align: center;
 
@@ -171,11 +130,23 @@
       margin: 0 auto;
       padding: 0.5em 0;
       width: 100%;
-      background-color: color-list("primary");
-      color: color-list("text-light");
+      background-color: $grey;
+      color: white;
       font-size: 1.4em;
-      font-weight: bold;
+      font-weight: 500;
       text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .cohorts-bar-subtitle {
+      background-color: $palest-grey;
+      width: 100%;
+      margin: 0 auto;
+      padding-top: 50px;
+      font-size: 1.4em;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: $dark-grey;
     }
 
     .cohorts-bar-items {
@@ -185,8 +156,8 @@
       align-items: flex-start;
       width: 100%;
       padding: 2em 0;
-      background-color: color-list("emphasis");
-      color: color-list("text-light");
+      background-color: $palest-grey;
+      color: $dark-grey;
       @include media("<=desktop") {
         justify-content: center;
         align-items: center;
@@ -207,8 +178,8 @@
       margin: 0 auto;
       padding: 0.5em 0;
       width: 100%;
-      background-color: color-list("primary");
-      color: color-list("text-light");
+      background-color: $grey;
+      color: white;
       font-size: 1.4em;
       font-weight: bold;
       text-transform: uppercase;
@@ -221,8 +192,8 @@
       align-items: flex-start;
       width: 100%;
       padding: 2em 0;
-      background-color: color-list("accent");
-      color: color-list("text-light");
+      background-color: $palest-grey;
+      color: $dark-grey;
       @include media("<=desktop") {
         justify-content: center;
         align-items: center;
@@ -232,15 +203,14 @@
   }
 
   .chingu-bar {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 2em 0;
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    max-width: $max-width;
     width: 100%;
     text-align: center;
-    min-height: 300px;
-    text-align: left;
-    @include media("<=desktop") {
+    @media(max-width: 1180px) {
+      text-align: center;
       align-items: center;
     }
 
@@ -249,16 +219,27 @@
       @include media("<=desktop") {
         padding: 0;
       }
-      
 
       .chingu-bar-title {
-        font-size: 4.5em;
+        font-size: 40px;
+        margin: 0;
         font-weight: bold;
-        color: color-list("accent");
+        color: $dark-grey;
       }
 
-      .chingu-bar-text {
-        max-width: 300px;
+      .chingu-green-btn {
+        margin: 1em 0;
+        padding: 0.5em 1em;
+        width: 200px;
+        border-radius: 10px;
+        background-color: color-list("accent");
+        color: color-list("text-light");
+        font-size: 1.5em;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: none;
+        outline: none;
+        cursor: pointer;
       }
     }
   }

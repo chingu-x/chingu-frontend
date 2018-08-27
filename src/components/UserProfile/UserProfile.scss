@@ -1,0 +1,60 @@
+@import '../../styles/abstracts/_variables.scss';
+
+.user-profile-background-color {
+  background-color: white;
+}
+.user-profile-container {
+  background: white;
+  max-width: $max-width;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: "i i v v v";
+  margin: 0 auto;
+  margin-top: 150px;
+  grid-gap: 100px;
+  min-height: 100vh;
+}
+
+.user-profile {
+  grid-area: i;
+}
+
+.user-voyages {
+ grid-area: v;
+ justify-self: center;
+}
+
+.user-voyage-title {
+    @include portal-subcategory;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+.user-voyage {
+  margin-bottom: 50px;
+}
+
+/*
+==========================
+MEDIA QUERY
+==========================
+*/
+@media (max-width: 1000px) {
+  .user-profile-container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "i"
+                          "v";
+    margin-top: 100px;
+    padding: 0px;
+    grid-gap: 100px;
+  }
+  .user-profile-container-personal {
+    margin: 0 auto;
+    max-width: 500px;
+  }
+  .user-voyage {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    margin-bottom: 100px;
+  }
+}

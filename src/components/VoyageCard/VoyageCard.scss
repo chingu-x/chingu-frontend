@@ -1,0 +1,119 @@
+@import '../../styles/abstracts/_variables.scss';
+/*
+==========================
+CARD
+==========================
+*/
+.card {
+  @include voyage-card($theme-green--light);
+}
+
+.card-circle {
+  @include voyage-badge($theme-purple);
+}
+
+.card--no-voyage {
+  border: 15px solid $grey;
+  color: $grey;
+}
+.card-info {
+  text-align: center;
+  flex-basis: 40%;
+}
+
+.card-info--header {
+  font-size: 20px;
+  text-transform: uppercase;
+  color: $theme-purple;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.card-info--date {
+  text-transform: uppercase;
+  color: $theme-purple;
+  font-size: 14px;
+  margin: 20px;
+}
+.card-info--teamTitle {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: $theme-purple;
+  letter-spacing: 2px;
+}
+.card-info--no-voyage {
+  text-align: center;
+  flex-basis: 40%;
+  margin: 5px 0px 15px 5px;
+  text-transform: uppercase;
+  color: $grey;
+}
+.card-number {
+  font-weight: 400;
+  padding-top: 5px;
+  font-size: 5rem;
+  text-align: center;
+  line-height: 3rem;
+  transform: translateY(10px);
+}
+
+.card-label {
+  display: block;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.card-left-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-right-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*
+==========================
+CARD ACTIONS
+==========================
+*/
+.action-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.action-button {
+  @include system-button($theme-green, $theme-green--hover);
+  box-shadow: $box-shadow-dark;
+}
+
+.action-warning {
+  text-transform: uppercase;
+  color: #EF8585;
+  font-size: 0.8rem;
+}
+
+.action-button--to-Voyage {
+  @include system-button($theme-green, $theme-green--hover);
+  width: 200px;
+  margin-top: 20px;
+  cursor: pointer;
+  box-shadow: $box-shadow-dark;
+  a {
+    color: white;
+    text-decoration: none;
+  }
+}
+.action-btn-done {
+  border: none;
+  background-color: $theme-green--light;
+  cursor: default;
+  box-shadow: none;
+  color: $theme-purple;
+  &:hover {
+    background-color: $theme-green--light;
+  }
+}
