@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { client } from "../../index.js";
-import { input, textarea } from "../DynamicForm/DynamicFormMaker/QuestionComponents";
+import { questionComponents } from "../DynamicForm/";
+const { text, textarea } = questionComponents;
 
 const EditFieldButton = ({ toggleEdit }) => (
   <button onClick={() => toggleEdit()}>
@@ -21,7 +22,7 @@ const EditArea = ({
   const inputData = { field_name: fieldName };
   const inputComponent = large
     ? textarea(inputData, onInputChange, data)
-    : input(
+    : text(
         { input_type: 'text', ...inputData },
         onInputChange,
         data
@@ -68,6 +69,7 @@ class EditableTextField extends React.Component {
   handleSubmit = () => {
     const { variables } = this.state;
     const { mutation } = this.props;
+    console.log('variables=' + variables);
     client.mutate({ mutation, variables })
       .then(this.handleUpdateData)
       .catch(console.error);
@@ -135,8 +137,7 @@ class EditableTextField extends React.Component {
         onMouseLeave={() => hasPermission && this.toggleDisplayEdit(false)}
       >
         {displayEdit && <EditButton toggleEdit={this.toggleEdit} />}
-        {/* <Component data={updatedData || fieldData} /> */}
-        <div>It works</div>
+        <Component data={updatedData || fieldData} />
       </div>
     );
   }
