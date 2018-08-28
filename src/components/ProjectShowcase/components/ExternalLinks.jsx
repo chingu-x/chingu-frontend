@@ -1,5 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
+import { gql } from "apollo-boost";
+import { Mutation } from "react-apollo";
 
 class ExternalLinks extends React.Component {
   static propTypes = {
@@ -95,4 +97,35 @@ class ExternalLinks extends React.Component {
   }
 }
 
-export default ExternalLinks;
+
+function withMutation(Component) {
+  const updateLinks = gql`
+    mutation updateProject($github_url: String, $project_url: String) {
+      updateProject(github_url: $github_url, project_url: $project_url) @client {
+        github_url
+        project_url
+      }
+    }
+  `;
+
+  return props => (
+    <Mutation mutation={updateLinks}>
+      {(updateProject, { error, loading, data }) => {
+        console.log("data from mutation", data);
+
+        if (error) {
+          return null;
+        }
+        if (loading) {
+          return null;
+        }
+
+        const text = data ? data.updateProject.text : props.text;
+
+        return <Component {...props} mutation={updateProject} text={text} />;
+      }}
+    </Mutation>
+  );
+}
+
+export default withMutation(ExternalLinks);
