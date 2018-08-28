@@ -94,8 +94,8 @@ class Footer extends React.Component {
   renderDesktopFooter() {
     return (
       <div className="footer">
-        {this.renderLinkBoxes()}
-        <div className="sub-box">
+          {this.renderLinkBoxes()}
+          {/* <div className="sub-box">
           <SubscribeForm
             onSubmit={e => this.handleSubmit(e)}
             onChange={e => this.handleOnChange(e)}
@@ -103,8 +103,8 @@ class Footer extends React.Component {
           <a href="https://www.patreon.com/user?u=4763160">
             <img src={patreon} alt="Become a Patron" />
           </a>
-        </div>
-        {this.renderSocialIcons()}
+        </div> */}
+          {this.renderSocialIcons()}
       </div>
     );
   }
