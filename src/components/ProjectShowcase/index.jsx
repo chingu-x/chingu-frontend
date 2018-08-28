@@ -6,7 +6,8 @@ import { getProjectAndUser, getUserId } from './graphql/getProjectAndUser';
 import { Query } from 'react-apollo';
 import './ProjectShowcase.css';
 import HeroImage from './components/HeroImage';
-import toggleGlobalLoader from "../utilities/toggleGlobalLoader"
+import Loader from "../Loader"
+import Error from "../Error"
 
 /*
 This component should only be concerned with the overall layout of the page and whether it is editable.
@@ -39,14 +40,13 @@ class ProjectShowcase extends React.Component {
 
           // if (error) { return null; }
           // if (loading) { return null; }
+          if (error) return <Error error={error.message} goBack="/" />
+          if (loading) return <Loader />
 
           // const { user, projects } = data;
           // const project = projects[0]; // FIXME[1]
-          // console.log(project);
-
-          toggleGlobalLoader(loading)
-          if (loading) return null
           const { project } = data
+          console.log({ project });
 
           return (
             <div className="project-portal">
