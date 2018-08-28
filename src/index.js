@@ -10,7 +10,7 @@ import "./styles/fontawesome/webfonts/fontawesome-all.css";
 import "./styles/main.css";
 import registerServiceWorker from "./registerServiceWorker";
 
-const mode = 'dev'
+const mode = 'prod'
 // create a new Apollo Client Instance
 const client = new ApolloClient({
   // The URL for your graphql server
