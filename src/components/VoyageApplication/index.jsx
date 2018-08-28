@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './VoyageApplication.css';
-import DynamicForm from "../DynamicForm";
+import { DynamicForm } from "../DynamicForm";
 import Request from "../utilities/Request"
 import { gql } from "apollo-boost";
 import { Redirect } from "react-router-dom";
@@ -88,5 +88,6 @@ export default props =>
     {...props} 
     component={VoyageApplicationContainer}
     query={VoyageApplicationUserQuery}
+    options={{ fetchPolicy: "network-only" }}
     globalLoader
   />
