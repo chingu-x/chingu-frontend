@@ -12,7 +12,7 @@ class HeroImage extends React.Component {
 
   static defaultProps = {
     editable: false,
-    imageLink: require('../../../assets/placeholder image.png'),
+    imageLink: `https://i.imgur.com/E63b9Re.png`,
     mutation: console.log
   };
 
@@ -53,10 +53,26 @@ class HeroImage extends React.Component {
 
     return (
       <div className="hero-image-container">
-        <img
-          className="hero-image"
-          src={this.state.imageLink}
-          alt="" />
+        {isEditing ? (
+          <React.Fragment>
+            <img
+              className="hero-image"
+              src={this.state.imageLink}
+              alt="" />
+            <input
+              className="hero-image__edit-input"
+              name="imageLink"
+              value={imageLink}
+              onChange={this.handleChange} />
+          </React.Fragment>
+
+        ) : (
+            <img
+              className="hero-image"
+              src={this.state.imageLink}
+              alt="" />
+          )}
+
         {editable && (
           <button
             className="project-portal__edit-button project-portal__positioning-3"

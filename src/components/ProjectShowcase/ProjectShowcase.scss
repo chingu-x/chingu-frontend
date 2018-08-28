@@ -371,6 +371,7 @@ HERO IMAGE
 .hero-image-container {
   background-color: $palest-grey;
   width: 100%;
+  height: 500px;
   padding: 40px 0px;
   margin-bottom: 40px;
   box-shadow: $box-shadow;
@@ -390,13 +391,30 @@ HERO IMAGE
   float: right;
   margin-right: 40px;
   box-shadow: none;
-  margin-top: -30px;
+  // margin-top: -10px;
   background-color: transparent;
   color: $theme-green;
   border: 1px solid $theme-green;
   &:hover {
     background-color: $theme-green--light;
   }
+}
+
+.hero-image__edit-input {
+
+  color: $dark-grey;
+  background-color: rgba(255, 255, 255, 0.877) !important;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid $light-grey;
+  padding: 10px;
+  display: block;
+  position: absolute;
+  margin: 0 auto;
+  left: calc(50% - 200px);
+  margin-top: 10px;
+  // margin-top: -200px;
+  width: 400px;
 }
 
 /*
