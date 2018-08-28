@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import DynamicFormMaker from "./DynamicFormMaker";
+import { dynamicFormMaker } from "./DynamicFormMaker";
 
 /**
  * @prop {array} questions array of Question data objects for rendering
@@ -116,7 +116,7 @@ class DynamicFormContainer extends React.Component {
    * 
    * - creates form Question components for each 'question'
    */
-  renderInputs = () => DynamicFormMaker(
+  renderInputs = () => dynamicFormMaker(
     this.props.questions,
     this.state.form_data,
     this._onFormChange,
