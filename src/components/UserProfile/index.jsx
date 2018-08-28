@@ -41,18 +41,21 @@ const UserProfile = ({ data: { user } }) => {
             }
           </section>
           <section className="user-voyage">
-            <div className="user-voyage-title">Upcoming Voyages</div>
             {
               pendingApproval.length > 0
                 ? pendingApproval.map((cohort, index) => {
                   return (
-                    <Cards.PendingApprovalVoyageCard
-                      key={cohort.id + "_" + index}
-                      voyageNumber={cohort.id}
-                      startDate={cohort.start_date}
-                      endDate={cohort.end_date}
-                      cohort={cohort.title}
-                    />
+                    <React.Fragment>
+                      <div className="user-voyage-title">Upcoming Voyages</div>
+                      <Cards.PendingApprovalVoyageCard
+                        key={cohort.id + "_" + index}
+                        voyageNumber={cohort.id}
+                        startDate={cohort.start_date}
+                        endDate={cohort.end_date}
+                        cohort={cohort.title}
+                      />
+                    </React.Fragment>
+
                   )
                 })
                 : null
