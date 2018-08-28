@@ -7,7 +7,6 @@
   min-height: 100vh;
   height: 100%;
   background-color: white;
- 
 }
 
 /*
@@ -31,6 +30,14 @@ TOOLBAR WITH PROJECT EDIT
     margin-right: 0.5em;
   }
 }
+
+/*
+==========================
+HERO IMAGE
+==========================
+*/
+
+
 /*
 ==========================
 OVERALL IMAGE CONTAINER
@@ -353,6 +360,15 @@ BANNER WTIH PROJECT TITLE
 
 .project-portal__banner--subheader {
   font-size: 16px;
+}
+
+.project-portal__banner-edit  {
+  color: white;
+  background-color: rgba(228, 228, 228, 0.2) !important;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid $light-grey;
+  padding: 5px;
 }
 /*
 

@@ -58,7 +58,11 @@ class Banner extends React.Component {
       <div className="project-portal__banner">
         <div className="project-portal__banner--header">
           {isEditing ? (
-            <input name="title" value={title} onChange={this.handleChange} />
+            <input 
+              className="project-portal__banner-edit" 
+              name="title" 
+              value={title} 
+              onChange={this.handleChange} />
           ) : (
               title
             )}
@@ -66,6 +70,7 @@ class Banner extends React.Component {
         <div className="project-portal__banner--subheader">
           {isEditing ? (
             <input
+              className="project-portal__banner-edit"
               name="elevatorPitch"
               value={elevatorPitch}
               onChange={this.handleChange}
