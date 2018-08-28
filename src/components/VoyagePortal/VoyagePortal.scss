@@ -1,8 +1,12 @@
 @import '../../styles/abstracts/_variables.scss';
 
+.voyage-portal-background-color {
+  background-color: white;
+}
 .voyage-portal {
   max-width: $max-width;
   margin: 0 auto;
+  min-height: 100vh;
 }
 .voyage-portal-title {
   @include portal-title;
@@ -37,5 +41,8 @@ MEDIA QUERY
     width: 100vw;
     grid-template-columns: repeat(1, 1fr);
     justify-items: center;
+  }
+  .voyage-portal-subcategory {
+    text-align: center;
   }
 }

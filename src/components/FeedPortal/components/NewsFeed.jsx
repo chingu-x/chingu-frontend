@@ -21,7 +21,6 @@ const NewsFeed = ({ type, loading, data }) => {
     }),
   );
 
-  // TODO: Check where is team coming from in the new query response
   const renderFeed = ({ newsfeed: { chingu, other, team } }) => {
     let dataToRender = (
       <React.Fragment>
@@ -30,11 +29,11 @@ const NewsFeed = ({ type, loading, data }) => {
             ? <TeamCard team={team} />
             : renderNewsfeedItems(chingu)
         }
-        {(team || chingu.length > 0) && other && <hr className="hl" />}
+        {(team || !!chingu.length) && other && <hr className="hl" />}
         {renderNewsfeedItems(other)}
       </React.Fragment>
     );
-    return (!other && !chingu ? <NoNews /> : dataToRender);
+    return ((!other.length && !chingu.length) ? <NoNews /> : dataToRender);
   }
 
   return (
@@ -45,7 +44,7 @@ const NewsFeed = ({ type, loading, data }) => {
       <div className="portal-panel__feed">
         {
           loading
-            ? <div style={{ height: "600px" }}><Loader style="medium" /></div>
+            ? <Loader height="600px" size="medium" />
             : renderFeed(data)
         }
       </div>
