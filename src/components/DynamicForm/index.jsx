@@ -1,193 +1,96 @@
-import * as React from "react";
-import { DynamicFormMaker } from './DynamicFormMaker';
-import { Mutation } from "react-apollo";
-import { Redirect } from "react-router-dom";
-import Request from "../utilities/Request"
-import dynamicFormQuery from "./graphql/dynamicFormQuery"
-import { gql } from "apollo-boost";
-import * as qs from "query-string";
+import React from "react";
+import PropTypes from "prop-types";
+import { Query } from "react-apollo";
+import qs from "query-string";
+
 import './DynamicForm.css';
-// import Loader from '../Loader';
+import Loader from '../Loader';
 import Error from '../Error';
+import { client } from "../../";
+import {
+  DynamicFormWrapper,
+  DynamicFormContainer,
+  dynamicFormMaker,
+  questionComponents,
+} from "./components";
 
-// const dynamicFormQuery = gql`
-//   query getDynamicForm(
-//     $purpose:FormPurposeEnum!
-//     $version:Int){
-//     form(
-//       purpose:$purpose
-//       version: $version
-//     ) {
-//       id
-//       purpose
-//       version
-//       questions {
-//         id
-//         field_name
-//         text
-//         subtext
-//         input_type
-//         options
-//         minlength
-//         maxlength
-//       }
-//     }
-//   }
-// `;
+import dynamicFormQuery from "./dynamicFormQuery";
+import dynamicFormSubmitMutation from "./dynamicFormSubmitMutation";
 
-// this is the actual export
+/**
+ * @prop {string} purpose Dynamic Form purpose
+ * --- OPTIONAL ---
+ * @prop {number} version Dynamic Form version for given purpose
+ * @prop {object} hiddenData object of values for hidden inputs
+ * @prop {string} queryString query string data for hidden inputs
+ * @prop {object} mutation alternative mutation (default submitDynamicForm)
+ * @prop {func} onSubmit custom handler for submit
+ * @prop {func} onResponse custom handler for mutation response data
+ * @prop {func} onError custom handler for mutation error
+ */
 const DynamicForm = (
   {
     purpose,
     version,
     hiddenData,
     queryString,
-    submitRedirect,
-    data
+    mutation,
+    onSubmit,
+    onResponse,
+    onError,
   },
-) => {
-  return (
-    <DynamicFormContainer
-      purpose={purpose}
-      version={data.form.version}
-      questions={data.form.questions}
-      submitRedirect={submitRedirect}
-      hiddenData={
-        queryString || hiddenData ?
-          Object.assign(hiddenData, qs.parse(queryString)) :
-          null
-      }
-    />
-  );
-}
-
-
-// this is a mutation-wrapped "submit" button
-const DynamicFormSubmit = ({ onSubmit, submitRedirect, variables }) => {
-  const submitDynamicFormMutation = gql`
-    mutation submitForm(
-      $purpose: FormPurposeEnum!
-      $version: Int
-      $form_data: JSON!
-    ) {
-      formSubmit(
-        purpose: $purpose,
-        version: $version,
-        form_data: $form_data
-      ) {
-        id
-      }
-    }
-  `;
-
-  return (
-    <Mutation mutation={submitDynamicFormMutation}>
-      {
-        (submitMutation, { loading, error, data }) => {
-          // if (loading) return <Loader />;
-          if (error) return <Error error={error.message} />;
-          if (data) return <Redirect to={submitRedirect || "/profile"} />
+) => (
+  <Query query={dynamicFormQuery} variables={{ purpose, version }}>
+    {
+      ({ data, loading, error }) => {
+        if (loading) return <Loader />;
+        if (error) return <Error error={error.message} />;
+        if (data.dynamicFormData) {
+          const { dynamicFormData } = data;
           return (
-            <button
-              className="form-btn"
-              type="submit"
-              value="submit"
-              onClick={(e) => {
-                e.preventDefault();
-                onSubmit(submitMutation, variables);
-              }}
-            >
-              {loading ? "Submitting..." : "Submit"} {/*TODO: Testing. Revert to loader. */}
-            </button>
+            <DynamicFormWrapper
+              client={client}
+              mutation={mutation}
+              hiddenData={
+                queryString || hiddenData ?
+                  Object.assign(hiddenData, qs.parse(queryString)) :
+                  null
+              }
+              onSubmit={onSubmit}
+              onResponse={onResponse}
+              onError={onError}
+              {...dynamicFormData}
+            />
           );
         }
+        return (
+          <Error
+            error={`No Dynamic Form found: purpose: ${purpose}, version: ${version}`}
+          />
+        )
       }
-    </Mutation>
-  );
+    }
+  </Query>
+);
+
+DynamicForm.propTypes = {
+  purpose: PropTypes.string,
+  version: PropTypes.number,
+  hiddenData: PropTypes.object,
+  queryString: PropTypes.string,
 }
 
-// this is the actual Form component (manages form state / rendering question components)
-class DynamicFormContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    // TODO: handle disabled flag for disabling(rendering) the submit button
-    // let questions control a disabled flag in on form change
-    const { purpose, version, questions } = props;
-    this.state = {
-      purpose,
-      version,
-      questions,
-      form_data: this.mapFormDataFields(questions), // snake_case for API
-    }
+DynamicForm.defaultProps = {
+  mutation: dynamicFormSubmitMutation,
+  onSubmit: null,
+  onResponse: null,
+  onError: null,
+}
 
-    this.onFormChange = this.onFormChange.bind(this);
-  }
-
-  mapFormDataFields = (questions) => questions.reduce(
-    (form_data, { field_name, input_type }) => {
-      // creates a Set for multiple answers
-      if (
-        // add other multiple answer types here
-        [
-          'checkbox',
-          'checkbox_2_column',
-          'dropdown_multiple',
-        ].includes(input_type)
-      ) form_data[field_name] = new Set();
-      else form_data[field_name] = '';
-
-      // insert hidden field values from hiddenData
-      // passed as hiddenData or queryString prop into <DynamicForm>
-      if (input_type === 'hidden') {
-        const hiddenValue = this.props.hiddenData[field_name];
-        if (!hiddenValue) console.error(`Missing hiddenData: ${field_name}`);
-        form_data[field_name] = hiddenValue;
-      }
-      return form_data;
-    },
-    {},
-  );
-
-  toggleValueInSet = (set, value) => {
-    set.has(value) ? set.delete(value) : set.add(value);
-    return set;
-  }
-
-  onFormChange = ({ currentTarget }) => {
-    const { name, value, type } = currentTarget;
-    const form_data = { ...this.state.form_data };
-
-    form_data[name] = type === 'checkbox' ?
-      form_data[name] = this.toggleValueInSet(form_data[name], value) :
-      form_data[name] = value;
-
-    this.setState({ form_data });
-  }
-
-  onSubmit = (submitMutation, variables) => submitMutation({ variables });
-
-  render() {
-    const { purpose, version, questions, form_data } = this.state;
-    return (
-      <div>
-        {DynamicFormMaker(questions, this.onFormChange, form_data)}
-        <hr className="hline" />
-        <DynamicFormSubmit
-          onSubmit={this.onSubmit}
-          submitRedirect={this.props.submitRedirect}
-          variables={{ purpose, version, form_data }}
-        />
-      </div>
-    );
-  }
+export {
+  DynamicForm,
+  DynamicFormWrapper,
+  DynamicFormContainer,
+  dynamicFormMaker,
+  questionComponents,
 };
-
-export default props => (
-  <Request
-    {...props}
-    component={DynamicForm}
-    query={dynamicFormQuery}
-    variables={{ purpose: props.purpose, version: props.version }}
-    globalLoader
-   />
-)

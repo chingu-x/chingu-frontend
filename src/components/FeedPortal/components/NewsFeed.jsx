@@ -21,9 +21,7 @@ const NewsFeed = ({ type, loading, data }) => {
     }),
   );
 
-  // TODO: Check where is team coming from in the new query response
   const renderFeed = ({ newsfeed: { chingu, other, team } }) => {
-    console.log('chingu=' + chingu);
     let dataToRender = (
       <React.Fragment>
         {
@@ -31,27 +29,27 @@ const NewsFeed = ({ type, loading, data }) => {
             ? <TeamCard team={team} />
             : renderNewsfeedItems(chingu)
         }
-        {(other && chingu.length > 0 ||  team) && <hr className="hl" />}
+        {(team || !!chingu.length) && other && <hr className="hl" />}
         {renderNewsfeedItems(other)}
       </React.Fragment>
     );
-    return ((other.length === 0 && chingu.length === 0) ? <NoNews /> : dataToRender);
+    return ((!other.length && !chingu.length) ? <NoNews /> : dataToRender);
   }
 
-return (
-  <div className="main-container">
-    <div className="title">
-      {!loading && getTitle(data.newsfeed.team)}
-    </div>
-    <div className="portal-panel__feed">
-      {
-        loading
-          ? <div style={{ height: "600px" }}><Loader style="medium" /></div>
-          : renderFeed(data)
-      }
-    </div>
-  </div >
-)
+  return (
+    <div className="main-container">
+      <div className="title">
+        {data.newsfeed && getTitle(data.newsfeed.team)}
+      </div>
+      <div className="portal-panel__feed">
+        {
+          loading
+            ? <Loader height="600px" size="medium" />
+            : renderFeed(data)
+        }
+      </div>
+    </div >
+  )
 }
 
 NewsFeed.propTypes = {
@@ -64,7 +62,6 @@ NewsFeed.propTypes = {
 NewsFeed.defaultProps = {
   type: "ALL",
 }
-
 
 export default (props) => {
   const variables = {

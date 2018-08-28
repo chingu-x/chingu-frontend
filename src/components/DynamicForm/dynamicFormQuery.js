@@ -1,14 +1,10 @@
-import { gql } from "apollo-boost"
+import { gql } from "apollo-boost";
 
-export default gql`
-  query getDynamicForm(
+const dynamicFormQuery = gql`
+  query dynamicFormQuery(
     $purpose:FormPurposeEnum!
     $version:Int){
-      user {
-        id
-        status
-      }
-    form(
+    dynamicFormData: form(
       purpose:$purpose
       version: $version
     ) {
@@ -28,3 +24,5 @@ export default gql`
     }
   }
 `;
+
+export default dynamicFormQuery;
