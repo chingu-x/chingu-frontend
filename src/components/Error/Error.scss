@@ -2,6 +2,7 @@
 
 .error-page-container {
     @include modal--solid-background;
+    overflow: scroll;
 }
 .error-page-modal {
     z-index: 210;

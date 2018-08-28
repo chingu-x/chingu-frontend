@@ -86,8 +86,15 @@ class Header extends React.Component {
         {
           this.state.showPortalDropdown && 
           <div className="header-dropdown-content--centered portal">
-            {teamsDOM}
-            
+            {/* {teamsDOM} */}
+            <Link 
+              to="/feed"
+              // onMouseOver={() => client.query({ query: voyagesQuery })}
+            >
+              Newsfeed
+            </Link>
+            <hr />
+
             <Link 
               to="/voyage"
               onMouseOver={() => client.query({ query: voyagesQuery })}

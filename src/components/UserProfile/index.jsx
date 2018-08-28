@@ -17,69 +17,72 @@ const UserProfile = ({ data: { user } }) => {
     }
   });
   return (
-    <div className="user-profile-container">
-      <aside className="user-profile">
-        <UserSideBar user={user} />
-      </aside>
-      <main className="user-voyages">
-        <section className="user-voyage">
-          <div className="user-voyage-title">Current Voyages</div>
-          {currentTeams.length > 0
-            ? currentTeams.map((team, index) => {
-              return (
-                <Cards.CurrentVoyageCardWithTeam
-                  key={team.id + "_" + index}
-                  voyageNumber={team.id}
-                  startDate={team.cohort.start_date}
-                  endDate={team.cohort.end_date}
-                  team={team.title}
-                />
-              )
-            })
-            : <Cards.ApplyForAVoyageCard />
-          }
-        </section>
-        <section className="user-voyage">
-          <div className="user-voyage-title">Upcoming Voyages</div>
-          {
-            pendingApproval.length > 0
-              ? pendingApproval.map((cohort, index) => {
+    <div className="user-profile-background-color">
+      <div className="user-profile-container">
+        <aside className="user-profile">
+          <UserSideBar user={user} />
+        </aside>
+        <main className="user-voyages">
+          <section className="user-voyage">
+            <div className="user-voyage-title">Current Voyages</div>
+            {currentTeams.length > 0
+              ? currentTeams.map((team, index) => {
                 return (
-                  <Cards.PendingApprovalVoyageCard
-                    key={cohort.id + "_" + index}
-                    voyageNumber={cohort.id}
-                    startDate={cohort.start_date}
-                    endDate={cohort.end_date}
-                    cohort={cohort.title}
+                  <Cards.CurrentVoyageCardWithTeam
+                    key={team.id + "_" + index}
+                    voyageNumber={team.id}
+                    startDate={team.cohort.start_date}
+                    endDate={team.cohort.end_date}
+                    team={team.title}
                   />
                 )
               })
-              : null
-          }
-        </section>
-        {
-          pastTeams.length > 0
-            ? <section className="user-voyage">
-              <div className="user-voyage-title">Past Voyages</div>
-              <div>
-                {pastTeams.map((team, index) => {
+              : <Cards.ApplyForAVoyageCard />
+            }
+          </section>
+          <section className="user-voyage">
+            <div className="user-voyage-title">Upcoming Voyages</div>
+            {
+              pendingApproval.length > 0
+                ? pendingApproval.map((cohort, index) => {
                   return (
-                    <Cards.PreviousVoyageCardWithTeam
-                      key={team.id + "_" + index}
-                      voyageNumber={team.id}
-                      startDate={team.cohort.start_date}
-                      endDate={team.cohort.end_date}
-                      team={team.title}
+                    <Cards.PendingApprovalVoyageCard
+                      key={cohort.id + "_" + index}
+                      voyageNumber={cohort.id}
+                      startDate={cohort.start_date}
+                      endDate={cohort.end_date}
+                      cohort={cohort.title}
                     />
                   )
-                })}
+                })
+                : null
+            }
+          </section>
+          {
+            pastTeams.length > 0
+              ? <section className="user-voyage">
+                <div className="user-voyage-title">Past Voyages</div>
+                <div>
+                  {pastTeams.map((team, index) => {
+                    return (
+                      <Cards.PreviousVoyageCardWithTeam
+                        key={team.id + "_" + index}
+                        voyageNumber={team.id}
+                        startDate={team.cohort.start_date}
+                        endDate={team.cohort.end_date}
+                        team={team.title}
+                      />
+                    )
+                  })}
 
-              </div>
-            </section>
-            : null
-        }
-      </main>
+                </div>
+              </section>
+              : null
+          }
+        </main>
+      </div>
     </div>
+
   )
 }
 

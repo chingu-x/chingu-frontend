@@ -56,32 +56,43 @@ class Banner extends React.Component {
 
     return (
       <div className="project-portal__banner">
-        {editable && (
-          <button
-            style={{ margin: "10px 20px" }}
-            onClick={() => this.toggleEditWithSave()}
-          >
-            {isEditing ? "Done" : "Edit"}
-          </button>
-        )}
-        <h1>
+        <div className="project-portal__banner--header">
           {isEditing ? (
-            <input name="title" value={title} onChange={this.handleChange} />
+            <input 
+              className="project-portal__banner-edit" 
+              name="title" 
+              value={title} 
+              onChange={this.handleChange} />
           ) : (
-            title
-          )}
-        </h1>
-        <p>
+              title
+            )}
+        </div>
+        <div className="project-portal__banner--subheader">
           {isEditing ? (
             <input
+              className="project-portal__banner-edit"
               name="elevatorPitch"
               value={elevatorPitch}
               onChange={this.handleChange}
             />
           ) : (
-            elevatorPitch
-          )}
-        </p>
+              elevatorPitch ? elevatorPitch : 'Put a short description of your project here!'
+            )}
+        </div>
+        {editable && (
+            <button
+              className="project-portal__edit-button project-portal__positioning-2"
+              onClick={() => this.toggleEditWithSave()}
+            >
+              <div className="project-portal__edit-button--text">
+                <img
+                  className="project-portal__edit-button--img"
+                  src={require('../../../../assets/edit-white.png')}
+                  alt="edit" />
+                {isEditing ? "Done" : "Edit"}
+              </div>
+            </button>
+        )}
       </div>
     );
   }
