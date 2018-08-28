@@ -68,8 +68,8 @@ class ExternalLinks extends React.Component {
             )}
             {isEditing ? (
               <React.Fragment>
-                <input type="text" name="githubURL" value={github_url} />
-                <input type="text" name="projectURL" value={project_url} />
+                <input type="text" name="githubURL" value={github_url} onChange={this.handleChange} />
+                <input type="text" name="projectURL" value={project_url} onChange={this.handleChange} />
               </React.Fragment>
             ) : (
               <React.Fragment>
