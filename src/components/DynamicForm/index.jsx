@@ -7,7 +7,13 @@ import './DynamicForm.css';
 import Loader from '../Loader';
 import Error from '../Error';
 import { client } from "../../";
-import { DynamicFormWrapper } from "./components";
+import {
+  DynamicFormWrapper,
+  DynamicFormContainer,
+  dynamicFormMaker,
+  questionComponents,
+} from "./components";
+
 import dynamicFormQuery from "./dynamicFormQuery";
 import dynamicFormSubmitMutation from "./dynamicFormSubmitMutation";
 
@@ -81,4 +87,10 @@ DynamicForm.defaultProps = {
   onError: null,
 }
 
-export default DynamicForm;
+export {
+  DynamicForm,
+  DynamicFormWrapper,
+  DynamicFormContainer,
+  dynamicFormMaker,
+  questionComponents,
+};
