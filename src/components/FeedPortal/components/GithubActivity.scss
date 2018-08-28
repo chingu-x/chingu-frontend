@@ -1,0 +1,25 @@
+@import '../../../styles/abstracts/_variables.scss';
+
+.github-activity-container {
+    background-color: $palest-grey;
+    @include newsfeed-card;
+}
+.github-activity-icon {
+    @include newsfeed-card--icon;
+}
+.github-activity-text {
+    @include newsfeed-card-text-container;
+}
+
+.github-activity-title, 
+.github-activity-subtitle {
+    @include newsfeed-card-text;
+}
+
+.github-activity-title {
+    color: $dark-grey;
+}
+
+.github-activity-subtitle {
+    color: $grey;
+}

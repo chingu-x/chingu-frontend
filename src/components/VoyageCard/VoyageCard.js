@@ -114,7 +114,16 @@ export const CurrentVoyageCardWithTeam = ({
   endDate,
   team,
 }) => {
-  let currentStandUp = team.standups.filter((standup) => standup.expiration > Number(new Date()));
+  const mock = [{
+    expiration: Date.now()  -  24*60*60*1000,
+    progress_sentiment: true
+  },{
+    expiration: Date.now() + 48*60*60*1000
+  }, {
+    expiration: Date.now() + 45,
+    progress_sentiment: true
+  }]
+  let currentStandUp = team.standups && team.standups.filter((standup) => standup.expiration > Number(new Date()));
   return (
     <VoyageCardCreator
       leftPanel={() => <Badge number={voyageNumber} />}
@@ -122,7 +131,13 @@ export const CurrentVoyageCardWithTeam = ({
       team={() => (
         <Title title={team.title ? team.title : null} />
       )}
-      action={() => currentStandUp[0] && currentStandUp[0].progress_sentiment ? <CheckInDone /> : <WeeklyCheckInButton team={team} />}
+      action={() => {
+        if (!currentStandUp || !currentStandUp.length) return null
+        if (currentStandUp[0].progress_sentiment) return <CheckInDone />
+        return <WeeklyCheckInButton team={team}/>
+
+        // currentStandUp && currentStandUp[0].progress_sentiment ? <CheckInDone /> : <WeeklyCheckInButton team={team} />
+      }}
     />
   );
 };
