@@ -1,45 +1,64 @@
 import React from "react"
-import { Redirect } from "react-router-dom"
+import { withRouter } from "react-router-dom"
 import qs from "query-string"
-import AuthenticateWithGithub from "./components/GithubAuth";
+import { gql } from "apollo-boost"
+// import AuthenticateWithGithub from "./components/GithubAuth";
+import { client } from "../../index"
+import Loader from "../Loader"
+import Error from "../Error"
+import toggleGlobalLoader from "../utilities/toggleGlobalLoader"
 import "./Login.css"
 
-/**
- * Component exists on:
- *  - /login
- *  - GitHub redirects to /login?code=''
- *
- * Goal
- * - component to load displaying a LOGIN WITH GITHUB button
- * - login -> redirects user to GitHub auth page
- * - redirects back to Login component with 'code' qs param
- *
- * - get code from url and initiate the userAuthGithub mutation
- * - retrive user and access_token from response payload
- * - store access_token in local storage
- * - redirect based on user status field
- *  - new_user -> Redirect to Register view
- *  - profile_complete -> Redirect to User portal view
- *  - [future] profile_incomplete -> Redirect to User update view
- */
+// -- MUTATION -- //
+const userAuthGithub = gql`
+  mutation authUser($code: String!) {
+    userAuthGithub(code: $code) {
+      access_token
+      user {
+        id
+        status
+      }
+    }
+  }
+`
 
-/**
- * NOTES
- * /login route is only used by github callback (or manually).
- * If there is a code found in querystring, try to authenticate with Github.
- * Otherwise redirect to /profile which will show the Login modal. If authed, redirects to /profile.
- */
+class Login extends React.Component {
+  state = { error: null }
 
-const Login = ({ queryString }) => {
-  if (queryString) {
-    var { code } = qs.parse(queryString)
-    var { redirect } = qs.parse(queryString)
+  async componentDidMount() {
+    const { token, redirect } = localStorage
+    const { queryString, history } = this.props
+    const { code } = qs.parse(queryString)
+
+    /**
+     * IF token found or no code provided, redirect to /profile
+     * /profile will render on token or show login modal without token
+     */
+    if (token || !code) history.replace("/profile")
+
+    // Continue to auth
+    toggleGlobalLoader(true)
+    const { data, error } = await client.mutate({
+      mutation: userAuthGithub,
+      variables: { code }
+    })
+
+    toggleGlobalLoader(false)
+    if (error) this.setState({ error: error.message })
+
+    const {
+      userAuthGithub: { user, access_token }
+    } = data
+    // Save new access_token
+    localStorage.token = access_token
+
+    // Redirect to pre-login navigated route or /feed
+    history.push(redirect || "/feed")
   }
 
-  // TODO: Pass redirect queryString for post-login redirect
-  return !localStorage.token && code
-    ? <AuthenticateWithGithub code={code} />
-    : <Redirect to="/profile" />
+  render = () => this.state.error
+    ? <Error error={this.state.error} goBack="/login" />
+    : null
 }
 
-export default Login
+export default withRouter(Login)
