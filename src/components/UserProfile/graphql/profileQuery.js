@@ -7,6 +7,9 @@ const profileQuery = gql`
       username
       avatar
       country
+      background
+      interests
+      coding_history
       teams {
         id
         title
