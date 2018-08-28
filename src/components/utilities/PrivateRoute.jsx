@@ -45,7 +45,7 @@ export default ({ component: Component, render: Render, ...props }) => {
                 return <Redirect to="/register" />
               }
               if (status === "profile_incomplete" && currentPath !== "/profile") {
-                return Redirect to = "/profile"
+                return <Redirect to="/profile" />
               }
 
               if (!!Render) return <Render {...props} />
