@@ -1,4 +1,5 @@
 import * as React from "react";
+import ExternalLinks from './ExternalLinks';
 
 const ProjectSideBar = ({ project }) => {
   console.log(project)
@@ -10,21 +11,6 @@ const ProjectSideBar = ({ project }) => {
       {project.users && <Team users={project.users} />}
     </div>
   )
-}
-
-const ExternalLinks = ({ data: { github_url, project_url } }) => {
-  return (
-    <React.Fragment>
-      <div className="project-subcategory">
-        <h1 className="project-subcategory-title">Links</h1>
-        <div className="project-buttons-container">
-          <a className="project-buttons" target="_blank" href={github_url}>GitHub Repo</a>
-          <a className="project-buttons" target="_blank" href={project_url}>Live Preview</a>
-        </div>
-      </div>
-      <hr className="project-side-panel--hline" />
-    </React.Fragment>
-  );
 }
 
 const TechStack = ({ skills }) => {
