@@ -6,6 +6,7 @@
   min-height: 100vh;
   height: 100%;
   background-color: white;
+  padding-bottom: 100px;
 }
 
 /*
@@ -30,27 +31,6 @@ TOOLBAR WITH PROJECT EDIT
   }
 }
 
-/*
-==========================
-HERO IMAGE
-==========================
-*/
-.hero-image-container {
-  background-color: $palest-grey;
-  width: 100%;
-  padding: 40px 0px;
-  margin-bottom: 40px;
-  box-shadow: $box-shadow;
-}
-
-.hero-image {
-  display: block;
-  margin: 0 auto;
-  width: 650px;
-  height: 400px;
-  object-fit: cover;
-  box-shadow: $box-shadow;
-}
 /*
 ==========================
 OVERALL IMAGE CONTAINER
@@ -383,6 +363,42 @@ BANNER WTIH PROJECT TITLE
   border-bottom: 1px solid $light-grey;
   padding: 5px;
 }
+/*
+==========================
+HERO IMAGE
+==========================
+*/
+.hero-image-container {
+  background-color: $palest-grey;
+  width: 100%;
+  padding: 40px 0px;
+  margin-bottom: 40px;
+  box-shadow: $box-shadow;
+}
+
+.hero-image {
+  display: block;
+  margin: 0 auto;
+  width: 650px;
+  height: 400px;
+  object-fit: cover;
+  box-shadow: $box-shadow;
+}
+
+.project-portal__positioning-3 {
+  position: relative;
+  float: right;
+  margin-right: 40px;
+  box-shadow: none;
+  margin-top: -30px;
+  background-color: transparent;
+  color: $theme-green;
+  border: 1px solid $theme-green;
+  &:hover {
+    background-color: $theme-green--light;
+  }
+}
+
 /*
 
 ==========================
