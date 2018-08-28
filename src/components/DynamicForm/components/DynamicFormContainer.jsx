@@ -145,6 +145,7 @@ class DynamicFormContainer extends React.Component {
     return (
       <form>
         {this.renderInputs()}
+        <hr className="form-hline" />
         {this.renderSubmit()}
       </form>
     );
