@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom"
 import { client } from "../../index"
-import dynamicFormQuery from "../DynamicForm/graphql/dynamicFormQuery"
+import dynamicFormQuery from "../DynamicForm/dynamicFormQuery"
 import voyagesQuery from "../VoyagePortal/graphql/voyagesQuery"
 
 const voyageActionSwitch = (userStatus, routeParam) => {
