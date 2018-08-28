@@ -2,8 +2,11 @@ import * as React from 'react';
 
 function HeroImage() {
   return (
-    <div>
-      <img src="https://via.placeholder.com/500x300" alt=""/>
+    <div className="hero-image-container">
+      <img 
+        className="hero-image" 
+        src={require('../../../assets/placeholder image.png')}
+        alt=""/>
     </div>
   )
 }

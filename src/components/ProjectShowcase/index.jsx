@@ -5,6 +5,7 @@ import ProjectDescription from './components/ProjectDescription';
 import getProjectAndUser from './graphql/getProjectAndUser';
 import { Query } from 'react-apollo';
 import './ProjectShowcase.css';
+import HeroImage from './components/HeroImage';
 
 /*
 
@@ -30,15 +31,15 @@ class ProjectShowcase extends React.Component {
   render() {
     return (
       <Query
-      query={getProjectAndUser}
-      // FIXME[1]
-      variable={{title: 'vampires Team 0 Project'}}>
-        {({ error, loading, data}) => {
-          
+        query={getProjectAndUser}
+        // FIXME[1]
+        variable={{ title: 'vampires Team 0 Project' }}>
+        {({ error, loading, data }) => {
+
           if (error) { return null; }
           if (loading) { return null; }
-          
-          const {user, projects} = data;
+
+          const { user, projects } = data;
           const project = projects[0]; // FIXME[1]
           console.log(project);
           return (
@@ -49,13 +50,19 @@ class ProjectShowcase extends React.Component {
                 title={project.title}
                 elevatorPitch={project.elevatorPitch}
               />
+              <HeroImage
+                editable={true}
+                // editable={this.isEditable(user, project)}
+                title={project.title}
+                elevatorPitch={project.elevatorPitch}
+              />
               <div className="project-info-container">
-                  <ProjectDescription
-                    // editable={this.isEditable(user, project)}
-                    editable={true}
-                    text={project.description}
-                  />
-                  <ProjectSideBar project={project} />
+                <ProjectDescription
+                  // editable={this.isEditable(user, project)}
+                  editable={true}
+                  text={project.description}
+                />
+                <ProjectSideBar project={project} />
               </div>
             </div>
           );

@@ -1,8 +1,7 @@
 @import '../../styles/abstracts/_variables.scss';
 
 .project-portal {
-  // TODO: Remove header positioning property
-  padding-top: 64px + 21px; // to account for header
+  padding-top: 64px; // to account for header
   margin: 0 auto;
   min-height: 100vh;
   height: 100%;
@@ -36,8 +35,21 @@ TOOLBAR WITH PROJECT EDIT
 HERO IMAGE
 ==========================
 */
+.hero-image-container {
+  background-color: $palest-grey;
+  width: 100%;
+  padding: 40px 0px;
+  margin-bottom: 40px;
+}
 
-
+.hero-image {
+  display: block;
+  margin: 0 auto;
+  width: 650px;
+  height: 400px;
+  object-fit: cover;
+  box-shadow: $box-shadow;
+}
 /*
 ==========================
 OVERALL IMAGE CONTAINER
@@ -329,7 +341,7 @@ BANNER WTIH PROJECT TITLE
 */
 .project-portal__banner {
   width: 100vw;
-  transform:translateY(-22px); // to account for header
+  // transform:translateY(-22px); // to account for header
   justify-self: center;
   text-align: center;
   color: #ffffff;
