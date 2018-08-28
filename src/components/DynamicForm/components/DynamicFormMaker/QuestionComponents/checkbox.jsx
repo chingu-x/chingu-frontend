@@ -1,29 +1,44 @@
 import React from 'react';
 
 const CheckboxComponent = (
-  { answer, field_name, index, onFormChange, form_data },
-) => (
-  <div key={'checkbox-answer_' + field_name + '_' + index} className="checkbox-container">
-    <label className="form-checkbox-answer" htmlFor={field_name + '_' + index}>
-      {answer}
-      <input
-        type="checkbox"
-        name={field_name}
-        value={answer}
-        id={field_name + '_' + index}
-        checked={form_data[field_name].indexOf(answer) !== -1} // is answer in answers array
-        onChange={e => onFormChange(e)}
-      />
-      <span className="checkmark" />
-    </label>
-  </div>
-);
+  {
+    answer,
+    field_name,
+    index,
+    onFormChange,
+    form_data,
+    minlength,
+    maxlength,
+  },
+) => {
+  const value = form_data[field_name];
+  return (
+    <div key={'checkbox-answer_' + field_name + '_' + index} className="checkbox-container">
+      <label className="form-checkbox-answer" htmlFor={field_name + '_' + index}>
+        {answer}
+        <input
+          type="checkbox"
+          name={field_name}
+          value={answer}
+          id={field_name + '_' + index}
+          checked={value.indexOf(answer) !== -1} // is answer in answers array
+          onChange={
+            ({ currentTarget }) => onFormChange(
+              { currentTarget, min: minlength, max: maxlength },
+            )
+          }
+        />
+        <span className="checkmark" />
+      </label>
+    </div>
+  );
+}
 
 export { CheckboxComponent };
 
 // maps over options array creating Checkbox components
 export default (
-  { field_name, options },
+  { field_name, options, minlength, maxlength },
   onFormChange,
   form_data,
 ) => options.map(
@@ -35,6 +50,8 @@ export default (
       index={index}
       onFormChange={onFormChange}
       form_data={form_data}
+      minlength={minlength}
+      maxlength={maxlength}
     />
   ),
 );
