@@ -9,22 +9,7 @@
   background-color: white;
  
 }
-/*
-==========================
-BANNER WTIH PROJECT TITLE
-& ELEVATOR PITCH
-==========================
-*/
-.project-portal__banner {
-  width: 100vw;
-  transform:translateY(-22px); // to account for header
-  justify-self: center;
-  text-align: center;
-  color: #ffffff;
-  min-height: 200px;
-  padding-top: 30px;
-  background: linear-gradient(to right , #74ebd5,#ACB6E5);
-}
+
 /*
 ==========================
 TOOLBAR WITH PROJECT EDIT
@@ -310,20 +295,6 @@ PROJECT DESCRIPTION
   margin-bottom: 20px;
 }
 
-.project-portal__positioning-2 {
-  position: relative;
-  float: right;
-  margin-right: 40px;
-  box-shadow: none;
-  margin-top: -10px;
-  background-color: transparent;
-  color: white;
-  border: 1px solid white;
-  &:hover {
-    background-color: $theme-green--light;
-  }
-}
-
 .project-portal__edit-button--text {
   text-align: center;
 }
@@ -343,7 +314,52 @@ PROJECT DESCRIPTION
   overflow: auto;
   cursor: text;
 }
+/*
+==========================
+BANNER WTIH PROJECT TITLE
+& ELEVATOR PITCH
+==========================
+*/
+.project-portal__banner {
+  width: 100vw;
+  transform:translateY(-22px); // to account for header
+  justify-self: center;
+  text-align: center;
+  color: #ffffff;
+  min-height: 200px;
+  padding-top: 30px;
+  background: linear-gradient(to right , #74ebd5,#ACB6E5);
+}
 
+.project-portal__positioning-2 {
+  position: relative;
+  float: right;
+  margin-right: 40px;
+  box-shadow: none;
+  margin-top: -10px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  &:hover {
+    background-color: $theme-green--light;
+  }
+}
+.project-portal__banner--header {
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  margin-top: 24px;
+}
+
+.project-portal__banner--subheader {
+  font-size: 16px;
+}
+/*
+
+==========================
+MARKDOWN
+==========================
+*/
 .markdown {
   color: $dark-grey;
   h1 {

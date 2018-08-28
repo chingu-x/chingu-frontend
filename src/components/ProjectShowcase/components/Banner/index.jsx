@@ -56,14 +56,14 @@ class Banner extends React.Component {
 
     return (
       <div className="project-portal__banner">
-        <h1>
+        <div className="project-portal__banner--header">
           {isEditing ? (
             <input name="title" value={title} onChange={this.handleChange} />
           ) : (
               title
             )}
-        </h1>
-        <p>
+        </div>
+        <div className="project-portal__banner--subheader">
           {isEditing ? (
             <input
               name="elevatorPitch"
@@ -73,7 +73,7 @@ class Banner extends React.Component {
           ) : (
               elevatorPitch ? elevatorPitch : 'Put a short description of your project here!'
             )}
-        </p>
+        </div>
         {editable && (
             <button
               className="project-portal__edit-button project-portal__positioning-2"
