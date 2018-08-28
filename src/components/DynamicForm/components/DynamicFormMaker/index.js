@@ -1,7 +1,7 @@
 import React from "react";
-import QuestionComponents from "./QuestionComponents";
+import questionComponents from "./QuestionComponents";
 
-export default (
+const dynamicFormMaker = (
   questions,
   form_data,
   onFormChange,
@@ -17,8 +17,8 @@ export default (
     if (input_type === "hidden") return null;
 
     const QuestionComponent = ["email", "url", "text"].includes(input_type)
-      ? QuestionComponents.text
-      : QuestionComponents[input_type];
+      ? questionComponents.text
+      : questionComponents[input_type];
 
     return (
       <div key={"question_" + field_name} className="form-QA">
@@ -31,3 +31,8 @@ export default (
     );
   },
 );
+
+export {
+  dynamicFormMaker,
+  questionComponents,
+};
