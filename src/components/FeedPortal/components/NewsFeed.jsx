@@ -30,27 +30,27 @@ const NewsFeed = ({ type, loading, data }) => {
             ? <TeamCard team={team} />
             : renderNewsfeedItems(chingu)
         }
-        {(other && chingu.length > 0) || (other && team.length > 0 ) && <hr className="hl" />}
+        {(team || chingu.length > 0) && other && <hr className="hl" />}
         {renderNewsfeedItems(other)}
       </React.Fragment>
     );
     return (!other && !chingu ? <NoNews /> : dataToRender);
   }
 
-return (
-  <div className="main-container">
-    <div className="title">
-      {!loading && getTitle(data.newsfeed.team)}
-    </div>
-    <div className="portal-panel__feed">
-      {
-        loading
-          ? <div style={{ height: "600px" }}><Loader style="medium" /></div>
-          : renderFeed(data)
-      }
-    </div>
-  </div >
-)
+  return (
+    <div className="main-container">
+      <div className="title">
+        {data.newsfeed && getTitle(data.newsfeed.team)}
+      </div>
+      <div className="portal-panel__feed">
+        {
+          loading
+            ? <div style={{ height: "600px" }}><Loader style="medium" /></div>
+            : renderFeed(data)
+        }
+      </div>
+    </div >
+  )
 }
 
 NewsFeed.propTypes = {
@@ -63,7 +63,6 @@ NewsFeed.propTypes = {
 NewsFeed.defaultProps = {
   type: "ALL",
 }
-
 
 export default (props) => {
   const variables = {
