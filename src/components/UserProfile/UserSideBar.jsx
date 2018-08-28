@@ -41,35 +41,47 @@ const USER_INFO_DOM_ELEMENTS = [
 class UserSideBar extends React.Component {
   state = {
     isEditing: false,
-    user: {}
+    user: {},
+    coding_history: '',
+    background: '',
+    interests: ''
   }
   componentDidMount() {
-    this.setState({ user: this.props.user });
+    let { coding_history, background, interests } = this.props.user;
+    this.setState({
+      user: this.props.user,
+      coding_history,
+      background,
+      interests
+    });
   }
 
   renderUserInfo = () => {
-    let user = this.state.user;
+    let { user } = this.state;
     return USER_INFO_DOM_ELEMENTS.map(elem => {
-      (user[elem.schemaKey] && user[elem.schemaKey].length > 0) &&
-        <EditableTextField
-          large
-          mutation={userUpdate}
-          mutationName="userUpdate"
-          fieldName={elem.schemaKey}
-          fieldData={user[elem.schemaKey]}
-          hasPermission={this.state.isEditing}
-          component={(
+        const userComponent = ({ data }) => {
+          return (
             <div className={elem.divClassName}>
               <h1 className="user-sidebar-subcategory">{elem.desc}</h1>
-              <p>{user[elem.schemaKey]}</p>
+              <p>{data}</p>
             </div>
-          )}
-        />
+          )
+        }
+        return (user[elem.schemaKey] && user[elem.schemaKey].length > 0) 
+          && <EditableTextField
+              large
+              mutation={userUpdate}
+              mutationName="userUpdate"
+              fieldName={elem.schemaKey}
+              fieldData={user[elem.schemaKey]}
+              hasPermission={true}
+              component={userComponent}
+            />
     });
   }
 
   renderLinks = () => {
-    let user = this.state.user;
+    let { user } = this.state;
     return (
       <div className="user-links">
         <h1 className="user-sidebar-subcategory">links</h1>
@@ -85,7 +97,8 @@ class UserSideBar extends React.Component {
   }
 
   render() {
-    let { user } = this.state.user;
+    let { user } = this.state;
+    console.log('rendered user=' + user);
     return (
       <div className="user-profile-container-personal">
         <header className="user">
