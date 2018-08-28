@@ -30,8 +30,6 @@ export default ({ component: Component, render: Render, ...props }) => {
         localStorage.redirect = currentPath
         return <Redirect to="/" /> // Landing age will check for localStorage.redirect and open a login modal
       }
-      // else if (!!Render) return <Render {...props} />
-      // else return <Component {...props} />
 
       return (
         <Query query={userStatusQuery}>
@@ -46,10 +44,9 @@ export default ({ component: Component, render: Render, ...props }) => {
               if (status === "new_user" && currentPath !== "/register") {
                 return <Redirect to="/register" />
               }
-              //TODO: 
-              // if (status === "profile_incomplete" && currentPath !== /profile/update") {
-              //   return Redirect to = "/profile/update"
-              // }
+              if (status === "profile_incomplete" && currentPath !== "/profile") {
+                return Redirect to = "/profile"
+              }
 
               if (!!Render) return <Render {...props} />
 
