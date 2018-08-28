@@ -281,7 +281,8 @@ PROJECT DESCRIPTION
   background-color: white;
   box-shadow: $box-shadow;
   border-radius: $border-radius;
-  padding: 20px;
+  padding: 40px;
+  border: 1px solid $palest-grey;
 }
 
 .project-portal__edit-button {
@@ -328,7 +329,11 @@ BANNER WTIH PROJECT TITLE
   color: #ffffff;
   min-height: 200px;
   padding-top: 30px;
+  background: linear-gradient(to right , #642B73,#C6426E); // Crimson Tide
+  background: linear-gradient(to right , #c0392b,#8e44ad); // Mello
+  background: linear-gradient(to right , #C33764,#1D2671); // Celestial
   background: linear-gradient(to right , #74ebd5,#ACB6E5);
+  box-shadow: $box-shadow;
 }
 
 .project-portal__positioning-2 {
@@ -369,6 +374,7 @@ HERO IMAGE
 ==========================
 */
 .hero-image-container {
+  background-color: $darkest-grey;
   background-color: $palest-grey;
   width: 100%;
   height: 500px;
@@ -383,7 +389,7 @@ HERO IMAGE
   width: 650px;
   height: 400px;
   object-fit: cover;
-  box-shadow: $box-shadow;
+  // box-shadow: $box-shadow-dark;
 }
 
 .project-portal__positioning-3 {

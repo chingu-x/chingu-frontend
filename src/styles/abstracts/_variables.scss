@@ -28,6 +28,7 @@ $theme-green--hover: rgb(25, 194, 129);
 $theme-green--light: #78d5b2;
 $theme-green--lightest: rgb(233, 247, 242);
 
+$darkest-grey: #333333;
 $darker-grey: #4f4f4f;
 $dark-grey: #7f7f7f;
 $med-grey: rgb(158, 158, 158);
@@ -114,7 +115,7 @@ PORTALS
 }
 
 @mixin portal-subcategory {
-  color: $light-grey;
+  color: $grey;
   font-size: $portal-subcategory-size;
   text-align: left;
   text-transform: uppercase;
