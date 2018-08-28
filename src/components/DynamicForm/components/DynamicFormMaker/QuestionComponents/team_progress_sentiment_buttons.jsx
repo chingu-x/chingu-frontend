@@ -1,3 +1,5 @@
+import React from "react";
+
 const FormButton = ({ color, onClick, data, id }) => {
   return (
     <input

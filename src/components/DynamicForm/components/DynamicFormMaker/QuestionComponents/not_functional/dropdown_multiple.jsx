@@ -1,6 +1,10 @@
-import { CheckboxComponent } from "./checkbox";
+import React from "react";
+
+import { CheckboxComponent } from "../checkbox";
 
 // TODO: this component is not currently functioning with DF
+// it renders a button that when clicked reloads the page nad puts all the options in the QS
+// params. not sure whats going on with it
 const dropdown_multiple = (data, onFormChange, form_data) => {
   const renderMultiple = () => {
     return data.options.map((answer, index) => {

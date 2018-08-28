@@ -1,3 +1,5 @@
+import React from "react";
+
 // TODO: this is currently unsupported. when its ready notify backend to add to
 // question input_type enum
 export class RadioWithInputComponent extends React.Component {

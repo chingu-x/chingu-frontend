@@ -1,4 +1,6 @@
-export class TierSelectRadioComponent extends React.Component {
+import React from "react";
+
+class TierSelectRadioComponent extends React.Component {
   render() {
     const badges = [
       {
