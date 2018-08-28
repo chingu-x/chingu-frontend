@@ -12,7 +12,7 @@ class HeroImage extends React.Component {
 
   static defaultProps = {
     editable: false,
-    imageLink: "",
+    imageLink: require('../../../assets/placeholder image.png'),
     mutation: console.log
   };
 
@@ -55,7 +55,7 @@ class HeroImage extends React.Component {
       <div className="hero-image-container">
         <img
           className="hero-image"
-          src={require('../../../assets/placeholder image.png')}
+          src={this.state.imageLink}
           alt="" />
         {editable && (
           <button
