@@ -53,6 +53,7 @@ const TeamLinks = ({ teams, toggleNewsfeed, activeTeamId }) => {
 }
 
 const SideBar = ({ data: { user }, toggleNewsfeed, team_id }) => {
+  console.log(user.teams);
   return (
     <aside className="sidebar-container">
       <div className="portal-panel__sidebar">
@@ -64,20 +65,28 @@ const SideBar = ({ data: { user }, toggleNewsfeed, team_id }) => {
           <div className="sidebar-userinfo__username">{user.username}</div>
         </div>
         <hr className="hl" />
-
+        
         <SidebarBtn
           action={toggleNewsfeed}
           active={!team_id}
           lbl="All News" />
         <hr className="hl" />
 
-        <label className="sidebar-nav__label">Your Teams</label>
+        {user.teams.length > 0
+          && (
+            <React.Fragment>
+              <hr className="hl" />
 
-        <TeamLinks
-          activeTeamId={team_id}
-          teams={user.teams}
-          toggleNewsfeed={toggleNewsfeed}
-        />
+              <label className="sidebar-nav__label">Your Teams</label>
+
+              <TeamLinks
+                activeTeamId={team_id}
+                teams={user.teams}
+                toggleNewsfeed={toggleNewsfeed}
+              />
+            </React.Fragment>
+          )
+        }
         <hr className="hl" />
 
       </div>
