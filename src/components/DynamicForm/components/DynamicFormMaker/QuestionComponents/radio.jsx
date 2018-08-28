@@ -19,6 +19,8 @@ const RadioComponent = (
   </div>
 );
 
+export { RadioComponent };
+
 // maps over options to create Radio Components
 export default (
   { field_name, options },
