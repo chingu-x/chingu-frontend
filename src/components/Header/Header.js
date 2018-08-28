@@ -171,8 +171,9 @@ export default withRouter(props => (
   !localStorage.token 
     ? <Header {...props}/>
     : <Request
+        {...props} 
         component={Header}
         query={userBaseQuery}
-        {...props} />
+      />
       )
 )

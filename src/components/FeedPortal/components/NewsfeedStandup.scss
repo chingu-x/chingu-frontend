@@ -1,0 +1,69 @@
+@import '../../../styles/abstracts/_variables.scss';
+
+
+/*
+==========================
+CONTAINER
+==========================
+*/
+.team-standup-card-container {
+    background-color: $palest-grey;
+    padding: 40px;
+}
+/*
+==========================
+data object
+==========================
+*/
+.team-standup-data {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: "l d d";
+    grid-gap: 20px;
+}
+
+.team-standup-label {
+    grid-area: l;
+    border-right: 1px solid $grey;
+    display: block;
+    padding-bottom: 30px;
+    font-size: 14px;
+    color: $med-grey;
+    text-transform: uppercase;
+}
+
+.team-standup-answer {
+    display: block;
+    grid-area: d;
+    font-size: 14px;
+    color: $dark-grey;
+    padding-bottom: 30px;
+}
+/*
+==========================
+COLORED STATUS
+==========================
+*/
+.team-standup-status--green,
+.team-standup-status--yellow,
+.team-standup-status--red {
+    background-color: white;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.team-standup-status--green {
+    border: 1px solid $health-green;
+    color: $health-green;
+}
+
+.team-standup-status--yellow {
+    border: 1px solid $health-yellow;
+    color: $health-yellow;
+}
+
+.team-standup-status--red {
+    border: 1px solid $health-red;
+    color: $health-red;
+}
