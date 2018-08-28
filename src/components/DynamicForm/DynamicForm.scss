@@ -1,12 +1,14 @@
 @import '../../styles/abstracts/_variables.scss';
+
 /*
 ==========================
-QUESTION & ANSWER UNIT
+DYNAMIC FORM
 ==========================
 */
-.form-QA {
-    display: block;
+.dynamic-form {
+    display: flex;
     padding-top: 20px;
+    justify-content: center;
 }
 /*
 ==========================
@@ -38,8 +40,6 @@ SUBMIT BUTTON
 */
 .form-btn {
     @include system-button($theme-green, $theme-green--hover);
-    margin: 0 auto;
-    margin-top: 20px;
 }
 
 .hline {
