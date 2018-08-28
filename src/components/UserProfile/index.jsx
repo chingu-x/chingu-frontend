@@ -33,7 +33,7 @@ const UserProfile = ({ data: { user } }) => {
                     voyageNumber={team.id}
                     startDate={team.cohort.start_date}
                     endDate={team.cohort.end_date}
-                    team={team.title}
+                    team={team}
                   />
                 )
               })
@@ -88,7 +88,8 @@ const UserProfile = ({ data: { user } }) => {
 
 export default props =>
   <Request
+    {...props} 
     component={UserProfile}
     query={profileQuery}
     globalLoader
-    {...props} />
+  />

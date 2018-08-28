@@ -18,7 +18,6 @@ const client = new ApolloClient({
   request: async operation => {
     const token = localStorage.getItem('token')
     // TODO check cache
-    console.log({previousState: client.cache.data.data})
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : ''

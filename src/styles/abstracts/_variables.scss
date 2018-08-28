@@ -26,11 +26,13 @@ $pale-purple--hover: rgb(206, 206, 224);
 $theme-green: #15cf89;
 $theme-green--hover: rgb(25, 194, 129);
 $theme-green--light: #78d5b2;
+$theme-green--palest: #def0e9;
 
 $darker-grey: #4f4f4f;
 $dark-grey: #7f7f7f;
 $med-grey: rgb(158, 158, 158);
 $grey: #bbbbbb;
+$lighter-grey: #D9D9D9;
 $light-grey: #e6e6e6;
 $pale-grey: #efefef;
 $palest-grey: #f8f8f8;
@@ -40,7 +42,9 @@ $attention-red--light: #efb0b0;
 
 $health-green: #22b571;
 $health-yellow: #ffcc00;
+$health-yellow--light: #FFFAB7;
 $health-red: #ef8585;
+$health-red--light: #FCC4C4;
 
 $badge-1: #f5e3a1;
 $badge-1--hover: rgb(245, 219, 126);
@@ -112,7 +116,7 @@ PORTALS
 }
 
 @mixin portal-subcategory {
-  color: $light-grey;
+  color: $lighter-grey;
   font-size: $portal-subcategory-size;
   text-align: left;
   text-transform: uppercase;
@@ -247,6 +251,38 @@ FORMS
   margin-left: -20px;
   border-top: 1px solid $pale-grey;
   margin-top: 20px;
+}
+
+/*
+==========================
+NEWSFEED CARDS
+==========================
+*/
+@mixin newsfeed-card {
+  padding: 20px;
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 20px;
+  text-transform: none;
+  margin-bottom: 20px;
+}
+@mixin newsfeed-card--icon {
+  width: 40px;
+    height: 40px;
+    grid-column: 1 / 2;
+    margin: 0 auto;
+    align-self: center;
+}
+
+@mixin newsfeed-card-text-container {
+  grid-column: 2 / -1;
+}
+
+@mixin newsfeed-card-text {
+  font-size: 14px;
+    line-height: 28px;
 }
 /*
 ==========================
