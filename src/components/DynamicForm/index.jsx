@@ -184,9 +184,10 @@ class DynamicFormContainer extends React.Component {
 
 export default props => (
   <Request
+    {...props}
     component={DynamicForm}
     query={dynamicFormQuery}
     variables={{ purpose: props.purpose, version: props.version }}
     globalLoader
-    {...props} />
+   />
 )

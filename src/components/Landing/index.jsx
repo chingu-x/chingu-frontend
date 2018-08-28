@@ -30,13 +30,15 @@ class Landing extends React.Component {
     const authed = !!localStorage.token
     return (
       <div className="landing" >
-        <Modal
-          open={!localStorage.token && !!localStorage.redirect}
-          background="transparent"
-          ref="loginModal"
-        >
-          <GithubLoginModal />
-        </Modal>
+        {
+          !authed &&
+          <Modal
+            open={!!localStorage.redirect}
+            background="transparent"
+            ref="loginModal">
+            <GithubLoginModal />
+          </Modal>
+        }
 
         <LandingTop authed={authed} onApplyClick={this.handleApplyClick} />
         <CohortsBar

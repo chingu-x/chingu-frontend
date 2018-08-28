@@ -10,7 +10,7 @@ import "./styles/fontawesome/webfonts/fontawesome-all.css";
 import "./styles/main.css";
 import registerServiceWorker from "./registerServiceWorker";
 
-const mode = 'dev66666666666'
+const mode = 'prod'
 // create a new Apollo Client Instance
 const client = new ApolloClient({
   // The URL for your graphql server
@@ -18,7 +18,6 @@ const client = new ApolloClient({
   request: async operation => {
     const token = localStorage.getItem('token')
     // TODO check cache
-    console.log({previousState: client.cache.data.data})
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : ''

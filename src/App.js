@@ -23,7 +23,7 @@ import Loader from "./components/Loader"
 export default () => ( 
   <div className="App">
     <Header />
-    <Loader />
+    <Loader size="global"/>
     <Switch>
       <Route exact path="/" component={Landing} />
       <Route
