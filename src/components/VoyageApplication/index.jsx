@@ -73,7 +73,8 @@ const VoyageApplication = ({ version, voyage_id, newUser }) => (
 
 export default props =>
   <Request
+    {...props} 
     component={VoyageApplicationContainer}
     query={VoyageApplicationUserQuery}
     globalLoader
-    {...props} />
+  />
