@@ -24,9 +24,9 @@ import dynamicFormSubmitMutation from "./dynamicFormSubmitMutation";
  * @prop {object} hiddenData object of values for hidden inputs
  * @prop {string} queryString query string data for hidden inputs
  * @prop {object} mutation alternative mutation (default submitDynamicForm)
- * @prop {function} onSubmit custom handler for submit
- * @prop {function} onResponse custom handler for mutation response data
- * @prop {function} onError custom handler for mutation error
+ * @prop {func} onSubmit custom handler for submit
+ * @prop {func} onResponse custom handler for mutation response data
+ * @prop {func} onError custom handler for mutation error
  */
 const DynamicForm = (
   {

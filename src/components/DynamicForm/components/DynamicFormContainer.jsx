@@ -5,8 +5,8 @@ import { dynamicFormMaker } from "./DynamicFormMaker";
 
 /**
  * @prop {array} questions array of Question data objects for rendering
- * @prop {string} purpose Dynamic Form purpose
- * @prop {function} handleSubmit wrapper callback for handling submit behavior
+ * @prop {string} purpose Dynamic Form purpose (for LS form data persistence)
+ * @prop {function} onSubmit wrapper callback for handling submit behavior
  */
 class DynamicFormContainer extends React.Component {
   constructor(props) {
@@ -124,7 +124,7 @@ class DynamicFormContainer extends React.Component {
 
   renderSubmit = () => {
     const { form_data } = this.state;
-    const { handleSubmit } = this.props;
+    const { onSubmit } = this.props;
 
     return (
       <input
@@ -134,7 +134,7 @@ class DynamicFormContainer extends React.Component {
         onClick={
           (e) => {
             e.preventDefault();
-            handleSubmit(form_data);
+            onSubmit(form_data);
           }
         }
       />
@@ -170,6 +170,7 @@ DynamicFormContainer.propTypes = {
   purpose: PropTypes.string,
   hiddenData: PropTypes.object,
   questions: PropTypes.arrayOf(PropTypes.shape(questionShape)),
+  onSubmit: PropTypes.func,
 };
 
 export default DynamicFormContainer;

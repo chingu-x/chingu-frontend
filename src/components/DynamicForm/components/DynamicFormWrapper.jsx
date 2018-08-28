@@ -13,6 +13,7 @@ import DynamicFormContainer from "./DynamicFormContainer";
  * 
  * -- OPTIONAL -- 
  * @prop {object} hiddenData optional object of hidden input field value(s)
+ * @prop {func} onSubmit optional handler for submitting mutation
  * @prop {func} onResponse optional handler for response data
  * @prop {func} onError optional handler for error data
  */
@@ -82,7 +83,7 @@ class DynamicFormWrapper extends React.Component {
         purpose={purpose}
         questions={questions}
         hiddenData={hiddenData}
-        handleSubmit={onSubmit || this.handleSubmit}
+        onSubmit={onSubmit || this.handleSubmit}
       />
     );
   }
