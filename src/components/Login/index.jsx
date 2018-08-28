@@ -9,12 +9,6 @@ import Error from "../Error"
 import toggleGlobalLoader from "../utilities/toggleGlobalLoader"
 import "./Login.css"
 
-// -- UTILITIES -- / /
-const loginRedirectSwitch = {
-  "new_user": "/register",
-  "profile_incomplete": "/profile/update"
-}
-
 // -- MUTATION -- //
 const userAuthGithub = gql`
   mutation authUser($code: String!) {
@@ -58,10 +52,8 @@ class Login extends React.Component {
     // Save new access_token
     localStorage.token = access_token
 
-    // Redirect to pre-login navigated route
-    redirect
-      ? history.push(redirect)
-      : history.replace(loginRedirectSwitch[user.status] || "/feed")
+    // Redirect to pre-login navigated route or /feed
+    history.push(redirect || "/feed")
   }
 
   render = () => this.state.error
