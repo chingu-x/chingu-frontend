@@ -1,11 +1,8 @@
 import { gql } from "apollo-boost"
 
 const getProjectAndUser = gql`
-  query getProjectAndUser($title: String) {
-    user {
-      id
-    }
-    projects(title: $title) { # FIXME[1]: Update query for retrieving a single Project based on route params
+  query getProject($id: ID!, $github_repo_id: String) {
+    project(id: $id, github_repo_id: $github_repo_id) {
       id
       title
       description
@@ -16,7 +13,7 @@ const getProjectAndUser = gql`
         username
         avatar
       }
-      skills{
+      skills {
         id
         name
       }
@@ -24,4 +21,12 @@ const getProjectAndUser = gql`
   }
 `
 
-export default getProjectAndUser
+const getUserId = gql`
+  query getUserId {
+    user {
+      id
+    }
+  }
+`
+
+export {getProjectAndUser, getUserId}

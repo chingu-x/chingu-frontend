@@ -2,17 +2,15 @@ import * as React from "react";
 import Banner from './components/Banner';
 import ProjectSideBar from './components/ProjectSideBar';
 import ProjectDescription from './components/ProjectDescription';
-import getProjectAndUser from './graphql/getProjectAndUser';
+import { getProjectAndUser, getUserId } from './graphql/getProjectAndUser';
 import { Query } from 'react-apollo';
 import './ProjectShowcase.css';
 import HeroImage from './components/HeroImage';
+import toggleGlobalLoader from "../utilities/toggleGlobalLoader"
 
 /*
-
 This component should only be concerned with the overall layout of the page and whether it is editable.
-
 */
-
 class ProjectShowcase extends React.Component {
   state = {
     editable: false
@@ -29,41 +27,58 @@ class ProjectShowcase extends React.Component {
   }
 
   render() {
+    console.log("projectOd", this.props.projectId)
     return (
       <Query
         query={getProjectAndUser}
-        // FIXME[1]
-        variable={{ title: 'vampires Team 0 Project' }}>
+        variables={{
+          id: this.props.projectId,
+          github_repo_id: this.props.github_repo_id
+        }}>
         {({ error, loading, data }) => {
 
-          if (error) { return null; }
-          if (loading) { return null; }
+          // if (error) { return null; }
+          // if (loading) { return null; }
 
-          const { user, projects } = data;
-          const project = projects[0]; // FIXME[1]
-          console.log(project);
+          // const { user, projects } = data;
+          // const project = projects[0]; // FIXME[1]
+          // console.log(project);
+
+          toggleGlobalLoader(loading)
+          if (loading) return null
+          const { project } = data
+
           return (
             <div className="project-portal">
-              <Banner
-                editable={true}
-                // editable={this.isEditable(user, project)}
-                title={project.title}
-                elevatorPitch={project.elevatorPitch}
-              />
-              <HeroImage
-                editable={true}
-                // editable={this.isEditable(user, project)}
-                title={project.title}
-                elevatorPitch={project.elevatorPitch}
-              />
-              <div className="project-info-container">
-                <ProjectDescription
-                  // editable={this.isEditable(user, project)}
-                  editable={true}
-                  text={project.description}
-                />
-                <ProjectSideBar project={project} />
-              </div>
+              <Query query={getUserId} fetchPolicy="cache-only">
+                {
+                  ({ loading, data: { user } }) => {
+                    if (loading) return null
+
+                    return <React.Fragment>
+                      <Banner
+                        editable={true}
+                        editable={user && this.isEditable(user, project)}
+                        title={project.title}
+                        elevatorPitch={project.elevatorPitch}
+                      />
+                      <HeroImage
+                        editable={true}
+                        editable={user && this.isEditable(user, project)}
+                        title={project.title}
+                        elevatorPitch={project.elevatorPitch}
+                      />
+                      <div className="project-info-container">
+                        <ProjectDescription
+                          editable={user && this.isEditable(user, project)}
+                          text={project.description}
+                        />
+                        <ProjectSideBar project={project} />
+                      </div>
+                    </React.Fragment>
+                  }
+                }
+              </Query>
             </div>
           );
         }}
