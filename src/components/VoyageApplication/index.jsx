@@ -32,6 +32,7 @@ const VoyageApplicationContainer = (
   { voyage_id, voyageVersion, newUserVersion, data: { user: { status } } },
 ) => {
   // TODO: Redirect if :voyage_id from route params is not available for application
+  console.log(`status: ${status}`);
   switch (status) {
     case 'voyage_ready':
       return (
@@ -55,25 +56,37 @@ const VoyageApplicationContainer = (
   }
 }
 
-const VoyageApplication = ({ version, voyage_id, newUser }) => (
-  <div className="voyage-application-container">
-    <div className="voyage-application-title">
-      {newUser ? "New Voyage User Application" : "Voyage Application"}
+
+const VoyageApplication = ({ version, voyage_id, newUser }) => {
+  const handleResponse = (data) => {
+    const redirectLocation = newUser
+      ? `/voyage/application/${voyage_id}`
+      : "/profile";
+
+    return <Redirect to={redirectLocation} />;
+  } 
+
+  return (
+    <div className="voyage-application-container">
+      <div className="voyage-application-title">
+        {newUser ? "New Voyage User Application" : "Voyage Application"}
+      </div>
+      <div className="voyage-application">
+        <DynamicForm
+          version={version}
+          purpose={newUser ? "new_voyage_user" : "voyage_application"}
+          hiddenData={{ voyage_id }}
+          onResponse={handleResponse}
+        />
+      </div>
     </div>
-    <div className="voyage-application">
-      <DynamicForm
-        version={version}
-        purpose={newUser ? "new_voyage_user" : "voyage_application"}
-        hiddenData={{ voyage_id }}
-        submitRedirect={newUser ? `/voyage/application/${voyage_id}` : null}
-      />
-    </div>
-  </div>
-);
+  );
+}
 
 export default props =>
   <Request
     component={VoyageApplicationContainer}
     query={VoyageApplicationUserQuery}
     globalLoader
+    options={}
     {...props} />
