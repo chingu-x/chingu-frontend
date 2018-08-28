@@ -309,8 +309,22 @@ PROJECT DESCRIPTION
   margin-right: 0px;
   margin-bottom: 20px;
 }
+
+.project-portal__positioning-2 {
+  position: relative;
+  float: right;
+  margin-right: 40px;
+  box-shadow: none;
+  margin-top: -10px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  &:hover {
+    background-color: $theme-green--light;
+  }
+}
+
 .project-portal__edit-button--text {
-  // display: inline-block;
   text-align: center;
 }
 .project-portal__edit-button--img {
