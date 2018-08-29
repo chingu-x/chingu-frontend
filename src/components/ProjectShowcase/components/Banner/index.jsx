@@ -21,12 +21,15 @@ class Banner extends React.Component {
   state = {
     isEditing: false,
     title: this.props.title,
-    elevator_pitch: this.props.elevator_pitch
+    elevator_pitch: this.props.elevator_pitch,
+    editBtnHidden: true
   };
 
   componentDidUpdate({ error }) {
     if (this.props.error && !error) this.setState({ isEditing: true })
   }
+
+  toggleEditable = editBtnHidden => this.setState({ editBtnHidden });
 
   toggleEditWithSave = () => {
     let { isEditing } = this.state;
@@ -70,13 +73,18 @@ class Banner extends React.Component {
   }
 
   render() {
-    console.log("component props", this.props);
-    const { isEditing, title, elevator_pitch } = this.state
+    const { isEditing, title, elevator_pitch, editBtnHidden } = this.state
     const { error, editable } = this.props;
-    const errorClass = error ? "--error" : ""
+
+    let btnState = ""
+    if (error) btnState = "--error"
+    else if (editBtnHidden) btnState = "--hidden"
 
     return (
-      <div className="project-portal__banner">
+      <div className="project-portal__banner"
+        onMouseEnter={() => editable && this.toggleEditable(false)}
+        onMouseLeave={() => editable && !isEditing && this.toggleEditable(true)}
+      >
         <div className="project-portal__banner--header">
           {isEditing ? (
             <React.Fragment>
@@ -104,7 +112,7 @@ class Banner extends React.Component {
         </div>
         {editable && (
           <button
-            className={`project-portal__edit-button${errorClass} project-portal__positioning-2`}
+            className={`project-portal__edit-button${btnState} project-portal__positioning-2`}
             onClick={() => this.toggleEditWithSave()}
           >
             <div className="project-portal__edit-button--text">

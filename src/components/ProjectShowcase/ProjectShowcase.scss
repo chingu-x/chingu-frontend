@@ -99,6 +99,7 @@ BUTTONS
   width: 100%;
 }
 
+
 /*
 ==========================
 OPEN IMAGE MODAL BTN
@@ -210,6 +211,11 @@ PROJECT INFO CONTAINER
 CARDS (PROJECT SIDEBAR)
 ==========================
 */
+.project-subcategory__title-container {
+  display: grid;
+  grid-template-areas: "title button"
+}
+
 .project-side-panel {
   grid-area: cards;
 }
@@ -287,6 +293,11 @@ PROJECT DESCRIPTION
 
 .project-portal__edit-button {
   @include system-button--sub($theme-green, $theme-green--lightest);
+  width: 150px;
+}
+.project-portal__edit-button--hidden {
+  @include system-button--sub($theme-green, $theme-green--lightest);
+  visibility: hidden;
   width: 150px;
 }
 
@@ -572,6 +583,8 @@ MEDIA QUERIES
   color: white;
   width: 150px;
 }
+
+
 
 
 // .project-portal__edit-form {
