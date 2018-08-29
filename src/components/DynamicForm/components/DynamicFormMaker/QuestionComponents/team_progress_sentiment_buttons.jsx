@@ -1,5 +1,5 @@
 import React from "react";
-
+// TODO: test validation
 const FormButton = ({ color, onClick, data, id }) => {
   return (
     <input

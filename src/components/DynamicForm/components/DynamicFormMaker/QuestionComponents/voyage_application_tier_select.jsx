@@ -1,5 +1,5 @@
 import React from "react";
-
+// TODO: test validation
 class TierSelectRadioComponent extends React.Component {
   render() {
     const badges = [
