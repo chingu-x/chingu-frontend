@@ -1,5 +1,6 @@
 import React from "react";
-// TODO: test validation
+// TODO: style these to have emojis or some text besides the color
+// options: [red, yellow, green]
 const FormButton = ({ color, onClick, data, id }) => {
   return (
     <input
