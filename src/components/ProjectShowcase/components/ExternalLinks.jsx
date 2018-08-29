@@ -70,8 +70,8 @@ class ExternalLinks extends React.Component {
     return (
       <React.Fragment>
         <div className="project-subcategory">
-          <h1 className="project-subcategory-title">Links</h1>
-          <div className="project-buttons-container">
+          <div className="project-subcategory__title-container">
+            <h1 className="project-subcategory-title">Links</h1>
             {editable && (
               <React.Fragment>
                 <button
@@ -90,6 +90,8 @@ class ExternalLinks extends React.Component {
                 <hr className="project-side-panel--hline" />
               </React.Fragment>
             )}
+          </div>
+          <div className="project-buttons-container">
             {isEditing ? (
               <React.Fragment>
                 <input type="text" name="github_url" value={github_url} onChange={this.handleChange} />

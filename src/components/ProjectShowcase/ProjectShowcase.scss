@@ -210,6 +210,11 @@ PROJECT INFO CONTAINER
 CARDS (PROJECT SIDEBAR)
 ==========================
 */
+.project-subcategory__title-container {
+  display: grid;
+  grid-template-areas: "title button"
+}
+
 .project-side-panel {
   grid-area: cards;
 }
