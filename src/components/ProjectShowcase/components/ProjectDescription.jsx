@@ -26,7 +26,8 @@ class ProjectDescription extends React.Component {
   static propTypes = {
     project_id: PropTypes.string,
     text: PropTypes.string,
-    editable: PropTypes.bool
+    editable: PropTypes.bool,
+    projectId: PropTypes.string
   };
 
   static defaultProps = {
