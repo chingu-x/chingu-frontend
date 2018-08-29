@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom"
 import ExternalLinks from './ExternalLinks';
 
 const ProjectSideBar = ({ project, editable }) => {
@@ -65,7 +66,7 @@ const Team = ({ users }) => {
 const Profile = ({ user: { username, avatar } }) => {
   return (
     <div className="project-portal__profile">
-      <img className="project-portal__user-avatar" src={avatar} alt="team-pic" />
+      <Link to={`/profile/${username}`} ><img className="project-portal__user-avatar" src={avatar} alt="team-pic" /></Link>
       <p className="project-portal__user-username">{username}</p>
     </div>
   );
