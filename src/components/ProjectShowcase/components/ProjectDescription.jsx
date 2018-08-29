@@ -38,6 +38,10 @@ class ProjectDescription extends React.Component {
     description: this.props.text
   };
 
+  componentDidUpdate({ error }) {
+    if (this.props.error && !error) this.setState({ isEditing: true })
+  }
+
   toggleEditWithSave = () => {
     let { isEditing } = this.state;
     this.setState({ isEditing: !isEditing });
@@ -64,9 +68,16 @@ class ProjectDescription extends React.Component {
     });
   };
 
+  editButtonText({ isEditing, error }) {
+    let lbl = "None"
+    if (isEditing) lbl = "Done"
+    if (error) lbl = "Try again"
+    return lbl
+  }
+
   render() {
     let { isEditing, description } = this.state;
-    let { editable, project_id } = this.props;
+    let { error, editable, project_id } = this.props;
 
     return (
       <div className="project-portal__about-container">
@@ -83,7 +94,7 @@ class ProjectDescription extends React.Component {
                     className="project-portal__edit-button--img"
                     src={require('../../../assets/edit-green.png')}
                     alt="edit" />
-                  {isEditing ? "Done" : "Edit"}
+                  {this.editButtonText({ isEditing, error })}
                 </div>
               </button>
               <hr className="project-side-panel--hline" />
@@ -132,7 +143,11 @@ function withMutation(Component) {
           ? data.projectUpdate.description
           : props.text;
 
-        return <Component {...props} mutation={updateProject} text={text} />;
+        return <Component
+          {...props}
+          mutation={updateProject}
+          text={text}
+          error={!!error} />
       }}
     </Mutation>
   );
