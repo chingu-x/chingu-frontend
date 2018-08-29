@@ -6,7 +6,7 @@ import { Mutation } from "react-apollo";
 class HeroImage extends React.Component {
   static propTypes = {
     editable: PropTypes.bool,
-    elevatorPitch: PropTypes.string,
+    imageLink: PropTypes.string,
     mutation: PropTypes.func
   };
 
