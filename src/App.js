@@ -69,13 +69,14 @@ export default () => (
       <Private
         exact path="/team/:team_id/standup"
         render={
-          ({ match: { params: { team_id } } }) => {
+          ({ match: { params: { team_id } } }) => (
             <TeamStandup
               team_id={team_id}
               standupVersion={null}
             />
-          }
+          )
         }
+      />
       <Route exact path="/current" component={CurrentPrograms} />
       <Route exact path="/team" component={Staff} />
       <Route exact path="/privacy" component={PrivacyPolicy} />
