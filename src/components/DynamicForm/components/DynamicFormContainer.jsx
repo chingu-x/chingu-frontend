@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { dynamicFormMaker } from "./DynamicFormMaker";
-import { isValid } from "./DynamicFormMaker/QuestionComponents/utilities";
+import { isValueValid, isEmpty } from "./utilities";
 
 /**
  * @prop {array} questions array of Question data objects for rendering
  * @prop {string} purpose Dynamic Form purpose (for LS form data persistence)
  * @prop {func} onSubmit wrapper callback for handling submit behavior
- * @prop {func} onValidate callback to control 'disabled' flag. expects boolean return
+ * @prop {func} onValidate callback for field level control of 'disabled' flag. expects boolean return
  */
 class DynamicFormContainer extends React.Component {
   constructor(props) {
@@ -17,11 +17,34 @@ class DynamicFormContainer extends React.Component {
     const { purpose, questions } = props;
     this.state = {
       disabled: true,
-      form_data: this._initializeFormData(
-        purpose,
-        questions,
-      ),
+      form_data: this._initializeFormData(purpose, questions),
     }
+  }
+
+  componentDidUpdate() {
+    // when the form_data is updated from onFormChange
+    const { form_data, disabled } = this.state;
+
+    // if disabled is true then a form field has set its value
+    // it should not be overwritten until the form field is corrected
+    if (disabled) return null;
+
+    // if the form is not disabled check for empty answers
+    // using the updated form_data
+    const isDisabled = this._hasEmptyAnswers(form_data);
+    if (isDisabled !== disabled) {
+      // only update if theres a difference (performance)
+      this.setState({ disabled: isDisabled });
+    }
+  }
+
+  /**
+   * Iterates over the form_data and checks for empty answers
+   * used to control the 'disabled' flag
+   */
+  _hasEmptyAnswers = (form_data) => {
+    return Object.keys(form_data)
+      .some(field_name => isEmpty(form_data[field_name]));
   }
 
   /**
@@ -105,19 +128,16 @@ class DynamicFormContainer extends React.Component {
 
     // persistence in LS
     window.localStorage.setItem(
-      this.state.purpose,
+      this.props.purpose,
       JSON.stringify(form_data),
     );
 
-    // 'disabled' controls rendering of the Submit button
-    // sets 'disabled' based on validity of user input
     const { onValidate } = this.props;
-    const disabled = onValidate
-      ? onValidate(type, form_data[name], min, max)
-      : !isValid(type, form_data[name], min, max);
-    console.log('in container: ', name, disabled);
+    // allow the field to disable the form if it is invalid
+    // using custom rules for different types
+    const fieldDisabled = onValidate(type, form_data[name], min, max);
 
-    this.setState({ form_data, disabled });
+    this.setState({ form_data, disabled: fieldDisabled });
   }
 
   /**
@@ -185,6 +205,10 @@ DynamicFormContainer.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.shape(questionShape)),
   onSubmit: PropTypes.func,
   onValidate: PropTypes.func,
+};
+
+DynamicFormContainer.defaultProps = {
+  onValidate: isValueValid,
 };
 
 export default DynamicFormContainer;
