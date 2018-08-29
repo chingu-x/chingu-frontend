@@ -1,13 +1,56 @@
 import * as React from "react";
 import './UserSideBar.css'
 import EditableTextField from '../utilities/EditableTextField';
-import { gql } from "apollo-boost"
-/**
- * TODO:
- * 1. remove hardcoded data
- * 2. factor out html components
- * 3. convert class to function
- **/
+import { gql } from "apollo-boost";
+
+class UserSideBar extends React.Component {
+  state = {
+    isEditing: false,
+    user: {},
+    coding_history: '',
+    background: '',
+    interests: ''
+  }
+  componentDidMount() {
+    let { coding_history, background, interests } = this.props.user;
+    this.setState({
+      user: this.props.user,
+      coding_history,
+      background,
+      interests
+    });
+  }
+
+  render() {
+    let { user } = this.state;
+    return (
+      <div className="user-profile-container-personal">
+        <header className="user">
+          <div className="photobox">
+            <img
+              className="user-photo"
+              src={user ? user.avatar : require('../../assets/blank image.png')}
+              alt="userprofile"
+            />
+            <p>{user.username}</p>
+            <p>Based in {user.country}</p>
+          </div>
+          <ul className="positions">
+            <li className="position">
+              <span>
+                <i className="fas fa-check" />
+              </span>Programmer
+              </li>
+          </ul>
+        </header>
+        <UserInfo user={this.state} />
+        <Links user={this.state} />
+      </div>
+    );
+  }
+}
+
+export default UserSideBar;
 
 const userUpdate = gql`
 mutation userUpdate($background: String, $interests: String, $coding_history: String) {
@@ -38,97 +81,46 @@ const USER_INFO_DOM_ELEMENTS = [
   },
 ];
 
-class UserSideBar extends React.Component {
-  state = {
-    isEditing: false,
-    user: {},
-    coding_history: '',
-    background: '',
-    interests: ''
-  }
-  componentDidMount() {
-    let { coding_history, background, interests } = this.props.user;
-    this.setState({
-      user: this.props.user,
-      coding_history,
-      background,
-      interests
-    });
-  }
 
-  renderUserInfo = () => {
-    let { user } = this.state;
-    return USER_INFO_DOM_ELEMENTS.map(elem => {
-        const userComponent = ({ data }) => {
-          return (
-            <div className={elem.divClassName}>
-              <h1 className="user-sidebar-subcategory">{elem.desc}</h1>
-              <p>{data}</p>
-            </div>
-          )
-        }
-        return (user[elem.schemaKey] && user[elem.schemaKey].length > 0) 
-          && <EditableTextField
-              large
-              mutation={userUpdate}
-              mutationName="userUpdate"
-              fieldName={elem.schemaKey}
-              fieldData={user[elem.schemaKey]}
-              hasPermission={true}
-              component={userComponent}
-            />
-    });
-  }
-
-  renderLinks = () => {
-    let { user } = this.state;
+const UserInfo = ({ user }) => {
+  return USER_INFO_DOM_ELEMENTS.map((elem, idx) => {
+    const userComponent = ({ data }) => {
+      return (
+        <div className={elem.divClassName}>
+          <h1 className="user-sidebar-subcategory">{elem.desc}</h1>
+          <p>{data}</p>
+        </div>
+      )
+    }
     return (
-      <div className="user-links">
-        <h1 className="user-sidebar-subcategory">links</h1>
-        <ul>
-          <li>
-            <a target="_blank" href={"https://www.github.com/" + user.username}>
-              <i className="fab fa-github fa-3x" />
-            </a>
-          </li>
-        </ul>
-      </div>
+      <EditableTextField
+        key={idx}
+        large
+        mutation={ userUpdate }
+        mutationName="userUpdate"
+        fieldName={elem.schemaKey}
+        fieldData={user[elem.schemaKey]}
+        hasPermission={true}
+        component={userComponent}
+      />
     )
-  }
-
-  render() {
-    let { user } = this.state;
-    console.log('rendered user=' + user);
-    return (
-      <div className="user-profile-container-personal">
-        <header className="user">
-          <div className="photobox">
-            <img
-              className="user-photo"
-              src={user ? user.avatar : require('../../assets/blank image.png')}
-              alt="userprofile"
-            />
-            <p>{user.username}</p>
-            <p>Based in {user.country}</p>
-          </div>
-          <ul className="positions">
-            <li className="position">
-              <span>
-                <i className="fas fa-check" />
-              </span>Programmer
-              </li>
-          </ul>
-        </header>
-        {this.renderUserInfo()}
-        {this.renderLinks()}
-      </div>
-    );
-  }
-
+  });
 }
 
-export default UserSideBar;
-
+const Links = ({ user }) => {
+return (
+  <div className="user-links">
+      <h1 className="user-sidebar-subcategory">links</h1>
+      <ul>
+        <li>
+          <a target="_blank" href={"https://www.github.com/" + user.username}>
+            <i className="fab fa-github fa-3x" />
+          </a>
+        </li>
+      </ul>
+    </div>
+)
+}
 
   // let skillDOM = null;
   // if (user.skills && user.skills.length > 0) {
