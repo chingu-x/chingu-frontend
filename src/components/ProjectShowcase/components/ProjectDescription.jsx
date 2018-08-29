@@ -69,15 +69,16 @@ class ProjectDescription extends React.Component {
   };
 
   editButtonText({ isEditing, error }) {
-    let lbl = "None"
+    let lbl = "Edit"
     if (isEditing) lbl = "Done"
     if (error) lbl = "Try again"
     return lbl
   }
 
   render() {
-    let { isEditing, description } = this.state;
-    let { error, editable, project_id } = this.props;
+    const { isEditing, description } = this.state;
+    const { error, editable, project_id } = this.props;
+    const errorClass = error ? "--error" : ""
 
     return (
       <div className="project-portal__about-container">
@@ -86,7 +87,7 @@ class ProjectDescription extends React.Component {
           {editable && (
             <React.Fragment>
               <button
-                className="project-portal__edit-button project-portal__positioning-1"
+                className={`project-portal__edit-button${errorClass} project-portal__positioning-1`}
                 onClick={() => this.toggleEditWithSave()}
               >
                 <div className="project-portal__edit-button--text">
