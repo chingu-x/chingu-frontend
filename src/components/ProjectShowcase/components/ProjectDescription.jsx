@@ -35,35 +35,29 @@ class ProjectDescription extends React.Component {
 
   state = {
     isEditing: false,
-    project_data: {
-      description: this.props.text
-    },
+    description: this.props.text
   };
 
   toggleEditWithSave = () => {
     let { isEditing } = this.state;
-
     this.setState({ isEditing: !isEditing });
-
-    if (isEditing) {
-      this.makeMutation();
-    }
+    if (isEditing) this.makeMutation();
   };
 
-  handleChange = e => {
-    const { value } = e.target;
-    const { project_data } = this.state;
-    project_data.description = value;
-    this.setState({ project_data });
-  };
+  handleChange = e => this.setState({ description: e.target.value })
 
   makeMutation = () => {
-    const { project_id, project_data } = this.state;
-    this.props.mutation({ variables: { project_id: this.props.project_id, project_data } });
+    const { project_id, description } = this.state;
+    this.props.mutation({
+      variables: {
+        project_id: this.props.project_id,
+        project_data: { description }
+      }
+    });
   };
 
   render() {
-    let { isEditing, project_data } = this.state;
+    let { isEditing, description } = this.state;
     let { editable, project_id } = this.props;
 
     return (
@@ -90,13 +84,13 @@ class ProjectDescription extends React.Component {
           {isEditing ? (
             <textarea
               name="text"
-              value={project_data.description}
+              value={description}
               className="project-portal__edit-box"
               onChange={this.handleChange}
             />
           ) : (
               <div className="markdown">
-                <ReactMarkdown source={this.state.project_data.description} />
+                <ReactMarkdown source={this.state.description} />
               </div>
 
             )}
