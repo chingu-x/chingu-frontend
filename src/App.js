@@ -19,6 +19,7 @@ import Login from './components/Login';
 import FeedPortal from "./components/FeedPortal"
 import Private from "./components/utilities/PrivateRoute"
 import Loader from "./components/Loader"
+import AllProjects from './components/AllProjects';
 
 export default () => (
   <div className="App">
@@ -65,6 +66,7 @@ export default () => (
       />
       <Private exact path="/feed" component={FeedPortal} />
       <Private exact path="/team/checkin/:id" component={WeeklyCheckin} />
+      <Route exact path="/projects" component={AllProjects} />
       <Route exact path="/current" component={CurrentPrograms} />
       <Route exact path="/team" component={Staff} />
       <Route exact path="/privacy" component={PrivacyPolicy} />
