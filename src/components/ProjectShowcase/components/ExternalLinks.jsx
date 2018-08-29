@@ -17,6 +17,10 @@ class ExternalLinks extends React.Component {
     project_url: this.props.project_url
   };
 
+  componentDidUpdate({ error }) {
+    if (!!this.props.error && !error) this.setState({ isEditing: true })
+  }
+
   toggleEditWithSave = () => {
     let { isEditing } = this.state;
 
@@ -37,7 +41,6 @@ class ExternalLinks extends React.Component {
 
   makeMutation = () => {
     const { github_url, project_url } = this.state;
-    console.log({ github_url, project_url })
     const { project_id } = this.props
     this.props.mutation({
       variables: { project_id, project_data: { github_url, project_url } },
@@ -52,11 +55,17 @@ class ExternalLinks extends React.Component {
     });
   };
 
+  editButtonText({ isEditing, error }) {
+    let lbl = "Edit"
+    if (isEditing) lbl = "Done"
+    if (error) lbl = "Try again"
+    return lbl
+  }
+
   render() {
-    console.log("rendering external links")
-    const { editable } = this.props;
+    const { editable, error } = this.props;
     const { isEditing, github_url, project_url } = this.state;
-    console.log(this.props, this.state)
+    // const errorClass = error ? "--error" : "" // TODO: Enable after #205 merge
 
     return (
       <React.Fragment>
@@ -75,7 +84,7 @@ class ExternalLinks extends React.Component {
                       src={require("../../../assets/edit-green.png")}
                       alt="edit"
                     />
-                    {isEditing ? "Done" : "Edit"}
+                    {this.editButtonText({ isEditing, error })}
                   </div>
                 </button>
                 <hr className="project-side-panel--hline" />
@@ -85,6 +94,7 @@ class ExternalLinks extends React.Component {
               <React.Fragment>
                 <input type="text" name="github_url" value={github_url} onChange={this.handleChange} />
                 <input type="text" name="project_url" value={project_url} onChange={this.handleChange} />
+                {/* {error && <div style={{ fontSize: "12px" }} className="editable-input__error">Must provide a fully qualified repo url.</div>} */}
               </React.Fragment>
             ) : (
                 <React.Fragment>
@@ -136,7 +146,8 @@ function withMutation(Component) {
           {...props}
           mutation={updateProject}
           project_url={project_url}
-          github_url={github_url} />;
+          github_url={github_url}
+          error={error && error.message} />;
       }}
     </Mutation>
   );
