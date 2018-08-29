@@ -63,7 +63,7 @@ class ProjectShowcase extends React.Component {
                         projectId={project.id}
                       />
                       <HeroImage
-                        editable
+                        editable={user && this.isEditable(user, project)}
                         imageLink={project.images[0] && project.images[0].url}
                         projectId={project.id}
                       />
