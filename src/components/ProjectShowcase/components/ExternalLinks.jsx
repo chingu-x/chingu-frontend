@@ -13,8 +13,8 @@ class ExternalLinks extends React.Component {
 
   state = {
     isEditing: false,
-    github_url: this.props.github_url,
-    project_url: this.props.project_url
+    github_url: this.props.github_url || '',
+    project_url: this.props.project_url || ''
   };
 
   componentDidUpdate({ error }) {
