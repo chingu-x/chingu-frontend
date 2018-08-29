@@ -1,11 +1,10 @@
 import * as React from "react";
 import ExternalLinks from './ExternalLinks';
 
-const ProjectSideBar = ({ project }) => {
-  console.log(project)
+const ProjectSideBar = ({ project, editable }) => {
   return (
     <div className="project-side-panel">
-      <ExternalLinks data={project} />
+      <ExternalLinks data={project} editable={editable} />
       {project.skills && project.skills.length > 0 && <TechStack teckstack={project.skills} />}
       {project.tags && project.tags.length > 0 && <Tags tags={project.tags} />}
       {project.users && <Team users={project.users} />}

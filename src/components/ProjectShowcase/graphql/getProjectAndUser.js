@@ -13,10 +13,7 @@ const getProjectAndUser = gql`
         username
         avatar
       }
-      skills {
-        id
-        name
-      }
+
     }
   }
 `

@@ -40,8 +40,10 @@ class ExternalLinks extends React.Component {
   };
 
   render() {
+    console.log("rendering external links")
     const { editable } = this.props;
     const { isEditing, github_url, project_url } = this.state;
+    console.log(this.props, this.state)
 
     return (
       <React.Fragment>
@@ -72,23 +74,23 @@ class ExternalLinks extends React.Component {
                 <input type="text" name="projectURL" value={project_url} onChange={this.handleChange} />
               </React.Fragment>
             ) : (
-              <React.Fragment>
-                <a
-                  className="project-buttons"
-                  target="_blank"
-                  href={github_url}
-                >
-                  GitHub Repo
+                <React.Fragment>
+                  <a
+                    className="project-buttons"
+                    target="_blank"
+                    href={github_url}
+                  >
+                    GitHub Repo
                 </a>
-                <a
-                  className="project-buttons"
-                  target="_blank"
-                  href={project_url}
-                >
-                  Live Preview
+                  <a
+                    className="project-buttons"
+                    target="_blank"
+                    href={project_url}
+                  >
+                    Live Preview
                 </a>
-              </React.Fragment>
-            )}
+                </React.Fragment>
+              )}
           </div>
         </div>
         <hr className="project-side-panel--hline" />
@@ -100,8 +102,8 @@ class ExternalLinks extends React.Component {
 
 function withMutation(Component) {
   const updateLinks = gql`
-    mutation updateProject($github_url: String, $project_url: String) {
-      updateProject(github_url: $github_url, project_url: $project_url) @client {
+    mutation projectUpdate($github_url: String, $project_url: String) {
+      projectUpdate(github_url: $github_url, project_url: $project_url) {
         github_url
         project_url
       }
