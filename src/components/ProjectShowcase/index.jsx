@@ -57,21 +57,21 @@ class ProjectShowcase extends React.Component {
 
                     return <React.Fragment>
                       <Banner
-                        editable={true}
                         editable={user && this.isEditable(user, project)}
                         title={project.title}
                         elevatorPitch={project.elevatorPitch}
+                        projectId={project.id}
                       />
                       <HeroImage
-                        editable={true}
                         editable={user && this.isEditable(user, project)}
-                        title={project.title}
-                        elevatorPitch={project.elevatorPitch}
+                        imageLink={project.images[0] && project.images[0].url}
+                        projectId={project.id}
                       />
                       <div className="project-info-container">
                         <ProjectDescription
                           editable={user && this.isEditable(user, project)}
                           text={project.description}
+                          projectId={project.id}
                         />
                         <ProjectSideBar project={project} />
                       </div>
