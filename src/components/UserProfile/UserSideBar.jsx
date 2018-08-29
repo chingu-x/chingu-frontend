@@ -53,8 +53,8 @@ class UserSideBar extends React.Component {
 export default UserSideBar;
 
 const userUpdate = gql`
-mutation userUpdate($background: String, $interests: String, $coding_history: String) {
-  updateProject(background: $title, interests: $elevator_pitch, coding_history: $coding_history) {
+mutation userUpdate($user_data: UserUpdateInput!) {
+  userUpdate(user_data: $user_data) {
     id
     background
     interests
@@ -98,6 +98,7 @@ const UserInfo = ({ user }) => {
         large
         mutation={ userUpdate }
         mutationName="userUpdate"
+        mutationInputName="user_data"
         fieldName={elem.schemaKey}
         fieldData={user[elem.schemaKey]}
         hasPermission={true}
