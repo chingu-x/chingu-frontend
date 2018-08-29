@@ -31,7 +31,10 @@ class TeamStandup extends React.Component {
     response: null,
   }
 
-  handleResponse = ({ data }) => this.setState({ response: data.standupSubmit });
+  handleResponse = ({ data }) => {
+    window.localStorage.removeItem('team_standup');
+    this.setState({ response: data.standupSubmit });
+  }
 
   handleError = error => this.setState({ error });
 
@@ -48,20 +51,27 @@ class TeamStandup extends React.Component {
     .catch(this.handleError);
   }
 
-  render = () => {
+  render() {
     const { team_id, standupVersion } = this.props;
     const { error, response } = this.state;
 
     if (error) return <Error error={error.message} />;
     if (response) return <Redirect to="/feed" />;
-
+// TODO: needs styling
     return (
-      <DynamicForm
-        purpose="team_standup"
-        version={standupVersion}
-        hiddenData={{ team_id }}
-        onSubmit={this.handleSubmit}
-      />
+      <div className="team-standup-container">
+        <div className="team-standup-title">
+          TEAM STANDUP
+        </div>
+        <div className="team-standup">
+          <DynamicForm
+            purpose="team_standup"
+            version={standupVersion}
+            hiddenData={{ team_id }}
+            onSubmit={this.handleSubmit}
+          />
+        </div>
+      </div>
     );
   }
 }
