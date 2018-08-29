@@ -155,8 +155,8 @@ MEDIA QUERY
     text-align: center;
   }
 }
-@media (max-width: 550px) {
-  .title {
-    text-align: center;
+@media (max-width: 400px) and (min-width: 0px) {
+  .portal-panel__feed {
+    padding: 10px;
   }
 }
