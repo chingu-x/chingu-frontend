@@ -12,7 +12,7 @@ const EditFieldButton = ({ toggleEdit }) => (
 );
 
 EditFieldButton.propTypes = {
-  toggleEdit: PropTypes.bool,
+  toggleEdit: PropTypes.func,
 };
 
 
@@ -68,7 +68,6 @@ class EditableTextField extends React.Component {
 
   handleUpdateData = ({ data }) => {
     const { mutationName, fieldName } = this.props;
-    console.log("?=" + data[mutationName][fieldName])
     this.setState({
       updatedData: data[mutationName][fieldName],
       edit: false,
@@ -78,8 +77,7 @@ class EditableTextField extends React.Component {
   handleSubmit = () => {
     const { variables } = this.state;
     const { mutation } = this.props;
-    console.log('variables=' + variables);
-    console.log('mutation=' + mutation);
+    
     client.mutate({ mutation, variables })
       .then(this.handleUpdateData)
       .catch(console.error);
@@ -88,12 +86,13 @@ class EditableTextField extends React.Component {
   handleCancel = () => this.setState({ edit: false });
 
   initializeVariables = () => {
-    const { fieldName, fieldData } = this.props;
+    const { mutationInputName, fieldName, fieldData } = this.props;
 
-    const input = {};
-    input[fieldName] = fieldData || '';
+    const variables = {};
+    variables[mutationInputName] = {};
+    variables[mutationInputName][fieldName] = fieldData || '';
 
-    return { input };
+    return variables;
   }
 
   toggleDisplayEdit = (displayEdit) => this.setState({ displayEdit });
@@ -111,16 +110,17 @@ class EditableTextField extends React.Component {
     () => {
       const { value } = currentTarget;
       const { variables } = this.state;
-      const { fieldName } = this.props;
-
-      variables.input[fieldName] = value;
-      this.setState({ variables });
+      const { mutationInputName, fieldName } = this.props;
+      
+      variables[mutationInputName][fieldName] = value;
+      return { variables };
     },
   )
 
   render() {
     const {
       large,
+      mutationInputName,
       fieldName,
       fieldData,
       hasPermission,
@@ -133,7 +133,7 @@ class EditableTextField extends React.Component {
     if (edit) return (
       <EditArea
         large={large}
-        data={variables.input}
+        data={variables[mutationInputName]}
         fieldName={fieldName}
         onSubmit={this.handleSubmit}
         onCancel={this.handleCancel}
@@ -159,11 +159,12 @@ EditableTextField.propTypes = {
   // mutation variables expects shape { input: { fieldName: fieldData } }
   mutation: PropTypes.object, // mutation to update the Type
   mutationName: PropTypes.string, // the name of the mutation for accessing response data
+  mutationInputName: PropTypes.string, // object that holds mutation data (ex: user_data)
   fieldName: PropTypes.string, // the field of the Type to be edited
   fieldData: PropTypes.string, // the existing data for the field of the Type
   hasPermission: PropTypes.bool, // viewing User has permission to edit
-  component: PropTypes.element, // component to render fieldData
-  editButton: PropTypes.element, // custom EditButton
+  component: PropTypes.func, // component to render fieldData
+  editButton: PropTypes.func, // custom EditButton
 };
 
 EditableTextField.defaultProps = {
