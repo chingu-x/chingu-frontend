@@ -17,7 +17,7 @@ class UserProfile extends React.Component {
 
   updateState = () => {
     let { data: { user }, editable } = this.props;
-    this.setState({ user: user,  editable: editable ? true : false }, () => {
+    this.setState({ user: user, editable: editable ? true : false }, () => {
       // TODO: Check filters
       let { user } = this.state;
       let { teams, cohorts } = user;
@@ -74,7 +74,7 @@ class UserProfile extends React.Component {
                 pendingApproval.length > 0
                   ? pendingApproval.map((cohort, index) => {
                     return (
-                      <React.Fragment>
+                      <React.Fragment key={cohort.id + "_" + index}>
                         <div className="user-voyage-title">Upcoming Voyages</div>
                         <Cards.PendingApprovalVoyageCard
                           key={cohort.id + "_" + index}
