@@ -2,6 +2,7 @@
 
 .voyage-portal-background-color {
   background-color: white;
+  padding: 20px;
 }
 .voyage-portal {
   max-width: $max-width;
@@ -38,9 +39,11 @@ MEDIA QUERY
     margin-bottom: 55px;
   }
   .voyage-card-list {
+    margin: 0 auto;
     width: 100vw;
     grid-template-columns: repeat(1, 1fr);
     justify-items: center;
+    align-items: center;
   }
   .voyage-portal-subcategory {
     text-align: center;
