@@ -1,0 +1,21 @@
+@import '../../styles/abstracts/_variables.scss';
+
+.team-standup-container {
+    background-color: $palest-grey;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.team-standup-title {
+    @include portal-title;
+}
+
+.team-standup {
+    margin: 0 auto;
+    width: 460px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    margin-bottom: 100px;
+}
