@@ -1,8 +1,8 @@
 import { gql } from "apollo-boost"
 
-const profileQuery = gql`
-  query profileQuery {
-    user {
+const publicUserQuery = gql`
+query ($input: String) {
+    user(username: $input) {
       id
       username
       avatar
@@ -52,4 +52,4 @@ const profileQuery = gql`
   }
 `
 
-export default profileQuery
+export default publicUserQuery
