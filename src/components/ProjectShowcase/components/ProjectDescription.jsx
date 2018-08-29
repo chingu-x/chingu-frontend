@@ -24,6 +24,7 @@ We are all looking forward to reading about your projects!
 
 class ProjectDescription extends React.Component {
   static propTypes = {
+    project_id: PropTypes.string,
     text: PropTypes.string,
     editable: PropTypes.bool
   };
@@ -35,18 +36,22 @@ class ProjectDescription extends React.Component {
 
   state = {
     isEditing: false,
-    description: this.props.text
+    description: this.props.text,
+    editBtnHidden: true
   };
 
   componentDidUpdate({ error }) {
     if (this.props.error && !error) this.setState({ isEditing: true })
   }
 
+  toggleEditable = editBtnHidden => this.setState({ editBtnHidden });
+
   toggleEditWithSave = () => {
     let { isEditing } = this.state;
     this.setState({ isEditing: !isEditing });
     if (isEditing) this.makeMutation();
   };
+
 
   handleChange = e => this.setState({ description: e.target.value })
 
@@ -76,18 +81,25 @@ class ProjectDescription extends React.Component {
   }
 
   render() {
-    const { isEditing, description } = this.state;
+    const { isEditing, description, editBtnHidden } = this.state;
     const { error, editable, project_id } = this.props;
-    const errorClass = error ? "--error" : ""
+
+    let btnState = ""
+    if (error) btnState = "--error"
+    else if (editBtnHidden) btnState = "--hidden"
 
     return (
-      <div className="project-portal__about-container">
+      <div
+        className="project-portal__about-container"
+        onMouseEnter={() => editable && this.toggleEditable(false)}
+        onMouseLeave={() => editable && !isEditing && this.toggleEditable(true)}
+      >
         <h1 className="project-subcategory-title">Project Description</h1>
         <div className="project-portal__about">
           {editable && (
             <React.Fragment>
               <button
-                className={`project-portal__edit-button${errorClass} project-portal__positioning-1`}
+                className={`project-portal__edit-button${btnState} project-portal__positioning-1`}
                 onClick={() => this.toggleEditWithSave()}
               >
                 <div className="project-portal__edit-button--text">
@@ -139,7 +151,6 @@ function withMutation(Component) {
   return props => (
     <Mutation mutation={updateProject}>
       {(updateProject, { error, loading, data }) => {
-        console.log("data from mutation", data);
         const text = data
           ? data.projectUpdate.description
           : props.text;
