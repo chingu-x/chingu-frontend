@@ -99,3 +99,23 @@ USER IMAGES
     display: none;
 }
 
+/*
+==========================
+MEDIA QUERY
+==========================
+*/
+@media (max-width: 610px) and (min-width: 0px) {
+    .team-card-container {
+        padding: 10px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .team-card-buttons-container {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .team-card-info-container {
+        grid-column: 1 / -1;
+        border-right: none;
+        border-bottom: 1px solid $light-grey;
+    }
+}
