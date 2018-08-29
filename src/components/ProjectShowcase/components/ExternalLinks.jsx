@@ -5,6 +5,7 @@ import { Mutation } from "react-apollo";
 
 class ExternalLinks extends React.Component {
   static propTypes = {
+    project_id: PropTypes.string,
     github_url: PropTypes.string,
     project_url: PropTypes.string,
     editable: PropTypes.bool
@@ -36,7 +37,19 @@ class ExternalLinks extends React.Component {
 
   makeMutation = () => {
     const { github_url, project_url } = this.state;
-    this.props.mutation({ variables: { github_url, project_url } });
+    console.log({ github_url, project_url })
+    const { project_id } = this.props
+    this.props.mutation({
+      variables: { project_id, project_data: { github_url, project_url } },
+      optimisticResponse: {
+        __typename: "Mutation",
+        projectUpdate: {
+          id: project_id,
+          github_url,
+          project_url
+        }
+      }
+    });
   };
 
   render() {
@@ -70,8 +83,8 @@ class ExternalLinks extends React.Component {
             )}
             {isEditing ? (
               <React.Fragment>
-                <input type="text" name="githubURL" value={github_url} onChange={this.handleChange} />
-                <input type="text" name="projectURL" value={project_url} onChange={this.handleChange} />
+                <input type="text" name="github_url" value={github_url} onChange={this.handleChange} />
+                <input type="text" name="project_url" value={project_url} onChange={this.handleChange} />
               </React.Fragment>
             ) : (
                 <React.Fragment>
@@ -102,29 +115,28 @@ class ExternalLinks extends React.Component {
 
 function withMutation(Component) {
   const updateLinks = gql`
-    mutation projectUpdate($github_url: String, $project_url: String) {
-      projectUpdate(github_url: $github_url, project_url: $project_url) {
-        github_url
-        project_url
+    mutation projectUpdate(
+      $project_id: ID!
+      $project_data: ProjectInput!) {
+        projectUpdate(
+        project_id: $project_id
+        project_data: $project_data) {
+          id
+          github_url
+          project_url
+        }
       }
-    }
-  `;
+    `;
 
   return props => (
     <Mutation mutation={updateLinks}>
       {(updateProject, { error, loading, data }) => {
-        console.log("data from mutation", data);
-
-        if (error) {
-          return null;
-        }
-        if (loading) {
-          return null;
-        }
-
-        const text = data ? data.updateProject.text : props.text;
-
-        return <Component {...props} mutation={updateProject} text={text} />;
+        const { project_url, github_url } = data ? data.projectUpdate : props
+        return <Component
+          {...props}
+          mutation={updateProject}
+          project_url={project_url}
+          github_url={github_url} />;
       }}
     </Mutation>
   );

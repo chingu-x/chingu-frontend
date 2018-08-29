@@ -2,12 +2,17 @@ import * as React from "react";
 import ExternalLinks from './ExternalLinks';
 
 const ProjectSideBar = ({ project, editable }) => {
+  const { project_id, project_url, github_url, skills, tags, users } = project
   return (
     <div className="project-side-panel">
-      <ExternalLinks data={project} editable={editable} />
-      {project.skills && project.skills.length > 0 && <TechStack teckstack={project.skills} />}
-      {project.tags && project.tags.length > 0 && <Tags tags={project.tags} />}
-      {project.users && <Team users={project.users} />}
+      <ExternalLinks
+        editable={editable}
+        project_id={project.id}
+        project_url={project_url}
+        github_url={github_url} />
+      {skills && skills.length > 0 && <TechStack teckstack={skills} />}
+      {tags && tags.length > 0 && <Tags tags={tags} />}
+      {users && <Team users={users} />}
     </div>
   )
 }
