@@ -5,20 +5,35 @@ import { gql } from "apollo-boost";
 
 class UserSideBar extends React.Component {
   state = {
-    isEditing: false,
+    editable: false,
     user: {},
     coding_history: '',
     background: '',
     interests: ''
   }
-  componentDidMount() {
+
+  updateState = () => {
     let { coding_history, background, interests } = this.props.user;
+    let { editable } = this.props;
     this.setState({
       user: this.props.user,
       coding_history,
       background,
-      interests
+      interests,
+      editable
     });
+  }
+  componentDidMount() {
+    this.updateState();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.editable !== prevProps.editable 
+      || this.props.user !== prevProps.user
+    ) {
+      this.updateState();
+    }
   }
 
   render() {
@@ -43,7 +58,7 @@ class UserSideBar extends React.Component {
               </li>
           </ul>
         </header>
-        <UserInfo user={this.state} />
+        <UserInfo user={this.state} editable={this.state.editable} />
         <Links user={this.state} />
       </div>
     );
@@ -82,7 +97,7 @@ const USER_INFO_DOM_ELEMENTS = [
 ];
 
 
-const UserInfo = ({ user }) => {
+const UserInfo = ({ user, editable }) => {
   return USER_INFO_DOM_ELEMENTS.map((elem, idx) => {
     const userComponent = ({ data }) => {
       return (
@@ -101,7 +116,7 @@ const UserInfo = ({ user }) => {
         mutationInputName="user_data"
         fieldName={elem.schemaKey}
         fieldData={user[elem.schemaKey]}
-        hasPermission={true}
+        hasPermission={editable}
         component={userComponent}
       />
     )
