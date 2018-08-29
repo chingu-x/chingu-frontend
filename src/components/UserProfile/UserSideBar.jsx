@@ -5,21 +5,14 @@ import { gql } from "apollo-boost";
 
 class UserSideBar extends React.Component {
   state = {
+    user: null,
     editable: false,
-    user: {},
-    coding_history: '',
-    background: '',
-    interests: ''
   }
 
   updateState = () => {
-    let { coding_history, background, interests } = this.props.user;
-    let { editable } = this.props;
+    const { user, editable } = this.props;
     this.setState({
-      user: this.props.user,
-      coding_history,
-      background,
-      interests,
+      user,
       editable
     });
   }
@@ -37,7 +30,8 @@ class UserSideBar extends React.Component {
   }
 
   render() {
-    let { user } = this.state;
+    const { user, editable } = this.state;
+    if (!user) return null;
     return (
       <div className="user-profile-container-personal">
         <header className="user">
@@ -58,8 +52,8 @@ class UserSideBar extends React.Component {
               </li>
           </ul>
         </header>
-        <UserInfo user={this.state} editable={this.state.editable} />
-        <Links user={this.state} />
+        <UserInfo user={user} editable={editable} />
+        <Links user={user} />
       </div>
     );
   }
@@ -107,37 +101,36 @@ const UserInfo = ({ user, editable }) => {
         </div>
       )
     }
-    return (
-      <EditableTextField
-        key={idx}
-        large
-        mutation={ userUpdate }
-        mutationName="userUpdate"
-        mutationInputName="user_data"
-        fieldName={elem.schemaKey}
-        fieldData={user[elem.schemaKey]}
-        hasPermission={editable}
-        component={userComponent}
-      />
-    )
+    return editable // only render EditableTextField if editable
+      ? (
+          <EditableTextField
+            key={idx}
+            large
+            mutation={ userUpdate }
+            mutationName="userUpdate"
+            mutationInputName="user_data"
+            fieldName={elem.schemaKey}
+            fieldData={user[elem.schemaKey]}
+            hasPermission={editable}
+            component={userComponent}
+          />
+        )
+      : userComponent({ data: user[elem.schemaKey] })
   });
 }
 
-const Links = ({ user }) => {
-return (
+const Links = ({ user: { username } }) => (
   <div className="user-links">
       <h1 className="user-sidebar-subcategory">links</h1>
       <ul>
         <li>
-          <a target="_blank" href={"https://www.github.com/" + user.username}>
+          <a target="_blank" href={`https://www.github.com/${username}`}>
             <i className="fab fa-github fa-3x" />
           </a>
         </li>
       </ul>
     </div>
-)
-}
-
+);
   // let skillDOM = null;
   // if (user.skills && user.skills.length > 0) {
   //   skillDOM = (
