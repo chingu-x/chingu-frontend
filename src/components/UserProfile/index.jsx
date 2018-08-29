@@ -3,7 +3,6 @@ import * as Cards from "../VoyageCard/VoyageCard";
 import UserSideBar from "./UserSideBar";
 import Request from "../utilities/Request"
 import profileQuery from "./graphql/profileQuery"
-import publicUserQuery from './graphql/publicUserQuery';
 import './UserProfile.css'
 
 class UserProfile extends React.Component {
@@ -119,11 +118,11 @@ class UserProfile extends React.Component {
 
 }
 
-export default props =>
+export default props => (
   <Request
     {...props}
-    query={props.username ? publicUserQuery : profileQuery}
-    variables={{ input: props.username }}
+    query={profileQuery}
+    variables={props.username && { username: props.username }}
     component={UserProfile}
     globalLoader
-  />
+  />)
