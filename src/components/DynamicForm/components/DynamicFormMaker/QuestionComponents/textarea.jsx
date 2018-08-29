@@ -9,9 +9,13 @@ export default (
     type="text"
     name={field_name}
     value={form_data[field_name]}
-    onChange={e => onFormChange(e)}
     className="form-text-area"
     minLength={minlength}
     maxLength={maxlength}
+    onChange={
+      ({ currentTarget }) => onFormChange(
+        { currentTarget, min: minlength, max: maxlength }
+      )
+    }
   />
 );

@@ -10,9 +10,13 @@ export default (
     type={input_type}
     name={field_name}
     value={form_data[field_name]}
-    onChange={e => onFormChange(e)}
     className="form-input"
     minLength={minlength}
     maxLength={maxlength}
+    onChange={
+      ({ currentTarget }) => onFormChange(
+        { currentTarget, min: minlength, max: maxlength }
+      )
+    }
   />
 );
