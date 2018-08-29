@@ -5,7 +5,6 @@ const areChoicesValid = (choices, min, max) => {
   const minChoices = min || 1;
   const maxChoices = max || 100;
   const numChoices = choices.length;
-  console.log('in validator: ', numChoices >= minChoices && numChoices <= maxChoices)
   return numChoices >= minChoices && numChoices <= maxChoices;
 }
 

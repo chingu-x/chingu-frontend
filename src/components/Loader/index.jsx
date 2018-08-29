@@ -17,7 +17,6 @@ const GlobalLoader = () => (
   <Query query={loaderQuery}>
     {
       ({ data: { loaderState: { isShowing } } }) => {
-        console.log("global")
         return !isShowing
           ? null
           : <Modal

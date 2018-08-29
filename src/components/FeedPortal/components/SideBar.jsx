@@ -53,7 +53,6 @@ const TeamLinks = ({ teams, toggleNewsfeed, activeTeamId }) => {
 }
 
 const SideBar = ({ data: { user }, toggleNewsfeed, team_id }) => {
-  console.log(user.teams);
   return (
     <aside className="sidebar-container">
       <div className="portal-panel__sidebar">
