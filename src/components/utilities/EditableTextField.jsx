@@ -5,12 +5,16 @@ import { client } from "../../index.js";
 import { questionComponents } from "../DynamicForm/";
 const { text, textarea } = questionComponents;
 
-
 const EditFieldButton = ({ toggleEdit }) => (
   <button className="edit-field-btn" onClick={() => toggleEdit()}>
     Edit
   </button>
 );
+
+EditFieldButton.propTypes = {
+  toggleEdit: PropTypes.bool,
+};
+
 
 const EditArea = ({
   large,
@@ -64,6 +68,7 @@ class EditableTextField extends React.Component {
 
   handleUpdateData = ({ data }) => {
     const { mutationName, fieldName } = this.props;
+    console.log("?=" + data[mutationName][fieldName])
     this.setState({
       updatedData: data[mutationName][fieldName],
       edit: false,
@@ -74,6 +79,7 @@ class EditableTextField extends React.Component {
     const { variables } = this.state;
     const { mutation } = this.props;
     console.log('variables=' + variables);
+    console.log('mutation=' + mutation);
     client.mutate({ mutation, variables })
       .then(this.handleUpdateData)
       .catch(console.error);
