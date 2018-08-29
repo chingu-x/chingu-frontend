@@ -63,7 +63,7 @@ class Banner extends React.Component {
   };
 
   editButtonText({ isEditing, error }) {
-    let lbl = "None"
+    let lbl = "Edit"
     if (isEditing) lbl = "Done"
     if (error) lbl = "Try again"
     return lbl
@@ -73,6 +73,7 @@ class Banner extends React.Component {
     console.log("component props", this.props);
     const { isEditing, title, elevator_pitch } = this.state
     const { error, editable } = this.props;
+    const errorClass = error ? "--error" : ""
 
     return (
       <div className="project-portal__banner">
@@ -103,14 +104,14 @@ class Banner extends React.Component {
         </div>
         {editable && (
           <button
-            className="project-portal__edit-button project-portal__positioning-2"
+            className={`project-portal__edit-button${errorClass} project-portal__positioning-2`}
             onClick={() => this.toggleEditWithSave()}
           >
             <div className="project-portal__edit-button--text">
-              <img
+              {!error && <img
                 className="project-portal__edit-button--img"
                 src={require('../../../../assets/edit-white.png')}
-                alt="edit" />
+                alt="edit" />}
               {this.editButtonText({ isEditing, error })}
             </div>
           </button>
