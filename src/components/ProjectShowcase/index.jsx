@@ -58,13 +58,12 @@ class ProjectShowcase extends React.Component {
                     const editable = user && this.isEditable(user, project)
                     return <React.Fragment>
                       <Banner
-                        editable={true}
                         editable={editable}
                         title={project.title}
                         elevatorPitch={project.elevatorPitch}
+                        projectId={project.id}
                       />
                       <HeroImage
-                        editable={true}
                         editable={editable}
                         title={project.title}
                         elevatorPitch={project.elevatorPitch}
@@ -73,6 +72,7 @@ class ProjectShowcase extends React.Component {
                         <ProjectDescription
                           editable={editable}
                           text={project.description}
+                          projectId={project.id}
                         />
                         <ProjectSideBar
                           project={project}

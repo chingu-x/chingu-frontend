@@ -1,19 +1,24 @@
 import { gql } from "apollo-boost"
 
 const getProjectAndUser = gql`
-  query getProject($id: ID!, $github_repo_id: String) {
-    project(id: $id, github_repo_id: $github_repo_id) {
+  query getProject($id: ID) {
+    project(id: $id) {
       id
       title
       description
+      elevator_pitch
       project_url
       github_url
+      images {
+        id
+        url
+        order
+      }
       users {
         id
         username
         avatar
       }
-
     }
   }
 `
