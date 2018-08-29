@@ -22,18 +22,18 @@ const isValid = (value, min, max) => {
     : isTextValid(value, min, max);
 }
 
-const isValueValid = (type, value, min, max) => {
-  if (isEmpty(value)) return false;
+const isFieldInvalid = (type, value, min, max) => {
+  if (!isEmpty(value)) return false;
 
   switch (type) {
-    case "email": return isEmail(value);
-    case "url": return isURL(value);
-    case "radio": return !isEmpty(value);
-    default: return isValid(value, min, max);
+    case "email": return !isEmail(value);
+    case "url": return !isURL(value);
+    case "radio": return isEmpty(value);
+    default: return !isValid(value, min, max);
   }
 }
 
 export {
   isEmpty,
-  isValueValid,
+  isFieldInvalid,
 };
