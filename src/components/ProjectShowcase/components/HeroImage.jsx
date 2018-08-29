@@ -40,9 +40,19 @@ class HeroImage extends React.Component {
 
   makeMutation = () => {
     const { imageLink } = this.state;
-    const { mutation } = this.props;
+    const { mutation, projectId} = this.props;
 
-    mutation({ variables: { imageLink } });
+    mutation({
+      variables: {
+        project_id: projectId,
+        project_data: {
+          images: {
+            url: imageLink,
+            order: 0
+          }
+        }
+      }
+     });
   };
 
   render() {
@@ -93,4 +103,38 @@ class HeroImage extends React.Component {
 
 }
 
-export default HeroImage;
+function withMutation(Component) {
+  const updateProject = gql`
+    mutation projectUpdate($project_id: ID!, $project_data: ProjectInput!) {
+      projectUpdate( project_id: $project_id, project_data: $project_data) {
+        id
+        images {
+          id
+          url
+          order
+        }
+      }
+    }
+  `;
+
+  return props => (
+    <Mutation mutation={updateProject}>
+      {(updateProject, { error, loading, data }) => {
+        console.log("data from mutation", data);
+
+        if (error) {
+          return null;
+        }
+        if (loading) {
+          return null;
+        }
+
+        const imageLink = data ? data.updateProject.images[0].url : props.imageLink;
+
+        return <Component {...props} mutation={updateProject} imageLink={imageLink} />;
+      }}
+    </Mutation>
+  );
+}
+
+export default withMutation(HeroImage);
