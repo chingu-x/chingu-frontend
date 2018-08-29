@@ -8,7 +8,8 @@ class Banner extends React.Component {
     editable: PropTypes.bool,
     title: PropTypes.string,
     elevatorPitch: PropTypes.string,
-    mutation: PropTypes.func
+    mutation: PropTypes.func,
+    projectId: PropTypes.string
   };
 
   static defaultProps = {
@@ -43,9 +44,17 @@ class Banner extends React.Component {
 
   makeMutation = () => {
     const { title, elevatorPitch } = this.state;
-    const { mutation } = this.props;
+    const { mutation, projectId } = this.props;
 
-    mutation({ variables: { title, elevator_pitch: elevatorPitch } });
+    mutation({
+      variables: {
+        project_id: projectId,
+        project_data: {
+          elevator_pitch: elevatorPitch,
+          title: title
+        }
+      }
+     });
   };
 
   render() {
@@ -100,8 +109,9 @@ class Banner extends React.Component {
 
 function withMutation(Component) {
   const updateProject = gql`
-    mutation updateProject($title: String, $elevator_pitch: String) {
-      updateProject(title: $title, elevator_pitch: $elevator_pitch) @client {
+    mutation projectUpdate($project_id: ID!, $project_data: ProjectInput!) {
+      projectUpdate( project_id: $project_id, project_data: $project_data) {
+        id
         title
         elevator_pitch
       }
