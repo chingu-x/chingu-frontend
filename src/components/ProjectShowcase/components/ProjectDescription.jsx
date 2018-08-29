@@ -24,7 +24,8 @@ We are all looking forward to reading about your projects!
 class ProjectDescription extends React.Component {
   static propTypes = {
     text: PropTypes.string,
-    editable: PropTypes.bool
+    editable: PropTypes.bool,
+    projectId: PropTypes.string
   };
 
   static defaultProps = {
@@ -56,8 +57,17 @@ class ProjectDescription extends React.Component {
   };
 
   makeMutation = () => {
+    const { mutation, projectId } = this.state.props;
     const { text } = this.state;
-    this.props.mutation({ variables: { text } });
+
+    mutation({
+      variables: {
+        project_id: projectId,
+        project_data: {
+          description: text
+        }
+      }
+     });
   };
 
   render() {
@@ -106,8 +116,9 @@ class ProjectDescription extends React.Component {
 
 function withMutation(Component) {
   const updateProject = gql`
-    mutation updateProject($text: String) {
-      updateProject(text: $text) @client {
+    mutation projectUpdate($project_id: ID!, $project_data: ProjectInput!) {
+      projectUpdate( project_id: $project_id, project_data: $project_data) {
+        id
         text
       }
     }

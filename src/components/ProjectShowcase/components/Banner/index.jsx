@@ -141,7 +141,7 @@ function withMutation(Component) {
           title
           elevator_pitch
         }
-      }
+    }
     `;
 
   return props => (
