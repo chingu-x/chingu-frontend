@@ -58,6 +58,7 @@ const DynamicForm = (
                   Object.assign(hiddenData, qs.parse(queryString)) :
                   null
               }
+              onValidate={onValidate}
               onSubmit={onSubmit}
               onResponse={onResponse}
               onError={onError}
