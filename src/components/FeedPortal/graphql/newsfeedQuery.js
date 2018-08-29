@@ -27,9 +27,6 @@ const getNewsfeed = gql`
                 username
                 avatar
             }
-            skills {
-                name
-            }
         }
       }
 

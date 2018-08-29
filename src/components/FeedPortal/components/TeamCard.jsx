@@ -29,7 +29,7 @@ const InfoComponents = ({ team }) => {
     { label: 'Team', data: project.users },
     { label: 'Project', data: project.title },
     { label: 'Description', data: project.description },
-    { label: 'TechStack', data: project.skills },
+    // { label: 'TechStack', data: project.skills },
   ]
 
   return infoObjects.map((info, idx) => {
@@ -38,15 +38,15 @@ const InfoComponents = ({ team }) => {
       case 'Team':
         data = info.data.map((user, idx) => {
           return (
-            <div key={idx} className="team-card-user">
+            <Link to={`/profile/${user.username}`} key={idx} className="team-card-user">
               <img className="team-card-avatar-img" src={user.avatar ? user.avatar : require('../../../assets/blank image.png')} alt={user.username} />
               <div className="team-card-username">{user.username}</div>
-            </div>
+            </Link>
           )
         })
         break;
       case 'TechStack':
-        data = info.data.map((tech, idx) => {
+        data = info.data && info.data.map((tech, idx) => {
           return (
             <div key={idx} className="team-card-techstac k">{tech.name}</div>
           )
