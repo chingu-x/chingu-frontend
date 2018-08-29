@@ -52,6 +52,14 @@ class ProjectDescription extends React.Component {
       variables: {
         project_id: this.props.project_id,
         project_data: { description }
+      },
+      optimisticResponse: {
+        __typename: "Mutation",
+        projectUpdate: {
+          __typename: "Project",
+          id: project_id,
+          description
+        }
       }
     });
   };
@@ -120,15 +128,9 @@ function withMutation(Component) {
     <Mutation mutation={updateProject}>
       {(updateProject, { error, loading, data }) => {
         console.log("data from mutation", data);
-
-        if (error) {
-          return null;
-        }
-        if (loading) {
-          return <Loader size="medium" />
-        }
-
-        const text = data ? data.projectUpdate.description : props.text;
+        const text = data
+          ? data.projectUpdate.description
+          : props.text;
 
         return <Component {...props} mutation={updateProject} text={text} />;
       }}
