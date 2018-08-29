@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import './EditableTextField.css';
 import { client } from "../../index.js";
 import { questionComponents } from "../DynamicForm/";
 const { text, textarea } = questionComponents;
 
+
 const EditFieldButton = ({ toggleEdit }) => (
-  <button onClick={() => toggleEdit()}>
+  <button className="edit-field-btn" onClick={() => toggleEdit()}>
     Edit
   </button>
 );
@@ -23,16 +24,19 @@ const EditArea = ({
   const inputComponent = large
     ? textarea(inputData, onInputChange, data)
     : text(
-        { input_type: 'text', ...inputData },
-        onInputChange,
-        data
-      );
+      { input_type: 'text', ...inputData },
+      onInputChange,
+      data
+    );
 
   return (
     <React.Fragment>
       {inputComponent}
-      <button onClick={() => onSubmit()}>Update</button>
-      <button onClick={() => onCancel()}>Cancel</button>
+      <div className="edit-field-btn--btn-container">
+        <button className="edit-field-btn--left" onClick={() => onSubmit()}>Update</button>
+        <button className="edit-field-btn--right" onClick={() => onCancel()}>Cancel</button>
+      </div>
+
     </React.Fragment>
   )
 }
@@ -56,7 +60,7 @@ class EditableTextField extends React.Component {
       variables: this.initializeVariables(),
     };
   }
-  
+
 
   handleUpdateData = ({ data }) => {
     const { mutationName, fieldName } = this.props;
@@ -127,12 +131,13 @@ class EditableTextField extends React.Component {
         fieldName={fieldName}
         onSubmit={this.handleSubmit}
         onCancel={this.handleCancel}
-        onInputChange={this.handleInputChange} 
+        onInputChange={this.handleInputChange}
       />
     );
 
     return (
       <div
+        className="editable-text-field-container"
         onMouseEnter={() => hasPermission && this.toggleDisplayEdit(true)}
         onMouseLeave={() => hasPermission && this.toggleDisplayEdit(false)}
       >
