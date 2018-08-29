@@ -20,11 +20,16 @@ class Banner extends React.Component {
 
   state = {
     isEditing: false,
+    // error: null,
     project_data: {
       title: this.props.title,
       elevator_pitch: this.props.elevatorPitch
     },
   };
+
+  componentDidUpdate({ error }) {
+    if (this.props.error && !error) this.setState({ isEditing: true })
+  }
 
   toggleEditWithSave = () => {
     let { isEditing } = this.state;
@@ -48,24 +53,42 @@ class Banner extends React.Component {
   makeMutation = () => {
     const { title } = this.state.project_data // TODOD: Add elevator_pitch
     const { project_id, mutation } = this.props
-    mutation({ variables: { project_id, project_data: this.state.project_data } });
+    mutation({
+      variables: { project_id, project_data: { title } },
+      optimisticResponse: {
+        __typename: "Mutation",
+        projectUpdate: {
+          __typename: "Project",
+          id: project_id,
+          title
+        }
+      }
+    });
   };
+
+  editButtonText({ isEditing, error }) {
+    let lbl = "None"
+    if (isEditing) lbl = "Done"
+    if (error) lbl = "Try again"
+    return lbl
+  }
 
   render() {
     console.log("component props", this.props);
-
     const { isEditing, project_data: { title, elevator_pitch } } = this.state
-    const { editable } = this.props;
+    const { error, editable } = this.props;
 
     return (
       <div className="project-portal__banner">
         <div className="project-portal__banner--header">
           {isEditing ? (
-            <input
-              className="project-portal__banner-edit"
-              name="title"
-              value={title}
-              onChange={this.handleChange} />
+            <React.Fragment>
+              <input
+                className="project-portal__banner-edit"
+                name="title"
+                value={title}
+                onChange={this.handleChange} />
+            </React.Fragment>
           ) : (
               title
             )}
@@ -92,7 +115,7 @@ class Banner extends React.Component {
                 className="project-portal__edit-button--img"
                 src={require('../../../../assets/edit-white.png')}
                 alt="edit" />
-              {isEditing ? "Done" : "Edit"}
+              {this.editButtonText({ isEditing, error })}
             </div>
           </button>
         )}
@@ -105,29 +128,19 @@ function withMutation(Component) {
   const projectUpdate = gql`
     mutation projectUpdate(
       $project_id: ID!
-      $project_data: ProjectInput!
-    ) {
-      projectUpdate(
+      $project_data: ProjectInput!) {
+        projectUpdate(
         project_id: $project_id
-        project_data: $project_data
-      ) {
-        id
-        title
+        project_data: $project_data) {
+          id
+          title
+        }
       }
-    }
-  `;
+    `;
 
   return props => (
     <Mutation mutation={projectUpdate}>
       {(projectUpdate, { error, loading, data }) => {
-        if (error) {
-          return null;
-        }
-        if (loading) {
-          return null;
-        }
-
-        console.log({ title: props.title })
         const title = data ? data.projectUpdate.title : props.title;
         const elevator_pitch = data
           ? data.projectUpdate.elevator_pitch
@@ -139,6 +152,7 @@ function withMutation(Component) {
             mutation={projectUpdate}
             title={title}
             elevatorPitch={elevator_pitch}
+            error={!!error}
           />
         );
       }}
