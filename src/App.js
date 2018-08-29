@@ -19,6 +19,7 @@ import Login from './components/Login';
 import FeedPortal from "./components/FeedPortal"
 import Private from "./components/utilities/PrivateRoute"
 import Loader from "./components/Loader"
+import TeamStandup from "./components/TeamStandup";
 
 export default () => (
   <div className="App">
@@ -65,6 +66,17 @@ export default () => (
       />
       <Private exact path="/feed" component={FeedPortal} />
       <Private exact path="/team/checkin/:id" component={WeeklyCheckin} />
+      <Private
+        exact path="/team/:team_id/standup"
+        render={
+          ({ match: { params: { team_id } } }) => (
+            <TeamStandup
+              team_id={team_id}
+              standupVersion={null}
+            />
+          )
+        }
+      />
       <Route exact path="/current" component={CurrentPrograms} />
       <Route exact path="/team" component={Staff} />
       <Route exact path="/privacy" component={PrivacyPolicy} />
