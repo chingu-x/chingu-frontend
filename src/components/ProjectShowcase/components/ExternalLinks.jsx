@@ -7,19 +7,22 @@ class ExternalLinks extends React.Component {
   static propTypes = {
     project_id: PropTypes.string,
     github_url: PropTypes.string,
-    project_url: PropTypes.string,
-    editable: PropTypes.bool
+    project_url: PropTypes.string
   };
 
   state = {
     isEditing: false,
     github_url: this.props.github_url || '',
-    project_url: this.props.project_url || ''
+    project_url: this.props.project_url || '',
+    editBtnHidden: true
   };
+
 
   componentDidUpdate({ error }) {
     if (!!this.props.error && !error) this.setState({ isEditing: true })
   }
+
+  toggleEditable = editBtnHidden => this.setState({ editBtnHidden });
 
   toggleEditWithSave = () => {
     let { isEditing } = this.state;
@@ -47,6 +50,7 @@ class ExternalLinks extends React.Component {
       optimisticResponse: {
         __typename: "Mutation",
         projectUpdate: {
+          __typename: "Project",
           id: project_id,
           github_url,
           project_url
@@ -64,26 +68,33 @@ class ExternalLinks extends React.Component {
 
   render() {
     const { editable, error } = this.props;
-    const { isEditing, github_url, project_url } = this.state;
-    // const errorClass = error ? "--error" : "" // TODO: Enable after #205 merge
+    const { editBtnHidden, isEditing, github_url, project_url } = this.state;
+
+    let btnState = ""
+    if (error) btnState = "--error"
+    else if (editBtnHidden) btnState = "--hidden"
 
     return (
       <React.Fragment>
-        <div className="project-subcategory">
-          <div className="project-subcategory__title-container">
+        <div className="project-subcategory"
+          onMouseEnter={() => editable && this.toggleEditable(false)}
+          onMouseLeave={() => editable && !isEditing && this.toggleEditable(true)}
+        >
+          <div
+            className="project-subcategory__title-container">
             <h1 className="project-subcategory-title">Links</h1>
             {editable && (
               <React.Fragment>
                 <button
-                  className="project-portal__edit-button project-portal__positioning-1"
+                  className={`project-portal__edit-button${btnState} project-portal__positioning-1`}
                   onClick={() => this.toggleEditWithSave()}
                 >
                   <div className="project-portal__edit-button--text">
-                    <img
+                    {!error && <img
                       className="project-portal__edit-button--img"
                       src={require("../../../assets/edit-green.png")}
                       alt="edit"
-                    />
+                    />}
                     {this.editButtonText({ isEditing, error })}
                   </div>
                 </button>

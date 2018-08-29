@@ -99,6 +99,7 @@ BUTTONS
   width: 100%;
 }
 
+
 /*
 ==========================
 OPEN IMAGE MODAL BTN
@@ -292,7 +293,12 @@ PROJECT DESCRIPTION
 
 .project-portal__edit-button {
   @include system-button--sub($theme-green, $theme-green--lightest);
-  width: 120px;
+  width: 150px;
+}
+.project-portal__edit-button--hidden {
+  @include system-button--sub($theme-green, $theme-green--lightest);
+  visibility: hidden;
+  width: 150px;
 }
 
 .project-portal__positioning-1  {
@@ -570,6 +576,15 @@ MEDIA QUERIES
     margin-top: 20px;
   }
 }
+
+
+.project-portal__edit-button--error {
+  @include system-button($attention-red, $health-red);
+  color: white;
+  width: 150px;
+}
+
+
 
 
 // .project-portal__edit-form {
