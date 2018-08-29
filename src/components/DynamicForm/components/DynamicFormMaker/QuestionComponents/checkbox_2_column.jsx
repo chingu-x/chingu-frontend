@@ -3,7 +3,7 @@ import React from "react";
 import { CheckboxComponent } from "./checkbox";
 
 export default (
-  { field_name, options },
+  { field_name, options, minlength, maxlength },
   onFormChange,
   form_data,
 ) => {
@@ -31,6 +31,8 @@ export default (
                 index={index}
                 onFormChange={onFormChange}
                 form_data={form_data}
+                minlength={minlength}
+                maxlength={maxlength}
               />
             ),
           )
@@ -47,6 +49,8 @@ export default (
                 index={(index + firstHalf.length)}
                 onFormChange={onFormChange}
                 form_data={form_data}
+                minlength={minlength}
+                maxlength={maxlength}
               />
             ),
           )

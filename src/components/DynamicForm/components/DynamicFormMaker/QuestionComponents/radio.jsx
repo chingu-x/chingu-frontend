@@ -2,22 +2,25 @@ import React from "react";
 
 const RadioComponent = (
   { answer, field_name, index, onFormChange, form_data },
-) => (
-  <div key={'radio-answer_' + field_name + '_' + index} className="radio-container">
-    <label className="form-answer" htmlFor={field_name + '_' + index}>
-      {answer}
-      <input
-        type="radio"
-        name={field_name}
-        id={field_name + '_' + index}
-        value={answer}
-        checked={form_data[field_name] === answer}
-        onChange={e => onFormChange(e)}
-      />
-      <span className="radio-checkmark" />
-    </label>
-  </div>
-);
+) => {
+  const value = form_data[field_name];
+  return (
+    <div key={'radio-answer_' + field_name + '_' + index} className="radio-container">
+      <label className="form-answer" htmlFor={field_name + '_' + index}>
+        {answer}
+        <input
+          type="radio"
+          name={field_name}
+          id={field_name + '_' + index}
+          value={answer}
+          checked={value === answer}
+          onChange={({ currentTarget }) => onFormChange({ currentTarget })}
+        />
+        <span className="radio-checkmark" />
+      </label>
+    </div>
+  );
+}
 
 export { RadioComponent };
 

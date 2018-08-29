@@ -2,24 +2,53 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { dynamicFormMaker } from "./DynamicFormMaker";
+import { isFieldInvalid, isEmpty } from "./utilities";
 
 /**
  * @prop {array} questions array of Question data objects for rendering
  * @prop {string} purpose Dynamic Form purpose (for LS form data persistence)
- * @prop {function} onSubmit wrapper callback for handling submit behavior
+ * @prop {func} onSubmit wrapper callback for handling submit behavior
+ * @prop {func} onValidate callback for field level control of 'disabled' flag. expects boolean return
  */
 class DynamicFormContainer extends React.Component {
   constructor(props) {
     super(props);
-    // TODO: handle disabled flag for disabling(rendering) the submit button
-    // let questions control a disabled flag in on form change
     const { purpose, questions } = props;
-    this.state = {
-      form_data: this._initializeFormData(
-        purpose,
-        questions,
-      ),
+    // initialize from LS data or props
+    this.state = this._initializeState(purpose, questions);
+  }
+
+  componentDidUpdate() {
+    // when the form_data is updated from onFormChange
+    const { form_data, disabled } = this.state;
+
+    // persistence in LS
+    window.localStorage.setItem(
+      this.props.purpose,
+      JSON.stringify(this.state),
+    );
+
+    // if disabled is true then a form field has set its value
+    // it should not be overwritten until the form field is corrected
+    if (disabled) return null;
+
+    // if the form is not disabled check for empty answers
+    // using the updated form_data
+    const isDisabled = this._hasEmptyAnswers(form_data);
+
+    if (isDisabled !== disabled) {
+      // only update if theres a difference (performance)
+      this.setState({ disabled: isDisabled });
     }
+  }
+
+  /**
+   * Iterates over the form_data and checks for empty answers
+   * used to control the 'disabled' flag
+   */
+  _hasEmptyAnswers = (form_data) => {
+    return Object.keys(form_data)
+      .some(field_name => isEmpty(form_data[field_name]));
   }
 
   /**
@@ -28,12 +57,13 @@ class DynamicFormContainer extends React.Component {
    * - uses local storage persisted data if available
    * - otherwise maps over 'questions' using _mapFormDataFields()
    */
-  _initializeFormData = (purpose, questions) => {
+  _initializeState = (purpose, questions) => {
     const persistedData = window.localStorage.getItem(purpose);
     if (persistedData) return JSON.parse(persistedData);
 
     // if no persisted data is found use default mapping method
-    return this._mapFormDataFields(questions);
+    const form_data = this._mapFormDataFields(questions);
+    return { disabled: true, form_data };
   }
 
   _isMultiAnswer = (input_type) => {
@@ -93,8 +123,7 @@ class DynamicFormContainer extends React.Component {
    * - toggles or sets response value for 'question'
    * - stores current 'form_data' in local storage for persistence
    */
-  _onFormChange = ({ currentTarget }) => {
-    // TODO: get 'disabled' attr here to control Submit?
+  _onFormChange = ({ currentTarget, min, max }) => {
     const { name, value, type } = currentTarget;
     const form_data = { ...this.state.form_data };
 
@@ -102,13 +131,12 @@ class DynamicFormContainer extends React.Component {
       ? this._toggleValueInArray(form_data[name], value)
       : form_data[name] = value;
 
-    // persistence in LS
-    window.localStorage.setItem(
-      this.state.purpose,
-      JSON.stringify(form_data),
-    );
-    
-    this.setState({ form_data });
+    const { onValidate } = this.props;
+    // allow the field to disable the form if it is invalid
+    // using custom rules for different types
+    const fieldInvalid = onValidate(type, form_data[name], min, max);
+
+    this.setState({ form_data, disabled: fieldInvalid });
   }
 
   /**
@@ -127,26 +155,29 @@ class DynamicFormContainer extends React.Component {
     const { onSubmit } = this.props;
 
     return (
-      <input
-        className="form-btn"
-        type="submit"
-        value="Submit"
-        onClick={
-          (e) => {
-            e.preventDefault();
-            onSubmit(form_data);
+      <React.Fragment>
+        <hr className="form-hline" />
+        <input
+          className="form-btn"
+          type="submit"
+          value="Submit"
+          onClick={
+            (e) => {
+              e.preventDefault();
+              onSubmit(form_data);
+            }
           }
-        }
-      />
+        />
+      </React.Fragment>
     );
   };
   
   render() {
+    const { disabled } = this.state;
     return (
       <form>
         {this.renderInputs()}
-        <hr className="form-hline" />
-        {this.renderSubmit()}
+        {!disabled && this.renderSubmit()}
       </form>
     );
   }
@@ -172,6 +203,11 @@ DynamicFormContainer.propTypes = {
   hiddenData: PropTypes.object,
   questions: PropTypes.arrayOf(PropTypes.shape(questionShape)),
   onSubmit: PropTypes.func,
+  onValidate: PropTypes.func,
+};
+
+DynamicFormContainer.defaultProps = {
+  onValidate: isFieldInvalid,
 };
 
 export default DynamicFormContainer;

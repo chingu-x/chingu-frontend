@@ -32,7 +32,6 @@ const VoyageApplicationContainer = (
   { voyage_id, voyageVersion, newUserVersion, data: { user: { status } } },
 ) => {
   // TODO: Redirect if :voyage_id from route params is not available for application
-  console.log(`status: ${status}`);
   switch (status) {
     case 'voyage_ready':
       return (

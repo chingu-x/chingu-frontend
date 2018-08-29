@@ -13,6 +13,7 @@ import DynamicFormContainer from "./DynamicFormContainer";
  * 
  * -- OPTIONAL -- 
  * @prop {object} hiddenData optional object of hidden input field value(s)
+ * @prop {func} onValidate optional handler for validating a form field
  * @prop {func} onSubmit optional handler for submitting mutation
  * @prop {func} onResponse optional handler for response data
  * @prop {func} onError optional handler for error data
@@ -94,6 +95,7 @@ DynamicFormWrapper.propTypes = {
   purpose: PropTypes.string,
   version: PropTypes.number,
   hiddenData: PropTypes.object,
+  onValidate: PropTypes.func,
   onSubmit: PropTypes.func,
   onResponse: PropTypes.func,
   onError: PropTypes.func,
@@ -101,6 +103,7 @@ DynamicFormWrapper.propTypes = {
 
 DynamicFormWrapper.defaultProps = {
   hiddenData: null,
+  onValidate: null,
   onSubmit: null,
   onResponse: null,
   onError: null,
