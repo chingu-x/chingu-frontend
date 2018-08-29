@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 import ReactMarkdown from "react-markdown";
+import Loader from "../../Loader"
 
 const md = `
 # Tell us about your project here!
@@ -34,7 +35,9 @@ class ProjectDescription extends React.Component {
 
   state = {
     isEditing: false,
-    text: this.props.text || md
+    project_data: {
+      description: this.props.text
+    },
   };
 
   toggleEditWithSave = () => {
@@ -48,21 +51,20 @@ class ProjectDescription extends React.Component {
   };
 
   handleChange = e => {
-    const { value, name } = e.target;
-
-    this.setState({
-      [name]: value
-    });
+    const { value } = e.target;
+    const { project_data } = this.state;
+    project_data.description = value;
+    this.setState({ project_data });
   };
 
   makeMutation = () => {
-    const { text } = this.state;
-    this.props.mutation({ variables: { text } });
+    const { project_id, project_data } = this.state;
+    this.props.mutation({ variables: { project_id: this.props.project_id, project_data } });
   };
 
   render() {
-    let { isEditing, text } = this.state;
-    let { editable } = this.props;
+    let { isEditing, project_data } = this.state;
+    let { editable, project_id } = this.props;
 
     return (
       <div className="project-portal__about-container">
@@ -88,13 +90,13 @@ class ProjectDescription extends React.Component {
           {isEditing ? (
             <textarea
               name="text"
-              value={text}
+              value={project_data.description}
               className="project-portal__edit-box"
               onChange={this.handleChange}
             />
           ) : (
               <div className="markdown">
-                <ReactMarkdown source={this.state.text} />
+                <ReactMarkdown source={this.state.project_data.description} />
               </div>
 
             )}
@@ -106,9 +108,16 @@ class ProjectDescription extends React.Component {
 
 function withMutation(Component) {
   const updateProject = gql`
-    mutation updateProject($text: String) {
-      updateProject(text: $text) @client {
-        text
+    mutation projectUpdate(
+      $project_id: ID!
+      $project_data: ProjectInput!
+    ) {
+      projectUpdate(
+        project_id: $project_id
+        project_data: $project_data
+      ) {
+        id
+        description
       }
     }
   `;
@@ -122,10 +131,10 @@ function withMutation(Component) {
           return null;
         }
         if (loading) {
-          return null;
+          return <Loader size="medium" />
         }
 
-        const text = data ? data.updateProject.text : props.text;
+        const text = data ? data.projectUpdate.description : props.text;
 
         return <Component {...props} mutation={updateProject} text={text} />;
       }}
