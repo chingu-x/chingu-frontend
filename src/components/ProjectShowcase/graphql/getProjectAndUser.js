@@ -6,16 +6,13 @@ const getProjectAndUser = gql`
       id
       title
       description
+      elevator_pitch
       project_url
       github_url
       users {
         id
         username
         avatar
-      }
-      skills {
-        id
-        name
       }
     }
   }

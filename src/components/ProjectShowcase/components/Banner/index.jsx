@@ -7,24 +7,21 @@ class Banner extends React.Component {
   static propTypes = {
     editable: PropTypes.bool,
     title: PropTypes.string,
-    elevatorPitch: PropTypes.string,
+    elevator_pitch: PropTypes.string,
     mutation: PropTypes.func
   };
 
   static defaultProps = {
     editable: false,
     title: "",
-    elevatorPitch: "",
+    elevator_pitch: "",
     mutation: console.log
   };
 
   state = {
     isEditing: false,
-    // error: null,
-    project_data: {
-      title: this.props.title,
-      elevator_pitch: this.props.elevatorPitch
-    },
+    title: this.props.title,
+    elevator_pitch: this.props.elevator_pitch
   };
 
   componentDidUpdate({ error }) {
@@ -44,23 +41,22 @@ class Banner extends React.Component {
   handleChange = e => {
     const { value, name } = e.target;
     this.setState({
-      project_data: {
-        [name]: value
-      }
+      [name]: value
     });
   };
 
   makeMutation = () => {
-    const { title } = this.state.project_data // TODOD: Add elevator_pitch
+    const { title, elevator_pitch } = this.state
     const { project_id, mutation } = this.props
     mutation({
-      variables: { project_id, project_data: { title } },
+      variables: { project_id, project_data: { title, elevator_pitch } },
       optimisticResponse: {
         __typename: "Mutation",
         projectUpdate: {
           __typename: "Project",
           id: project_id,
-          title
+          title,
+          elevator_pitch
         }
       }
     });
@@ -75,7 +71,7 @@ class Banner extends React.Component {
 
   render() {
     console.log("component props", this.props);
-    const { isEditing, project_data: { title, elevator_pitch } } = this.state
+    const { isEditing, title, elevator_pitch } = this.state
     const { error, editable } = this.props;
 
     return (
@@ -97,7 +93,7 @@ class Banner extends React.Component {
           {isEditing ? (
             <input
               className="project-portal__banner-edit"
-              name="elevatorPitch"
+              name="elevator_pitch"
               value={elevator_pitch}
               onChange={this.handleChange}
             />
@@ -134,6 +130,7 @@ function withMutation(Component) {
         project_data: $project_data) {
           id
           title
+          elevator_pitch
         }
       }
     `;
@@ -144,14 +141,14 @@ function withMutation(Component) {
         const title = data ? data.projectUpdate.title : props.title;
         const elevator_pitch = data
           ? data.projectUpdate.elevator_pitch
-          : props.elevatorPitch;
+          : props.elevator_pitch;
 
         return (
           <Component
             {...props}
             mutation={projectUpdate}
             title={title}
-            elevatorPitch={elevator_pitch}
+            elevator_pitch={elevator_pitch}
             error={!!error}
           />
         );

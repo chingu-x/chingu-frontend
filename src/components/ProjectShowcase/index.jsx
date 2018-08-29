@@ -60,7 +60,7 @@ class ProjectShowcase extends React.Component {
                         editable={true}
                         editable={user && this.isEditable(user, project)}
                         title={project.title}
-                        elevatorPitch={project.elevatorPitch}
+                        elevator_pitch={project.elevator_pitch}
                         project_id={this.props.projectId}
                       />
                       <HeroImage
