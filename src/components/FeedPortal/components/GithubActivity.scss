@@ -23,3 +23,8 @@
 .github-activity-subtitle {
     color: $grey;
 }
+@media (max-width: 610px) and (min-width: 0px) {
+    .github-activity-container {
+        padding: 20px;
+    }
+}
