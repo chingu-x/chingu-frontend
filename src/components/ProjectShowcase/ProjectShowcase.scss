@@ -103,7 +103,6 @@ BUTTONS
   width: 100%;
   padding: 10px;
   margin: 5px 0;
-  // background-color: $lighter-grey;
   background-color: $pale-grey;
   border-style: none;
 }
@@ -388,9 +387,12 @@ BANNER WTIH PROJECT TITLE
 
 .project-portal__banner--subheader {
   font-size: 16px;
+  letter-spacing: 1.6px;
 }
 
 .project-portal__banner-edit  {
+  font-family: "Open Sans", "Helvetica Neue", "Raleway", sans-serif;
+  letter-spacing: 1.6px;
   color: white;
   background-color: rgba(228, 228, 228, 0.2) !important;
   text-align: center;
