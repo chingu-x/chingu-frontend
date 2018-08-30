@@ -47,7 +47,13 @@ SUBMIT BUTTON
     margin: 0 auto;
     margin-top: 20px;
 }
-
+.form-btn--disabled {
+    @include system-button($lighter-grey, $lighter-grey);
+    margin: 0 auto;
+    margin-top: 20px;
+    cursor: pointer;
+    width: 200px;
+}
 .hline,
 .form-hline {
     @include hline;
