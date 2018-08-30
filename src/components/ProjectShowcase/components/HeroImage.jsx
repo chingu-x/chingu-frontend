@@ -5,17 +5,16 @@ import { Mutation } from "react-apollo";
 
 class HeroImage extends React.Component {
   static propTypes = {
-    editable: PropTypes.bool,
-    imageLink: PropTypes.string,
-    mutation: PropTypes.func,
-    project_id: PropTypes.string,
+    editable: PropTypes.bool.isRequired,
+    imageLink: PropTypes.string.isRequired,
+    mutation: PropTypes.func.isRequired,
+    project_id: PropTypes.string.isRequired,
     error: PropTypes.bool
   };
 
   static defaultProps = {
     editable: false,
     imageLink: `https://i.imgur.com/E63b9Re.png`,
-    mutation: console.log,
   };
 
   state = {

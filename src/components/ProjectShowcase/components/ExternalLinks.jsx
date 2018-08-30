@@ -5,7 +5,7 @@ import { Mutation } from "react-apollo";
 
 class ExternalLinks extends React.Component {
   static propTypes = {
-    project_id: PropTypes.string,
+    project_id: PropTypes.string.isRequired,
     github_url: PropTypes.string,
     project_url: PropTypes.string
   };

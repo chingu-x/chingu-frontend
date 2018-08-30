@@ -5,17 +5,16 @@ import { Mutation } from "react-apollo";
 
 class Banner extends React.Component {
   static propTypes = {
-    editable: PropTypes.bool,
-    title: PropTypes.string,
-    elevator_pitch: PropTypes.string,
-    mutation: PropTypes.func
+    editable: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+    elevator_pitch: PropTypes.string.isRequired,
+    mutation: PropTypes.func.isRequired
   };
 
   static defaultProps = {
     editable: false,
     title: "",
     elevator_pitch: "",
-    mutation: console.log
   };
 
   state = {
