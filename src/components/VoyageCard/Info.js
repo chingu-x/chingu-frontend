@@ -6,7 +6,7 @@ function dateFormatter (timestamp) {
   newDate.pop();
   return newDate.join(' ');
 }
-const Info = ({startDate, endDate}) => {
+const Info = ({startDate, endDate, title}) => {
   return (
     <div className="card-info">
       <div className="card-info--header">8 Weeks <br />Build to Learn</div>
