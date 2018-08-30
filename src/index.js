@@ -14,7 +14,7 @@ const mode = 'prod'
 // create a new Apollo Client Instance
 const client = new ApolloClient({
   // The URL for your graphql server
-  uri: mode === 'dev' ? 'http://localhost:8008/graphql' : 'https://api.chingu.io/graphql',
+  uri: mode === 'dev' ? 'http://localhost:8008/graphql' : 'https://fb.api.chingu.io/graphql',
   request: async operation => {
     const token = localStorage.getItem('token')
     operation.setContext({
