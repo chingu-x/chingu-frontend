@@ -118,7 +118,7 @@ class Banner extends React.Component {
             <div className="project-portal__edit-button--text">
               {!error && <img
                 className="project-portal__edit-button--img"
-                src={require('../../../../assets/edit-white.png')}
+                src={require('../../../assets/edit-white.png')}
                 alt="edit" />}
               {this.editButtonText({ isEditing, error })}
             </div>
