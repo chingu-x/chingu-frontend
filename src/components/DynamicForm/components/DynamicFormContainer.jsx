@@ -174,7 +174,6 @@ class DynamicFormContainer extends React.Component {
   };
 
   render() {
-    const { disabled } = this.state;
     return (
       <form>
         {this.renderInputs()}
