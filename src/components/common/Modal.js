@@ -30,14 +30,14 @@ export default class extends React.Component {
   static propTypes = {
     open: PropTypes.bool,
     persist: PropTypes.bool,
-    background: PropTypes.oneOf(["none", "transparent", ""]),
+    background: PropTypes.oneOf(["white", "transparent", "none"]),
     onModalClick: PropTypes.oneOfType([PropTypes.func, PropTypes.oneOf([false])])
   }
   
   static defaultProps = {
     open: false,
     persist: false,
-    background: "",
+    background: "white",
     onModalClick: false
   }
 
