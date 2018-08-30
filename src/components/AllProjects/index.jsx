@@ -10,12 +10,12 @@ class AllProjects extends React.Component {
   }
 
   componentDidMount() {
-    let { projects } = this.props.data;
+    const { projects } = this.props.data;
     this.setState({ projects })
   }
 
   renderProjects = () => {
-    let { projects } = this.state;
+    const { projects } = this.state;
     return projects.map((project, idx) => {
       return <Project project={ project} key={idx} />
     })
