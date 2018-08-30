@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 import ReactMarkdown from "react-markdown";
-import Loader from "../../Loader"
 
 const md = `
 # Tell us about your project here!
@@ -31,7 +30,7 @@ class ProjectDescription extends React.Component {
   };
 
   static defaultProps = {
-    description: "",
+    description: md,
     editable: false
   };
 
@@ -85,7 +84,7 @@ class ProjectDescription extends React.Component {
 
   render() {
     const { isEditing, description, editBtnHidden } = this.state;
-    const { error, editable, project_id } = this.props;
+    const { error, editable } = this.props;
 
     let btnState = ""
     if (error) btnState = "--error"
