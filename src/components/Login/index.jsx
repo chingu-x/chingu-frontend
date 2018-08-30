@@ -1,6 +1,5 @@
 import React from "react"
 import { withRouter } from "react-router-dom"
-import qs from "query-string"
 import { gql } from "apollo-boost"
 // import AuthenticateWithGithub from "./components/GithubAuth";
 import { client } from "../../index"
@@ -27,7 +26,8 @@ class Login extends React.Component {
   async componentDidMount() {
     const { token, redirect } = localStorage
     const { queryString, history } = this.props
-    const { code } = qs.parse(queryString)
+    const queryParams = new URLSearchParams(queryString);
+    const code = queryParams.has('code') ? queryParams.get('code') : '';
 
     /**
      * IF token found or no code provided, redirect to /profile
