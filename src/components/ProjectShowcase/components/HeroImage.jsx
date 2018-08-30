@@ -121,8 +121,6 @@ function withMutation(Component) {
   return props => (
     <Mutation mutation={updateProject}>
       {(updateProject, { error, loading, data }) => {
-        console.log("data from mutation", data);
-
         if (error) {
           return null;
         }

@@ -59,7 +59,7 @@ class ProjectDescription extends React.Component {
   makeMutation = () => {
     const { project_id } = this.props;
     const { description } = this.state;
-    console.log("PROJECT ID", project_id)
+
     this.props.mutation({
       variables: {
         project_id: this.props.project_id,
