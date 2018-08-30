@@ -64,6 +64,13 @@ class HeroImage extends React.Component {
      });
   };
 
+  editButtonText({ isEditing, error }) {
+    let lbl = "Edit"
+    if (isEditing) lbl = "Done"
+    if (error) lbl = "Try again"
+    return lbl
+  }
+
   render() {
     console.log("component props", this.props);
 
@@ -110,7 +117,7 @@ class HeroImage extends React.Component {
                 className="project-portal__edit-button--img"
                 src={require('../../../assets/edit-green.png')}
                 alt="edit" />
-              {isEditing ? "Done" : "Edit"}
+              {this.editButtonText({ isEditing, error })}
             </div>
           </button>
         )}
