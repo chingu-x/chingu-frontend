@@ -21,12 +21,12 @@ const NewsFeed = ({ type, loading, data }) => {
     }),
   );
 
-  const renderFeed = ({ newsfeed: { chingu, other, team } }) => {
+  const renderFeed = ({ user, newsfeed: { chingu, other, team } }) => {
     let dataToRender = (
       <React.Fragment>
         {
           type === "TEAM"
-            ? <TeamCard team={team} />
+            ? <TeamCard team={team} user={user} />
             : renderNewsfeedItems(chingu)
         }
         {(team || !!chingu.length) && other && <hr className="hl" />}

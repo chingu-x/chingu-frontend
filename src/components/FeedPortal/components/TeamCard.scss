@@ -34,6 +34,18 @@ BUTTONS
     height: 40px;
     padding: 10px 30px;
 }
+
+.user-btn--disabled {
+  @include system-button($pale-grey, $pale-grey);
+  width: 100%;
+  font-size: 11px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  height: 40px;
+  padding: 10px 30px;
+  color: $dark-grey;
+}
+
 /*
 ==========================
 INFO CONTAINER

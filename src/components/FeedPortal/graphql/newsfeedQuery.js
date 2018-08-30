@@ -2,9 +2,17 @@ import { gql } from "apollo-boost"
 
 const getNewsfeed = gql`
   query getNewsfeed($input: NewsfeedInput!) {
+    user {
+      id
+      available_standups {
+        id
+        team: cohort_team {
+          id
+        }
+      }
+    }
     newsfeed(input: $input) {
       id
-
       team {
         id
         title
@@ -29,7 +37,6 @@ const getNewsfeed = gql`
             }
         }
       }
-
       chingu {
         id
         type: __typename
@@ -38,13 +45,21 @@ const getNewsfeed = gql`
           id
           username
           avatar
-        } 
+        }
+        ... on NewsfeedAvailableStandup {
+          expiration
+          team {
+            id
+            title
+          }
+        }
         
         ... on NewsfeedVoyage {
           voyage{
             id
             title
           }
+          has_applied
         }
       }
       
@@ -86,7 +101,6 @@ const getNewsfeed = gql`
               created_at
               updated_at
             }
-
             ... on GithubActivityPullRequest {
               status
               files_changed
