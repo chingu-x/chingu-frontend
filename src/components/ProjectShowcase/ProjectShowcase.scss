@@ -103,7 +103,6 @@ BUTTONS
   width: 100%;
   padding: 10px;
   margin: 5px 0;
-  // background-color: $lighter-grey;
   background-color: $pale-grey;
   border-style: none;
 }
@@ -111,10 +110,15 @@ BUTTONS
 .project-buttons {
   @include system-button($theme-green, $theme-green--hover);
   width: 100%;
-  &.disabled {
-    cursor: default;
-  }
 }
+.project-buttons--disabled {
+  @include system-button($pale-grey, $pale-grey);
+  color: $dark-grey;
+  cursor: default;
+  width: 100%;
+}
+
+
 
 
 /*
@@ -230,7 +234,7 @@ CARDS (PROJECT SIDEBAR)
 */
 .project-subcategory__title-container {
   display: grid;
-  grid-template-areas: "title button"
+  grid-template-areas: "title button";
 }
 
 .project-side-panel {
@@ -318,10 +322,12 @@ PROJECT DESCRIPTION
   width: 150px;
 }
 
-.project-portal__positioning-1  {
+.project-portal__positioning-description,
+.project-portal__positioning-links
+ {
   margin: 0 auto;
   margin-right: 0px;
-  margin-bottom: 20px;
+  margin-top: 10px;
   height: 44.4px;
 }
 
@@ -388,9 +394,12 @@ BANNER WTIH PROJECT TITLE
 
 .project-portal__banner--subheader {
   font-size: 16px;
+  letter-spacing: 1.6px;
 }
 
 .project-portal__banner-edit  {
+  font-family: "Open Sans", "Helvetica Neue", "Raleway", sans-serif;
+  letter-spacing: 1.6px;
   color: white;
   background-color: rgba(228, 228, 228, 0.2) !important;
   text-align: center;
