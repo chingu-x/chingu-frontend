@@ -5,7 +5,11 @@ import './TeamCard.css';
 
 const TeamCard = ({ user: { available_standups }, team }) => {
   console.log("teamcard", { team, available_standups })
-  const standupStatus = !!available_standups.length && available_standups.some(su => su.team.id === team.id)
+  const availableStandup = (
+    !!available_standups.length &&
+    available_standups.some(su => su.team.id === team.id)
+  );
+  const standupStatus = availableStandup
     ? ""
     : "--disabled"
 
@@ -17,7 +21,10 @@ const TeamCard = ({ user: { available_standups }, team }) => {
       <div className="team-card-buttons-container">
         <Link to={"/project/" + team.project.id + "/workspace"} className="user-btn--disabled">Team Workspace</Link>
         <Link to={"/project/" + team.project.id} className="user-btn">Project Page</Link>
-        <Link className={`user-btn${standupStatus}`} to={`/team/${team.id}/standup`}>Team Standups</Link>
+        <Link
+          className={`user-btn${standupStatus}`}
+          to={availableStandup ? `/team/${team.id}/standup` : "#"}
+        >{availableStandup ? "Submit Standup" : "No Standup Available"}</Link>
       </div>
     </div >
   )
