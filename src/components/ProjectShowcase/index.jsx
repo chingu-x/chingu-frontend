@@ -57,6 +57,7 @@ class ProjectShowcase extends React.Component {
                         editable={editable}
                         title={project.title}
                         elevatorPitch={project.elevatorPitch}
+                        proect_id={this.props.projectId}
                       />
                       <div className="project-info-container">
                         <ProjectDescription

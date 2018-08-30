@@ -7,7 +7,8 @@ class HeroImage extends React.Component {
   static propTypes = {
     editable: PropTypes.bool,
     imageLink: PropTypes.string,
-    mutation: PropTypes.func
+    mutation: PropTypes.func,
+    project_id: PropTypes.string
   };
 
   static defaultProps = {
@@ -40,11 +41,11 @@ class HeroImage extends React.Component {
 
   makeMutation = () => {
     const { imageLink } = this.state;
-    const { mutation, projectId} = this.props;
+    const { mutation, project_id} = this.props;
 
     mutation({
       variables: {
-        project_id: projectId,
+        project_id,
         project_data: {
           images: {
             url: imageLink,
