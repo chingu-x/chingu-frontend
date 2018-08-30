@@ -3,12 +3,12 @@ import { Link } from "react-router-dom"
 import ExternalLinks from './ExternalLinks';
 
 const ProjectSideBar = ({ project, editable }) => {
-  const { project_id, project_url, github_url, skills, tags, users } = project
+  const { id, project_url, github_url, skills, tags, users } = project
   return (
     <div className="project-side-panel">
       <ExternalLinks
         editable={editable}
-        project_id={project_id}
+        project_id={id}
         project_url={project_url}
         github_url={github_url} />
       {skills && skills.length > 0 && <TechStack teckstack={skills} />}
