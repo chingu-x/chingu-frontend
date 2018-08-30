@@ -1,50 +1,25 @@
-import React, { Fragment } from "react"
+import React, { Component, Fragment } from "react"
 import "./FeedPortal.css"
+import SideBar from './components/SideBar';
+import NewsFeed from './components/NewsFeed';
 
-const SidebarBtn = ({ lbl, active }) => (
-  <Fragment>
-    <hr className="hl" />
-    <div
-      className={`sidebar-nav__btn ${active ? "active" : null}`}>
-      {lbl}</div>
-  </Fragment>
-)
+class FeedPortal extends Component {
+  state = {
+    newsfeed: {
+      type: "ALL",
+      team_id: null
+    }
+  }
 
-class FeedPortal extends React.Component {
+  toggleNewsfeed = (type, team_id) => this.setState({ newsfeed: { type, team_id } })
+
   render() {
+    const { type, team_id } = this.state.newsfeed
     return (
       <div className="view-container">
         <div className="portal-container">
-
-          <aside className="sidebar-container">
-            <div className="portal-panel__sidebar">
-              <div className="sidebar-userinfo__container">
-                <img
-                  className="sidebar-userinfo__avatar"
-                  src={" http://placehold.it/150x150"}
-                  alt="User Avatar" />
-                <div
-                  className="sidebar-userinfo__username">
-                  UsernameHere</div>
-              </div>
-
-              <SidebarBtn lbl="All News" />
-
-              <hr className="hl" />
-              <labelv className="sidebar-nav__label">Your Teams</labelv>
-              <SidebarBtn lbl="Voyage-4/Bears-Team-11" active />
-              <SidebarBtn lbl="Voyage-2/Turtles-Team-11" />
-              <hr className="hl" />
-            </div>
-          </aside>
-
-          <main className="main-container">
-            <div className="title">NEWS FEED</div>
-            <main className="portal-panel__feed">
-              Feed
-            <hr className="hl" />
-            </main>
-          </main>
+          <SideBar toggleNewsfeed={this.toggleNewsfeed} team_id={team_id} />
+          <NewsFeed type={type} team_id={team_id} />
         </div>
       </div>
     )
@@ -52,3 +27,4 @@ class FeedPortal extends React.Component {
 }
 
 export default FeedPortal
+

@@ -1,5 +1,5 @@
 import * as React from "react";
-import DynamicForm from "../DynamicForm";
+import { DynamicForm } from "../DynamicForm";
 import './Register.css';
 // TODO: refactor the styling
 const Register = ({ version }) => {
