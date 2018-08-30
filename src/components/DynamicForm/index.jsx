@@ -17,7 +17,7 @@ import dynamicFormQuery from "./dynamicFormQuery";
 import dynamicFormSubmitMutation from "./dynamicFormSubmitMutation";
 
 const parseParams = (queryString) => {
-  const queryParams = new URLSearchParams(window.location.search);
+  const queryParams = new URLSearchParams(queryString);
   const params = {};
   for(let entry of queryParams.entries()) {
     if(entry.length) {
