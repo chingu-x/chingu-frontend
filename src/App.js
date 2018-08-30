@@ -64,7 +64,7 @@ export default () => (
           )
         }
       />
-      <Private exact path="/feed" component={FeedPortal} />
+      <Private exact path="/newsfeed" component={FeedPortal} />
       <Private exact path="/team/checkin/:id" component={WeeklyCheckin} />
       <Route exact path="/projects" component={AllProjects} />
       <Private

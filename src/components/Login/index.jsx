@@ -50,7 +50,7 @@ class Login extends React.Component {
     localStorage.token = access_token
 
     // Redirect to pre-login navigated route or /feed
-    history.push(redirect || "/feed")
+    history.push(redirect || "/newsfeed")
   }
 
   render = () => this.state.error
