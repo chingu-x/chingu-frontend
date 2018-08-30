@@ -1,0 +1,22 @@
+@import '../../styles/abstracts/_variables.scss';
+
+.all-projects-container {
+    max-width: $max-width;
+    min-height: 100vh;
+    padding: $page-padding;
+    margin: 0 auto;
+}
+
+.all-projects-title {
+    @include portal-title;
+    margin-bottom: 60px;
+}
+
+.all-projects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    align-items: center;
+    justify-items: center;
+    margin-bottom: 100px;
+}
