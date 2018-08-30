@@ -23,7 +23,7 @@ export const GithubActivityPullRequest = ( data ) => {
       <PRIcon />
       <div className="github-activity-text">
         <div className="github-activity-title">{data.title}</div>
-        <div className="github-activity-subtitle">You review was requested {newsfeedDateFormatter(data.timestamp)} ago</div>
+        <div className="github-activity-subtitle">Your review was requested {newsfeedDateFormatter(data.timestamp)} ago</div>
       </div>
     </a>
   )
@@ -34,7 +34,7 @@ export const GithubActivityIssue = ( data ) => {
       <IssueIcon />
       <div className="github-activity-text">
         <div className="github-activity-title">{data.title}</div>
-        <div className="github-activity-subtitle">You review was requested  {newsfeedDateFormatter(data.timestamp)} ago</div>
+        <div className="github-activity-subtitle">Your review was requested  {newsfeedDateFormatter(data.timestamp)} ago</div>
       </div>
     </a>
   )

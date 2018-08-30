@@ -67,3 +67,15 @@ COLORED STATUS
     border: 1px solid $health-red;
     color: $health-red;
 }
+
+@media (max-width: 610px) and (min-width: 0px) {
+    .team-standup-card-container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 400px) and (min-width: 0px) {
+    .team-standup-card-container {
+        padding: 10px;
+    }
+}

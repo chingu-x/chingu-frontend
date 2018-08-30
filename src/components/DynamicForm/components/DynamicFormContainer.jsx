@@ -90,7 +90,7 @@ class DynamicFormContainer extends React.Component {
       else form_data[field_name] = '';
 
       // insert hidden field values from hiddenData
-        // passed as hiddenData and / or queryString prop of <DynamicForm>
+      // passed as hiddenData and / or queryString prop of <DynamicForm>
       if (input_type === 'hidden') {
         const { hiddenData } = this.props;
         if (!hiddenData || !hiddenData[field_name]) {
@@ -151,16 +151,17 @@ class DynamicFormContainer extends React.Component {
   );
 
   renderSubmit = () => {
-    const { form_data } = this.state;
+    const { form_data, disabled } = this.state;
     const { onSubmit } = this.props;
 
     return (
       <React.Fragment>
         <hr className="form-hline" />
         <input
-          className="form-btn"
+          className={disabled ? "form-btn--disabled" : "form-btn"}
           type="submit"
-          value="Submit"
+          value={disabled ? "Incomplete" : "Submit"}
+          disabled={disabled}
           onClick={
             (e) => {
               e.preventDefault();
@@ -171,13 +172,12 @@ class DynamicFormContainer extends React.Component {
       </React.Fragment>
     );
   };
-  
+
   render() {
-    const { disabled } = this.state;
     return (
       <form>
         {this.renderInputs()}
-        {!disabled && this.renderSubmit()}
+        {this.renderSubmit()}
       </form>
     );
   }

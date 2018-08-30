@@ -2,6 +2,7 @@
 
 .user-profile-background-color {
   background-color: white;
+  padding: 20px;
 }
 .user-profile-container {
   background: white;
@@ -14,7 +15,7 @@
   grid-gap: 100px;
   min-height: 100vh;
   margin-bottom: 100px;
-  padding: 20px;
+  // padding: 20px;
 }
 
 .user-profile {
@@ -22,6 +23,7 @@
 }
 
 .user-voyages {
+  width: 100%;
  grid-area: v;
  justify-self: center;
 }
@@ -33,6 +35,19 @@
 }
 .user-voyage {
   margin-bottom: 50px;
+}
+
+.no-data-card {
+  display: block;
+  color: $grey;
+  background-color: $palest-grey;
+  box-shadow: $box-shadow;
+  padding: 40px 20px;
+  width: 100%;
+  // border-radius: $border-radius;
+  font-size: 20px;
+  text-align: center;
+  border: 1px solid $light-grey;
 }
 
 /*
@@ -58,5 +73,8 @@ MEDIA QUERY
     display: block;
     text-align: center;
     margin-bottom: 100px;
+  }
+  .user-voyage-title {
+    text-align: center;
   }
 }
