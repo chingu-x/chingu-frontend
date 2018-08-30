@@ -151,16 +151,17 @@ class DynamicFormContainer extends React.Component {
   );
 
   renderSubmit = () => {
-    const { form_data } = this.state;
+    const { form_data, disabled } = this.state;
     const { onSubmit } = this.props;
 
     return (
       <React.Fragment>
         <hr className="form-hline" />
         <input
-          className="form-btn"
+          className={`form-btn${disabled && "--disabled"}`}
           type="submit"
-          value="Submit"
+          value={disabled ? "Incomplete" : "Submit"}
+          disabled={disabled}
           onClick={
             (e) => {
               e.preventDefault();
@@ -172,25 +173,12 @@ class DynamicFormContainer extends React.Component {
     );
   };
 
-  renderDisabledSubmitBtn = () => {
-    return (
-      <React.Fragment>
-        <hr className="form-hline" />
-        <input
-          className="form-btn--disabled"
-          disbaled
-          value="Can't Submit Yet"
-        />
-      </React.Fragment>
-    );
-  }
-
   render() {
     const { disabled } = this.state;
     return (
       <form>
         {this.renderInputs()}
-        {!disabled ? this.renderSubmit() : this.renderDisabledSubmitBtn()}
+        {this.renderSubmit()}
       </form>
     );
   }
