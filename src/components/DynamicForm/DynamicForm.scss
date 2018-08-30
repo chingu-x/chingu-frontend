@@ -10,6 +10,10 @@ DYNAMIC FORM
     padding-top: 20px;
     justify-content: center;
 }
+
+.form-QA {
+    margin-bottom: 40px;
+}
 /*
 ==========================
 QUESTION
@@ -40,9 +44,18 @@ SUBMIT BUTTON
 */
 .form-btn {
     @include system-button($theme-green, $theme-green--hover);
+    margin: 0 auto;
+    margin-top: 20px;
 }
-
-.hline {
+.form-btn--disabled {
+    @include system-button($lighter-grey, $lighter-grey);
+    margin: 0 auto;
+    margin-top: 20px;
+    cursor: pointer;
+    width: 200px;
+}
+.hline,
+.form-hline {
     @include hline;
 }
 /*

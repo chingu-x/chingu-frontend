@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import Error from "../Error";
 import { client } from "../../";
 import { DynamicForm } from "../DynamicForm";
+import './TeamStandup.css';
 
 import { gql } from "apollo-boost";
 
@@ -38,7 +39,7 @@ class TeamStandup extends React.Component {
 
   handleError = error => this.setState({ error });
 
-  handleSubmit = ({ team_id, ...standup_data}) => {
+  handleSubmit = ({ team_id, ...standup_data }) => {
     const variables = {
       team_id,
       standup_data,
@@ -48,7 +49,7 @@ class TeamStandup extends React.Component {
       mutation: submitStandupMutation,
       variables,
     }).then(this.handleResponse)
-    .catch(this.handleError);
+      .catch(this.handleError);
   }
 
   render() {
@@ -57,12 +58,11 @@ class TeamStandup extends React.Component {
 
     if (error) return <Error error={error.message} />;
     if (response) return <Redirect to="/feed" />;
-// TODO: needs styling
     return (
       <div className="team-standup-container">
         <div className="team-standup-title">
           TEAM STANDUP
-        </div>
+          </div>
         <div className="team-standup">
           <DynamicForm
             purpose="team_standup"

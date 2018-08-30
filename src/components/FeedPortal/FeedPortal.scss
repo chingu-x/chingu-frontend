@@ -25,16 +25,18 @@
 .view-container {
   margin: 0 auto;
   width: 100%;
-  max-width: $max-width;
   min-height: 100vh;
+  background-color: $palest-grey;
 }
 
 .portal-container {
   display: grid;
+  max-width: $max-width;
   grid-template-columns: repeat(4, 1fr);
   grid-template-areas: "navi news news news";
   grid-gap: 50px;
   margin: 150px auto;
+  padding: 20px;
 }
 
 // PANELS //
@@ -148,5 +150,13 @@ MEDIA QUERY
   .portal-container {
     grid-template-columns: repeat(1, 1fr);
     grid-template-areas: "navi"  "news";
+  }
+  .title {
+    text-align: center;
+  }
+}
+@media (max-width: 400px) and (min-width: 0px) {
+  .portal-panel__feed {
+    padding: 10px;
   }
 }

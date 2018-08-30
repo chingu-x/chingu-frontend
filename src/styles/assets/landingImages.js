@@ -3,13 +3,6 @@ module.exports = {
   "process-02": require("./process-02.png"),
   "process-03": require("./process-03.png"),
   "process-04": require("./process-04.png"),
-  "cohort-01": require("./cohort-01.png"),
-  "cohort-02": require("./cohort-02.png"),
-  "cohort-03": require("./cohort-03.png"),
-  "projects-01": require("./projects-01.jpg"),
-  "projects-02": require("./projects-02.jpg"),
-  "projects-03": require("./projects-03.jpg"),
-  "user-01": require("./user-placeholder.png"),
   "challenge--landing": require("./challenge--landing.png"),
   "earth--landing": require("./earth--landing.png"),
   "grow--landing": require("./grow--landing.png"),
@@ -20,7 +13,7 @@ module.exports = {
   "tier-badges-02--landing": require("./tier-badges-02--landing.png"),
   "tier-badges-03--landing": require("./tier-badges-03--landing.png"),
   "pankaja": require('./pankaja.jpg'),
-  "Periman": require('./Periman.jpeg'),
+  "Periman": require('./Periman.jpg'),
   "debasree": require('./debasree.jpg')
 
 }
