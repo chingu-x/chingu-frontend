@@ -22,7 +22,7 @@ const getNewsfeed = gql`
         project {
             id
             title
-            description
+            elevator_pitch
             users {
                 username
                 avatar

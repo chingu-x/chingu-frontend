@@ -22,7 +22,7 @@ class UserSideBar extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (
-      this.props.editable !== prevProps.editable 
+      this.props.editable !== prevProps.editable
       || this.props.user !== prevProps.user
     ) {
       this.updateState();
@@ -95,7 +95,7 @@ const UserInfo = ({ user, editable }) => {
   return USER_INFO_DOM_ELEMENTS.map((elem, idx) => {
     const userComponent = ({ data }) => {
       return (
-        <div className={elem.divClassName}>
+        <div key={idx} className={elem.divClassName}>
           <h1 className="user-sidebar-subcategory">{elem.desc}</h1>
           <p>{data}</p>
         </div>
@@ -103,33 +103,33 @@ const UserInfo = ({ user, editable }) => {
     }
     return editable // only render EditableTextField if editable
       ? (
-          <EditableTextField
-            key={idx}
-            large
-            mutation={ userUpdate }
-            mutationName="userUpdate"
-            mutationInputName="user_data"
-            fieldName={elem.schemaKey}
-            fieldData={user[elem.schemaKey]}
-            hasPermission={editable}
-            component={userComponent}
-          />
-        )
+        <EditableTextField
+          key={idx}
+          large
+          mutation={userUpdate}
+          mutationName="userUpdate"
+          mutationInputName="user_data"
+          fieldName={elem.schemaKey}
+          fieldData={user[elem.schemaKey]}
+          hasPermission={editable}
+          component={userComponent}
+        />
+      )
       : userComponent({ data: user[elem.schemaKey] })
   });
 }
 
 const Links = ({ user: { username } }) => (
   <div className="user-links">
-      <h1 className="user-sidebar-subcategory">links</h1>
-      <ul>
-        <li>
-          <a target="_blank" href={`https://www.github.com/${username}`}>
-            <i className="fab fa-github fa-3x" />
-          </a>
-        </li>
-      </ul>
-    </div>
+    <h1 className="user-sidebar-subcategory">links</h1>
+    <ul>
+      <li>
+        <a target="_blank" href={`https://www.github.com/${username}`}>
+          <i className="fab fa-github fa-3x" />
+        </a>
+      </li>
+    </ul>
+  </div>
 );
   // let skillDOM = null;
   // if (user.skills && user.skills.length > 0) {

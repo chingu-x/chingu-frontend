@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom"
 import { Query } from "react-apollo"
 import { gql } from "apollo-boost"
 import Error from "../Error"
-import toggleGlobalLoader from "./toggleGlobalLoader"
+import Loader from "../Loader"
 
 const userStatusQuery = gql`
  query getUserStatus {
@@ -36,7 +36,7 @@ export default ({ component: Component, render: Render, ...props }) => {
           {
             ({ loading, error, data }) => {
               if (error) return <Error error={error.message} />
-              toggleGlobalLoader(loading)
+              if (loading) return <Loader />
               if (!data.user) return null
 
               const { status } = data.user

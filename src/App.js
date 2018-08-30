@@ -18,14 +18,13 @@ import Register from './components/Register';
 import Login from './components/Login';
 import FeedPortal from "./components/FeedPortal"
 import Private from "./components/utilities/PrivateRoute"
-import Loader from "./components/Loader"
 import AllProjects from './components/AllProjects';
 import TeamStandup from "./components/TeamStandup";
+import ProjectShowcase from "./components/ProjectShowcase"
 
 export default () => (
   <div className="App">
     <Header />
-    <Loader size="global" />
     <Switch>
       <Route exact path="/" component={Landing} />
       <Route
@@ -65,7 +64,7 @@ export default () => (
           )
         }
       />
-      <Private exact path="/feed" component={FeedPortal} />
+      <Private exact path="/newsfeed" component={FeedPortal} />
       <Private exact path="/team/checkin/:id" component={WeeklyCheckin} />
       <Route exact path="/projects" component={AllProjects} />
       <Private
@@ -84,6 +83,8 @@ export default () => (
       <Route exact path="/privacy" component={PrivacyPolicy} />
       <Route exact path="/companyfaq" render={() => <FAQ headerText="Company FAQs" data={companyFAQ} />} />
       <Route exact path="/programfaq" render={() => <FAQ headerText="Program FAQs" data={programFAQ} />} />
+      <Route exact path="/project/:projectId" render={
+        ({ match: { params: { projectId } } }) => <ProjectShowcase projectId={projectId}/> } />
       <Route path="*" exact component={Missing404Page} />
     </Switch>
     <Footer />

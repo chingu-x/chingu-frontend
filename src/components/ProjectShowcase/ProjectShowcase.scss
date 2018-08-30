@@ -1,0 +1,653 @@
+@import '../../styles/abstracts/_variables.scss';
+
+.project-portal {
+  padding-top: 64px; // to account for header
+  margin: 0 auto;
+  min-height: 100vh;
+  height: 100%;
+  background-color: white;
+  padding-bottom: 100px;
+}
+
+/*
+==========================
+TOOLBAR WITH PROJECT EDIT
+& PROJECT SUBMIT BUTTONS
+==========================
+*/
+.project-portal__toolbar {
+  grid-column: 1 / -1;
+  justify-self: end;
+  a {
+    margin-left: 15px;
+    text-decoration: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    color: #ffffff;
+    background-color: $light-purple;
+  }
+  span {
+    margin-right: 0.5em;
+  }
+}
+
+/*
+==========================
+OVERALL IMAGE CONTAINER
+==========================
+*/
+.project-image-container {
+  display: grid;
+  grid-template-areas: "image image image image image image image-carousel image-carousel image-carousel";
+  grid-template-columns: repeat(9, 1fr);
+  height: 500px;
+  overflow-x: hidden;
+}
+/*
+==========================
+IMAGE-CAROUSEL (PREVIEW)
+==========================
+*/
+.project-portal__preview-color {
+  grid-area: image-carousel;
+  background-color: $pale-grey;
+}
+.project-portal__preview {
+  width: 400px;
+  margin-left: 0px;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  overflow-y: scroll;
+  padding: 30px;
+  height: 500px;
+}
+.project-portal__slide {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.project-portal__img--preview {
+  width: 100%;
+  height: 85px;
+  object-fit: cover;
+  background-color: white;
+  margin-top: 10px;
+  box-shadow: $box-shadow;
+}
+.project-portal__caption--preview {
+  font-size: 12px;
+  text-align: center;
+  color: $dark-grey;
+  margin-top: -4px;
+}
+/*
+==========================
+BUTTONS
+==========================
+*/
+.project-buttons-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-items: center;
+  grid-gap: 10px;
+  height: 60px;
+}
+.project-buttons-container--editing {
+  height: 60px;
+}
+
+.project-button__input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  // background-color: $lighter-grey;
+  background-color: $pale-grey;
+  border-style: none;
+}
+
+.project-buttons {
+  @include system-button($theme-green, $theme-green--hover);
+  width: 100%;
+  &.disabled {
+    cursor: default;
+  }
+}
+
+
+/*
+==========================
+OPEN IMAGE MODAL BTN
+==========================
+*/
+.project-btn {
+  @include system-button($theme-green, $theme-green--hover);
+  grid-column: 1 / -1;
+  margin: 0 auto;
+  height: 40px;
+}
+/*
+==========================
+UPLOAD IMAGE BTN
+==========================
+*/
+.project-upload-image-btn {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+  z-index: -1;
+}
+.project-upload-image-btn + label {
+  color: white;
+  background-color: $theme-green;
+  text-transform: uppercase;
+  grid-column: 1 / -1;
+  padding: 10px 30px;
+  height: 40px;
+  border-radius: $border-radius;
+  cursor: pointer;
+  box-shadow: $box-shadow;
+  &:hover{
+    background-color: $theme-green--hover;
+  }
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+/*
+==========================
+UPLOAD IMAGE MODAL
+==========================
+*/ 
+.project-image-upload-background {
+  @include transparent-background;
+}
+.project-image-upload-container {
+  display: block;
+  position: absolute;
+  z-index: 110;
+  width: 460px;
+  left: calc(50% - 230px);
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: $box-shadow-dark;
+  margin: 0 auto;
+  margin-top: calc(50vh - 100px);
+  margin-bottom: 100px;
+  padding: 20px;
+}
+/*
+==========================
+MAIN IMAGE
+==========================
+*/
+.project-portal__main-color {
+  grid-area: image;
+  background-color: $palest-grey;
+  width: 100%;
+}
+.project-portal__main-image {
+  margin: 0 auto;
+  width: 720px;
+  height: 100%;
+  margin-right: 50px;
+}
+.project-portal__slide--main {
+  text-align: center;
+  height: 500px;
+}
+.project-portal__img--main {
+  margin-top: 20px;
+  width: 650px;
+  height: 88%;
+  object-fit: cover;
+  box-shadow: $box-shadow;
+}
+.project-portal__caption--main {
+  color: $dark-grey;
+  margin-top: -5px;
+}
+/*
+==========================
+PROJECT INFO CONTAINER
+==========================
+*/
+.project-info-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "description description cards";
+  grid-gap: 40px;
+  max-width: $max-width;
+  margin: 0 auto;
+}
+/*
+==========================
+CARDS (PROJECT SIDEBAR)
+==========================
+*/
+.project-subcategory__title-container {
+  display: grid;
+  grid-template-areas: "title button"
+}
+
+.project-side-panel {
+  grid-area: cards;
+}
+
+.project-subcategory-title {
+  @include portal-subcategory;
+}
+.project-subcategory {
+  margin-bottom: 40px;
+}
+.project-side-panel--hline {
+  border-top: 1px solid $light-grey;
+}
+.project-portal__external-links {
+  grid-column: 1 / -1;
+}
+/*
+==========================
+TAGS
+==========================
+*/
+.project-tags {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  color: $dark-grey;
+  border: 1px solid $grey;
+  padding: 5px 10px;
+}
+/*
+==========================
+TEAM / USER
+==========================
+*/
+.project-team-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: start;
+  grid-gap: 10px;
+}
+.project-portal__profile {
+  color: $dark-grey;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  justify-items: center;
+}
+.project-portal__user-avatar {
+  width: 75px;
+  height: 75px;
+  box-shadow: $box-shadow;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 50%;
+}
+.project-portal__user-username {
+  text-align: center;
+}
+
+/*
+==========================
+PROJECT DESCRIPTION
+==========================
+*/
+.project-portal__about-container {
+  grid-area: description;
+}
+.project-portal__about {
+  background-color: white;
+  box-shadow: $box-shadow;
+  border-radius: $border-radius;
+  padding: 40px;
+  border: 1px solid $palest-grey;
+}
+
+.project-portal__edit-button {
+  @include system-button--sub($theme-green, $theme-green--lightest);
+  width: 150px;
+}
+.project-portal__edit-button--hidden {
+  @include system-button--sub($theme-green, $theme-green--lightest);
+  visibility: hidden;
+  width: 150px;
+}
+
+.project-portal__positioning-1  {
+  margin: 0 auto;
+  margin-right: 0px;
+  margin-bottom: 20px;
+  height: 44.4px;
+}
+
+.project-portal__edit-button--text {
+  text-align: center;
+}
+.project-portal__edit-button--img {
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
+.project-portal__edit-box {
+  width: 100%;
+  min-height: 500px;
+  box-shadow: $box-shadow;
+  border: 1px solid $light-grey;
+  padding: 10px;
+  resize: vertical;
+  overflow: auto;
+  cursor: text;
+}
+/*
+==========================
+BANNER WTIH PROJECT TITLE
+& ELEVATOR PITCH
+==========================
+*/
+.project-portal__banner {
+  width: 100vw;
+  // transform:translateY(-22px); // to account for header
+  justify-self: center;
+  text-align: center;
+  color: #ffffff;
+  min-height: 200px;
+  padding-top: 30px;
+  background: linear-gradient(to right , #642B73,#C6426E); // Crimson Tide
+  background: linear-gradient(to right , #c0392b,#8e44ad); // Mello
+  background: linear-gradient(to right , #C33764,#1D2671); // Celestial
+  background: linear-gradient(to right , #74ebd5,#ACB6E5);
+  box-shadow: $box-shadow;
+}
+
+.project-portal__positioning-2 {
+  position: relative;
+  float: right;
+  margin-right: 40px;
+  box-shadow: none;
+  margin-top: -10px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  height: 44.4px;
+  &:hover {
+    background-color: $theme-green--light;
+  }
+}
+.project-portal__banner--header {
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  margin-top: 24px;
+}
+
+.project-portal__banner--subheader {
+  font-size: 16px;
+}
+
+.project-portal__banner-edit  {
+  color: white;
+  background-color: rgba(228, 228, 228, 0.2) !important;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid $light-grey;
+  padding: 5px;
+  min-width: 551px;
+}
+/*
+==========================
+HERO IMAGE
+==========================
+*/
+.hero-image-container {
+  background-color: $darkest-grey;
+  background-color: $palest-grey;
+  width: 100%;
+  height: 500px;
+  padding: 40px 0px;
+  margin-bottom: 40px;
+  box-shadow: $box-shadow;
+}
+
+.hero-image {
+  display: block;
+  margin: 0 auto;
+  width: 650px;
+  height: 400px;
+  object-fit: cover;
+  // box-shadow: $box-shadow-dark;
+}
+
+.project-portal__positioning-3 {
+  position: relative;
+  float: right;
+  margin-right: 40px;
+  box-shadow: none;
+  // margin-top: -10px;
+  background-color: transparent;
+  color: $theme-green;
+  border: 1px solid $theme-green;
+  height: 44.4px;
+  // &:hover {
+  //   background-color: $theme-green--light;
+  // }
+}
+
+.hero-image__edit-input {
+
+  color: $dark-grey;
+  background-color: rgba(255, 255, 255, 0.877) !important;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid $light-grey;
+  padding: 10px;
+  display: block;
+  position: absolute;
+  margin: 0 auto;
+  left: calc(50% - 200px);
+  margin-top: 10px;
+  // margin-top: -200px;
+  width: 400px;
+}
+
+/*
+
+==========================
+MARKDOWN
+==========================
+*/
+.markdown {
+  color: $dark-grey;
+  h1 {
+    font-size: 36px;
+    border-bottom: 1px solid $light-grey;
+  }
+  h2 {
+    font-size: 30px;
+    border-bottom: 1px solid $light-grey;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+  h5 {
+    font-size: 14px;
+  }
+  h6 {
+    font-size: 10px;
+  }
+  blockquote {
+    border-left: 8px solid $light-grey;
+    p {
+      margin-left: 8px;
+    }
+  }
+  pre {
+    background-color: $palest-grey;
+    padding: 10px;
+  }
+  p {
+    font-size: 14px;
+
+    img {
+      max-width: 100%;
+    }
+
+    a {
+      color: $theme-green;
+    }
+  }
+  table {
+    border-color: $dark-grey;
+    color: $dark-grey;
+  }
+}
+
+/*
+==========================
+MEDIA QUERIES
+==========================
+*/
+@media (max-width: 950px) and (min-width: 0px) {
+  .project-info-container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "cards" "description";
+    padding: 20px;
+  }
+  .project-side-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
+  .project-team-container,
+  .project-buttons-container,
+  .project-tags {
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    padding: 20px;
+    height: 200px;
+  }
+  .project-buttons-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .project-side-panel--hline {
+    display: none;
+  }
+}
+
+@media (max-width: 675px) and (min-width: 0px) {
+  .project-subcategory-title {
+    text-align: center;
+  }
+  .project-side-panel {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .project-portal {
+    width: 100%;
+  }
+  .hero-image-container {
+    height: auto;
+    padding-bottom: 120px;
+  }
+  .hero-image  {
+    width: 90%;
+    height: auto;
+  }
+  .hero-image__edit-input {
+    width: 90%;
+    left: 5%;
+  }
+  .project-portal__banner-edit {
+    width: 90%;
+  }
+  .project-portal__positioning-1 {
+    margin: 0 auto;
+  }
+  .project-portal__positioning-3,
+  .project-portal__positioning-2 {
+    position: absolute;
+    display: block;
+    margin: 0 auto;
+    margin-left: calc(50% - 60px);
+    margin-top: 60px;
+  }
+  .project-portal__positioning-2 {
+    margin-top: 0px;
+  }
+}
+
+@media (max-width: 550px) and (min-width: 0px) {
+  .project-portal__banner {
+    height: 100%;
+    padding: 10px;
+    padding-bottom: 30px;
+  }
+  .project-portal__banner--header {
+    font-size: 26px;
+  }
+  .project-portal__positioning-2 {
+    margin-left: calc(50% - 80px);
+    margin-top: 20px;
+  }
+}
+
+
+.project-portal__edit-button--error {
+  @include system-button($attention-red, $health-red);
+  color: white;
+  width: 150px;
+}
+
+
+
+
+// .project-portal__edit-form {
+//   position: fixed;
+//   background: rgba(0, 0, 0, 0.3);
+//   width: 100vw;
+//   height: 100vh;
+//   top: 0;
+//   right: 0;
+//   z-index: 9999;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+
+//   form {
+//     padding: 20px 50px;
+//     width: 540px;
+//     background: white;
+//   }
+
+//   div {
+//     margin-bottom: 20px;
+//   }
+
+//   h2 {
+//     text-transform: uppercase;
+//     margin: 0;
+//     font-size: 0.9em;
+//     font-weight: 400;
+//     color: $med-grey;
+//   }
+
+//   textarea {
+//     width: 100%;
+//     border: 1px solid $light-grey;
+//     color: $darker-grey;
+//     min-height: 100px;
+//   }
+
+//   input {
+//     width: 100%;
+//     border: 1px solid $light-grey;
+//     color: $darker-grey;
+//   }
+// }

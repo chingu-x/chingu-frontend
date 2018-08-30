@@ -44,7 +44,7 @@ const VoyagePortal = ({ data: { cohorts, user, user: { id: userId, status: userS
                     endDate={voyage.end_date}
                     id={voyage.id}
                     userStatus={userStatus}
-                    alreadyApplied={false} // Temp hardcoded for testing purposes. TODO:  use alreadyApplied
+                    alreadyApplied={alreadyApplied}
                   />
                 )
               })

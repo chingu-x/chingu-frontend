@@ -6,7 +6,6 @@ import { gql } from "apollo-boost"
 import { client } from "../../index"
 import Loader from "../Loader"
 import Error from "../Error"
-import toggleGlobalLoader from "../utilities/toggleGlobalLoader"
 import "./Login.css"
 
 // -- MUTATION -- //
@@ -37,13 +36,11 @@ class Login extends React.Component {
     if (token || !code) history.replace("/profile")
 
     // Continue to auth
-    toggleGlobalLoader(true)
     const { data, error } = await client.mutate({
       mutation: userAuthGithub,
       variables: { code }
     })
 
-    toggleGlobalLoader(false)
     if (error) this.setState({ error: error.message })
 
     const {
@@ -53,12 +50,12 @@ class Login extends React.Component {
     localStorage.token = access_token
 
     // Redirect to pre-login navigated route or /feed
-    history.push(redirect || "/feed")
+    history.push(redirect || "/newsfeed")
   }
 
   render = () => this.state.error
     ? <Error error={this.state.error} goBack="/login" />
-    : null
+    : <Loader />
 }
 
 export default withRouter(Login)
