@@ -18,7 +18,11 @@ const TeamCard = ({ user: { available_standups }, team }) => {
         <InfoComponents team={team} />
       </div>
       <div className="team-card-buttons-container">
-        <Link to={"/project/" + team.project.id + "/workspace"} className="user-btn--disabled">Team Workspace</Link>
+        <Link
+          // to={"/project/" + team.project.id + "/workspace"} 
+          to={"#"}
+          className="user-btn--disabled">Team Workspace
+          </Link>
         <Link to={"/project/" + team.project.id} className="user-btn">Project Page</Link>
         <Link
           className={`user-btn${standupStatus}`}
