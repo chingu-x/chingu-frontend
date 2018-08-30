@@ -37,14 +37,15 @@ const VoyageCardCreator = ({
 };
 
 export const CurrentVoyageCard = ({
-  voyageNumber,
+  voyageTitle,
   startDate,
   endDate
 }) => {
+  let badgeId = voyageTitle.replace( /^\D+/g, '');
   return (
     <VoyageCardCreator
-      leftPanel={() => <Badge number={voyageNumber} />}
-      rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
+      leftPanel={() => <Badge number={badgeId} />}
+      rightPanel={() => <Info title={voyageTitle} startDate={startDate} endDate={endDate} />}
     />
   );
 };
