@@ -25,19 +25,19 @@ We are all looking forward to reading about your projects!
 class ProjectDescription extends React.Component {
   static propTypes = {
     project_id: PropTypes.string,
-    text: PropTypes.string,
+    description: PropTypes.string,
     editable: PropTypes.bool,
     projectId: PropTypes.string
   };
 
   static defaultProps = {
-    text: "",
+    description: "",
     editable: false
   };
 
   state = {
     isEditing: false,
-    description: this.props.text,
+    description: this.props.description,
     editBtnHidden: true
   };
 
@@ -118,7 +118,7 @@ class ProjectDescription extends React.Component {
           )}
           {isEditing ? (
             <textarea
-              name="text"
+              name="description"
               value={description}
               className="project-portal__edit-box"
               onChange={this.handleChange}
@@ -154,14 +154,14 @@ function withMutation(Component) {
   return props => (
     <Mutation mutation={updateProject}>
       {(updateProject, { error, loading, data }) => {
-        const text = data
+        const description = data
           ? data.projectUpdate.description
-          : props.text;
+          : props.description;
 
         return <Component
           {...props}
           mutation={updateProject}
-          text={text}
+          description={description}
           error={!!error} />
       }}
     </Mutation>
