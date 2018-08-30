@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Query } from "react-apollo";
-import qs from "query-string";
 
 import './DynamicForm.css';
 import Loader from '../Loader';
@@ -16,6 +15,25 @@ import {
 
 import dynamicFormQuery from "./dynamicFormQuery";
 import dynamicFormSubmitMutation from "./dynamicFormSubmitMutation";
+
+const parseParams = (queryString) => {
+  const queryParams = new URLSearchParams(window.location.search);
+  const params = {};
+  for(let entry of queryParams.entries()) {
+    if(entry.length) {
+      if(params[entry[0]]) {
+        if(Array.isArray(params[entry[0]])) {
+          params[entry[0]].push(...entry.slice(1));
+        } else {
+          params[entry[0]] = [params[entry[0]], ...entry.slice(1)];
+        }
+      } else {
+        params[entry[0]] = entry.slice(1).length === 1 ? entry[1] : entry.slice(1);
+      }
+    }
+  }
+  return params;
+}
 
 /**
  * @prop {string} purpose Dynamic Form purpose
@@ -55,7 +73,7 @@ const DynamicForm = (
               mutation={mutation}
               hiddenData={
                 queryString || hiddenData ?
-                  Object.assign(hiddenData, qs.parse(queryString)) :
+                  Object.assign(hiddenData, parseParams(queryString)) :
                   null
               }
               onValidate={onValidate}
