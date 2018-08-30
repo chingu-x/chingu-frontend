@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import "./FeedItem.css"
 import newsfeedDateFormatter from '../../utilities/newsfeedDateFormatter';
 
-const header = ({ type, user, repo })=> {
+const header = ({ type, user, repo }) => {
   switch (type) {
     case "NewsfeedVoyage":
       return ["Chingu"]

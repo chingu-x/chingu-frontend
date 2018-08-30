@@ -13,20 +13,26 @@ const NewsFeed = ({ type, loading, data }) => {
     ${team ? `${team.title.toUpperCase()}` : "ALL"} NEWS
   `;
 
-  const renderNewsfeedItems = items => items.map(
-    item => FeedItemContainer({
-      component: NewsfeedItems[item.type],
-      item,
-      key: item.id,
-    }),
-  );
 
-  const renderFeed = ({ newsfeed: { chingu, other, team } }) => {
+  const renderNewsfeedItems = items => {
+    items = items.filter(item => item.type !== "NewsfeedAvailableStandup") // TODO: Remove
+    return items.map(
+      item => {
+        return FeedItemContainer({
+          component: NewsfeedItems[item.type],
+          item,
+          key: item.id,
+        })
+      }
+    );
+  }
+
+  const renderFeed = ({ user, newsfeed: { chingu, other, team } }) => {
     let dataToRender = (
       <React.Fragment>
         {
           type === "TEAM"
-            ? <TeamCard team={team} />
+            ? <TeamCard team={team} user={user} />
             : renderNewsfeedItems(chingu)
         }
         {(team || !!chingu.length) && other && <hr className="hl" />}
