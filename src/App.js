@@ -18,7 +18,6 @@ import Register from './components/Register';
 import Login from './components/Login';
 import FeedPortal from "./components/FeedPortal"
 import Private from "./components/utilities/PrivateRoute"
-import Loader from "./components/Loader"
 import AllProjects from './components/AllProjects';
 import TeamStandup from "./components/TeamStandup";
 import ProjectShowcase from "./components/ProjectShowcase"
@@ -26,7 +25,6 @@ import ProjectShowcase from "./components/ProjectShowcase"
 export default () => (
   <div className="App">
     <Header />
-    <Loader/> 
     <Switch>
       <Route exact path="/" component={Landing} />
       <Route
