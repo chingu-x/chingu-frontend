@@ -45,6 +45,7 @@ const getNewsfeed = gql`
             id
             title
           }
+          has_applied
         }
       }
       
