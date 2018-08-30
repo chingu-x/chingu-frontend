@@ -51,13 +51,13 @@ class ProjectShowcase extends React.Component {
                         editable
                         title={project.title}
                         elevator_pitch={project.elevator_pitch}
-                        project_id={this.props.projectId}
+                        project_id={projectId}
                       />
                       <HeroImage
                         editable
                         title={project.title}
                         elevatorPitch={project.elevatorPitch}
-                        proect_id={this.props.projectId}
+                        project_id={projectId}
                       />
                       <div className="project-info-container">
                         <ProjectDescription
