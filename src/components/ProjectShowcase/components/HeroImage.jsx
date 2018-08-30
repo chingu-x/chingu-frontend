@@ -144,7 +144,7 @@ function withMutation(Component) {
         let imageLink;
 
         if (data) {
-          imageLink = data.projectsUpdate.image[0].url;
+          imageLink = data.projectUpdate.images[0].url;
         } else if (props.images) {
           console.log('props images', props.images);
           imageLink = props.images.url;

@@ -13,24 +13,24 @@ const VoyagePortal = ({ data: { cohorts, user, user: { id: userId, status: userS
     <div className="voyage-portal-background-color">
       <div className="voyage-portal">
         <h1 className="voyage-portal-title">VOYAGES</h1>
-        <section className="voyage-section">
-          <p className="voyage-portal-subcategory">Current Voyages</p>
-          <div className="voyage-card-list">
-            {currentVoyages.length >= 1
-              ? currentVoyages.map((voyage, index) => {
+        {currentVoyages.length >= 1
+          &&
+          <section className="voyage-section">
+            <p className="voyage-portal-subcategory">Current Voyages</p>
+            <div className="voyage-card-list">
+              {currentVoyages.map((voyage, index) => {
                 return (
                   <Cards.CurrentVoyageCard
                     key={index}
-                    voyageNumber={voyage.id}
+                    voyageTitle={voyage.title}
                     startDate={voyage.start_date}
                     endDate={voyage.end_date}
                   />
                 )
-              })
-              : <Cards.NoVoyagesCard />
-            }
-          </div>
-        </section>
+              })}
+            </div>
+          </section>
+        }
         <section className="voyage-section">
           <p className="voyage-portal-subcategory">Upcoming Voyages</p>
           <div className="voyage-card-list">

@@ -86,7 +86,7 @@ class ExternalLinks extends React.Component {
             {editable && (
               <React.Fragment>
                 <button
-                  className={`project-portal__edit-button${btnState} project-portal__positioning-1`}
+                  className={`project-portal__edit-button${btnState} project-portal__positioning-links`}
                   onClick={() => this.toggleEditWithSave()}
                 >
                   <div className="project-portal__edit-button--text">
@@ -127,14 +127,14 @@ class ExternalLinks extends React.Component {
             !isEditing &&
             <div className="project-buttons-container">
               <a
-                className={`project-buttons ${github_url ? "" : "disabled"}`}
+                className={`project-buttons${github_url ? "" : "--disabled"}`}
                 target="_blank"
                 href={github_url || null}
               >
                 GitHub Repo
                 </a>
               <a
-                className={`project-buttons ${project_url ? "" : "disabled"}`}
+                className={`project-buttons${project_url ? "" : "--disabled"}`}
                 target="_blank"
                 href={project_url || null}
               >
