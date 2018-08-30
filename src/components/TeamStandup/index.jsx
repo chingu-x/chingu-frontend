@@ -58,7 +58,6 @@ class TeamStandup extends React.Component {
 
     if (error) return <Error error={error.message} />;
     if (response) return <Redirect to="/feed" />;
-    // TODO: needs styling
     return (
       <div className="team-standup-container">
         <div className="team-standup-title">
