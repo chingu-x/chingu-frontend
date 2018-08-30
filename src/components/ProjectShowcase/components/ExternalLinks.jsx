@@ -102,35 +102,54 @@ class ExternalLinks extends React.Component {
               </React.Fragment>
             )}
           </div>
-          <div className="project-buttons-container">
-            {isEditing ? (
-              <React.Fragment>
-                <input type="text" name="github_url" value={github_url} onChange={this.handleChange} />
-                <input type="text" name="project_url" value={project_url} onChange={this.handleChange} />
-                {/* {error && <div style={{ fontSize: "12px" }} className="editable-input__error">Must provide a fully qualified repo url.</div>} */}
-              </React.Fragment>
-            ) : (
-                <React.Fragment>
-                  <a
-                    className={`project-buttons ${github_url ? "" : "disabled"}`}
-                    target="_blank"
-                    href={github_url || null}
-                  >
-                    GitHub Repo
+          {
+            isEditing &&
+            <React.Fragment>
+              {/* {error && <div style={{ fontSize: "12px" }} className="editable-input__error">Must provide a fully qualified repo url.</div>} */}
+              < div className="project-buttons-container--editing">
+                <input
+                  className="project-button__input"
+                  type="text"
+                  placeholder="Github Repository URL"
+                  name="github_url"
+                  value={github_url}
+                  onChange={this.handleChange} />
+                <input
+                  className="project-button__input"
+                  type="text"
+                  placeholder="Live Link"
+                  name="project_url" value={project_url}
+                  onChange={this.handleChange} />
+              </div>
+            </React.Fragment>
+          }
+          {
+            !isEditing &&
+            <div className="project-buttons-container">
+              <a
+                className={`project-buttons ${github_url ? "" : "disabled"}`}
+                target="_blank"
+                href={github_url || null}
+              >
+                GitHub Repo
                 </a>
-                  <a
-                    className={`project-buttons ${project_url ? "" : "disabled"}`}
-                    target="_blank"
-                    href={project_url || null}
-                  >
-                    Live Preview
+              <a
+                className={`project-buttons ${project_url ? "" : "disabled"}`}
+                target="_blank"
+                href={project_url || null}
+              >
+                Live Link
                 </a>
-                </React.Fragment>
-              )}
-          </div>
+            </div>
+
+          }
+
+
+
+
         </div>
         <hr className="project-side-panel--hline" />
-      </React.Fragment>
+      </React.Fragment >
     );
   }
 }
