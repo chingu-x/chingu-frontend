@@ -44,7 +44,7 @@ class ProjectDescription extends React.Component {
     if (this.props.error && !error) this.setState({ isEditing: true })
   }
 
-  toggleEditable = editBtnHidden => this.setState({ editBtnHidden });
+  toggleEditButton = editBtnHidden => this.setState({ editBtnHidden });
 
   toggleEditWithSave = () => {
     let { isEditing } = this.state;
@@ -93,8 +93,8 @@ class ProjectDescription extends React.Component {
     return (
       <div
         className="project-portal__about-container"
-        onMouseEnter={() => editable && this.toggleEditable(false)}
-        onMouseLeave={() => editable && !isEditing && this.toggleEditable(true)}
+        onMouseOver={() => editable && editBtnHidden && this.toggleEditButton(false)}
+        onMouseLeave={() => editable && !isEditing && this.toggleEditButton(true)}
       >
         <h1 className="project-subcategory-title">Project Description</h1>
         <div className="project-portal__about">

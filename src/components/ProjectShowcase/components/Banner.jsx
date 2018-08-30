@@ -29,7 +29,7 @@ class Banner extends React.Component {
     if (this.props.error && !error) this.setState({ isEditing: true })
   }
 
-  toggleEditable = editBtnHidden => this.setState({ editBtnHidden });
+  toggleEditButton = editBtnHidden => this.setState({ editBtnHidden });
 
   toggleEditWithSave = () => {
     let { isEditing } = this.state;
@@ -82,8 +82,8 @@ class Banner extends React.Component {
 
     return (
       <div className="project-portal__banner"
-        onMouseEnter={() => editable && this.toggleEditable(false)}
-        onMouseLeave={() => editable && !isEditing && this.toggleEditable(true)}
+        onMouseOver={() => editable && editBtnHidden && this.toggleEditButton(false)}
+        onMouseLeave={() => editable && !isEditing && this.toggleEditButton(true)}
       >
         <div className="project-portal__banner--header">
           {isEditing ? (

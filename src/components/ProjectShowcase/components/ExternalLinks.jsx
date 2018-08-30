@@ -22,7 +22,7 @@ class ExternalLinks extends React.Component {
     if (!!this.props.error && !error) this.setState({ isEditing: true })
   }
 
-  toggleEditable = editBtnHidden => this.setState({ editBtnHidden });
+  toggleEditButton = editBtnHidden => this.setState({ editBtnHidden });
 
   toggleEditWithSave = () => {
     let { isEditing } = this.state;
@@ -77,8 +77,8 @@ class ExternalLinks extends React.Component {
     return (
       <React.Fragment>
         <div className="project-subcategory"
-          onMouseEnter={() => editable && this.toggleEditable(false)}
-          onMouseLeave={() => editable && !isEditing && this.toggleEditable(true)}
+          onMouseOver={() => editable && editBtnHidden && this.toggleEditButton(false)}
+          onMouseLeave={() => editable && !isEditing && this.toggleEditButton(true)}
         >
           <div
             className="project-subcategory__title-container">

@@ -28,7 +28,7 @@ class HeroImage extends React.Component {
     if (this.props.error && !error) this.setState({ isEditing: true })
   }
 
-  toggleEditable = editBtnHidden => this.setState({ editBtnHidden });
+  toggleEditButton = editBtnHidden => this.setState({ editBtnHidden });
 
   toggleEditWithSave = () => {
     let { isEditing } = this.state;
@@ -82,8 +82,8 @@ class HeroImage extends React.Component {
     return (
       <div
         className="hero-image-container"
-        onMouseEnter={() => editable && this.toggleEditable(false)}
-        onMouseLeave={() => editable && !isEditing && this.toggleEditable(true)}
+        onMouseOver={() => editable && editBtnHidden && this.toggleEditButton(false)}
+        onMouseLeave={() => editable && !isEditing && this.toggleEditButton(true)}
       >
         {isEditing ? (
           <React.Fragment>
