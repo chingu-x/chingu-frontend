@@ -6,7 +6,7 @@ import './AllProjects.css';
 
 class AllProjects extends React.Component {
   state = {
-    projects: this.props.data.projects
+    projects: null
   }
 
   componentDidMount() {
@@ -22,10 +22,11 @@ class AllProjects extends React.Component {
   }
 
   render() {
+    let { projects } = this.state;
     return (
       <div className="all-projects-container">
         <div className="all-projects-title">All Projects</div>
-        <div className="all-projects">{this.renderProjects()}</div>
+        <div className="all-projects">{projects && this.renderProjects()}</div>
       </div>
     )
   }
