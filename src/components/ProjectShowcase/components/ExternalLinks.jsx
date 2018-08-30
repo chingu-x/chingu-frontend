@@ -112,16 +112,16 @@ class ExternalLinks extends React.Component {
             ) : (
                 <React.Fragment>
                   <a
-                    className="project-buttons"
+                    className={`project-buttons ${github_url ? "" : "disabled"}`}
                     target="_blank"
-                    href={github_url}
+                    href={github_url || null}
                   >
                     GitHub Repo
                 </a>
                   <a
-                    className="project-buttons"
+                    className={`project-buttons ${project_url ? "" : "disabled"}`}
                     target="_blank"
-                    href={project_url}
+                    href={project_url || null}
                   >
                     Live Preview
                 </a>

@@ -97,6 +97,9 @@ BUTTONS
 .project-buttons {
   @include system-button($theme-green, $theme-green--hover);
   width: 100%;
+  &.disabled {
+    cursor: default;
+  }
 }
 
 
