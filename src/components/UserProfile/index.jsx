@@ -44,7 +44,6 @@ class UserProfile extends React.Component {
 
   render() {
     let { user, currentTeams, pastTeams, pendingApproval, editable } = this.state;
-    console.log(editable);
     return (
       <div className="user-profile-background-color" >
         <div className="user-profile-container">
