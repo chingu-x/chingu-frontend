@@ -72,8 +72,6 @@ class HeroImage extends React.Component {
   }
 
   render() {
-    console.log("component props", this.props);
-
     const { isEditing, imageLink, editBtnHidden} = this.state;
     const { editable, error} = this.props;
 
@@ -144,7 +142,6 @@ function withMutation(Component) {
   return props => (
     <Mutation mutation={updateProject}>
       {(updateProject, { error, loading, data }) => {
-        
         const imageLink = data ? data.updateProject.images[0].url : props.imageLink;
 
         return <Component {...props} mutation={updateProject} imageLink={imageLink} error={!!error} />;
