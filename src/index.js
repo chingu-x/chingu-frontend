@@ -14,43 +14,15 @@ const mode = 'prod'
 // create a new Apollo Client Instance
 const client = new ApolloClient({
   // The URL for your graphql server
-  uri: mode === 'dev' ? 'http://localhost:8008/graphql' : 'https://api.chingu.io/graphql',
+  uri: mode === 'dev' ? 'http://localhost:8008/graphql' : 'https://fb.api.chingu.io/graphql',
   request: async operation => {
     const token = localStorage.getItem('token')
-    // TODO check cache
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : ''
       }
-    }) 
+    })
   },
-  // This is the configuration of local state
-  clientState: {
-    // This is the default state that your application starts with
-    defaults: {
-      loaderState: {
-        __typename: "LoaderState",
-        isShowing: false
-      }
-    }, 
-    // The resolvers for your local mutations
-    resolvers: {
-      Query: {},  
-      Mutation: {
-        toggleLoader: (_, { isShowing }, { cache}) => {
-          cache.writeData({
-            data: {
-              loaderState: {
-                __typename: "LoaderState",
-                isShowing
-              }
-            }
-          })
-          return null
-        }
-      }
-    } 
-  }
 })
 
 ReactDOM.render(
@@ -66,4 +38,4 @@ ReactDOM.render(
 
 registerServiceWorker();
 
-export {client}
+export { client }

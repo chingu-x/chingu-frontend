@@ -13,6 +13,7 @@
   justify-content: center;
   z-index: $z-middle;
   background-color: white;
+  overflow: auto;
   > * {
     margin: auto;
   }
