@@ -48,7 +48,13 @@ class DynamicFormContainer extends React.Component {
    */
   _hasEmptyAnswers = (form_data) => {
     return Object.keys(form_data)
-      .some(field_name => isEmpty(form_data[field_name]));
+      .some(field_name => {
+        const value = form_data[field_name];
+        if (!isNaN(value)) { // any numeric value is acceptable (non-empty)
+          return false;
+        }
+        return isEmpty(value)
+      });
   }
 
   /**
