@@ -8,7 +8,7 @@ const ProjectSideBar = ({ project, editable }) => {
     <div className="project-side-panel">
       <ExternalLinks
         editable={editable}
-        project_id={project.id}
+        project_id={project_id}
         project_url={project_url}
         github_url={github_url} />
       {skills && skills.length > 0 && <TechStack teckstack={skills} />}
