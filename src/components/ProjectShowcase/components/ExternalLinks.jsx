@@ -86,7 +86,7 @@ class ExternalLinks extends React.Component {
             {editable && (
               <React.Fragment>
                 <button
-                  className={`project-portal__edit-button${btnState} project-portal__positioning-1`}
+                  className={`project-portal__edit-button${btnState} project-portal__positioning-links`}
                   onClick={() => this.toggleEditWithSave()}
                 >
                   <div className="project-portal__edit-button--text">
