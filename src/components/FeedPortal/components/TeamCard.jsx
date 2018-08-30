@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 import './TeamCard.css';
 
 const TeamCard = ({ user: { available_standups }, team }) => {
-  console.log("teamcard", { team, available_standups })
   const availableStandup = (
     !!available_standups.length &&
     available_standups.some(su => su.team.id === team.id)
