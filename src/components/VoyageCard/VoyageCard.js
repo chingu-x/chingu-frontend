@@ -62,7 +62,7 @@ export const UpcomingVoyageCard = ({
       backgroundColor={"#EFEFEF"}
       leftPanel={() => <Badge number={voyageNumber} />}
       rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
-      action={() => alreadyApplied ? null : <Action routeId={id} userStatus={userStatus}/>}
+      action={() => alreadyApplied ? 'PENDING APPROVAL' : <Action routeId={id} userStatus={userStatus}/>}
     />
   );
 };
