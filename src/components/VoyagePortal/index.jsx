@@ -22,7 +22,7 @@ const VoyagePortal = ({ data: { cohorts, user, user: { id: userId, status: userS
                 return (
                   <Cards.CurrentVoyageCard
                     key={index}
-                    voyageNumber={voyage.id}
+                    voyageTitle={voyage.title}
                     startDate={voyage.start_date}
                     endDate={voyage.end_date}
                   />
