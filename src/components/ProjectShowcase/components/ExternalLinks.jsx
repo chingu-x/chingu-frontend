@@ -90,11 +90,11 @@ class ExternalLinks extends React.Component {
                   onClick={() => this.toggleEditWithSave()}
                 >
                   <div className="project-portal__edit-button--text">
-                    <img
+                    {!error && <img
                       className="project-portal__edit-button--img"
                       src={require("../../../assets/edit-green.png")}
                       alt="edit"
-                    />
+                    />}
                     {this.editButtonText({ isEditing, error })}
                   </div>
                 </button>
