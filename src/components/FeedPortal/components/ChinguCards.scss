@@ -1,0 +1,20 @@
+@import '../../../styles/abstracts/_variables.scss';
+
+.newsfeed-chingu-card--container {
+    @include newsfeed-card;
+}
+.chingu-card--green  {
+    background-color: $theme-green--palest;
+    color: $theme-green;
+}
+.newsfeed-chingu-card--icon {
+    @include newsfeed-card--icon;
+}
+
+.newsfeed-voyage-text {
+    @include newsfeed-card-text-container;
+    align-self: center;
+    // text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}

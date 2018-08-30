@@ -1,22 +1,15 @@
 import { gql } from "apollo-boost"
 
 const profileQuery = gql`
-  query profileQuery {
-    user {
+  query getUserProfile($username: String) {
+    user(username: $username) {
       id
       username
       avatar
       country
-      teams {
-        id
-        title
-        cohort {
-          id
-          status
-          start_date
-          end_date
-        }
-      }
+      background
+      interests
+      coding_history
       cohorts {
         id
         title
@@ -31,7 +24,30 @@ const profileQuery = gql`
           }
         }
       }
-
+      teams {
+        id
+        title
+        cohort {
+          id
+          title
+          status
+          start_date
+          end_date
+        }
+        tier {
+            title
+            level
+        }
+        project {
+            id
+            title
+            description
+            users {
+                username
+                avatar
+            }
+        }
+      }
     }
   }
 `

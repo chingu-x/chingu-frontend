@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './VoyageApplication.css';
-import DynamicForm from "../DynamicForm";
+import { DynamicForm } from "../DynamicForm";
 import Request from "../utilities/Request"
 import { gql } from "apollo-boost";
 import { Redirect } from "react-router-dom";
@@ -55,25 +55,38 @@ const VoyageApplicationContainer = (
   }
 }
 
-const VoyageApplication = ({ version, voyage_id, newUser }) => (
-  <div className="voyage-application-container">
-    <div className="voyage-application-title">
-      {newUser ? "New Voyage User Application" : "Voyage Application"}
+
+const VoyageApplication = ({ version, voyage_id, newUser }) => {
+  const handleResponse = (data) => {
+    const redirectLocation = newUser
+      ? `/voyage/application/${voyage_id}`
+      : "/profile";
+
+    return <Redirect to={redirectLocation} />;
+  } 
+
+  return (
+    <div className="voyage-application-container">
+      <div className="voyage-application-title">
+        {newUser ? "New Voyage User Application" : "Voyage Application"}
+      </div>
+      <div className="voyage-application">
+        <DynamicForm
+          version={version}
+          purpose={newUser ? "new_voyage_user" : "voyage_application"}
+          hiddenData={{ voyage_id }}
+          onResponse={handleResponse}
+        />
+      </div>
     </div>
-    <div className="voyage-application">
-      <DynamicForm
-        version={version}
-        purpose={newUser ? "new_voyage_user" : "voyage_application"}
-        hiddenData={{ voyage_id }}
-        submitRedirect={newUser ? `/voyage/application/${voyage_id}` : null}
-      />
-    </div>
-  </div>
-);
+  );
+}
 
 export default props =>
   <Request
+    {...props} 
     component={VoyageApplicationContainer}
     query={VoyageApplicationUserQuery}
+    options={{ fetchPolicy: "network-only" }}
     globalLoader
-    {...props} />
+  />

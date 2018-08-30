@@ -117,3 +117,35 @@ CARD ACTIONS
     background-color: $theme-green--light;
   }
 }
+
+/*
+==========================
+MEDIA QUERY
+==========================
+*/
+@media (max-width: 600px) {
+  .card {
+    margin: 0 auto;
+    width: 90%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "badge" "info";
+  }
+  .card-left-panel {
+    grid-area: badge;
+  }
+  
+  .card-right-panel {
+    grid-area: info;
+  }
+  .card-circle {
+    width: 150px;
+    height: 150px;
+    border-width: 10px;
+    margin-bottom: 20px;
+  }
+  .card-number {
+    font-size: 60px;
+  }
+}

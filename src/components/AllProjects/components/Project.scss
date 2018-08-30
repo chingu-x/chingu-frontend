@@ -1,0 +1,32 @@
+@import '../../../styles/abstracts/_variables.scss';
+
+.project {
+    width: 100%;
+    box-shadow: $box-shadow;
+    color: $dark-grey;
+}
+.project-image {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+    border: 1px solid $light-grey;
+}
+
+.project-info {
+    background-color: white;
+    padding: 10px;
+    border: 1px solid $lighter-grey;
+    margin-top: -7px;
+    min-height: 120px;
+}
+
+.project-title {
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.project-description {
+    font-size: 14px;
+}
