@@ -7,7 +7,7 @@ const ProjectSideBar = ({ project, editable }) => {
   return (
     <div className="project-side-panel">
       <ExternalLinks
-        editable={editable}
+        editable
         project_id={project_id}
         project_url={project_url}
         github_url={github_url} />

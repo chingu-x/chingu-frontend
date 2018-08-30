@@ -8,19 +8,27 @@ class HeroImage extends React.Component {
     editable: PropTypes.bool,
     imageLink: PropTypes.string,
     mutation: PropTypes.func,
-    project_id: PropTypes.string
+    project_id: PropTypes.string,
+    error: PropTypes.bool
   };
 
   static defaultProps = {
     editable: false,
     imageLink: `https://i.imgur.com/E63b9Re.png`,
-    mutation: console.log
+    mutation: console.log,
   };
 
   state = {
     isEditing: false,
-    imageLink: this.props.imageLink
+    imageLink: this.props.imageLink,
+    editBtnHidden: true
   };
+
+  componentDidUpdate({ error }) {
+    if (this.props.error && !error) this.setState({ isEditing: true })
+  }
+
+  toggleEditable = editBtnHidden => this.setState({ editBtnHidden });
 
   toggleEditWithSave = () => {
     let { isEditing } = this.state;
@@ -59,11 +67,19 @@ class HeroImage extends React.Component {
   render() {
     console.log("component props", this.props);
 
-    const { isEditing, imageLink } = this.state;
-    const { editable } = this.props;
+    const { isEditing, imageLink, editBtnHidden} = this.state;
+    const { editable, error} = this.props;
+
+    let btnState = ""
+    if (error) btnState = "--error"
+    else if (editBtnHidden) btnState = "--hidden"
 
     return (
-      <div className="hero-image-container">
+      <div
+        className="hero-image-container"
+        onMouseEnter={() => editable && this.toggleEditable(false)}
+        onMouseLeave={() => editable && !isEditing && this.toggleEditable(true)}
+      >
         {isEditing ? (
           <React.Fragment>
             <img
@@ -86,7 +102,7 @@ class HeroImage extends React.Component {
 
         {editable && (
           <button
-            className="project-portal__edit-button project-portal__positioning-3"
+            className={`project-portal__edit-button${btnState} project-portal__positioning-3`}
             onClick={() => this.toggleEditWithSave()}
           >
             <div className="project-portal__edit-button--text">
@@ -130,7 +146,7 @@ function withMutation(Component) {
 
         const imageLink = data ? data.updateProject.images[0].url : props.imageLink;
 
-        return <Component {...props} mutation={updateProject} imageLink={imageLink} />;
+        return <Component {...props} mutation={updateProject} imageLink={imageLink} error={!!error} />;
       }}
     </Mutation>
   );
