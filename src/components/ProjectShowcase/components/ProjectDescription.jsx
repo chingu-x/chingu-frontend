@@ -90,45 +90,49 @@ class ProjectDescription extends React.Component {
     else if (editBtnHidden) btnState = "--hidden"
 
     return (
-      <div
-        className="project-portal__about-container"
-        onMouseOver={() => editable && editBtnHidden && this.toggleEditButton(false)}
-        onMouseLeave={() => editable && !isEditing && this.toggleEditButton(true)}
-      >
-        <h1 className="project-subcategory-title">Project Description</h1>
-        <div className="project-portal__about">
-          {editable && (
-            <React.Fragment>
-              <button
-                className={`project-portal__edit-button${btnState} project-portal__positioning-1`}
-                onClick={() => this.toggleEditWithSave()}
-              >
-                <div className="project-portal__edit-button--text">
-                  {!error && <img
-                    className="project-portal__edit-button--img"
-                    src={require('../../../assets/edit-green.png')}
-                    alt="edit" />}
-                  {this.editButtonText({ isEditing, error })}
-                </div>
-              </button>
-              <hr className="project-side-panel--hline" />
-            </React.Fragment>
-          )}
-          {isEditing ? (
-            <textarea
-              name="description"
-              value={description}
-              className="project-portal__edit-box"
-              onChange={this.handleChange}
-            />
-          ) : (
-              <div className="markdown">
-                <ReactMarkdown source={this.state.description} />
-              </div>
-
+      <React.Fragment>
+        <div
+          className="project-portal__about-container"
+          onMouseOver={() => editable && editBtnHidden && this.toggleEditButton(false)}
+          onMouseLeave={() => editable && !isEditing && this.toggleEditButton(true)}
+        >
+          <div className="project-subcategory__title-container">
+            <h1 className="project-subcategory-title">Project Description</h1>
+            {editable && (
+              <React.Fragment>
+                <button
+                  className={`project-portal__edit-button${btnState} project-portal__positioning-1`}
+                  onClick={() => this.toggleEditWithSave()}
+                >
+                  <div className="project-portal__edit-button--text">
+                    {!error && <img
+                      className="project-portal__edit-button--img"
+                      src={require('../../../assets/edit-green.png')}
+                      alt="edit" />}
+                    {this.editButtonText({ isEditing, error })}
+                  </div>
+                </button>
+                <hr className="project-side-panel--hline" />
+              </React.Fragment>
             )}
+          </div>
+          <div className="project-portal__about">
+            {isEditing ? (
+              <textarea
+                name="description"
+                value={description}
+                className="project-portal__edit-box"
+                onChange={this.handleChange}
+              />
+            ) : (
+                <div className="markdown">
+                  <ReactMarkdown source={this.state.description} />
+                </div>
+
+              )}
+          </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
