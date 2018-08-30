@@ -137,13 +137,7 @@ function withMutation(Component) {
   return props => (
     <Mutation mutation={updateProject}>
       {(updateProject, { error, loading, data }) => {
-        if (error) {
-          return null;
-        }
-        if (loading) {
-          return null;
-        }
-
+        
         const imageLink = data ? data.updateProject.images[0].url : props.imageLink;
 
         return <Component {...props} mutation={updateProject} imageLink={imageLink} error={!!error} />;
