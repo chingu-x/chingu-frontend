@@ -49,7 +49,7 @@ class HeroImage extends React.Component {
 
   makeMutation = () => {
     const { imageLink } = this.state;
-    const { mutation, project_id} = this.props;
+    const { mutation, project_id } = this.props;
 
     mutation({
       variables: {
@@ -61,7 +61,7 @@ class HeroImage extends React.Component {
           }
         }
       }
-     });
+    });
   };
 
   editButtonText({ isEditing, error }) {
@@ -72,8 +72,8 @@ class HeroImage extends React.Component {
   }
 
   render() {
-    const { isEditing, imageLink, editBtnHidden} = this.state;
-    const { editable, error} = this.props;
+    const { isEditing, imageLink, editBtnHidden } = this.state;
+    const { editable, error } = this.props;
 
     let btnState = ""
     if (error) btnState = "--error"
@@ -111,10 +111,10 @@ class HeroImage extends React.Component {
             onClick={() => this.toggleEditWithSave()}
           >
             <div className="project-portal__edit-button--text">
-              <img
+              {!error && <img
                 className="project-portal__edit-button--img"
                 src={require('../../../assets/edit-green.png')}
-                alt="edit" />
+                alt="edit" />}
               {this.editButtonText({ isEditing, error })}
             </div>
           </button>
@@ -126,7 +126,7 @@ class HeroImage extends React.Component {
 }
 
 function withMutation(Component) {
-  const updateProject = gql`
+  const projectUpdate = gql`
     mutation projectUpdate($project_id: ID!, $project_data: ProjectInput!) {
       projectUpdate( project_id: $project_id, project_data: $project_data) {
         id
@@ -140,11 +140,14 @@ function withMutation(Component) {
   `;
 
   return props => (
-    <Mutation mutation={updateProject}>
+    <Mutation mutation={projectUpdate}>
       {(updateProject, { error, loading, data }) => {
-        const imageLink = data ? data.updateProject.images[0].url : props.imageLink;
+        const imageLink = data ? data.projectUpdate.images[0].url : props.imageLink;
 
-        return <Component {...props} mutation={updateProject} imageLink={imageLink} error={!!error} />;
+        return <Component {...props}
+          mutation={updateProject}
+          imageLink={imageLink}
+          error={!!error} />;
       }}
     </Mutation>
   );
