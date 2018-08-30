@@ -76,7 +76,7 @@ class DynamicFormWrapper extends React.Component {
     if (response) return (
       onResponse
         ? onResponse(response)
-        : <Redirect to="/" />
+        : <Redirect to="/profile" />
     );
 
     return (
