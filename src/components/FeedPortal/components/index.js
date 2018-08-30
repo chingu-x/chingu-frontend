@@ -5,7 +5,7 @@ import NewsfeedStandup from './NewsfeedStandup';
 const NewsfeedItems = {
     NewsfeedVoyage,
     NewsfeedStandup,
-    GithubActivityIssue,
+    GithubActivityIssue,  
     GithubActivityPullRequest,
 };
 
