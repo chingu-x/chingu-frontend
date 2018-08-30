@@ -7,23 +7,29 @@ class Banner extends React.Component {
   static propTypes = {
     editable: PropTypes.bool,
     title: PropTypes.string,
-    elevatorPitch: PropTypes.string,
-    mutation: PropTypes.func,
-    projectId: PropTypes.string
+    elevator_pitch: PropTypes.string,
+    mutation: PropTypes.func
   };
 
   static defaultProps = {
     editable: false,
     title: "",
-    elevatorPitch: "",
+    elevator_pitch: "",
     mutation: console.log
   };
 
   state = {
     isEditing: false,
     title: this.props.title,
-    elevatorPitch: this.props.elevatorPitch
+    elevator_pitch: this.props.elevator_pitch,
+    editBtnHidden: true
   };
+
+  componentDidUpdate({ error }) {
+    if (this.props.error && !error) this.setState({ isEditing: true })
+  }
+
+  toggleEditable = editBtnHidden => this.setState({ editBtnHidden });
 
   toggleEditWithSave = () => {
     let { isEditing } = this.state;
@@ -43,35 +49,51 @@ class Banner extends React.Component {
   };
 
   makeMutation = () => {
-    const { title, elevatorPitch } = this.state;
-    const { mutation, projectId } = this.props;
-
+    const { title, elevator_pitch } = this.state
+    const { project_id, mutation } = this.props
     mutation({
-      variables: {
-        project_id: projectId,
-        project_data: {
-          elevator_pitch: elevatorPitch,
-          title: title
+      variables: { project_id, project_data: { title, elevator_pitch } },
+      optimisticResponse: {
+        __typename: "Mutation",
+        projectUpdate: {
+          __typename: "Project",
+          id: project_id,
+          title,
+          elevator_pitch
         }
       }
-     });
+    });
   };
 
-  render() {
-    console.log("component props", this.props);
+  editButtonText({ isEditing, error }) {
+    let lbl = "Edit"
+    if (isEditing) lbl = "Done"
+    if (error) lbl = "Try again"
+    return lbl
+  }
 
-    const { isEditing, title, elevatorPitch } = this.state;
-    const { editable } = this.props;
+  render() {
+    const { isEditing, title, elevator_pitch, editBtnHidden } = this.state
+    const { error, editable } = this.props;
+
+    let btnState = ""
+    if (error) btnState = "--error"
+    else if (editBtnHidden) btnState = "--hidden"
 
     return (
-      <div className="project-portal__banner">
+      <div className="project-portal__banner"
+        onMouseEnter={() => editable && this.toggleEditable(false)}
+        onMouseLeave={() => editable && !isEditing && this.toggleEditable(true)}
+      >
         <div className="project-portal__banner--header">
           {isEditing ? (
-            <input 
-              className="project-portal__banner-edit" 
-              name="title" 
-              value={title} 
-              onChange={this.handleChange} />
+            <React.Fragment>
+              <input
+                className="project-portal__banner-edit"
+                name="title"
+                value={title}
+                onChange={this.handleChange} />
+            </React.Fragment>
           ) : (
               title
             )}
@@ -80,27 +102,27 @@ class Banner extends React.Component {
           {isEditing ? (
             <input
               className="project-portal__banner-edit"
-              name="elevatorPitch"
-              value={elevatorPitch}
+              name="elevator_pitch"
+              value={elevator_pitch}
               onChange={this.handleChange}
             />
           ) : (
-              elevatorPitch ? elevatorPitch : 'Put a short description of your project here!'
+              elevator_pitch ? elevator_pitch : 'Put a short description of your project here!'
             )}
         </div>
         {editable && (
-            <button
-              className="project-portal__edit-button project-portal__positioning-2"
-              onClick={() => this.toggleEditWithSave()}
-            >
-              <div className="project-portal__edit-button--text">
-                <img
-                  className="project-portal__edit-button--img"
-                  src={require('../../../../assets/edit-white.png')}
-                  alt="edit" />
-                {isEditing ? "Done" : "Edit"}
-              </div>
-            </button>
+          <button
+            className={`project-portal__edit-button${btnState} project-portal__positioning-2`}
+            onClick={() => this.toggleEditWithSave()}
+          >
+            <div className="project-portal__edit-button--text">
+              {!error && <img
+                className="project-portal__edit-button--img"
+                src={require('../../../../assets/edit-white.png')}
+                alt="edit" />}
+              {this.editButtonText({ isEditing, error })}
+            </div>
+          </button>
         )}
       </div>
     );
@@ -108,37 +130,35 @@ class Banner extends React.Component {
 }
 
 function withMutation(Component) {
-  const updateProject = gql`
-    mutation projectUpdate($project_id: ID!, $project_data: ProjectInput!) {
-      projectUpdate( project_id: $project_id, project_data: $project_data) {
-        id
-        title
-        elevator_pitch
-      }
+  const projectUpdate = gql`
+    mutation projectUpdate(
+      $project_id: ID!
+      $project_data: ProjectInput!) {
+        projectUpdate(
+        project_id: $project_id
+        project_data: $project_data) {
+          id
+          title
+          elevator_pitch
+        }
     }
-  `;
+    `;
 
   return props => (
-    <Mutation mutation={updateProject}>
-      {(updateProject, { error, loading, data }) => {
-        if (error) {
-          return null;
-        }
-        if (loading) {
-          return null;
-        }
-
-        const title = data ? data.updateProject.title : props.title;
+    <Mutation mutation={projectUpdate}>
+      {(projectUpdate, { error, loading, data }) => {
+        const title = data ? data.projectUpdate.title : props.title;
         const elevator_pitch = data
-          ? data.updateProject.elevator_pitch
-          : props.elevatorPitch;
+          ? data.projectUpdate.elevator_pitch
+          : props.elevator_pitch;
 
         return (
           <Component
             {...props}
-            mutation={updateProject}
+            mutation={projectUpdate}
             title={title}
-            elevatorPitch={elevator_pitch}
+            elevator_pitch={elevator_pitch}
+            error={!!error}
           />
         );
       }}

@@ -60,8 +60,8 @@ class ProjectShowcase extends React.Component {
                       <Banner
                         editable={editable}
                         title={project.title}
-                        elevatorPitch={project.elevatorPitch}
-                        projectId={project.id}
+                        elevator_pitch={project.elevator_pitch}
+                        project_id={this.props.projectId}
                       />
                       <HeroImage
                         editable={editable}
