@@ -56,7 +56,7 @@ class ProjectShowcase extends React.Component {
                       <HeroImage
                         editable={editable}
                         title={project.title}
-                        elevatorPitch={project.elevatorPitch}
+                        images={project.images.length > 0 ? project.images[0] : undefined}
                         project_id={projectId}
                       />
                       <div className="project-info-container">
