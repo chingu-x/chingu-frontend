@@ -110,10 +110,15 @@ BUTTONS
 .project-buttons {
   @include system-button($theme-green, $theme-green--hover);
   width: 100%;
-  &.disabled {
-    cursor: default;
-  }
 }
+.project-buttons--disabled {
+  @include system-button($pale-grey, $pale-grey);
+  color: $dark-grey;
+  cursor: default;
+  width: 100%;
+}
+
+
 
 
 /*
