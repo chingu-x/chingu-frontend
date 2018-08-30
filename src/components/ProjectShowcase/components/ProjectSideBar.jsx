@@ -1,30 +1,21 @@
 import * as React from "react";
+import { Link } from "react-router-dom"
+import ExternalLinks from './ExternalLinks';
 
-const ProjectSideBar = ({ project }) => {
-  console.log(project)
+const ProjectSideBar = ({ project, editable }) => {
+  const { project_id, project_url, github_url, skills, tags, users } = project
   return (
     <div className="project-side-panel">
-      <ExternalLinks data={project} />
-      {project.skills && project.skills.length > 0 && <TechStack teckstack={project.skills} />}
-      {project.tags && project.tags.length > 0 && <Tags tags={project.tags} />}
-      {project.users && <Team users={project.users} />}
+      <ExternalLinks
+        editable
+        project_id={project.id}
+        project_url={project_url}
+        github_url={github_url} />
+      {skills && skills.length > 0 && <TechStack teckstack={skills} />}
+      {tags && tags.length > 0 && <Tags tags={tags} />}
+      {users && <Team users={users} />}
     </div>
   )
-}
-
-const ExternalLinks = ({ data: { github_url, project_url } }) => {
-  return (
-    <React.Fragment>
-      <div className="project-subcategory">
-        <h1 className="project-subcategory-title">Links</h1>
-        <div className="project-buttons-container">
-          <a className="project-buttons" target="_blank" href={github_url}>GitHub Repo</a>
-          <a className="project-buttons" target="_blank" href={project_url}>Live Preview</a>
-        </div>
-      </div>
-      <hr className="project-side-panel--hline" />
-    </React.Fragment>
-  );
 }
 
 const TechStack = ({ skills }) => {
@@ -75,7 +66,7 @@ const Team = ({ users }) => {
 const Profile = ({ user: { username, avatar } }) => {
   return (
     <div className="project-portal__profile">
-      <img className="project-portal__user-avatar" src={avatar} alt="team-pic" />
+      <Link to={`/profile/${username}`} ><img className="project-portal__user-avatar" src={avatar} alt="team-pic" /></Link>
       <p className="project-portal__user-username">{username}</p>
     </div>
   );
