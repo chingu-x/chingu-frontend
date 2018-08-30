@@ -1,7 +1,7 @@
 @import '../../styles/abstracts/_variables.scss';
 
 .project-portal {
-  // padding-top: 64px; // to account for header
+  padding-top: 64px; // to account for header
   margin: 0 auto;
   min-height: 100vh;
   height: 100%;
@@ -397,6 +397,7 @@ BANNER WTIH PROJECT TITLE
   border: none;
   border-bottom: 1px solid $light-grey;
   padding: 5px;
+  min-width: 551px;
 }
 /*
 ==========================

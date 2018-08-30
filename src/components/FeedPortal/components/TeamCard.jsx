@@ -11,7 +11,7 @@ const TeamCard = ({ team }) => {
       </div>
       <div className="team-card-buttons-container">
         {/* <Link to={"/project/" + team.project.id + "/workspace"} className="user-btn">Team Workspace</Link> */}
-        <Link to={"/project/" + team.project.id} className="user-btn">Project Showcase</Link>
+        <Link to={"/project/" + team.project.id} className="user-btn">Project Page</Link>
         <Link className="user-btn" to={`/team/${team.id}/standup`}>Team Standups</Link>
       </div>
     </div>
@@ -28,7 +28,7 @@ const InfoComponents = ({ team }) => {
     { label: 'Tier', data: 'Tier ' + team.tier.level },
     { label: 'Team', data: project.users },
     { label: 'Project', data: project.title },
-    { label: 'Description', data: project.description },
+    { label: 'Description', data: project.elevator_pitch },
     // { label: 'TechStack', data: project.skills },
   ]
 

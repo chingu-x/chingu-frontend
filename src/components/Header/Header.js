@@ -63,7 +63,7 @@ class Header extends React.Component {
           <div className="header-mask" />
           <div className="header-dropdown-content avatar">
             <Link
-              to="/feed"
+              to="/newsfeed"
             >
               Newsfeed
             </Link>

@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Query } from "react-apollo"
 import Error from "../Error"
-import toggleGlobalLoader from "./toggleGlobalLoader"
+import Loader from "../Loader"
 
 /**
  * USAGE
@@ -35,8 +35,7 @@ const Request = ({
       {
         ({ loading, error, data }) => {
           if (error) return <Error error={error.message} /> // TODO: Pass goBack prop
-          globalLoader && toggleGlobalLoader(loading)
-          if (loading && globalLoader) return null
+          if (loading && globalLoader) return <Loader />
           return <Component {...props} data={data} loading={loading} />
         }
       }

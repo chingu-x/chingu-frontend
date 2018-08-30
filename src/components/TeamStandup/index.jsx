@@ -57,7 +57,7 @@ class TeamStandup extends React.Component {
     const { error, response } = this.state;
 
     if (error) return <Error error={error.message} />;
-    if (response) return <Redirect to="/feed" />;
+    if (response) return <Redirect to="/newsfeed" />;
     return (
       <div className="team-standup-container">
         <div className="team-standup-title">
