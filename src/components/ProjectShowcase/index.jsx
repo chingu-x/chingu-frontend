@@ -23,30 +23,20 @@ class ProjectShowcase extends React.Component {
     });
   }
 
-  getProjectId = () => {
-    return this.props.match.params.projectId;
-  }
-
   render() {
-    console.log("projectOd", this.props.projectId)
+    const { projectId } = this.props
     return (
       <Query
         query={getProjectAndUser}
         variables={{
-          id: this.props.projectId,
+          id: projectId,
           github_repo_id: this.props.github_repo_id
         }}>
         {({ error, loading, data }) => {
 
-          // if (error) { return null; }
-          // if (loading) { return null; }
           if (error) return <Error error={error.message} goBack="/" />
           if (loading) return <Loader />
-
-          // const { user, projects } = data;
-          // const project = projects[0]; // FIXME[1]
           const { project } = data
-          console.log({ project });
 
           return (
             <div className="project-portal">
@@ -72,7 +62,7 @@ class ProjectShowcase extends React.Component {
                         <ProjectDescription
                           editable={editable}
                           text={project.description}
-                          projectId={project.id}
+                          project_id={projectId}
                         />
                         <ProjectSideBar
                           project={project}

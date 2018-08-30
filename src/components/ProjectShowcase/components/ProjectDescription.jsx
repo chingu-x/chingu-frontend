@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { gql } from "apollo-boost";
 import { Mutation } from "react-apollo";
 import ReactMarkdown from "react-markdown";
+import Loader from "../../Loader"
 
 const md = `
 # Tell us about your project here!
@@ -23,6 +24,7 @@ We are all looking forward to reading about your projects!
 
 class ProjectDescription extends React.Component {
   static propTypes = {
+    project_id: PropTypes.string,
     text: PropTypes.string,
     editable: PropTypes.bool,
     projectId: PropTypes.string
@@ -35,53 +37,72 @@ class ProjectDescription extends React.Component {
 
   state = {
     isEditing: false,
-    text: this.props.text || md
+    description: this.props.text,
+    editBtnHidden: true
   };
+
+  componentDidUpdate({ error }) {
+    if (this.props.error && !error) this.setState({ isEditing: true })
+  }
+
+  toggleEditable = editBtnHidden => this.setState({ editBtnHidden });
 
   toggleEditWithSave = () => {
     let { isEditing } = this.state;
-
     this.setState({ isEditing: !isEditing });
-
-    if (isEditing) {
-      this.makeMutation();
-    }
+    if (isEditing) this.makeMutation();
   };
 
-  handleChange = e => {
-    const { value, name } = e.target;
 
-    this.setState({
-      [name]: value
+  handleChange = e => this.setState({ description: e.target.value })
+
+  makeMutation = () => {
+    const { project_id } = this.props;
+    const { description } = this.state;
+    console.log("PROJECT ID", project_id)
+    this.props.mutation({
+      variables: {
+        project_id: this.props.project_id,
+        project_data: { description }
+      },
+      optimisticResponse: {
+        __typename: "Mutation",
+        projectUpdate: {
+          __typename: "Project",
+          id: project_id,
+          description
+        }
+      }
     });
   };
 
-  makeMutation = () => {
-    const { mutation, projectId } = this.state.props;
-    const { text } = this.state;
-
-    mutation({
-      variables: {
-        project_id: projectId,
-        project_data: {
-          description: text
-        }
-      }
-     });
-  };
+  editButtonText({ isEditing, error }) {
+    let lbl = "Edit"
+    if (isEditing) lbl = "Done"
+    if (error) lbl = "Try again"
+    return lbl
+  }
 
   render() {
-    let { isEditing, text } = this.state;
-    let { editable } = this.props;
+    const { isEditing, description, editBtnHidden } = this.state;
+    const { error, editable, project_id } = this.props;
+
+    let btnState = ""
+    if (error) btnState = "--error"
+    else if (editBtnHidden) btnState = "--hidden"
 
     return (
-      <div className="project-portal__about-container">
+      <div
+        className="project-portal__about-container"
+        onMouseEnter={() => editable && this.toggleEditable(false)}
+        onMouseLeave={() => editable && !isEditing && this.toggleEditable(true)}
+      >
         <h1 className="project-subcategory-title">Project Description</h1>
         <div className="project-portal__about">
           {editable && (
             <React.Fragment>
               <button
-                className="project-portal__edit-button project-portal__positioning-1"
+                className={`project-portal__edit-button${btnState} project-portal__positioning-1`}
                 onClick={() => this.toggleEditWithSave()}
               >
                 <div className="project-portal__edit-button--text">
@@ -89,7 +110,7 @@ class ProjectDescription extends React.Component {
                     className="project-portal__edit-button--img"
                     src={require('../../../assets/edit-green.png')}
                     alt="edit" />
-                  {isEditing ? "Done" : "Edit"}
+                  {this.editButtonText({ isEditing, error })}
                 </div>
               </button>
               <hr className="project-side-panel--hline" />
@@ -98,13 +119,13 @@ class ProjectDescription extends React.Component {
           {isEditing ? (
             <textarea
               name="text"
-              value={text}
+              value={description}
               className="project-portal__edit-box"
               onChange={this.handleChange}
             />
           ) : (
               <div className="markdown">
-                <ReactMarkdown source={this.state.text} />
+                <ReactMarkdown source={this.state.description} />
               </div>
 
             )}
@@ -116,10 +137,16 @@ class ProjectDescription extends React.Component {
 
 function withMutation(Component) {
   const updateProject = gql`
-    mutation projectUpdate($project_id: ID!, $project_data: ProjectInput!) {
-      projectUpdate( project_id: $project_id, project_data: $project_data) {
+    mutation projectUpdate(
+      $project_id: ID!
+      $project_data: ProjectInput!
+    ) {
+      projectUpdate(
+        project_id: $project_id
+        project_data: $project_data
+      ) {
         id
-        text
+        description
       }
     }
   `;
@@ -127,18 +154,15 @@ function withMutation(Component) {
   return props => (
     <Mutation mutation={updateProject}>
       {(updateProject, { error, loading, data }) => {
-        console.log("data from mutation", data);
+        const text = data
+          ? data.projectUpdate.description
+          : props.text;
 
-        if (error) {
-          return null;
-        }
-        if (loading) {
-          return null;
-        }
-
-        const text = data ? data.updateProject.text : props.text;
-
-        return <Component {...props} mutation={updateProject} text={text} />;
+        return <Component
+          {...props}
+          mutation={updateProject}
+          text={text}
+          error={!!error} />
       }}
     </Mutation>
   );
