@@ -305,6 +305,7 @@ PROJECT DESCRIPTION
   margin: 0 auto;
   margin-right: 0px;
   margin-bottom: 20px;
+  height: 44.4px;
 }
 
 .project-portal__edit-button--text {
@@ -356,6 +357,7 @@ BANNER WTIH PROJECT TITLE
   background-color: transparent;
   color: white;
   border: 1px solid white;
+  height: 44.4px;
   &:hover {
     background-color: $theme-green--light;
   }
@@ -412,9 +414,10 @@ HERO IMAGE
   background-color: transparent;
   color: $theme-green;
   border: 1px solid $theme-green;
-  &:hover {
-    background-color: $theme-green--light;
-  }
+  height: 44.4px;
+  // &:hover {
+  //   background-color: $theme-green--light;
+  // }
 }
 
 .hero-image__edit-input {
