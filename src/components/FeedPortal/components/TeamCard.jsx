@@ -10,7 +10,7 @@ const TeamCard = ({ team }) => {
         <InfoComponents team={team} />
       </div>
       <div className="team-card-buttons-container">
-        <Link to={"/project/" + team.project.id + "/workspace"} className="user-btn">Team Workspace</Link>
+        {/* <Link to={"/project/" + team.project.id + "/workspace"} className="user-btn">Team Workspace</Link> */}
         <Link to={"/project/" + team.project.id} className="user-btn">Project Showcase</Link>
         <Link className="user-btn" to={"/team/" + team.cohort.id + "/standup"}>Team Standups</Link>
       </div>
