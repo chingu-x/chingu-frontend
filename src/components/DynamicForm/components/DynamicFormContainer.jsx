@@ -158,7 +158,7 @@ class DynamicFormContainer extends React.Component {
       <React.Fragment>
         <hr className="form-hline" />
         <input
-          className={`form-btn ${disabled && "--disabled"}`}
+          className={disabled ? "form-btn--disabled" : "form-btn"}
           type="submit"
           value={disabled ? "Incomplete" : "Submit"}
           disabled={disabled}
