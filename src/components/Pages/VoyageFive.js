@@ -7,7 +7,7 @@ const VoyageFive = () => {
     <div className="voyage-five">
       <iframe 
         title="voyage-five"
-        src="https://docs.google.com/forms/d/e/1FAIpQLSe7eeorRF3kWj98X9Q342VrQdriGoDoBfu6ELOEeDuxrQ2wgw/viewform?embedded=true" 
+        src="https://docs.google.com/forms/d/e/1FAIpQLSezGMa71ACwQICpPyX9zepBuHkhYQYcXYSC0c3YFTiBOpLzqw/viewform" 
         height="12000" 
         frameBorder="0" 
         marginHeight="0" 
