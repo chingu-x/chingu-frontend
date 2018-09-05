@@ -12,6 +12,10 @@ const dynamicFormSubmitMutation = gql`
       form_data: $form_data
     ) {
       id
+      user {
+        id
+        status
+      }
     }
   }
 `;
