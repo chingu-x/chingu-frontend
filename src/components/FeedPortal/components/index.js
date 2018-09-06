@@ -1,10 +1,11 @@
 import { GithubActivityPullRequest, GithubActivityIssue } from './GithubActivity';
-import { NewsfeedVoyage } from './ChinguCards';
+import { NewsfeedVoyage, NewsfeedAvailableStandup } from './ChinguCards';
 import NewsfeedStandup from './NewsfeedStandup';
 
 const NewsfeedItems = {
     NewsfeedVoyage,
     NewsfeedStandup,
+    NewsfeedAvailableStandup,
     GithubActivityIssue,  
     GithubActivityPullRequest,
 };

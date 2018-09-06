@@ -1,5 +1,7 @@
-export default function newsfeedDateFormatter(timestamp) {
-    let timeSinceCurrent = new Date().getTime() - timestamp;
+export default function newsfeedDateFormatter(timestamp, futureDate) {
+    let timeSinceCurrent = futureDate
+        ? timestamp - Date.now()
+        : new Date().getTime() - timestamp;
     let minute = Math.floor(timeSinceCurrent / 60000);
     let hour;
     let day;
