@@ -1,6 +1,10 @@
+@import "../abstracts/_variables.scss";
+
+
 .landing-item {
   display: block;
-  margin: 0 2.5em;
+  margin: 0 60px;
+  
   
   @include media(">large") {
     margin: 0 2.5em;
@@ -64,6 +68,7 @@
     margin-top: -5px;
     margin-bottom: 20px;
     min-height: 190px;
+    box-shadow: $box-shadow;
   }
 
   .landing-item-project-title {
@@ -98,5 +103,22 @@
   }
   .landing-item-project-techStack {
     border: 1px solid $light-grey;
+  }
+}
+
+
+.landing-card {
+  box-shadow: $box-shadow;
+  border: 1px solid $lighter-grey;
+  // background-color: $palest-grey;
+  width: 270px;
+  padding: 20px;
+  margin: 10px;
+  height: 360px;
+  &:hover {
+    transform: scale(1.05);
+    background-color: $theme-green--palest;
+    border: none;
+    // color: white;
   }
 }

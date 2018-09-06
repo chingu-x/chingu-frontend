@@ -4,6 +4,7 @@ import _ from "lodash";
 import LandingBarWithIcons from "./LandingBarWithIcons.jsx";
 import LandingProjects from "./LandingProjects";
 import LandingTestimonial from "./LandingTestimonial";
+import landingImages from "../../../styles/assets/landingImages";
 
 const ProcessBar = (process) => {
   return _.map(process, ({
@@ -12,12 +13,11 @@ const ProcessBar = (process) => {
     description
   }) => {
     return (
-      <LandingBarWithIcons
-        key={title}
-        title={title}
-        image={image}
-        description={description}
-      />
+      <div className="landing-item landing-card" >
+        <img className="landing-item-image" src={landingImages[image]} alt="" />
+        <div className="landing-item-title" >{title}</div>
+        <div className="landing-item-description" >{description}</div>
+      </div>
     );
   })
 }
