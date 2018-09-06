@@ -1,0 +1,39 @@
+@import '../../styles/abstracts/_variables.scss';
+
+.editable-text-field-container {
+  display: block;
+  width: 100%;
+}
+.edit-field-btn {
+  display: block;
+  background-color: white;
+  border: 1px solid $theme-green;
+  color: $theme-green;
+  position: relative;
+  float: right;
+  margin-top: 40px;
+  &:hover {
+    background-color: $theme-green--palest;
+  }
+}
+.edit-field-btn--btn-container {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+.edit-field-btn--left {
+  @include system-button($theme-green, $theme-green--hover);
+}
+
+.edit-field-btn--right {
+  @include system-button($grey, $med-grey);
+}
+
+.edit-field-btn--left, 
+.edit-field-btn--right {
+  display: inline-block;
+  padding: 5px 10px;
+  width: auto;
+}

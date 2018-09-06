@@ -1,3 +1,5 @@
+@import './_variables.scss';
+
 //---------------------------------------
 //				  Mixins
 //---------------------------------------
@@ -10,7 +12,7 @@
   }
 }
 
-/// Helper to clear inner floats
+/// Helper to clear inner float
 /// @author Nicolas Gallagher
 /// @link http://nicolasgallagher.com/micro-clearfix-hack/ Micro Clearfix
 @mixin clearfix {

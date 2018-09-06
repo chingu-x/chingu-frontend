@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
-class FAQ extends Component {
+class FAQ extends React.Component {
 
   state = {
     activeQuestion: null

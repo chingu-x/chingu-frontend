@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import * as React from 'react';
 import { Link } from "react-router-dom";
 import SubscribeForm from "./SubscribeForm";
 import patreon from "../../styles/assets/patreon.png";
 
-class Footer extends Component {
+class Footer extends React.Component {
   state = {
     email: "",
     isFooterDDShowing: false
@@ -38,28 +38,28 @@ class Footer extends Component {
         <Link className="footer-link" to="/team">
           Our Team
         </Link>
-        <a className="footer-link" href="/">
+        {/* <a className="footer-link" href="/">
           Press
-        </a>
-        <a className="footer-link" href="/privacy">
+        </a> */}
+        <Link className="footer-link" to="/privacy">
           Privacy Policy
-        </a>
-        <Link className="footer-link" to="/companyfaq">
-          FAQ
         </Link>
+        {/* <Link className="footer-link" to="/companyfaq">
+          FAQ
+        </Link> */}
       </div>,
-      <div key="3" className="footer-linkbox">
-        <div className="footer-subtitle">Programs</div>
-        <Link className="footer-link" to="/current">
-          Current Programs
-        </Link>
-        <Link className="footer-link" to="/apply">
-          Application
-        </Link>
-        <Link className="footer-link" to="/programfaq">
-          FAQ
-        </Link>
-      </div>
+      // <div key="3" className="footer-linkbox">
+      //   <div className="footer-subtitle">Programs</div>
+      //   <Link className="footer-link" to="/current">
+      //     Current Programs
+      //   </Link>
+      //   <Link className="footer-link" to="/apply">
+      //     Application
+      //   </Link>
+      //   {/* <Link className="footer-link" to="/programfaq">
+      //     FAQ
+      //   </Link> */}
+      // </div>
     ];
   }
 
@@ -94,8 +94,8 @@ class Footer extends Component {
   renderDesktopFooter() {
     return (
       <div className="footer">
-        {this.renderLinkBoxes()}
-        <div className="sub-box">
+          {this.renderLinkBoxes()}
+          {/* <div className="sub-box">
           <SubscribeForm
             onSubmit={e => this.handleSubmit(e)}
             onChange={e => this.handleOnChange(e)}
@@ -103,8 +103,8 @@ class Footer extends Component {
           <a href="https://www.patreon.com/user?u=4763160">
             <img src={patreon} alt="Become a Patron" />
           </a>
-        </div>
-        {this.renderSocialIcons()}
+        </div> */}
+          {this.renderSocialIcons()}
       </div>
     );
   }

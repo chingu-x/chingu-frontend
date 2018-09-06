@@ -1,0 +1,31 @@
+@import '../../../styles/abstracts/_variables.scss';
+
+.feed-item-component-container {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+.feed-item__header-content {
+  font: 400 14px "open sans", sans-serif;
+  color: #5A5A5A;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feed-item__header--left {
+  display: flex;
+  align-items: center
+}
+
+.feed-item__header-avatar {
+  height: 30px;
+  width: 3opx;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.feed-item__container {
+  margin-bottom: 5px;
+}
+

@@ -1,3 +1,5 @@
+@import '../abstracts/_variables.scss';
+
 .testimonial {
   @include media(">desktop") {
     margin: 0 1.5em;
@@ -11,11 +13,14 @@
 .testimonial-box {
   position: relative;
   height: 175px;
-  width: 300px;
-  background-color: color-list("accent");
+  width: 320px;
+  background-color: white;
+  padding: 25px;
   display: flex;
   justify-content: center;
- 
+  box-shadow: $box-shadow;
+  text-align: left;
+  margin-top: 50px;
   
   &:before, :after {
       position: absolute;
@@ -29,14 +34,14 @@
   
   &:before {
       border-right: 50px solid transparent;
-      border-top: 20px solid color-list("accent");
+      border-top: 20px solid white;
       z-index:1;
   }
 
   .testimonial-text {
-    padding: 1em 1.5em;
-    color: color-list("text-light");
-    font-size: 1em;
+    // padding: 1em 1.5em;
+    color: $dark-grey;
+    font-size: 16px;
   }
 }
 
@@ -45,12 +50,13 @@
   flex-direction: row;
   align-items: center;
   flex-wrap: nowrap;
-  margin: 2em 1.5em;
+  margin: 2em -1em;
+  margin-bottom: 50px;
   
   .testimonial-img {
     height: 50px;
     width: 50px;
-    margin-right: 15px;
+    margin-right: 10px;
     object-fit: cover;
     border-radius: 50px;
   }

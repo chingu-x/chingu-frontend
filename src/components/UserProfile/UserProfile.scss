@@ -1,0 +1,80 @@
+@import '../../styles/abstracts/_variables.scss';
+
+.user-profile-background-color {
+  background-color: white;
+  padding: 20px;
+}
+.user-profile-container {
+  background: white;
+  max-width: $max-width;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: "i i v v v";
+  margin: 0 auto;
+  margin-top: 150px;
+  grid-gap: 100px;
+  min-height: 100vh;
+  margin-bottom: 100px;
+  // padding: 20px;
+}
+
+.user-profile {
+  grid-area: i;
+}
+
+.user-voyages {
+  width: 100%;
+ grid-area: v;
+ justify-self: center;
+}
+
+.user-voyage-title {
+    @include portal-subcategory;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+.user-voyage {
+  margin-bottom: 50px;
+}
+
+.no-data-card {
+  display: block;
+  color: $grey;
+  background-color: $palest-grey;
+  box-shadow: $box-shadow;
+  padding: 40px 20px;
+  width: 100%;
+  // border-radius: $border-radius;
+  font-size: 20px;
+  text-align: center;
+  border: 1px solid $light-grey;
+}
+
+/*
+==========================
+MEDIA QUERY
+==========================
+*/
+@media (max-width: 1000px) {
+  .user-profile-container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "i"
+                          "v";
+    margin-top: 100px;
+    padding: 0px;
+    grid-gap: 100px;
+  }
+  .user-profile-container-personal {
+    margin: 0 auto;
+    max-width: 500px;
+  }
+  .user-voyage {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    margin-bottom: 100px;
+  }
+  .user-voyage-title {
+    text-align: center;
+  }
+}
