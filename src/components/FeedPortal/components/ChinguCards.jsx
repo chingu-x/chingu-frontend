@@ -1,13 +1,18 @@
 import * as React from "react";
 import './ChinguCards.css';
 import { Link } from "react-router-dom";
+import newsfeedDateFormatter from '../../utilities/newsfeedDateFormatter';
 
-const CardBody = (message) => {
+const CardBody = (message, iconPath) => {
   return (
     <React.Fragment>
       <img
         className="newsfeed-chingu-card--icon"
-        src={require('../../../assets/green alert.png')}
+        src={
+          iconPath
+            ? require(iconPath)
+            : require('../../../assets/green alert.png')
+        }
         alt="green"
       />
       <div className="newsfeed-voyage-text">
@@ -41,3 +46,13 @@ export const NewsfeedVoyage = ({ voyage: { id, title }, has_applied, ...rest}) =
     )
   }
 }
+// TODO: styling
+// color and icon?
+export const NewsfeedAvailableStandup = ({ expiration, team }) => { console.log(expiration); return (
+  <Link
+    to={`/team/${team.id}/standup`}
+    className="newsfeed-chingu-card--container chingu-card--purple"
+  >
+    {CardBody(`New Standup available. Expires in ${newsfeedDateFormatter(expiration, true)}`)}
+  </Link>
+);}

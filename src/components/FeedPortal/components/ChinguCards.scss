@@ -7,6 +7,12 @@
     background-color: $theme-green--palest;
     color: $theme-green;
 }
+
+.chingu-card--purple  {
+    background-color:$pale-purple--hover;
+    color: $theme-purple;
+}
+
 .newsfeed-chingu-card--icon {
     @include newsfeed-card--icon;
 }
