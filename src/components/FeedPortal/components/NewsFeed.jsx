@@ -14,18 +14,15 @@ const NewsFeed = ({ type, loading, data }) => {
   `;
 
 
-  const renderNewsfeedItems = items => {
-    items = items.filter(item => item.type !== "NewsfeedAvailableStandup") // TODO: Remove
-    return items.map(
-      item => {
-        return FeedItemContainer({
-          component: NewsfeedItems[item.type],
-          item,
-          key: item.id,
-        })
-      }
-    );
-  }
+  const renderNewsfeedItems = items => items.map(
+    item => {
+      return FeedItemContainer({
+        component: NewsfeedItems[item.type],
+        item,
+        key: item.id,
+      })
+    }
+  );
 
   const renderFeed = ({ user, newsfeed: { chingu, other, team } }) => {
     let dataToRender = (
