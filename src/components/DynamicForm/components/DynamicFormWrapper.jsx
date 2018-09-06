@@ -43,7 +43,7 @@ class DynamicFormWrapper extends React.Component {
       purpose,
       version,
     } = this.props;
-  
+
     const variables = {
       purpose,
       version,
@@ -64,7 +64,7 @@ class DynamicFormWrapper extends React.Component {
       questions,
       hiddenData,
     } = this.props;
-    
+
     const { response, error } = this.state;
 
     if (error) return (
@@ -76,7 +76,7 @@ class DynamicFormWrapper extends React.Component {
     if (response) return (
       onResponse
         ? onResponse(response)
-        : <Redirect to="/profile" />
+        : <Redirect to="/newsfeed" />
     );
 
     return (
