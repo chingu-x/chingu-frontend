@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 const VoyageFive = () => {
   //Chrome throws error for iframes. Known bug.

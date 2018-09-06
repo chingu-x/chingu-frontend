@@ -1,0 +1,51 @@
+@import '../../styles/abstracts/_variables.scss';
+
+.voyage-portal-background-color {
+  background-color: white;
+  padding: 20px;
+}
+.voyage-portal {
+  max-width: $max-width;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+.voyage-portal-title {
+  @include portal-title;
+}
+.voyage-section {
+  margin-bottom: 55px;
+}
+.voyage-portal-subcategory {
+  @include portal-subcategory;
+  margin-left: 5px;
+}
+.voyage-card-list {
+  width: $max-width;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/*
+==========================
+MEDIA QUERY
+==========================
+*/
+@media (max-width: 1180px) {
+  .voyage-section {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 55px;
+  }
+  .voyage-card-list {
+    margin: 0 auto;
+    width: 100vw;
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+    align-items: center;
+  }
+  .voyage-portal-subcategory {
+    text-align: center;
+  }
+}

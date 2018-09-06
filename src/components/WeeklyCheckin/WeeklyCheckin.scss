@@ -1,0 +1,24 @@
+@import '../../styles/abstracts/_variables.scss';
+
+.weekly-checkin-container {
+    background-color: $palest-grey;
+    height: 100%;
+}
+
+.weekly-checkin-title {
+    @include form-title;
+}
+
+.weekly-checkin-form {
+    @include form-card;
+}
+
+.hline {
+    @include hline;
+}
+
+.weekly-checkin-btn {
+    @include system-button($theme-green, $theme-green--hover);
+    margin: 0 auto;
+    margin-top: 20px;
+}
