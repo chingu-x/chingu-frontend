@@ -55,23 +55,6 @@ const InfoComponents = ({ team }) => {
   })
 }
 
-const ProjectCard = ({ team }) => {
-  const { images } = team.project
-  return (
-    <div className="project-card__container">
-      <Link to={`/project/${team.project.id}`}>
-        <img
-          className="project-img"
-          src={images[0] ? images[0].url : require('../../assets/landingImage.png')} />
-      </Link>
-      <div className="project-info__container">
-        <InfoComponents team={team} />
-      </div>
-    </div>
-  )
-}
-
-
 
 // -- USER PROFILE (EXPORT) -- //
 const UserProfile = props => {
@@ -89,16 +72,6 @@ const UserProfile = props => {
     cohort.members.some(member =>
       member.user.username === username && member.status === "pending_approval"
     ))
-
-  const renderProjectCards = (currentTeams, pastTeams) => {
-    const mapProjectCards = teamsList => teamsList.map(team => <ProjectCard key={team.project.id} team={team} />)
-    return <Fragment>
-      {!!currentTeams.length && <div className="user-voyage-title">Current Projects</div>}
-      {mapProjectCards(currentTeams)}
-      {!!pastTeams.length && <div className="user-voyage-title">Past Projects</div>}
-      {mapProjectCards(pastTeams)}
-    </Fragment>
-  }
 
   const renderCurrentTeam = currentTeams => {
     let card = currentTeams.length > 0 && currentTeams.map((team, index) => {
@@ -163,6 +136,22 @@ const UserProfile = props => {
     )
   }
 
+  const renderProjectCards = teamsList => teamsList.map(team => {
+    const { id, images } = team.project
+    return (
+      <Link key={id} to={`/project/${id}`}>
+        <div className="project-card__container">
+          <img
+            className="project-img"
+            src={images[0] ? images[0].url : require('../../assets/landingImage.png')} />
+          <div className="project-info__container">
+            <InfoComponents team={team} />
+          </div>
+        </div>
+      </Link>
+    )
+  })
+
   return (
     < div className="user-profile-background-color" >
       <div className="user-profile-container">
@@ -185,7 +174,10 @@ const UserProfile = props => {
             }
           </section>
           <section>
-            {renderProjectCards(currentTeams, pastTeams)}
+            {!!currentTeams.length && <div className="user-voyage-title">Current Projects</div>}
+            {renderProjectCards(currentTeams)}
+            {!!pastTeams.length && <div className="user-voyage-title">Past Projects</div>}
+            {renderProjectCards(pastTeams)}
           </section>
         </main>
       </div>
