@@ -1,7 +1,5 @@
 import React from "react"
-import { withRouter } from "react-router-dom"
 import { gql } from "apollo-boost"
-// import AuthenticateWithGithub from "./components/GithubAuth";
 import { client } from "../../index"
 import Loader from "../Loader"
 import Error from "../Error"
@@ -14,7 +12,6 @@ const userAuthGithub = gql`
       access_token
       user {
         id
-        status
       }
     }
   }
@@ -25,15 +22,14 @@ class Login extends React.Component {
 
   async componentDidMount() {
     const { token, redirect } = localStorage
-    const { queryString, history } = this.props
-    const queryParams = new URLSearchParams(queryString);
+    const queryParams = new URLSearchParams(this.props.location.search);
     const code = queryParams.has('code') ? queryParams.get('code') : '';
 
     /**
      * IF token found or no code provided, redirect to /profile
      * /profile will render on token or show login modal without token
      */
-    if (token || !code) history.replace("/profile")
+    if (token || !code) return this.props.history.replace("/profile")
 
     // Continue to auth
     const { data, error } = await client.mutate({
@@ -43,14 +39,9 @@ class Login extends React.Component {
 
     if (error) this.setState({ error: error.message })
 
-    const {
-      userAuthGithub: { user, access_token }
-    } = data
-    // Save new access_token
-    localStorage.token = access_token
-
-    // Redirect to pre-login navigated route or /feed
-    history.push(redirect || "/newsfeed")
+    // Save new access_token and redirect to pre-login navigated route OR /newsfeed
+    localStorage.token = data.userAuthGithub.access_token
+    return this.props.history.push(redirect || "/newsfeed")
   }
 
   render = () => this.state.error
@@ -58,4 +49,4 @@ class Login extends React.Component {
     : <Loader />
 }
 
-export default withRouter(Login)
+export default Login
