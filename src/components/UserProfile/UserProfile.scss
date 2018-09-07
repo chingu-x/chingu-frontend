@@ -79,19 +79,21 @@ MEDIA QUERY
   }
 }
 
-
+// PROJECT CARD //
 .project-card__container {
   width: 710px;
-  min-height: 260px;
+  // min-height: 260px;
   box-shadow: $box-shadow;
   display: grid;
   margin-bottom: 10px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, auto);
   grid-gap: 20px;
+  background-color: white;
 }
 
 .project-img {
   width: 325px;
+  object-fit: cover;
   // TODO: Crop
 }
 
@@ -100,8 +102,9 @@ MEDIA QUERY
   width: 385px;
   padding: 20px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, auto);
   grid-gap: 10px;
+  margin-bottom: 10px;
 }
 
 .project-info__label {

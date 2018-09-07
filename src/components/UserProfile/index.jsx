@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom"
 import * as Cards from "../VoyageCard/VoyageCard";
 import UserSideBar from "./UserSideBar";
@@ -7,6 +7,8 @@ import profileQuery from "./graphql/profileQuery"
 import './UserProfile.css'
 import dateFormatter from "../utilities/dateFormatter.js"
 
+
+// PROJECT CARD INFO //
 const InfoComponents = ({ team }) => {
   const { project, cohort, tier, title } = team
   const infoObjects = [
@@ -28,7 +30,7 @@ const InfoComponents = ({ team }) => {
           return (
             <Link to={`/profile/${user.username}`} key={idx} className="team-card-user">
               <img className="team-card-avatar-img" src={user.avatar ? user.avatar : require('../../assets/blank image.png')} alt={user.username} />
-              <div className="team-card-username">{user.username}</div>
+              {/* <div className="team-card-username">{user.username}</div> */}
             </Link>
           )
         })
@@ -45,20 +47,23 @@ const InfoComponents = ({ team }) => {
         break;
     }
     return (
-      <React.Fragment key={idx} >
+      <Fragment key={idx} >
         <div className="project-info__label">{info.label}</div>
         <div className="project-info__data">{data}</div>
-      </React.Fragment>
+      </Fragment>
     )
   })
 }
 
 const ProjectCard = ({ team }) => {
+  const { images } = team.project
   return (
     <div className="project-card__container">
-      <img
-        className="project-img"
-        src="https://placehold.it/325x260" />
+      <Link to={`/project/${team.project.id}`}>
+        <img
+          className="project-img"
+          src={images[0] ? images[0].url : require('../../assets/landingImage.png')} />
+      </Link>
       <div className="project-info__container">
         <InfoComponents team={team} />
       </div>
@@ -66,6 +71,9 @@ const ProjectCard = ({ team }) => {
   )
 }
 
+
+
+// -- USER PROFILE (EXPORT) -- //
 const UserProfile = props => {
   // Only allow editing if no /profile param provided. TODO: Check for currently logged in user
   const editable = !props.match.params.username
@@ -73,7 +81,6 @@ const UserProfile = props => {
   /**
    * TODOS:
    * Check filters
-   * Fix pendingApproval filter (currently looks for ANY pending_approval status)
    */
   const { user, user: { teams, cohorts, username } } = props.data // Fetched user
   const pastTeams = teams.filter(team => team.cohort.status === 'ended');
@@ -83,7 +90,15 @@ const UserProfile = props => {
       member.user.username === username && member.status === "pending_approval"
     ))
 
-  const renderProjectCards = teams => teams.map(team => <ProjectCard key={team.project.id} team={team} />)
+  const renderProjectCards = (currentTeams, pastTeams) => {
+    const mapProjectCards = teamsList => teamsList.map(team => <ProjectCard key={team.project.id} team={team} />)
+    return <Fragment>
+      {!!currentTeams.length && <div className="user-voyage-title">Current Projects</div>}
+      {mapProjectCards(currentTeams)}
+      {!!pastTeams.length && <div className="user-voyage-title">Past Projects</div>}
+      {mapProjectCards(pastTeams)}
+    </Fragment>
+  }
 
   const renderCurrentTeam = currentTeams => {
     let card = currentTeams.length > 0 && currentTeams.map((team, index) => {
@@ -98,15 +113,15 @@ const UserProfile = props => {
       )
     })
     return (
-      <React.Fragment>
+      <Fragment>
         <div className="user-voyage-title">Current Voyages</div>
         {card}
-      </React.Fragment>
+      </Fragment>
     )
   }
 
   const renderPendingApproval = pendingApproval => (
-    <React.Fragment>
+    <Fragment>
       <div className="user-voyage-title">Upcoming Voyages</div>
       {
         pendingApproval.map((cohort, index) =>
@@ -118,7 +133,7 @@ const UserProfile = props => {
             cohort={cohort.title}
           />
         )}
-    </React.Fragment>
+    </Fragment>
   )
 
   const renderNoTeamTypeCards = pendingApproval => {
@@ -141,10 +156,10 @@ const UserProfile = props => {
       card = <NothingHere />
     }
     return (
-      <React.Fragment>
+      <Fragment>
         <div className="user-voyage-title">Current Voyages</div>
         {card}
-      </React.Fragment>
+      </Fragment>
     )
   }
 
@@ -170,7 +185,7 @@ const UserProfile = props => {
             }
           </section>
           <section>
-            {renderProjectCards(teams)}
+            {renderProjectCards(currentTeams, pastTeams)}
           </section>
         </main>
       </div>
@@ -239,10 +254,10 @@ export default props =>
 //       )
 //     })
 //     return (
-//       <React.Fragment>
+//       <Fragment>
 //         <div className="user-voyage-title">Current Voyages</div>
 //         {card}
-//       </React.Fragment>
+//       </Fragment>
 //     )
 //   }
 
@@ -250,7 +265,7 @@ export default props =>
 //     let { pendingApproval } = this.state;
 //     return pendingApproval.map((cohort, index) => {
 //       return (
-//         <React.Fragment key={cohort.id + "_" + index}>
+//         <Fragment key={cohort.id + "_" + index}>
 //           <div className="user-voyage-title">Upcoming Voyages</div>
 //           <Cards.PendingApprovalVoyageCard
 //             key={cohort.id + "_" + index}
@@ -259,7 +274,7 @@ export default props =>
 //             endDate={cohort.end_date}
 //             cohort={cohort.title}
 //           />
-//         </React.Fragment>
+//         </Fragment>
 //       )
 //     })
 //   }
@@ -284,10 +299,10 @@ export default props =>
 //       card = <NothingHere />
 //     }
 //     return (
-//       <React.Fragment>
+//       <Fragment>
 //         <div className="user-voyage-title">Current Voyages</div>
 //         {card}
-//       </React.Fragment>
+//       </Fragment>
 //     )
 //   }
 //   render() {
