@@ -1,16 +1,77 @@
 import * as React from "react";
+import { Link } from "react-router-dom"
 import * as Cards from "../VoyageCard/VoyageCard";
 import UserSideBar from "./UserSideBar";
 import Request from "../utilities/Request"
 import profileQuery from "./graphql/profileQuery"
 import './UserProfile.css'
+import dateFormatter from "../utilities/dateFormatter.js"
+
+const InfoComponents = ({ team }) => {
+  const { project, cohort, tier, title } = team
+  const infoObjects = [
+    { label: 'Voyage Dates', data: dateFormatter(cohort.start_date) + " - " + dateFormatter(cohort.end_date) },
+    { label: 'Team Name', data: title },
+    { label: 'Project', data: project.title },
+    { label: 'Elevator Pitch', data: project.elevator_pitch },
+    { label: 'Tier', data: 'Tier ' + tier.level },
+    { label: 'Team', data: project.users },
+    // { label: 'Status', data: cohort.status },
+    // { label: 'TechStack', data: project.skills },
+  ]
+
+  return infoObjects.map((info, idx) => {
+    let data;
+    switch (info.label) {
+      case 'Team':
+        data = info.data.map((user, idx) => {
+          return (
+            <Link to={`/profile/${user.username}`} key={idx} className="team-card-user">
+              <img className="team-card-avatar-img" src={user.avatar ? user.avatar : require('../../assets/blank image.png')} alt={user.username} />
+              <div className="team-card-username">{user.username}</div>
+            </Link>
+          )
+        })
+        break;
+      case 'TechStack':
+        data = info.data && info.data.map((tech, idx) => {
+          return (
+            <div key={idx} className="team-card-techstac k">{tech.name}</div>
+          )
+        })
+        break;
+      default:
+        data = info.data;
+        break;
+    }
+    return (
+      <React.Fragment key={idx} >
+        <div className="project-info__label">{info.label}</div>
+        <div className="project-info__data">{data}</div>
+      </React.Fragment>
+    )
+  })
+}
+
+const ProjectCard = ({ team }) => {
+  return (
+    <div className="project-card__container">
+      <img
+        className="project-img"
+        src="https://placehold.it/325x260" />
+      <div className="project-info__container">
+        <InfoComponents team={team} />
+      </div>
+    </div>
+  )
+}
 
 const UserProfile = props => {
   // Only allow editing if no /profile param provided. TODO: Check for currently logged in user
   const editable = !props.match.params.username
 
   /**
-   * TODOS: 
+   * TODOS:
    * Check filters
    * Fix pendingApproval filter (currently looks for ANY pending_approval status)
    */
@@ -21,6 +82,8 @@ const UserProfile = props => {
     cohort.members.some(member =>
       member.user.username === username && member.status === "pending_approval"
     ))
+
+  const renderProjectCards = teams => teams.map(team => <ProjectCard key={team.project.id} team={team} />)
 
   const renderCurrentTeam = currentTeams => {
     let card = currentTeams.length > 0 && currentTeams.map((team, index) => {
@@ -105,6 +168,9 @@ const UserProfile = props => {
               pendingApproval.length > 0
               && renderPendingApproval(pendingApproval)
             }
+          </section>
+          <section>
+            {renderProjectCards(teams)}
           </section>
         </main>
       </div>

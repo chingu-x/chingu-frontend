@@ -78,3 +78,43 @@ MEDIA QUERY
     text-align: center;
   }
 }
+
+
+.project-card__container {
+  width: 710px;
+  min-height: 260px;
+  box-shadow: $box-shadow;
+  display: grid;
+  margin-bottom: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.project-img {
+  width: 325px;
+  // TODO: Crop
+}
+
+.project-info__container {
+  font-size: 14px;
+  width: 385px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+.project-info__label {
+  grid-column: 1 / 2;
+  font-size: 14px;
+  color: $lighter-grey;
+  text-transform: uppercase;
+
+}
+.project-info__data {
+  grid-column: 2 / -1;
+  font-size: 14px;
+  color: $dark-grey;
+  max-height: 100px;
+  align-items: start;
+}
