@@ -82,10 +82,9 @@ MEDIA QUERY
 // PROJECT CARD //
 .project-card__container {
   width: 710px;
-  // min-height: 260px;
   box-shadow: $box-shadow;
   display: grid;
-  margin-bottom: 10px;
+  padding-right: 20px;
   grid-template-columns: repeat(2, auto);
   grid-gap: 20px;
   background-color: white;
@@ -104,7 +103,6 @@ MEDIA QUERY
   display: grid;
   grid-template-columns: repeat(2, auto);
   grid-gap: 10px;
-  margin-bottom: 10px;
 }
 
 .project-info__label {
@@ -112,8 +110,9 @@ MEDIA QUERY
   font-size: 14px;
   color: $lighter-grey;
   text-transform: uppercase;
-
+  align-self: center
 }
+
 .project-info__data {
   grid-column: 2 / -1;
   font-size: 14px;

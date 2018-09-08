@@ -37,9 +37,9 @@ const InfoComponents = ({ team }) => {
   let cohort = team.cohort;
   let project = team.project;
   let infoObjects = [
-    { label: 'Voyage Dates', data: dateFormatter(cohort.start_date) + " - " + dateFormatter(cohort.end_date) },
+    { label: 'Voyage', data: `${cohort.title} - ${dateFormatter(cohort.start_date)} - ${dateFormatter(cohort.end_date)}` },
     { label: 'Status', data: cohort.status },
-    { label: 'Team Name', data: team.title },
+    { label: 'Team', data: team.title },
     { label: 'Tier', data: 'Tier ' + team.tier.level },
     { label: 'Project', data: project.title },
     { label: 'Elevator Pitch', data: project.elevator_pitch },

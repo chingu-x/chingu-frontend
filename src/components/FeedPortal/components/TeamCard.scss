@@ -6,7 +6,7 @@
     padding: 40px 0px 40px 30px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-gap: 20px;
+    grid-gap: 24px;
 }
 
 /*
@@ -67,6 +67,7 @@ INFO CONTAINER
     font-size: 14px;
     color: $lighter-grey;
     text-transform: uppercase;
+    align-self: center;
 }
 
 .team-card-info--data {
@@ -102,10 +103,9 @@ USER IMAGES
 */
 .team-card-user {
     width: 45px;
-    height: 60px;
+    height: 45px;
     display: inline-block;
-    margin-right: 14px;
-    margin-bottom: 10px;
+    margin: auto 10px 10px auto;
 }
 .team-card-avatar-img {
     margin: 0 auto;

@@ -12,8 +12,8 @@ import dateFormatter from "../utilities/dateFormatter.js"
 const InfoComponents = ({ team }) => {
   const { project, cohort, tier, title } = team
   const infoObjects = [
-    { label: 'Voyage Dates', data: dateFormatter(cohort.start_date) + " - " + dateFormatter(cohort.end_date) },
-    { label: 'Team Name', data: title },
+    { label: 'Voyage', data: `${cohort.title} - ${dateFormatter(cohort.start_date)} - ${dateFormatter(cohort.end_date)}` },
+    { label: 'Team', data: title },
     { label: 'Tier', data: 'Tier ' + tier.level },
     { label: 'Project', data: project.title },
     { label: 'Elevator Pitch', data: project.elevator_pitch },
@@ -174,7 +174,7 @@ const UserProfile = props => {
               && renderPendingApproval(pendingApproval)
             }
           </section>
-          <section>
+          <section className="user-voyage">
             {!!currentTeams.length && <div className="user-voyage-title">Current Projects</div>}
             {renderProjectCards(currentTeams)}
             {!!pastTeams.length && <div className="user-voyage-title">Past Projects</div>}
