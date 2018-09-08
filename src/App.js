@@ -78,8 +78,7 @@ export default () => (
       <Route exact path="/privacy" component={PrivacyPolicy} />
       <Route exact path="/companyfaq" render={() => <FAQ headerText="Company FAQs" data={companyFAQ} />} />
       <Route exact path="/programfaq" render={() => <FAQ headerText="Program FAQs" data={programFAQ} />} />
-      <Route exact path="/project/:projectId" render={
-        ({ match: { params: { projectId } } }) => <ProjectShowcase projectId={projectId}/> } />
+      <Route exact path="/project/:project_id" component={ProjectShowcase} />
       <Route path="*" exact component={Missing404Page} />
     </Switch>
     <Footer />
