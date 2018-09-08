@@ -18,3 +18,40 @@
     font-weight: 900;
     cursor: pointer;
 }
+
+/*
+==========================
+TICKETBOX MAIN BTN SELECTION
+==========================
+*/
+.ticketbox-btn-section {
+    background-color: white;
+    box-shadow: $box-shadow;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    position: absolute;
+    right: 20px;
+    bottom: 120px;
+}
+
+.ticketbox-btn--container {
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+.ticketbox-btn {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: none;
+    box-shadow: $box-shadow;
+}
+.ticketbox-btn--text {
+    color: $dark-grey;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
