@@ -21,6 +21,7 @@ import Private from "./components/utilities/PrivateRoute"
 import AllProjects from './components/AllProjects';
 import TeamStandup from "./components/TeamStandup";
 import ProjectShowcase from "./components/ProjectShowcase"
+import Ticketbox from './components/Ticketbox';
 
 export default () => (
   <div className="App">
@@ -82,6 +83,7 @@ export default () => (
         ({ match: { params: { projectId } } }) => <ProjectShowcase projectId={projectId}/> } />
       <Route path="*" exact component={Missing404Page} />
     </Switch>
+    <Ticketbox />
     <Footer />
   </div>
 )
