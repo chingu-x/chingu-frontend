@@ -5,10 +5,6 @@ export default gql`
     user {
       id
       status
-      teams {
-        id
-        title
-      }
       avatar
     }
   }
