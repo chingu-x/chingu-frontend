@@ -6,8 +6,9 @@ import './TeamCard.css';
 const TeamCard = ({ user: { available_standups }, team }) => {
   const availableStandup = (
     !!available_standups.length &&
-    available_standups.some(su => su.team.id === team.id)
+    available_standups.find(su => su.team.id === team.id)
   );
+
   const standupStatus = availableStandup
     ? ""
     : "--disabled"
@@ -26,7 +27,7 @@ const TeamCard = ({ user: { available_standups }, team }) => {
         <Link to={"/project/" + team.project.id} className="user-btn">Project Page</Link>
         <Link
           className={`user-btn${standupStatus}`}
-          to={availableStandup ? `/team/${team.id}/standup` : "#"}
+          to={availableStandup ? `/team/standup/${availableStandup.id}` : "#"}
         >{availableStandup ? "Submit Standup" : "No Standup Available"}</Link>
       </div>
     </div >
