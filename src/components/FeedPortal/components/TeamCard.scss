@@ -86,6 +86,15 @@ INFO CONTAINER
     padding: 5px 10px;
     text-transform: capitalize;
 }
+
+.tier-icon {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: $health-green;
+  border: 1px solid $health-green;
+  padding: 3px 7px;
+  margin: 2px auto;
+}
 /*
 ==========================
 USER IMAGES

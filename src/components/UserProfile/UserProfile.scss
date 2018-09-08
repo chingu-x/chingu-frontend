@@ -123,9 +123,10 @@ MEDIA QUERY
 }
 
 .tier-icon {
-  color: $health-green;
-  border: 1px solid $health-green;
-  padding: 5px 7px;
   font-size: 12px;
   text-transform: uppercase;
+  color: $health-green;
+  border: 1px solid $health-green;
+  padding: 3px 7px;
+  margin: 2px auto;
 }

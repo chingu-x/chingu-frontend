@@ -140,16 +140,16 @@ const UserProfile = props => {
   const renderProjectCards = teamsList => teamsList.map(team => {
     const { id, images } = team.project
     return (
-      <Link key={id} to={`/project/${id}`}>
-        <div className="project-card__container">
+      <div key={id} className="project-card__container">
+        <Link to={`/project/${id}`}>
           <img
             className="project-img"
             src={images[0] ? images[0].url : require('../../assets/landingImage.png')} />
-          <div className="project-info__container">
-            <InfoComponents team={team} />
-          </div>
+        </Link>
+        <div className="project-info__container">
+          <InfoComponents team={team} />
         </div>
-      </Link>
+      </div>
     )
   })
 
