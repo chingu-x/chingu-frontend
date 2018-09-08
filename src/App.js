@@ -63,11 +63,11 @@ export default () => (
       <Private exact path="/team/checkin/:id" component={WeeklyCheckin} />
       <Route exact path="/projects" component={AllProjects} />
       <Private
-        exact path="/team/:team_id/standup"
+        exact path="/team/standup/:standup_id"
         render={
-          ({ match: { params: { team_id } } }) => (
+          ({ match: { params: { standup_id } } }) => (
             <TeamStandup
-              team_id={team_id}
+              standup_id={standup_id}
               standupVersion={null}
             />
           )

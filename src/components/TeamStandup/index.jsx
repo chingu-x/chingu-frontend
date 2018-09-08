@@ -10,11 +10,11 @@ import { gql } from "apollo-boost";
 
 const submitStandupMutation = gql`
   mutation submitStandup(
-    $team_id: ID!
+    $standup_id: ID!
     $standup_data: StandupSubmitInput!
   ) {
     standupSubmit(
-      team_id: $team_id
+      standup_id: $standup_id
       standup_data: $standup_data
     ) {
       id
@@ -39,9 +39,9 @@ class TeamStandup extends React.Component {
 
   handleError = error => this.setState({ error });
 
-  handleSubmit = ({ team_id, ...standup_data }) => {
+  handleSubmit = ({ standup_id, ...standup_data }) => {
     const variables = {
-      team_id,
+      standup_id,
       standup_data,
     };
 
@@ -53,7 +53,7 @@ class TeamStandup extends React.Component {
   }
 
   render() {
-    const { team_id, standupVersion } = this.props;
+    const { standup_id, standupVersion } = this.props;
     const { error, response } = this.state;
 
     if (error) return <Error error={error.message} />;
@@ -67,7 +67,7 @@ class TeamStandup extends React.Component {
           <DynamicForm
             purpose="team_standup"
             version={standupVersion}
-            hiddenData={{ team_id }}
+            hiddenData={{ standup_id }}
             onSubmit={this.handleSubmit}
           />
         </div>
