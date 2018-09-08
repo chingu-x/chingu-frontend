@@ -48,11 +48,11 @@ export const NewsfeedVoyage = ({ voyage: { id, title }, has_applied, ...rest}) =
 }
 // TODO: styling
 // color and icon?
-export const NewsfeedAvailableStandup = ({ expiration, team }) => { console.log(expiration); return (
+export const NewsfeedAvailableStandup = ({ id, expiration }) => (
   <Link
-    to={`/team/${team.id}/standup`}
+    to={`/team/standup/${id}`}
     className="newsfeed-chingu-card--container chingu-card--purple"
   >
     {CardBody(`New Standup available. Expires in ${newsfeedDateFormatter(expiration, true)}`)}
   </Link>
-);}
+);
