@@ -16,7 +16,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData
 });
 
-const mode = 'dev'
+const mode = 'prod'
 // create a new Apollo Client Instance
 const client = new ApolloClient({
   cache: new InMemoryCache({ fragmentMatcher }),
