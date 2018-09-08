@@ -27,12 +27,7 @@ export default () => (
     <Header />
     <Switch>
       <Route exact path="/" component={Landing} />
-      <Route
-        exact path="/login"
-        render={
-          ({ location: { search } }) => <Login queryString={search} />
-        }
-      />
+      <Route exact path="/login" component={Login} />
       <Private
         exact path="/register"
         render={
