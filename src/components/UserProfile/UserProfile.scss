@@ -121,3 +121,11 @@ MEDIA QUERY
   max-height: 100px;
   align-items: start;
 }
+
+.tier-icon {
+  color: $health-green;
+  border: 1px solid $health-green;
+  padding: 5px 7px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
