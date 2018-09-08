@@ -23,7 +23,7 @@ class Login extends React.Component {
   async componentDidMount() {
     const { token, redirect } = localStorage
     const queryParams = new URLSearchParams(this.props.location.search);
-    const code = queryParams.has('code') ? queryParams.get('code') : '';
+    const code = queryParams.get('code');
 
     /**
      * IF token found or no code provided, redirect to /profile
