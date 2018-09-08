@@ -43,7 +43,7 @@ const InfoComponents = ({ team }) => {
     { label: 'Tier', data: 'Tier ' + team.tier.level },
     { label: 'Team', data: project.users },
     { label: 'Project', data: project.title },
-    { label: 'Description', data: project.elevator_pitch },
+    { label: 'Elevator Pitch', data: project.elevator_pitch },
     // { label: 'TechStack', data: project.skills },
   ]
 

@@ -64,7 +64,7 @@ const SideBar = ({ data: { user }, toggleNewsfeed, team_id }) => {
           <div className="sidebar-userinfo__username">{user.username}</div>
         </div>
         <hr className="hl" />
-        
+
         <SidebarBtn
           action={toggleNewsfeed}
           active={!team_id}
@@ -94,7 +94,7 @@ const SideBar = ({ data: { user }, toggleNewsfeed, team_id }) => {
 }
 
 SideBar.propTypes = {
-  team_id: PropTypes.number
+  team_id: PropTypes.string
 }
 
 SideBar.defaultProps = {

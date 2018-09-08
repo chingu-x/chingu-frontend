@@ -1,0 +1,1 @@
+{"__schema":{"types":[{"kind":"INTERFACE","name":"NewsfeedItem","possibleTypes":[{"name":"NewsfeedVoyage"},{"name":"NewsfeedStandup"},{"name":"NewsfeedAvailableStandup"},{"name":"GithubActivityIssue"},{"name":"GithubActivityPullRequest"}]},{"kind":"INTERFACE","name":"GithubActivityItem","possibleTypes":[{"name":"GithubActivityIssue"},{"name":"GithubActivityPullRequest"}]}]}}
