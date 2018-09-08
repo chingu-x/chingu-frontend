@@ -1,0 +1,20 @@
+@import '../../styles/abstracts/_variables.scss';
+
+.ticketbox-container {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+.ticketbox-btn--main {
+    background-color: $theme-green;
+    color: white;
+    font-size: 60px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    box-shadow: $box-shadow;
+    text-align: center;
+    font-weight: 900;
+    cursor: pointer;
+}

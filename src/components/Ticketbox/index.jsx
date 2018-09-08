@@ -1,14 +1,20 @@
 import * as React from "react";
 import './Ticketbox.css';
+import Modal from "../common/Modal";
 
 const Ticketbox = () => {
   return (
-    <div className="ticketbox-container">
-      <img
-        className="ticketbox-btn--main"
-        alt="help"
-        src={require('../../assets/icons8-help-96.png')} />
-    </div>
+    <Modal 
+      open 
+      persist 
+      background="none"
+    >
+      <div className="ticketbox-container">
+        <div
+          className="ticketbox-btn--main"
+        >?</div>
+      </div>
+    </Modal>
   )
 }
 
