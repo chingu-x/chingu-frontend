@@ -93,8 +93,8 @@ MEDIA QUERY
 
 .project-img {
   width: 325px;
+  height: 100%;
   object-fit: cover;
-  // TODO: Crop
 }
 
 .project-info__container {
