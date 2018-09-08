@@ -12,11 +12,11 @@ import dateFormatter from "../utilities/dateFormatter.js"
 const InfoComponents = ({ team }) => {
   const { project, cohort, tier, title } = team
   const infoObjects = [
-    { label: 'Voyage', data: `${cohort.title} - ${dateFormatter(cohort.start_date)} - ${dateFormatter(cohort.end_date)}` },
+    { label: 'Voyage', data: `${cohort.title} / ${dateFormatter(cohort.start_date)} - ${dateFormatter(cohort.end_date)}` },
     { label: 'Team', data: title },
     { label: 'Tier', data: 'Tier ' + tier.level },
     { label: 'Project', data: project.title },
-    { label: 'Elevator Pitch', data: project.elevator_pitch },
+    { label: 'Description', data: project.elevator_pitch },
     { label: 'Members', data: project.users },
   ]
 
@@ -141,7 +141,7 @@ const UserProfile = props => {
     const { id, images } = team.project
     return (
       <div key={id} className="project-card__container">
-        <Link to={`/project/${id}`}>
+        <Link className="project-img" to={`/project/${id}`}>
           <img
             className="project-img"
             src={images[0] ? images[0].url : require('../../assets/landingImage.png')} />

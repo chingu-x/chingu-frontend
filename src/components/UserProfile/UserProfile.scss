@@ -8,23 +8,23 @@
   background: white;
   max-width: $max-width;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-areas: "i i v v v";
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "info project project";
   margin: 0 auto;
   margin-top: 150px;
-  grid-gap: 100px;
+  grid-gap: 60px;
   min-height: 100vh;
   margin-bottom: 100px;
-  // padding: 20px;
+  padding: 20px;
 }
 
 .user-profile {
-  grid-area: i;
+  grid-area: info;
 }
 
 .user-voyages {
   width: 100%;
- grid-area: v;
+ grid-area: project;
  justify-self: center;
 }
 
@@ -44,22 +44,78 @@
   box-shadow: $box-shadow;
   padding: 40px 20px;
   width: 100%;
-  // border-radius: $border-radius;
   font-size: 20px;
   text-align: center;
   border: 1px solid $light-grey;
 }
+/*
+==========================
+PROJECT CARDS
+==========================
+*/
+.project-card__container {
+  width: 100%;
+  box-shadow: $box-shadow;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: "image info";
+  background-color: white;
+}
 
+.project-img {
+  grid-area: image;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-info__container {
+  grid-area: info;
+  font-size: 14px;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-gap: 10px;
+  align-items: center;
+  justify-items: start;
+}
+
+.project-info__label {
+  grid-column: 1 / 2;
+  font-size: 14px;
+  color: $lighter-grey;
+  text-transform: uppercase;
+  align-self: start;
+}
+
+.project-info__data {
+  grid-column: 2 / -1;
+  font-size: 14px;
+  color: $dark-grey;
+  max-height: 100px;
+  align-items: start;
+  min-height: 28px;
+  text-align: left;
+}
+
+.tier-icon {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: $health-green;
+  border: 1px solid $health-green;
+  padding: 3px 7px;
+  margin: 2px auto;
+}
 /*
 ==========================
 MEDIA QUERY
 ==========================
 */
-@media (max-width: 1000px) {
+@media (max-width: 1000px) and (min-width: 0px) {
   .user-profile-container {
     grid-template-columns: repeat(1, 1fr);
-    grid-template-areas: "i"
-                          "v";
+    grid-template-areas: "info"
+                          "project";
     margin-top: 100px;
     padding: 0px;
     grid-gap: 100px;
@@ -77,55 +133,16 @@ MEDIA QUERY
   .user-voyage-title {
     text-align: center;
   }
+  .project-card__container {
+    margin: 0 auto;
+    max-width: 500px;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "image" "info";
+    margin-bottom: 20px;
+  } 
 }
-
-// PROJECT CARD //
-.project-card__container {
-  width: 710px;
-  box-shadow: $box-shadow;
-  display: grid;
-  padding-right: 20px;
-  grid-template-columns: repeat(2, auto);
-  grid-gap: 20px;
-  background-color: white;
-}
-
-.project-img {
-  width: 325px;
-  height: 100%;
-  object-fit: cover;
-}
-
-.project-info__container {
-  font-size: 14px;
-  width: 385px;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  grid-gap: 10px;
-}
-
-.project-info__label {
-  grid-column: 1 / 2;
-  font-size: 14px;
-  color: $lighter-grey;
-  text-transform: uppercase;
-  align-self: center
-}
-
-.project-info__data {
-  grid-column: 2 / -1;
-  font-size: 14px;
-  color: $dark-grey;
-  max-height: 100px;
-  align-items: start;
-}
-
-.tier-icon {
-  font-size: 12px;
-  text-transform: uppercase;
-  color: $health-green;
-  border: 1px solid $health-green;
-  padding: 3px 7px;
-  margin: 2px auto;
+@media (max-width: 500px) and (min-width: 0px) {
+  .project-card__container {
+    width: 90vw;
+  } 
 }
