@@ -8,11 +8,11 @@
   background: white;
   max-width: $max-width;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-areas: "info project project";
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: "info project project project";
   margin: 0 auto;
   margin-top: 150px;
-  grid-gap: 60px;
+  grid-gap: 80px;
   min-height: 100vh;
   margin-bottom: 100px;
   padding: 20px;
