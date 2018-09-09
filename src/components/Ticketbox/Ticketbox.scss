@@ -71,6 +71,45 @@ TICKETBOX MAIN BTN SELECTION
 BUG & SUGGESTION FORMS
 ==========================
 */
-// .bug-suggestion-box {
-//     /
-// }
+.box-color {
+    width: calc(100% + 60px);
+    margin-left: -30px;
+    height: 50px;
+    margin-top: -30px;
+    margin-bottom: 20px;
+}
+
+.color--suggestion {
+    background-color: $suggestion;
+}
+.color--bug {
+    background-color: $bug;
+}
+.color--help {
+    background-color: $help;
+}
+.box-icon {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    // padding-top: 10px;
+}
+/*
+==========================
+FORM STYLING
+==========================
+*/
+.ticketbox-form {
+    .form-QA {
+        margin-bottom: 20px;
+    }
+    .form-question {
+        text-transform: uppercase;
+        letter-spacing: 1.3px;
+        color: $med-grey;
+        padding-bottom: 5px;
+    }
+    .form-input {
+        height: 30px;
+    }
+}

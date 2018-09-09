@@ -13,7 +13,7 @@ const QA = (category) => [
     text: 'Type',
     input_type: 'dropdown', // TODO: "button_option" new Question input_type?
     field_name: 'sub_category',
-    options: category ===  'bug'
+    options: category === 'bug'
       ? ['error', 'malfunction'] // bug category
       : ['existing', 'new'] // suggestion category
   },
@@ -81,7 +81,7 @@ class BugSuggestion extends React.Component {
     `;
 
     const variables = { feedback_data };
-    client.mutate({  mutation, variables })
+    client.mutate({ mutation, variables })
       .then(this.handleResponse)
       .catch(this.handleError);
   }
@@ -98,11 +98,14 @@ class BugSuggestion extends React.Component {
 
     return (
       <div className="bug-suggestion-box">
+      <div className={`box-color color--${category}`}>
         <img className="box-icon" alt="icon" src={imgSrc} />
-        { 
+      </div>
+        {
           response
             ? <Success url={response.github_issue.url} />
             : (
+              <div className="ticketbox-form">
                 <DynamicFormContainer
                   hiddenData={{ category }}
                   questions={QA(category)}
@@ -110,6 +113,7 @@ class BugSuggestion extends React.Component {
                   persistence
                   purpose="ticketbox"
                 />
+              </div>
             )
         }
       </div>
