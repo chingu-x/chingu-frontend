@@ -4,17 +4,15 @@ import { withRouter } from "react-router-dom"
 
 /**
  * TODO:
- * Use onFocus and onBlur synthetic events instead of global eventListeners
- * Custom error handlers for toggle and menu props
- * Enable optional props to handle parent state
- * Add refs to use by the parent
- * Add option to ersist over route changes
+ * Use onFocus and onBlur synthetic events instead of eventListeners
+ * Add refs to be used by the parent
+ * Add optional prop to allow persistence over route changes
  */
 
 class Dropdown extends Component {
   static propTypes = {
     persist: PropTypes.bool, // Persist over clicks outside of dd menu
-    onDropdownClick: PropTypes.func,
+    // onDropdownClick: PropTypes.func, // TODO:
     toggle: (props, propName, componentName) => {
       if (props.toggle && !props.menu) {
         return new Error(`${componentName} requires both 'toggle' and 'menu' props OR two child elements!`)
@@ -26,9 +24,7 @@ class Dropdown extends Component {
       }
     },
     children: PropTypes.arrayOf(arrayOfChildren => {
-      if (
-        this.toggle && this.menu && !!arrayOfChildren.length
-      ) {
+      if (this.toggle && this.menu && !!arrayOfChildren.length) {
         console.warn(`Dropdown: 'Toggle' and 'menu' props found. Children will not be used!`)
       }
 
@@ -44,6 +40,7 @@ class Dropdown extends Component {
   }
 
   state = { show: false }
+  // TODO: Create refs in constructor and use with domRef in children - for use by the parent
 
   componentDidMount() {
     document.addEventListener("click", this.handleClick, false)
@@ -63,15 +60,13 @@ class Dropdown extends Component {
   handleClick = e => {
     const { onDropdownClick, persist } = this.props
 
-    if (onDropdownClick) {
-      return onDropdownClick(e)
-    }
-
+    // Open DD on toggle element click 
     if (!this.state.show &&
       this.dropdownToggle.firstChild === e.target) {
       return this.setState({ show: true })
     }
 
+    // Close DD on click outside of menu element  (unless props.persist === true)
     if (
       !persist &&
       !this.dropdownMenu.contains(e.target)) {
