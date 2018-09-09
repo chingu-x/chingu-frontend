@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types"
 import Request from "../utilities/Request"
+import Dropdown from "../utilities/Dropdown"
 import Modal from "../common/Modal"
 import GithubLoginModal from "../Login/components/GithubLoginModal"
 import profileQuery from "../UserProfile/graphql/profileQuery"
@@ -10,24 +11,14 @@ import userBaseQuery from "./userBaseQuery"
 import { client } from "../../index"
 
 class Header extends React.Component {
-  state = { showDropdown: false }
-
-  // TODO: Refactor Header methods
   openLoginModal = e => {
     e.stopPropagation()
     this.refs.loginModal.open()
   }
 
-  toggleDropdown = () => {
-    this.refs.dropdownModal.toggle()
-    this.setState({ showDropdown: !this.state.showDropdown })
-  }
-
   logout = async e => {
     e.preventDefault();
     window.localStorage.removeItem("token");
-    window.localStorage.removeItem("store");
-
     /**
      * TODOS: 
      * Server logout logic
@@ -38,24 +29,18 @@ class Header extends React.Component {
   };
 
   renderAvatar = avatar => (
-    <div className="header-dropdown">
+    <Dropdown className="header-dropdown">
       <img
         onClick={this.toggleDropdown}
         className="avatar"
         src={avatar ? avatar : require('../../assets/blank image.png')} alt="user avatar"
       />
-
-      {
-        this.state.showDropdown &&
-        <Fragment>
-          <div className="header-mask" />
-          <div className="header-dropdown-content avatar">
+        <div className="header-dropdown-content">
             <Link
               to="/newsfeed"
             >
               Newsfeed
             </Link>
-
             <Link
               to="/voyage"
               onMouseOver={() => client.query({ query: voyagesQuery })}
@@ -77,9 +62,7 @@ class Header extends React.Component {
             <hr />
             <Link to="/" onClick={e => this.logout(e)}>Log out</Link>
           </div>
-        </Fragment>
-      }
-    </div>
+    </Dropdown>
   )
 
   render() {
@@ -87,11 +70,14 @@ class Header extends React.Component {
     const { user } = this.props.data
     return (
       <Fragment>
-        <Modal onModalClick={this.toggleDropdown} background="none" ref="dropdownModal" />
-        <Modal ref="loginModal" background="transparent"><GithubLoginModal /></Modal>
-        <div
-          onClick={this.toggleDropdown}
-          className={`header header-dark ${this.state.showDropdown ? "modal-peek" : ""}`}>
+        
+        <Modal 
+          ref="loginModal" 
+          background="transparent">
+          <GithubLoginModal />
+        </Modal>
+        
+        <div className="header header-dark">
           <div className="header-container">
             <div className="header-left">
               <div className="nav-logo">
