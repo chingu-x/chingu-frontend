@@ -21,19 +21,29 @@
 
 /*
 ==========================
+PLACEMENT OF MODALS
+==========================
+*/
+.bug-suggestion-box,
+.ticketbox-btn-section {
+    position: absolute;
+    right: 20px;
+    bottom: 120px;
+    background-color: white;
+    box-shadow: $box-shadow;
+    padding: 30px;
+    width: 380px;
+}
+/*
+==========================
 TICKETBOX MAIN BTN SELECTION
 ==========================
 */
 .ticketbox-btn-section {
-    background-color: white;
-    box-shadow: $box-shadow;
-    padding: 30px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-    position: absolute;
-    right: 20px;
-    bottom: 120px;
+    grid-gap: 15px;
 }
 
 .ticketbox-btn--container {
@@ -44,8 +54,8 @@ TICKETBOX MAIN BTN SELECTION
     }
 }
 .ticketbox-btn {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background-color: none;
     box-shadow: $box-shadow;
@@ -54,4 +64,13 @@ TICKETBOX MAIN BTN SELECTION
     color: $dark-grey;
     text-transform: uppercase;
     letter-spacing: 1.5px;
+    width: 100px;
 }
+/*
+==========================
+BUG & SUGGESTION FORMS
+==========================
+*/
+// .bug-suggestion-box {
+//     /
+// }
