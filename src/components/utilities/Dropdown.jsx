@@ -12,6 +12,37 @@ import { withRouter } from "react-router-dom"
  */
 
 class Dropdown extends Component {
+  static propTypes = {
+    persist: PropTypes.bool, // Persist over clicks outside of dd menu
+    onDropdownClick: PropTypes.func,
+    toggle: (props, propName, componentName) => {
+      if (props.toggle && !props.menu) {
+        return new Error(`${componentName} requires both 'toggle' and 'menu' props OR two child elements!`)
+      }
+    },
+    menu: (props, propName, componentName) => {
+      if (props.menu && !props.toggle) {
+        return new Error(`${componentName} requires both 'toggle' and 'menu' props OR two child elements!`)
+      }
+    },
+    children: PropTypes.arrayOf(arrayOfChildren => {
+      if (
+        this.toggle && this.menu && !!arrayOfChildren.length
+      ) {
+        console.warn(`Dropdown: 'Toggle' and 'menu' props found. Children will not be used!`)
+      }
+
+      if ((!this.toggle || !this.menu) && arrayOfChildren.length !== 2) {
+        return new Error(`Dropdown requires two child elements - [<toggle/>, <menu/>]!`)
+      }
+    })
+  }
+
+  static defaultProps = {
+    persist: false,
+    children: [] // Prevent non-iterable destructure error when providing only one of 'toggle' and 'menu' props
+  }
+
   state = { show: false }
 
   componentDidMount() {
