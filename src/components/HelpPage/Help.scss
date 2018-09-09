@@ -33,14 +33,13 @@
   text-align: left;
   background-color: white;
   margin: auto;
-  padding-bottom: 15px;
+  padding-bottom: 70px;
   width: 700px;
-  min-height: 800px;
+  min-height: 470px;
   box-shadow: $box-shadow;
 }
 
 .QA-title__outer {
-  // height: 75px;
   width: 100%;
   padding: 30px 30px 0 30px;
   cursor: pointer;
@@ -58,15 +57,15 @@
   flex-wrap: nowrap;
 }
 
-// .QA-content__container {
-//   padding: 0 30px;
-// }
-
 .QA-question {
   padding: 15px 30px;
   color: $theme-green;
   font-size: 18px;
   font-weight: 600;
+  cursor: pointer;
+  &:hover {
+    background-color: $palest-grey;
+  }
 }
 
 .QA-answer {

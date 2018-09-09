@@ -53,6 +53,33 @@ class HelpPage extends React.Component {
         : question
     })
 
+  renderQuestions = list => (
+    list.map(({ question, answer }) => {
+      return (
+        <React.Fragment key={question}>
+          <div className="QA-question">{question}</div>
+          <div className="QA-answer">{answer}</div>
+        </React.Fragment>
+      )
+    })
+  )
+
+  renderCategories = list => (
+    list.map((item, idx) => {
+      return (
+        <React.Fragment key={idx}>
+          <div className="QA-title__outer">
+            <div className="QA-title__inner">
+              {item.category}
+              <i className="fas fas fa-chevron-down" />
+            </div>
+          </div>
+          <ExpansionPanel list={this.renderQuestions(item.qa_set)} />
+        </React.Fragment>
+      )
+    })
+  )
+
   render() {
     return (
       <React.Fragment>
@@ -65,33 +92,10 @@ class HelpPage extends React.Component {
             type="search"
             placeholder="How can we help?"
           />
-          <div className="help-QA__container">
-            {
-              HelpQA.map(item => {
-                return (
-                  <React.Fragment>
-                    <div className="QA-title__outer">
-                      <div className="QA-title__inner">
-                        {item.category}
-                        <i className="fas fas fa-chevron-down" />
-                      </div>
-                    </div>
-                    {
-                      !this.state.activeQuestion &&
-                      item.qa_set.map(({ question, answer }) => {
-                        return (
-                          <React.Fragment>
-                            <div className="QA-question">{question}</div>
-                            <div className="QA-answer">{answer}</div>
-                          </React.Fragment>
-                        )
-                      })
-                    }
-                  </React.Fragment>
-                )
-              })
-            }
-          </div>
+          <ExpansionPanel
+            className="help-QA__container"
+            list={this.renderCategories(HelpQA)}
+          />
         </div>
       </React.Fragment>
     )
