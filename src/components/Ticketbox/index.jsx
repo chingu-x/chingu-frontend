@@ -3,6 +3,18 @@ import './Ticketbox.css';
 import Modal from "../common/Modal";
 
 class Ticketbox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.ticketboxRef = React.createRef();
+    this.state = {
+      modalVisibility: false
+    }
+  }
+
+  toggleModal = () => {
+    let ticketbox = this.ticketboxRef.current;
+    ticketbox.toggle();
+  }
   render() {
     return (
       <Modal
@@ -11,10 +23,9 @@ class Ticketbox extends React.Component {
         background="none"
       >
         <div className="ticketbox-container">
-          <div className="ticketbox-btn--main">?</div>
+          <div onClick={() => this.toggleModal()} className="ticketbox-btn--main">?</div>
           <Modal
-            open
-            persist
+            ref={this.ticketboxRef}
             background="none"
           >
             <div className="ticketbox-subcontainer">
