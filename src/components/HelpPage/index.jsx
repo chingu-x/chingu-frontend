@@ -4,24 +4,44 @@ import './Help.css';
 import { HelpQA } from './help-qa.data';
 
 
-// TODO: 
-// class ExpansionPanel extends React.Component {
-//   static propTypes = {
-//     children: PropTypes.arrayOf(PropTypes.element).isRequired,
-//     multi: PropTypes.bool //TODO: Keeps multiple items opne
-//   }
+class ExpansionPanel extends React.Component {
+  static propTypes = {
+    multi: PropTypes.bool, //TODO: Keeps multiple items open
+    list: PropTypes.arrayOf(list => {
+      console.log({ list })
+      if (!list.every(item => item.props.children.length === 2)) {
+        return new Error("ExpansionPanel expects its list prop item to contain 2 children (First is used as a clickable panel label.)")
+      }
+    }).isRequired
+  }
 
-//   state = { key: null }
+  state = { key: [] }
 
-//   handleClick = key => {
-//     this.setState({ key: key === this.state.key ? null : key })
-//   }
+  handleClick = key => {
+    this.setState({ key: key === this.state.key ? [] : [key] })
+  }
 
-//   render() {
-//     return ()
-//   }
-
-// }
+  render() {
+    return (
+      <div className={this.props.className}>
+        {
+          this.props.list.map(listItem => {
+            const [label, content] = listItem.props.children
+            return (
+              <React.Fragment key={listItem.key}>
+                <div
+                  onClick={() => this.handleClick(listItem.key)}>
+                  {label}
+                </div>
+                {this.state.key.includes(listItem.key) && content}
+              </React.Fragment>
+            )
+          })
+        }
+      </div>
+    )
+  }
+}
 
 class HelpPage extends React.Component {
   state = { activeQuestion: null }
