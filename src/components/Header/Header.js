@@ -34,34 +34,35 @@ class Header extends React.Component {
         onClick={this.toggleDropdown}
         className="avatar"
         src={avatar ? avatar : require('../../assets/blank image.png')} alt="user avatar"
-      />
+        />
         <div className="header-dropdown-content">
-            <Link
-              to="/newsfeed"
+          <Link
+            to="/newsfeed"
             >
-              Newsfeed
-            </Link>
-            <Link
-              to="/voyage"
-              onMouseOver={() => client.query({ query: voyagesQuery })}
+            Newsfeed
+          </Link>
+          <Link
+            to="/voyage"
+            onMouseOver={() => client.query({ query: voyagesQuery })}
+          >
+            Voyage Portal
+          </Link>
+          <Link
+            to="/projects"
             >
-              Voyage Portal
-            </Link>
-            <Link
-              to="/projects"
+            Project Showcase
+          </Link>
+          <hr />
+          <Link
+            to="/profile"
+            // TODO: FIXME Query related error when prefetching while vieweing ProjectShowcase
+            // onMouseOver={() => client.query({ query: profileQuery })}
             >
-              Project Showcase
-            </Link>
-            <hr />
-            <Link
-              to="/profile"
-              onMouseOver={() => client.query({ query: profileQuery })}
-            >
-              User Profile
-            </Link>
-            <hr />
-            <Link to="/" onClick={e => this.logout(e)}>Log out</Link>
-          </div>
+            User Profile
+          </Link>
+          <hr />
+          <Link to="/" onClick={e => this.logout(e)}>Log out</Link>
+        </div>
     </Dropdown>
   )
 
