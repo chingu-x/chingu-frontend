@@ -1,2 +1,74 @@
 @import '../../styles/abstracts/_variables.scss';
 
+
+.help-banner {
+  position: absolute;
+  margin-top: 60px; 
+  width: 100%;
+  height: 400px;
+  background-color: $light-purple;
+}
+
+.help-container {
+  position: relative;
+  width: 1180px;
+  margin: 100px auto;
+  text-align: center;
+}
+
+.help-search-title {
+  color: white;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.help-search-bar {
+  width: 400px;
+  height: 20px;
+  margin-bottom: 40px;
+  box-shadow: $box-shadow-dark;
+}
+
+.help-QA__container {
+  text-align: left;
+  background-color: white;
+  margin: auto;
+  padding-bottom: 15px;
+  width: 700px;
+  min-height: 800px;
+  box-shadow: $box-shadow;
+}
+
+.QA-title__outer {
+  // height: 75px;
+  width: 100%;
+  padding: 30px 30px 0 30px;
+  cursor: pointer;
+}
+
+.QA-title__inner {
+  color: $darkest-grey;
+  font-size: 24px;
+  font-weight: 600;
+  padding-bottom: 15px;
+  border-bottom: 1px solid $darkest-grey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+// .QA-content__container {
+//   padding: 0 30px;
+// }
+
+.QA-question {
+  padding: 15px 30px;
+  color: $theme-green;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.QA-answer {
+  padding: 0 30px;
+}

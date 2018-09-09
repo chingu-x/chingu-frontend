@@ -1,3 +1,5 @@
+import React from "react"
+
 export const HelpQA = [
   {
     category: 'Chingu Code of Conduct',
