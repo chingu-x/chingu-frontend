@@ -2,27 +2,30 @@ import * as React from "react";
 import './Ticketbox.css';
 import Modal from "../common/Modal";
 
-const Ticketbox = () => {
-  return (
-    <Modal
-      open
-      persist
-      background="none"
-    >
-      <div className="ticketbox-container">
-        <div className="ticketbox-btn--main">?</div>
-        <Modal
-          open
-          persist
-          background="none"
-        >
-          <div className="ticketbox-subcontainer">
-          <TicketboxButtons />
-          </div>
-        </Modal>
-      </div>
-    </Modal>
-  )
+class Ticketbox extends React.Component {
+  render() {
+    return (
+      <Modal
+        open
+        persist
+        background="none"
+      >
+        <div className="ticketbox-container">
+          <div className="ticketbox-btn--main">?</div>
+          <Modal
+            open
+            persist
+            background="none"
+          >
+            <div className="ticketbox-subcontainer">
+              <TicketboxButtons />
+            </div>
+          </Modal>
+        </div>
+      </Modal>
+    )
+  }
+
 }
 
 const TicketboxButtons = () => {
@@ -31,7 +34,7 @@ const TicketboxButtons = () => {
     'Artboard 3.png',
     'Artboard 4.png'
   ];
-  let labels =  ['Suggestion', 'Bug', 'Help'];
+  let labels = ['Suggestion', 'Bug', 'Help'];
   return (
     <div className="ticketbox-btn-section">
       {
