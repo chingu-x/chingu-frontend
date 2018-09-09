@@ -53,10 +53,13 @@ class DynamicFormContainer extends React.Component {
     return Object.keys(form_data)
       .some(field_name => {
         const value = form_data[field_name];
-        if (!isNaN(value)) { // any numeric value is acceptable (non-empty)
-          return false;
-        }
-        return isEmpty(value)
+        /*
+          if non-numeric returns if value is empty
+          - if value is empty (true) then the loop breaks -> disabled true
+          if numeric value returns false to continue looping
+          - any numeric value is consideed non-empty
+        */
+        return typeof value !== 'number' && isEmpty(value);
       });
   }
 
