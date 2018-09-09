@@ -106,10 +106,25 @@ FORM STYLING
     .form-question {
         text-transform: uppercase;
         letter-spacing: 1.3px;
-        color: $med-grey;
+        color: $grey;
         padding-bottom: 5px;
     }
-    .form-input {
-        height: 30px;
+    .form-input,
+    .form-text-area  {
+        padding: 10px;
+    }
+
+    .form-dropdown {
+        text-transform: capitalize;
+    }
+    .form-btn,
+    .form-btn--disabled {
+        float: right;
+    }
+    .form-back-btn {
+        float: left;
+        @include system-button($grey, $med-grey);
+        width: 100px;
+        margin-top: 20px;
     }
 }

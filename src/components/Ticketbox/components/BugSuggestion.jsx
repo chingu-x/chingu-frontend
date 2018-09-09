@@ -113,6 +113,12 @@ class BugSuggestion extends React.Component {
                   persistence
                   purpose="ticketbox"
                 />
+                <input
+                  type="button"
+                  value="BACK"
+                  className="form-back-btn"
+                  onClick={() => this.props.switchRenderedType('')}
+                />
               </div>
             )
         }
