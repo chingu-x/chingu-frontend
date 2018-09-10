@@ -25,7 +25,7 @@ class HelpPageSearch extends React.Component {
       />
     }
     return (
-      <React.Fragment>
+      <div className="help-page-search-container">
         <div className="form-question">Have a Question?</div>
         <input
           className="form-input"
@@ -37,15 +37,15 @@ class HelpPageSearch extends React.Component {
           className="form-btn-submit--icon"
           onClick={() => this.searchHelpPage()}
         >?</div>
-        <hr className="hr-line" />
+        <hr className="hline" />
         <BackBtn switchRenderedType={switchRenderedType} />
         <input
-          className="form-btn--next"
+          className="form-btn"
           value="Still Need Help?"
           type="button"
           onClick={() => switchHelpType('help-options')}
         />
-      </React.Fragment>
+      </div>
     )
   }
 }

@@ -39,6 +39,14 @@ PLACEMENT OF MODALS
 TICKETBOX MAIN BTN SELECTION
 ==========================
 */
+.ticketbox-subcontainer {
+    .form-back-btn {
+        float: left;
+        @include system-button($grey, $med-grey);
+        width: 100px;
+        margin-top: 20px;
+    }
+}
 .ticketbox-btn-section {
     margin: 0 auto;
     display: grid;
@@ -104,7 +112,34 @@ HELP TICKET
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
     text-align: center;
-    justify-items: center;
+    justify-items: center;  
+}
+.help-page-search-container {
+    .form-btn {
+        width: 200px;
+        margin-top: 26px;
+        margin-right: 0px;
+    }
+    .form-input {
+        width: 75%;
+        display: inline-block;
+        margin-top: 0px;
+        height: 35px;
+    }
+    .hline {
+        margin-top: 30px;
+    }
+}
+.form-btn-submit--icon {
+    display: inline-block;
+    background-color: $theme-green;
+    color: white;
+    height: 35px;
+    border: 1px solid $theme-green;
+    text-align: center;
+    font-weight: 800;
+    font-size: 20px;
+    width: 25%;
 }
 /*
 ==========================
@@ -132,12 +167,6 @@ FORM STYLING
     .form-btn,
     .form-btn--disabled {
         float: right;
-    }
-    .form-back-btn {
-        float: left;
-        @include system-button($grey, $med-grey);
-        width: 100px;
-        margin-top: 20px;
     }
 }
 /*
