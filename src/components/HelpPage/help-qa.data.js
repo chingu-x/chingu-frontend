@@ -60,6 +60,7 @@ export const HelpQA = [
           <React.Fragment>
             Open to collaboration, accountable, and hungry to level-up their skills.
             <br />
+            <br />
             As far as skill and experience level, if 0 is just started to learn today and 100 is got a developer job,
             Chingu members come from the 15 - 150 range. New learners who have built a project or two → experienced
             professional developers learning new skills (new frameworks, leadership, mentorship)
@@ -81,19 +82,23 @@ export const HelpQA = [
             <br />
             <br />
             <b>Hard skills: </b>
-            <ul>Git/github</ul>
-            <ul>Accelerated</ul>
-            <br />
+            <ul>
+              <li>Git/github</li>
+              <li>Accelerated</li>
+            </ul>
             <br />
             <b>Soft skills: </b>
-            <ul>Leadership</ul>
-            <ul>Time management</ul>
-            <ul>Collaboration</ul>
-            <ul>Confidence</ul>
-            <ul>Empathy</ul>
-            <ul>Conflict resolution</ul>
-            <ul>Adaptability</ul>
-            <ul>Creativity</ul>
+            <ul>
+              <li>Leadership</li>
+              <li>Time management</li>
+              <li>Collaboration</li>
+              <li>Confidence</li>
+              <li>Empathy</li>
+              <li>Conflict resolution</li>
+              <li>Adaptability</li>
+              <li>Creativity</li>
+            </ul>
+
           </React.Fragment>
         )
       },
@@ -103,9 +108,11 @@ export const HelpQA = [
           <React.Fragment>
             Yes, Chingu is tech-stack agnostic and the team decides together what tech-stack to use.
                 <br />
+            <br />
             A big portion of our team-formation algorithm is connecting people who have similar experience
             levels and tech-stack preferences.
                  <br />
+            <br />
             Most people who join Chingu thus far are into Web-Development, and the most common stack is MERN
             (MongoDB, Express, React, Node) for the more experienced and HTML/CSS/Basic Javascript for the newer learners.
           </React.Fragment>
@@ -128,6 +135,7 @@ export const HelpQA = [
             People and constantly getting jobs in the Chingu ecosystem, but completing one Voyage does not
             guarantee you will get a job. We launch teams at all levels - from newer learners building landing
             pages to experienced experts building full stack applications.
+            <br />
             <br />
             That being said, by doing Voyages you gain in-demand hard skills and learn how to work in a
             modern team, the two core aspects all employees look for.
@@ -154,6 +162,7 @@ export const HelpQA = [
           <React.Fragment>
             If you’re a first time member, there’s no way to secure a spot, though we try to give as many new people an opportunity.
             <br />
+            <br />
             Once you are accepted, you can secure your spot by maintaining a high reputation score.
           </React.Fragment>
         )
@@ -164,6 +173,7 @@ export const HelpQA = [
         answer: (
           <React.Fragment>
             This is dependent on your skill level, the team dynamics, and how outside of your comfort zone the project is.
+            <br />
             <br />
             For example, if you’re using a tech-stack you’re familiar with, you would need to spend much less time
             than if you’re learning a new framework to complete your tasks.
@@ -179,6 +189,7 @@ export const HelpQA = [
         answer: (
           <React.Fragment>
             You will receive a notification that your application has been received.
+            <br />
             <br />
             We review applications once a week, though it can sometimes take 1-3 weeks to get a response back.
           </React.Fragment>
@@ -205,7 +216,9 @@ export const HelpQA = [
             It all depends on the specific context. The Voyage is 8 weeks, so for most cases as long as you communicate
             and the team adapts as necessary it’s fine.
             <br />
+            <br />
             Laziness or apathy are not appropriate excuses.
+            <br />
             <br />
             Chingu is a meritocracy and your actions now will dictate your opportunities in the future on the platform.
             Your peers will be rating you out of 5 each week as a team-mate, and the average of those ratings will
@@ -251,6 +264,7 @@ export const HelpQA = [
           <React.Fragment>
             Every team is unique, but all teams will be given the same structure and tools to help them work together.
             <br />
+            <br />
             You’re given a team Slack channel for communication, a project roadmap to follow, and if possible a Project Manager.
             We also have mandatory weekly check-in forms to help ensure team communication and accountability.
           </React.Fragment>
@@ -262,11 +276,12 @@ export const HelpQA = [
           <React.Fragment>
             A typical team will utilize a workflow that includes the following platforms:
             <br />
-            <ul>Slack/ Discord/ Google Hangouts for team communication and meetings</ul>
-            <ul>Git/ Github for a code repository</ul>
-            <ul>Github projects, Waffle or Trello for task management</ul>
-            <ul>Chingu platform for Team Standups & motivation</ul>
-
+            <ul>
+              <li>Slack/ Discord/ Google Hangouts for team communication and meetings</li>
+              <li>Git/ Github for a code repository</li>
+              <li>Github projects, Waffle or Trello for task management</li>
+              <li>Chingu platform for Team Standups & motivation</li>
+            </ul>
           </React.Fragment>
         )
       },
@@ -293,7 +308,7 @@ export const HelpQA = [
         question: `What happens if a teammate has disappeared?`,
         answer: (
           <React.Fragment>
-            
+
           </React.Fragment>
         )
       },
@@ -301,7 +316,7 @@ export const HelpQA = [
         question: `What happens if a project manager has disappeared?`,
         answer: (
           <React.Fragment>
-            
+
           </React.Fragment>
         )
       },
@@ -309,7 +324,7 @@ export const HelpQA = [
         question: `What happens if I want to change the Project Manager?`,
         answer: (
           <React.Fragment>
-            
+
           </React.Fragment>
         )
       },
@@ -317,7 +332,7 @@ export const HelpQA = [
         question: `What if I need to drop out of the voyage?`,
         answer: (
           <React.Fragment>
-            
+
           </React.Fragment>
         )
       },
@@ -325,7 +340,7 @@ export const HelpQA = [
         question: `What happens if a teammate or team is not responsive / lost the momentum?`,
         answer: (
           <React.Fragment>
-            
+
           </React.Fragment>
         )
       },
@@ -339,10 +354,11 @@ export const HelpQA = [
         question: `When do we submit the projects?`,
         answer: (
           <React.Fragment>
-            Projects are submitted when the project MVP (Minimum Viable Project) is completed 
-            before or at the end of the 8 week Voyage. 
+            Projects are submitted when the project MVP (Minimum Viable Project) is completed
+            before or at the end of the 8 week Voyage.
             <br />
-            Eligible project MVPs will be showcased in Chingu’s Project Showcase article. 
+            <br />
+            Eligible project MVPs will be showcased in Chingu’s Project Showcase article.
           </React.Fragment>
         )
       },
