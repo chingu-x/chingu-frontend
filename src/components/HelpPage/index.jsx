@@ -81,49 +81,51 @@ class HelpPage extends React.Component {
       return (
         <React.Fragment key={question}>
           <div className="QA-question">{question}</div>
-          <div className="QA-answer">
+          {/* <div className="QA-answer">
             <ReactMarkdown>{answer}</ReactMarkdown>
+          </div> */}
+          <div className="QA-answer">
+            {answer}
           </div>
         </React.Fragment>
       )
     })
   )
 
-  renderCategories = list => (
-    list.map((item, idx) => {
-      return (
-        <React.Fragment key={idx}>
-          <div className="QA-title__outer">
-            <div className="QA-title__inner">
-              {item.category}
-              <i className="fas fas fa-chevron-down" />
-            </div>
+  renderCategories = list =>
+    list.map((item, idx) =>
+      <React.Fragment key={idx}>
+        <div className="QA-title__outer">
+          <div className="QA-title__inner">
+            {item.category}
+            <i className="fas fas fa-chevron-down" />
           </div>
-          <ExpansionPanel className="expansion-section" list={this.renderQuestions(item.qa_set)} />
-        </React.Fragment>
-      )
-    }))
+        </div>
+        <ExpansionPanel
+          className="expansion-section"
+          list={this.renderQuestions(item.qa_set)} />
+      </React.Fragment>)
 
   filteredQA = (list, search) => {
-    const stringIncludes = (str, term) => str.toLowerCase().includes(term)
+    const stringIncludes = (str, term) => str.toString().toLowerCase().includes(term)
     const filterQA = (list, term) => list.filter(qa =>
       stringIncludes(qa.question, term) || stringIncludes(qa.answer, term))
 
-    const filtered = (list, term) => list.filter(cat => {
-      const qa = filterQA(cat.qa_set, term)
-      return stringIncludes(cat.category, term) || !!qa.length
-    })
-
+    const filtered = (list, term) => list.reduce((reduced, { category, qa_set }) => {
+      const qa = filterQA(qa_set, term)
+      if (/*stringIncludes(category, term) || */ !!qa.length) {
+        reduced.push({ category, qa_set: qa })
+      }
+      return reduced
+    }, [])
 
     if (!search) return list
     const filteredList = filtered(list, search)
-    console.log({ filteredList })
     return filteredList
   }
 
   render() {
     const { search } = this.state
-    console.log({ search })
     return (
       <div className="help-page--container" >
         <div className="help-banner" />
