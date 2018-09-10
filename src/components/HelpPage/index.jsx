@@ -23,13 +23,11 @@ class ExpansionPanel extends React.Component {
 
   handleClick = key => {
     const { keys } = this.state
-    const { multi } = this.props
 
-    if (multi) {
-      const keyIndex = keys.findIndex(stateKey => stateKey === key)
+    if (this.props.multi) {
       this.setState({
         keys: keys.includes(key)
-          ? [...keys.slice(0, keyIndex), ...keys.slice(keyIndex + 1)]
+          ? keys.filter(stateKey => stateKey !== key)
           : [...keys, key]
       })
     }
