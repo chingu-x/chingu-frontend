@@ -58,7 +58,7 @@ class Ticketbox extends React.Component {
 
       <PopupMenu className="ticketbox-container">
         <div className="ticketbox-btn--main">?</div>
-        <div className="ticketbox-subcontainer">
+        <div className="ticketbox-popup">
           {this.renderTicketForm(type)}
         </div>
       </PopupMenu>
