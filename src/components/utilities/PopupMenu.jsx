@@ -80,7 +80,7 @@ class PopupMenu extends Component {
     if (!toggle || !menu) ([toggle, menu] = this.props.children)
 
     return (
-      <div>
+      <div className={this.props.className}>
         <div ref={el => this.toggleElement = el}>{toggle}</div>
         <div ref={el => this.menuElement = el}>{this.state.show && menu}</div>
       </div>

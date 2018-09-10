@@ -107,19 +107,20 @@
   }
 }
 
-.header-mask {
-  background-color: black;
-  float: right;
-  width: 30%;
-  height: 100px;
-  position: relative;
-  margin-right: -50px;
-  opacity: 0;
+// .header-mask {
+//   background-color: black;
+//   float: right;
+//   width: 30%;
+//   height: 100px;
+//   position: relative;
+//   margin-right: -50px;
+//   opacity: 0;
   // visibility: visible;
   // &:hover ~ .header-dropdown-content {
   //   visibility: visible;
   // }
-}
+// }
+
 .header-portal-btn {
   display: block;
   margin: 0 auto;
@@ -147,7 +148,7 @@
 }
 
 .header-dropdown {
-  margin: 0 auto;
+  // margin: 0 0 auto auto;
   // width: 100%;
   float: right;
   padding: 2px;
