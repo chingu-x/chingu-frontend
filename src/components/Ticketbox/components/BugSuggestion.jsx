@@ -42,11 +42,14 @@ class BugSuggestion extends React.Component {
 
     if (error) {
       return (
-        <Error
-          category={category}
-          imgSrc={imgSrc}
-          switchRenderedType={this.props.switchRenderedType}
-        />
+        <div className="bug-suggestion-box">
+          <div className={`box-color color--${category}`}>
+            <img className="box-icon" alt="icon" src={imgSrc} />
+          </div>
+          <Error
+            switchRenderedType={this.props.switchRenderedType}
+          />
+        </div>
       )
     }
 
@@ -67,7 +70,7 @@ class BugSuggestion extends React.Component {
                   persistence
                   purpose="ticketbox"
                 />
-                <BackBtn switchRenderedType={this.props.switchRenderedType}/>
+                <BackBtn switchRenderedType={this.props.switchRenderedType} />
               </div>
             )
         }
