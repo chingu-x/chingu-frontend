@@ -4,16 +4,14 @@ import { HelpQA } from './help-qa.data';
 import ReactMarkdown from "react-markdown";
 import './Help.css';
 
-// const mapStringtoFragments = str =>
-//   str.split('\n')
-//     .map((item, key) =>
-//       <React.Fragment key={key}>
-//         {item}<br />
-//       </React.Fragment>
-//     )
+/**
+ * TODO:
+ * Make QA answers pure strings to avoid using .toString in search filters (use custom mapper or ReactMarkdown)
+ */
 
 class ExpansionPanel extends React.Component {
   state = { keys: [] }
+
   static propTypes = {
     multi: PropTypes.bool, // Allows multiple open items
     defaultOpen: PropTypes.bool,// Opens all items by default (use with eg search filtered list)
@@ -35,14 +33,14 @@ class ExpansionPanel extends React.Component {
   }
 
   static getDerivedStateFromProps({ defaultOpen, list }) {
-    if (defaultOpen) return { keys: list.map(item => item.key) }
-    return null
+    return { keys: !defaultOpen ? [] : list.map(item => item.key) }
   }
 
   handleClick = key => {
     const { keys } = this.state
+    const { multi, defaultOpen } = this.props
 
-    if (this.props.multi) {
+    if (multi || defaultOpen) {
       this.setState({
         keys: keys.includes(key)
           ? keys.filter(stateKey => stateKey !== key)
@@ -88,9 +86,6 @@ class HelpPage extends React.Component {
       return (
         <React.Fragment key={question}>
           <div className="QA-question">{question}</div>
-          {/* <div className="QA-answer">
-            <ReactMarkdown>{answer}</ReactMarkdown>
-          </div> */}
           <div className="QA-answer">
             {answer}
           </div>
@@ -114,24 +109,24 @@ class HelpPage extends React.Component {
       </React.Fragment>)
 
   filteredQA = (list, search) => {
+    // If search input, return whole list
     if (!search) return list
-    // Cleanup search inputs
 
+    // If search input found:
+    // Cleanup search input
     search = search.toLowerCase().split(" ")
       .reduce((search, term) =>
         !!term.trim() ?
           [...search, term.trim()]
           : search, [])
 
+    // Filter and return results
     const stringIncludes = (str, search) => search.every(term => str.toString().toLowerCase().includes(term))
-
-    const filtered = (list, search) => list.reduce((reduced, { category, qa_set }) => {
+    return list.reduce((reduced, { category, qa_set }) => {
       const qa = qa_set.filter(qa => stringIncludes(qa.question, search) || stringIncludes(qa.answer, search))
       return !!qa.length ? [...reduced, { category, qa_set: qa }] : reduced
     }, [])
 
-    const filteredList = filtered(list, search)
-    return filteredList
   }
 
   render() {
@@ -140,7 +135,7 @@ class HelpPage extends React.Component {
       <div className="help-page--container" >
         <div className="help-banner" />
         <div className="help-container">
-          {/* <div className="help-background-color" /> */}
+
           <div className="help-search-title">How can we help you?</div>
           <input
             className="help-search-bar"
@@ -149,6 +144,7 @@ class HelpPage extends React.Component {
             value={search || ""}
             onChange={e => this.setState({ search: e.target.value })}
           />
+
           <ExpansionPanel
             defaultOpen={!!search}
             className="help-QA__container"
