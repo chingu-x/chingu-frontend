@@ -2,6 +2,15 @@
 
 .help-page--container {
   min-height: 100vh;
+  width: 100vw;
+}
+/*
+==========================
+CATEGORY DOWN ICON
+==========================
+*/
+.fa-chevron-down {
+  color: $theme-green;
 }
 /*
 ==========================
@@ -19,7 +28,7 @@ COLOR BANNER
 
 .help-container {
   position: relative;
-  width: 1180px;
+  max-width: $max-width;
   margin: 100px auto;
   text-align: center;
   color: $dark-grey;
@@ -35,17 +44,18 @@ SEARCH
   margin-bottom: 10px;
   font-weight: 600;
   letter-spacing: 1.7px;
+  margin-top: 150px;
 }
 
 .help-search-bar {
-  width: 400px;
+  width: 500px;
   height: 20px;
-  margin-bottom: 40px;
   border: none;
   box-shadow: $box-shadow-dark;
   padding: 20px;
   color: $grey;
   font-size: 16px;
+  margin-bottom: 60px;
 }
 /*
 ==========================
@@ -63,7 +73,7 @@ QUESTION / ANSWER CONTAINER
   box-shadow: $box-shadow;
 }
 .expansion-section {
-  padding-bottom: 30px;
+  margin-bottom: 50px;
 }
 .QA-title__outer {
   width: 100%;
@@ -72,7 +82,7 @@ QUESTION / ANSWER CONTAINER
 
 .QA-title__inner {
   color: $theme-purple;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   padding-bottom: 10px;
   border-bottom: 1px solid $lighter-grey;
@@ -81,22 +91,27 @@ QUESTION / ANSWER CONTAINER
   align-items: center;
   flex-wrap: nowrap;
   text-transform: capitalize;
-  letter-spacing: 1.5px;
   margin-bottom: 20px;
 }
 
 .QA-question {
-  padding-top: 20px;
   color: $light-purple;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+  width: calc(100% + 80px);
+  margin-left: -40px;
+  padding: 10px 40px;
   &:hover {
-    background-color: $palest-grey;
+    background-color: $palest-purple;
   }
 }
 
 .QA-answer {
   font-size: 16px;
   margin-bottom: 20px;
+  background-color: $palest-purple;
+  width: calc(100% + 80px);
+  margin-left: -40px;
+  padding: 40px;
 }

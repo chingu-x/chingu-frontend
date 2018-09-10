@@ -10,7 +10,8 @@ class ExpansionPanel extends React.Component {
     list: PropTypes.arrayOf(list => {
       console.log({ list })
       if (!list.every(item => item.props.children.length === 2)) {
-        return new Error("ExpansionPanel expects its list prop item to contain 2 children (First is used as a clickable panel label.)")
+        return new Error(`ExpansionPanel expects its list prop item to 
+                        contain 2 children (First is used as a clickable panel label.)`)
       }
     }).isRequired
   }
@@ -86,11 +87,11 @@ class HelpPage extends React.Component {
         <div className="help-banner" />
         <div className="help-container">
           {/* <div className="help-background-color" /> */}
-          <div className="help-search-title">Looking for Help?</div>
+          <div className="help-search-title">How can we help you?</div>
           <input
             className="help-search-bar"
             type="search"
-            placeholder="How can we help?"
+            placeholder="Search Help"
           />
           <ExpansionPanel
             className="help-QA__container"
