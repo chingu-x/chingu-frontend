@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from "prop-types"
-import './Help.css';
 import { HelpQA } from './help-qa.data';
+import './Help.css';
 
 
 class ExpansionPanel extends React.Component {
@@ -74,7 +74,7 @@ class HelpPage extends React.Component {
               <i className="fas fas fa-chevron-down" />
             </div>
           </div>
-          <ExpansionPanel list={this.renderQuestions(item.qa_set)} />
+          <ExpansionPanel className="expansion-section" list={this.renderQuestions(item.qa_set)} />
         </React.Fragment>
       )
     })
@@ -82,7 +82,7 @@ class HelpPage extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className="help-page--container">
         <div className="help-banner" />
         <div className="help-container">
           {/* <div className="help-background-color" /> */}
@@ -97,7 +97,7 @@ class HelpPage extends React.Component {
             list={this.renderCategories(HelpQA)}
           />
         </div>
-      </React.Fragment>
+      </div>
     )
   }
 }

@@ -1,12 +1,20 @@
 @import '../../styles/abstracts/_variables.scss';
 
-
+.help-page--container {
+  min-height: 100vh;
+}
+/*
+==========================
+COLOR BANNER
+==========================
+*/
 .help-banner {
   position: absolute;
   margin-top: 60px; 
   width: 100%;
   height: 400px;
   background-color: $light-purple;
+  box-shadow: $box-shadow;
 }
 
 .help-container {
@@ -14,21 +22,36 @@
   width: 1180px;
   margin: 100px auto;
   text-align: center;
+  color: $dark-grey;
 }
-
+/*
+==========================
+SEARCH
+==========================
+*/
 .help-search-title {
   color: white;
   font-size: 30px;
   margin-bottom: 10px;
+  font-weight: 600;
+  letter-spacing: 1.7px;
 }
 
 .help-search-bar {
   width: 400px;
   height: 20px;
   margin-bottom: 40px;
+  border: none;
   box-shadow: $box-shadow-dark;
+  padding: 20px;
+  color: $grey;
+  font-size: 16px;
 }
-
+/*
+==========================
+QUESTION / ANSWER CONTAINER
+==========================
+*/
 .help-QA__container {
   text-align: left;
   background-color: white;
@@ -36,30 +59,35 @@
   padding-bottom: 70px;
   width: 700px;
   min-height: 470px;
+  padding: 40px;
   box-shadow: $box-shadow;
 }
-
+.expansion-section {
+  padding-bottom: 30px;
+}
 .QA-title__outer {
   width: 100%;
-  padding: 30px 30px 0 30px;
   cursor: pointer;
 }
 
 .QA-title__inner {
-  color: $darkest-grey;
-  font-size: 24px;
+  color: $theme-purple;
+  font-size: 20px;
   font-weight: 600;
-  padding-bottom: 15px;
-  border-bottom: 1px solid $darkest-grey;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $lighter-grey;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
+  text-transform: capitalize;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
 }
 
 .QA-question {
-  padding: 15px 30px;
-  color: $theme-green;
+  padding-top: 20px;
+  color: $light-purple;
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
@@ -69,5 +97,6 @@
 }
 
 .QA-answer {
-  padding: 0 30px;
+  font-size: 16px;
+  margin-bottom: 20px;
 }
