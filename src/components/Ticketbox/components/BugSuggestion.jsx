@@ -95,17 +95,16 @@ class BugSuggestion extends React.Component {
     const imgSrc = require(`../../../assets/${imgFile}`);
 
     if (error) {
-      // TODO: best way to display error? Error component is too heavy
       return (
         <div className="bug-suggestion-box">
           <div className={`box-color color--${category}`}>
             <img className="box-icon" alt="icon" src={imgSrc} />
           </div>
           <div className="ticketbox-success">
-            An Error Has Occured:
+            Well, this is embarassing.
             <br />
-            <div className="ticketbox-error-msg">
-            {error}
+            <div className="ticketbox-subtext">
+            We seem to have hit an error, <br /> so please try again later!
             </div>
             <input
                   type="button"

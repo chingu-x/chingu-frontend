@@ -144,6 +144,11 @@ ERROR
     @include system-button($theme-green, $theme-green--hover);
     width: 100px;
     margin: 0 auto;
+    margin-top: 20px;
+}
+.ticketbox-subtext {
+    font-weight: 500;
+    line-height: 20px;
 }
 /*
 ==========================
