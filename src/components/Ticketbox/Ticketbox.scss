@@ -96,6 +96,18 @@ BUG & SUGGESTION FORMS
 }
 /*
 ==========================
+HELP TICKET
+==========================
+*/
+.help-btns--container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    text-align: center;
+    justify-items: center;
+}
+/*
+==========================
 FORM STYLING
 ==========================
 */

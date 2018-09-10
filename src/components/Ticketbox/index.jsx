@@ -2,7 +2,7 @@ import * as React from "react";
 import './Ticketbox.css';
 import Modal from "../common/Modal";
 import BugSuggestion from './components/BugSuggestion';
-
+import Help from './components/Help';
 class Ticketbox extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +28,7 @@ class Ticketbox extends React.Component {
       case 'bug':
         return <BugSuggestion switchRenderedType={this.switchRenderedType} category={type} />
       case 'help':
-        break;
+        return <Help switchRenderedType={this.switchRenderedType} category={type} />
       default:
         return <TicketboxButtons switchRenderedType={this.switchRenderedType} />
     }
