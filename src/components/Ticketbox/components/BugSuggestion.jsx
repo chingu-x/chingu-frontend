@@ -52,10 +52,12 @@ const QA = (category) => [
 
 // TODO: styling for Success message?
 // should be own file if used in other parts of ticketbox system
-const Success = ({ url }) => (
-  <React.Fragment>
-    Success! <a href={url} target="_blank">View feedback Issue on Github</a>
-  </React.Fragment>
+const Success = ({ category, url }) => (
+  <div className="ticketbox-success">
+    Success!
+    <br />
+    <a href={url} target="_blank">{`View ${category} Issue on Github`}</a>
+  </div>
 );
 
 class BugSuggestion extends React.Component {
@@ -94,16 +96,36 @@ class BugSuggestion extends React.Component {
 
     if (error) {
       // TODO: best way to display error? Error component is too heavy
+      return (
+        <div className="bug-suggestion-box">
+          <div className={`box-color color--${category}`}>
+            <img className="box-icon" alt="icon" src={imgSrc} />
+          </div>
+          <div className="ticketbox-success">
+            An Error Has Occured:
+            <br />
+            <div className="ticketbox-error-msg">
+            {error}
+            </div>
+            <input
+                  type="button"
+                  value="BACK"
+                  className="form-error-back-btn"
+                  onClick={() => this.props.switchRenderedType('')}
+                />
+          </div>
+        </div>
+      )
     }
 
     return (
       <div className="bug-suggestion-box">
-      <div className={`box-color color--${category}`}>
-        <img className="box-icon" alt="icon" src={imgSrc} />
-      </div>
+        <div className={`box-color color--${category}`}>
+          <img className="box-icon" alt="icon" src={imgSrc} />
+        </div>
         {
           response
-            ? <Success url={response.github_issue.url} />
+            ? <Success category={category} url={response.github_issue.url} />
             : (
               <div className="ticketbox-form">
                 <DynamicFormContainer

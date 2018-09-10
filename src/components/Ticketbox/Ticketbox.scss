@@ -128,3 +128,39 @@ FORM STYLING
         margin-top: 20px;
     }
 }
+/*
+==========================
+ERROR
+==========================
+*/
+.ticketbox-error-msg {
+    background-color: $palest-grey;
+    padding: 10px;
+    margin: 20px 0px;
+    letter-spacing: initial;
+    text-align: left;
+}
+.form-error-back-btn {
+    @include system-button($theme-green, $theme-green--hover);
+    width: 100px;
+    margin: 0 auto;
+}
+/*
+==========================
+SUCCESS FORM
+==========================
+*/
+.ticketbox-success {
+    text-align: center;
+    color: $dark-grey;
+    letter-spacing: 1.5px;
+    line-height: 35px;
+    font-weight: 600;
+    a {
+        color: $theme-green--hover;
+        text-transform: capitalize;
+        font-weight: 400;
+        border-bottom: 1px solid $theme-green--hover;
+        padding-bottom: 5px;
+    }
+}
