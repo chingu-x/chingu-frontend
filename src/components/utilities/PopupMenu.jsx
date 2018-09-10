@@ -9,10 +9,10 @@ import { withRouter } from "react-router-dom"
  * Add optional prop to allow persistence over route changes
  */
 
-class Dropdown extends Component {
+class PopupMenu extends Component {
   static propTypes = {
     persist: PropTypes.bool, // Persist over clicks outside of dd menu
-    // onDropdownClick: PropTypes.func, // TODO:
+    // onMenuClick: PropTypes.func, // TODO:
     toggle: (props, propName, componentName) => {
       if (props.toggle && !props.menu) {
         return new Error(`${componentName} requires both 'toggle' and 'menu' props OR two child elements!`)
@@ -25,11 +25,11 @@ class Dropdown extends Component {
     },
     children: PropTypes.arrayOf(arrayOfChildren => {
       if (this.toggle && this.menu && !!arrayOfChildren.length) {
-        console.warn(`Dropdown: 'Toggle' and 'menu' props found. Children will not be used!`)
+        console.warn(`PopupMenu: 'Toggle' and 'menu' props found. Children will not be used!`)
       }
 
       if ((!this.toggle || !this.menu) && arrayOfChildren.length !== 2) {
-        return new Error(`Dropdown requires two child elements - [<toggle/>, <menu/>]!`)
+        return new Error(`PopupMenu requires two child elements - [<toggle/>, <menu/>]!`)
       }
     })
   }
@@ -58,18 +58,18 @@ class Dropdown extends Component {
   }
 
   handleClick = e => {
-    const { onDropdownClick, persist } = this.props
+    const { onMenuClick, persist } = this.props
 
     // Open DD on toggle element click 
     if (!this.state.show &&
-      this.dropdownToggle.firstChild === e.target) {
+      this.toggleElement.firstChild === e.target) {
       return this.setState({ show: true })
     }
 
     // Close DD on click outside of menu element  (unless props.persist === true)
     if (
       !persist &&
-      !this.dropdownMenu.contains(e.target)) {
+      !this.menuElement.contains(e.target)) {
       return this.setState({ show: false })
     }
   }
@@ -81,11 +81,11 @@ class Dropdown extends Component {
 
     return (
       <div>
-        <div ref={el => this.dropdownToggle = el}>{toggle}</div>
-        <div ref={el => this.dropdownMenu = el}>{this.state.show && menu}</div>
+        <div ref={el => this.toggleElement = el}>{toggle}</div>
+        <div ref={el => this.menuElement = el}>{this.state.show && menu}</div>
       </div>
     )
   }
 }
 
-export default withRouter(Dropdown)
+export default withRouter(PopupMenu)

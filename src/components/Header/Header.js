@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types"
 import Request from "../utilities/Request"
-import Dropdown from "../utilities/Dropdown"
+import PopupMenu from "../utilities/PopupMenu"
 import Modal from "../common/Modal"
 import GithubLoginModal from "../Login/components/GithubLoginModal"
 import profileQuery from "../UserProfile/graphql/profileQuery"
@@ -29,7 +29,7 @@ class Header extends React.Component {
   };
 
   renderAvatar = avatar => (
-    <Dropdown className="header-dropdown">
+    <PopupMenu className="header-dropdown">
       <img
         onClick={this.toggleDropdown}
         className="avatar"
@@ -63,7 +63,7 @@ class Header extends React.Component {
           <hr />
           <Link to="/" onClick={e => this.logout(e)}>Log out</Link>
         </div>
-    </Dropdown>
+    </PopupMenu>
   )
 
   render() {
