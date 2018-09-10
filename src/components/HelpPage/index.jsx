@@ -11,15 +11,16 @@ class ExpansionPanel extends React.Component {
       console.log({ list })
       if (!list.every(item => item.props.children.length === 2)) {
         return new Error(`ExpansionPanel expects its list prop item to 
-                        contain 2 children (First is used as a clickable panel label.)`)
+        contain 2 children (First is used as a clickable panel label.)`)
       }
     }).isRequired
   }
 
-  state = { key: [] }
+  state = { keys: [] }
 
   handleClick = key => {
-    this.setState({ key: key === this.state.key ? [] : [key] })
+    const { keys } = this.state
+    this.setState({ keys: keys.includes(key) ? [] : [key] })
   }
 
   render() {
@@ -27,6 +28,7 @@ class ExpansionPanel extends React.Component {
       <div className={this.props.className}>
         {
           this.props.list.map(listItem => {
+            console.log({ key: listItem.key, state: this.state.key })
             const [label, content] = listItem.props.children
             return (
               <React.Fragment key={listItem.key}>
@@ -34,7 +36,7 @@ class ExpansionPanel extends React.Component {
                   onClick={() => this.handleClick(listItem.key)}>
                   {label}
                 </div>
-                {this.state.key.includes(listItem.key) && content}
+                {this.state.keys.includes(listItem.key) && content}
               </React.Fragment>
             )
           })
@@ -44,17 +46,8 @@ class ExpansionPanel extends React.Component {
   }
 }
 
-class HelpPage extends React.Component {
-  state = { activeQuestion: null }
-
-  handleClick = question =>
-    this.setState({
-      activeQuestion: question === this.state.activeQuestion
-        ? null
-        : question
-    })
-
-  renderQuestions = list => (
+const HelpPage = props => {
+  const renderQuestions = list => (
     list.map(({ question, answer }) => {
       return (
         <React.Fragment key={question}>
@@ -65,7 +58,7 @@ class HelpPage extends React.Component {
     })
   )
 
-  renderCategories = list => (
+  const renderCategories = list => (
     list.map((item, idx) => {
       return (
         <React.Fragment key={idx}>
@@ -75,32 +68,29 @@ class HelpPage extends React.Component {
               <i className="fas fas fa-chevron-down" />
             </div>
           </div>
-          <ExpansionPanel className="expansion-section" list={this.renderQuestions(item.qa_set)} />
+          <ExpansionPanel className="expansion-section" list={renderQuestions(item.qa_set)} />
         </React.Fragment>
       )
-    })
-  )
+    }))
 
-  render() {
-    return (
-      <div className="help-page--container">
-        <div className="help-banner" />
-        <div className="help-container">
-          {/* <div className="help-background-color" /> */}
-          <div className="help-search-title">How can we help you?</div>
-          <input
-            className="help-search-bar"
-            type="search"
-            placeholder="Search Help"
-          />
-          <ExpansionPanel
-            className="help-QA__container"
-            list={this.renderCategories(HelpQA)}
-          />
-        </div>
+  return (
+    <div className="help-page--container">
+      <div className="help-banner" />
+      <div className="help-container">
+        {/* <div className="help-background-color" /> */}
+        <div className="help-search-title">How can we help you?</div>
+        <input
+          className="help-search-bar"
+          type="search"
+          placeholder="Search Help"
+        />
+        <ExpansionPanel
+          className="help-QA__container"
+          list={renderCategories(HelpQA)}
+        />
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default HelpPage;
