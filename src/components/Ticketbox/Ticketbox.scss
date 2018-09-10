@@ -4,7 +4,16 @@
     position: fixed;
     right: 20px;
     bottom: 20px;
-    z-index: $modal;
+}
+
+.ticketbox-popup {
+  position: absolute;
+  right: 20px;
+  bottom: 120px;
+  background-color: white;
+  box-shadow: $box-shadow;
+  padding: 30px;
+  width: 380px;
 }
 
 .ticketbox-btn--main {
@@ -26,23 +35,23 @@
 PLACEMENT OF MODALS
 ==========================
 */
-.bug-suggestion-box,
-.ticketbox-btn-section {
-    position: absolute;
-    right: 20px;
-    bottom: 120px;
-    background-color: white;
-    box-shadow: $box-shadow;
-    padding: 30px;
-    width: 380px;
-}
+// .bug-suggestion-box,
+// .ticketbox-btn-section {
+    // position: absolute;
+    // right: 20px;
+    // bottom: 120px;
+    // background-color: white;
+    // box-shadow: $box-shadow;
+    // padding: 30px;
+    // width: 380px;
+// }
 /*
 ==========================
 TICKETBOX MAIN BTN SELECTION
 ==========================
 */
 .ticketbox-btn-section {
-    margin: 0 auto;
+    // margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 15px;

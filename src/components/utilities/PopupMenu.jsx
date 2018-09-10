@@ -59,17 +59,19 @@ class PopupMenu extends Component {
 
   handleClick = e => {
     const { onMenuClick, persist } = this.props
+    const target = ((e.target: any): HTMLElement);
+    console.log("hit target", this.menuRef.contains(target), this.menuRef)
 
     // Open DD on toggle element click 
     if (!this.state.show &&
-      this.toggleElement.firstChild === e.target) {
+      this.controlRef.firstChild === target) {
       return this.setState({ show: true })
     }
 
     // Close DD on click outside of menu element  (unless props.persist === true)
     if (
       !persist &&
-      !this.menuElement.contains(e.target)) {
+      !this.menuRef.contains(target)) {
       return this.setState({ show: false })
     }
   }
@@ -81,8 +83,8 @@ class PopupMenu extends Component {
 
     return (
       <div className={this.props.className}>
-        <div ref={el => this.toggleElement = el}>{toggle}</div>
-        <div ref={el => this.menuElement = el}>{this.state.show && menu}</div>
+        <div ref={el => this.controlRef = el}>{toggle}</div>
+        <div ref={el => this.menuRef = el}>{this.state.show && menu}</div>
       </div>
     )
   }
