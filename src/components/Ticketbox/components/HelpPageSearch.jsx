@@ -38,7 +38,7 @@ class HelpPageSearch extends React.Component {
           onClick={() => this.searchHelpPage()}
         >?</div>
         <hr className="hline" />
-        <BackBtn switchRenderedType={switchRenderedType} />
+        <BackBtn switchRenderedType={switchRenderedType} path={""} />
         <input
           className="form-btn"
           value="Still Need Help?"

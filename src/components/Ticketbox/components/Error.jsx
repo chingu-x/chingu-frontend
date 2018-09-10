@@ -8,7 +8,7 @@ const Error = ({ switchRenderedType }) => (
         <div className="ticketbox-subtext">
             We seem to have hit an error, <br /> so please try again later!
             </div>
-        <BackBtn type="error" switchRenderedType={switchRenderedType} />
+        <BackBtn type="error" switchRenderedType={switchRenderedType} path={""} />
     </div>
 );
 

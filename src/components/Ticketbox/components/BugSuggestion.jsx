@@ -70,7 +70,7 @@ class BugSuggestion extends React.Component {
                   persistence
                   purpose="ticketbox"
                 />
-                <BackBtn switchRenderedType={this.props.switchRenderedType} />
+                <BackBtn path={""} switchRenderedType={this.props.switchRenderedType} />
               </div>
             )
         }

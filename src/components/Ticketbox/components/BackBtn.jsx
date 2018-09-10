@@ -1,11 +1,11 @@
 import * as React from "react";
 
-const BackBtn = ({ type, switchRenderedType }) => (
+const BackBtn = ({ path, type, switchRenderedType, switchHelpType }) => (
     <input
         type="button"
         value="BACK"
         className={type === 'error' ? "form-error-back-btn" : "form-back-btn"}
-        onClick={() => switchRenderedType('')}
+        onClick={switchHelpType ? () => switchHelpType(path) : () => switchRenderedType(path)}
     />
 );
 
