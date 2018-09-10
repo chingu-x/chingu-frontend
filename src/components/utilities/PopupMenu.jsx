@@ -43,11 +43,11 @@ class PopupMenu extends Component {
   // TODO: Create refs in constructor and use with domRef in children - for use by the parent
 
   componentDidMount() {
-    document.addEventListener("click", this.handleClick, false)
+    document.addEventListener("mousedown", this.handleClick, false)
   }
 
   componentWillUnmount() {
-    document.removeEventListener("click", this.handleClick, false)
+    document.removeEventListener("mousedown", this.handleClick, false)
   }
 
   componentDidUpdate(prevProps) {
