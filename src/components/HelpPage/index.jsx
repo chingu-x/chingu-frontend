@@ -8,10 +8,13 @@ class ExpansionPanel extends React.Component {
   static propTypes = {
     multi: PropTypes.bool,
     list: PropTypes.arrayOf(list => {
-      console.log({ list })
       if (!list.every(item => item.props.children.length === 2)) {
         return new Error(`ExpansionPanel expects its list prop item to 
         contain 2 children (First is used as a clickable panel label.)`)
+      }
+      if (!list.every(item => item.key)) {
+        return new Error(`ExpansionPanel requires unique key prop 
+        on children of its list prop element`)
       }
     }).isRequired
   }
