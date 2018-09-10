@@ -6,7 +6,7 @@ import './Help.css';
 
 class ExpansionPanel extends React.Component {
   static propTypes = {
-    multi: PropTypes.bool, //TODO: Keeps multiple items open
+    multi: PropTypes.bool,
     list: PropTypes.arrayOf(list => {
       console.log({ list })
       if (!list.every(item => item.props.children.length === 2)) {
@@ -20,7 +20,18 @@ class ExpansionPanel extends React.Component {
 
   handleClick = key => {
     const { keys } = this.state
-    this.setState({ keys: keys.includes(key) ? [] : [key] })
+    const { multi } = this.props
+
+    if (multi) {
+      const keyIndex = keys.findIndex(stateKey => stateKey === key)
+      this.setState({
+        keys: keys.includes(key)
+          ? [...keys.slice(0, keyIndex), ...keys.slice(keyIndex + 1)]
+          : [...keys, key]
+      })
+    }
+
+    else this.setState({ keys: keys.includes(key) ? [] : [key] })
   }
 
   render() {
@@ -28,7 +39,6 @@ class ExpansionPanel extends React.Component {
       <div className={this.props.className}>
         {
           this.props.list.map(listItem => {
-            console.log({ key: listItem.key, state: this.state.key })
             const [label, content] = listItem.props.children
             return (
               <React.Fragment key={listItem.key}>
