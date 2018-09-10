@@ -12,8 +12,6 @@ import './Help.css';
 //       </React.Fragment>
 //     )
 
-// TODO: Adjust search filters to check against array of string
-
 class ExpansionPanel extends React.Component {
   static propTypes = {
     multi: PropTypes.bool, // Allows multiple open items
@@ -79,6 +77,10 @@ class ExpansionPanel extends React.Component {
 // -- EXPORT -- //
 class HelpPage extends React.Component {
   state = { search: [] }
+  static getDerivedStateFromProps({ location, match }) {
+    const queryParams = new URLSearchParams(location.search);
+    return { search: decodeURIComponent(queryParams.get('search')) || match.params.searchTerm }
+  }
 
   renderQuestions = list => (
     list.map(({ question, answer }) => {
@@ -111,6 +113,13 @@ class HelpPage extends React.Component {
       </React.Fragment>)
 
   filteredQA = (list, search) => {
+    // Cleanup search inputs
+    search = search.toLowerCase().split(" ")
+      .reduce((search, term) =>
+        !!term.trim() ?
+          [...search, term.trim()]
+          : search, [])
+
     const stringIncludes = (str, search) => search.every(term => str.toString().toLowerCase().includes(term))
     const filterQA = (list, search) => list.filter(qa =>
       stringIncludes(qa.question, search) || stringIncludes(qa.answer, search))
@@ -128,15 +137,6 @@ class HelpPage extends React.Component {
     return filteredList
   }
 
-  handleSearchInputChange = e => this.setState({
-    search: e.target.value
-      .toLowerCase().split(" ")
-      .reduce((search, term) =>
-        !!term.trim() ?
-          [...search, term.trim()]
-          : search, [])
-  })
-
   render() {
     const { search } = this.state
     return (
@@ -149,7 +149,8 @@ class HelpPage extends React.Component {
             className="help-search-bar"
             type="search"
             placeholder="Search Help"
-            onChange={this.handleSearchInputChange}
+            value={search || ""}
+            onChange={e => this.setState({ search: e.target.value })}
           />
           <ExpansionPanel
             defaultOpen={!!search}
