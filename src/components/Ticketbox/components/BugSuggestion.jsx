@@ -2,64 +2,10 @@ import * as React from "react";
 import { DynamicFormContainer } from "../../DynamicForm";
 import { gql } from "apollo-boost";
 import { client } from "../../../";
-
-const QA = (category) => [
-  {
-    text: 'Category',
-    input_type: 'hidden',
-    field_name: 'category',
-  },
-  {
-    text: 'Type',
-    input_type: 'dropdown', // TODO: "button_option" new Question input_type?
-    field_name: 'sub_category',
-    options: category === 'bug'
-      ? ['error', 'malfunction'] // bug category
-      : ['existing', 'new'] // suggestion category
-  },
-  {
-    text: 'Site Feature',
-    input_type: 'dropdown',
-    field_name: 'site_location',
-    options: [
-      'FAQ',
-      'landing',
-      'login',
-      'newsfeed_all',
-      'newsfeed_team',
-      'other',
-      'profile',
-      'project',
-      'project_showcase',
-      'registration',
-      'team_standup',
-      'ticketbox',
-      'voyages',
-      'voyage_application'
-    ]
-  },
-  {
-    text: 'Title',
-    input_type: 'text',
-    field_name: 'title'
-  },
-  {
-    text: 'Body',
-    input_type: 'textarea',
-    field_name: 'body'
-  }
-];
-
-// TODO: styling for Success message?
-// should be own file if used in other parts of ticketbox system
-const Success = ({ category, url }) => (
-  <div className="ticketbox-success">
-    Success!
-    <br />
-    <a href={url} target="_blank">{`View ${category} Issue on Github`}</a>
-  </div>
-);
-
+import { QA } from './formQA';
+import Success from './Success';
+import Error from './Error';
+import BackBtn from './BackBtn';
 class BugSuggestion extends React.Component {
   state = { error: null, response: null };
 
@@ -96,24 +42,11 @@ class BugSuggestion extends React.Component {
 
     if (error) {
       return (
-        <div className="bug-suggestion-box">
-          <div className={`box-color color--${category}`}>
-            <img className="box-icon" alt="icon" src={imgSrc} />
-          </div>
-          <div className="ticketbox-success">
-            Well, this is embarassing.
-            <br />
-            <div className="ticketbox-subtext">
-            We seem to have hit an error, <br /> so please try again later!
-            </div>
-            <input
-                  type="button"
-                  value="BACK"
-                  className="form-error-back-btn"
-                  onClick={() => this.props.switchRenderedType('')}
-                />
-          </div>
-        </div>
+        <Error
+          category={category}
+          imgSrc={imgSrc}
+          switchRenderedType={this.props.switchRenderedType}
+        />
       )
     }
 
@@ -134,12 +67,7 @@ class BugSuggestion extends React.Component {
                   persistence
                   purpose="ticketbox"
                 />
-                <input
-                  type="button"
-                  value="BACK"
-                  className="form-back-btn"
-                  onClick={() => this.props.switchRenderedType('')}
-                />
+                <BackBtn switchRenderedType={this.props.switchRenderedType}/>
               </div>
             )
         }
