@@ -1,11 +1,9 @@
 import * as React from "react";
-// import { DynamicFormContainer } from "../../DynamicForm";
-// import { gql } from "apollo-boost";
-// import { client } from "../../../";
 import Success from './Success';
 import Error from './Error';
 import HelpOptions from './HelpOptions';
 import HelpPageSearch from './HelpPageSearch';
+import HelpOther from './HelpOther.jsx';
 
 class Help extends React.Component {
   state = { type: '', response: null, error: null }
@@ -14,12 +12,22 @@ class Help extends React.Component {
     this.setState({ type })
   }
 
+  setResponse = (response) => {
+    this.setState({ response }, () => {
+      this.renderHelpSections('success');
+    })
+  }
+
   renderHelpSections = (type) => {
     let { switchRenderedType } = this.props;
     let { response } = this.state;
     switch (type) {
       case 'team':
       case 'other':
+        return <HelpOther 
+                  category="other" 
+                  setResponse={this.setResponse} 
+                  switchHelpType={this.switchHelpType}/>
       case 'help-options':
         return <HelpOptions switchHelpType={this.switchHelpType} />
       case 'error':
