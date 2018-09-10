@@ -4,9 +4,11 @@ import { HelpQA } from './help-qa.data';
 import './Help.css';
 
 
+
 class ExpansionPanel extends React.Component {
   static propTypes = {
-    multi: PropTypes.bool,
+    multi: PropTypes.bool, // Allows multiple open items
+    all: PropTypes.bool, // Shows whole list (use with already filtered lists)
     list: PropTypes.arrayOf(list => {
       if (!list.every(item => item.props.children.length === 2)) {
         return new Error(`ExpansionPanel expects its list prop item to 
@@ -17,6 +19,11 @@ class ExpansionPanel extends React.Component {
         on children of its list prop element`)
       }
     }).isRequired
+  }
+
+  static defaultProps = {
+    multi: false,
+    all: false
   }
 
   state = { keys: [] }
@@ -57,8 +64,11 @@ class ExpansionPanel extends React.Component {
   }
 }
 
-const HelpPage = props => {
-  const renderQuestions = list => (
+// -- EXPORT -- //
+class HelpPage extends React.Component {
+  state = { search: null }
+
+  renderQuestions = list => (
     list.map(({ question, answer }) => {
       return (
         <React.Fragment key={question}>
@@ -69,7 +79,7 @@ const HelpPage = props => {
     })
   )
 
-  const renderCategories = list => (
+  renderCategories = list => (
     list.map((item, idx) => {
       return (
         <React.Fragment key={idx}>
@@ -79,13 +89,17 @@ const HelpPage = props => {
               <i className="fas fas fa-chevron-down" />
             </div>
           </div>
-          <ExpansionPanel className="expansion-section" list={renderQuestions(item.qa_set)} />
+          <ExpansionPanel className="expansion-section" list={this.renderQuestions(item.qa_set)} />
         </React.Fragment>
       )
     }))
 
+
+  render() {
+    const { search } = this.state
+    console.log({ search })
   return (
-    <div className="help-page--container">
+      <div className="help-page--container" >
       <div className="help-banner" />
       <div className="help-container">
         {/* <div className="help-background-color" /> */}
@@ -94,14 +108,17 @@ const HelpPage = props => {
           className="help-search-bar"
           type="search"
           placeholder="Search Help"
+            onChange={e => this.setState({ search: e.target.value })}
         />
         <ExpansionPanel
+            all={!!search}
           className="help-QA__container"
           list={renderCategories(HelpQA)}
         />
       </div>
     </div>
   )
+}
 }
 
 export default HelpPage;
