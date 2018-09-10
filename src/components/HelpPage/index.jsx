@@ -12,11 +12,12 @@ import './Help.css';
 //       </React.Fragment>
 //     )
 
+// TODO: Adjust search filters to check against array of string
 
 class ExpansionPanel extends React.Component {
   static propTypes = {
     multi: PropTypes.bool, // Allows multiple open items
-    all: PropTypes.bool, // Shows whole list (use with already filtered lists)
+    defaultOpen: PropTypes.bool,// Opens all items by default (use with eg search filtered list)
     list: PropTypes.arrayOf(list => {
       if (!list.every(item => item.props.children.length === 2)) {
         return new Error(`ExpansionPanel expects its list prop item to 
@@ -31,11 +32,11 @@ class ExpansionPanel extends React.Component {
 
   static defaultProps = {
     multi: false,
-    all: false
+    defaultOpen: false
   }
 
-  static getDerivedStateFromProps({ all, list }) {
-    if (all) return { keys: list.map(item => item.key) }
+  static getDerivedStateFromProps({ defaultOpen, list }) {
+    if (defaultOpen) return { keys: list.map(item => item.key) }
     else return { keys: [] }
   }
 
@@ -142,7 +143,7 @@ class HelpPage extends React.Component {
             onChange={e => this.setState({ search: e.target.value })}
           />
           <ExpansionPanel
-            all={!!search}
+            defaultOpen={!!search}
             className="help-QA__container"
             list={this.renderCategories(this.filteredQA(HelpQA, search))}
           />
