@@ -77,10 +77,10 @@ class ExpansionPanel extends React.Component {
 
 // -- EXPORT -- //
 class HelpPage extends React.Component {
-  state = { search: [] }
+  state = { search: "" }
   static getDerivedStateFromProps({ location, match }) {
     const queryParams = new URLSearchParams(location.search);
-    return { search: decodeURIComponent(queryParams.get('search')) || match.params.searchTerm }
+    return { search: queryParams.get('search') || match.params.searchTerm }
   }
 
   renderQuestions = list => (
@@ -114,7 +114,9 @@ class HelpPage extends React.Component {
       </React.Fragment>)
 
   filteredQA = (list, search) => {
+    if (!search) return list
     // Cleanup search inputs
+
     search = search.toLowerCase().split(" ")
       .reduce((search, term) =>
         !!term.trim() ?
@@ -122,18 +124,12 @@ class HelpPage extends React.Component {
           : search, [])
 
     const stringIncludes = (str, search) => search.every(term => str.toString().toLowerCase().includes(term))
-    const filterQA = (list, search) => list.filter(qa =>
-      stringIncludes(qa.question, search) || stringIncludes(qa.answer, search))
 
     const filtered = (list, search) => list.reduce((reduced, { category, qa_set }) => {
-      const qa = filterQA(qa_set, search)
-      if (/*stringIncludes(category, search) || */ !!qa.length) {
-        reduced.push({ category, qa_set: qa })
-      }
-      return reduced
+      const qa = qa_set.filter(qa => stringIncludes(qa.question, search) || stringIncludes(qa.answer, search))
+      return !!qa.length ? [...reduced, { category, qa_set: qa }] : reduced
     }, [])
 
-    if (!search) return list
     const filteredList = filtered(list, search)
     return filteredList
   }
