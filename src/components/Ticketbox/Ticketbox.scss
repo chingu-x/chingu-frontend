@@ -1,9 +1,10 @@
 @import '../../styles/abstracts/_variables.scss';
 
 .ticketbox-container {
-    position: absolute;
+    position: fixed;
     right: 20px;
     bottom: 20px;
+    z-index: $modal;
 }
 
 .ticketbox-btn--main {
@@ -17,6 +18,7 @@
     text-align: center;
     font-weight: 900;
     cursor: pointer;
+    user-select: none;
 }
 
 /*
