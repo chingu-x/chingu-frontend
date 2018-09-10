@@ -2,10 +2,10 @@ import * as React from "react";
 import { QA } from './HelpOther.js';
 import { DynamicFormContainer } from "../../DynamicForm";
 import { gql } from "apollo-boost";
-import { client } from "../../../";
+import { client } from "../../../index.js";
 import BackBtn from './BackBtn';
 
-class HelpOther extends React.Component {
+class GeneralHelp extends React.Component {
   state = { error: null, response: null };
 
   handleResponse = ({ data }) => {
@@ -50,4 +50,4 @@ class HelpOther extends React.Component {
   }
 }
 
-export default HelpOther;
+export default GeneralHelp;

@@ -3,7 +3,7 @@ import Success from './Success';
 import Error from './Error';
 import HelpOptions from './HelpOptions';
 import HelpPageSearch from './HelpPageSearch';
-import HelpOther from './HelpOther.jsx';
+import GeneralHelp from './GeneralHelp.jsx';
 
 class Help extends React.Component {
   state = { type: '', response: null, error: null }
@@ -22,9 +22,9 @@ class Help extends React.Component {
     let { switchRenderedType } = this.props;
     let { response } = this.state;
     switch (type) {
-      case 'team':
-      case 'other':
-        return <HelpOther 
+      case 'team help':
+      case 'general':
+        return <GeneralHelp 
                   category="other" 
                   setResponse={this.setResponse} 
                   switchHelpType={this.switchHelpType}/>

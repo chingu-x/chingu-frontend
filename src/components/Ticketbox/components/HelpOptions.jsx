@@ -5,7 +5,7 @@ const HelpOptions = ({ switchHelpType }) => {
       'help-team.png',
       'help-other.png'
     ];
-    let labels = ['team', 'other'];
+    let labels = ['team help', 'general'];
     return (
       <div className="help-btns--container">
         {
