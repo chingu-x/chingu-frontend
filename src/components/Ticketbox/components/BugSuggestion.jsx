@@ -2,7 +2,7 @@ import * as React from "react";
 import { DynamicFormContainer } from "../../DynamicForm";
 import { gql } from "apollo-boost";
 import { client } from "../../../";
-import { QA } from './formQA';
+import { QA } from './SuggestionBugQA.js';
 import Success from './Success';
 import Error from './Error';
 import BackBtn from './BackBtn';
