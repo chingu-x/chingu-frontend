@@ -34,7 +34,10 @@ class ExpansionPanel extends React.Component {
     all: false
   }
 
-  state = { keys: [] }
+  static getDerivedStateFromProps({ all, list }) {
+    if (all) return { keys: list.map(item => item.key) }
+    else return { keys: [] }
+  }
 
   handleClick = key => {
     const { keys } = this.state
@@ -62,7 +65,7 @@ class ExpansionPanel extends React.Component {
                   onClick={() => this.handleClick(listItem.key)}>
                   {label}
                 </div>
-                {(this.props.all || this.state.keys.includes(listItem.key)) && content}
+                {this.state.keys.includes(listItem.key) && content}
               </React.Fragment>
             )
           })
