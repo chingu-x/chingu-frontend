@@ -53,7 +53,7 @@ export default class extends React.Component {
     if (!!this.props.onModalClick) this.props.onModalClick()
     else if (!this.props.persist) this.close()
   }
-  
+  stopPropagation = (e) => e.stopPropagation();
   render() {
     const { background } = this.props
     // TODO Listen to events
@@ -63,7 +63,7 @@ export default class extends React.Component {
         onClick={this.handleModalClick}
         className={`modal ${background}`}
       >
-        { this.props.children }
+        <div onClick={e => this.stopPropagation(e)}>{ this.props.children }</div>
       </div>, 
       document.querySelector("#modal-root")
     )

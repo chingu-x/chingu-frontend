@@ -21,19 +21,29 @@
 
 /*
 ==========================
+PLACEMENT OF MODALS
+==========================
+*/
+.bug-suggestion-box,
+.ticketbox-btn-section {
+    position: absolute;
+    right: 20px;
+    bottom: 120px;
+    background-color: white;
+    box-shadow: $box-shadow;
+    padding: 30px;
+    width: 380px;
+}
+/*
+==========================
 TICKETBOX MAIN BTN SELECTION
 ==========================
 */
 .ticketbox-btn-section {
-    background-color: white;
-    box-shadow: $box-shadow;
-    padding: 30px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-    position: absolute;
-    right: 20px;
-    bottom: 120px;
+    grid-gap: 15px;
 }
 
 .ticketbox-btn--container {
@@ -44,8 +54,8 @@ TICKETBOX MAIN BTN SELECTION
     }
 }
 .ticketbox-btn {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background-color: none;
     box-shadow: $box-shadow;
@@ -54,4 +64,108 @@ TICKETBOX MAIN BTN SELECTION
     color: $dark-grey;
     text-transform: uppercase;
     letter-spacing: 1.5px;
+    width: 100px;
+}
+/*
+==========================
+BUG & SUGGESTION FORMS
+==========================
+*/
+.box-color {
+    width: calc(100% + 60px);
+    margin-left: -30px;
+    height: 50px;
+    margin-top: -30px;
+    margin-bottom: 20px;
+}
+
+.color--suggestion {
+    background-color: $suggestion;
+}
+.color--bug {
+    background-color: $bug;
+}
+.color--help {
+    background-color: $help;
+}
+.box-icon {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    // padding-top: 10px;
+}
+/*
+==========================
+FORM STYLING
+==========================
+*/
+.ticketbox-form {
+    .form-QA {
+        margin-bottom: 20px;
+    }
+    .form-question {
+        text-transform: uppercase;
+        letter-spacing: 1.3px;
+        color: $grey;
+        padding-bottom: 5px;
+    }
+    .form-input,
+    .form-text-area  {
+        padding: 10px;
+    }
+
+    .form-dropdown {
+        text-transform: capitalize;
+    }
+    .form-btn,
+    .form-btn--disabled {
+        float: right;
+    }
+    .form-back-btn {
+        float: left;
+        @include system-button($grey, $med-grey);
+        width: 100px;
+        margin-top: 20px;
+    }
+}
+/*
+==========================
+ERROR
+==========================
+*/
+.ticketbox-error-msg {
+    background-color: $palest-grey;
+    padding: 10px;
+    margin: 20px 0px;
+    letter-spacing: initial;
+    text-align: left;
+}
+.form-error-back-btn {
+    @include system-button($theme-green, $theme-green--hover);
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.ticketbox-subtext {
+    font-weight: 500;
+    line-height: 20px;
+}
+/*
+==========================
+SUCCESS FORM
+==========================
+*/
+.ticketbox-success {
+    text-align: center;
+    color: $dark-grey;
+    letter-spacing: 1.5px;
+    line-height: 35px;
+    font-weight: 600;
+    a {
+        color: $theme-green--hover;
+        text-transform: capitalize;
+        font-weight: 400;
+        border-bottom: 1px solid $theme-green--hover;
+        padding-bottom: 5px;
+    }
 }
