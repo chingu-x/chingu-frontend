@@ -54,7 +54,7 @@ class ExpansionPanel extends React.Component {
                   onClick={() => this.handleClick(listItem.key)}>
                   {label}
                 </div>
-                {this.state.keys.includes(listItem.key) && content}
+                {(this.props.all || this.state.keys.includes(listItem.key)) && content}
               </React.Fragment>
             )
           })
@@ -94,6 +94,22 @@ class HelpPage extends React.Component {
       )
     }))
 
+  filteredQA = (list, search) => {
+    const stringIncludes = (str, term) => str.toLowerCase().includes(term)
+    const filterQA = (list, term) => list.filter(qa =>
+      stringIncludes(qa.question, term) || stringIncludes(qa.answer, term))
+
+    const filtered = (list, term) => list.filter(cat => {
+      const qa = filterQA(cat.qa_set, term)
+      return stringIncludes(cat.category, term) || !!qa.length
+    })
+
+
+    if (!search) return list
+    const filteredList = filtered(list, search)
+    console.log({ filteredList })
+    return filteredList
+  }
 
   render() {
     const { search } = this.state
@@ -113,7 +129,7 @@ class HelpPage extends React.Component {
         <ExpansionPanel
             all={!!search}
           className="help-QA__container"
-          list={renderCategories(HelpQA)}
+            list={this.renderCategories(this.filteredQA(HelpQA, search))}
         />
       </div>
     </div>
