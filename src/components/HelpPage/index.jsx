@@ -13,6 +13,7 @@ import './Help.css';
 //     )
 
 class ExpansionPanel extends React.Component {
+  state = { keys: [] }
   static propTypes = {
     multi: PropTypes.bool, // Allows multiple open items
     defaultOpen: PropTypes.bool,// Opens all items by default (use with eg search filtered list)
@@ -35,7 +36,7 @@ class ExpansionPanel extends React.Component {
 
   static getDerivedStateFromProps({ defaultOpen, list }) {
     if (defaultOpen) return { keys: list.map(item => item.key) }
-    else return { keys: [] }
+    return null
   }
 
   handleClick = key => {
