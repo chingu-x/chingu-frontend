@@ -1,15 +1,16 @@
 import * as React from 'react';
 import PropTypes from "prop-types"
 import { HelpQA } from './help-qa.data';
+import ReactMarkdown from "react-markdown";
 import './Help.css';
 
-const mapStringtoFragments = str =>
-  str.split('\n')
-    .map((item, key) =>
-      <React.Fragment key={key}>
-        {item}<br />
-      </React.Fragment>
-    )
+// const mapStringtoFragments = str =>
+//   str.split('\n')
+//     .map((item, key) =>
+//       <React.Fragment key={key}>
+//         {item}<br />
+//       </React.Fragment>
+//     )
 
 
 class ExpansionPanel extends React.Component {
@@ -80,7 +81,9 @@ class HelpPage extends React.Component {
       return (
         <React.Fragment key={question}>
           <div className="QA-question">{question}</div>
-          <div className="QA-answer">{answer}</div>
+          <div className="QA-answer">
+            <ReactMarkdown>{answer}</ReactMarkdown>
+          </div>
         </React.Fragment>
       )
     })
@@ -121,27 +124,27 @@ class HelpPage extends React.Component {
   render() {
     const { search } = this.state
     console.log({ search })
-  return (
+    return (
       <div className="help-page--container" >
-      <div className="help-banner" />
-      <div className="help-container">
-        {/* <div className="help-background-color" /> */}
-        <div className="help-search-title">How can we help you?</div>
-        <input
-          className="help-search-bar"
-          type="search"
-          placeholder="Search Help"
+        <div className="help-banner" />
+        <div className="help-container">
+          {/* <div className="help-background-color" /> */}
+          <div className="help-search-title">How can we help you?</div>
+          <input
+            className="help-search-bar"
+            type="search"
+            placeholder="Search Help"
             onChange={e => this.setState({ search: e.target.value })}
-        />
-        <ExpansionPanel
+          />
+          <ExpansionPanel
             all={!!search}
-          className="help-QA__container"
+            className="help-QA__container"
             list={this.renderCategories(this.filteredQA(HelpQA, search))}
-        />
+          />
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
 }
 
 export default HelpPage;
