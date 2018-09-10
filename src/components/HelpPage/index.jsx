@@ -3,6 +3,13 @@ import PropTypes from "prop-types"
 import { HelpQA } from './help-qa.data';
 import './Help.css';
 
+const mapStringtoFragments = str =>
+  str.split('\n')
+    .map((item, key) =>
+      <React.Fragment key={key}>
+        {item}<br />
+      </React.Fragment>
+    )
 
 
 class ExpansionPanel extends React.Component {
