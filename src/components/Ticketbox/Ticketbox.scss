@@ -67,12 +67,14 @@ TICKETBOX MAIN BTN SELECTION
     border-radius: 50%;
     background-color: none;
     box-shadow: $box-shadow;
+    cursor: pointer;
 }
 .ticketbox-btn--text {
     color: $dark-grey;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     width: 100px;
+    cursor: pointer;
 }
 /*
 ==========================
@@ -120,26 +122,36 @@ HELP TICKET
         margin-top: 26px;
         margin-right: 0px;
     }
+    .form-question {
+        text-align: center;
+        margin-top: 40px;
+    }
     .form-input {
         width: 75%;
         display: inline-block;
         margin-top: 0px;
-        height: 35px;
+        height: 45px;
+        color: $dark-grey;
+        &::placeholder {
+            color: $grey;
+        }
     }
     .hline {
-        margin-top: 30px;
+        margin-top: 40px;
     }
 }
 .form-btn-submit--icon {
     display: inline-block;
     background-color: $theme-green;
     color: white;
-    height: 35px;
+    height: 45px;
     border: 1px solid $theme-green;
     text-align: center;
-    font-weight: 800;
-    font-size: 20px;
+    font-weight: 600;
+    font-size: 22px;
     width: 25%;
+    cursor: pointer;
+    box-shadow: $box-shadow;
 }
 /*
 ==========================
