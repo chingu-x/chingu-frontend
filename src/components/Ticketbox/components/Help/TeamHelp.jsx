@@ -52,12 +52,12 @@ class TeamHelp extends React.Component {
     }
   }
 
-  getQuestions = (subtype, teams, teamID) => {
+  getQuestions = (subtype, teams, teamID, currentUserID) => {
     switch (subtype) {
       case 'inactivity':
         return [
           ...TeamHelpBaseQA(teams),
-          ...InactivityQA(teams, teamID),
+          ...InactivityQA(teams, teamID, currentUserID),
           ContextQA,
         ];
       default:
@@ -106,7 +106,7 @@ class TeamHelp extends React.Component {
   }
 
   render() {
-    const { setResponse, switchHelpType, user } = this.props;
+    const { setResponse, switchHelpType, loading, data: { user } } = this.props;
     const { error, response, requestSubtype, teamID } = this.state;
 
     if (error) return switchHelpType('error');
@@ -167,8 +167,7 @@ class TeamHelp extends React.Component {
     };
 
     // TODO: replace with user when querying for actual user
-    const questions = this.getQuestions(requestSubtype, userMock.teams, teamID);
-
+    const questions = this.getQuestions(requestSubtype, userMock.teams, teamID, user.id);
     return (
       <div className="help-team-container">
         <div className="ticketbox-form">
@@ -176,12 +175,12 @@ class TeamHelp extends React.Component {
             loading
               ? <Loader size="medium" height="478.6px" color="#E20000" />
               : <DynamicFormContainer
-            purpose="team-help-request"
-            questions={questions}
-            onSubmit={this.submitRequest}
-            onInputChange={this.handleInputChange}
-            persistence
-          />
+                purpose="team-help-request"
+                questions={questions}
+                onSubmit={this.submitRequest}
+                onInputChange={this.handleInputChange}
+                persistence
+              />
           }
           <BackBtn path={"help-options"} switchHelpType={switchHelpType} />
         </div>
@@ -190,6 +189,7 @@ class TeamHelp extends React.Component {
   }
 }
 
+// export default TeamHelp
 export default props =>
   <Request
     {...props}

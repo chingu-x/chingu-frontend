@@ -17,9 +17,13 @@ export const TeamHelpBaseQA = teams => [
   }
 ];
 
-export const InactivityQA = (teams, teamID) => {
+export const InactivityQA = (teams, teamID, currentUserID) => {
+  console.log({teams, teamID, currentUserID})
   const team = teams.find(({ id }) => id === Number(teamID));
-  const options = team.cohort_users.map(({ user }) => user);
+  // filters current user from options and maps rest to options array
+  // TODO: Check when Request added
+  const options = team.cohort_users.reduce((opts, { user }) => 
+    user.id != currentUserID ? [...opts, user] : opts, []);
 
   return [
     {
