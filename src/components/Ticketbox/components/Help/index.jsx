@@ -55,7 +55,10 @@ class Help extends React.Component {
           <img className="box-icon" alt="icon" src={imgSrc} />
         </div>
         {this.renderHelpSections(type)}
-        {type === "help-options" && <BackBtn className="form-btn" path={""} switchRenderedType={this.props.switchRenderedType} />}
+        {type === "help-options" &&
+          <BackBtn
+            className="form-btn"
+            switchRenderedType={this.props.switchRenderedType} />}
       </div>
     )
   }
