@@ -38,13 +38,10 @@ class HelpPageSearch extends React.Component {
           onClick={() => this.searchHelpPage()}
         >?</div>
         <hr className="hline" />
-        {/* <BackBtn switchHelpType={switchHelpType} path={""} /> */}
-        <input
-          className="form-btn" // TODO: fix color or modify Backbtn styling to be centered (preferred)
-          value="Back"
-          type="button"
-          onClick={() => switchHelpType('help-options')}
-        />
+        <BackBtn
+          switchHelpType={switchHelpType}
+          path={""}
+          className="form-btn" />
       </div>
     )
   }
