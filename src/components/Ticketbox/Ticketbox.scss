@@ -68,6 +68,9 @@ TICKETBOX MAIN BTN SELECTION
     background-color: none;
     box-shadow: $box-shadow;
     cursor: pointer;
+    &.disabled {
+      cursor: default;
+    }
 }
 .ticketbox-btn--text {
     color: $dark-grey;

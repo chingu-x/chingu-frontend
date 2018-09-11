@@ -1,29 +1,35 @@
 import * as React from "react";
 
-const HelpOptions = ({ switchHelpType }) => {
-    let assets = [
-      'help-team.png',
-      'help-other.png'
-    ];
-    let labels = ['team help', 'general'];
-    return (
-      <div className="help-btns--container">
-        {
-          labels.map((text, idx) => {
-            return (
-              <div key={idx} onClick={() => switchHelpType(text)} className="help-btns">
-                <img
-                  className="ticketbox-btn"
-                  alt="ticketbox-btn"
-                  src={require(`../../../../assets/${assets[idx]}`)}
-                />
-                <div className="ticketbox-btn--text">{text}</div>
-              </div>
-            )
-          })
-        }
-      </div>
-    )
-  }
+const HelpOptions = ({ switchHelpType, hasActiveTeams }) => {
+  const buttons = [{
+    text: "team help",
+    src: hasActiveTeams ? 'help-team.png' : 'help-team-disabled.png',
+    className: `ticketbox-btn${hasActiveTeams ? "" : " disabled"}`,
+    disabled: !hasActiveTeams
+  }, {
+    text: "general",
+    src: "help-other.png",
+    className: "ticketbox-btn"
+  }]
 
-  export default HelpOptions;
+  return (
+    <div className="help-btns--container">
+      {
+        buttons.map(({ text, src, className, disabled }) => {
+          return (
+            <div key={text} onClick={() => !disabled && switchHelpType(text)}>
+              <img
+                className={className}
+                alt="ticketbox-btn"
+                src={require(`../../../../assets/${src}`)}
+              />
+              <div className="ticketbox-btn--text">{text}</div>
+            </div>
+          )
+        })
+      }
+    </div>
+  )
+}
+
+export default HelpOptions;
