@@ -67,7 +67,7 @@ export const InactivityQA = [
   {
     text: 'Last Contacted',
     input_type: 'date',
-    field_name: 'last_contacted'
+    field_name: 'last_contact'
   },
   {
     text: 'Description',
