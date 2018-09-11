@@ -65,8 +65,8 @@ TICKETBOX MAIN BTN SELECTION
       cursor: default;
       transform: none;
     }
-}
-.ticketbox-btn {
+  }
+  .ticketbox-btn {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -76,16 +76,12 @@ TICKETBOX MAIN BTN SELECTION
     &.disabled {
       cursor: default;
     }
-    &:hover {
-      transform: scale(1.1);
-    }
 }
 .ticketbox-btn--text {
     color: $dark-grey;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     width: 100px;
-    cursor: pointer;
 }
 /*
 ==========================
