@@ -16,7 +16,7 @@ class TeamHelp extends React.Component {
     const { name, value } = e.currentTarget;
     const feedback_data = { ...this.state.feedback_data };
 
-    feedback_data[name] = feedback_data[name] = value;
+    feedback_data[name] = value;
 
     this.setState({ feedback_data });
   }
@@ -28,10 +28,12 @@ class TeamHelp extends React.Component {
 
   handleError = error => this.setState({ error });
 
-  submitTicket = (feedback_data) => {
+  submitTicket = () => {
+    let { feedback_data } = this.state;
     const mutation = gql``;
 
-    const variables = { feedback_data };
+    const variables = feedback_data;
+    console.log(variables);
     client.mutate({ mutation, variables })
       .then(this.handleResponse)
       .catch(this.handleError);
@@ -40,6 +42,8 @@ class TeamHelp extends React.Component {
   render() {
     const { category, setResponse, switchHelpType } = this.props;
     const { error, response, feedback_data } = this.state;
+    let questionType = feedback_data.request_subtype === 'inactivity' ? InactivityQA : TextQA;
+
     if (error) {
       switchHelpType('error');
     }
@@ -51,6 +55,16 @@ class TeamHelp extends React.Component {
         <div className="ticketbox-form">
           {dynamicFormMaker(QA, feedback_data, this.onChangeHandler)}
           {
+            feedback_data.request_subtype
+            && dynamicFormMaker(questionType, feedback_data, this.onChangeHandler)
+          }
+          <input
+            type="submit"
+            className="form-btn"
+            value="Submit"
+            onClick={() => this.submitTicket()}
+          />
+          {/* {
             feedback_data.request_subtype 
               && <DynamicFormContainer
                 hiddenData={{ category }}
@@ -59,7 +73,7 @@ class TeamHelp extends React.Component {
                 persistence
                 purpose="ticketbox"
               />
-          } 
+          }  */}
           <BackBtn path={"help-options"} switchHelpType={switchHelpType} />
         </div>
       </div>
