@@ -45,6 +45,7 @@ TICKETBOX MAIN BTN SELECTION
         @include system-button($grey, $med-grey);
         width: 100px;
         margin-top: 20px;
+        cursor: pointer;
     }
 }
 .ticketbox-btn-section {
@@ -193,6 +194,7 @@ FORM STYLING
     width: 100px;
     margin: 0 auto;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 /*
