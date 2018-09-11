@@ -45,6 +45,7 @@ TICKETBOX MAIN BTN SELECTION
         @include system-button($grey, $med-grey);
         width: 100px;
         margin-top: 20px;
+        cursor: pointer;
     }
 }
 .ticketbox-btn-section {
@@ -57,24 +58,31 @@ TICKETBOX MAIN BTN SELECTION
 .ticketbox-btn--container {
     text-align: center;
     cursor: pointer;
+    transition: all .075s ease-out;
     &:hover {
-        transform: scale(1.1);
+      transform: scale(1.1);
     }
-}
-.ticketbox-btn {
+    &.disabled {
+      cursor: default;
+      transform: none;
+    }
+  }
+  .ticketbox-btn {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     background-color: none;
     box-shadow: $box-shadow;
     cursor: pointer;
+    &.disabled {
+      cursor: default;
+    }
 }
 .ticketbox-btn--text {
     color: $dark-grey;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     width: 100px;
-    cursor: pointer;
 }
 /*
 ==========================
@@ -114,7 +122,7 @@ HELP TICKET
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
     text-align: center;
-    justify-items: center;  
+    justify-items: center; 
 }
 .help-page-search-container { // TODO: shitty temporary styling
     .form-btn {
@@ -181,6 +189,14 @@ FORM STYLING
         float: right;
     }
 }
+.back-btn--centered {
+    @include system-button($theme-green, $theme-green--hover);
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
 /*
 ==========================
 ERROR
@@ -192,12 +208,6 @@ ERROR
     margin: 20px 0px;
     letter-spacing: initial;
     text-align: left;
-}
-.form-error-back-btn {
-    @include system-button($theme-green, $theme-green--hover);
-    width: 100px;
-    margin: 0 auto;
-    margin-top: 20px;
 }
 .ticketbox-subtext {
     font-weight: 500;

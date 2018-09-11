@@ -182,7 +182,7 @@ class TeamHelp extends React.Component {
                 persistence
               />
           }
-          <BackBtn path={"help-options"} switchHelpType={switchHelpType} />
+          <BackBtn path={"help-options"} type="left" switchHelpType={switchHelpType} />
         </div>
       </div>
     )

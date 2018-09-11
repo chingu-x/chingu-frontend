@@ -8,8 +8,8 @@ const TicketBoxError = ({ switchRenderedType }) => (
     <div className="ticketbox-subtext">
       We seem to have hit an error, <br /> so please try again later!
       </div>
-    <BackBtn type="error" switchRenderedType={switchRenderedType} path={""} />
+    <BackBtn switchRenderedType={switchRenderedType} path={""} />
   </div>
 );
 
-export default Error;
+export default TicketBoxError;

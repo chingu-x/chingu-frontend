@@ -1,14 +1,28 @@
 import * as React from "react";
 import Success from '../Success';
-import Error from '../Error';
+import TicketBoxError from '../TicketBoxError';
 import HelpOptions from './HelpOptions';
 import HelpPageSearch from './HelpPageSearch';
 import TeamHelp from './TeamHelp';
 import BackBtn from "../BackBtn"
+import { gql } from "apollo-boost"
+import Request from "../../../utilities/Request"
+
+// Check if user has any active teams
+// TODO: Make sure cache already has this OR fetch all data needed for TeamHelp
+const userActiveTeamsBaseQuery = gql`
+  query getUserActiveTeamsBase {
+    user {
+      id
+      teams(only_active: true) {
+        id
+      }
+    }
+  }
+`
 
 class Help extends React.Component {
   state = { type: 'help-options', response: null, error: null }
-
 
   switchHelpType = (type) => {
     this.setState({ type })
@@ -21,11 +35,10 @@ class Help extends React.Component {
   }
 
   renderHelpSections = (type) => {
-    let { switchRenderedType } = this.props;
+    let { switchRenderedType, data: { user } } = this.props;
     let { response } = this.state;
     switch (type) {
       case 'team help':
-        // TODO: grey / disable this when the user is not on any teams?
         return <TeamHelp
           category="team"
           setResponse={this.setResponse}
@@ -35,17 +48,17 @@ class Help extends React.Component {
           switchRenderedType={switchRenderedType}
           switchHelpType={this.switchHelpType} />
       case 'error':
-        return <Error
+        return <TicketBoxError
           switchRenderedType={switchRenderedType} />
       case 'success': // TODO: help requests dont have an associated github issue
         return <Success category="help" url={response.github_issue.url} />
       default:
-        return <HelpOptions switchHelpType={this.switchHelpType} />
+        return <HelpOptions switchHelpType={this.switchHelpType} hasActiveTeams={user && !!user.teams.length} />
     }
   }
 
   render() {
-    const { category } = this.props;
+    const { category, switchRenderedType } = this.props;
     const { type } = this.state;
     const imgSrc = require(`../../../../assets/Artboard 4-small.png`);
 
@@ -57,11 +70,17 @@ class Help extends React.Component {
         {this.renderHelpSections(type)}
         {type === "help-options" &&
           <BackBtn
-            className="form-btn"
-            switchRenderedType={this.props.switchRenderedType} />}
+            path=""
+            switchRenderedType={switchRenderedType} />}
       </div>
     )
   }
 }
 
-export default Help;
+// export default Help;
+export default props =>
+  <Request
+    {...props}
+    component={Help}
+    query={userActiveTeamsBaseQuery}
+  />

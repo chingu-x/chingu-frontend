@@ -10,7 +10,7 @@ const BackBtn = ({
     <input
       type="button"
       value="BACK"
-      className={type === 'error' ? "form-error-back-btn" : className}
+      className={type === 'left' ? "form-back-btn" : "back-btn--centered"}
       onClick={switchHelpType ? () => switchHelpType(path) : () => switchRenderedType(path)}
     />
   );
