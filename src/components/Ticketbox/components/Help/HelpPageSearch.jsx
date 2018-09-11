@@ -1,6 +1,6 @@
 import * as React from "react";
 import BackBtn from '../BackBtn';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 class HelpPageSearch extends React.Component {
   state = {
@@ -12,18 +12,24 @@ class HelpPageSearch extends React.Component {
     this.setState({ searchTerm: value })
   }
   searchHelpPage = () => {
-    this.setState({ shouldRedirect: true })
+    // this.setState({ shouldRedirect: true })
+    /**
+    * TEMP using ueryString redirect
+    * NOTE: There is bug where ticketbox doesn't close on route redirect. DO NOT FIX
+    * PopupMenu utility will close dropdowns/popups on route changes by default.
+    */
+    return this.props.history.push(`/help?search=${this.state.searchTerm}`)
   }
   render() {
     let { shouldRedirect, searchTerm } = this.state;
     let { switchRenderedType, switchHelpType } = this.props;
 
-    if (shouldRedirect) {
-      <Redirect
-        push={true}
-        to={`/help/${searchTerm}`}
-      />
-    }
+    // if (shouldRedirect) {
+    //   <Redirect /> // missing return
+    //     push={true}
+    //     to={`/help/${searchTerm}`}
+    //   />
+    // }
     return (
       <div className="help-page-search-container">
         <div className="form-question">Have a Question?</div>
@@ -31,23 +37,20 @@ class HelpPageSearch extends React.Component {
           className="form-input"
           placeholder="Search our help section"
           type="text"
-          onKeyUp={(e) => this.handleInput(e)}
+          onKeyUp={this.handleInput}
         />
         <div
           className="form-btn-submit--icon"
-          onClick={() => this.searchHelpPage()}
+          onClick={this.searchHelpPage}
         >?</div>
         <hr className="hline" />
-        {/* <BackBtn switchHelpType={switchHelpType} path={""} /> */}
-        <input
-          className="form-btn" // TODO: fix color or modify Backbtn styling to be centered (preferred)
-          value="Back"
-          type="button"
-          onClick={() => switchHelpType('help-options')}
-        />
+        <BackBtn
+          path={"help-options"}
+          switchHelpType={switchHelpType}
+          className="form-btn" />
       </div>
     )
   }
 }
 
-export default HelpPageSearch;
+export default withRouter(HelpPageSearch);

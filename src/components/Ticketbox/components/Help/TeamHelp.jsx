@@ -1,12 +1,36 @@
 import * as React from "react";
 import BackBtn from '../BackBtn';
-import { DynamicFormContainer, dynamicFormMaker } from "../../../DynamicForm";
 import { gql } from "apollo-boost";
+import { DynamicFormContainer, dynamicFormMaker } from "../../../DynamicForm";
 import { client } from "../../../../";
+import Request from "../../../utilities/Request"
+import Loader from "../../../Loader"
 import { TeamHelpBaseQA, InactivityQA, ContextQA } from './TeamHelpQA';
 
+const userActiveTeamsQuery = gql`
+ query getUserActiveTeams {
+  user {
+    id
+    teams(only_active: true) {
+      id
+      title
+      project { 
+        id
+        title
+      }
+      cohort_users {
+        user {
+          id
+          username
+          avatar
+        }
+      }
+    }
+  }
+ }
+`
 class TeamHelp extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     const persistedData = localStorage.getItem("team-help-request");
@@ -28,12 +52,12 @@ class TeamHelp extends React.Component {
     }
   }
 
-  getQuestions = (subtype, teams, teamID) => {
+  getQuestions = (subtype, teams, teamID, currentUserID) => {
     switch (subtype) {
       case 'inactivity':
         return [
           ...TeamHelpBaseQA(teams),
-          ...InactivityQA(teams, teamID),
+          ...InactivityQA(teams, teamID, currentUserID),
           ContextQA,
         ];
       default:
@@ -48,7 +72,7 @@ class TeamHelp extends React.Component {
     if (!['request_subtype', 'team_id'].includes(fieldName)) return;
 
     // update values when DFContainer input changes
-    if (fieldName === 'request_subtype'){
+    if (fieldName === 'request_subtype') {
       this.setState({ requestSubtype: value });
     } else if (fieldName === 'team_id') {
       this.setState({ teamID: value });
@@ -82,9 +106,9 @@ class TeamHelp extends React.Component {
   }
 
   render() {
-    const { setResponse, switchHelpType, user } = this.props;
+    const { setResponse, switchHelpType, loading, data: { user } } = this.props;
     const { error, response, requestSubtype, teamID } = this.state;
-    
+
     if (error) return switchHelpType('error');
     if (response) return setResponse(response);
 
@@ -94,81 +118,82 @@ class TeamHelp extends React.Component {
         {
           id: 1,
           title: "Vampires Team 0",
-          project: { 
+          project: {
             id: 1,
             title: "Chingu API",
           },
           cohort_users: [
-            { user: {
-              id: 1,
-              username: "the-vampiire",
-              avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
-            }},
-            { user: {
-              id: 2,
-              username: "thinktwice13",
-              avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
-            }},
+            {
+              user: {
+                id: 1,
+                username: "the-vampiire",
+                avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
+              }
+            },
+            {
+              user: {
+                id: 2,
+                username: "thinktwice13",
+                avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
+              }
+            },
           ],
         },
         {
           id: 2,
           title: "Werewolves Team 0",
-          project: { 
+          project: {
             id: 2,
             title: "Chingu Frontend",
           },
           cohort_users: [
-            { user: {
-              id: 3,
-              username: "serpient",
-              avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
-            }},
-            { user: {
-              id: 1,
-              username: "the-vampiire",
-              avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
-            }},
+            {
+              user: {
+                id: 3,
+                username: "serpient",
+                avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
+              }
+            },
+            {
+              user: {
+                id: 1,
+                username: "the-vampiire",
+                avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
+              }
+            },
           ]
         },
       ],
     };
 
     // TODO: replace with user when querying for actual user
-    const questions = this.getQuestions(requestSubtype, userMock.teams, teamID);
-
+    const questions = this.getQuestions(requestSubtype, userMock.teams, teamID, user.id);
     return (
       <div className="help-team-container">
         <div className="ticketbox-form">
-          <DynamicFormContainer
-            purpose="team-help-request"
-            questions={questions}
-            onSubmit={this.submitRequest}
-            onInputChange={this.handleInputChange}
-            persistence
-          />
+          {
+            loading
+              ? <Loader size="medium" height="478.6px" color="#E20000" />
+              : <DynamicFormContainer
+                purpose="team-help-request"
+                questions={questions}
+                onSubmit={this.submitRequest}
+                onInputChange={this.handleInputChange}
+                persistence
+              />
+          }
           <BackBtn path={"help-options"} switchHelpType={switchHelpType} />
         </div>
       </div>
     )
   }
 }
-// TODO: export wrapped in <Request> wrapper. get user with following shape:
-`
-teams(only_active: true) {
-  id
-  title
-  project { 
-    id
-    title
-  }
-  cohort_users {
-    user {
-      id
-      username
-      avatar
-    }
-  }
-}
-`
-export default TeamHelp;
+
+// export default TeamHelp
+export default props =>
+  <Request
+    {...props}
+    query={userActiveTeamsQuery}
+    component={TeamHelp}
+  />
+
