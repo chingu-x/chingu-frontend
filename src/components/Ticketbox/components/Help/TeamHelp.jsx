@@ -1,9 +1,10 @@
 import * as React from "react";
 import BackBtn from '../BackBtn';
-import { DynamicFormContainer, dynamicFormMaker } from "../../../DynamicForm";
 import { gql } from "apollo-boost";
+import { DynamicFormContainer, dynamicFormMaker } from "../../../DynamicForm";
 import { client } from "../../../../";
 import Request from "../../../utilities/Request"
+import Loader from "../../../Loader"
 import { TeamHelpBaseQA, InactivityQA, ContextQA } from './TeamHelpQA';
 
 const userActiveTeamsQuery = gql`
@@ -171,13 +172,17 @@ class TeamHelp extends React.Component {
     return (
       <div className="help-team-container">
         <div className="ticketbox-form">
-          <DynamicFormContainer
+          {
+            loading
+              ? <Loader size="medium" height="478.6px" color="#E20000" />
+              : <DynamicFormContainer
             purpose="team-help-request"
             questions={questions}
             onSubmit={this.submitRequest}
             onInputChange={this.handleInputChange}
             persistence
           />
+          }
           <BackBtn path={"help-options"} switchHelpType={switchHelpType} />
         </div>
       </div>
