@@ -7,7 +7,8 @@ import TeamHelp from './TeamHelp';
 import BackBtn from "../BackBtn"
 
 class Help extends React.Component {
-  state = { type: '', response: null, error: null }
+  state = { type: 'help-options', response: null, error: null }
+
 
   switchHelpType = (type) => {
     this.setState({ type })
@@ -54,7 +55,7 @@ class Help extends React.Component {
           <img className="box-icon" alt="icon" src={imgSrc} />
         </div>
         {this.renderHelpSections(type)}
-        <BackBtn className="form-btn" path={""} switchRenderedType={this.props.switchRenderedType} />
+        {type === "help-options" && <BackBtn className="form-btn" path={""} switchRenderedType={this.props.switchRenderedType} />}
       </div>
     )
   }
