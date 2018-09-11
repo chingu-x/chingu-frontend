@@ -23,6 +23,11 @@ import Loader from "../Loader"
  * Component receives props passed to it as well as data and the loading state, so that components which don't require the globalLoader can still handle the loading in some way
  */
 
+/**
+ * TODO:
+ * component, query, options and globalLoader props should be consumed by the Request wrapper!! (otherwise, component keep receiveg themselves)
+ * Move ...props and variables props to the end of args list
+ */
 const Request = ({
   ...props,
   component: Component,
