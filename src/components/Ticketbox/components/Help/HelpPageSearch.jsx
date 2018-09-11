@@ -47,7 +47,7 @@ class HelpPageSearch extends React.Component {
         <BackBtn
           path={"help-options"}
           switchHelpType={switchHelpType}
-          className="form-btn" />
+        />
       </div>
     )
   }

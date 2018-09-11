@@ -1,6 +1,6 @@
 import * as React from "react";
 import Success from '../Success';
-import Error from '../Error';
+import TicketBoxError from '../TicketBoxError';
 import HelpOptions from './HelpOptions';
 import HelpPageSearch from './HelpPageSearch';
 import TeamHelp from './TeamHelp';
@@ -35,7 +35,7 @@ class Help extends React.Component {
           switchRenderedType={switchRenderedType}
           switchHelpType={this.switchHelpType} />
       case 'error':
-        return <Error
+        return <TicketBoxError
           switchRenderedType={switchRenderedType} />
       case 'success': // TODO: help requests dont have an associated github issue
         return <Success category="help" url={response.github_issue.url} />
@@ -45,7 +45,7 @@ class Help extends React.Component {
   }
 
   render() {
-    const { category } = this.props;
+    const { category, switchRenderedType } = this.props;
     const { type } = this.state;
     const imgSrc = require(`../../../../assets/Artboard 4-small.png`);
 
@@ -57,8 +57,8 @@ class Help extends React.Component {
         {this.renderHelpSections(type)}
         {type === "help-options" &&
           <BackBtn
-            className="form-btn"
-            switchRenderedType={this.props.switchRenderedType} />}
+            path=""
+            switchRenderedType={switchRenderedType} />}
       </div>
     )
   }

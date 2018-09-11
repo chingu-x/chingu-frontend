@@ -181,6 +181,13 @@ FORM STYLING
         float: right;
     }
 }
+.back-btn--centered {
+    @include system-button($theme-green, $theme-green--hover);
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
 /*
 ==========================
 ERROR
@@ -192,12 +199,6 @@ ERROR
     margin: 20px 0px;
     letter-spacing: initial;
     text-align: left;
-}
-.form-error-back-btn {
-    @include system-button($theme-green, $theme-green--hover);
-    width: 100px;
-    margin: 0 auto;
-    margin-top: 20px;
 }
 .ticketbox-subtext {
     font-weight: 500;

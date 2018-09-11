@@ -4,7 +4,7 @@ import { gql } from "apollo-boost";
 import { client } from "../../../../";
 import { QA } from './BugSuggestionQA';
 import Success from '../Success';
-import Error from '../Error';
+import TicketBoxError from '../TicketBoxError';
 import BackBtn from '../BackBtn';
 
 class BugSuggestion extends React.Component {
@@ -36,7 +36,7 @@ class BugSuggestion extends React.Component {
   }
 
   render() {
-    const { category } = this.props;
+    const { category, switchRenderedType } = this.props;
     const { error, response } = this.state;
     const imgFile = category === 'bug' ? 'Artboard 3-small.png' : 'Artboard 2-small.png';
     const imgSrc = require(`../../../../assets/${imgFile}`);
@@ -47,8 +47,8 @@ class BugSuggestion extends React.Component {
           <div className={`box-color color--${category}`}>
             <img className="box-icon" alt="icon" src={imgSrc} />
           </div>
-          <Error
-            switchRenderedType={this.props.switchRenderedType}
+          <TicketBoxError
+            switchRenderedType={switchRenderedType}
           />
         </div>
       )
@@ -71,7 +71,7 @@ class BugSuggestion extends React.Component {
                   persistence
                   purpose="ticketbox"
                 />
-                <BackBtn path={""} switchRenderedType={this.props.switchRenderedType} />
+                <BackBtn type="left" path={""} switchRenderedType={switchRenderedType} />
               </div>
             )
         }
