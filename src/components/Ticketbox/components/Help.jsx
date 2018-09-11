@@ -3,7 +3,8 @@ import Success from './Success';
 import Error from './Error';
 import HelpOptions from './HelpOptions';
 import HelpPageSearch from './HelpPageSearch';
-import GeneralHelp from './GeneralHelp.jsx';
+import GeneralHelp from './GeneralHelp';
+import TeamHelp from './TeamHelp';
 
 class Help extends React.Component {
   state = { type: '', response: null, error: null }
@@ -23,6 +24,10 @@ class Help extends React.Component {
     let { response } = this.state;
     switch (type) {
       case 'team help':
+        return <TeamHelp
+                  category="team"
+                  setResponse={this.setResponse}
+                  switchHelpType={this.switchHelpType} />
       case 'general':
         return <GeneralHelp 
                   category="other" 
@@ -32,14 +37,13 @@ class Help extends React.Component {
         return <HelpOptions switchHelpType={this.switchHelpType} />
       case 'error':
         return <Error
-                switchRenderedType={switchRenderedType}
-              />
+                switchRenderedType={switchRenderedType} />
       case 'success':
         return <Success category="help" url={response.github_issue.url} />
       default:
         return <HelpPageSearch
-          switchRenderedType={switchRenderedType}
-          switchHelpType={this.switchHelpType} />
+                switchRenderedType={switchRenderedType}
+                switchHelpType={this.switchHelpType} />
     }
   }
 
