@@ -39,7 +39,6 @@ class Help extends React.Component {
     let { response } = this.state;
     switch (type) {
       case 'team help':
-        // TODO: grey / disable this when the user is not on any teams?
         return <TeamHelp
           category="team"
           setResponse={this.setResponse}

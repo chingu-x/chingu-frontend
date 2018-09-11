@@ -4,26 +4,27 @@ const HelpOptions = ({ switchHelpType, hasActiveTeams }) => {
   const buttons = [{
     text: "team help",
     src: hasActiveTeams ? 'help-team.png' : 'help-team-disabled.png',
-    className: `ticketbox-btn${hasActiveTeams ? "" : " disabled"}`,
-    disabled: !hasActiveTeams
+    disabled: hasActiveTeams ? "" : " disabled"
   }, {
     text: "general",
     src: "help-other.png",
-    className: "ticketbox-btn"
+    disabled: ""
   }]
 
   return (
     <div className="help-btns--container">
       {
-        buttons.map(({ text, src, className, disabled }) => {
+        buttons.map(({ text, src, disabled }) => {
           return (
-            <div key={text} onClick={() => !disabled && switchHelpType(text)}>
-              <img
-                className={className}
-                alt="ticketbox-btn"
-                src={require(`../../../../assets/${src}`)}
-              />
-              <div className="ticketbox-btn--text">{text}</div>
+            <div className={`ticketbox-btn--container${disabled}`}>
+              <div key={text} onClick={() => !disabled && switchHelpType(text)}>
+                <img
+                  className={`ticketbox-btn${disabled}`}
+                  alt="ticketbox-btn"
+                  src={require(`../../../../assets/${src}`)}
+                />
+                <div className="ticketbox-btn--text">{text}</div>
+              </div>
             </div>
           )
         })

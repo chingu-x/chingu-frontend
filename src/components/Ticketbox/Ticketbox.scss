@@ -57,8 +57,13 @@ TICKETBOX MAIN BTN SELECTION
 .ticketbox-btn--container {
     text-align: center;
     cursor: pointer;
+    transition: all .075s ease-out;
     &:hover {
-        transform: scale(1.1);
+      transform: scale(1.1);
+    }
+    &.disabled {
+      cursor: default;
+      transform: none;
     }
 }
 .ticketbox-btn {
