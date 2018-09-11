@@ -38,20 +38,23 @@ const InfoComponents = ({ team }) => {
   let cohort = team.cohort;
   let project = team.project;
   let infoObjects = [
-    { label: 'Team Name', data: team.title },
-    { label: 'Voyage Dates', data: dateFormatter(cohort.start_date) + " - " + dateFormatter(cohort.end_date) },
+    { label: 'Voyage', data: `${cohort.title} - ${dateFormatter(cohort.start_date)} - ${dateFormatter(cohort.end_date)}` },
     { label: 'Status', data: cohort.status },
+    { label: 'Team', data: team.title },
     { label: 'Tier', data: 'Tier ' + team.tier.level },
-    { label: 'Team', data: project.users },
     { label: 'Project', data: project.title },
     { label: 'Elevator Pitch', data: project.elevator_pitch },
+    { label: 'Members', data: project.users },
     // { label: 'TechStack', data: project.skills },
   ]
 
   return infoObjects.map((info, idx) => {
     let data;
     switch (info.label) {
-      case 'Team':
+      case "Tier":
+        data = <span key={idx} className="tier-icon">{info.data}</span>
+        break;
+      case 'Members':
         data = info.data.map((user, idx) => {
           return (
             <Link to={`/profile/${user.username}`} key={idx} className="team-card-user">

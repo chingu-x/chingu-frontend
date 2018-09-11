@@ -41,10 +41,14 @@ const profileQuery = gql`
         project {
             id
             title
-            description
+            elevator_pitch
+            images {
+              id
+              url
+            }
             users {
-                username
-                avatar
+              username
+              avatar
             }
         }
       }
