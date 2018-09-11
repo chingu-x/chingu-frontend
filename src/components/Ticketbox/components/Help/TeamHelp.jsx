@@ -3,10 +3,33 @@ import BackBtn from '../BackBtn';
 import { DynamicFormContainer, dynamicFormMaker } from "../../../DynamicForm";
 import { gql } from "apollo-boost";
 import { client } from "../../../../";
+import Request from "../../../utilities/Request"
 import { TeamHelpBaseQA, InactivityQA, ContextQA } from './TeamHelpQA';
 
+const userActiveTeamsQuery = gql`
+ query getUserActiveTeams {
+  user {
+    id
+    teams(only_active: true) {
+      id
+      title
+      project { 
+        id
+        title
+      }
+      cohort_users {
+        user {
+          id
+          username
+          avatar
+        }
+      }
+    }
+  }
+ }
+`
 class TeamHelp extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     const persistedData = localStorage.getItem("team-help-request");
@@ -48,7 +71,7 @@ class TeamHelp extends React.Component {
     if (!['request_subtype', 'team_id'].includes(fieldName)) return;
 
     // update values when DFContainer input changes
-    if (fieldName === 'request_subtype'){
+    if (fieldName === 'request_subtype') {
       this.setState({ requestSubtype: value });
     } else if (fieldName === 'team_id') {
       this.setState({ teamID: value });
@@ -84,7 +107,7 @@ class TeamHelp extends React.Component {
   render() {
     const { setResponse, switchHelpType, user } = this.props;
     const { error, response, requestSubtype, teamID } = this.state;
-    
+
     if (error) return switchHelpType('error');
     if (response) return setResponse(response);
 
@@ -94,41 +117,49 @@ class TeamHelp extends React.Component {
         {
           id: 1,
           title: "Vampires Team 0",
-          project: { 
+          project: {
             id: 1,
             title: "Chingu API",
           },
           cohort_users: [
-            { user: {
-              id: 1,
-              username: "the-vampiire",
-              avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
-            }},
-            { user: {
-              id: 2,
-              username: "thinktwice13",
-              avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
-            }},
+            {
+              user: {
+                id: 1,
+                username: "the-vampiire",
+                avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
+              }
+            },
+            {
+              user: {
+                id: 2,
+                username: "thinktwice13",
+                avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
+              }
+            },
           ],
         },
         {
           id: 2,
           title: "Werewolves Team 0",
-          project: { 
+          project: {
             id: 2,
             title: "Chingu Frontend",
           },
           cohort_users: [
-            { user: {
-              id: 3,
-              username: "serpient",
-              avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
-            }},
-            { user: {
-              id: 1,
-              username: "the-vampiire",
-              avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
-            }},
+            {
+              user: {
+                id: 3,
+                username: "serpient",
+                avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
+              }
+            },
+            {
+              user: {
+                id: 1,
+                username: "the-vampiire",
+                avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
+              }
+            },
           ]
         },
       ],
@@ -153,22 +184,11 @@ class TeamHelp extends React.Component {
     )
   }
 }
-// TODO: export wrapped in <Request> wrapper. get user with following shape:
-`
-teams(only_active: true) {
-  id
-  title
-  project { 
-    id
-    title
-  }
-  cohort_users {
-    user {
-      id
-      username
-      avatar
-    }
-  }
-}
-`
-export default TeamHelp;
+
+export default props =>
+  <Request
+    {...props}
+    query={userActiveTeamsQuery}
+    component={TeamHelp}
+  />
+
