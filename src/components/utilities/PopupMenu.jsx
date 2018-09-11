@@ -13,30 +13,30 @@ class PopupMenu extends Component {
   static propTypes = {
     persist: PropTypes.bool, // Persist over clicks outside of dd menu
     // onMenuClick: PropTypes.func, // TODO:
-    toggle: (props, propName, componentName) => {
-      if (props.toggle && !props.menu) {
-        return new Error(`${componentName} requires both 'toggle' and 'menu' props OR two child elements!`)
+    control: (props, propName, componentName) => {
+      if (props.control && !props.menu) {
+        return new Error(`${componentName} requires both 'control' and 'menu' props OR two child elements!`)
       }
     },
     menu: (props, propName, componentName) => {
-      if (props.menu && !props.toggle) {
-        return new Error(`${componentName} requires both 'toggle' and 'menu' props OR two child elements!`)
+      if (props.menu && !props.control) {
+        return new Error(`${componentName} requires both 'control' and 'menu' props OR two child elements!`)
       }
     },
     children: PropTypes.arrayOf(arrayOfChildren => {
-      if (this.toggle && this.menu && !!arrayOfChildren.length) {
-        console.warn(`PopupMenu: 'Toggle' and 'menu' props found. Children will not be used!`)
+      if (this.control && this.menu && !!arrayOfChildren.length) {
+        console.warn(`PopupMenu: 'control' and 'menu' props found. Children will not be used!`)
       }
 
-      if ((!this.toggle || !this.menu) && arrayOfChildren.length !== 2) {
-        return new Error(`PopupMenu requires two child elements - [<toggle/>, <menu/>]!`)
+      if ((!this.control || !this.menu) && arrayOfChildren.length !== 2) {
+        return new Error(`PopupMenu requires two child elements - [<control/>, <menu/>]!`)
       }
     })
   }
 
   static defaultProps = {
     persist: false,
-    children: [] // Prevent non-iterable destructure error when providing only one of 'toggle' and 'menu' props
+    children: [] // Prevent non-iterable destructure error when providing only one of 'control' and 'menu' props
   }
 
   state = { show: false }
@@ -60,9 +60,9 @@ class PopupMenu extends Component {
   handleClick = e => {
     const { onMenuClick, persist } = this.props
 
-    // Open DD on toggle element click 
+    // Open DD on control element click 
     if (!this.state.show &&
-      this.toggleElement.firstChild === e.target) {
+      this.controlElement.firstChild === e.target) {
       return this.setState({ show: true })
     }
 
@@ -75,13 +75,13 @@ class PopupMenu extends Component {
   }
 
   render() {
-    // Get toggle and menu elements from props or props.children
-    let { toggle, menu } = this.props
-    if (!toggle || !menu) ([toggle, menu] = this.props.children)
+    // Get control and menu elements from props or props.children
+    let { control, menu } = this.props
+    if (!control || !menu) ([control, menu] = this.props.children)
 
     return (
       <div className={this.props.className}>
-        <div ref={el => this.toggleElement = el}>{toggle}</div>
+        <div ref={el => this.controlElement = el}>{control}</div>
         <div ref={el => this.menuElement = el}>{this.state.show && menu}</div>
       </div>
     )
