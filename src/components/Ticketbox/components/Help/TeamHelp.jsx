@@ -13,35 +13,46 @@ class TeamHelp extends React.Component {
 
     // sets the questions based on persisted data from DFContainer
     let requestSubtype = null;
+    let teamID = null;
     if (persistedData) {
-      const { form_data: { request_subtype } } = JSON.parse(persistedData);
+      const { form_data: { request_subtype, team_id } } = JSON.parse(persistedData);
       requestSubtype = request_subtype;
+      teamID = team_id;
     }
 
     this.state = {
       error: null,
       response: null,
-      questions: this.getQuestions(requestSubtype),
+      requestSubtype,
+      teamID,
     }
   }
 
-  getQuestions = (subtype) => {
+  getQuestions = (subtype, teams, teamID) => {
     switch (subtype) {
       case 'inactivity':
-        return [...TeamHelpBaseQA, ...InactivityQA, ContextQA];
+        return [
+          ...TeamHelpBaseQA(teams),
+          ...InactivityQA(teams, teamID),
+          ContextQA,
+        ];
       default:
-        return [...TeamHelpBaseQA, ContextQA];
+        return [...TeamHelpBaseQA(teams), ContextQA];
     }
   };
 
   // passed as prop to DFContainer
   // provides access to the request_subtype value when it changes
-  handleInputChange = (fieldName, value, formData) => {
-    if (fieldName !== 'request_subtype') return;
+  handleInputChange = (fieldName, value) => {
+    // ignore other field names
+    if (!['request_subtype', 'team_id'].includes(fieldName)) return;
 
-    // use request_subtype value (on change) to determine rendered questions
-    const questions = this.getQuestions(value);
-    this.setState({ questions });
+    // update values when DFContainer input changes
+    if (fieldName === 'request_subtype'){
+      this.setState({ requestSubtype: value });
+    } else if (fieldName === 'team_id') {
+      this.setState({ teamID: value });
+    };
   }
 
   handleResponse = ({ data }) => {
@@ -71,11 +82,60 @@ class TeamHelp extends React.Component {
   }
 
   render() {
-    const { setResponse, switchHelpType } = this.props;
-    const { error, response, questions } = this.state;
+    const { setResponse, switchHelpType, user } = this.props;
+    const { error, response, requestSubtype, teamID } = this.state;
     
     if (error) return switchHelpType('error');
     if (response) return setResponse(response);
+
+    // TODO: remove once querying for actual user
+    const userMock = {
+      teams: [
+        {
+          id: 1,
+          title: "Vampires Team 0",
+          project: { 
+            id: 1,
+            title: "Chingu API",
+          },
+          cohort_users: [
+            { user: {
+              id: 1,
+              username: "the-vampiire",
+              avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
+            }},
+            { user: {
+              id: 2,
+              username: "thinktwice13",
+              avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
+            }},
+          ],
+        },
+        {
+          id: 2,
+          title: "Werewolves Team 0",
+          project: { 
+            id: 2,
+            title: "Chingu Frontend",
+          },
+          cohort_users: [
+            { user: {
+              id: 3,
+              username: "serpient",
+              avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
+            }},
+            { user: {
+              id: 1,
+              username: "the-vampiire",
+              avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
+            }},
+          ]
+        },
+      ],
+    };
+
+    // TODO: replace with user when querying for actual user
+    const questions = this.getQuestions(requestSubtype, userMock.teams, teamID);
 
     return (
       <div className="help-team-container">
@@ -93,5 +153,22 @@ class TeamHelp extends React.Component {
     )
   }
 }
-
+// TODO: export wrapped in <Request> wrapper. get user with following shape:
+`
+teams(only_active: true) {
+  id
+  title
+  project { 
+    id
+    title
+  }
+  cohort_users {
+    user {
+      id
+      username
+      avatar
+    }
+  }
+}
+`
 export default TeamHelp;
