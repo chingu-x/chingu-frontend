@@ -116,11 +116,11 @@ HELP TICKET
     text-align: center;
     justify-items: center;  
 }
-.help-page-search-container {
+.help-page-search-container { // TODO: shitty temporary styling
     .form-btn {
-        width: 200px;
+        width: 100px;
         margin-top: 26px;
-        margin-right: 0px;
+        // margin-right: 0px;
     }
     .form-question {
         text-align: center;

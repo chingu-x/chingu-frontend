@@ -1,6 +1,6 @@
 import * as React from "react";
 import BackBtn from './BackBtn';
-
+// TODO: rename to TicketboxError
 const Error = ({ switchRenderedType }) => (
     <div className="ticketbox-success">
         Well, this is embarassing.
