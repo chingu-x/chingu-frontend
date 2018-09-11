@@ -15,7 +15,7 @@ const HelpOptions = ({ switchHelpType }) => {
                 <img
                   className="ticketbox-btn"
                   alt="ticketbox-btn"
-                  src={require(`../../../assets/${assets[idx]}`)}
+                  src={require(`../../../../assets/${assets[idx]}`)}
                 />
                 <div className="ticketbox-btn--text">{text}</div>
               </div>

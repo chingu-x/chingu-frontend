@@ -1,8 +1,8 @@
 import * as React from "react";
 import './Ticketbox.css';
 import Modal from "../common/Modal";
-import BugSuggestion from './components/BugSuggestion';
-import Help from './components/Help';
+import { BugSuggestion } from './components/Feedback';
+import Help from './components/Help/';
 class Ticketbox extends React.Component {
   constructor(props) {
     super(props);
