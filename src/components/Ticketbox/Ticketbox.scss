@@ -71,6 +71,9 @@ TICKETBOX MAIN BTN SELECTION
     &.disabled {
       cursor: default;
     }
+    &:hover {
+      transform: scale(1.1);
+    }
 }
 .ticketbox-btn--text {
     color: $dark-grey;
@@ -117,7 +120,7 @@ HELP TICKET
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
     text-align: center;
-    justify-items: center;  
+    justify-items: center; 
 }
 .help-page-search-container { // TODO: shitty temporary styling
     .form-btn {
