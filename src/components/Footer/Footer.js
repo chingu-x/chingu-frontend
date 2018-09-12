@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
-import SubscribeForm from "./SubscribeForm";
-import patreon from "../../styles/assets/patreon.png";
 
 class Footer extends React.Component {
   state = {
@@ -25,7 +23,6 @@ class Footer extends React.Component {
     return [
       <div key="1" className="footer-linkbox">
         <div className="footer-subtitle">Contact Us</div>
-        {/*<div className="footer-link">+44 345 678 903</div>*/}
         <a className="footer-link" href="mailto:admin@chingu.io">
           admin@chingu.io
         </a>
@@ -35,31 +32,16 @@ class Footer extends React.Component {
         <a className="footer-link" href="mailto:admin@chingu.io">
           Contact Us
         </a>
+        <Link className="footer-link" to="/help">
+          Help Page
+        </Link>
         <Link className="footer-link" to="/team">
           Our Team
         </Link>
-        {/* <a className="footer-link" href="/">
-          Press
-        </a> */}
         <Link className="footer-link" to="/privacy">
           Privacy Policy
         </Link>
-        {/* <Link className="footer-link" to="/companyfaq">
-          FAQ
-        </Link> */}
       </div>,
-      // <div key="3" className="footer-linkbox">
-      //   <div className="footer-subtitle">Programs</div>
-      //   <Link className="footer-link" to="/current">
-      //     Current Programs
-      //   </Link>
-      //   <Link className="footer-link" to="/apply">
-      //     Application
-      //   </Link>
-      //   {/* <Link className="footer-link" to="/programfaq">
-      //     FAQ
-      //   </Link> */}
-      // </div>
     ];
   }
 
@@ -95,15 +77,6 @@ class Footer extends React.Component {
     return (
       <div className="footer">
           {this.renderLinkBoxes()}
-          {/* <div className="sub-box">
-          <SubscribeForm
-            onSubmit={e => this.handleSubmit(e)}
-            onChange={e => this.handleOnChange(e)}
-          />
-          <a href="https://www.patreon.com/user?u=4763160">
-            <img src={patreon} alt="Become a Patron" />
-          </a>
-        </div> */}
           {this.renderSocialIcons()}
       </div>
     );
@@ -138,30 +111,15 @@ class Footer extends React.Component {
           <Link className="footer-link" to="/team">
             Our Team
           </Link>
-          <a className="footer-link" href="/">
-            Press
-          </a>
           <a className="footer-link" href="/privacy">
             Privacy Policy
           </a>
-          <Link className="footer-link" to="/companyfaq">
-            Company FAQ
+          <Link className="footer-link" to="/help">
+            Help Page
           </Link>
           <a className="footer-link" href="mailto:admin@chingu.io">
             Contact Us
           </a>
-          <div disabled className="footer-dropdown-title">
-            Programs
-          </div>
-          <Link className="footer-link" to="/current">
-            Current Programs
-          </Link>
-          <Link className="footer-link" to="/apply">
-            Application
-          </Link>
-          <Link className="footer-link" to="/programfaq">
-            Program FAQ
-          </Link>
         </div>
         <button className="footer-btn" onClick={() => this.openDropDown()}>
           Site Navigation
@@ -173,13 +131,6 @@ class Footer extends React.Component {
   renderMobileFooter() {
     return (
       <div className="footer">
-        <SubscribeForm
-          onSubmit={e => this.handleSubmit(e)}
-          onChange={e => this.handleOnChange(e)}
-        />
-        <a className="patreon" href="https://www.patreon.com/user?u=4763160">
-          <img src={patreon} alt="Become a Patron" />
-        </a>
         {this.renderSocialIcons()}
         {this.renderMobileDropDown()}
       </div>

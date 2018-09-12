@@ -23,6 +23,7 @@ $theme-purple--hover: rgb(7, 8, 44);
 $light-purple: #71739b;
 $light-purple--hover: rgb(102, 104, 139);
 $pale-purple--hover: rgb(206, 206, 224);
+$palest-purple: rgb(240, 240, 255);
 $theme-green: #15cf89;
 $theme-green--hover: rgb(25, 194, 129);
 $theme-green--light: #78d5b2;
@@ -95,7 +96,7 @@ $page-padding: 20px;
 $box-shadow: 0px 3px 6px $light-grey;
 $box-shadow-dark: 0px 3px 6px $dark-grey;
 $border: 1px solid $light-grey;
-$border-radius: 20px;
+$border-radius: 0px;
 /*
 ==========================
 Z-INDEXES
