@@ -1,6 +1,8 @@
 import * as React from "react";
 
-const HelpOptions = ({ switchHelpType, hasActiveTeams }) => {
+const HelpOptions = ({ switchHelpType, hasActiveTeamsFIX }) => {
+  // TODO: remove with real query and fix destructured arg
+  const hasActiveTeams = true;
   const buttons = [{
     text: "team help",
     src: hasActiveTeams ? 'help-team.png' : 'help-team-disabled.png',
@@ -16,8 +18,8 @@ const HelpOptions = ({ switchHelpType, hasActiveTeams }) => {
       {
         buttons.map(({ text, src, disabled }) => {
           return (
-            <div className={`ticketbox-btn--container${disabled}`}>
-              <div key={text} onClick={() => !disabled && switchHelpType(text)}>
+            <div key={text} className={`ticketbox-btn--container${disabled}`}>
+              <div onClick={() => !disabled && switchHelpType(text)}>
                 <img
                   className={`ticketbox-btn${disabled}`}
                   alt="ticketbox-btn"
