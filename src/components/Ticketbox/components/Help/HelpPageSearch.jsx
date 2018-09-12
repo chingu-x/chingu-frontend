@@ -9,6 +9,7 @@ class HelpPageSearch extends React.Component {
   handleInput = (e) => {
     let { value } = e.currentTarget;
     this.setState({ searchTerm: value })
+    if (e.keyCode === 13) this.searchHelpPage();
   }
   searchHelpPage = () => {
     /**
