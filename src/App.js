@@ -75,8 +75,8 @@ export default () => (
         ({ match: { params: { projectId } } }) => <ProjectShowcase projectId={projectId}/> } />
       <Route path="*" exact component={Missing404Page} />
     </Switch>
-    <Ticketbox />
     <Footer />
+    <Ticketbox />
   </div>
 )
 
