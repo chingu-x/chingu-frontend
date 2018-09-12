@@ -32,21 +32,14 @@ const userActiveTeamsQuery = gql`
 `
 
 class Help extends React.Component {
-  state = { type: 'help-options', response: null, error: null }
+  state = { type: 'help-options' }
 
   switchHelpType = (type) => {
     this.setState({ type })
   }
 
-  setResponse = (response) => {
-    this.setState({ response }, () => {
-      this.renderHelpSections('success');
-    })
-  }
-
   renderHelpSections = (type) => {
     let { switchRenderedType, data: { user } } = this.props;
-    let { response } = this.state;
     switch (type) {
       case 'team help':
         return <TeamHelp

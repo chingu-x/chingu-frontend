@@ -134,7 +134,7 @@ HELP TICKET
 */
 .help-btns--container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     width: 100%;
     text-align: center;
     justify-items: center; 
@@ -189,6 +189,7 @@ FORM STYLING
         letter-spacing: 1.3px;
         color: $grey;
         padding-bottom: 5px;
+        font-size: 12px;
     }
     .form-input,
     .form-text-area  {
@@ -198,6 +199,12 @@ FORM STYLING
     .form-btn,
     .form-btn--disabled {
         float: right;
+    }
+    .form-subtext--link {
+        display: block;
+        color: $theme-green--light;
+        text-decoration: underline;
+        padding-top: 10px;
     }
 }
 .back-btn--centered {
@@ -241,5 +248,9 @@ SUCCESS FORM
         font-weight: 400;
         border-bottom: 1px solid $theme-green--hover;
         padding-bottom: 5px;
+    }
+    .ticketbox-success--subtext {
+        font-weight: 400;
+        line-height: 20px;
     }
 }
