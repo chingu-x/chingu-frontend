@@ -6,6 +6,7 @@ export default (
   form_data,
 ) => {
   const value = form_data[field_name];
+  const dropdownOptions = [...options];
   return (
     <select
       className="form-dropdown"
@@ -16,14 +17,19 @@ export default (
       multiple={false}
     >
       {
-        options.map(
+        dropdownOptions.map(
           (answer, index) => (
             <option
               className="form-answer"
-              value={answer.value || answer}
+              value={answer.id}
               key={'dropdown_' + field_name + '_' + index}
             >
-              {answer.text || answer}
+              {`${answer.title} / ${answer.project.title}`}
+
+              {answer.cohort_users.map(({ user }, idx) => {
+                <img key={idx} className="form-answer-user" alt="user" src={user.avatar} />
+              })}
+
             </option>
           ),
         )

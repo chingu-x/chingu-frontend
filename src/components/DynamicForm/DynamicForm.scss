@@ -78,10 +78,11 @@ ANSWER FONT
 }
 /*
 ==========================
-INPUT & TEXTAREA
+INPUT & TEXTAREA & DATE
 ==========================
 */
-.form-input {
+.form-input,
+.form-date {
     display: block;
     width: 100%;
     font-size: 14px;
@@ -89,6 +90,9 @@ INPUT & TEXTAREA
     padding: 5px;
     margin-top: 5px;
     border: 1px solid $light-grey;
+}
+.form-date {
+    padding: 8px;
 }
 
 .form-text-area {
@@ -488,7 +492,7 @@ BTN (3)
 .btn-container--3 {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     margin: 0 auto;
 }
 .btn-3 {
@@ -527,3 +531,15 @@ BTN (3)
     color: white;
     border: none;
 }
+/*
+==========================
+TEAM & USER DROPDOWNS
+==========================
+*/
+.form-answer-user {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 5px;
+    }

@@ -1,11 +1,12 @@
 import * as React from "react";
-import { DynamicFormContainer } from "../../DynamicForm";
+import { DynamicFormContainer } from "../../../DynamicForm";
 import { gql } from "apollo-boost";
-import { client } from "../../../";
-import { QA } from './formQA';
-import Success from './Success';
-import Error from './Error';
-import BackBtn from './BackBtn';
+import { client } from "../../../../";
+import { QA } from './BugSuggestionQA';
+import Success from '../Success';
+import TicketBoxError from '../TicketBoxError';
+import BackBtn from '../BackBtn';
+
 class BugSuggestion extends React.Component {
   state = { error: null, response: null };
 
@@ -35,18 +36,21 @@ class BugSuggestion extends React.Component {
   }
 
   render() {
-    const { category } = this.props;
+    const { category, switchRenderedType } = this.props;
     const { error, response } = this.state;
     const imgFile = category === 'bug' ? 'Artboard 3-small.png' : 'Artboard 2-small.png';
-    const imgSrc = require(`../../../assets/${imgFile}`);
+    const imgSrc = require(`../../../../assets/${imgFile}`);
 
     if (error) {
       return (
-        <Error
-          category={category}
-          imgSrc={imgSrc}
-          switchRenderedType={this.props.switchRenderedType}
-        />
+        <div className="bug-suggestion-box">
+          <div className={`box-color color--${category}`}>
+            <img className="box-icon" alt="icon" src={imgSrc} />
+          </div>
+          <TicketBoxError
+            switchRenderedType={switchRenderedType}
+          />
+        </div>
       )
     }
 
@@ -67,7 +71,7 @@ class BugSuggestion extends React.Component {
                   persistence
                   purpose="ticketbox"
                 />
-                <BackBtn switchRenderedType={this.props.switchRenderedType}/>
+                <BackBtn type="left" path={""} switchRenderedType={switchRenderedType} />
               </div>
             )
         }
