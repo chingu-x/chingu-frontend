@@ -93,8 +93,10 @@ export const ContextQA = (requestSubtype) => {
     case "withdraw":
       text = "Reason";
       subtext = (
-        "This message is confidential and is used internally to identify areas for improvement." +
-        " Please let your team know you are leaving. Your reasons don't need to be shared with them but communicating shows respect for their time and effort."
+        <div className="form-subtext">
+          This message is confidential and is used internally to identify areas for improvement. 
+          Please let your team know you are leaving. Your reasons don't need to be shared with them but communicating shows respect for their time and effort.
+        </div>
       );
       break;
     default:

@@ -195,7 +195,7 @@ FORM STYLING
     .form-text-area  {
         padding: 10px;
     }
-    
+
     .form-btn,
     .form-btn--disabled {
         float: right;
@@ -205,6 +205,9 @@ FORM STYLING
         color: $theme-green--light;
         text-decoration: underline;
         padding-top: 10px;
+    }
+    .form-subtext {
+        margin-top: 5px;
     }
 }
 .back-btn--centered {
