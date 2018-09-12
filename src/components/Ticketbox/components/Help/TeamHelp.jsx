@@ -167,6 +167,7 @@ class TeamHelp extends React.Component {
 
     if (error) switchHelpType('error');
     
+    // TODO: setResponse is broken (should return a success component)
     if (response) switchHelpType('success');
 
     return (
