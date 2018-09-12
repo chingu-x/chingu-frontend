@@ -30,74 +30,17 @@ class TeamHelp extends React.Component {
   }
 
   getQuestions = (requestSubtype, chosenTeamID) => {
-    const userMock = {
-      user: {
-        id: 10,
-        teams: [
-          {
-            id: 1,
-            title: "Vampires Team 0",
-            project: {
-              id: 1,
-              title: "Chingu API",
-            },
-            cohort_users: [
-              {
-                user: {
-                  id: 1,
-                  username: "the-vampiire",
-                  avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
-                }
-              },
-              {
-                user: {
-                  id: 2,
-                  username: "thinktwice13",
-                  avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
-                }
-              },
-            ],
-          },
-          {
-            id: 2,
-            title: "Werewolves Team 0",
-            project: {
-              id: 2,
-              title: "Chingu Frontend",
-            },
-            cohort_users: [
-              {
-                user: {
-                  id: 3,
-                  username: "serpient",
-                  avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
-                }
-              },
-              {
-                user: {
-                  id: 1,
-                  username: "the-vampiire",
-                  avatar: "https://avatars2.githubusercontent.com/u/25523682?s=88&v=4",
-                }
-              },
-            ]
-          },
-        ],
-      },
-    };
-    // TODO: replace with actual query
-    // const { user, user: { teams } } = this.props;
-    const { user, user: { teams } } = userMock;
-    
+    const { user, user: { teams } } = this.props;
+    console.log(teams);
     switch (requestSubtype) {
       case 'inactivity':
         return [
-          ...TeamHelpBaseQA(teams),
+          ...TeamHelpBaseQA(user, chosenTeamID),
           ...InactivityQA(user, chosenTeamID),
           ContextQA(requestSubtype),
         ];
       default:
-        return [...TeamHelpBaseQA(teams), ContextQA(requestSubtype)];
+        return [...TeamHelpBaseQA(user, chosenTeamID), ContextQA(requestSubtype)];
     }
   };
 
@@ -162,12 +105,17 @@ class TeamHelp extends React.Component {
   }
 
   render() {
-    const { setResponse, switchHelpType } = this.props;
+    const { switchHelpType } = this.props;
     const { error, response, questions } = this.state;
 
-    if (error) switchHelpType('error');
-
-    if (response) switchHelpType('success');
+    if (error) {
+      switchHelpType("error");
+      return null;
+    }
+    if (response) {
+      switchHelpType("success");
+      return null;
+    }
 
     return (
       <div className="help-team-container">
