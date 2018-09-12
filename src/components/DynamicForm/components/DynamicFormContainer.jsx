@@ -86,8 +86,8 @@ class DynamicFormContainer extends React.Component {
   _initializeState = (purpose, questions) => {
     const persistedData = window.localStorage.getItem(purpose);
     if (persistedData) {
-      const form_data = JSON.parse(persistedData);
-      return { questions, ...form_data };
+      const existing_data = JSON.parse(persistedData);
+      return { questions, ...existing_data };
     }
 
     // if no persisted data is found use default mapping method
