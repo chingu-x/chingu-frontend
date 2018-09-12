@@ -6,19 +6,27 @@ export const HelpQA = [
     qa_set: [
       {
         question: 'What is Chingu?',
-        answer: `Chingu is building a global collaboration capital for 21st century tech-learners** 
-                to gain experience, meet friends and generate impact through building projects. 
-                Chingu’s mission is to empower the planet’s tech-learners with 21st century skills 
-                by facilitating diverse collaboration experiences and build-to-learn projects.
-                **Developers, designers, data scientists, and digital marketers can all find a home here. 
-                `
+        answer:  (
+          <React.Fragment>
+            Chingu is building a global collaboration capital for 21st century tech-learners*
+            to gain experience, meet friends and generate impact through building projects. 
+            Chingu’s mission is to empower the planet’s tech-learners with 21st century skills 
+            by facilitating diverse collaboration experiences and build-to-learn projects.
+            <br />
+            <br />
+            <i>*Developers, designers, data scientists, and digital marketers can all find a home here.</i> 
+          </React.Fragment>
+          )
       },
       {
         question: 'What is a Voyage?',
-        answer: `A Voyage is an ambitious community with shared goals and an opportunity to gain experience 
-                  learning and building with a team. Those that are accepted are organized into remote teams, 
-                  given prompts and various tools to aid them accelerate their learning. 
-                `
+        answer: (
+          <React.Fragment>
+            A Voyage is an ambitious community with shared goals and an opportunity to gain experience 
+            learning and building with a team. Those that are accepted are organized into remote teams, 
+            given prompts and various tools to aid them accelerate their learning. 
+          </React.Fragment>
+          )
       },
       {
         question: 'How long is the Voyage?',
@@ -292,12 +300,15 @@ export const HelpQA = [
       },
       {
         question: `What happens if we don't complete our project in time`,
-        answer: `In a typical Voyage we may launch 70-110 different teams. These teams will range from 
-                people working on landing pages, to data science projects to full stack applications. 
-                Projects will have different ambition levels and scope, and some won’t be able to finish 
-                in the time frame. That is completely okay and we always have some teams that transfer 
-                into the next Voyage to continue working on it.
-        `
+        answer: (
+          <React.Fragment>
+            In a typical Voyage we may launch 70-110 different teams. These teams will range from 
+            people working on landing pages, to data science projects to full stack applications. 
+            Projects will have different ambition levels and scope, and some won’t be able to finish 
+            in the time frame. That is completely okay and we always have some teams that transfer 
+            into the next Voyage to continue working on it.
+          </React.Fragment>
+          )
       },
     ]
   },
@@ -364,9 +375,13 @@ export const HelpQA = [
       },
       {
         question: `How do we submit projects?`,
-        answer: `They’ll be Project submission form in your team portal where the project 
-                  can be submitted. Towards the end of the Voyage we will notify the community 
-                  with clear instructions on how to submit as well. `
+        answer: (
+          <React.Fragment>
+            They’ll be Project submission form in your team portal where the project
+            can be submitted. Towards the end of the Voyage we will notify the community
+            with clear instructions on how to submit as well.
+          </React.Fragment>
+        )
       },
       {
         question: `What happens next?`,
@@ -375,7 +390,7 @@ export const HelpQA = [
     ]
   },
   {
-    category: `PRESS`,
+    category: `Press`,
     qa_set: [
       {
         question: `I'm writing an article and want to learn more about Chingu. Who do I contact?`,
