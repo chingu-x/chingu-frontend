@@ -61,8 +61,8 @@ class Help extends React.Component {
       case 'error':
         return <TicketBoxError
           switchRenderedType={switchRenderedType} />
-      case 'success': // TODO: help requests dont have an associated github issue
-        return <Success category="help" url={response.github_issue.url} />
+      case 'success': 
+        return <Success category="help" />
       default:
         return <HelpOptions switchHelpType={this.switchHelpType} hasActiveTeams={user && !!user.teams.length} />
     }
