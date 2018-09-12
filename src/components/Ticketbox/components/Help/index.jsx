@@ -8,17 +8,27 @@ import BackBtn from "../BackBtn"
 import { gql } from "apollo-boost"
 import Request from "../../../utilities/Request"
 
-// Check if user has any active teams
-// TODO: Make sure cache already has this OR fetch all data needed for TeamHelp
-const userActiveTeamsBaseQuery = gql`
-  query getUserActiveTeamsBase {
-    user {
+const userActiveTeamsQuery = gql`
+ query getUserActiveTeams {
+  user {
+    id
+    teams(only_active: true) {
       id
-      teams(only_active: true) {
+      title
+      project { 
         id
+        title
+      }
+      cohort_users {
+        user {
+          id
+          username
+          avatar
+        }
       }
     }
   }
+ }
 `
 
 class Help extends React.Component {
@@ -41,6 +51,7 @@ class Help extends React.Component {
       case 'team help':
         return <TeamHelp
           category="team"
+          user={user}
           setResponse={this.setResponse}
           switchHelpType={this.switchHelpType} />
       case 'general':
@@ -82,5 +93,5 @@ export default props =>
   <Request
     {...props}
     component={Help}
-    query={userActiveTeamsBaseQuery}
+    query={userActiveTeamsQuery}
   />
