@@ -1,8 +1,6 @@
 import * as React from "react";
 
-const HelpOptions = ({ switchHelpType, hasActiveTeamsFIX }) => {
-  // TODO: remove with real query and fix destructured arg
-  const hasActiveTeams = true;
+const HelpOptions = ({ switchHelpType, hasActiveTeams }) => {
   const buttons = [{
     text: "team help",
     src: hasActiveTeams ? 'help-team.png' : 'help-team-disabled.png',
