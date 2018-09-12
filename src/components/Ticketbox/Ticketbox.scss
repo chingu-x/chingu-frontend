@@ -1,20 +1,9 @@
 @import '../../styles/abstracts/_variables.scss';
 
 .ticketbox-container {
-    // position: absolute;
     position: fixed;
     right: 20px;
     bottom: 20px;
-}
-
-.ticketbox-popup {
-  position: absolute;
-  right: 20px;
-  bottom: 120px;
-  background-color: white;
-  box-shadow: $box-shadow;
-  padding: 30px;
-  width: 380px;
 }
 
 .ticketbox-btn--main {
@@ -28,19 +17,29 @@
     text-align: center;
     font-weight: 900;
     cursor: pointer;
-    user-select: none;
 }
 
+/*
+==========================
+PLACEMENT OF MODALS
+==========================
+*/
+.bug-suggestion-box,
+.ticketbox-btn-section {
+    position: absolute;
+    right: 20px;
+    bottom: 120px;
+    background-color: white;
+    box-shadow: $box-shadow;
+    padding: 30px;
+    width: 380px;
+}
 /*
 ==========================
 TICKETBOX MAIN BTN SELECTION
 ==========================
 */
 .ticketbox-subcontainer {
-    position: absolute;
-    right: 20px;
-    bottom: 120px;
-
     .form-back-btn {
         float: left;
         @include system-button($grey, $med-grey);
@@ -48,45 +47,9 @@ TICKETBOX MAIN BTN SELECTION
         margin-top: 20px;
         cursor: pointer;
     }
-    div::-webkit-scrollbar {
-        width: 14px;
-    }
- 
-    div::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px $dark-grey;
-    }
-    
-    div::-webkit-scrollbar-thumb {
-        background-color: darkgrey;
-        outline: 1px solid slategrey;
-    }
 }
 .ticketbox-btn-section {
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-}
-=======
-PLACEMENT OF MODALS
-==========================
-*/
-// .bug-suggestion-box,
-// .ticketbox-btn-section {
-    // position: absolute;
-    // right: 20px;
-    // bottom: 120px;
-    // background-color: white;
-    // box-shadow: $box-shadow;
-    // padding: 30px;
-    // width: 380px;
-// }
-/*
-==========================
-TICKETBOX MAIN BTN SELECTION
-==========================
-*/
-.ticketbox-btn-section {
-    // margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 15px;
@@ -105,11 +68,6 @@ TICKETBOX MAIN BTN SELECTION
     }
   }
   .ticketbox-btn {
-    &:hover {
-        transform: scale(1.1);
-    }
-}
-.ticketbox-btn {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -125,20 +83,6 @@ TICKETBOX MAIN BTN SELECTION
     text-transform: uppercase;
     letter-spacing: 1.5px;
     width: 100px;
-}
-/*
-==========================
-PLACEMENT OF MODALS
-==========================
-*/
-.bug-suggestion-box,
-.ticketbox-btn-section {
-    background-color: white;
-    box-shadow: $box-shadow;
-    padding: 30px;
-    width: 380px;
-    max-height: calc(100vh - 200px);
-    overflow-y: auto;
 }
 /*
 ==========================
@@ -166,7 +110,6 @@ BUG & SUGGESTION FORMS
     display: block;
     margin: 0 auto;
     border-radius: 50%;
-    // padding-top: 10px;
 }
 /*
 ==========================
@@ -175,7 +118,7 @@ HELP TICKET
 */
 .help-btns--container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     width: 100%;
     text-align: center;
     justify-items: center; 
@@ -184,6 +127,7 @@ HELP TICKET
     .form-btn {
         width: 100px;
         margin-top: 26px;
+        // margin-right: 0px;
     }
     .form-question {
         text-align: center;
@@ -230,27 +174,18 @@ FORM STYLING
         letter-spacing: 1.3px;
         color: $grey;
         padding-bottom: 5px;
-        font-size: 12px;
     }
     .form-input,
     .form-text-area  {
         padding: 10px;
     }
+
     .form-dropdown {
         text-transform: capitalize;
     }
     .form-btn,
     .form-btn--disabled {
         float: right;
-    }
-    .form-subtext--link {
-        display: block;
-        color: $theme-green--light;
-        text-decoration: underline;
-        padding-top: 10px;
-    }
-    .form-subtext {
-        margin-top: 5px;
     }
 }
 .back-btn--centered {
@@ -261,13 +196,6 @@ FORM STYLING
     cursor: pointer;
 }
 
-    .form-back-btn {
-        float: left;
-        @include system-button($grey, $med-grey);
-        width: 100px;
-        margin-top: 20px;
-    }
-}
 /*
 ==========================
 ERROR
@@ -283,11 +211,6 @@ ERROR
 .ticketbox-subtext {
     font-weight: 500;
     line-height: 20px;
-}
-.form-error-back-btn {
-    @include system-button($theme-green, $theme-green--hover);
-    width: 100px;
-    margin: 0 auto;
 }
 /*
 ==========================
@@ -306,9 +229,5 @@ SUCCESS FORM
         font-weight: 400;
         border-bottom: 1px solid $theme-green--hover;
         padding-bottom: 5px;
-    }
-    .ticketbox-success--subtext {
-        font-weight: 400;
-        line-height: 20px;
     }
 }
