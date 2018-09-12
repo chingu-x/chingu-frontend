@@ -1,49 +1,80 @@
-import * as React from "react";
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom"
 import * as Cards from "../VoyageCard/VoyageCard";
 import UserSideBar from "./UserSideBar";
 import Request from "../utilities/Request"
 import profileQuery from "./graphql/profileQuery"
 import './UserProfile.css'
+import dateFormatter from "../utilities/dateFormatter.js"
 
-class UserProfile extends React.Component {
-  state = {
-    user: this.props.data.user,
-    currentTeams: [],
-    pastTeams: [],
-    pendingApproval: [],
-    editable: false
-  }
 
-  updateState = () => {
-    let { data: { user }, editable } = this.props;
-    this.setState({ user: user, editable: editable ? true : false }, () => {
-      // TODO: Check filters
-      let { user } = this.state;
-      let { teams, cohorts } = user;
-      let currentTeams = teams.filter(team => { return team.cohort.status === 'ongoing' });
-      let pastTeams = teams.filter(team => { return team.cohort.status === 'ended' });
+// PROJECT CARD INFO //
+const InfoComponents = ({ team }) => {
+  const { project, cohort, tier, title } = team
+  const infoObjects = [
+    { label: 'Voyage', data: `${cohort.title} / ${dateFormatter(cohort.start_date)} - ${dateFormatter(cohort.end_date)}` },
+    { label: 'Team', data: title },
+    { label: 'Tier', data: 'Tier ' + tier.level },
+    { label: 'Project', data: project.title },
+    { label: 'Description', data: project.elevator_pitch },
+    { label: 'Members', data: project.users },
+  ]
 
-      let pendingApproval = cohorts.filter((cohort) => {
-        let member = cohort.members.filter((member) => member.user.username === user.username && member.status === 'pending_approval');
-        if (member.length >= 1) {
-          return cohort;
-        }
-      });
-      this.setState({ currentTeams, pastTeams, pendingApproval });
-    })
-  }
-  componentDidMount() {
-    this.updateState();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
-      this.updateState();
+  return infoObjects.map((info, idx) => {
+    let data;
+    switch (info.label) {
+      case "Tier":
+        data = <span key={idx} className="tier-icon">{info.data}</span>
+        break;
+      case 'Members':
+        data = info.data.map((user, idx) => {
+          return (
+            <Link to={`/profile/${user.username}`} key={idx} className="team-card-user">
+              <img className="team-card-avatar-img" src={user.avatar ? user.avatar : require('../../assets/blank image.png')} alt={user.username} />
+              {/* <div className="team-card-username">{user.username}</div> */}
+            </Link>
+          )
+        })
+        break;
+      case 'TechStack':
+        data = info.data && info.data.map((tech, idx) => {
+          return (
+            <div key={idx} className="team-card-techstack">{tech.name}</div>
+          )
+        })
+        break;
+      default:
+        data = info.data;
+        break;
     }
-  }
+    return (
+      <Fragment key={idx} >
+        <div className="project-info__label">{info.label}</div>
+        <div className="project-info__data">{data}</div>
+      </Fragment>
+    )
+  })
+}
 
-  renderCurrentTeam = () => {
-    let { currentTeams } = this.state;
+
+// -- USER PROFILE (EXPORT) -- //
+const UserProfile = props => {
+  // Only allow editing if no /profile param provided. TODO: Check for currently logged in user
+  const editable = !props.match.params.username
+
+  /**
+   * TODOS:
+   * Check filters
+   */
+  const { user, user: { teams, cohorts, username } } = props.data // Fetched user
+  const pastTeams = teams.filter(team => team.cohort.status === 'ended');
+  const currentTeams = teams.filter(team => team.cohort.status === 'ongoing');
+  const pendingApproval = cohorts.filter(cohort =>
+    cohort.members.some(member =>
+      member.user.username === username && member.status === "pending_approval"
+    ))
+
+  const renderCurrentTeam = currentTeams => {
     let card = currentTeams.length > 0 && currentTeams.map((team, index) => {
       return (
         <Cards.CurrentVoyageCardWithTeam
@@ -56,19 +87,18 @@ class UserProfile extends React.Component {
       )
     })
     return (
-      <React.Fragment>
+      <Fragment>
         <div className="user-voyage-title">Current Voyages</div>
         {card}
-      </React.Fragment>
+      </Fragment>
     )
   }
 
-  renderPendingApproval = () => {
-    let { pendingApproval } = this.state;
-    return pendingApproval.map((cohort, index) => {
-      return (
-        <React.Fragment key={cohort.id + "_" + index}>
-          <div className="user-voyage-title">Upcoming Voyages</div>
+  const renderPendingApproval = pendingApproval => (
+    <Fragment>
+      <div className="user-voyage-title">Upcoming Voyages</div>
+      {
+        pendingApproval.map((cohort, index) =>
           <Cards.PendingApprovalVoyageCard
             key={cohort.id + "_" + index}
             voyageNumber={cohort.id}
@@ -76,12 +106,11 @@ class UserProfile extends React.Component {
             endDate={cohort.end_date}
             cohort={cohort.title}
           />
-        </React.Fragment>
-      )
-    })
-  }
-  renderNoTeamTypeCards = () => {
-    let { user, currentTeams, pastTeams, pendingApproval, editable } = this.state;
+        )}
+    </Fragment>
+  )
+
+  const renderNoTeamTypeCards = pendingApproval => {
     const NothingHere = () => {
       return (
         <div className="no-data-card">
@@ -101,69 +130,67 @@ class UserProfile extends React.Component {
       card = <NothingHere />
     }
     return (
-      <React.Fragment>
+      <Fragment>
         <div className="user-voyage-title">Current Voyages</div>
         {card}
-      </React.Fragment>
+      </Fragment>
     )
   }
-  render() {
-    let { user, currentTeams, pastTeams, pendingApproval, editable } = this.state;
+
+  const renderProjectCards = teamsList => teamsList.map(team => {
+    const { id, images } = team.project
     return (
-      <div className="user-profile-background-color" >
-        <div className="user-profile-container">
-          <aside className="user-profile">
-            <UserSideBar editable={this.state.editable} user={user} />
-          </aside>
-
-          <main className="user-voyages">
-            <section className="user-voyage">
-              {
-                currentTeams.length > 0
-                  ? this.renderCurrentTeam()
-                  : this.renderNoTeamTypeCards()
-              }
-            </section>
-            <section className="user-voyage">
-              {
-                pendingApproval.length > 0
-                && this.renderPendingApproval()
-              }
-            </section>
-          </main>
+      <div key={id} className="project-card__container">
+        <Link className="project-img" to={`/project/${id}`}>
+          <img
+            className="project-img"
+            src={images[0] ? images[0].url : require('../../assets/landingImage.png')} />
+        </Link>
+        <div className="project-info__container">
+          <InfoComponents team={team} />
         </div>
-      </div >
+      </div>
     )
-  }
+  })
 
+  return (
+    < div className="user-profile-background-color" >
+      <div className="user-profile-container">
+        <aside className="user-profile">
+          <UserSideBar editable={editable} user={user} />
+        </aside>
+
+        <main className="user-voyages">
+          <section className="user-voyage">
+            {
+              currentTeams.length > 0
+                ? renderCurrentTeam(currentTeams)
+                : renderNoTeamTypeCards(pendingApproval)
+            }
+          </section>
+          <section className="user-voyage">
+            {
+              pendingApproval.length > 0
+              && renderPendingApproval(pendingApproval)
+            }
+          </section>
+          <section className="user-voyage">
+            {!!currentTeams.length && <div className="user-voyage-title">Current Projects</div>}
+            {renderProjectCards(currentTeams)}
+            {!!pastTeams.length && <div className="user-voyage-title">Past Projects</div>}
+            {renderProjectCards(pastTeams)}
+          </section>
+        </main>
+      </div>
+    </div >
+  )
 }
 
-export default props => (
+export default props =>
   <Request
     {...props}
     query={profileQuery}
-    variables={props.username && { username: props.username }}
+    variables={{ username: props.match.params.username }}
     component={UserProfile}
     globalLoader
-  />)
-
-
-// {
-//   pastTeams.length > 0
-//   && <section className="user-voyage">
-//     <div className="user-voyage-title">Past Voyages</div>
-//     <div>
-//       {pastTeams.map((team, index) => {
-//         return (
-//           <Cards.PreviousVoyageCardWithTeam
-//             key={team.id + "_" + index}
-//             voyageNumber={team.id}
-//             startDate={team.cohort.start_date}
-//             endDate={team.cohort.end_date}
-//             team={team.title}
-//           />
-//         )
-//       })}
-//     </div>
-//   </section>
-// }
+  />
