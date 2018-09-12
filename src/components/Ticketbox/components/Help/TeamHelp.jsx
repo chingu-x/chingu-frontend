@@ -22,7 +22,7 @@ class TeamHelp extends React.Component {
 
     this.state = {
       error: null,
-      response: null,
+      response: {},
       requestSubtype,
       chosenTeamID,
       questions: this.getQuestions(requestSubtype, chosenTeamID),
@@ -165,10 +165,10 @@ class TeamHelp extends React.Component {
     const { setResponse, switchHelpType } = this.props;
     const { error, response, questions } = this.state;
 
-    if (error) return switchHelpType('error');
+    if (error) switchHelpType('error');
     
     // TODO: setResponse is broken (should return a success component)
-    if (response) return setResponse(response);
+    if (response) switchHelpType('success');
 
     return (
       <div className="help-team-container">
