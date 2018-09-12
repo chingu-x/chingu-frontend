@@ -22,7 +22,7 @@ class TeamHelp extends React.Component {
 
     this.state = {
       error: null,
-      response: {},
+      response: null,
       requestSubtype,
       chosenTeamID,
       questions: this.getQuestions(requestSubtype, chosenTeamID),
