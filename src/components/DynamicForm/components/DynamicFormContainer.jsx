@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { isEqual } from "lodash";
 
 import { dynamicFormMaker } from "./DynamicFormMaker";
 import { isFieldInvalid, isEmpty } from "./utilities";
-
+// TODO: update DF repo new changes as of 9/11/18
 /**
  * @prop {array} questions array of Question data objects for rendering
  * @prop {string} purpose Dynamic Form collection name (for form data persistence)
@@ -25,13 +26,24 @@ class DynamicFormContainer extends React.Component {
     this.state = this._initializeState(purpose, questions);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     // when the form_data is updated from onFormChange
     const { form_data, disabled } = this.state;
-    const { purpose, persistence } = this.props;
+    const { purpose, persistence, questions } = this.props;
 
     // persistence in LS
-    if (persistence) localStorage[purpose] = JSON.stringify(this.state);
+    if (persistence) {
+      // only persist disabled state and form_data
+      const persistedData = JSON.stringify({ disabled, form_data });
+      localStorage.setItem(purpose, persistedData);
+    }
+
+    // update form_data default values if questions change
+    if (!isEqual(questions, prevProps.questions)) {
+      const mapped_form_data = this._mapFormDataFields(questions);
+      const new_form_data = { ...mapped_form_data, ...form_data };
+      this.setState({ form_data: new_form_data, questions });
+    }
 
     // if disabled is true then a form field has set its value
     // it should not be overwritten until the form field is corrected
@@ -42,7 +54,7 @@ class DynamicFormContainer extends React.Component {
     const isDisabled = this._hasEmptyAnswers(form_data);
 
     if (isDisabled !== disabled) {
-      // only update if theres a difference (performance)
+      // only update if theres a difference (performance) //shouldComponentUpdate() ?
       this.setState({ disabled: isDisabled });
     }
   }
@@ -73,12 +85,16 @@ class DynamicFormContainer extends React.Component {
    */
   _initializeState = (purpose, questions) => {
     const persistedData = window.localStorage.getItem(purpose);
-    if (persistedData) return JSON.parse(persistedData);
+    if (persistedData) {
+      const form_data = JSON.parse(persistedData);
+      return { questions, ...form_data };
+    }
 
     // if no persisted data is found use default mapping method
     const form_data = this._mapFormDataFields(questions);
+
     // default initialization 'state'
-    return { disabled: true, form_data };
+    return { disabled: true, form_data, questions };
   }
 
   _isMultiAnswer = (input_type) => {
@@ -98,10 +114,18 @@ class DynamicFormContainer extends React.Component {
   _mapFormDataFields = (questions) => questions.reduce(
     (
       form_data,
-      { field_name, input_type },
+      { field_name, input_type, options, },
     ) => {
       // creates a Set for multiple answers
+      // TODO: apply same text / value to checkboxes
       if (this._isMultiAnswer(input_type)) form_data[field_name] = [];
+      else if (input_type === 'dropdown') {
+        const first_option = options[0];
+        // options can be a single value or an object of text / value
+        // to support difference between user text and stored value
+        const value = first_option.value || first_option;
+        form_data[field_name] = value;
+      }
       else form_data[field_name] = '';
 
       // insert hidden field values from hiddenData
@@ -149,7 +173,7 @@ class DynamicFormContainer extends React.Component {
    *   - observation only
    * - toggles or sets response value for 'question'
    */
-  _onInputChange = ({ currentTarget, min, max }) => {
+  _handleInputChange = ({ currentTarget, min, max }) => {
     const { name, value, type } = currentTarget;
     const form_data = { ...this.state.form_data };
 
@@ -174,9 +198,9 @@ class DynamicFormContainer extends React.Component {
    * - creates form Question components for each 'question'
    */
   renderInputs = () => dynamicFormMaker(
-    this.props.questions,
+    this.state.questions,
     this.state.form_data,
-    this._onInputChange,
+    this._handleInputChange,
     this.props.customComponents,
   );
 
