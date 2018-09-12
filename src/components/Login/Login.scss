@@ -3,29 +3,12 @@
 a {
   text-decoration: none;
 }
-.login-container {
-    display: block;
-    position: absolute;
-    min-width: 100vw;
-    min-height: 100vh;
-    height: 100%;
-    z-index: 100;
-    background-color: rgba(158, 158, 158, 0.637); 
-    cursor: default;
-}
-
 .login-box {
-  display: block;
-  position: absolute;
   z-index: 110;
   width: 350px;
-  left: calc(50% - 175px);
   background-color: white;
   border-radius: 20px;
   box-shadow: $box-shadow-dark;
-  margin: 0 auto;
-  margin-top: calc(50vh - 100px);
-  margin-bottom: 100px;
   padding: 20px;
   a {
     text-decoration: none !important;
