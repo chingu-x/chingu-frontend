@@ -4,15 +4,13 @@ import { Redirect, withRouter } from 'react-router-dom';
 
 class HelpPageSearch extends React.Component {
   state = {
-    searchTerm: null,
-    shouldRedirect: false
+    searchTerm: null
   }
   handleInput = (e) => {
     let { value } = e.currentTarget;
     this.setState({ searchTerm: value })
   }
   searchHelpPage = () => {
-    // this.setState({ shouldRedirect: true })
     /**
     * TEMP using ueryString redirect
     * NOTE: There is bug where ticketbox doesn't close on route redirect. DO NOT FIX
@@ -21,15 +19,8 @@ class HelpPageSearch extends React.Component {
     return this.props.history.push(`/help?search=${this.state.searchTerm}`)
   }
   render() {
-    let { shouldRedirect, searchTerm } = this.state;
-    let { switchRenderedType, switchHelpType } = this.props;
+    let { switchHelpType } = this.props;
 
-    // if (shouldRedirect) {
-    //   <Redirect /> // missing return
-    //     push={true}
-    //     to={`/help/${searchTerm}`}
-    //   />
-    // }
     return (
       <div className="help-page-search-container">
         <div className="form-question">Have a Question?</div>
