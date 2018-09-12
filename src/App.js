@@ -34,18 +34,8 @@ export default () => (
           () => <Register version={null} /> // set custom 'chingu_application' version here
         }
       />
-      <Private exact path="/profile" render={() => <UserProfile editable={true} />} />
-      <Route
-        exact path="/profile/:username"
-        render={
-          ({ match: { params: { username } } }) => (
-            <UserProfile
-              username={username}
-              editable={false}
-            />
-          )
-        }
-      />
+      <Private exact path="/profile" component={UserProfile} />
+      <Route exact path="/profile/:username" component={UserProfile} />
       <Private exact path="/voyage" component={VoyagePortal} />
       <Private
         exact path="/voyage/application/:voyage_id"

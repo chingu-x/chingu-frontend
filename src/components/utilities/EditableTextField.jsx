@@ -77,7 +77,7 @@ class EditableTextField extends React.Component {
   handleSubmit = () => {
     const { variables } = this.state;
     const { mutation } = this.props;
-    
+
     client.mutate({ mutation, variables })
       .then(this.handleUpdateData)
       .catch(console.error);
@@ -111,7 +111,7 @@ class EditableTextField extends React.Component {
       const { value } = currentTarget;
       const { variables } = this.state;
       const { mutationInputName, fieldName } = this.props;
-      
+
       variables[mutationInputName][fieldName] = value;
       return { variables };
     },
@@ -131,14 +131,16 @@ class EditableTextField extends React.Component {
     const { edit, displayEdit, variables, updatedData } = this.state;
 
     if (edit) return (
-      <EditArea
-        large={large}
-        data={variables[mutationInputName]}
-        fieldName={fieldName}
-        onSubmit={this.handleSubmit}
-        onCancel={this.handleCancel}
-        onInputChange={this.handleInputChange}
-      />
+      <Component>
+        <EditArea
+          large={large}
+          data={variables[mutationInputName]}
+          fieldName={fieldName}
+          onSubmit={this.handleSubmit}
+          onCancel={this.handleCancel}
+          onInputChange={this.handleInputChange}
+        />
+      </Component>
     );
 
     return (
@@ -148,7 +150,7 @@ class EditableTextField extends React.Component {
         onMouseLeave={() => hasPermission && this.toggleDisplayEdit(false)}
       >
         {displayEdit && <EditButton toggleEdit={this.toggleEdit} />}
-        <Component data={updatedData || fieldData} />
+        <Component>{updatedData || fieldData}</Component>
       </div>
     );
   }

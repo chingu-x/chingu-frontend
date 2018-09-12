@@ -9,7 +9,6 @@ const areChoicesValid = (choices, min, max) => {
 }
 
 const isTextValid = (text, min, max) => {
-
   const minLength = min || 10;
   const maxLength = max || 1000;
   const textLength = text.length;
@@ -23,8 +22,6 @@ const isValid = (value, min, max) => {
 }
 
 const isFieldInvalid = (type, value, min, max) => {
-  if (!isEmpty(value)) return false;
-
   switch (type) {
     case "email": return !isEmail(value);
     case "url": return !isURL(value);
