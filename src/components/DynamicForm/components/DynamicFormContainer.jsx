@@ -11,7 +11,7 @@ import { isFieldInvalid, isEmpty } from "./utilities";
  * 
  * -- OPTIONAL --
  * @prop {object} hiddenData values for 'hidden' input types -> { field_name: value }
- * @prop {bool} persistance controls storing form data in LS onFormChange
+ * @prop {bool} persistence controls storing form data in LS onFormChange
  * @prop {func} onSubmit wrapper callback for handling submit behavior
  * @prop {func} onValidate callback for field level control of 'disabled' flag. expects boolean return
  */
@@ -26,10 +26,10 @@ class DynamicFormContainer extends React.Component {
   componentDidUpdate() {
     // when the form_data is updated from onFormChange
     const { form_data, disabled } = this.state;
-    const { purpose, persistance } = this.props;
+    const { purpose, persistence } = this.props;
 
     // persistence in LS
-    if (persistance) localStorage[purpose] = JSON.stringify(this.state);
+    if (persistence) localStorage[purpose] = JSON.stringify(this.state);
 
     // if disabled is true then a form field has set its value
     // it should not be overwritten until the form field is corrected
@@ -225,7 +225,7 @@ DynamicFormContainer.propTypes = {
   purpose: PropTypes.string, // used for labeling persisted form data
   questions: PropTypes.arrayOf(PropTypes.shape(questionShape)),
   hiddenData: PropTypes.object, // values for hidden fields
-  persistance: PropTypes.bool, // enable LS form data persistence
+  persistence: PropTypes.bool, // enable LS form data persistence
   onSubmit: PropTypes.func, // optional handler for form submission
   onValidate: PropTypes.func, // optional handler for field validation
 };

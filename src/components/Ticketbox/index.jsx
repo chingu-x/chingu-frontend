@@ -1,21 +1,41 @@
 import * as React from "react";
 import './Ticketbox.css';
 import Modal from "../common/Modal";
+import BugSuggestion from './components/BugSuggestion';
 
 class Ticketbox extends React.Component {
   constructor(props) {
     super(props);
     this.ticketboxRef = React.createRef();
     this.state = {
-      modalVisibility: false
+      type: ''
     }
   }
 
-  toggleModal = () => {
+  toggleModal = (e) => {
     let ticketbox = this.ticketboxRef.current;
     ticketbox.toggle();
+    !ticketbox.state.show && this.setState({ type: '' })
   }
+
+  switchRenderedType = (type) => {
+    this.setState({ type })
+  }
+
+  renderTicketForm = (type) => {
+    switch (type) {
+      case 'suggestion':
+      case 'bug':
+        return <BugSuggestion switchRenderedType={this.switchRenderedType} category={type} />
+      case 'help':
+        break;
+      default:
+        return <TicketboxButtons switchRenderedType={this.switchRenderedType} />
+    }
+  }
+  
   render() {
+    let { type } = this.state;
     return (
       <Modal
         open
@@ -23,35 +43,34 @@ class Ticketbox extends React.Component {
         background="none"
       >
         <div className="ticketbox-container">
-          <div onClick={() => this.toggleModal()} className="ticketbox-btn--main">?</div>
+          <div onClick={(e) => this.toggleModal(e)} className="ticketbox-btn--main">?</div>
           <Modal
             ref={this.ticketboxRef}
             background="none"
           >
             <div className="ticketbox-subcontainer">
-              <TicketboxButtons />
+              {this.renderTicketForm(type)}
             </div>
           </Modal>
         </div>
       </Modal>
     )
   }
-
 }
 
-const TicketboxButtons = () => {
+const TicketboxButtons = ({ switchRenderedType }) => {
   let assets = [
     'Artboard 2.png',
     'Artboard 3.png',
     'Artboard 4.png'
   ];
-  let labels = ['Suggestion', 'Bug', 'Help'];
+  let labels = ['suggestion', 'bug', 'help'];
   return (
     <div className="ticketbox-btn-section">
       {
         labels.map((text, idx) => {
           return (
-            <div key={idx} className="ticketbox-btn--container">
+            <div key={idx} onClick={(e) => switchRenderedType(text)} className="ticketbox-btn--container">
               <img
                 className="ticketbox-btn"
                 alt="ticketbox-btn"
@@ -65,5 +84,6 @@ const TicketboxButtons = () => {
     </div>
   )
 }
+
 
 export default Ticketbox;

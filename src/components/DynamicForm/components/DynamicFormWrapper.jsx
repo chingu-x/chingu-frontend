@@ -13,7 +13,7 @@ import dynamicFormSubmitMutation from "../dynamicFormSubmitMutation.js";
  * @prop {array} questions form questions
  * 
  * -- OPTIONAL -- 
- * @prop {bool} persistance controls LS persistence of form data 
+ * @prop {bool} persistence controls LS persistence of form data 
  * @prop {object} hiddenData optional object of hidden input field value(s)
  * @prop {func} onValidate optional handler for validating a form field (onChange)
  * @prop {func} onSubmit optional handler for submitting form
@@ -57,7 +57,7 @@ class DynamicFormWrapper extends React.Component {
       onSubmit,
       onError,
       onResponse,
-      persistance,
+      persistence,
       purpose,
       questions,
       hiddenData,
@@ -79,7 +79,7 @@ class DynamicFormWrapper extends React.Component {
 
     return (
       <DynamicFormContainer
-        persistance={persistance}
+        persistence={persistence}
         purpose={purpose}
         questions={questions}
         hiddenData={hiddenData}
@@ -95,7 +95,7 @@ DynamicFormWrapper.propTypes = {
   purpose: PropTypes.string,
   version: PropTypes.number,
   questions: PropTypes.arrayOf(PropTypes.object),
-  persistance: PropTypes.bool,
+  persistence: PropTypes.bool,
   hiddenData: PropTypes.object,
   onValidate: PropTypes.func,
   onSubmit: PropTypes.func,
@@ -104,7 +104,7 @@ DynamicFormWrapper.propTypes = {
 };
 
 DynamicFormWrapper.defaultProps = {
-  persistance: true,
+  persistence: true,
   hiddenData: null,
   onValidate: null,
   onSubmit: null,
