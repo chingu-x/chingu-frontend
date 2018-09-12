@@ -21,31 +21,32 @@
 
 /*
 ==========================
-PLACEMENT OF MODALS
-==========================
-*/
-.bug-suggestion-box,
-.ticketbox-btn-section {
-    position: absolute;
-    right: 20px;
-    bottom: 120px;
-    background-color: white;
-    box-shadow: $box-shadow;
-    padding: 30px;
-    width: 380px;
-}
-/*
-==========================
 TICKETBOX MAIN BTN SELECTION
 ==========================
 */
 .ticketbox-subcontainer {
+    position: absolute;
+    right: 20px;
+    bottom: 120px;
+
     .form-back-btn {
         float: left;
         @include system-button($grey, $med-grey);
         width: 100px;
         margin-top: 20px;
         cursor: pointer;
+    }
+    div::-webkit-scrollbar {
+        width: 14px;
+    }
+ 
+    div::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px $dark-grey;
+    }
+    
+    div::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        outline: 1px solid slategrey;
     }
 }
 .ticketbox-btn-section {
@@ -83,6 +84,20 @@ TICKETBOX MAIN BTN SELECTION
     text-transform: uppercase;
     letter-spacing: 1.5px;
     width: 100px;
+}
+/*
+==========================
+PLACEMENT OF MODALS
+==========================
+*/
+.bug-suggestion-box,
+.ticketbox-btn-section {
+    background-color: white;
+    box-shadow: $box-shadow;
+    padding: 30px;
+    width: 380px;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
 }
 /*
 ==========================
@@ -128,7 +143,6 @@ HELP TICKET
     .form-btn {
         width: 100px;
         margin-top: 26px;
-        // margin-right: 0px;
     }
     .form-question {
         text-align: center;
