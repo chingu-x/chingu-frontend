@@ -6,6 +6,7 @@ export default (
   form_data,
 ) => {
   const value = form_data[field_name];
+  const dropdownOptions = ["Select an option", ...options];
   return (
     <select
       className="form-dropdown"
@@ -16,7 +17,7 @@ export default (
       multiple={false}
     >
       {
-        options.map(
+        dropdownOptions.map(
           (answer, index) => (
             <option
               className="form-answer"

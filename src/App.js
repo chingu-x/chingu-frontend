@@ -24,6 +24,7 @@ import ProjectShowcase from "./components/ProjectShowcase"
 import Ticketbox from './components/Ticketbox';
 import HelpPage from "./components/HelpPage"
 
+
 export default () => (
   <div className="App">
     <Header />
@@ -77,6 +78,7 @@ export default () => (
     </Switch>
     <Ticketbox />
     <Footer />
+    <Ticketbox />
   </div>
 )
 

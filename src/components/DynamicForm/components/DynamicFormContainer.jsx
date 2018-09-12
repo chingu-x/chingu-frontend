@@ -186,7 +186,7 @@ class DynamicFormContainer extends React.Component {
     form_data[name] = type === 'checkbox'
       ? this._toggleValueInArray(form_data[name], value, max)
       : form_data[name] = value;
-
+    
     const validateField = onValidate || isFieldInvalid;
     const fieldInvalid = validateField(type, form_data[name], min, max);
 
