@@ -1,3 +1,5 @@
+import React from "react";
+
 const getCurrentTeam = (teams, chosenTeamID) => teams.find(
   team => Number(team.id) === Number(chosenTeamID),
 );
@@ -77,26 +79,28 @@ export const ContextQA = (requestSubtype) => {
   let text, subtext;
   switch (requestSubtype) {
     case "inactivity":
-      text = "Description";
+      text = "Description of Inactivity";
       subtext = (
           <a 
             className="form-subtext--link"
             target="_blank" 
             href="https://medium.com/chingu/4-tips-for-when-you-feel-your-team-is-in-the-yellow-or-red-status-9a93b79069d"
-          >Please read this article first and try the tips before submitting a ticket.
+          >
+            Please read this article first and try the tips before submitting a ticket.
           </a>
       );
       break;
     case "withdraw":
       text = "Reason";
-      subtext = `
-        This message is confidential and is used internally to identify areas for improvement.
-        Be sure to let your team know.
-        Your reasons don't need to be shared with them but communicating shows respect for your team.
-      `;
-    case "other":
-      text = "Description"
-  }
+      subtext = (
+        "This message is confidential and is used internally to identify areas for improvement." +
+        " Please let your team know you are leaving. Your reasons don't need to be shared with them but communicating shows respect for their time and effort."
+      );
+      break;
+    default:
+      text = "Description of Issue";
+  };
+
   return ({
     text,
     subtext,
