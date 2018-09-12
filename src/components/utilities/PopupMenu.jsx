@@ -84,9 +84,7 @@ class PopupMenu extends Component {
 
     return (
       <div className={this.props.className}>
-<!--         <div ref={el => this.controlElement = el}>{control}</div>
-        <div ref={el => this.menuElement = el}>{this.state.show && menu}</div> -->
-        <div ref={el => this.controlRef = el}>{toggle}</div>
+        <div ref={el => this.controlRef = el}>{control}</div>
         <div ref={el => this.menuRef = el}>{this.state.show && menu}</div>
       </div>
     )
