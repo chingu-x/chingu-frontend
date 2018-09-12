@@ -189,6 +189,7 @@ FORM STYLING
         letter-spacing: 1.3px;
         color: $grey;
         padding-bottom: 5px;
+        font-size: 12px;
     }
     .form-input,
     .form-text-area  {
@@ -198,6 +199,12 @@ FORM STYLING
     .form-btn,
     .form-btn--disabled {
         float: right;
+    }
+    .form-subtext--link {
+        display: block;
+        color: $theme-green--light;
+        text-decoration: underline;
+        padding-top: 10px;
     }
 }
 .back-btn--centered {

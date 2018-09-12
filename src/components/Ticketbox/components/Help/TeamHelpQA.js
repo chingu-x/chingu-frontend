@@ -1,3 +1,5 @@
+import * as React from "react";
+
 export const TeamHelpBaseQA = teams => {
   const teamOptions = teams.map(team => ({
     text: `${team.title} / ${team.project.title}`,
@@ -56,9 +58,19 @@ export const InactivityQA = (user, chosenTeamID) => {
 };
 
 // TODO: change text based on subtype
-// change subtext to use medium article URLs for providing guidance
 export const ContextQA = (requestSubtype) => ({
-  text: 'Description of Issue',
+  text: `Description of ${requestSubtype} Issue`,
+  subtext: (
+    requestSubtype === 'inactivity' && 
+    <React.Fragment>
+      <a 
+        className="form-subtext--link"
+        target="_blank" 
+        href="https://medium.com/chingu/4-tips-for-when-you-feel-your-team-is-in-the-yellow-or-red-status-9a93b79069d"
+      >Please read this article first and try the tips before submitting a ticket.
+      </a>
+    </React.Fragment>
+  ),
   input_type: 'textarea',
   field_name: 'context'
 });
