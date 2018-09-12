@@ -48,22 +48,22 @@ export default class extends React.Component {
   toggle = () => this.state.show ? this.close() : this.open()
   open = () => this.setState({ show: true })
   close = () => !this.props.persist && this.setState({ show: false })
+  
   handleModalClick = () => {
     delete localStorage.redirect
     if (!!this.props.onModalClick) this.props.onModalClick()
     else if (!this.props.persist) this.close()
   }
-  stopPropagation = (e) => e.stopPropagation();
+  
   render() {
     const { background } = this.props
-    // TODO Listen to events
     return this.state.show &&
     ReactDOM.createPortal(
       <div
         onClick={this.handleModalClick}
         className={`modal ${background}`}
       >
-        <div onClick={e => this.stopPropagation(e)}>{ this.props.children }</div>
+        <div onClick={e => e.stopPropagation()}>{ this.props.children }</div>
       </div>, 
       document.querySelector("#modal-root")
     )

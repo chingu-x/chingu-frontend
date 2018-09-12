@@ -11,7 +11,7 @@ const GithubLoginModal = ({
   // const redirectBase = `${procescs.env.CLIENT_URL}/login`;
   const redirectBase = "https://localhost:3000/login"
   return (
-    <div className="login-box" onClick={e => e.stopPropagation()} >
+    <div className="login-box" >
       <div className="login-title">Github Authentication</div>
       <a
         className="login-link"
