@@ -22,6 +22,7 @@ import AllProjects from './components/AllProjects';
 import TeamStandup from "./components/TeamStandup";
 import ProjectShowcase from "./components/ProjectShowcase"
 import Ticketbox from './components/Ticketbox';
+import HelpPage from "./components/HelpPage"
 
 export default () => (
   <div className="App">
@@ -35,18 +36,8 @@ export default () => (
           () => <Register version={null} /> // set custom 'chingu_application' version here
         }
       />
-      <Private exact path="/profile" render={() => <UserProfile editable={true} />} />
-      <Route
-        exact path="/profile/:username"
-        render={
-          ({ match: { params: { username } } }) => (
-            <UserProfile
-              username={username}
-              editable={false}
-            />
-          )
-        }
-      />
+      <Private exact path="/profile" component={UserProfile} />
+      <Route exact path="/profile/:username" component={UserProfile} />
       <Private exact path="/voyage" component={VoyagePortal} />
       <Private
         exact path="/voyage/application/:voyage_id"
@@ -77,6 +68,7 @@ export default () => (
       <Route exact path="/current" component={CurrentPrograms} />
       <Route exact path="/team" component={Staff} />
       <Route exact path="/privacy" component={PrivacyPolicy} />
+      <Route exact path="/help" component={HelpPage} />
       <Route exact path="/companyfaq" render={() => <FAQ headerText="Company FAQs" data={companyFAQ} />} />
       <Route exact path="/programfaq" render={() => <FAQ headerText="Program FAQs" data={programFAQ} />} />
       <Route exact path="/project/:projectId" render={
