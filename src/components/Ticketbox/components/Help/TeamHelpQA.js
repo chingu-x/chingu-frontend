@@ -1,34 +1,49 @@
-export const TeamHelpBaseQA = teams => [
-  {
-    text: "Team",
-    input_type: 'dropdown_team_cards',
-    field_name: "team_id",
-    options: teams,
-  },
-  {
-    text: 'Issue',
-    input_type: 'three_buttons',
-    field_name: 'request_subtype',
-    options: [
-      'inactivity',
-      'withdraw',
-      'other'
-    ]
-  }
-];
+export const TeamHelpBaseQA = teams => {
+  const teamOptions = teams.map(team => ({
+    text: `${team.title} / ${team.project.title}`,
+    value: team.id,
+  }));
 
-export const InactivityQA = (teams, teamID, currentUserID) => {
-  console.log({teams, teamID, currentUserID})
-  const team = teams.find(({ id }) => id === Number(teamID));
+  return [
+    {
+      text: "Team",
+      input_type: 'dropdown',
+      field_name: "team_id",
+      options: teamOptions,
+    },
+    {
+      text: 'Issue',
+      input_type: 'three_buttons',
+      field_name: 'request_subtype',
+      options: [
+        'inactivity',
+        'withdraw',
+        'other'
+      ]
+    }
+  ]
+};
+
+export const InactivityQA = (user, chosenTeamID) => {
+  const { teams, id: currentUserID } = user;
+  const team = teams.find(({ id }) => id === Number(chosenTeamID));
+
   // filters current user from options and maps rest to options array
-  // TODO: Check when Request added
-  const options = team.cohort_users.reduce((opts, { user }) => 
-    user.id != currentUserID ? [...opts, user] : opts, []);
+  const options = team.cohort_users.reduce(
+    (userOptions, { user }) => {
+      if (user.id !== Number(currentUserID)) {
+        const userOption = { text: user.username, value: user.id };
+        return [...userOptions, userOption];
+      }
+      return userOptions;
+    },
+    [],
+  );
 
   return [
     {
       text: 'Team Member',
-      input_type: 'dropdown_users',
+      input_type: 'dropdown',
       field_name: 'inactive_user_id',
       options,
     },
@@ -40,8 +55,10 @@ export const InactivityQA = (teams, teamID, currentUserID) => {
   ]
 };
 
-export const ContextQA = {
+// TODO: change text based on subtype
+// change subtext to use medium article URLs for providing guidance
+export const ContextQA = (requestSubtype) => ({
   text: 'Description of Issue',
   input_type: 'textarea',
   field_name: 'context'
-};
+});
