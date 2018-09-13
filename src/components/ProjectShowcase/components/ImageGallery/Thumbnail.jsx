@@ -17,7 +17,7 @@ Thumbnail.propTypes = {
 };
 
 Thumbnail.defaultProps = {
-  displayLargeImg: console.log,
+  displayLargeImg:'',
   imageSrc: '',
   imgCption: ''
 };
