@@ -120,13 +120,38 @@ class HelpPage extends React.Component {
           [...search, term.trim()]
           : search, [])
 
-    // Filter and return results
-    const stringIncludes = (str, search) => search.every(term => str.toString().toLowerCase().includes(term))
+    // stringifies the QA item
+    // looks through nested objects to extract strings within react fragments
+    const StringifyQAItem = (QAItem) => {
+      let stringifiedResult = QAItem;
+      if (typeof QAItem === 'object') {
+        let strings = [];
+        let checkTheseObjects = [QAItem];
+        while (checkTheseObjects.length > 0) {
+          let reactObject = checkTheseObjects.pop();
+          let children = reactObject.props.children;
+          if (!children) { continue; }
+          if (typeof children === 'string') { strings.push(children) }
+          else if (typeof children === 'object') { 
+            // if children is an array, push children objects into checkTheseObjects
+            children.forEach((item) => {
+              typeof item === 'string' ? strings.push(item) : checkTheseObjects.push(item);
+            })
+          }
+        }
+        stringifiedResult = strings.join(' ');
+      }
+      return stringifiedResult.toLowerCase();
+    }
+
     return list.reduce((reduced, { category, qa_set }) => {
-      const qa = qa_set.filter(qa => stringIncludes(qa.question, search) || stringIncludes(qa.answer, search))
+      const qa = qa_set.filter(qa => {
+        let questionString = StringifyQAItem(qa.question);
+        let answerString = StringifyQAItem(qa.answer);
+        return search.every((term) => questionString.includes(term) || answerString.includes(term))
+      })
       return !!qa.length ? [...reduced, { category, qa_set: qa }] : reduced
     }, [])
-
   }
 
   render() {
