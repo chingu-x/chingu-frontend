@@ -142,6 +142,7 @@ HELP TICKET
     .form-btn {
         width: 100px;
         margin-top: 26px;
+        cursor: pointer;
     }
     .form-question {
         text-align: center;
@@ -198,7 +199,10 @@ FORM STYLING
     .form-dropdown {
         text-transform: capitalize;
     }
-    .form-btn,
+    .form-btn {
+      float: right;
+      cursor: pointer;
+    }
     .form-btn--disabled {
         float: right;
         cursor: default;
