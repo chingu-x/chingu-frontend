@@ -7,13 +7,13 @@ class HelpPageSearch extends React.Component {
     searchTerm: null
   }
   handleInput = (e) => {
-    let { value } = e.currentTarget;
+    const { value } = e.currentTarget;
+    if (e.keyCode === 13) return this.searchHelpPage(value);
     this.setState({ searchTerm: value })
-    if (e.keyCode === 13) this.searchHelpPage();
   }
-  searchHelpPage = () => {
-    if (!this.state.searchTerm) return
-    return this.props.history.push(`/help?search=${this.state.searchTerm}`)
+  searchHelpPage = searchTerm => {
+    if (!searchTerm) return
+    return this.props.history.push(`/help?search=${searchTerm}`)
   }
   render() {
     let { switchHelpType } = this.props;
@@ -29,7 +29,7 @@ class HelpPageSearch extends React.Component {
         />
         <div
           className="form-btn-submit--icon"
-          onClick={this.searchHelpPage}
+          onClick={() => this.searchHelpPage(this.state.searchTerm)}
         >?</div>
         {localStorage.token &&
           <React.Fragment>
