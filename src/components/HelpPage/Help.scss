@@ -53,9 +53,12 @@ SEARCH
   border: none;
   box-shadow: $box-shadow-dark;
   padding: 20px;
-  color: $grey;
+  color: $dark-grey;
   font-size: 16px;
   margin-bottom: 60px;
+  &::placeholder {
+    color: $grey;
+  }
 }
 /*
 ==========================
