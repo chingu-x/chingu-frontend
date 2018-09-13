@@ -1,4 +1,5 @@
 import * as React from "react";
+import PropTypes from "prop-types"
 import Success from '../Success';
 import TicketBoxError from '../TicketBoxError';
 import HelpOptions from './HelpOptions';
@@ -34,6 +35,14 @@ const userActiveTeamsQuery = gql`
 class Help extends React.Component {
   state = { type: 'help-options' }
 
+  static defaultProps = {
+    data: {}
+  }
+
+  componentDidMount() {
+    !localStorage.token && this.switchHelpType("general")
+  }
+
   switchHelpType = (type) => this.setState({ type })
 
   renderHelpSections = (type) => {
@@ -52,7 +61,7 @@ class Help extends React.Component {
       case 'error':
         return <TicketBoxError
           switchRenderedType={switchRenderedType} />
-      case 'success': 
+      case 'success':
         return <Success category="help" />
       default:
         return <HelpOptions switchHelpType={this.switchHelpType} hasActiveTeams={user && !!user.teams.length} />
@@ -60,6 +69,7 @@ class Help extends React.Component {
   }
 
   render() {
+    console.log("help", this.props)
     const { category, switchRenderedType } = this.props;
     const { type } = this.state;
     const imgSrc = require(`../../../../assets/Artboard 4-small.png`);
@@ -81,8 +91,10 @@ class Help extends React.Component {
 
 // export default Help;
 export default props =>
-  <Request
-    {...props}
-    component={Help}
-    query={userActiveTeamsQuery}
-  />
+  !localStorage.token
+    ? <Help {...props} />
+    : <Request
+      {...props}
+      component={Help}
+      query={userActiveTeamsQuery}
+    />

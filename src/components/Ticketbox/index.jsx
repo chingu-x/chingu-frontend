@@ -1,16 +1,21 @@
 import * as React from "react";
+import { withRouter } from "react-router-dom"
 import './Ticketbox.css';
 import Modal from "../common/Modal";
 import Help from './components/Help/';
 import PopupMenu from "../utilities/PopupMenu"
 import BugSuggestion from './components/BugSuggestion';
 
-class Ticketbox extends React.Component {
+class TicketboxPopup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       type: ''
     }
+  }
+
+  componentDidMount() {
+    !localStorage.token && this.switchRenderedType("help")
   }
 
   switchRenderedType = (type) => {
@@ -30,14 +35,10 @@ class Ticketbox extends React.Component {
   }
 
   render() {
-    let { type } = this.state;
     return (
-      <PopupMenu className="ticketbox-container">
-        <div className="ticketbox-btn--main">?</div>
-        <div className="ticketbox-subcontainer">
-          {this.renderTicketForm(type)}
-        </div>
-      </PopupMenu>
+      <div className="ticketbox-subcontainer">
+        {this.renderTicketForm(this.state.type)}
+      </div>
     )
   }
 }
@@ -69,5 +70,11 @@ const TicketboxButtons = ({ switchRenderedType }) => {
   )
 }
 
-
-export default Ticketbox;
+// Disable TicketBox on HepPage for non-auth users
+export default withRouter(({ location }) =>
+  location.pathname !== "/help" &&
+  <PopupMenu className="ticketbox-container">
+    <div className="ticketbox-btn--main">?</div>
+    <TicketboxPopup />
+  </PopupMenu>
+);
