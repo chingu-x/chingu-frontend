@@ -1,13 +1,7 @@
 import * as React from 'react';
 import PropTypes from "prop-types"
 import { HelpQA } from './help-qa.data';
-import ReactMarkdown from "react-markdown";
 import './Help.css';
-
-/**
- * TODO:
- * Make QA answers pure strings to avoid using .toString in search filters (use custom mapper or ReactMarkdown)
- */
 
 class ExpansionPanel extends React.Component {
   state = { keys: [] }
@@ -57,13 +51,14 @@ class ExpansionPanel extends React.Component {
         {
           this.props.list.map(listItem => {
             const [label, content] = listItem.props.children
+            const isOpen = this.state.keys.includes(listItem.key)
             return (
               <React.Fragment key={listItem.key}>
                 <div
                   onClick={() => this.handleClick(listItem.key)}>
-                  {label}
+                  {typeof label === "function" ? label({ isOpen }) : label}
                 </div>
-                {this.state.keys.includes(listItem.key) && content}
+                {isOpen && content}
               </React.Fragment>
             )
           })
@@ -81,32 +76,33 @@ class HelpPage extends React.Component {
     return { search: queryParams.get('search') || match.params.searchTerm }
   }
 
-  renderQuestions = list => (
-    list.map(({ question, answer }) => {
-      return (
-        <React.Fragment key={question}>
-          <div className="QA-question">{question}</div>
-          <div className="QA-answer">
-            {answer}
-          </div>
-        </React.Fragment>
-      )
-    })
-  )
+  renderQuestions = list =>
+    list.map(({ question, answer }) =>
+      <React.Fragment key={question}>
+        <div className="QA-question">{question}</div>
+        <div className="QA-answer">
+          {answer}
+        </div>
+      </React.Fragment>
+    )
 
   renderCategories = list =>
     list.map((item, idx) =>
-      <React.Fragment key={idx}>
-        <div className="QA-title__outer">
-          <div className="QA-title__inner">
-            {item.category}
-            <i className="fas fas fa-chevron-down" />
-          </div>
-        </div>
+      <React.Fragment key={item.category}>
+        {
+          ({ isOpen }) =>
+            <div className="QA-title__outer">
+              <div className="QA-title__inner">
+                {item.category}
+                <i className={`fas fa-chevron-${isOpen ? "up" : "down"}`} />
+              </div>
+            </div>
+        }
         <ExpansionPanel
           className="expansion-section"
           list={this.renderQuestions(item.qa_set)} />
-      </React.Fragment>)
+      </React.Fragment>
+    )
 
   filteredQA = (list, search) => {
     // If search input, return whole list
@@ -132,7 +128,7 @@ class HelpPage extends React.Component {
           let children = reactObject.props.children;
           if (!children) { continue; }
           if (typeof children === 'string') { strings.push(children) }
-          else if (typeof children === 'object') { 
+          else if (typeof children === 'object') {
             // if children is an array, push children objects into checkTheseObjects
             children.forEach((item) => {
               typeof item === 'string' ? strings.push(item) : checkTheseObjects.push(item);
