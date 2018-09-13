@@ -43,9 +43,8 @@ const InfoComponents = ({ team }) => {
     { label: 'Team', data: team.title },
     { label: 'Tier', data: 'Tier ' + team.tier.level },
     { label: 'Project', data: project.title },
-    { label: 'Elevator Pitch', data: project.elevator_pitch },
+    { label: 'Description', data: project.elevator_pitch },
     { label: 'Members', data: project.users },
-    // { label: 'TechStack', data: project.skills },
   ]
 
   return infoObjects.map((info, idx) => {
@@ -58,7 +57,7 @@ const InfoComponents = ({ team }) => {
         data = info.data.map((user, idx) => {
           return (
             <Link to={`/profile/${user.username}`} key={idx} className="team-card-user">
-              <img className="team-card-avatar-img" src={user.avatar ? user.avatar : require('../../../assets/blank image.png')} alt={user.username} />
+              <img className="team-card-avatar-img" src={user.avatar || require('../../../assets/blank image.png')} alt={user.username} />
               <div className="team-card-username">{user.username}</div>
             </Link>
           )
