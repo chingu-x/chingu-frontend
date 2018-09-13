@@ -30,8 +30,8 @@ class TeamHelp extends React.Component {
   }
 
   getQuestions = (requestSubtype, chosenTeamID) => {
-    const { user, user: { teams } } = this.props;
-    console.log(teams);
+    const { user } = this.props;
+
     switch (requestSubtype) {
       case 'inactivity':
         return [
@@ -108,14 +108,8 @@ class TeamHelp extends React.Component {
     const { switchHelpType } = this.props;
     const { error, response, questions } = this.state;
 
-    if (error) {
-      switchHelpType("error");
-      return null;
-    }
-    if (response) {
-      switchHelpType("success");
-      return null;
-    }
+    if (error) switchHelpType("error");
+    if (response) switchHelpType("success");
 
     return (
       <div className="help-team-container">
