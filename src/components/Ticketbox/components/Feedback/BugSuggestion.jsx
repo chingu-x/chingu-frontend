@@ -69,7 +69,7 @@ class BugSuggestion extends React.Component {
                   questions={QA(category)}
                   onSubmit={this.submitTicket}
                   persistence
-                  purpose="ticketbox"
+                  purpose={`ticketbox-${category}`}
                 />
                 <BackBtn type="left" path={""} switchRenderedType={switchRenderedType} />
               </div>
