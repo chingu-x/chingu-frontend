@@ -147,10 +147,7 @@ class HelpPage extends React.Component {
       const qa = qa_set.filter(qa => {
         let questionString = StringifyQAItem(qa.question);
         let answerString = StringifyQAItem(qa.answer);
-        for (var i = 0; i < search.length; i++) {
-          if (questionString.includes(search[i]) || answerString.includes(search[i])) { return true }
-        }
-        return false;
+        return search.every((term) => questionString.includes(term) || answerString.includes(term))
       })
       return !!qa.length ? [...reduced, { category, qa_set: qa }] : reduced
     }, [])
