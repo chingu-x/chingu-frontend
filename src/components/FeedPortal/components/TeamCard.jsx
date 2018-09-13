@@ -19,8 +19,8 @@ const TeamCard = ({ user: { available_standups }, team }) => {
         <InfoComponents team={team} />
       </div>
       <div className="team-card-buttons-container">
+      
         <Link
-          // to={"/project/" + team.project.id + "/workspace"} 
           to={"#"}
           className="user-btn--disabled">Team Workspace
           </Link>
@@ -29,9 +29,34 @@ const TeamCard = ({ user: { available_standups }, team }) => {
           className={`user-btn${standupStatus}`}
           to={availableStandup ? `/team/standup/${availableStandup.id}` : "#"}
         >{availableStandup ? "Submit Standup" : "No Standup Available"}</Link>
+
+        <div className="team-resource-links-container">
+          <img
+            alt="edit links"
+            className="team-resource-links"
+            src={require(`../../../assets/links.png`)}
+          />
+          <TeamLinks team={team} />
+        </div>
+        
       </div>
     </div >
   )
+}
+
+const TeamLinks = ({ team }) => {
+  let links = [{ github_url, project_url, slack_url, drive_url, pm_url, mockup_url  }] = team.project;
+  links.map((link, idx) => {
+    return link &&
+      <img 
+        key={idx} 
+        alt="icon" 
+        className="team-resource-links"
+        src={require(`../../../assets/${link}.png`)}
+      >
+        <a target="_blank" href="link"/>
+      </img>
+  })
 }
 
 const InfoComponents = ({ team }) => {
