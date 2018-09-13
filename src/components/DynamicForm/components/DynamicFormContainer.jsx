@@ -247,11 +247,22 @@ class DynamicFormContainer extends React.Component {
 const questionShape = {
   id: PropTypes.string, // mongo oID of Dynamic Question
   text: PropTypes.string, // user facing text
-  subtext: PropTypes.string, // user facing extra info
+  subtext: PropTypes.oneOfType([ // user facing extra info
+    PropTypes.string, // text
+    PropTypes.element, // <a> link
+  ]),
   input_type: PropTypes.string, // html input type
   field_name: PropTypes.string, // form field name
-  options: PropTypes.arrayOf( // enum selection options
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  options: PropTypes.arrayOf( // selection options
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      // { text, value } option for different user facing text and stored value
+      PropTypes.shape({ 
+        text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      }),
+    ]),
   ),
   minlength: PropTypes.number, // min length or number of choices
   maxlength: PropTypes.number, // max length or number of choices
