@@ -12,11 +12,7 @@ class HelpPageSearch extends React.Component {
     if (e.keyCode === 13) this.searchHelpPage();
   }
   searchHelpPage = () => {
-    /**
-    * TEMP using ueryString redirect
-    * NOTE: There is bug where ticketbox doesn't close on route redirect. DO NOT FIX
-    * PopupMenu utility will close dropdowns/popups on route changes by default.
-    */
+    if (!this.state.searchTerm) return
     return this.props.history.push(`/help?search=${this.state.searchTerm}`)
   }
   render() {
