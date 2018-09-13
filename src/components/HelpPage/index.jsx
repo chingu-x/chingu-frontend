@@ -122,25 +122,26 @@ class HelpPage extends React.Component {
 
     // stringifies the QA item
     // looks through nested objects to extract strings within react fragments
-    const StringifyQAItem = (str) => {
-      let stringsOnly = str;
-      if (typeof str === 'object') {
-        stringsOnly = [];
-        let checkTheseObjects = [str];
+    const StringifyQAItem = (QAItem) => {
+      let stringifiedResult = QAItem;
+      if (typeof QAItem === 'object') {
+        let strings = [];
+        let checkTheseObjects = [QAItem];
         while (checkTheseObjects.length > 0) {
-          let lastItem = checkTheseObjects.pop();
-          if (!lastItem.props.children) { continue; }
-          if (typeof lastItem.props.children === 'string') { stringsOnly.push(lastItem.props.children) }
-          else if (typeof lastItem.props.children === 'object') { 
+          let reactObject = checkTheseObjects.pop();
+          let children = reactObject.props.children;
+          if (!children) { continue; }
+          if (typeof children === 'string') { strings.push(children) }
+          else if (typeof children === 'object') { 
             // if children is an array, push children objects into checkTheseObjects
-            lastItem.props.children.forEach((item) => {
-              typeof item === 'string' ? stringsOnly.push(item) : checkTheseObjects.push(item);
+            children.forEach((item) => {
+              typeof item === 'string' ? strings.push(item) : checkTheseObjects.push(item);
             })
           }
         }
-        stringsOnly = stringsOnly.join(' ');
+        stringifiedResult = strings.join(' ');
       }
-      return stringsOnly.toString().toLowerCase();
+      return stringifiedResult.toLowerCase();
     }
 
     return list.reduce((reduced, { category, qa_set }) => {
