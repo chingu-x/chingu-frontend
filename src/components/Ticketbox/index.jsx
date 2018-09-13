@@ -1,4 +1,5 @@
 import * as React from "react";
+import { withRouter } from "react-router-dom"
 import './Ticketbox.css';
 import Modal from "../common/Modal";
 import Help from './components/Help/';
@@ -73,5 +74,6 @@ const TicketboxButtons = ({ switchRenderedType }) => {
   )
 }
 
-
-export default Ticketbox;
+// Disable TicketBox on HepPage for non-auth users
+export default withRouter(({ location }) =>
+  location.pathname !== "/help" && <Ticketbox />);
