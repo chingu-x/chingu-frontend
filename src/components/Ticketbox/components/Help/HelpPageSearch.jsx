@@ -35,11 +35,14 @@ class HelpPageSearch extends React.Component {
           className="form-btn-submit--icon"
           onClick={this.searchHelpPage}
         >?</div>
-        <hr className="hline" />
-        <BackBtn
-          path={"help-options"}
-          switchHelpType={switchHelpType}
-        />
+        {localStorage.token &&
+          <React.Fragment>
+            <hr className="hline" />
+            <BackBtn
+              path={"help-options"}
+              switchHelpType={switchHelpType} />
+          </React.Fragment>
+        }
       </div>
     )
   }

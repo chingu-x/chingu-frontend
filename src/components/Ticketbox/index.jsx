@@ -13,6 +13,10 @@ class Ticketbox extends React.Component {
     }
   }
 
+  componentDidMount() {
+    !localStorage.token && this.setState({ type: "help" })
+  }
+
   switchRenderedType = (type) => {
     this.setState({ type })
   }
