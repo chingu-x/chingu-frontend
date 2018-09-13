@@ -13,7 +13,6 @@ export const TeamHelpBaseQA = (user, chosenTeamID) => {
     value: team.id,
   }));
 
-  // console.log(teams, getCurrentTeam(teams, chosenTeamID))
   // build subtype options
   const team = getCurrentTeam(teams, chosenTeamID);
   const hasAnotherMember = team && team.cohort_users.some(
