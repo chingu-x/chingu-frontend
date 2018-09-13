@@ -60,7 +60,6 @@ class PopupMenu extends Component {
   handleClick = e => {
     const { onMenuClick, persist } = this.props
     const target = ((e.target: any): HTMLElement);
-    console.log("hit target", this.menuRef.contains(target), this.menuRef)
 
     // Open DD on control element click 
     if (!this.state.show &&
