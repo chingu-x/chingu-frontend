@@ -78,7 +78,6 @@ export default () => (
     </Switch>
     <Ticketbox />
     <Footer />
-    <Ticketbox />
   </div>
 )
 
