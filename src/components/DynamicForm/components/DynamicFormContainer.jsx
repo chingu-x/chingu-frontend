@@ -28,6 +28,7 @@ class DynamicFormContainer extends React.Component {
 
   componentDidUpdate(prevProps) {
     // when the form_data is updated from onFormChange
+    // or it receives new questions (for multi-question sets)
     const { form_data, disabled } = this.state;
     const { purpose, persistence, questions } = this.props;
 
