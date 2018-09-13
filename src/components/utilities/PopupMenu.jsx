@@ -12,7 +12,7 @@ import { withRouter } from "react-router-dom"
 class PopupMenu extends Component {
   static propTypes = {
     persist: PropTypes.bool, // Persist over clicks outside of dd menu
-    // onMenuClick: PropTypes.func, // TODO:
+    onMenuClick: PropTypes.func, // Observationsal
     control: (props, propName, componentName) => {
       if (props.control && !props.menu) {
         return new Error(`${componentName} requires both 'control' and 'menu' props OR two child elements!`)
@@ -36,6 +36,7 @@ class PopupMenu extends Component {
 
   static defaultProps = {
     persist: false,
+    onMenuClick: () => { },
     children: [] // Prevent non-iterable destructure error when providing only one of 'control' and 'menu' props
   }
 
@@ -57,9 +58,8 @@ class PopupMenu extends Component {
     }
   }
 
-  handleClick = e => {
+  handleClick = ({ target }) => {
     const { onMenuClick, persist } = this.props
-    const target = ((e.target: any): HTMLElement);
 
     // Open DD on control element click 
     if (!this.state.show &&
@@ -72,6 +72,7 @@ class PopupMenu extends Component {
     if (
       !persist &&
       !this.menuRef.contains(target)) {
+      onMenuClick(target)
       return this.setState({ show: false })
     }
   }
