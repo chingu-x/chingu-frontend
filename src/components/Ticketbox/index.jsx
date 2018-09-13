@@ -1,10 +1,9 @@
 import * as React from "react";
 import { withRouter } from "react-router-dom"
-import './Ticketbox.css';
-import Modal from "../common/Modal";
-import Help from './components/Help/';
 import PopupMenu from "../utilities/PopupMenu"
+import Help from './components/Help/';
 import BugSuggestion from './components/BugSuggestion';
+import './Ticketbox.css';
 
 class TicketboxPopup extends React.Component {
   constructor(props) {

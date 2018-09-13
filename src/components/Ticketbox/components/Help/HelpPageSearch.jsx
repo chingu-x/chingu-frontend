@@ -1,6 +1,6 @@
 import * as React from "react";
 import BackBtn from '../BackBtn';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class HelpPageSearch extends React.Component {
   state = {

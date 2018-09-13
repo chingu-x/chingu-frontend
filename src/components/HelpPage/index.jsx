@@ -1,13 +1,7 @@
 import * as React from 'react';
 import PropTypes from "prop-types"
 import { HelpQA } from './help-qa.data';
-import ReactMarkdown from "react-markdown";
 import './Help.css';
-
-/**
- * TODO:
- * Make QA answers pure strings to avoid using .toString in search filters (use custom mapper or ReactMarkdown)
- */
 
 class ExpansionPanel extends React.Component {
   state = { keys: [] }
@@ -132,7 +126,7 @@ class HelpPage extends React.Component {
           let children = reactObject.props.children;
           if (!children) { continue; }
           if (typeof children === 'string') { strings.push(children) }
-          else if (typeof children === 'object') { 
+          else if (typeof children === 'object') {
             // if children is an array, push children objects into checkTheseObjects
             children.forEach((item) => {
               typeof item === 'string' ? strings.push(item) : checkTheseObjects.push(item);
