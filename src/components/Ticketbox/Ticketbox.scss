@@ -218,7 +218,7 @@ FORM STYLING
     }
 }
 .back-btn--centered {
-    @include system-button($theme-green, $theme-green--hover);
+    @include system-button($grey, $med-grey);
     width: 100px;
     margin: 0 auto;
     margin-top: 20px;
