@@ -56,7 +56,13 @@ class Help extends React.Component {
       case 'success':
         return <Success category="help" />
       default:
-        return <HelpOptions switchHelpType={this.switchHelpType} hasActiveTeams={user && !!user.teams.length} />
+        return (
+          <HelpOptions
+            switchRenderedType={switchRenderedType}
+            switchHelpType={this.switchHelpType}
+            hasActiveTeams={user && !!user.teams.length}
+          />
+        )
     }
   }
 
