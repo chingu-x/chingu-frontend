@@ -1,26 +1,14 @@
 import * as React from "react";
-import { withRouter } from "react-router-dom"
+import PropTypes from "prop-types";
 import './Ticketbox.css';
-import Modal from "../common/Modal";
 import Help from './components/Help/';
 import PopupMenu from "../utilities/PopupMenu"
 import BugSuggestion from './components/BugSuggestion';
 
 class TicketboxPopup extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      type: ''
-    }
-  }
+  state = { type: null }
 
-  componentDidMount() {
-    !localStorage.token && this.switchRenderedType("help")
-  }
-
-  switchRenderedType = (type) => {
-    this.setState({ type })
-  }
+  switchRenderedType = (type) => this.setState({ type });
 
   renderTicketForm = (type) => {
     switch (type) {
@@ -41,7 +29,7 @@ class TicketboxPopup extends React.Component {
       </div>
     )
   }
-}
+};
 
 const TicketboxButtons = ({ switchRenderedType }) => {
   let assets = [
@@ -68,13 +56,18 @@ const TicketboxButtons = ({ switchRenderedType }) => {
       }
     </div>
   )
-}
+};
+
+TicketboxButtons.propTypes = {
+  switchRenderedType: PropTypes.func.isRequired,
+};
 
 // Disable TicketBox on HepPage for non-auth users
-export default withRouter(({ location }) =>
-  location.pathname !== "/help" &&
-  <PopupMenu className="ticketbox-container">
-    <div className="ticketbox-btn--main">?</div>
-    <TicketboxPopup />
-  </PopupMenu>
-);
+export default () => localStorage.token
+  ? (
+      <PopupMenu className="ticketbox-container">
+        <div className="ticketbox-btn--main">?</div>
+        <TicketboxPopup />
+      </PopupMenu>
+    )
+  : null; // only render if the user is logged in
