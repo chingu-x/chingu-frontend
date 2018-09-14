@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import Success from '../Success';
 import TicketBoxError from '../TicketBoxError';
 import HelpOptions from './HelpOptions';
-import HelpPageSearch from './HelpPageSearch';
+// import HelpPageSearch from './HelpPageSearch';
 import TeamHelp from './TeamHelp';
 import BackBtn from "../BackBtn"
 import { gql } from "apollo-boost"
@@ -33,15 +33,7 @@ const userActiveTeamsQuery = gql`
 `
 
 class Help extends React.Component {
-  state = { type: 'help-options' }
-
-  static defaultProps = {
-    data: {}
-  }
-
-  componentDidMount() {
-    !localStorage.token && this.switchHelpType("general")
-  }
+  state = { type: null }
 
   switchHelpType = (type) => this.setState({ type })
 
@@ -54,10 +46,10 @@ class Help extends React.Component {
           category="team"
           user={user}
           switchHelpType={this.switchHelpType} />
-      case 'general':
-        return <HelpPageSearch
-          switchRenderedType={switchRenderedType}
-          switchHelpType={this.switchHelpType} />
+      // case 'general': // TODO: uncomment when help section refactored
+      //   return <HelpPageSearch
+      //     switchRenderedType={switchRenderedType}
+      //     switchHelpType={this.switchHelpType} />
       case 'error':
         return <TicketBoxError
           switchRenderedType={switchRenderedType} />
@@ -69,7 +61,6 @@ class Help extends React.Component {
   }
 
   render() {
-    console.log("help", this.props)
     const { category, switchRenderedType } = this.props;
     const { type } = this.state;
     const imgSrc = require(`../../../../assets/Artboard 4-small.png`);
@@ -80,21 +71,24 @@ class Help extends React.Component {
           <img className="box-icon" alt="icon" src={imgSrc} />
         </div>
         {this.renderHelpSections(type)}
-        {type === "help-options" &&
-          <BackBtn
-            path=""
-            switchRenderedType={switchRenderedType} />}
+        {
+          type === "help-options" &&
+          <BackBtn path="" switchRenderedType={switchRenderedType} />
+        }
       </div>
     )
   }
 }
 
-// export default Help;
-export default props =>
-  !localStorage.token
-    ? <Help {...props} />
-    : <Request
-      {...props}
-      component={Help}
-      query={userActiveTeamsQuery}
-    />
+Help.propTypes = {
+  category: PropTypes.string.isRequired,
+  switchRenderedType: PropTypes.func.isRequired,
+};
+
+export default props => (
+  <Request
+    {...props}
+    component={Help}
+    query={userActiveTeamsQuery}
+  />
+);
