@@ -51,13 +51,14 @@ class ExpansionPanel extends React.Component {
         {
           this.props.list.map(listItem => {
             const [label, content] = listItem.props.children
+            const isOpen = this.state.keys.includes(listItem.key)
             return (
               <React.Fragment key={listItem.key}>
                 <div
                   onClick={() => this.handleClick(listItem.key)}>
-                  {label}
+                  {typeof label === "function" ? label({ isOpen }) : label}
                 </div>
-                {this.state.keys.includes(listItem.key) && content}
+                {isOpen && content}
               </React.Fragment>
             )
           })
@@ -75,32 +76,33 @@ class HelpPage extends React.Component {
     return { search: queryParams.get('search') || match.params.searchTerm }
   }
 
-  renderQuestions = list => (
-    list.map(({ question, answer }) => {
-      return (
-        <React.Fragment key={question}>
-          <div className="QA-question">{question}</div>
-          <div className="QA-answer">
-            {answer}
-          </div>
-        </React.Fragment>
-      )
-    })
-  )
+  renderQuestions = list =>
+    list.map(({ question, answer }) =>
+      <React.Fragment key={question}>
+        <div className="QA-question">{question}</div>
+        <div className="QA-answer">
+          {answer}
+        </div>
+      </React.Fragment>
+    )
 
   renderCategories = list =>
     list.map((item, idx) =>
-      <React.Fragment key={idx}>
-        <div className="QA-title__outer">
-          <div className="QA-title__inner">
-            {item.category}
-            <i className="fas fas fa-chevron-down" />
-          </div>
-        </div>
+      <React.Fragment key={item.category}>
+        {
+          ({ isOpen }) =>
+            <div className="QA-title__outer">
+              <div className="QA-title__inner">
+                {item.category}
+                <i className={`fas fa-chevron-${isOpen ? "up" : "down"}`} />
+              </div>
+            </div>
+        }
         <ExpansionPanel
           className="expansion-section"
           list={this.renderQuestions(item.qa_set)} />
-      </React.Fragment>)
+      </React.Fragment>
+    )
 
   filteredQA = (list, search) => {
     // If search input, return whole list
