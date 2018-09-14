@@ -1,4 +1,5 @@
 import * as React from "react";
+import PropTypes from "prop-types";
 import Success from '../Success';
 import TicketBoxError from '../TicketBoxError';
 import HelpOptions from './HelpOptions';
@@ -41,19 +42,21 @@ class Help extends React.Component {
 
     switch (type) {
       case 'team help':
-        return <TeamHelp
-          category="team"
-          user={user}
-          switchHelpType={this.switchHelpType} />
+        return (
+          <TeamHelp
+            category="team"
+            user={user}
+            switchHelpType={this.switchHelpType}
+          />
+        )
       // case 'general': // TODO: uncomment when help section refactored
       //   return <HelpPageSearch
       //     switchRenderedType={switchRenderedType}
       //     switchHelpType={this.switchHelpType} />
       case 'error':
-        return <TicketBoxError
-          switchRenderedType={switchRenderedType} />
+        return <TicketBoxError switchRenderedType={switchRenderedType} />;
       case 'success':
-        return <Success category="help" />
+        return <Success category="help" />;
       default:
         return (
           <HelpOptions
@@ -77,7 +80,7 @@ class Help extends React.Component {
         </div>
         {this.renderHelpSections(type)}
         {
-          type === "help-options" &&
+          [null, "help-options"].includes(type) &&
           <BackBtn path="" switchRenderedType={switchRenderedType} />
         }
       </div>
