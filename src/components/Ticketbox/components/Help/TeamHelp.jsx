@@ -1,4 +1,5 @@
 import * as React from "react";
+import PropTypes from "prop-types"
 import BackBtn from '../BackBtn';
 import { gql } from "apollo-boost";
 import { DynamicFormContainer } from "../../../DynamicForm";
@@ -134,5 +135,10 @@ class TeamHelp extends React.Component {
     )
   }
 }
+
+TeamHelp.propTypes = {
+  user: PropTypes.object.isRequired,
+  switchHelpType: PropTypes.func.isRequired,
+};
 
 export default TeamHelp
