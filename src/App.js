@@ -22,7 +22,7 @@ import AllProjects from './components/AllProjects';
 import TeamStandup from "./components/TeamStandup";
 import ProjectShowcase from "./components/ProjectShowcase"
 import Ticketbox from './components/Ticketbox';
-import HelpPage from "./components/HelpPage"
+// import HelpPage from "./components/HelpPage" TODO: uncomment when ready
 
 
 export default () => (
@@ -69,7 +69,7 @@ export default () => (
       <Route exact path="/current" component={CurrentPrograms} />
       <Route exact path="/team" component={Staff} />
       <Route exact path="/privacy" component={PrivacyPolicy} />
-      <Route exact path="/help" component={HelpPage} />
+      {/* TODO: uncomment when ready <Route exact path="/help" component={HelpPage} /> */}
       <Route exact path="/companyfaq" render={() => <FAQ headerText="Company FAQs" data={companyFAQ} />} />
       <Route exact path="/programfaq" render={() => <FAQ headerText="Program FAQs" data={programFAQ} />} />
       <Route exact path="/project/:projectId" render={
