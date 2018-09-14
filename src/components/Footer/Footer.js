@@ -32,9 +32,9 @@ class Footer extends React.Component {
         <a className="footer-link" href="mailto:admin@chingu.io">
           Contact Us
         </a>
-        <Link className="footer-link" to="/help">
+        {/* TODO: uncomment when complete <Link className="footer-link" to="/help">
           Help Page
-        </Link>
+        </Link> */}
         <Link className="footer-link" to="/team">
           Our Team
         </Link>

@@ -9,8 +9,14 @@ export const QA = (category) => [
       input_type: 'dropdown', // TODO: "button_option" new Question input_type?
       field_name: 'sub_category',
       options: category === 'bug'
-        ? ['error', 'malfunction'] // bug category
-        : ['existing', 'new'] // suggestion category
+        ? [
+            { text: 'Error Message', value: 'error' },
+            'malfunction',
+          ] // bug category
+        : [
+            { text: 'Existing Feature', value: 'existing' },
+            { text: 'New Feature', value: 'new' },
+          ] // suggestion category
     },
     {
       text: 'Site Feature',
