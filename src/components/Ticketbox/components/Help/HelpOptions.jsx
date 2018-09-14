@@ -1,4 +1,5 @@
 import * as React from "react";
+import PropTypes from "prop-types"
 
 const HelpOptions = ({ switchHelpType, hasActiveTeams }) => {
   const buttons = [
@@ -36,5 +37,10 @@ const HelpOptions = ({ switchHelpType, hasActiveTeams }) => {
     </div>
   )
 }
+
+HelpOptions.propTypes = {
+  hasActiveTeams: PropTypes.bool.isRequired,
+  switchHelpType: PropTypes.func.isRequired,
+};
 
 export default HelpOptions;
