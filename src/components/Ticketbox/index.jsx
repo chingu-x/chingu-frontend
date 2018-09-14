@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import './Ticketbox.css';
 import Help from './components/Help/';
 import PopupMenu from "../utilities/PopupMenu"
-import BugSuggestion from './components/BugSuggestion';
+import { BugSuggestion } from './components/Feedback';
 
 class TicketboxPopup extends React.Component {
   state = { type: null }
