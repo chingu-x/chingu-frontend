@@ -108,8 +108,15 @@ class TeamHelp extends React.Component {
     const { switchHelpType } = this.props;
     const { error, response, questions } = this.state;
 
-    if (error) switchHelpType("error");
-    if (response) switchHelpType("success");
+    if (error) {
+      switchHelpType("error");
+      return null;
+    }
+
+    if (response){
+      switchHelpType("success");
+      return null;
+    }
 
     return (
       <div className="help-team-container">
