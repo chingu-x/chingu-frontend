@@ -37,7 +37,6 @@ const HelpOptions = ({ switchHelpType, switchRenderedType, hasActiveTeams }) => 
           })
         }
       </div>
-      <BackBtn switchRenderedType={switchRenderedType} className="back-btn--centered" />
     </React.Fragment>
   )
 }
