@@ -1,4 +1,5 @@
 import * as React from "react";
+import PropTypes from "prop-types"
 import { DynamicFormContainer } from "../../../DynamicForm";
 import { gql } from "apollo-boost";
 import { client } from "../../../../";
@@ -78,6 +79,11 @@ class BugSuggestion extends React.Component {
       </div>
     )
   }
+}
+
+BugSuggestion.propTypes = {
+  category: PropTypes.string.isRequired,
+  switchRenderedType: PropTypes.func.isRequired,
 }
 
 export default BugSuggestion;
