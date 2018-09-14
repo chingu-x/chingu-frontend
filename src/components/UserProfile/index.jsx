@@ -193,5 +193,5 @@ export default props =>
     query={profileQuery}
     variables={{ username: props.match.params.username }}
     component={UserProfile}
-    globalLoader
+    loader
   />
