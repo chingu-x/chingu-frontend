@@ -8,13 +8,13 @@ export const HelpQA = [
         question: 'What is Chingu?',
         answer:  (
           <React.Fragment>
-            Chingu is building a global collaboration capital for 21st century tech-learners*
+            Chingu is building a global collaboration capital for 21st century tech-learners
             to gain experience, meet friends and generate impact through building projects. 
             Chingu’s mission is to empower the planet’s tech-learners with 21st century skills 
             by facilitating diverse collaboration experiences and build-to-learn projects.
             <br />
             <br />
-            <i>*Developers, designers, data scientists, and digital marketers can all find a home here.</i> 
+            <i>Developers, designers, data scientists, and digital marketers can all find a home here.</i> 
           </React.Fragment>
           )
       },

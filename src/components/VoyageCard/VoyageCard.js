@@ -115,15 +115,6 @@ export const CurrentVoyageCardWithTeam = ({
   endDate,
   team,
 }) => {
-  const mock = [{
-    expiration: Date.now()  -  24*60*60*1000,
-    progress_sentiment: true
-  },{
-    expiration: Date.now() + 48*60*60*1000
-  }, {
-    expiration: Date.now() + 45,
-    progress_sentiment: true
-  }]
   let currentStandUp = team.standups && team.standups.filter((standup) => standup.expiration > Number(new Date()));
   return (
     <VoyageCardCreator

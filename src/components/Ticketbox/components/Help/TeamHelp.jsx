@@ -14,7 +14,7 @@ class TeamHelp extends React.Component {
 
     // sets the questions based on persisted data from DFContainer
     let requestSubtype = null;
-    let chosenTeamID = null;
+    let chosenTeamID = props.user.teams[0].id; // default to first team's ID
     if (persistedData) {
       const { form_data: { request_subtype, team_id } } = JSON.parse(persistedData);
       requestSubtype = request_subtype;
@@ -32,7 +32,7 @@ class TeamHelp extends React.Component {
 
   getQuestions = (requestSubtype, chosenTeamID) => {
     const { user } = this.props;
-
+  
     switch (requestSubtype) {
       case 'inactivity':
         return [

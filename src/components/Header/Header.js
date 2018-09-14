@@ -1,14 +1,12 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import PropTypes from "prop-types"
+import { client } from "../../index"
 import Request from "../utilities/Request"
 import PopupMenu from "../utilities/PopupMenu"
 import Modal from "../common/Modal"
 import GithubLoginModal from "../Login/components/GithubLoginModal"
-import profileQuery from "../UserProfile/graphql/profileQuery"
 import voyagesQuery from "../VoyagePortal/graphql/voyagesQuery"
 import userBaseQuery from "./userBaseQuery"
-import { client } from "../../index"
 
 class Header extends React.Component {
   openLoginModal = e => {

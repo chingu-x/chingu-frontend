@@ -83,6 +83,7 @@ export const ContextQA = (requestSubtype) => {
           <a 
             className="form-subtext--link"
             target="_blank" 
+            rel="noopener noreferrer"
             href="https://medium.com/chingu/4-tips-for-when-you-feel-your-team-is-in-the-yellow-or-red-status-9a93b79069d"
           >
             Please read this article first and try the tips before submitting a ticket.

@@ -46,12 +46,13 @@ SUBMIT BUTTON
     @include system-button($theme-green, $theme-green--hover);
     margin: 0 auto;
     margin-top: 20px;
+    cursor: pointer;
 }
 .form-btn--disabled {
     @include system-button($lighter-grey, $lighter-grey);
     margin: 0 auto;
     margin-top: 20px;
-    cursor: pointer;
+    cursor: disabled;
     width: 200px;
 }
 .hline,

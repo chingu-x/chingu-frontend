@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import { withRouter } from "react-router-dom"
 
@@ -9,7 +9,7 @@ import { withRouter } from "react-router-dom"
  * Add optional prop to allow persistence over route changes
  */
 
-class PopupMenu extends Component {
+class PopupMenu extends React.Component {
   static propTypes = {
     persist: PropTypes.bool, // Persist over clicks outside of dd menu
     onMenuClick: PropTypes.func, // Observationsal
