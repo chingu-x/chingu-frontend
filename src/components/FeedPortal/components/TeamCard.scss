@@ -51,6 +51,10 @@ TEAM RESOURCE LINKS
 .team-resource-links-container {
     border-top: 1px solid $light-grey;
     padding-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    align-items: center;
+    justify-items: center;
 }
 .team-resource-links {
     width: 60px;
@@ -152,5 +156,12 @@ MEDIA QUERY
         grid-column: 1 / -1;
         border-right: none;
         border-bottom: 1px solid $light-grey;
+    }
+    .team-resource-links-container {
+        display: flex;
+        justify-content: center;
+    }
+    .team-resource-links {
+        margin: 5px;
     }
 }
