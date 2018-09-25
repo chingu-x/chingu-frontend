@@ -12,6 +12,7 @@ const dynamicFormMaker = (
       subtext,
       input_type,
       field_name,
+      style_name
     } = question;
 
     if (input_type === "hidden") return null;
@@ -22,7 +23,7 @@ const dynamicFormMaker = (
       : questionComponents[input_type];
 
     return (
-      <div key={"question_" + field_name} className="form-QA">
+      <div key={"question_" + field_name} className={`form-QA ${style_name}`}>
         <label className="form-question">
           {text}
         </label>
