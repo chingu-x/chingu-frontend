@@ -15,11 +15,11 @@ class SkillSetter extends React.Component {
         let { backend, backend_dependency, database, frontend, frontend_dependency } = options[0];
         this.setState({
             SKILL_ELEMENTS: [
+                frontend,
+                frontend_dependency,
                 backend,
                 backend_dependency,
                 database,
-                frontend,
-                frontend_dependency
             ]
         })
     }
@@ -47,7 +47,9 @@ class SkillSetter extends React.Component {
         let { SKILL_ELEMENTS } = this.state;
         return (
             <div className="skill-setter">
-                {this.renderSkills(SKILL_ELEMENTS)}
+                <div className="skill-options">{this.renderSkills(SKILL_ELEMENTS)}</div>
+                <div className="skill-chosen">
+                </div>
             </div>
         )
     }
