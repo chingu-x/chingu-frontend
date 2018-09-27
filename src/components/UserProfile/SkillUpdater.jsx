@@ -102,19 +102,17 @@ const SkillUpdater = () => {
     return (
         <PopupMenu>
             <button>Open Skill Updater</button>
-            <div className="skill-modal-background">
-                <div className="skill-modal">
-                    <DynamicFormContainer
-                        questions={QA}
-                    />
-                </div>
+            <div className="skill-modal">
+                <DynamicFormContainer
+                    questions={QA}
+                />
             </div>
         </PopupMenu>
-        
-    )
-} 
 
-export default props => 
+    )
+}
+
+export default props =>
     <Request
         {...props}
         query={skillQuery}
