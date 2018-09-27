@@ -18,7 +18,7 @@ const dynamicFormQuery = gql`
         text
         subtext
         input_type
-        options
+        options { text, value }
         minlength
         maxlength
       }
