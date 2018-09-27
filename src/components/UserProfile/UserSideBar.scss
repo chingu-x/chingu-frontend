@@ -90,3 +90,16 @@
     margin: 0.2em 0.3em 0.2em 0;
   }
 }
+
+.skill-modal-background {
+  @include transparent-background;
+}
+.skill-modal {
+  display: grid;
+  z-index: 100;
+  width: 600px;
+  padding: 20px;
+  background-color: white;
+  margin: 0 auto;
+  margin-top: 100px;
+}
