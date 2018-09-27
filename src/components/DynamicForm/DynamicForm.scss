@@ -533,26 +533,47 @@ SKILL SETTER
 ==========================
 */
 .skill-setter {
-    display: block;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 0px;
+    height: 600px;
+    grid-gap: 15px;
 }
 
 .skill-subcategory {
     display: block;
     font-size: 14px;
     color: $dark-grey;
-    padding: 20px;
+    padding: 10px;
     border-bottom: 1px solid $light-grey;
 }
 
 .skill-subcategory--title {
     @include portal-subcategory-small;
+    text-align: center;
 }
 
 .skill-list {
     width: 100%;
     text-align: center;
-    padding: 5px;
+    padding: 3px;
     border: 1px solid $light-grey;
     box-shadow: $box-shadow;
     margin: 10px 0px;
+    &:hover, &:focus {
+        background-color: $theme-green;
+        color: white;
+    }
+}
+
+.skill-options {
+    grid-column: 1 / 2;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.skill-chosen {
+  grid-column: 2 / -1;
+  background-color: $palest-grey;
+  box-shadow: $box-shadow;
 }
