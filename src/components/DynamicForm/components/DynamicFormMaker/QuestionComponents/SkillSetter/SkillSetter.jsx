@@ -2,12 +2,6 @@ import React from "react";
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-const skill_setter = (data, onFormChange, form_data) => {
-    return (
-        <SkillSetter data={data} onFormChange={onFormChange} form_data={form_data} />
-    )
-}
-// DragDropContext(HTML5Backend)(
 const ItemTypes = {
     SKILL_CARD: 'skill-card'
 }
@@ -94,4 +88,4 @@ const RenderSkills = ({ SKILL_ARRAY }) => {
     })
 }
 
-export default skill_setter;
+export default DragDropContext(HTML5Backend)(SkillSetter);
