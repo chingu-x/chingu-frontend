@@ -527,3 +527,32 @@ BTN (3)
     color: white;
     border: none;
 }
+/*
+==========================
+SKILL SETTER
+==========================
+*/
+.skill-setter {
+    display: block;
+}
+
+.skill-subcategory {
+    display: block;
+    font-size: 14px;
+    color: $dark-grey;
+    padding: 20px;
+    border-bottom: 1px solid $light-grey;
+}
+
+.skill-subcategory--title {
+    @include portal-subcategory-small;
+}
+
+.skill-list {
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid $light-grey;
+    box-shadow: $box-shadow;
+    margin: 10px 0px;
+}
