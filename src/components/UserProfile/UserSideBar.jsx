@@ -94,11 +94,11 @@ const USER_SKILLS_DOM_ELEMENTS = [
     schemaKey: 'skills',
     desc: 'Skills',
   },
-  {
-    divClassName: 'user-desired-skills',
-    schemaKey: 'desired_skills',
-    desc: 'Desired Skills',
-  },
+  // {
+  //   divClassName: 'user-desired-skills',
+  //   schemaKey: 'desired_skills',
+  //   desc: 'Desired Skills',
+  // },
 ];
 
 const UserSkills = ({ user, editable }) => {
@@ -115,7 +115,7 @@ const UserSkills = ({ user, editable }) => {
 
     return !editable // only render EditableTextField if editable
       ? <UserSkillComponent key={idx}>{user[elem.schemaKey]}</UserSkillComponent>
-      : <SkillUpdater />
+      : <SkillUpdater key={idx}/>
   });
 }
 
