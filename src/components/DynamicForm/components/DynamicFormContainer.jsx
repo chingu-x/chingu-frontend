@@ -215,7 +215,7 @@ const questionShape = {
   input_type: PropTypes.string, // html input type
   field_name: PropTypes.string, // form field name
   options: PropTypes.arrayOf( // enum selection options
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
   ),
   minlength: PropTypes.number, // min length or number of choices
   maxlength: PropTypes.number, // max length or number of choices
