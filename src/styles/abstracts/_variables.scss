@@ -127,6 +127,15 @@ PORTALS
   font-weight: 300;
 }
 
+@mixin portal-subcategory-small {
+  color: $lighter-grey;
+  font-size: 12px;
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: 1.5px;
+}
+
 @mixin portal-description {
   color: $dark-grey;
   font-size: $base-font-size;
