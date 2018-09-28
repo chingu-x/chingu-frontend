@@ -564,6 +564,12 @@ SKILL SETTER
         background-color: $theme-green;
         color: white;
     }
+    cursor: move;
+}
+
+.skill-list--dragging {
+    background-color: $theme-green;
+    color: white;
 }
 
 .skill-options {
