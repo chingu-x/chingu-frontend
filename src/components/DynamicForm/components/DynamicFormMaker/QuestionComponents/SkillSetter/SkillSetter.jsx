@@ -1,18 +1,9 @@
 import React from "react";
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-
-const ItemTypes = {
-    SKILL_CARD: 'skill-card'
-}
-
-const skillSource = {
-    beginDrag(props) {
-        return {
-            skillId: props.id
-        }
-    }
-}
+import RenderChosenSkills from './RenderChosenSkills';
+import RenderSkills from './RenderSkills';
+import PropTypes from 'prop-types';
 
 class SkillSetter extends React.Component {
     state = {
@@ -22,7 +13,6 @@ class SkillSetter extends React.Component {
     componentDidMount() {
         let { field_name, options } = this.props.data;
         let { backend, backend_dependency, database, frontend, frontend_dependency } = options[0];
-        console.log('backend=' + backend)
         this.setState({
             SKILL_ELEMENTS: [
                 frontend,
@@ -37,7 +27,6 @@ class SkillSetter extends React.Component {
     render() {
         let { field_name, options } = this.props.data;
         let { SKILL_ELEMENTS, CHOSEN_SKILL_ELEMENTS } = this.state;
-
         return (
             <div className="skill-setter">
                 <div className="skill-options">
@@ -49,43 +38,6 @@ class SkillSetter extends React.Component {
             </div>
         )
     }
-}
-
-const RenderChosenSkills = ({ SKILL_ARRAY }) => {
-    return SKILL_ARRAY.map((category) => {
-        return (
-            category.map((skill, idx) => {
-                return (
-                    <div key={idx} className="skill-list--chosen-background">
-                        <div className="skill-list--number">{idx}</div>
-                        <div key={'skill_' + idx} name={skill.id} className="skill-list--chosen">
-                            {skill.name}
-                        </div>
-                    </div>
-                )
-            })
-        )
-    })
-}
-
-const RenderSkills = ({ SKILL_ARRAY }) => {
-    console.log(SKILL_ARRAY);
-    return SKILL_ARRAY.map((category, idx) => {
-        return (
-            <div key={idx} className="skill-subcategory">
-                <div className="skill-subcategory--title">{category[0].category}</div>
-                {
-                    category.map((skill, idx) => {
-                        return (
-                            <div key={'skill_' + idx} name={skill.id} className="skill-list">
-                                {skill.name}
-                            </div>
-                        )
-                    })
-                }
-            </div>
-        )
-    })
-}
+} 
 
 export default DragDropContext(HTML5Backend)(SkillSetter);
