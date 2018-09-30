@@ -5,7 +5,7 @@ import { ItemTypes } from './ItemTypes';
 import { DropTarget } from 'react-dnd';
 
 const skillTarget = {
-    drop(props, monitor, component) {
+    drop(props, monitor) {
         return {
             position: props.position,
             skill: monitor.getItem().skillId,
@@ -17,25 +17,19 @@ const skillTarget = {
 function collect(connect, monitor) {
     return {
         connectDropTarget: connect.dropTarget(),
-        isOver: monitor.isOver(),
-        dropResult: monitor.getDropResult(),
+        isOver: monitor.isOver()
     }
 }
 
-class RenderChosenSkills extends React.Component {
-    render() {
-        const { SKILL_ARRAY, connectDropTarget, isOver, position } = this.props;
-
-        return connectDropTarget(
-            <div key={position} className={`chosen-skill-container ` + (isOver && ` chosen-skill-container--is-over`)}>
-                <div className="chosen-skill-number">{position + 1}</div>
-                {   
-                    SKILL_ARRAY[position] && SKILL_ARRAY[position].id 
-                    && <SourceSkillCard chosen={true} skill={SKILL_ARRAY[position]} />
-                }
-            </div>
-        )
-    }
+const RenderChosenSkills = ({ SKILL, connectDropTarget, isOver, position }) => {
+    return connectDropTarget(
+        <div key={position} className={`chosen-skill-container ` + (isOver && ` chosen-skill-container--is-over`)}>
+            <div className="chosen-skill-number">{position + 1}</div>
+            {
+                SKILL && SKILL.id && <SourceSkillCard chosen={true} skill={SKILL} />
+            }
+        </div>
+    )
 }
 
 RenderChosenSkills.propTypes = {
