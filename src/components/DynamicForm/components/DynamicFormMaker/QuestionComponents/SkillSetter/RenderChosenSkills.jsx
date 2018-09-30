@@ -1,20 +1,46 @@
 import React from "react";
+import PropTypes from 'prop-types';
+import SourceSkillCard from './SourceSkillCard';
+import { ItemTypes } from './ItemTypes';
+import { DropTarget } from 'react-dnd';
 
-const RenderChosenSkills = ({ SKILL_ARRAY }) => {
-    return SKILL_ARRAY.map((category) => {
-        return (
-            category.map((skill, idx) => {
-                return (
-                    <div key={idx} className="skill-list--chosen-background">
-                        <div className="skill-list--number">{idx}</div>
-                        <div key={'skill_' + idx} name={skill.id} className="skill-list--chosen">
-                            {skill.name}
-                        </div>
-                    </div>
-                )
-            })
-        )
-    })
+const skillTarget = {
+    drop(props, monitor, component) {
+        return {
+            position: props.position,
+            skill: monitor.getItem().skillId,
+            addSkillHandler: props.addSkillHandler
+        }
+    }
 }
 
-export default RenderChosenSkills;
+function collect(connect, monitor) {
+    return {
+        connectDropTarget: connect.dropTarget(),
+        isOver: monitor.isOver(),
+        dropResult: monitor.getDropResult(),
+    }
+}
+
+class RenderChosenSkills extends React.Component {
+    render() {
+        const { SKILL_ARRAY, connectDropTarget, isOver, position } = this.props;
+
+        return connectDropTarget(
+            <div key={position} className={`chosen-skill-container ` + (isOver && ` chosen-skill-container--is-over`)}>
+                <div className="chosen-skill-number">{position + 1}</div>
+                {   
+                    SKILL_ARRAY[position] && SKILL_ARRAY[position].id 
+                    && <SourceSkillCard chosen={true} skill={SKILL_ARRAY[position]} />
+                }
+            </div>
+        )
+    }
+}
+
+RenderChosenSkills.propTypes = {
+    connectDropTarget: PropTypes.func.isRequired,
+    isOver: PropTypes.bool.isRequired
+};
+
+export default DropTarget(ItemTypes.SKILL_CARD, skillTarget, collect)(RenderChosenSkills);
