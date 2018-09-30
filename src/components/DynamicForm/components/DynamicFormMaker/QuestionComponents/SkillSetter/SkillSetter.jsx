@@ -29,13 +29,10 @@ class SkillSetter extends React.Component {
         if (!this.checkForNoDuplicates(object)) {
             // if there is a duplicate, set existing
             // object position to empty object
-            console.log('there are duplicates!');
             skills[this.findCurrentPositionOf(object)] = {};
-        }
+        } 
         skills[position] = object;
-        console.log(skills);
-        // this.setState({ CHOSEN_SKILL_ELEMENTS: skills })
-        return null;
+        this.setState({ CHOSEN_SKILL_ELEMENTS: skills })
     }
 
     checkForNoDuplicates = (object) => {
@@ -49,9 +46,8 @@ class SkillSetter extends React.Component {
 
     findCurrentPositionOf = (object) => {
         let skills = this.state.CHOSEN_SKILL_ELEMENTS;
-        console.log(skills);
         for (var i = 0; i < skills.length; i++) {
-            if (object === {}) { continue; }
+            if (skills[i] === {}) { continue; }
             if (object.id === skills[i].id) { return i; }
         }
     }
@@ -78,7 +74,7 @@ class SkillSetter extends React.Component {
                                     position={num}
                                     addSkillHandler={this.addSkillHandler}
                                     removeSkillHandler={this.removeSkillHandler}
-                                    SKILL_ARRAY={CHOSEN_SKILL_ELEMENTS}
+                                    SKILL={CHOSEN_SKILL_ELEMENTS[num]}
                                 />
                             })
                         }
