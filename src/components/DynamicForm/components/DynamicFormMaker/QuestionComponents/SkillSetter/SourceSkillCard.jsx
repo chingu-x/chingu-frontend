@@ -11,8 +11,10 @@ const skillSource = {
     },
     endDrag(props, monitor, component) {
         let results = monitor.getDropResult();
-        let { addSkillHandler, position, skill } = results;
-        return addSkillHandler(position, skill);
+        if (results) {
+            let { addSkillHandler, position, skill } = results;
+            return addSkillHandler(position, skill);
+        }
     }
 }
 
