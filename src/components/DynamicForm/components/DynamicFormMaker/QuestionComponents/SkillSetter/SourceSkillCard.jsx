@@ -6,8 +6,13 @@ import { DragSource } from 'react-dnd';
 const skillSource = {
     beginDrag(props) {
         return {
-            skillId: props.id
+            skillId: props.skill
         }
+    },
+    endDrag(props, monitor, component) {
+        let results = monitor.getDropResult();
+        let { addSkillHandler, position, skill } = results;
+        return addSkillHandler(position, skill);
     }
 }
 
@@ -17,16 +22,15 @@ function collect(connect, monitor) {
         isDragging: monitor.isDragging()
     }
 }
-const SourceSkillCard = ({ skill, connectDragSource, isDragging }) => {
-    return (
-        connectDragSource(
-            <div
-                name={skill.id}
-                className={`skill-list ${isDragging && `skill-list--dragging`}`}
-            >
-                {skill.name}
-            </div>
-        )
+
+const SourceSkillCard = ({ skill, connectDragSource, isDragging, chosen }) => {
+    return connectDragSource(
+        <div
+            name={skill.id}
+            className={`skill-list ${isDragging && `skill-list--dragging`} ${chosen && `skill-list--chosen`}`}
+        >
+            {skill.name}
+        </div>
     )
 }
 
