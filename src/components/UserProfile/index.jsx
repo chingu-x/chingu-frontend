@@ -120,13 +120,10 @@ const UserProfile = props => {
     }
     let card;
     if (editable && pendingApproval.length > 0) {
-      console.log('in 1')
       return null;
     } else if (editable) {
-      console.log('in 2')
       card = <Cards.ApplyForAVoyageCard />
     } else if (!editable && pendingApproval.length === 0) {
-      console.log('in 3')
       card = <NothingHere />
     }
     return (
