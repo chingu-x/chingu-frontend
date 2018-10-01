@@ -8,7 +8,7 @@ import dropdown_with_input from './dropdown_with_input';
 
 import team_progress_sentiment_buttons from "./team_progress_sentiment_buttons.jsx";
 import voyage_application_tier_select from "./voyage_application_tier_select";
-import skill_setter from './SkillSetter/skill_setter';
+import skill_setter from './SkillSetter';
 
 export default {
   checkbox,
