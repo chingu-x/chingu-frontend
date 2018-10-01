@@ -4,13 +4,13 @@ import { userAddSkills, userAddDesiredSkills } from '../graphql/skillMutations';
 import UserSkillComponent from './UserSkillComponent';
 
 class EditableUserSkills extends React.Component {
-    state = {
-        displayEdit: false
-    }
+    // state = {
+    //     displayEdit: false
+    // }
 
-    toggleDisplayEdit = (displayEdit) => {
-        this.setState({ displayEdit });
-    }
+    // toggleDisplayEdit = (displayEdit) => {
+    //     this.setState({ displayEdit });
+    // }
 
     render() {
         let { hasPermission, elem, skills } = this.props;
