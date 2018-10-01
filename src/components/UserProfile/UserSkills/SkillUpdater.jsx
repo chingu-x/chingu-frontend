@@ -1,9 +1,8 @@
 import * as React from "react";
-import PopupMenu from "../utilities/PopupMenu";
-import { DynamicFormContainer } from '../DynamicForm/components';
-import { gql } from "apollo-boost";
-import Request from "../utilities/Request"
-import skillQuery from './graphql/skillQuery';
+import PopupMenu from "../../utilities/PopupMenu";
+import { DynamicFormContainer } from '../../DynamicForm/components';
+import Request from "../../utilities/Request"
+import skillQuery from '../graphql/skillQuery';
 
 /**
  * @prop {string} mutation 
