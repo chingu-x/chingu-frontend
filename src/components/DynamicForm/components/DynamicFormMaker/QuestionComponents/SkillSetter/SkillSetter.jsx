@@ -32,7 +32,9 @@ class SkillSetter extends React.Component {
             skills[this.findCurrentPositionOf(object)] = {};
         } 
         skills[position] = object;
-        this.setState({ CHOSEN_SKILL_ELEMENTS: skills })
+        this.setState({ CHOSEN_SKILL_ELEMENTS: skills }, () => {
+            this.props.onFormChange(this.idParser());
+        })
     }
 
     checkForNoDuplicates = (object) => {
@@ -50,6 +52,17 @@ class SkillSetter extends React.Component {
             if (skills[i] === {}) { continue; }
             if (object.id === skills[i].id) { return i; }
         }
+    }
+
+    idParser = () => {
+        let skills = this.state.CHOSEN_SKILL_ELEMENTS;
+        let skillIds = skills.map((skill) => { return skill.id });
+        return { 
+            currentTarget: {
+                name: 'skill_ids',
+                value: skillIds
+            }
+        };
     }
 
     render() {
