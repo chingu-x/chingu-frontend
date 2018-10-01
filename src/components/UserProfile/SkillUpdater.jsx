@@ -10,34 +10,26 @@ import skillQuery from './graphql/skillQuery';
  * @prop {array} questions array of Dynamic Question objects
  */
 
-
-const DesiredSkillQA = [
-    {
-        text: 'Your Desired Skills',
-        input_type: 'skill_setter',
-        field_name: 'desired_skills'
-    }
-]
-
-const SkillUpdater = ({ data }) => {
+const SkillUpdater = ({ data, headerText, mutation }) => {
     const QA = [
         {
-            text: 'Your Skills',
+            text: headerText,
             input_type: 'skill_setter',
             field_name: 'skill_ids',
+            subtext: `Please drag up to 5 skills from the left panel to the right panel in order of importance. 
+                    The skill order will be used to find other teammates that best matches your skills`,
             options: [data]
         }
     ]
     return (
         <PopupMenu>
-            <button>Open Skill Updater</button>
+            <button className="edit-field-btn">Edit</button>
             <div className="skill-modal">
                 <DynamicFormContainer
                     questions={QA}
                 />
             </div>
         </PopupMenu>
-
     )
 }
 
