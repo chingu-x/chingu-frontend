@@ -1,31 +1,8 @@
 import * as React from "react";
 import { gql } from "apollo-boost";
 import SkillUpdater from './SkillUpdater';
+import { userAddSkills, userAddDesiredSkills } from './graphql/skillMutations';
 
-// -- MUTATION -- //
-const userAddSkills = gql`
-mutation userAddSkills($skill_ids: [ID!]) {
-  userAddSkills(skill_ids: $skill_ids) {
-    id
-    skills {
-      name
-      category
-    }
-  }
-}
-`;
-
-const userAddDesiredSkills = gql`
-mutation userAddDesiredSkills($skill_ids: [ID!]) {
-  userAddDesiredSkills(skill_ids: $skill_ids) {
-    id
-    skills {
-      name
-      category
-    }
-  }
-}
-`;
 
 // -- SKILL ELEMENTS -- //
 const USER_SKILLS_DOM_ELEMENTS = [
