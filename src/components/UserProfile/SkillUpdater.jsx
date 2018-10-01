@@ -24,7 +24,7 @@ const SkillUpdater = ({ data }) => {
         {
             text: 'Your Skills',
             input_type: 'skill_setter',
-            field_name: 'skills',
+            field_name: 'skill_ids',
             options: [data]
         }
     ]
