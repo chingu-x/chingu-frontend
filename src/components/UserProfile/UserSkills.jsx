@@ -27,36 +27,52 @@ mutation userAddDesiredSkills($skill_ids: [ID!]) {
 }
 `;
 
-
 // -- SKILL ELEMENTS -- //
 const USER_SKILLS_DOM_ELEMENTS = [
     {
         divClassName: 'user-skills',
-        schemaKey: 'skill_ids',
+        schemaKey: 'skills',
         desc: 'Skills',
     },
-    // {
-    //   divClassName: 'user-desired-skills',
-    //   schemaKey: 'desired_skills',
-    //   desc: 'Desired Skills',
-    // },
+    {
+      divClassName: 'user-desired-skills',
+        schemaKey: 'desired_skills',
+      desc: 'Desired Skills',
+    },
 ];
 
+const EditableUserSkills = ({ skills, elem }) => {
+    return (
+    <div>
+        <UserSkillComponent skills={skills} elem={elem} />
+        <SkillUpdater 
+            headerText={elem.divClassName === `user-desired-skills` ? 'Your Desired Skills' : 'Your Skills' } 
+            mutation={elem.divClassName === `user-desired-skills` ? userAddDesiredSkills : userAddSkills }
+        />
+    </div> 
+    );
+}
+
+const UserSkillComponent = ({ skills, elem }) => {
+    return (
+        <div className={elem.divClassName}>
+            <h1 className="user-sidebar-subcategory">{elem.desc}</h1>
+            {skills.map(elem => (
+                <li>{elem}</li>
+            ))}
+        </div>
+    )
+}
 const UserSkills = ({ user, editable }) => {
+    console.log(user);
     return USER_SKILLS_DOM_ELEMENTS.map((elem, idx) => {
-        const UserSkillComponent = props =>
-            <div key={idx} className={elem.divClassName}>
-                <h1 className="user-sidebar-subcategory">{elem.desc}</h1>
-                {props.children.map(elem => console.log(elem)(
-                    <li>{elem}</li>
-                ))}
-            </div>
-
-        const QA = []
-
-        return !editable // only render EditableTextField if editable
-            ? <UserSkillComponent key={idx}>{user[elem.schemaKey]}</UserSkillComponent>
-            : <SkillUpdater key={idx} />
+        return !editable 
+            ? <UserSkillComponent key={idx} skills={user[elem.schemaKey]} elem={elem} />
+            : <EditableUserSkills 
+                key={idx} 
+                skills={user[elem.schemaKey]} 
+                elem={elem}
+            />
     });
 }
 
