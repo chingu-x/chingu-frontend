@@ -47,9 +47,7 @@ class SkillUpdater extends React.Component {
 
     handleResponse = ({ data }) => { 
         const { mutationName, fieldName } = this.props;
-        console.log({ mutationName, fieldName }); 
         this.setState({ response: data });
-        console.log(data);
         this.props.updateSkills(data[mutationName][fieldName]);
    }
 
