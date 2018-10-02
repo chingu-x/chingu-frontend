@@ -20,4 +20,4 @@ const Success = () => {
   )
 }
 
-export default SuccessForm;
+export default Success;
