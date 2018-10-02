@@ -29,6 +29,7 @@ class SkillSetter extends React.Component {
         if (!this.checkForNoDuplicates(object)) {
             // if there is a duplicate, set existing
             // object position to empty object
+            console.log('potential duplicate')
             skills[this.findCurrentPositionOf(object)] = {};
         } 
         skills[position] = object;
@@ -49,14 +50,22 @@ class SkillSetter extends React.Component {
     findCurrentPositionOf = (object) => {
         let skills = this.state.CHOSEN_SKILL_ELEMENTS;
         for (var i = 0; i < skills.length; i++) {
-            if (skills[i] === {}) { continue; }
+            if (!this.isNotEmpty(skills[i])) { continue; }
             if (object.id === skills[i].id) { return i; }
+        }
+    }
+
+    isNotEmpty = (obj) => {
+        for (var key in obj) {
+            if (Object.prototype.hasOwnProperty.call(obj, key)) { return true; }
+            return false;
         }
     }
 
     idParser = () => {
         let skills = this.state.CHOSEN_SKILL_ELEMENTS;
-        let skillIds = skills.map((skill) => { return skill.id });
+        let nonNullSkills = skills.filter((skill) => { return this.isNotEmpty(skill) });
+        let skillIds = nonNullSkills.map((skill) => { return skill.id });
         return { 
             currentTarget: {
                 name: 'skill_ids',
