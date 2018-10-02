@@ -23,6 +23,7 @@ const UserSkills = ({ user, editable }) => {
             : <EditableUserSkills
                 key={idx}
                 skills={user[elem.schemaKey]}
+                schemaKey={elem.schemaKey}
                 elem={elem}
                 hasPermission={editable}
             />
