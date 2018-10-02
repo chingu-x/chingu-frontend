@@ -9,11 +9,13 @@ import Success from '../../Success/Success';
 import FormError from '../../Error/FormError';
 
 /**
- * @prop {string} mutation 
- * @prop {array} questions array of Dynamic Question objects
+ * @prop {string} mutation  skill / desired_skill mutation
+ * @prop {string} mutationName 
+ * @prop {string} fieldName skills / desired_skills
+ * @prop {array} headerText form header
+ * @prop {function} updateSkills saves returned form data to parent components state
  */
 
-// ({ data, headerText, mutation })
 class SkillUpdater extends React.Component {
     constructor(props) {
         super(props);
@@ -43,7 +45,13 @@ class SkillUpdater extends React.Component {
         this.setState({ QA });
     }
 
-    handleResponse = ({ data }) => { this.setState({ response: data.voyageCreate }) }
+    handleResponse = ({ data }) => { 
+        const { mutationName, fieldName } = this.props;
+        console.log({ mutationName, fieldName }); 
+        this.setState({ response: data });
+        console.log(data);
+        this.props.updateSkills(data[mutationName][fieldName]);
+   }
 
     handleError = (error) => { this.setState({ error }) };
 
