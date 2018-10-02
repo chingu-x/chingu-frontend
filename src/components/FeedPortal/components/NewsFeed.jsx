@@ -36,7 +36,7 @@ const NewsFeed = ({ type, loading, data }) => {
         {renderNewsfeedItems(other)}
       </React.Fragment>
     );
-    return ((!other.length && !chingu.length) ? <NoNews /> : dataToRender);
+    return ((!team && !other.length && !chingu.length) ? <NoNews /> : dataToRender);
   }
 
   return (
