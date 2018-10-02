@@ -106,6 +106,6 @@ export default props => (
     {...props}
     component={SideBar}
     query={sidebarQuery}
-    globalLoader
+    loader
   />
 );

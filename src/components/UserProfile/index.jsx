@@ -30,8 +30,10 @@ const InfoComponents = ({ team }) => {
         data = info.data.map((user, idx) => {
           return (
             <Link to={`/profile/${user.username}`} key={idx} className="team-card-user">
-              <img className="team-card-avatar-img" src={user.avatar ? user.avatar : require('../../assets/blank image.png')} alt={user.username} />
-              {/* <div className="team-card-username">{user.username}</div> */}
+              <img
+                className="team-card-avatar-img"
+                src={user.avatar || require('../../assets/blank image.png')}
+                alt={user.username} />
             </Link>
           )
         })
@@ -120,13 +122,10 @@ const UserProfile = props => {
     }
     let card;
     if (editable && pendingApproval.length > 0) {
-      console.log('in 1')
       return null;
     } else if (editable) {
-      console.log('in 2')
       card = <Cards.ApplyForAVoyageCard />
     } else if (!editable && pendingApproval.length === 0) {
-      console.log('in 3')
       card = <NothingHere />
     }
     return (
@@ -144,7 +143,9 @@ const UserProfile = props => {
         <Link className="project-img" to={`/project/${id}`}>
           <img
             className="project-img"
-            src={images[0] ? images[0].url : require('../../assets/landingImage.png')} />
+            src={images[0] ? images[0].url : require('../../assets/landingImage.png')}
+            alt="project"
+          />
         </Link>
         <div className="project-info__container">
           <InfoComponents team={team} />
@@ -192,5 +193,5 @@ export default props =>
     query={profileQuery}
     variables={{ username: props.match.params.username }}
     component={UserProfile}
-    globalLoader
+    loader
   />

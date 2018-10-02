@@ -21,6 +21,9 @@ import Private from "./components/utilities/PrivateRoute"
 import AllProjects from './components/AllProjects';
 import TeamStandup from "./components/TeamStandup";
 import ProjectShowcase from "./components/ProjectShowcase"
+import Ticketbox from './components/Ticketbox';
+// import HelpPage from "./components/HelpPage" TODO: uncomment when ready
+
 
 export default () => (
   <div className="App">
@@ -66,11 +69,13 @@ export default () => (
       <Route exact path="/current" component={CurrentPrograms} />
       <Route exact path="/team" component={Staff} />
       <Route exact path="/privacy" component={PrivacyPolicy} />
+      {/* TODO: uncomment when ready <Route exact path="/help" component={HelpPage} /> */}
       <Route exact path="/companyfaq" render={() => <FAQ headerText="Company FAQs" data={companyFAQ} />} />
       <Route exact path="/programfaq" render={() => <FAQ headerText="Program FAQs" data={programFAQ} />} />
       <Route exact path="/project/:project_id" component={ProjectShowcase} />
       <Route path="*" exact component={Missing404Page} />
     </Switch>
+    <Ticketbox />
     <Footer />
   </div>
 )

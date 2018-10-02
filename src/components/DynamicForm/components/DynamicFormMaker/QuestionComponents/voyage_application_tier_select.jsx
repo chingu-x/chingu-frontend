@@ -1,5 +1,5 @@
 import React from "react";
-// TODO: test validation
+
 class TierSelectRadioComponent extends React.Component {
   render() {
     const badges = [
@@ -27,13 +27,13 @@ class TierSelectRadioComponent extends React.Component {
             <div className={badges[index].btnClassName}>
               <img className={badges[index].className} src={badges[index].img} alt={'badge-' + index} />
             </div>
-            <div className="badge-title">{`Tier ${answer}`}</div>
+            <div className="badge-title">{`Tier ${answer.text}`}</div>
             {/* im sorry... */}
             <div className="badge-subtext">
               {
-                answer === "1" && <p>HTML / Basic Javascript / Basic Algorithms (Landing Pages)</p> ||
-                answer === "2" && <p>Intermediate Algorithms / Front-end Projects (Front-End)</p> ||
-                answer === "3" && <p>Advanced Projects / Data Visualization / Back-end (Full-Stack)</p>
+                answer.value === 1 && <p>HTML / Basic Javascript / Basic Algorithms (Landing Pages)</p> ||
+                answer.value === 2 && <p>Intermediate Algorithms / Front-end Projects (Front-End)</p> ||
+                answer.value === 3 && <p>Advanced Projects / Data Visualization / Back-end (Full-Stack)</p>
               }
             </div>
             <input
@@ -41,8 +41,8 @@ class TierSelectRadioComponent extends React.Component {
               type="radio"
               name={field_name}
               id={field_name + '_' + index}
-              value={answer}
-              checked={form_data[field_name] === answer}
+              value={answer.value}
+              checked={form_data[field_name] === answer.value}
               onChange={e => onFormChange(e)}
             />
             <span className="radio-checkmark--badge" />
