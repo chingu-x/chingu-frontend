@@ -9,11 +9,7 @@ import ProjectCards from './ProjectCards/ProjectCards';
 // -- USER PROFILE (EXPORT) -- //
 const UserProfile = ({ data, match }) => {
   // Only allow editing if no /profile param provided. TODO: Check for currently logged in user
-  console.log(data);
-  console.log(data.user);
-
   const editable = !match.params.username
-  console.log(editable);
 
   const { user, user: { teams, cohorts, username } } = data; // Fetched user
   const pastTeams = teams.filter(team => team.cohort.status === 'ended');
