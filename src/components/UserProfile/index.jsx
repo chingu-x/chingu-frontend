@@ -35,19 +35,6 @@ const UserProfile = props => {
 
         <main className="user-voyages">
           <section className="user-voyage">
-            {
-              currentTeams.length > 0
-                ? CurrentVoyages(currentTeams)
-                : NoTeamTypeCards(pendingApproval, editable)
-            }
-          </section>
-          <section className="user-voyage">
-            {
-              pendingApproval.length > 0
-              && PendingApproval(pendingApproval)
-            }
-          </section>
-          <section className="user-voyage">
             {!!currentTeams.length && <div className="user-voyage-title">Current Projects</div>}
             {ProjectCards(currentTeams)}
             {!!pastTeams.length && <div className="user-voyage-title">Past Projects</div>}
