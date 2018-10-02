@@ -3,7 +3,7 @@ import * as Cards from "../../VoyageCard/VoyageCard";
 
 const PendingApproval = pendingApproval => (
     <Fragment>
-        <div className="user-voyage-title">Upcoming Voyages</div>
+        <div className="user-voyage-title">Pending Voyages</div>
         {
             pendingApproval.map((cohort, index) =>
                 <Cards.PendingApprovalVoyageCard
