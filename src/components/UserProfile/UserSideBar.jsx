@@ -46,6 +46,3 @@ const UserSideBar = ({ user, editable }) => (
 );
 
 export default UserSideBar;
-
-// once links are integrated again, render this
-// check for fb/linkedin/gitub
