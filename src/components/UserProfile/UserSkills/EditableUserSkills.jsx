@@ -4,16 +4,23 @@ import { userAddSkills, userAddDesiredSkills } from '../graphql/skillMutations';
 import UserSkillComponent from './UserSkillComponent';
 
 class EditableUserSkills extends React.Component {
-    // state = {
-    //     displayEdit: false
-    // }
+    state = {
+        displayEdit: false,
+        updatedSkills: null
+    }
 
     // toggleDisplayEdit = (displayEdit) => {
     //     this.setState({ displayEdit });
     // }
 
+    updateSkills = (data) => {
+        this.setState({ updatedSkills: data }, () => { this.forceUpdate() })
+    }
+
     render() {
         let { hasPermission, elem, skills } = this.props;
+        let isDesiredSkill = elem.divClassName === `user-desired-skills`;
+        console.log(skills);
         // let { displayEdit, displaySkillWindow } = this.state;
         return (
             <div
@@ -22,11 +29,14 @@ class EditableUserSkills extends React.Component {
             >
                 {
                     <SkillUpdater
-                        headerText={elem.divClassName === `user-desired-skills` ? 'Your Desired Skills' : 'Your Skills'}
-                        mutation={elem.divClassName === `user-desired-skills` ? userAddDesiredSkills : userAddSkills}
+                        headerText={isDesiredSkill ? 'Your Desired Skills' : 'Your Skills'}
+                        mutation={isDesiredSkill ? userAddDesiredSkills : userAddSkills}
+                        mutationName={isDesiredSkill ? 'userAddDesiredSkills' : 'userAddSkills'}
+                        fieldName={elem.schemaKey}
+                        updateSkills={this.updateSkills}
                     />
                 }
-                <UserSkillComponent skills={skills} elem={elem} />
+                <UserSkillComponent skills={this.state.updatedSkills || skills} elem={elem} />
             </div>
         );
     }
