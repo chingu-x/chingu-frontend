@@ -7,6 +7,7 @@ mutation userAddSkills ($skill_ids:[ID!]!) {
     skills {
       id
       name
+      category
     }
   }
 }
@@ -20,6 +21,7 @@ mutation addDesiredSkills ($skill_ids:[ID!]!) {
     desired_skills {
       id
       name
+      category
     }
   }
 }
