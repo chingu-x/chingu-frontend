@@ -3,13 +3,11 @@ import UserSideBar from "./UserSideBar";
 import Request from "../utilities/Request"
 import profileQuery from "./graphql/profileQuery"
 import './UserProfile.css'
-import CurrentVoyages from './ProjectCards/CurrentVoyages';
-import NoTeamTypeCards from './ProjectCards/NoTeamTypeCards';
 import PendingApproval from './ProjectCards/PendingVoyages';
 import ProjectCards from './ProjectCards/ProjectCards';
 
 // -- USER PROFILE (EXPORT) -- //
-const UserProfile = props => {
+const UserProfile = (props) => {
   // Only allow editing if no /profile param provided. TODO: Check for currently logged in user
   console.log(props);
   const editable = !props.match.params.username
