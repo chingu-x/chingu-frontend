@@ -49,9 +49,13 @@ class SkillUpdater extends React.Component {
         const { mutationName, fieldName } = this.props;
         this.setState({ response: data });
         this.props.updateSkills(data[mutationName][fieldName]);
+        setTimeout(() => { this.setState({ response: null })}, 2000)
    }
 
-    handleError = (error) => { this.setState({ error }) };
+    handleError = (error) => { 
+        this.setState({ error });
+        setTimeout(() => { this.setState({  error: null }) }, 4000)
+     };
 
     onSubmit = ({ skill_ids }) => {
         const { mutation } = this.props;
