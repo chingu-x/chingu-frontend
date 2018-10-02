@@ -3,7 +3,6 @@ import InfoComponents from './InfoComponents';
 import { Link } from "react-router-dom"
 
 const ProjectCards = ({ teamsList }) => teamsList.map(team => {
-    console.log('should render project cards');
     const { id, images } = team.project
     return (
         <div key={id} className="project-card__container">
