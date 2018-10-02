@@ -6,7 +6,7 @@ import skillQuery from '../graphql/skillQuery';
 import { version } from "punycode";
 import { client } from "../../../index.js";
 import Success from '../../Success/Success';
-import Error from '../../Error/index';
+import FormError from '../../Error/FormError';
 
 /**
  * @prop {string} mutation 
@@ -19,18 +19,18 @@ class SkillUpdater extends React.Component {
         super(props);
         this.state = {
             QA: {
-                    text: this.props.headerText,
-                    input_type: 'skill_setter',
-                    field_name: 'skill_ids',
-                    subtext: `Please drag up to 5 skills from the left panel to the right panel in order of importance. 
+                text: this.props.headerText,
+                input_type: 'skill_setter',
+                field_name: 'skill_ids',
+                subtext: `Please drag up to 5 skills from the left panel to the right panel in order of importance. 
                     The skill order will be used to find other teammates that best matches your skills`,
-                    options: [{}]
-                },
+                options: [{}]
+            },
             error: null,
             response: null
         }
     }
-    
+
     componentDidUpdate(prevProps) {
         if (prevProps.data !== this.props.data) {
             this.updateQA(this.props);
@@ -42,7 +42,7 @@ class SkillUpdater extends React.Component {
         QA.options = [data];
         this.setState({ QA });
     }
-    
+
     handleResponse = ({ data }) => { this.setState({ response: data.voyageCreate }) }
 
     handleError = (error) => { this.setState({ error }) };
@@ -53,27 +53,36 @@ class SkillUpdater extends React.Component {
         const variables = { skill_ids };
         client.mutate({ mutation, variables })
             .then(this.handleResponse)
-            .catch(this.handleError)
+            .catch(this.handleError);
     }
 
     render() {
         let { QA, error, response } = this.state;
 
-        if (error) { return <Error error={error.message} /> };
+        if (error) { return <FormError error={error.message} /> };
 
         return (
             <PopupMenu>
                 <button className="edit-field-btn">Edit</button>
-                {
-                    response 
-                        ? <Success />
-                        : <div className="skill-modal">
-                            <DynamicFormContainer
+
+                <div className="skill-modal">
+                    {
+                        response
+                            ? <Success message={
+                                    <React.Fragment>
+                                        Thank you! 
+                                        <br /> 
+                                        Please click anywhere outside the window to close it.
+                                        <br />
+                                        <br />
+                                    </React.Fragment>
+                                } />
+                            : <DynamicFormContainer
                                 questions={[QA]}
                                 onSubmit={this.onSubmit}
                             />
-                        </div>
-                }
+                    }
+                </div>
             </PopupMenu >
         )
     }
