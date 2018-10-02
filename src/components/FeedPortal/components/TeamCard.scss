@@ -3,7 +3,7 @@
 .team-card-container {
     width: 100%;
     background-color: white;
-    padding: 40px 0px 40px 30px;
+    padding: 30px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 24px;
@@ -16,11 +16,8 @@ BUTTONS
 */
 .team-card-buttons-container {
     grid-column: 4 / -1;
-    // padding: 30px 0px 30px 30px;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    // grid-template-rows: repeat(3, 1fr);
-    // grid-template-rows: repeat(3, 1fr);
     margin: 0 auto;
     align-items: center;
     width: 100%;
@@ -46,7 +43,26 @@ BUTTONS
   color: $dark-grey;
   cursor: default;
 }
-
+/*
+==========================
+TEAM RESOURCE LINKS
+==========================
+*/
+.team-resource-links-container {
+    border-top: 1px solid $light-grey;
+    padding-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    align-items: center;
+    justify-items: center;
+}
+.team-resource-links {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: $box-shadow;
+    cursor: pointer;
+}
 /*
 ==========================
 INFO CONTAINER
@@ -140,5 +156,12 @@ MEDIA QUERY
         grid-column: 1 / -1;
         border-right: none;
         border-bottom: 1px solid $light-grey;
+    }
+    .team-resource-links-container {
+        display: flex;
+        justify-content: center;
+    }
+    .team-resource-links {
+        margin: 5px;
     }
 }

@@ -89,11 +89,12 @@ BUTTONS
 */
 .project-buttons-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: auto;
   align-items: center;
   justify-items: center;
   grid-gap: 10px;
-  height: 60px;
+  min-height: 60px;
 }
 .project-buttons-container--editing {
   height: 60px;
@@ -226,6 +227,7 @@ PROJECT INFO CONTAINER
   grid-gap: 40px;
   max-width: $max-width;
   margin: 0 auto;
+  padding: 20px;
 }
 /*
 ==========================
@@ -524,6 +526,7 @@ MARKDOWN
 MEDIA QUERIES
 ==========================
 */
+
 @media (max-width: 950px) and (min-width: 0px) {
   .project-info-container {
     grid-template-columns: repeat(1, 1fr);
@@ -541,10 +544,10 @@ MEDIA QUERIES
     box-shadow: $box-shadow;
     border-radius: $border-radius;
     padding: 20px;
-    height: 200px;
+    height: 235px;
   }
   .project-buttons-container {
-    grid-template-columns: repeat(1, 1fr);
+    height: auto;
   }
   .project-side-panel--hline {
     display: none;

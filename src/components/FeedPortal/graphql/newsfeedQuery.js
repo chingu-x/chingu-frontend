@@ -35,6 +35,10 @@ const getNewsfeed = gql`
                 username
                 avatar
             }
+            project_url
+            github_url
+            communication_url
+            workflow_url
         }
       }
       chingu {

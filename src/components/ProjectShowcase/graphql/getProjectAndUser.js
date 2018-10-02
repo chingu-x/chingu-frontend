@@ -9,6 +9,8 @@ const getProjectAndUser = gql`
       elevator_pitch
       project_url
       github_url
+      communication_url
+      workflow_url
       images {
         id
         url
