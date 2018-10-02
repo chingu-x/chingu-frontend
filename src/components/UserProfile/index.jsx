@@ -11,6 +11,7 @@ import ProjectCards from './ProjectCards/ProjectCards';
 // -- USER PROFILE (EXPORT) -- //
 const UserProfile = props => {
   // Only allow editing if no /profile param provided. TODO: Check for currently logged in user
+  console.log(props);
   const editable = !props.match.params.username
   console.log(props.data.user);
 
@@ -34,18 +35,21 @@ const UserProfile = props => {
         </aside>
 
         <main className="user-voyages">
+
           <section className="user-voyage">
             {
               pendingApproval.length > 0
-              && PendingApproval(pendingApproval)
+              && <PendingApproval pendingApproval={pendingApproval} />
             }
           </section>
+
           <section className="user-voyage">
             {!!currentTeams.length && <div className="user-voyage-title">Current Projects</div>}
-            {ProjectCards(currentTeams)}
+            <ProjectCards teamsList={currentTeams} />
             {!!pastTeams.length && <div className="user-voyage-title">Past Projects</div>}
-            {ProjectCards(pastTeams)}
+            <ProjectCards teamsList={pastTeams} />
           </section>
+
         </main>
       </div>
     </div >
