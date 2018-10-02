@@ -112,4 +112,16 @@
 
   max-height: 900px;
 
+  .form-question {
+    text-align: center;
+    font-weight: 600;
+  }
+  .form-subtext {
+    display: block;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
 }
