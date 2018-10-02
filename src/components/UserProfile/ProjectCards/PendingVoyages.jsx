@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import * as Cards from "../../VoyageCard/VoyageCard";
 
-const PendingApproval = pendingApproval => (
+const PendingApproval = ({ pendingApproval }) => (
     <Fragment>
         <div className="user-voyage-title">Pending Voyages</div>
         {
