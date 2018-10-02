@@ -14,7 +14,7 @@ class EditableUserSkills extends React.Component {
     // }
 
     updateSkills = (data) => {
-        this.setState({ updatedSkills: data }, () => { this.forceUpdate() })
+        this.setState({ updatedSkills: data })
     }
 
     render() {
