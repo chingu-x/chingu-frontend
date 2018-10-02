@@ -7,13 +7,17 @@ class ExternalLinks extends React.Component {
   static propTypes = {
     project_id: PropTypes.string.isRequired,
     github_url: PropTypes.string,
-    project_url: PropTypes.string
+    project_url: PropTypes.string,
+    communication_url: PropTypes.string,
+    workflow_url: PropTypes.string
   };
 
   state = {
     isEditing: false,
     github_url: this.props.github_url || '',
     project_url: this.props.project_url || '',
+    communication_url: this.props.communication_url || '',
+    workflow_url: this.props.workflow_url || '',
     editBtnHidden: true
   };
 
@@ -43,10 +47,10 @@ class ExternalLinks extends React.Component {
   };
 
   makeMutation = () => {
-    const { github_url, project_url } = this.state;
+    const { github_url, project_url, workflow_url, communication_url } = this.state;
     const { project_id } = this.props
     this.props.mutation({
-      variables: { project_id, project_data: { github_url, project_url } },
+      variables: { project_id, project_data: { github_url, project_url, communication_url, workflow_url } },
       optimisticResponse: {
         __typename: "Mutation",
         projectUpdate: {
@@ -68,7 +72,7 @@ class ExternalLinks extends React.Component {
 
   render() {
     const { editable, error } = this.props;
-    const { editBtnHidden, isEditing, github_url, project_url } = this.state;
+    const { editBtnHidden, isEditing, github_url, project_url, workflow_url, communication_url } = this.state;
 
     let btnState = ""
     if (error) btnState = "--error"
@@ -120,31 +124,62 @@ class ExternalLinks extends React.Component {
                   placeholder="Live Link"
                   name="project_url" value={project_url}
                   onChange={this.handleChange} />
+                <input
+                  className="project-button__input"
+                  type="text"
+                  placeholder="Communication Tool"
+                  name="communication_url" value={communication_url}
+                  onChange={this.handleChange} />
+                <input
+                  className="project-button__input"
+                  type="text"
+                  placeholder="Workflow Tool"
+                  name="workflow_url" value={workflow_url}
+                  onChange={this.handleChange} />
               </div>
             </React.Fragment>
           }
-          {
-            !isEditing &&
-            <div className="project-buttons-container">
-              <a
-                className={`project-buttons${github_url ? "" : "--disabled"}`}
-                target="_blank"
-                href={github_url || null}
-              >
-                GitHub Repo
+          <div className="project-buttons-container">
+            {
+              !isEditing &&
+              <React.Fragment>
+                <a
+                  className={`project-buttons${github_url ? "" : "--disabled"}`}
+                  target="_blank"
+                  href={github_url || null}
+                >
+                  GitHub Repo
                 </a>
-              <a
-                className={`project-buttons${project_url ? "" : "--disabled"}`}
-                target="_blank"
-                href={project_url || null}
-              >
-                Live Link
+                <a
+                  className={`project-buttons${project_url ? "" : "--disabled"}`}
+                  target="_blank"
+                  href={project_url || null}
+                >
+                  Live Link
                 </a>
-            </div>
+              </React.Fragment>
 
-          }
-
-
+            }
+            {
+              !isEditing && editable &&
+              <React.Fragment>
+                <a
+                  className={`project-buttons${project_url ? "" : "--disabled"}`}
+                  target="_blank"
+                  href={communication_url || null}
+                >
+                  Communication Tool
+                </a>
+                <a
+                  className={`project-buttons${project_url ? "" : "--disabled"}`}
+                  target="_blank"
+                  href={workflow_url || null}
+                >
+                  Workflow Tool
+                </a>
+              </React.Fragment>
+            }
+          </div>
 
 
         </div>

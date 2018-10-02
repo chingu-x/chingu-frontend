@@ -24,8 +24,8 @@ We are all looking forward to reading about your projects!
 class ProjectDescription extends React.Component {
   static propTypes = {
     project_id: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
     editable: PropTypes.bool.isRequired,
+    description: PropTypes.string,
   };
 
   static defaultProps = {

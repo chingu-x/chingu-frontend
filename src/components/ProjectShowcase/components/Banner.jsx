@@ -7,8 +7,8 @@ class Banner extends React.Component {
   static propTypes = {
     editable: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
-    elevator_pitch: PropTypes.string.isRequired,
-    mutation: PropTypes.func.isRequired
+    mutation: PropTypes.func.isRequired,
+    elevator_pitch: PropTypes.string,
   };
 
   static defaultProps = {
