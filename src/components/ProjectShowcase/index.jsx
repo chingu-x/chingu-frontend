@@ -1,85 +1,71 @@
 import * as React from "react";
+import { Redirect } from "react-router-dom";
+import { Query } from 'react-apollo';
 import Banner from './components/Banner';
+import HeroImage from './components/HeroImage';
 import ProjectSideBar from './components/ProjectSideBar';
 import ProjectDescription from './components/ProjectDescription';
-import { getProjectAndUser, getUserId } from './graphql/getProjectAndUser';
-import { Query } from 'react-apollo';
-import './ProjectShowcase.css';
-import HeroImage from './components/HeroImage';
 import Loader from "../Loader"
-import Error from "../Error"
+import { getProjectAndUser, getUserId } from './graphql/getProjectAndUser';
+import './ProjectShowcase.css';
 
 /*
 This component should only be concerned with the overall layout of the page and whether it is editable.
 */
-class ProjectShowcase extends React.Component {
-  state = {
-    editable: false
-  };
+const ProjectShowcase = props => {
+  const { project_id } = props.match.params
 
-  isEditable = (user, project) => {
-    return project.users.some((teamMember) => {
-      return user.id === teamMember.id;
-    });
-  }
+  const isEditable = (currentUserId, projectUsers) =>
+    projectUsers.some((projectUser) => currentUserId === projectUser.id);
 
-  render() {
-    const { projectId } = this.props
-    return (
-      <Query
-        query={getProjectAndUser}
-        variables={{
-          id: projectId,
-          github_repo_id: this.props.github_repo_id
-        }}>
-        {({ error, loading, data }) => {
+  return (
+    <Query query={getProjectAndUser} variables={{ id: project_id }}>
+      {({ error, loading, data }) => {
+        if (error) return <Redirect to="/projects" />
+        if (loading) return <Loader />
 
-          if (error) return <Error error={error.message} goBack="/" />
-          if (loading) return <Loader />
-          const { project } = data
-
-          return (
-            <div className="project-portal">
-              <Query query={getUserId} fetchPolicy="cache-only">
-                {
-                  ({ loading, data: { user } }) => {
-                    if (loading) return null
-
-                    const editable = user && this.isEditable(user, project)
-                    return <React.Fragment>
-                      <Banner
+        const { project } = data
+        return (
+          <div className="project-portal">
+            <Query query={getUserId} fetchPolicy="cache-only">
+              {
+                // Get logged in user to determine if project fields should be editable.
+                ({ loading, data: { user } }) => {
+                  if (loading) return null
+                  const editable = user && isEditable(user.id, project.users)
+                  return <React.Fragment>
+                    <Banner
+                      editable={editable}
+                      title={project.title}
+                      elevator_pitch={project.elevator_pitch}
+                      project_id={project_id}
+                    />
+                    <HeroImage
+                      editable={editable}
+                      title={project.title}
+                      images={project.images[0]}
+                      project_id={project_id}
+                    />
+                    <div className="project-info-container">
+                      <ProjectDescription
                         editable={editable}
-                        title={project.title}
-                        elevator_pitch={project.elevator_pitch}
-                        project_id={projectId}
+                        description={project.description}
+                        project_id={project_id}
                       />
-                      <HeroImage
+                      <ProjectSideBar
+                        project={project}
                         editable={editable}
-                        title={project.title}
-                        images={project.images.length > 0 ? project.images[0] : undefined}
-                        project_id={projectId}
                       />
-                      <div className="project-info-container">
-                        <ProjectDescription
-                          editable={editable}
-                          description={project.description}
-                          project_id={projectId}
-                        />
-                        <ProjectSideBar
-                          project={project}
-                          editable={editable}
-                        />
-                      </div>
-                    </React.Fragment>
-                  }
+                    </div>
+                  </React.Fragment>
                 }
-              </Query>
-            </div>
-          );
-        }}
-      </Query>
-    );
-  }
+              }
+            </Query>
+          </div>
+        );
+      }}
+    </Query>
+  );
 }
 
 export default ProjectShowcase;
