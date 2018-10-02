@@ -66,7 +66,7 @@ const InfoComponents = ({ team }) => {
       case 'TechStack':
         data = info.data && info.data.map((tech, idx) => {
           return (
-            <div key={idx} className="team-card-techstac k">{tech.name}</div>
+            <div key={idx} className="team-card-techstack">{tech.name}</div>
           )
         })
         break;
