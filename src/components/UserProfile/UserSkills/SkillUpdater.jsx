@@ -47,9 +47,8 @@ class SkillUpdater extends React.Component {
 
     handleError = (error) => { this.setState({ error }) };
 
-    onSubmit = (skill_ids) => {
+    onSubmit = ({ skill_ids }) => {
         const { mutation } = this.props;
-        console.log(skill_ids);
         const variables = { skill_ids };
         client.mutate({ mutation, variables })
             .then(this.handleResponse)
