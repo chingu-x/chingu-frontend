@@ -78,18 +78,33 @@
   }
 }
 
-.user-skills {
+.user-skills,
+.user-desired-skills {
   ul {
     list-style: none;
     padding: 0;
   }
 
-  li {
-    display: inline-block;
-    border: 1px solid $grey;
-    padding: 0.3em 1em;
-    margin: 0.2em 0.3em 0.2em 0;
+  .skill-frontend {
+    @include tags($frontend);
   }
+
+  .skill-frontend_dependency {
+    @include tags($frontend-dependency);
+  }
+
+  .skill-backend {
+    @include tags($backend);
+  }
+
+  .skill-backend_dependency {
+    @include tags($backend-dependency);
+  }
+
+  .skill-database {
+    @include tags($database);
+  }
+
 }
 
 .skill-modal-background {
