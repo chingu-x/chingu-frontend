@@ -7,17 +7,15 @@ import PendingApproval from './ProjectCards/PendingVoyages';
 import ProjectCards from './ProjectCards/ProjectCards';
 
 // -- USER PROFILE (EXPORT) -- //
-const UserProfile = (props) => {
+const UserProfile = ({ data, match }) => {
   // Only allow editing if no /profile param provided. TODO: Check for currently logged in user
-  console.log(props);
-  const editable = !props.match.params.username
-  console.log(props.data.user);
+  console.log(data);
+  console.log(data.user);
 
-  /**
-   * TODOS:
-   * Check filters
-   */
-  const { user, user: { teams, cohorts, username } } = props.data // Fetched user
+  const editable = !match.params.username
+  console.log(editable);
+
+  const { user, user: { teams, cohorts, username } } = data; // Fetched user
   const pastTeams = teams.filter(team => team.cohort.status === 'ended');
   const currentTeams = teams.filter(team => team.cohort.status === 'ongoing');
   const pendingApproval = cohorts.filter(cohort =>
@@ -60,5 +58,5 @@ export default props =>
     query={profileQuery}
     variables={{ username: props.match.params.username }}
     component={UserProfile}
-    loader
+    globalLoader
   />
