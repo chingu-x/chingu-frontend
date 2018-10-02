@@ -1,7 +1,5 @@
 import * as React from "react";
 import './UserSideBar.css'
-import EditableTextField from '../utilities/EditableTextField';
-import { gql } from "apollo-boost";
 import UserSkills from './UserSkills';
 import UserInfo from './UserInfo';
 

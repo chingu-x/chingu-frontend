@@ -3,7 +3,6 @@ import PopupMenu from "../../utilities/PopupMenu";
 import { DynamicFormContainer } from '../../DynamicForm/components';
 import Request from "../../utilities/Request"
 import skillQuery from '../graphql/skillQuery';
-import { version } from "punycode";
 import { client } from "../../../index.js";
 import Success from '../../Success/Success';
 import FormError from '../../Error/FormError';
