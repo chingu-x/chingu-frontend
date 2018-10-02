@@ -54,7 +54,8 @@
 .user-coding-history,
 .user-interests, 
 .user-links,
-.user-skills {
+.user-skills,
+.user-desired-skills {
   @include portal-description;
   margin-top: 20px;
   border-top: 1px solid $light-grey;
