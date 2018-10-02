@@ -42,6 +42,12 @@ $palest-grey: #f8f8f8;
 $attention-red: #f37070;
 $attention-red--light: #efb0b0;
 
+$frontend: #3f72fd;
+$frontend-dependency: #6a58cf;
+$backend: #1ad8e6;
+$backend-dependency: #7ff3cc;
+$database: #e28f09;
+
 $health-green: #22b571;
 $health-yellow: #ffcc00;
 $health-yellow--light: #FFFAB7;
@@ -80,6 +86,14 @@ $transparent-background: rgba(158, 158, 158, 0.637);
   min-height: 100%;
   top: 0px;
   left: 0px;
+}
+
+@mixin tags($color) {
+  display: inline-block;
+  padding: 0.3em 1em;
+  margin: 0.2em 0.3em 0.2em 0;
+  border: 1px solid $color;
+  color: $color;
 }
 /*
 ==========================
