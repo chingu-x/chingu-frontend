@@ -4,7 +4,7 @@ import { isEqual } from "lodash";
 
 import { dynamicFormMaker } from "./DynamicFormMaker";
 import { isFieldInvalid, isEmpty } from "./utilities";
-// TODO: update DF repo new changes as of 9/11/18
+// TODO: update DF repo new changes as of 10/2/18
 /**
  * @prop {array} questions array of Question data objects for rendering
  * @prop {string} purpose Dynamic Form collection name (for form data persistence)
@@ -39,10 +39,11 @@ class DynamicFormContainer extends React.Component {
       localStorage.setItem(purpose, persistedData);
     }
 
-    // update form_data default values if questions change
-    if (!isEqual(questions, prevProps.questions)) {
-      const mapped_form_data = this._mapFormDataFields(questions);
-      const new_form_data = { ...mapped_form_data, ...form_data };
+    // update form_data when a new question set is introduced
+    // handles cases where multiple question sets may be introduced by
+    // the DF Wrapper managing the DF Container
+    if (!isEqual(questions, prevProps.questions)) { // only update if question set changes
+      const new_form_data = this._handleNewQuestions(questions, form_data);
       this.setState({ form_data: new_form_data, questions });
     }
 
@@ -61,6 +62,35 @@ class DynamicFormContainer extends React.Component {
   }
 
   /**
+   * Purpose: maintains state.form_data fields required for the current question set
+   * 
+   * merges any existing responses from the previous question set if the same
+   * fields exist in the new question set
+   * 
+   * destroys any existing responses whose fields are not part of the new question set
+   */
+  _handleNewQuestions = (questions, form_data) => {
+    const current_fields = Object.keys(form_data);
+    const new_fields = questions.map(question => question.field_name);
+
+    const overlapping_fields = current_fields.filter(
+      field_name => new_fields.includes(field_name),
+    );
+
+    const new_questions_form_data = this._mapFormDataFields(questions);
+
+    const overlapping_form_data = overlapping_fields.reduce(
+      (overlapping_data, field_name) => {
+        overlapping_data[field_name] = form_data[field_name];
+        return overlapping_data;
+      },
+      {},
+    );
+
+    return { ...new_questions_form_data, ...overlapping_form_data };
+  }
+
+  /**
    * Iterates over the form_data and checks for empty answers
    * used to control the 'disabled' flag
    */
@@ -68,6 +98,8 @@ class DynamicFormContainer extends React.Component {
     return Object.keys(form_data)
       .some(field_name => {
         const value = form_data[field_name];
+        console.log(field_name, value, typeof value !== 'number' && isEmpty(value))
+        console.log(this.state)
         /*
           if non-numeric returns if value is empty
           - if value is empty (true) then the loop breaks -> disabled true
