@@ -149,7 +149,8 @@ class EditableTextField extends React.Component {
         onMouseEnter={() => hasPermission && this.toggleDisplayEdit(true)}
         onMouseLeave={() => hasPermission && this.toggleDisplayEdit(false)}
       >
-        {displayEdit && <EditButton toggleEdit={this.toggleEdit} />}
+        {/* {displayEdit && <EditButton toggleEdit={this.toggleEdit} />} */}
+        <EditButton toggleEdit={this.toggleEdit} />
         <Component>{updatedData || fieldData}</Component>
       </div>
     );

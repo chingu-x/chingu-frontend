@@ -544,3 +544,104 @@ TEAM & USER DROPDOWNS
         display: inline-block;
         margin: 5px;
     }
+
+.skill-setter {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 0px;
+    height: 600px;
+    grid-gap: 15px;
+}
+
+.skill-subcategory {
+    display: block;
+    font-size: 14px;
+    color: $dark-grey;
+    padding: 10px;
+    border-bottom: 1px solid $light-grey;
+}
+
+.skill-subcategory--title {
+    @include portal-subcategory-small;
+    text-align: center;
+    color: $med-grey;
+}
+
+.skill-list {
+    width: 100%;
+    text-align: center;
+    padding: 3px;
+    border: 1px solid $light-grey;
+    box-shadow: $box-shadow;
+    background-color: white;
+    margin: 10px 0px;
+    &:hover, &:focus {
+        background-color: $theme-green;
+        color: white;
+    }
+    cursor: move;
+}
+
+.skill-list--chosen {
+    position: relative;
+    width: auto;
+    margin: 0 auto;
+    margin-left: 10%;
+    margin-top: -37%;
+    text-align: center;
+    padding: 3px;
+    box-shadow: $box-shadow;
+    background-color: $theme-green;
+    color: white;
+    height: 100%;
+    display: grid;
+    align-content: center;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+}
+
+.skill-list--dragging {
+    background-color: $theme-green;
+    color: white;
+}
+
+.skill-options {
+    grid-column: 1 / 2;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    // border: 1px solid $light-grey;
+    box-shadow: $box-shadow;
+    background-color: $palest-grey;
+}
+.skill-chosen {
+  grid-column: 2 / -1;
+  background-color: $palest-grey;
+  box-shadow: $box-shadow;
+}
+.chosen-skill-container {
+    border-bottom: 1px solid $light-grey;
+}
+.chosen-skill-container--is-over {
+    box-shadow: $box-shadow;
+    transform: scale(1.01);
+}
+
+.chosen-skill-number {
+    background-color: $light-grey;
+    width: 10%;
+    text-align: center;
+    border-bottom: 1px solid $lighter-grey;
+    color: $grey;
+    height: 100%;
+    display: grid;
+    align-content: center;
+}
+
+.skill-containers-empty {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    height: 100%;
+}
+

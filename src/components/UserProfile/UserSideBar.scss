@@ -54,7 +54,8 @@
 .user-coding-history,
 .user-interests, 
 .user-links,
-.user-skills {
+.user-skills,
+.user-desired-skills {
   @include portal-description;
   margin-top: 20px;
   border-top: 1px solid $light-grey;
@@ -77,16 +78,65 @@
   }
 }
 
-.user-skills {
+.user-skills,
+.user-desired-skills {
   ul {
     list-style: none;
     padding: 0;
   }
 
-  li {
-    display: inline-block;
-    border: 1px solid $grey;
-    padding: 0.3em 1em;
-    margin: 0.2em 0.3em 0.2em 0;
+  .skill-frontend {
+    @include tags($frontend);
+  }
+
+  .skill-frontend_dependency {
+    @include tags($frontend-dependency);
+  }
+
+  .skill-backend {
+    @include tags($backend);
+  }
+
+  .skill-backend_dependency {
+    @include tags($backend-dependency);
+  }
+
+  .skill-database {
+    @include tags($database);
+  }
+
+}
+
+.skill-modal-background {
+  @include transparent-background;
+}
+.skill-modal {
+  display: block;
+
+  position: absolute;
+  top: 0px;
+  left: calc(50vw - 350px);
+  z-index: 10;
+  width: 700px;
+  padding: 20px;
+  margin-top: 100px;
+
+  background-color: white;
+  box-shadow: $box-shadow;
+  border: 1px solid $palest-grey;
+
+  max-height: 900px;
+
+  .form-question {
+    text-align: center;
+    font-weight: 600;
+  }
+  .form-subtext {
+    display: block;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    font-size: 14px;
   }
 }

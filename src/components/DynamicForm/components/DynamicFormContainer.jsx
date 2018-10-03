@@ -289,6 +289,7 @@ const questionShape = {
     PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
+      PropTypes.object,
       // { text, value } option for different user facing text and stored value
       PropTypes.shape({ 
         text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
