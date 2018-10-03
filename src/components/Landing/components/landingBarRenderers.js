@@ -13,7 +13,7 @@ const ProcessBar = (process) => {
     description
   }) => {
     return (
-      <div className="landing-item landing-card" >
+      <div key={title} className="landing-item landing-card" >
         <img className="landing-item-image" src={landingImages[image]} alt="" />
         <div className="landing-item-title" >{title}</div>
         <div className="landing-item-description" >{description}</div>

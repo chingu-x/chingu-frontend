@@ -69,7 +69,6 @@ class WeeklyCheckin extends React.Component {
 
 //   onFormChange = (e) => {
 //     const { name, value, type } = e.currentTarget;
-//     console.log(type);
 //     switch (type) {
 //       case 'checkbox':
 //         this.setState({ [name]: this.toggleValueInSet(this.state[name], value) });

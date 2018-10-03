@@ -62,6 +62,6 @@ export default props => (
     {...props}
     component={VoyagePortal}
     query={voyagesQuery}
-    globalLoader
+    loader
   />
 )

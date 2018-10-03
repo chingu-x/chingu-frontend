@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import { withRouter } from "react-router-dom"
 
@@ -9,10 +9,10 @@ import { withRouter } from "react-router-dom"
  * Add optional prop to allow persistence over route changes
  */
 
-class PopupMenu extends Component {
+class PopupMenu extends React.Component {
   static propTypes = {
     persist: PropTypes.bool, // Persist over clicks outside of dd menu
-    // onMenuClick: PropTypes.func, // TODO:
+    onMenuClick: PropTypes.func, // Observationsal
     control: (props, propName, componentName) => {
       if (props.control && !props.menu) {
         return new Error(`${componentName} requires both 'control' and 'menu' props OR two child elements!`)
@@ -36,6 +36,7 @@ class PopupMenu extends Component {
 
   static defaultProps = {
     persist: false,
+    onMenuClick: () => { },
     children: [] // Prevent non-iterable destructure error when providing only one of 'control' and 'menu' props
   }
 
@@ -57,19 +58,21 @@ class PopupMenu extends Component {
     }
   }
 
-  handleClick = e => {
+  handleClick = ({ target }) => {
     const { onMenuClick, persist } = this.props
 
     // Open DD on control element click 
     if (!this.state.show &&
-      this.controlElement.firstChild === e.target) {
+      // this.controlElement.firstChild === e.target) {
+      this.controlRef.firstChild === target) {
       return this.setState({ show: true })
     }
 
     // Close DD on click outside of menu element  (unless props.persist === true)
     if (
       !persist &&
-      !this.menuElement.contains(e.target)) {
+      !this.menuRef.contains(target)) {
+      onMenuClick(target)
       return this.setState({ show: false })
     }
   }
@@ -81,8 +84,8 @@ class PopupMenu extends Component {
 
     return (
       <div className={this.props.className}>
-        <div ref={el => this.controlElement = el}>{control}</div>
-        <div ref={el => this.menuElement = el}>{this.state.show && menu}</div>
+        <div ref={el => this.controlRef = el}>{control}</div>
+        <div ref={el => this.menuRef = el}>{this.state.show && menu}</div>
       </div>
     )
   }

@@ -2,12 +2,12 @@ import * as React from 'react';
 import propTypes from 'prop-types';
 
 function Thumbnail(props) {
-    return (
-      <div className="project-portal__slide" onClick={(e) => props.displayLargeImg(props.imgSrc)}>
-        <img className="project-portal__img--preview" src={props.imgSrc} alt="" />
-        <p className="project-portal__caption--preview" >{props.imgCptn}</p>
-      </div>
-    );
+  return (
+    <div className="project-portal__slide" onClick={(e) => props.displayLargeImg(props.imgSrc)}>
+      <img className="project-portal__img--preview" src={props.imgSrc} alt="" />
+      <p className="project-portal__caption--preview" >{props.imgCptn}</p>
+    </div>
+  );
 }
 
 Thumbnail.propTypes = {
@@ -17,7 +17,7 @@ Thumbnail.propTypes = {
 };
 
 Thumbnail.defaultProps = {
-  displayLargeImg: console.log,
+  displayLargeImg:'',
   imageSrc: '',
   imgCption: ''
 };

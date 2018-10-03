@@ -88,5 +88,5 @@ export default props =>
     component={VoyageApplicationContainer}
     query={VoyageApplicationUserQuery}
     options={{ fetchPolicy: "network-only" }}
-    globalLoader
+    loader
   />

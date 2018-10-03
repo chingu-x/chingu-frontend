@@ -1,0 +1,122 @@
+@import '../../styles/abstracts/_variables.scss';
+
+.help-page--container {
+  min-height: 100vh;
+  width: 100%;
+}
+/*
+==========================
+CATEGORY DOWN ICON
+==========================
+*/
+.fas {
+  color: $theme-green;
+}
+/*
+==========================
+COLOR BANNER
+==========================
+*/
+.help-banner {
+  position: absolute;
+  margin-top: 60px; 
+  width: 100%;
+  height: 400px;
+  background-color: $light-purple;
+  box-shadow: $box-shadow;
+}
+
+.help-container {
+  position: relative;
+  max-width: $max-width;
+  margin: 100px auto;
+  text-align: center;
+  color: $dark-grey;
+}
+/*
+==========================
+SEARCH
+==========================
+*/
+.help-search-title {
+  color: white;
+  font-size: 30px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  letter-spacing: 1.7px;
+  margin-top: 150px;
+}
+
+.help-search-bar {
+  width: 500px;
+  height: 20px;
+  border: none;
+  box-shadow: $box-shadow-dark;
+  padding: 20px;
+  color: $dark-grey;
+  font-size: 16px;
+  margin-bottom: 60px;
+  &::placeholder {
+    color: $grey;
+  }
+}
+/*
+==========================
+QUESTION / ANSWER CONTAINER
+==========================
+*/
+.help-QA__container {
+  text-align: left;
+  background-color: white;
+  margin: auto;
+  padding-bottom: 70px;
+  width: 700px;
+  min-height: 470px;
+  padding: 40px;
+  box-shadow: $box-shadow;
+}
+.expansion-section {
+  margin-bottom: 50px;
+}
+.QA-title__outer {
+  width: 100%;
+  cursor: pointer;
+}
+
+.QA-title__inner {
+  color: $theme-purple;
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $lighter-grey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  text-transform: capitalize;
+  margin-bottom: 20px;
+}
+
+.QA-question {
+  color: $light-purple;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  width: calc(100% + 80px);
+  margin-left: -40px;
+  padding: 10px 40px;
+  margin-bottom: 10px;
+  &:hover {
+    background-color: $palest-purple;
+  }
+}
+
+.QA-answer {
+  font-size: 16px;
+  margin-bottom: 20px;
+  background-color: $palest-purple;
+  width: calc(100% + 80px);
+  margin-left: -40px;
+  padding: 40px;
+  white-space: pre-line;
+}
