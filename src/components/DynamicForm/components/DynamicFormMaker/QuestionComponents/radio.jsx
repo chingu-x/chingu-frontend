@@ -7,13 +7,13 @@ const RadioComponent = (
   return (
     <div key={'radio-answer_' + field_name + '_' + index} className="radio-container">
       <label className="form-answer" htmlFor={field_name + '_' + index}>
-        {answer}
+        {answer.text}
         <input
           type="radio"
           name={field_name}
           id={field_name + '_' + index}
-          value={answer}
-          checked={value === answer}
+          value={answer.value}
+          checked={value === answer.value}
           onChange={({ currentTarget }) => onFormChange({ currentTarget })}
         />
         <span className="radio-checkmark" />

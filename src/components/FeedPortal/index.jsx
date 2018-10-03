@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from "react"
+import React from "react"
 import "./FeedPortal.css"
 import SideBar from './components/SideBar';
 import NewsFeed from './components/NewsFeed';
 
-class FeedPortal extends Component {
+class FeedPortal extends React.Component {
   state = {
     newsfeed: {
       type: "ALL",

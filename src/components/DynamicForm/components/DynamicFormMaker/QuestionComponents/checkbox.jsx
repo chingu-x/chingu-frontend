@@ -15,13 +15,13 @@ const CheckboxComponent = (
   return (
     <div key={'checkbox-answer_' + field_name + '_' + index} className="checkbox-container">
       <label className="form-checkbox-answer" htmlFor={field_name + '_' + index}>
-        {answer}
+        {answer.text || answer}
         <input
           type="checkbox"
           name={field_name}
           value={answer}
           id={field_name + '_' + index}
-          checked={value.indexOf(answer) !== -1} // is answer in answers array
+          checked={value.indexOf(answer.value || answer) !== -1} // is answer in answers array
           onChange={
             ({ currentTarget }) => onFormChange(
               { currentTarget, min: minlength, max: maxlength },

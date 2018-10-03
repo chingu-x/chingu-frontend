@@ -1,14 +1,12 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import PropTypes from "prop-types"
+import { client } from "../../index"
 import Request from "../utilities/Request"
 import PopupMenu from "../utilities/PopupMenu"
 import Modal from "../common/Modal"
 import GithubLoginModal from "../Login/components/GithubLoginModal"
-import profileQuery from "../UserProfile/graphql/profileQuery"
 import voyagesQuery from "../VoyagePortal/graphql/voyagesQuery"
 import userBaseQuery from "./userBaseQuery"
-import { client } from "../../index"
 
 class Header extends React.Component {
   openLoginModal = e => {
@@ -35,34 +33,34 @@ class Header extends React.Component {
         className="avatar"
         src={avatar ? avatar : require('../../assets/blank image.png')} alt="user avatar"
         />
-        <div className="header-dropdown-content">
-          <Link
-            to="/newsfeed"
-            >
-            Newsfeed
-          </Link>
-          <Link
-            to="/voyage"
-            onMouseOver={() => client.query({ query: voyagesQuery })}
+      <div className="header-dropdown-content">
+        <Link
+          to="/newsfeed"
           >
-            Voyage Portal
-          </Link>
-          <Link
-            to="/projects"
-            >
-            Project Showcase
-          </Link>
-          <hr />
-          <Link
-            to="/profile"
-            // TODO: FIXME Query related error when prefetching while vieweing ProjectShowcase
-            // onMouseOver={() => client.query({ query: profileQuery })}
-            >
-            User Profile
-          </Link>
-          <hr />
-          <Link to="/" onClick={e => this.logout(e)}>Log out</Link>
-        </div>
+          Newsfeed
+        </Link>
+        <Link
+          to="/voyage"
+          onMouseOver={() => client.query({ query: voyagesQuery })}
+        >
+          Voyage Portal
+        </Link>
+        <Link
+          to="/projects"
+          >
+          Project Showcase
+        </Link>
+        <hr />
+        <Link
+          to="/profile"
+          // TODO: FIXME Query related error when prefetching while vieweing ProjectShowcase
+          // onMouseOver={() => client.query({ query: profileQuery })}
+          >
+          User Profile
+        </Link>
+        <hr />
+        <Link to="/" onClick={e => this.logout(e)}>Log out</Link>
+      </div>
     </PopupMenu>
   )
 

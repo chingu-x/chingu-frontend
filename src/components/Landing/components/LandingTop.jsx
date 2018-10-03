@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { client } from "../../../index"
-import voyagesQuery from "../../VoyagePortal/graphql/voyagesQuery"
 
 export default props => (
   <div className="landing-top" >

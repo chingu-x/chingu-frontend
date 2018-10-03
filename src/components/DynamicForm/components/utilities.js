@@ -9,7 +9,7 @@ const areChoicesValid = (choices, min, max) => {
 }
 
 const isTextValid = (text, min, max) => {
-  const minLength = min || 10;
+  const minLength = min || 1;
   const maxLength = max || 1000;
   const textLength = text.length;
   return textLength >= minLength && textLength <= maxLength;
