@@ -5,6 +5,7 @@ const dynamicFormMaker = (
   questions,
   form_data,
   onFormChange,
+  customComponents,
 ) => questions.map(
   (question) => {
     const {
@@ -15,12 +16,16 @@ const dynamicFormMaker = (
       style_name
     } = question;
 
+    const components = customComponents
+      ? { ...questionComponents, ...customComponents }
+      : questionComponents;
+  
     if (input_type === "hidden") return null;
 
 // TODO: support for 'date' type? should be 'text' input but need to confirm formatting
     const QuestionComponent = ["email", "url", "text"].includes(input_type)
-      ? questionComponents.text
-      : questionComponents[input_type];
+      ? components.text
+      : components[input_type];
 
     return (
       <div key={"question_" + field_name} className={`form-QA ${style_name}`}>

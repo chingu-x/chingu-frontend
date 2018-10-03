@@ -6,6 +6,7 @@ import './UserProfile.css'
 import PendingApproval from './ProjectCards/PendingVoyages';
 import ProjectCards from './ProjectCards/ProjectCards';
 
+
 // -- USER PROFILE (EXPORT) -- //
 const UserProfile = ({ data, match }) => {
   // Only allow editing if no /profile param provided. TODO: Check for currently logged in user
@@ -54,5 +55,5 @@ export default props =>
     query={profileQuery}
     variables={{ username: props.match.params.username }}
     component={UserProfile}
-    globalLoader
+    loader
   />

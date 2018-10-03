@@ -2,16 +2,6 @@ import * as React from 'react';
 import PropTypes from "prop-types"
 import './Loader.css';
 import Modal from "../common/Modal"
-import { Query } from "react-apollo"
-import { gql } from "apollo-boost"
-
-const loaderQuery = gql`
-  { 
-    loaderState @client {
-      isShowing
-    }
-  }
-`
 
 const FullscreenLoader = () =>
   <Modal

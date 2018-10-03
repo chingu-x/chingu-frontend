@@ -37,5 +37,5 @@ export default props => (
     {...props}
     query={allProjectsQuery}
     component={AllProjects}
-    globalLoader
+    loader
   />)
