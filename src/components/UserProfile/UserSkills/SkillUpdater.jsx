@@ -6,6 +6,8 @@ import skillQuery from '../graphql/skillQuery';
 import { client } from "../../../index.js";
 import Success from '../../Success/Success';
 import FormError from '../../Error/FormError';
+import EditButton from '../../common/EditButton';
+
 
 /**
  * @prop {string} mutation  skill / desired_skill mutation
@@ -71,9 +73,10 @@ class SkillUpdater extends React.Component {
 
         return (
             <PopupMenu>
-                <button className="edit-field-btn">Edit</button>
 
-                <div className="skill-modal">
+                <EditButton />
+                
+                <div className="skill-modal" >
                     {
                         response
                             ? <Success message={
@@ -91,6 +94,7 @@ class SkillUpdater extends React.Component {
                             />
                     }
                 </div>
+
             </PopupMenu >
         )
     }
@@ -101,5 +105,4 @@ export default props =>
         {...props}
         query={skillQuery}
         component={SkillUpdater}
-        loader
     />
