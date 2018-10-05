@@ -1,9 +1,9 @@
 import * as React from "react";
 
-const UserSkillComponent = ({ skills, elem }) => {
+const ChosenSkills = ({ skills, elem }) => {
     return (
-        <div className={elem.divClassName}>
-            <h1 className="user-sidebar-subcategory">{elem.desc}</h1>
+        <div className="chosen-skills">
+            <h1 className="sidebar-subcategory">{elem.desc}</h1>
             {skills.map((elem, idx) => {
                 return <li className={'skill-' + elem.category} key={idx}>{elem.name}</li>
             })}
@@ -11,4 +11,4 @@ const UserSkillComponent = ({ skills, elem }) => {
     )
 }
 
-export default UserSkillComponent;
+export default ChosenSkills;
