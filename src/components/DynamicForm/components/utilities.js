@@ -22,15 +22,13 @@ const isValid = (value, min, max) => {
 }
 
 const isSkillSetterInvalid = (skill_ids) => {
-  let skillIdCopy = Array.from(skill_ids);
-
   // removes the nulls at the end of the array
-  while (skillIdCopy[skillIdCopy.length - 1] === null) {
-    skillIdCopy.pop()
+  while (skill_ids[skill_ids.length - 1] === null) {
+    skill_ids.pop()
   }
 
   // return valid if no-nulls
-  return skillIdCopy.every(skill => { return skill !== null });
+  return skill_ids.every(skill => { return skill !== null });
 }
 
 const isFieldInvalid = (type, value, min, max) => {
