@@ -27,15 +27,19 @@ class SkillSetter extends React.Component {
     // add or change position of an item
     addSkillHandler = (position, object) => {
         let chosenSkills = this.state.CHOSEN_SKILL_ELEMENTS;
+        if (chosenSkills.indexOf(object) === -1) {
+            // if this is the first time the skill object has been added to chosen skills
+            this.setState({ SKILL_ELEMENTS: this.updateSkillOptions(object) })
+        }
         if (!this.checkForNoDuplicates(object, chosenSkills)) {
             // if there is a duplicate, set existing position to null
             chosenSkills[this.findCurrentPositionOf(object, chosenSkills)] = null;
         } 
         // set skill in correct positon
         chosenSkills[position] = object;
+    
         this.setState({ 
             CHOSEN_SKILL_ELEMENTS: chosenSkills, 
-            SKILL_ELEMENTS: this.updateSkillOptions(object) 
         }, () => {
             this.props.onFormChange(this.idParser());
         })
