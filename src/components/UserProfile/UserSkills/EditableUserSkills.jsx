@@ -5,28 +5,18 @@ import UserSkillComponent from './UserSkillComponent';
 
 class EditableUserSkills extends React.Component {
     state = {
-        displayEdit: false,
         updatedSkills: null
     }
-
-    // toggleDisplayEdit = (displayEdit) => {
-    //     this.setState({ displayEdit });
-    // }
 
     updateSkills = (data) => {
         this.setState({ updatedSkills: data })
     }
 
     render() {
-        let { hasPermission, elem, skills } = this.props;
+        let { elem, skills } = this.props;
         let isDesiredSkill = elem.divClassName === `user-desired-skills`;
-        console.log(skills);
-        // let { displayEdit, displaySkillWindow } = this.state;
         return (
-            <div
-                // onMouseEnter={() => hasPermission && this.toggleDisplayEdit(true)}
-                // onMouseLeave={() => hasPermission && this.toggleDisplayEdit(false)}
-            >
+            <React.Fragment>
                 {
                     <SkillUpdater
                         headerText={isDesiredSkill ? 'Your Desired Skills' : 'Your Skills'}
@@ -37,7 +27,7 @@ class EditableUserSkills extends React.Component {
                     />
                 }
                 <UserSkillComponent skills={this.state.updatedSkills || skills} elem={elem} />
-            </div>
+            </React.Fragment>
         );
     }
 }
