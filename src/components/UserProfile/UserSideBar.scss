@@ -32,6 +32,9 @@
 
 .user-sidebar-subcategory {
   @include portal-subcategory;
+  font-size: 18px !important;
+  letter-spacing: 1.6px;
+  margin-top: 20px;
 }
 
 .photobox {
