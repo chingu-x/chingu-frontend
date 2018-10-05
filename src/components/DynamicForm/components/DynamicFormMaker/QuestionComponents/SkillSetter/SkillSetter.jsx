@@ -7,7 +7,8 @@ import RenderSkills from './RenderSkills';
 class SkillSetter extends React.Component {
     state = {
         SKILL_ELEMENTS: [],
-        CHOSEN_SKILL_ELEMENTS: []
+        CHOSEN_SKILL_ELEMENTS: [],
+        OPTION_LENGTH: 0
     }
     componentDidMount() {
         let { options } = this.props.data;
@@ -20,7 +21,8 @@ class SkillSetter extends React.Component {
                 backend_dependency,
                 database,
             ],
-            CHOSEN_SKILL_ELEMENTS: this.props.form_data.skill_ids
+            CHOSEN_SKILL_ELEMENTS: this.props.form_data.skill_ids,
+            OPTION_LENGTH:  this.props.form_data.skill_ids.length
         })
     }
 
@@ -109,18 +111,19 @@ class SkillSetter extends React.Component {
             }
             return skill.id 
         });
+        console.log(skillIds);
         return { 
             currentTarget: {
                 name: 'skill_ids',
-                value: skillIds
+                value: skillIds,
+                type: 'skill_setter'
             }
         };
     }
 
     render() {
-        let { SKILL_ELEMENTS, CHOSEN_SKILL_ELEMENTS } = this.state;
-        let { skill_ids } = this.props.form_data;
-        let numberedArray = Array.from(Array(skill_ids.length).keys());
+        let { SKILL_ELEMENTS, CHOSEN_SKILL_ELEMENTS, OPTION_LENGTH } = this.state;
+        let numberedArray = Array.from(Array(OPTION_LENGTH).keys());
 
         return (
             <div className="skill-setter">
