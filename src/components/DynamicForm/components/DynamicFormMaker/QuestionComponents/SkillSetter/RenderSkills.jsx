@@ -19,21 +19,15 @@ function collect(connect, monitor) {
     }
 }
 
-const RenderSkills = ({ SKILL_ARRAY, connectDropTarget, removeSkillHandler }) => {
+const RenderSkills = ({ SKILL_ARRAY, connectDropTarget }) => {
     return connectDropTarget(
-        <div>
-            {SKILL_ARRAY.map((category, idx) => {
-                return (
-                    <div key={idx} className="skill-subcategory">
-                        <div className="skill-subcategory--title">{category[0].category}</div>
-                        {
-                            category.map((skill, idx) => {
-                                return <SourceSkillCard skill={skill} key={idx} />
-                            })
-                        }
-                    </div>
-                )
-            })}
+        <div className="skill-subcategory">
+            <div className="skill-subcategory--title">{SKILL_ARRAY[0].category}</div>
+            {
+                SKILL_ARRAY.map((skill, idx) => {
+                    return <SourceSkillCard skill={skill} key={idx} />
+                })
+            }
         </div>
     )
 }
