@@ -98,8 +98,6 @@ class DynamicFormContainer extends React.Component {
     return Object.keys(form_data)
       .some(field_name => {
         const value = form_data[field_name];
-        console.log(field_name, value, typeof value !== 'number' && isEmpty(value))
-        console.log(this.state)
         /*
           if non-numeric returns if value is empty
           - if value is empty (true) then the loop breaks -> disabled true
