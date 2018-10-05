@@ -38,6 +38,17 @@ class SkillSetter extends React.Component {
         })
     }
 
+    removeSkillHandler = (position, object) => {
+        let skills = this.state.CHOSEN_SKILL_ELEMENTS;
+        console.log(position);
+        console.log(skills);
+        console.log(object);
+        if (object.id === skills[position].id) {
+            skills[position] = null;
+            this.setState({ CHOSEN_SKILL_ELEMENTS: skills });
+        }
+    }
+
     checkForNoDuplicates = (object) => {
         let skills = this.state.CHOSEN_SKILL_ELEMENTS;
         if (skills === []) { return true };
