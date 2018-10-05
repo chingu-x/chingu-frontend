@@ -21,11 +21,24 @@ const isValid = (value, min, max) => {
     : isTextValid(value, min, max);
 }
 
+const isSkillSetterInvalid = (skill_ids) => {
+  let skillIdCopy = Array.from(skill_ids);
+
+  // removes the nulls at the end of the array
+  while (skillIdCopy[skillIdCopy.length - 1] === null) {
+    skillIdCopy.pop()
+  }
+
+  // return valid if no-nulls
+  return skillIdCopy.every(skill => { return skill !== null });
+}
+
 const isFieldInvalid = (type, value, min, max) => {
   switch (type) {
     case "email": return !isEmail(value);
     case "url": return !isURL(value);
     case "radio": return isEmpty(value);
+    case "skill_setter": return !isSkillSetterInvalid(value);
     default: return !isValid(value, min, max);
   }
 }
