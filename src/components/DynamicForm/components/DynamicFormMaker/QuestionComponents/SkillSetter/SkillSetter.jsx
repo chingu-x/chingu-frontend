@@ -36,12 +36,17 @@ class SkillSetter extends React.Component {
         if (!this.checkForNoDuplicates(object, chosenSkills)) {
             // if there is a duplicate, set existing position to null
             chosenSkills[this.findCurrentPositionOf(object, chosenSkills)] = null;
-        } 
-        // set skill in correct positon
+        }
+        if (chosenSkills[position] !== null) {
+            // if there is an object in that position
+            // add that existing object back into skill options
+            this.updateSkillOptions(chosenSkills[position])
+        }
+        // set skill in correct position
         chosenSkills[position] = object;
-    
-        this.setState({ 
-            CHOSEN_SKILL_ELEMENTS: chosenSkills, 
+
+        this.setState({
+            CHOSEN_SKILL_ELEMENTS: chosenSkills,
         }, () => {
             this.props.onFormChange(this.idParser());
         })
