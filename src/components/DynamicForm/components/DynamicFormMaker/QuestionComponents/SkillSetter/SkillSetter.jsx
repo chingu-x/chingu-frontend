@@ -26,52 +26,79 @@ class SkillSetter extends React.Component {
 
     // add or change position of an item
     addSkillHandler = (position, object) => {
-        let skills = this.state.CHOSEN_SKILL_ELEMENTS;
-        if (!this.checkForNoDuplicates(object)) {
-            // if there is a duplicate, set existing
-            // object position to empty object
-            skills[this.findCurrentPositionOf(object)] = null;
+        let chosenSkills = this.state.CHOSEN_SKILL_ELEMENTS;
+        if (!this.checkForNoDuplicates(object, chosenSkills)) {
+            // if there is a duplicate, set existing position to null
+            chosenSkills[this.findCurrentPositionOf(object, chosenSkills)] = null;
         } 
-        skills[position] = object;
-        this.setState({ CHOSEN_SKILL_ELEMENTS: skills }, () => {
+        // set skill in correct positon
+        chosenSkills[position] = object;
+        this.setState({ 
+            CHOSEN_SKILL_ELEMENTS: chosenSkills, 
+            SKILL_ELEMENTS: this.updateSkillOptions(object) 
+        }, () => {
             this.props.onFormChange(this.idParser());
         })
     }
 
     removeSkillHandler = (object) => {
-        let skills = this.state.CHOSEN_SKILL_ELEMENTS;
-        let position = this.findCurrentPositionOf(object);
-        skills[position] = null;
-        this.setState({ CHOSEN_SKILL_ELEMENTS: skills });
-
+        let skill_array = this.state.CHOSEN_SKILL_ELEMENTS;
+        let position = this.findCurrentPositionOf(object, skill_array);
+        skill_array[position] = null;
+        this.setState({ 
+            CHOSEN_SKILL_ELEMENTS: skill_array,
+            SKILL_ELEMENTS: this.updateSkillOptions(object) 
+         });
     }
 
-    checkForNoDuplicates = (object) => {
-        let skills = this.state.CHOSEN_SKILL_ELEMENTS;
-        return skills.every(skillObject => {
+    checkForNoDuplicates = (object, skill_array) => {
+        return skill_array.every(skillObject => {
             if (skillObject === null) { return true };
             return skillObject.id !== object.id;
         })
     }
 
-    findCurrentPositionOf = (object) => {
-        let skills = this.state.CHOSEN_SKILL_ELEMENTS;
-        for (var i = 0; i < skills.length; i++) {
-            if (skills[i] === null) { continue; }
-            if (object.id === skills[i].id) { return i; }
+    findCurrentPositionOf = (object, skill_array) => {
+        for (var i = 0; i < skill_array.length; i++) {
+            if (skill_array[i] === null) { continue; }
+            if (object.id === skill_array[i].id) { return i; }
         }
+    }
+
+    updateSkillOptions = (object) => {
+        let skillOptions = this.state.SKILL_ELEMENTS;
+        let arrayCategories = ['frontend', 'frontend_dependency', 'backend', 'backend_dependency', 'database'];
+        let arrayPosition = arrayCategories.indexOf(object.category);
+        let currentArray = Array.from(skillOptions[arrayPosition]);
+
+        let hasExistingPosition = -1;
+        for (var i = 0; i < currentArray.length; i++) {
+            if (object.id === currentArray[i].id) {
+                hasExistingPosition = i;
+            }
+        }
+
+        if (hasExistingPosition !== -1) {
+            // remove object from array
+            currentArray.splice(hasExistingPosition, 1);
+        } else {
+            // add object to array;
+            currentArray.push(object);
+        }
+
+        skillOptions[arrayPosition] = currentArray;
+        return skillOptions;
     }
 
     // isNotEmpty = (obj) => {
     //     for (var key in obj) {
-    //         if (Object.prototype.hasOwnProperty.call(obj, key)) { return true; }
+    //          if (Object.prototype.hasOwnProperty.call(obj, key)) { return true; }
     //         return false;
     //     }
     // }
 
     idParser = () => {
         let skills = this.state.CHOSEN_SKILL_ELEMENTS;
-        // let nonNullSkills = skills.filter((skill) => { return this.isNotEmpty(skill) });
         let skillIds = skills.map((skill) => { 
             if (skill === null) {
                 return null;
@@ -88,21 +115,27 @@ class SkillSetter extends React.Component {
 
     render() {
         let { SKILL_ELEMENTS, CHOSEN_SKILL_ELEMENTS } = this.state;
-        const emptyContainers = [0, 1, 2, 3, 4];
+        let { skill_ids } = this.props.form_data;
+        let numberedArray = Array.from(Array(skill_ids.length).keys());
 
         return (
             <div className="skill-setter">
                 <div className="skill-options">
-                    <RenderSkills
-                        SKILL_ARRAY={SKILL_ELEMENTS}
-                        addSkillHandler={this.addSkillHandler}
-                        removeSkillHandler={this.removeSkillHandler}
-                    />
+                    {
+                        SKILL_ELEMENTS.map((category, idx) => {
+                            return <RenderSkills
+                                key={idx}
+                                SKILL_ARRAY={category}
+                                addSkillHandler={this.addSkillHandler}
+                                removeSkillHandler={this.removeSkillHandler}
+                            />
+                        })
+                    }
                 </div>
                 <div className="skill-chosen">
                     <div className="skill-containers-empty">
                         {
-                            emptyContainers.map((num) => {
+                            numberedArray.map((num) => {
                                 return <RenderChosenSkills
                                     key={num}
                                     position={num}
