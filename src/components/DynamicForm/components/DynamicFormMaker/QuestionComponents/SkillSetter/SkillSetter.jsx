@@ -38,15 +38,15 @@ class SkillSetter extends React.Component {
         })
     }
 
-    removeSkillHandler = (position, object) => {
+    removeSkillHandler = (object) => {
         let skills = this.state.CHOSEN_SKILL_ELEMENTS;
         console.log(position);
         console.log(skills);
         console.log(object);
-        if (object.id === skills[position].id) {
-            skills[position] = null;
-            this.setState({ CHOSEN_SKILL_ELEMENTS: skills });
-        }
+        let position = this.findCurrentPositionOf(object);
+        skills[position] = null;
+        this.setState({ CHOSEN_SKILL_ELEMENTS: skills });
+
     }
 
     checkForNoDuplicates = (object) => {
@@ -75,8 +75,13 @@ class SkillSetter extends React.Component {
 
     idParser = () => {
         let skills = this.state.CHOSEN_SKILL_ELEMENTS;
-        let nonNullSkills = skills.filter((skill) => { return this.isNotEmpty(skill) });
-        let skillIds = nonNullSkills.map((skill) => { return skill.id });
+        // let nonNullSkills = skills.filter((skill) => { return this.isNotEmpty(skill) });
+        let skillIds = skills.map((skill) => { 
+            if (skill === null) {
+                return null;
+            }
+            return skill.id 
+        });
         return { 
             currentTarget: {
                 name: 'skill_ids',

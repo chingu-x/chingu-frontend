@@ -6,7 +6,6 @@ import { DropTarget } from 'react-dnd';
 const skillTarget = {
     drop(props, monitor) {
         return {
-            position: props.position,
             skill: monitor.getItem().skillId,
             removeSkillHandler: props.removeSkillHandler
         }

@@ -15,9 +15,8 @@ const skillSource = {
             let { addSkillHandler, position, skill } = results;
             return addSkillHandler(position, skill);
         } else if (results.removeSkillHandler) {
-            let { removeSkillHandler, position, skill } = results;
-            console.log(skill);
-            return removeSkillHandler(position, skill)
+            let { removeSkillHandler, skill } = results;
+            return removeSkillHandler(skill)
         }
     }
 }
