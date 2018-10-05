@@ -19,7 +19,8 @@ class SkillSetter extends React.Component {
                 backend,
                 backend_dependency,
                 database,
-            ]
+            ],
+            CHOSEN_SKILL_ELEMENTS: this.props.form_data.skill_ids
         })
     }
 
@@ -29,8 +30,7 @@ class SkillSetter extends React.Component {
         if (!this.checkForNoDuplicates(object)) {
             // if there is a duplicate, set existing
             // object position to empty object
-            console.log('potential duplicate')
-            skills[this.findCurrentPositionOf(object)] = {};
+            skills[this.findCurrentPositionOf(object)] = null;
         } 
         skills[position] = object;
         this.setState({ CHOSEN_SKILL_ELEMENTS: skills }, () => {
@@ -40,9 +40,6 @@ class SkillSetter extends React.Component {
 
     removeSkillHandler = (object) => {
         let skills = this.state.CHOSEN_SKILL_ELEMENTS;
-        console.log(position);
-        console.log(skills);
-        console.log(object);
         let position = this.findCurrentPositionOf(object);
         skills[position] = null;
         this.setState({ CHOSEN_SKILL_ELEMENTS: skills });
@@ -51,9 +48,8 @@ class SkillSetter extends React.Component {
 
     checkForNoDuplicates = (object) => {
         let skills = this.state.CHOSEN_SKILL_ELEMENTS;
-        if (skills === []) { return true };
         return skills.every(skillObject => {
-            if (skillObject === {}) { return true };
+            if (skillObject === null) { return true };
             return skillObject.id !== object.id;
         })
     }
@@ -61,17 +57,17 @@ class SkillSetter extends React.Component {
     findCurrentPositionOf = (object) => {
         let skills = this.state.CHOSEN_SKILL_ELEMENTS;
         for (var i = 0; i < skills.length; i++) {
-            if (!this.isNotEmpty(skills[i])) { continue; }
+            if (skills[i] === null) { continue; }
             if (object.id === skills[i].id) { return i; }
         }
     }
 
-    isNotEmpty = (obj) => {
-        for (var key in obj) {
-            if (Object.prototype.hasOwnProperty.call(obj, key)) { return true; }
-            return false;
-        }
-    }
+    // isNotEmpty = (obj) => {
+    //     for (var key in obj) {
+    //         if (Object.prototype.hasOwnProperty.call(obj, key)) { return true; }
+    //         return false;
+    //     }
+    // }
 
     idParser = () => {
         let skills = this.state.CHOSEN_SKILL_ELEMENTS;
