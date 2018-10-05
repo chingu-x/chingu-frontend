@@ -25,8 +25,12 @@ class SkillUpdater extends React.Component {
                 text: this.props.headerText,
                 input_type: 'skill_setter',
                 field_name: 'skill_ids',
-                subtext: `Please drag up to 5 skills from the left panel to the right panel in order of importance. 
-                    The skill order will be used to find other teammates that best matches your skills`,
+                subtext: <React.Fragment>
+                    Please drag up to 5 skills from the left panel to the right panel in order of importance. 
+                    The skill order will be used to find other teammates that best matches your skills.
+                    <br />
+                    <i>Please do not leave gaps between chosen skill cards.</i>
+                    </React.Fragment>,
                 options: [{}]
             },
             error: null,
