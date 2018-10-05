@@ -12,6 +12,8 @@ const DOM_ELEMENT = [
         divClassName: 'user-skills',
         schemaKey: 'skills',
         desc: 'Skills',
+        mutation: userAddSkills,
+        mutationName: 'userAddSkills'
     }
 ];
 */
