@@ -12,17 +12,3 @@ mutation userAddSkills ($skill_ids:[ID!]!) {
   }
 }
 `;
-
-
-export const userAddDesiredSkills = gql`
-mutation addDesiredSkills ($skill_ids:[ID!]!) {
-  userAddDesiredSkills(skill_ids:$skill_ids) {
-    id
-    desired_skills {
-      id
-      name
-      category
-    }
-  }
-}
-`;
