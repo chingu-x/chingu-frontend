@@ -1,7 +1,7 @@
 import * as React from "react";
 import './UserSideBar.css'
 import UserInfo from './UserInfo';
-import { DesiredSkillsPicker } from "./components";
+import { UserSkillsPicker, DesiredSkillsPicker } from "./components";
 import { userAddSkills } from './graphql/skillMutations';
 
 const Links = ({ user: { username } }) => (
@@ -48,6 +48,10 @@ const UserSideBar = ({ user, editable }) => (
       </ul>
     </header>
     <UserInfo user={user} editable={editable} />
+    <UserSkillsPicker
+      user={user}
+      editable={editable}
+    />
     <DesiredSkillsPicker 
       user={user} 
       editable={editable}
