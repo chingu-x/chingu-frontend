@@ -98,6 +98,7 @@ class SkillsPicker extends React.Component {
       (ids, skill) => skill.value ? [skill.value, ...ids] : ids,
       [],
     );
+    // TODO: accept mutation prop to handle user/projectAddSkills
     const mutation = gql`
       mutation userAddSkills ($skill_ids:[ID!]!) {
         userAddSkills(skill_ids:$skill_ids) {
@@ -140,6 +141,7 @@ SkillsPicker.propTypes = {
   user: PropTypes.object,
   skills: PropTypes.object,
   client: PropTypes.func,
+  mutation: PropTypes.object,
 }
 
 export default props => (
