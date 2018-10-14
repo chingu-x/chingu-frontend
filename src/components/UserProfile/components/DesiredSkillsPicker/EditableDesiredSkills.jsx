@@ -1,5 +1,5 @@
 import * as React from "react";
-import SkillUpdater from './SkillUpdater';
+import DesiredSkillsPicker from './DesiredSkillsPicker';
 import ChosenSkills from "../ChosenSkills";
 
 class EditableSkills extends React.Component {
@@ -16,7 +16,7 @@ class EditableSkills extends React.Component {
     const { skills } = this.props;
     return (
       <React.Fragment>
-        <SkillUpdater updateSkills={this.updateSkills} />
+        <DesiredSkillsPicker updateSkills={this.updateSkills} />
         <ChosenSkills
           description="Desired Skills"
           skills={this.state.updatedSkills || skills}
