@@ -1,8 +1,8 @@
 import * as React from "react";
 import './UserSideBar.css'
 import UserInfo from './UserInfo';
-import DesiredSkillsPicker from '../DesiredSkillsPicker';
-import { userAddSkills, userAddDesiredSkills } from './graphql/skillMutations';
+import { DesiredSkillsPicker } from "./components";
+import { userAddSkills } from './graphql/skillMutations';
 
 const Links = ({ user: { username } }) => (
   <div className="user-links">

@@ -1,6 +1,6 @@
 import * as React from "react";
 import SkillUpdater from './SkillUpdater';
-import ChosenSkills from './ChosenSkills';
+import ChosenSkills from "../ChosenSkills";
 
 class EditableSkills extends React.Component {
   state = {
