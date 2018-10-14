@@ -7,7 +7,20 @@ import { client } from "../../index.js";
 import Success from '../Success/Success';
 import FormError from '../Error/FormError';
 import EditButton from '../common/EditButton';
+import { gql } from "apollo-boost";
 
+const userAddDesiredSkills = gql`
+mutation addDesiredSkills ($skill_ids:[ID!]!) {
+  userAddDesiredSkills(skill_ids:$skill_ids) {
+    id
+    desired_skills {
+      id
+      name
+      category
+    }
+  }
+}
+`;
 
 /**
  * @prop {string} mutation  skill / desired_skill mutation
@@ -16,97 +29,93 @@ import EditButton from '../common/EditButton';
  * @prop {array} headerText form header
  * @prop {function} updateSkills saves returned form data to parent components state
  */
-
 class SkillUpdater extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            QA: {
-                text: this.props.headerText,
-                input_type: 'skill_setter',
-                field_name: 'skill_ids',
-                subtext: <React.Fragment>
-                    Please drag up to 5 skills from the left panel to the right panel in order of importance. 
-                    The skill order will be used to find other teammates that best matches your skills.
-                    <br />
-                    <i>Please do not leave gaps between chosen skill cards.</i>
-                    </React.Fragment>,
-                options: [{}]
-            },
-            error: null,
-            response: null
-        }
-    }
+  constructor(props) {
+      super(props);
+      this.state = {
+          QA: {
+              text: "Desired Skills",
+              input_type: 'skill_setter',
+              field_name: 'skill_ids',
+              subtext: <React.Fragment>
+                  Please drag up to 5 skills from the left panel to the right panel in order of importance. 
+                  The skill order will be used to find other teammates that best matches your skills.
+                  <br />
+                  <i>Please do not leave gaps between chosen skill cards.</i>
+                  </React.Fragment>,
+              options: [{}]
+          },
+          error: null,
+          response: null
+      }
+  }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.data !== this.props.data) {
-            this.updateQA(this.props);
-        }
-    }
+  componentDidUpdate(prevProps) {
+      if (prevProps.data !== this.props.data) {
+          this.updateQA(this.props);
+      }
+  }
 
-    updateQA = ({ data }) => {
-        let QA = this.state.QA;
-        QA.options = [data];
-        this.setState({ QA });
-    }
+  updateQA = ({ data }) => {
+      let QA = this.state.QA;
+      QA.options = [data];
+      this.setState({ QA });
+  }
 
-    handleResponse = ({ data }) => { 
-        const { mutationName, fieldName } = this.props;
-        this.setState({ response: data });
-        this.props.updateSkills(data[mutationName][fieldName]);
-        setTimeout(() => { this.setState({ response: null })}, 2000)
-   }
+  handleResponse = ({ data }) => { 
+      this.setState({ response: data });
+      this.props.updateSkills(data);
+      setTimeout(() => { this.setState({ response: null })}, 2000)
+  }
 
-    handleError = (error) => { 
-        this.setState({ error });
-        setTimeout(() => { this.setState({  error: null }) }, 4000)
-     };
+  handleError = (error) => { 
+      this.setState({ error });
+      setTimeout(() => { this.setState({  error: null }) }, 4000)
+    };
 
-    onSubmit = ({ skill_ids }) => {
-        const { mutation } = this.props;
-        const variables = { skill_ids };
-        client.mutate({ mutation, variables })
-            .then(this.handleResponse)
-            .catch(this.handleError);
-    }
+  onSubmit = (variables) => {
+      client.mutate({
+        mutation: userAddDesiredSkills,
+        variables,
+      }).then(this.handleResponse)
+      .catch(this.handleError);
+  }
 
-    render() {
-        let { QA, error, response } = this.state;
+  render() {
+    let { QA, error, response } = this.state;
 
-        if (error) { return <FormError error={error.message} /> };
+    if (error) { return <FormError error={error.message} /> };
 
-        return (
-            <PopupMenu>
-
-                <EditButton />
-                
-                <div className="skill-modal" >
-                    {
-                        response
-                            ? <Success message={
-                                    <React.Fragment>
-                                        Thank you! 
-                                        <br /> 
-                                        Please click anywhere outside the window to close it.
-                                        <br />
-                                        <br />
-                                    </React.Fragment>
-                                } />
-                            : <DynamicFormContainer
-                                questions={[QA]}
-                                onSubmit={this.onSubmit}
-                            />
-                    }
-                </div>
-
-            </PopupMenu >
-        )
-    }
+    return (
+      <PopupMenu>
+        <EditButton />
+        
+        <div className="skill-modal" >
+            {
+              response
+                ? <Success message={
+                      <React.Fragment>
+                          Thank you! 
+                          <br /> 
+                          Please click anywhere outside the window to close it.
+                          <br />
+                          <br />
+                      </React.Fragment>
+                    } />
+                : <DynamicFormContainer
+                    questions={[QA]}
+                    onSubmit={this.onSubmit}
+                  />
+            }
+        </div>
+      </PopupMenu >
+  )}
 }
 
-export default props =>
-    <Request
-        {...props}
-        query={skillQuery}
-        component={SkillUpdater}
-    />
+export default props =>(
+  <Request
+    {...props}
+    query={skillQuery}
+    component={SkillUpdater}
+  />
+);

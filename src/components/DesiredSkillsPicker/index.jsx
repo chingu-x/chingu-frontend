@@ -1,5 +1,5 @@
 import * as React from "react";
-import EditableSkills from './EditableSkills';
+import EditableDesiredSkills from './EditableDesiredSkills';
 import ChosenSkills from './ChosenSkills';
 import './DesiredSkillPicker.css'
 /**
@@ -17,19 +17,16 @@ const DOM_ELEMENT = [
     }
 ];
 */
-
-const DesiredSkillsPicker = ({ user, project, editable, DOM_ELEMENTS }) => {
-    return DOM_ELEMENTS.map((elem, idx) => {
-        return !editable
-            ? <ChosenSkills key={idx} skills={user[elem.schemaKey] || project[elem.schemaKey]} elem={elem} />
-            : <EditableSkills
-                key={idx}
-                skills={user[elem.schemaKey] || project[elem.schemaKey]}
-                schemaKey={elem.schemaKey}
-                elem={elem}
-                hasPermission={editable}
-            />
-    });
-}
+const DesiredSkillsPicker = ({ user, project, editable }) => (
+  !editable
+    ? <ChosenSkills
+        skills={user.desired_skills}
+        description="Desired Skills"
+      />
+    : <EditableDesiredSkills
+        skills={user.desired_skills}
+        hasPermission={editable}
+    />
+);
 
 export default DesiredSkillsPicker;

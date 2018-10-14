@@ -26,13 +26,6 @@ const USER_SKILLS_DOM_ELEMENTS = [
     mutation: userAddSkills,
     mutationName: 'userAddSkills'
   },
-  {
-    divClassName: 'user-desired-skills',
-    schemaKey: 'desired_skills',
-    desc: 'Desired Skills',
-    mutation: userAddDesiredSkills,
-    mutationName: 'userAddDesiredSkills'
-  },
 ];
 
 // -- USER SIDEBAR (EXPORT)-- // 
@@ -57,8 +50,7 @@ const UserSideBar = ({ user, editable }) => (
     <UserInfo user={user} editable={editable} />
     <DesiredSkillsPicker 
       user={user} 
-      editable={editable} 
-      DOM_ELEMENTS={USER_SKILLS_DOM_ELEMENTS}
+      editable={editable}
     />
     <Links user={user} />
   </div>
