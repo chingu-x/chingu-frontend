@@ -27,7 +27,6 @@ const profileQuery = gql`
         end_date
         members {
           id
-          status
           user {
             id
             username
