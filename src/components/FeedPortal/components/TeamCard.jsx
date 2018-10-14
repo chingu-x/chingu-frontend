@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Link } from "react-router-dom"
 import './TeamCard.css';
-import InfoComponents from './InfoComponents';
 import TeamLinks from './TeamLinks';
-
+import dateFormatter from '../../utilities/dateFormatter';
 
 const TeamCard = ({ user: { available_standups }, team }) => {
   let editorIsVisible = false;

@@ -11,9 +11,16 @@ const skillSource = {
     },
     endDrag(props, monitor, component) {
         let results = monitor.getDropResult();
-        if (results) {
+        if (!results) {
+            // dragged outside of targetSources
+            // do nothing
+            return;
+        } else if (results.addSkillHandler) {
             let { addSkillHandler, position, skill } = results;
             return addSkillHandler(position, skill);
+        } else if (results.removeSkillHandler) {
+            let { removeSkillHandler, skill } = results;
+            return removeSkillHandler(skill)
         }
     }
 }

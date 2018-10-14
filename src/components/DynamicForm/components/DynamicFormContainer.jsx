@@ -98,8 +98,6 @@ class DynamicFormContainer extends React.Component {
     return Object.keys(form_data)
       .some(field_name => {
         const value = form_data[field_name];
-        console.log(field_name, value, typeof value !== 'number' && isEmpty(value))
-        console.log(this.state)
         /*
           if non-numeric returns if value is empty
           - if value is empty (true) then the loop breaks -> disabled true
@@ -158,6 +156,10 @@ class DynamicFormContainer extends React.Component {
         // to support difference between user text and stored value
         const value = first_option.value || first_option;
         form_data[field_name] = value;
+      } else if (input_type === 'skill_setter') {
+        const MAX_SKILL_CHOICES = 5;
+        const initializedValue = Array(MAX_SKILL_CHOICES).fill(null);
+        form_data[field_name] = initializedValue;
       }
       else form_data[field_name] = '';
 

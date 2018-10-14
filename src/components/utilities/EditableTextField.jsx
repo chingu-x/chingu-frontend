@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import './EditableTextField.css';
 import { client } from "../../index.js";
 import { questionComponents } from "../DynamicForm/";
+import EditButton from '../common/EditButton';
+
 const { text, textarea } = questionComponents;
 
 const EditFieldButton = ({ toggleEdit }) => (
-  <button className="edit-field-btn" onClick={() => toggleEdit()}>
-    Edit
-  </button>
+  <EditButton onClick={() => toggleEdit()}  />
 );
 
 EditFieldButton.propTypes = {

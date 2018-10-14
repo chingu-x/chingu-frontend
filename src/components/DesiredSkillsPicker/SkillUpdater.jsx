@@ -1,11 +1,13 @@
 import * as React from "react";
-import PopupMenu from "../../utilities/PopupMenu";
-import { DynamicFormContainer } from '../../DynamicForm/components';
-import Request from "../../utilities/Request"
-import skillQuery from '../graphql/skillQuery';
-import { client } from "../../../index.js";
-import Success from '../../Success/Success';
-import FormError from '../../Error/FormError';
+import PopupMenu from "../utilities/PopupMenu";
+import { DynamicFormContainer } from '../DynamicForm/components';
+import Request from "../utilities/Request"
+import skillQuery from './skillQuery';
+import { client } from "../../index.js";
+import Success from '../Success/Success';
+import FormError from '../Error/FormError';
+import EditButton from '../common/EditButton';
+
 
 /**
  * @prop {string} mutation  skill / desired_skill mutation
@@ -23,8 +25,12 @@ class SkillUpdater extends React.Component {
                 text: this.props.headerText,
                 input_type: 'skill_setter',
                 field_name: 'skill_ids',
-                subtext: `Please drag up to 5 skills from the left panel to the right panel in order of importance. 
-                    The skill order will be used to find other teammates that best matches your skills`,
+                subtext: <React.Fragment>
+                    Please drag up to 5 skills from the left panel to the right panel in order of importance. 
+                    The skill order will be used to find other teammates that best matches your skills.
+                    <br />
+                    <i>Please do not leave gaps between chosen skill cards.</i>
+                    </React.Fragment>,
                 options: [{}]
             },
             error: null,
@@ -71,9 +77,10 @@ class SkillUpdater extends React.Component {
 
         return (
             <PopupMenu>
-                <button className="edit-field-btn">Edit</button>
 
-                <div className="skill-modal">
+                <EditButton />
+                
+                <div className="skill-modal" >
                     {
                         response
                             ? <Success message={
@@ -91,6 +98,7 @@ class SkillUpdater extends React.Component {
                             />
                     }
                 </div>
+
             </PopupMenu >
         )
     }
@@ -101,5 +109,4 @@ export default props =>
         {...props}
         query={skillQuery}
         component={SkillUpdater}
-        loader
     />
