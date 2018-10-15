@@ -5,18 +5,14 @@ import Request from "../utilities/Request";
 import { gql } from "apollo-boost";
 import { client } from "../../";
 
+const mapSkillsOptions = (sourceSkills, allSkills) => {
+  const options = allSkills.filter(
+    // filter out any skills that already exist on the source (user or project)
+    skill => !sourceSkills.some(sourceSkill => sourceSkill.id === skill.id),
+  );
 
-const skillsPickerQuery = gql`
-  query skillsPickerQuery {
-    skills {
-      id
-      name
-      category
-    }
-  }
-`;
-
-
+  return options.map(skill => ({ label: skill.name, value: skill.id }));
+}
 
 class SkillsPicker extends React.Component {
   constructor(props) {
@@ -27,6 +23,7 @@ class SkillsPicker extends React.Component {
       selectedSkills: [],
     };
 
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -34,19 +31,22 @@ class SkillsPicker extends React.Component {
 
   componentDidMount() {
     const { currentSkills, data } = this.props;
-    const options = this._mapSkillsOptions(currentSkills, data.skills);
+    const options = mapSkillsOptions(currentSkills, data.skills);
     return this.setState({ options });
   }
 
-  createSkillRequest = (skill) => {
-    // TODO: implement skill request mutation on API
-    console.log('create skill request: ', skill);
-    // const { client } = this.props;
-    // const mutation = createSkillRequestMutation;
-    // const variables = { name: skill.name };
-    // client.mutate({ mutation, variables})
-    //   .then(this._updateLocalStorage)
-    //   .catch(this.handleError);
+  createSkillRequest = (name) => {
+    const mutation = gql`
+      mutation createSkillRequest($name: String!) {
+        requestedSkillCreate(name:$name) {
+          id
+          name
+        }
+      }
+    `;
+
+    client.mutate({ mutation, variables: { name } })
+      .catch(console.error); // TODO: handle error
   }
 
   addNewSkill = (requestedSkill, selectedSkills) => {
@@ -54,22 +54,7 @@ class SkillsPicker extends React.Component {
     return [...selectedSkills, { label: requestedSkill, value: null }];
   }
 
-  _updateLocalStorage = (data) => {
-    const { skillRequest } = data;
-    const savedSkills = localStorage.getItem('userRequestedSkills');
-    const requestedSkills = savedSkills ? JSON.parse(savedSkills) : {};
-    const saveData = JSON.stringify([skillRequest, ...requestedSkills ]);
-    localStorage.setItem('userRequestedSkills', saveData);
-  }
-
-  _mapSkillsOptions(sourceSkills, allSkills) {
-    const potentialSkills = allSkills.filter(
-      // filter out any skills that already exist on the source (user or project)
-      skill => !sourceSkills.some(sourceSkill => sourceSkill.id === skill.id),
-    );
-
-    return potentialSkills.map(skill => ({ label: skill.name, value: skill.id }));
-  }
+  resetState = () => this.setState({ input: '', selectedSkills: [] })
 
   handleKeyDown = (event) => {
     const { input, selectedSkills } = this.state;
@@ -92,27 +77,19 @@ class SkillsPicker extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+
     const { selectedSkills } = this.state;
-    const skill_ids = selectedSkills.reduce(
-      // ignore new skill requests (with value: null)
+    const { mutation } = this.props;
+    const variables = this.props.variables || {};
+
+    variables.skill_ids = selectedSkills.reduce(
+      // ignore skill requests (with value: null)
       (ids, skill) => skill.value ? [skill.value, ...ids] : ids,
       [],
     );
-    // TODO: accept mutation prop to handle user/projectAddSkills
-    const mutation = gql`
-      mutation userAddSkills ($skill_ids:[ID!]!) {
-        userAddSkills(skill_ids:$skill_ids) {
-          id
-          skills {
-            id
-            name
-            category
-          }
-        }
-      }
-    `;
 
-    client.mutate({ mutation, variables: { skill_ids } })
+    client.mutate({ mutation, variables })
+      .then(this.resetState)
       .catch(console.error); // TODO: error handling
   }
 
@@ -138,11 +115,21 @@ class SkillsPicker extends React.Component {
 }
 
 SkillsPicker.propTypes = {
-  user: PropTypes.object,
-  skills: PropTypes.object,
-  client: PropTypes.func,
-  mutation: PropTypes.object,
-}
+  data: PropTypes.object.isRequired, // { skills } from <Request />
+  currentSkills: PropTypes.array.isRequired, // source skills (user.skills, project.skills)
+  mutation: PropTypes.object.isRequired, // user/projectAddSkills
+  variables: PropTypes.objectOf({ project_id: PropTypes.string }),
+};
+
+const skillsPickerQuery = gql`
+  query skillsPickerQuery {
+    skills {
+      id
+      name
+      category
+    }
+  }
+`;
 
 export default props => (
   <Request
