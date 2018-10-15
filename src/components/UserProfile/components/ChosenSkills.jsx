@@ -1,19 +1,26 @@
 import * as React from "react";
+// TODO: create 'requested-skill' class
+const mapSkills = skills => skills.map((skill, idx) => (
+  <li
+    key={idx}
+    className={
+      skill.category // requested skills have no category
+        ? `skill-${skill.category}`
+        : "requested-skill"
+    }
+  >
+    {skill.name}
+  </li>
+));
 
-const ChosenSkills = ({ skills, description }) => {
-  const requestedSkills = localStorage.getItem('userRequestedSkills');
-  // TODO: handle rendering requested skills
-  // TODO: need greyed out class and tooltip
-  return (
-    <div className="chosen-skills">
-      <h1 className="sidebar-subcategory">{description}</h1>
-      {skills.map((skill, idx) => (
-        <li className={'skill-' + skill.category} key={idx}>
-          {skill.name}
-        </li>
-      ))}
-    </div>
-  )
-}
+const ChosenSkills = ({
+  description,
+  skills, // user.skills or skills + requested skills
+}) => (
+  <div className="chosen-skills">
+    <h1 className="sidebar-subcategory">{description}</h1>
+    {mapSkills(skills)}
+  </div>
+);
 
 export default ChosenSkills;
