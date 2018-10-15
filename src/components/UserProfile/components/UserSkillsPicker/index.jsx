@@ -5,7 +5,10 @@ import UserEditableSkills from "./UserEditableSkills";
 const UserSkillsPicker = ({ user, editable }) => (
   editable
     ? <UserEditableSkills user={user} />
-    : <ChosenSkills skills={user.skills} description="Acquired Skills"/>
+    : <ChosenSkills
+        description="Acquired Skills"
+        skills={[...user.skills, ...user.requested_skills]}
+      />
 );
 
 export default UserSkillsPicker;

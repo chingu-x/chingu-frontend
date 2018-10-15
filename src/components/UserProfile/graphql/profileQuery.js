@@ -20,6 +20,10 @@ const profileQuery = gql`
         name
         category
       }
+      requested_skills {
+        id
+        name
+      }
       cohorts {
         id
         title
