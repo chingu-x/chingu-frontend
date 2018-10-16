@@ -1,5 +1,5 @@
 import * as React from "react";
-// TODO: create 'requested-skill' class
+// TODO: create css classes
 const mapSkills = skills => skills.map((skill, idx) => {
   // requested skills have no category property
   const isAcquiredSkill = !!skill.category;
@@ -17,7 +17,7 @@ const mapSkills = skills => skills.map((skill, idx) => {
 
 const ChosenSkills = ({
   description,
-  skills, // user.skills or skills + requested skills
+  skills, // user.acquired_skills or acquired skills + requested skills
 }) => (
   <div className="chosen-skills">
     <h1 className="sidebar-subcategory">{description}</h1>
