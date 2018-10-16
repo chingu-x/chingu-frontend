@@ -10,7 +10,7 @@ const profileQuery = gql`
       background
       interests
       coding_history
-      skills {
+      acquired_skills {
         id
         name
         category
