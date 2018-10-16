@@ -1,17 +1,19 @@
 import * as React from "react";
 // TODO: create 'requested-skill' class
-const mapSkills = skills => skills.map((skill, idx) => (
-  <li
-    key={idx}
-    className={
-      skill.category // requested skills have no category
-        ? `skill-${skill.category}`
-        : "requested-skill"
-    }
-  >
-    {skill.name}
-  </li>
-));
+const mapSkills = skills => skills.map((skill, idx) => {
+  // requested skills have no category property
+  const isAcquiredSkill = !!skill.category;
+  const className = isAcquiredSkill ? `skill-${skill.category}` : "requested-skill";
+  return (
+    <li key={idx} className={className}>
+      <div className="acquired-skill-name">{skill.name}</div>
+      {
+        isAcquiredSkill &&
+        <div className="skill-showcase-count">{skill.showcase_count}</div>
+      }
+    </li>
+  );
+});
 
 const ChosenSkills = ({
   description,
