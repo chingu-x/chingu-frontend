@@ -14,6 +14,7 @@ const profileQuery = gql`
         id
         name
         category
+        showcase_count
       }
       desired_skills {
         id

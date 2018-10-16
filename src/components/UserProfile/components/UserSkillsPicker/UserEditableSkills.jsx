@@ -11,6 +11,7 @@ const userAddSkills = gql`
         id
         name
         category
+        showcase_count
       }
       requested_skills {
         id
