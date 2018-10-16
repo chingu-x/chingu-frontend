@@ -7,7 +7,7 @@ const userAddSkills = gql`
   mutation userAddSkills ($skill_ids:[ID!]!) {
     userAddSkills(skill_ids:$skill_ids) {
       id
-      skills {
+      acquired_skills {
         id
         name
         category
@@ -24,11 +24,11 @@ const UserEditableSkills = ({ user }) => (
   <div className="user-editable-skills" style={{ "margin": 50 }}>
     <ChosenSkills
       description="Acquired Skills" 
-      skills={[...user.skills, ...user.requested_skills]}
+      skills={[...user.acquired_skills, ...user.requested_skills]}
     />
     <SkillsPicker
       mutation={userAddSkills}
-      currentSkills={user.skills}
+      currentSkills={user.acquired_skills}
     />
   </div>
 );
