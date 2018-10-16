@@ -40,7 +40,10 @@ class SkillsPicker extends React.Component {
       mutation createSkillRequest($name: String!) {
         requestedSkillCreate(name:$name) {
           id
-          name
+          requested_skills {
+            id
+            name
+          }
         }
       }
     `;
@@ -49,12 +52,18 @@ class SkillsPicker extends React.Component {
       .catch(console.error); // TODO: handle error
   }
 
+  createSkillRequests = (requestedSkills) => Promise.all(
+    requestedSkills.map(skill => this.createSkillRequest(skill.label)),
+  );
+
   addNewSkill = (requestedSkill, selectedSkills) => {
-    this.createSkillRequest(requestedSkill);
-    return [...selectedSkills, { label: requestedSkill, value: null }];
+    // set the value to be unique (for ability to remove option before saving)
+    // prefix with 'requested' to filter api skills vs requests during submit
+    const value = `requested-${requestedSkill}`;
+    return [...selectedSkills, { label: requestedSkill, value }];
   }
 
-  resetState = () => this.setState({ input: '', selectedSkills: [] })
+  resetFormState = () => this.setState({ input: '', selectedSkills: [] })
 
   handleKeyDown = (event) => {
     const { input, selectedSkills } = this.state;
@@ -77,19 +86,23 @@ class SkillsPicker extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-
     const { selectedSkills } = this.state;
+
+    // handle user requested skills
+    const requestedSkills = selectedSkills.filter(skill => skill.value.includes('-'));
+    this.createSkillRequests(requestedSkills).catch(console.error) // TODO: handle error
+
+    // handle user selected skills
     const { mutation } = this.props;
     const variables = this.props.variables || {};
-
     variables.skill_ids = selectedSkills.reduce(
-      // ignore skill requests (with value: null)
-      (ids, skill) => skill.value ? [skill.value, ...ids] : ids,
+      // ignore skill requests (with value: requested-SkillName)
+      (ids, skill) => skill.value.includes('-') ? ids : [skill.value, ...ids],
       [],
     );
 
     client.mutate({ mutation, variables })
-      .then(this.resetState)
+      .then(this.resetFormState)
       .catch(console.error); // TODO: error handling
   }
 
