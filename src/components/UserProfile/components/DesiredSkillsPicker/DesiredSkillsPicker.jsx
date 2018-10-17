@@ -7,6 +7,7 @@ import { client } from "../../../../index.js";
 import Success from '../../../Success/Success';
 import FormError from '../../../Error/FormError';
 import EditButton from '../../../common/EditButton';
+import Modal from '../../../common/Modal'
 import { gql } from "apollo-boost";
 
 const userAddDesiredSkills = gql`
@@ -38,11 +39,11 @@ class DesiredSkillsPicker extends React.Component {
         input_type: 'skill_setter',
         field_name: 'skill_ids',
         subtext: <React.Fragment>
-            Please drag up to 5 skills from the left panel to the right panel in order of importance. 
-            The skill order will be used to find other teammates that best matches your skills.
+          Please drag up to 5 skills from the left panel to the right panel in order of importance.
+          The skill order will be used to find other teammates that best matches your skills.
             <br />
-            <i>Please do not leave gaps between chosen skill cards.</i>
-            </React.Fragment>,
+          <i>Please do not leave gaps between chosen skill cards.</i>
+        </React.Fragment>,
         options: [{}]
       },
       error: null,
@@ -62,15 +63,16 @@ class DesiredSkillsPicker extends React.Component {
     this.setState({ QA });
   }
 
-  handleResponse = ({ data }) => { 
+  handleResponse = ({ data }) => {
+    this.popup.close()
     this.setState({ response: data });
     this.props.updateSkills(data);
-    setTimeout(() => { this.setState({ response: null })}, 2000)
+    // setTimeout(() => { this.setState({ response: null }) }, 2000)
   }
 
-  handleError = (error) => { 
+  handleError = (error) => {
     this.setState({ error });
-    setTimeout(() => { this.setState({  error: null }) }, 4000)
+    setTimeout(() => { this.setState({ error: null }) }, 4000)
   };
 
   onSubmit = (variables) => {
@@ -78,7 +80,7 @@ class DesiredSkillsPicker extends React.Component {
       mutation: userAddDesiredSkills,
       variables,
     }).then(this.handleResponse)
-    .catch(this.handleError);
+      .catch(this.handleError);
   }
 
   render() {
@@ -87,32 +89,44 @@ class DesiredSkillsPicker extends React.Component {
     if (error) { return <FormError error={error.message} /> };
 
     return (
-      <PopupMenu>
-        <EditButton />
-        
-        <div className="skill-modal" >
-          {
-            response
-              ? <Success message={
-                    <React.Fragment>
-                        Thank you! 
-                        <br /> 
-                        Please click anywhere outside the window to close it.
-                        <br />
-                        <br />
-                    </React.Fragment>
-                  } />
-              : <DynamicFormContainer
-                  questions={[QA]}
-                  onSubmit={this.onSubmit}
-                />
-          }
-        </div>
-      </PopupMenu >
-  )}
+      // <PopupMenu>
+      //   <EditButton />
+
+      //   <div className="skill-modal" >
+      //     {
+      //       response
+      //         ? <Success message={
+      //               <React.Fragment>
+      //                   Thank you! 
+      //                   <br /> 
+      //                   Please click anywhere outside the window to close it.
+      //                   <br />
+      //                   <br />
+      //               </React.Fragment>
+      //             } />
+      // : <DynamicFormContainer
+      //     questions={[QA]}
+      //     onSubmit={this.onSubmit}
+      //   />
+      //     }
+      //   </div>
+      // </PopupMenu >
+      <React.Fragment>
+        <EditButton onClick={() => this.popup.open()} />
+        <Modal ref={el => this.popup = el} background='none'>
+          <div className="skill-modal" >
+            <DynamicFormContainer
+              questions={[QA]}
+              onSubmit={this.onSubmit}
+            />
+          </div>
+        </Modal>
+      </React.Fragment>
+    )
+  }
 }
 
-export default props =>(
+export default props => (
   <Request
     {...props}
     query={skillsQuery}
