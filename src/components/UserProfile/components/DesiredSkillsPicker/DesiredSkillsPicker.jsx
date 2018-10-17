@@ -63,12 +63,6 @@ class DesiredSkillsPicker extends React.Component {
     this.setState({ QA });
   }
 
-  handleResponse = ({ data }) => {
-    this.popup.close()
-    this.setState({ response: data });
-    this.props.updateSkills(data);
-    // setTimeout(() => { this.setState({ response: null }) }, 2000)
-  }
 
   handleError = (error) => {
     this.setState({ error });
@@ -79,38 +73,16 @@ class DesiredSkillsPicker extends React.Component {
     client.mutate({
       mutation: userAddDesiredSkills,
       variables,
-    }).then(this.handleResponse)
+    }).then(this.popup.close)
       .catch(this.handleError);
   }
 
   render() {
-    let { QA, error, response } = this.state;
+    let { QA, error } = this.state;
 
     if (error) { return <FormError error={error.message} /> };
 
     return (
-      // <PopupMenu>
-      //   <EditButton />
-
-      //   <div className="skill-modal" >
-      //     {
-      //       response
-      //         ? <Success message={
-      //               <React.Fragment>
-      //                   Thank you! 
-      //                   <br /> 
-      //                   Please click anywhere outside the window to close it.
-      //                   <br />
-      //                   <br />
-      //               </React.Fragment>
-      //             } />
-      // : <DynamicFormContainer
-      //     questions={[QA]}
-      //     onSubmit={this.onSubmit}
-      //   />
-      //     }
-      //   </div>
-      // </PopupMenu >
       <React.Fragment>
         <EditButton onClick={() => this.popup.open()} />
         <Modal ref={el => this.popup = el} background='none'>
