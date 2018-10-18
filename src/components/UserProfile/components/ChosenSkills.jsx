@@ -7,10 +7,10 @@ const mapSkills = skills => skills.map((skill, idx) => {
   return (
     <li key={idx} className={className}>
       <div className="acquired-skill-name">{skill.name}</div>
-      {
+      {/* {
         isAcquiredSkill &&
         <div className="skill-showcase-count">{skill.showcase_count}</div>
-      }
+      } */}
     </li>
   );
 });
