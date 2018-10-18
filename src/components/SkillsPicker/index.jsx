@@ -5,14 +5,16 @@ import Request from "../utilities/Request";
 import { gql } from "apollo-boost";
 import { client } from "../../";
 
-const mapSkillsOptions = (sourceSkills, allSkills) => {
-  const options = allSkills.filter(
-    // filter out any skills that already exist on the source (user or project)
-    skill => !sourceSkills.some(sourceSkill => sourceSkill.id === skill.id),
-  );
-
-  return options.map(skill => ({ label: skill.name, value: skill.id }));
-}
+const mapSkillsOptions = (sourceSkills, allSkills) => allSkills.reduce(
+  (options, skill) => {
+    const hasSkill = sourceSkills.some(sourceSkill => sourceSkill.id === skill.id);
+    // format the skill for the data list
+    const formattedSkill = { label: skill.name, value: skill.id };
+    // ignore skills the source already owns
+    return hasSkill ? options : [...options, formattedSkill];
+  },
+  [],
+);
 
 class SkillsPicker extends React.Component {
   constructor(props) {
@@ -21,6 +23,7 @@ class SkillsPicker extends React.Component {
       input: '',
       options: null,
       selectedSkills: [],
+      isEditing: null,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,12 +33,20 @@ class SkillsPicker extends React.Component {
   }
 
   componentDidMount() {
-    const { currentSkills, data } = this.props;
+    const { currentSkills, data, isEditing } = this.props;
     const options = mapSkillsOptions(currentSkills, data.skills);
-    return this.setState({ options });
+    return this.setState({ options, isEditing });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { isEditing, shouldSave } = nextProps;
+
+    if (isEditing !== this.state.isEditing) this.setState({ isEditing });
+    if (shouldSave) this.handleSubmit();
   }
 
   createSkillRequest = (name) => {
+    // TODO: how to handle Project skill requests?
     const mutation = gql`
       mutation createSkillRequest($name: String!) {
         requestedSkillCreate(name:$name) {
@@ -84,8 +95,7 @@ class SkillsPicker extends React.Component {
 
   handleInputChange = (input) => this.setState({ input });
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  handleSubmit = () => {
     const { selectedSkills } = this.state;
 
     // handle user requested skills
@@ -107,9 +117,9 @@ class SkillsPicker extends React.Component {
   }
 
   render() {
-    const { input, options, selectedSkills } = this.state;
+    const { input, options, selectedSkills, isEditing } = this.state;
 
-    return (
+    return isEditing && (
       <form>
         <CreatableSelect
           isMulti
@@ -121,7 +131,6 @@ class SkillsPicker extends React.Component {
           onInputChange={this.handleInputChange}
           onKeyDown={this.handleKeyDown}
         />
-        <input type="submit" value="Save" onClick={this.handleSubmit} />
       </form>
     );
   }
@@ -132,6 +141,8 @@ SkillsPicker.propTypes = {
   currentSkills: PropTypes.array.isRequired, // source skills (user.skills, project.skills)
   mutation: PropTypes.object.isRequired, // user/projectAddSkills
   variables: PropTypes.objectOf({ project_id: PropTypes.string }),
+  isEditing: PropTypes.bool.isRequired,
+  shouldSave: PropTypes.bool.isRequired,
 };
 
 const skillsPickerQuery = gql`
