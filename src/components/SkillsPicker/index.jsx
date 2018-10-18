@@ -103,11 +103,13 @@ class SkillsPicker extends React.Component {
 
     client.mutate({ mutation, variables })
       .then(this.resetFormState)
+      .then(this.props.onSubmit)
       .catch(console.error); // TODO: error handling
   }
 
   render() {
     const { input, options, selectedSkills } = this.state;
+    console.log(this.props)
 
     return (
       <form>
@@ -149,6 +151,6 @@ export default props => (
     {...props}
     query={skillsPickerQuery}
     component={SkillsPicker}
-    loader
+    loader={{ size: 'medium'}}
   />
 );
