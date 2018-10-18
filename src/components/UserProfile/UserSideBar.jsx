@@ -1,7 +1,7 @@
 import * as React from "react";
 import './UserSideBar.css'
 import UserInfo from './UserInfo';
-import { UserSkillsPicker, DesiredSkillsPicker } from "./components";
+import { UserSkills } from "./components";
 
 const Links = ({ user: { username } }) => (
   <div className="user-links">
@@ -36,14 +36,7 @@ const UserSideBar = ({ user, editable }) => (
       </ul>
     </header>
     <UserInfo user={user} editable={editable} />
-    <UserSkillsPicker
-      user={user}
-      editable={editable}
-    />
-    <DesiredSkillsPicker 
-      user={user} 
-      editable={editable}
-    />
+    <UserSkills user={user} editable={editable} />
     <Links user={user} />
   </div>
 
