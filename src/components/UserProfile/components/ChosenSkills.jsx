@@ -3,7 +3,7 @@ import * as React from "react";
 const mapSkills = skills => skills.map((skill, idx) => {
   // requested skills have no category property
   const isAcquiredSkill = !!skill.category;
-  const className = isAcquiredSkill ? `skill-${skill.category}` : "requested-skill";
+  const className = isAcquiredSkill ? `skill-${skill.category}` : "skill-requested";
   return (
     <li key={idx} className={className}>
       <div className="acquired-skill-name">{skill.name}</div>

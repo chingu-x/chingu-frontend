@@ -35,6 +35,10 @@
   .skill-database {
     @include tags($database);
   }
+  
+  .skill-requested {
+    @include tags($grey)
+  }
 
 .skill-modal-background {
   @include transparent-background;
