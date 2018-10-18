@@ -19,10 +19,12 @@ const ChosenSkills = ({
   description,
   skills, // user.acquired_skills or acquired skills + requested skills
 }) => (
-  <div className="chosen-skills">
-    <h1 className="sidebar-subcategory">{description}</h1>
-    {mapSkills(skills)}
-  </div>
-);
+    <div className="user-skills">
+      <h1 className="sidebar-subcategory">{description}</h1>
+      <div className="chosen-skills">
+        {mapSkills(skills)}
+      </div>
+    </div>
+  );
 
 export default ChosenSkills;
