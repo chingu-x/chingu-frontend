@@ -4,7 +4,7 @@ import ChosenSkills from "../ChosenSkills";
 import UserEditableSkills from "./UserEditableSkills";
 
 const UserSkillsPicker = ({ user, editable }) => (
-  console.log({user})
+  editable
     ? <UserEditableSkills user={user} />
     : <ChosenSkills
         description="Acquired Skills"
