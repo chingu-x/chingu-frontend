@@ -65,3 +65,21 @@ class UserEditableSkills extends React.Component {
 }
 
 export default UserEditableSkills;
+
+// this is more performant because the component doesnt mount on sidebar load
+// but it means that when the edit button is called a loader is rendered which looks choppy
+// the above (chosen) approach predicts that the user will edit their AcquiredSkills so there
+// is no noticeable load when the edit button is pressed
+// leaving this here for learning and in case we change our minds
+  // implies that isEditing be removed as a prop from SkillsPicker
+// {isEditing && (
+//   <React.Fragment>
+//     <hr className="form-hline" />
+//     <SkillsPicker
+//       shouldSave={shouldSave}
+//       mutation={userAddSkills}
+//       currentSkills={user.acquired_skills}
+//     />
+//     <ActionButtons onSave={this.toggleSave} onCancel={this.toggleEdit} />
+//   </React.Fragment>
+// )}
