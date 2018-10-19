@@ -28,24 +28,24 @@ mutation addDesiredSkills ($skill_ids:[ID!]!) {
  * @prop {array} headerText form header
  * @prop {function} updateSkills saves returned form data to parent components state
  */
+
+const QA = {
+  text: "Desired Skills",
+  input_type: 'skill_setter',
+  field_name: 'skill_ids',
+  subtext: <React.Fragment>
+    Please drag up to 5 skills from the left panel to the right panel in order of importance.
+    The skill order will be used to find other teammates that best matches your skills.
+      <br />
+    <i>Please do not leave gaps between chosen skill cards.</i>
+  </React.Fragment>
+}
 class DesiredSkillsPicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      QA: {
-        text: "Desired Skills",
-        input_type: 'skill_setter',
-        field_name: 'skill_ids',
-        subtext: <React.Fragment>
-          Please drag up to 5 skills from the left panel to the right panel in order of importance.
-          The skill order will be used to find other teammates that best matches your skills.
-            <br />
-          <i>Please do not leave gaps between chosen skill cards.</i>
-        </React.Fragment>,
-        options: [{}]
-      },
-      error: null,
-      response: null
+      options: [{}],
+      error: null
     }
   }
 
@@ -56,9 +56,8 @@ class DesiredSkillsPicker extends React.Component {
   }
 
   updateQA = ({ data }) => {
-    let QA = this.state.QA;
-    QA.options = [data];
-    this.setState({ QA });
+    const options = [data];
+    this.setState({ options });
   }
 
 
@@ -76,7 +75,7 @@ class DesiredSkillsPicker extends React.Component {
   }
 
   render() {
-    let { QA, error } = this.state;
+    const { options, error } = this.state;
 
     if (error) { return <FormError error={error.message} /> };
 
@@ -86,7 +85,7 @@ class DesiredSkillsPicker extends React.Component {
         <Modal ref={el => this.popup = el} background='none'>
           <div className="skill-modal" >
             <DynamicFormContainer
-              questions={[QA]}
+              questions={[{ ...QA, options }]}
               onSubmit={this.onSubmit}
             />
           </div>
