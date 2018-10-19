@@ -44,50 +44,32 @@ class DesiredSkillsPicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      options: [{}],
       error: null
     }
   }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.data !== this.props.data) {
-      this.updateQA(this.props);
-    }
-  }
-
-  updateQA = ({ data }) => {
-    const options = [data];
-    this.setState({ options });
-  }
-
-
-  handleError = (error) => {
-    this.setState({ error });
-    setTimeout(() => { this.setState({ error: null }) }, 4000)
-  };
 
   onSubmit = (variables) => {
     client.mutate({
       mutation: userAddDesiredSkills,
       variables,
     }).then(this.popup.close)
-      .catch(this.handleError);
+      .catch(error => this.setState({ error }));
   }
 
   render() {
-    const { options, error } = this.state;
-
-    if (error) { return <FormError error={error.message} /> };
-
     return (
       <React.Fragment>
-        <EditButton onClick={() => this.popup.open()} />
+        {!this.props.loading && <EditButton onClick={() => this.popup.open()} />}
         <Modal ref={el => this.popup = el} background='none'>
           <div className="skill-modal" >
-            <DynamicFormContainer
-              questions={[{ ...QA, options }]}
-              onSubmit={this.onSubmit}
-            />
+            {
+              this.state.error // TODO: Check if modal is still open on rerender
+                ? <FormError error={this.state.error.message} />
+                : <DynamicFormContainer
+                  questions={[{ ...QA, options: [this.props.data] }]}
+                  onSubmit={this.onSubmit}
+                />
+            }
           </div>
         </Modal>
       </React.Fragment>
