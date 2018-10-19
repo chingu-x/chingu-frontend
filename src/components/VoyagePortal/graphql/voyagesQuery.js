@@ -14,7 +14,6 @@ export const voyagesQuery = gql`
         status
         members {
           id
-          status
           user {
             id
             status
