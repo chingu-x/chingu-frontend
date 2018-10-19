@@ -7,14 +7,12 @@ import EditButton from '../common/EditButton';
 
 const { text, textarea } = questionComponents;
 
-const EditFieldButton = ({ toggleEdit }) => (
-  <EditButton onClick={() => toggleEdit()}  />
+const ActionButtons = ({ onSave, onCancel }) => (
+  <div className="edit-field-btn--btn-container">
+    <button className="edit-field-btn--left" onClick={() => onSave()}>Update</button>
+    <button className="edit-field-btn--right" onClick={() => onCancel()}>Cancel</button>
+  </div>
 );
-
-EditFieldButton.propTypes = {
-  toggleEdit: PropTypes.func,
-};
-
 
 const EditArea = ({
   large,
@@ -36,11 +34,7 @@ const EditArea = ({
   return (
     <React.Fragment>
       {inputComponent}
-      <div className="edit-field-btn--btn-container">
-        <button className="edit-field-btn--left" onClick={() => onSubmit()}>Update</button>
-        <button className="edit-field-btn--right" onClick={() => onCancel()}>Cancel</button>
-      </div>
-
+      <ActionButtons onSave={onSubmit} onCancel={onCancel} />
     </React.Fragment>
   )
 }
@@ -149,8 +143,7 @@ class EditableTextField extends React.Component {
         onMouseEnter={() => hasPermission && this.toggleDisplayEdit(true)}
         onMouseLeave={() => hasPermission && this.toggleDisplayEdit(false)}
       >
-        {/* {displayEdit && <EditButton toggleEdit={this.toggleEdit} />} */}
-        <EditButton toggleEdit={this.toggleEdit} />
+        <EditButton onClick={this.toggleEdit} />
         <Component>{updatedData || fieldData}</Component>
       </div>
     );
@@ -171,7 +164,9 @@ EditableTextField.propTypes = {
 };
 
 EditableTextField.defaultProps = {
-  editButton: EditFieldButton, // simple EditButton
+  editButton: EditButton, // simple EditButton
 };
+
+export { ActionButtons };
 
 export default EditableTextField;
