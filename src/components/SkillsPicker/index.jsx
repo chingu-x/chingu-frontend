@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types"
-import CreatableSelect from 'react-select/lib/Creatable';
-import Request from "../utilities/Request";
 import { gql } from "apollo-boost";
+import CreatableSelect from 'react-select/lib/Creatable';
+
 import { client } from "../../";
+import Request from "../utilities/Request";
 import { ActionButtons } from "../utilities/EditableTextField";
 
 
@@ -29,6 +30,7 @@ class SkillsPicker extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.resetFormState = this.resetFormState.bind(this);
     this.handleCreateInput = this.handleCreateInput.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -68,19 +70,19 @@ class SkillsPicker extends React.Component {
     requestedSkills.map(skill => this.createSkillRequest(skill.label)),
   );
 
-  addNewSkill = (requestedSkill) => {
+  addNewSkill = (requestedSkillName) => {
     const { selectedSkills } = this.state;
     // set the value to be unique (for ability to remove option before saving)
     // prefix with 'requested' to filter api skills vs requests during submit
-    const value = `requested-${requestedSkill}`;
-    return [...selectedSkills, { label: requestedSkill, value }];
+    const value = `requested-${requestedSkillName}`;
+    return [...selectedSkills, { label: requestedSkillName, value }];
   }
 
 
-  handleCreateInput = (requestedSkill) => {
+  handleCreateInput = (requestedSkillName) => {
     this.setState({
       input: '',
-      selectedSkills: this.addNewSkill(requestedSkill),
+      selectedSkills: this.addNewSkill(requestedSkillName),
     });
   };
 
@@ -99,7 +101,7 @@ class SkillsPicker extends React.Component {
     const { mutation } = this.props;
     const variables = this.props.variables || {};
     variables.skill_ids = selectedSkills.reduce(
-      // ignore skill requests (with value: requested-SkillName)
+      // ignore skill requests (with value: requested-requestedSkillName)
       (ids, skill) => skill.value.includes('-') ? ids : [skill.value, ...ids],
       [],
     );
@@ -125,7 +127,10 @@ class SkillsPicker extends React.Component {
             onCreateOption={this.handleCreateInput}
             onInputChange={this.handleInputChange}
           />
-          <ActionButtons onSave={onSave} onCancel={onCancel} />
+          <ActionButtons
+            onSave={onSave || this.handleSubmit}
+            onCancel={onCancel || this.resetFormState}
+          />
         </form>
       );
   }
@@ -137,9 +142,9 @@ SkillsPicker.propTypes = {
   mutation: PropTypes.object.isRequired, // user/projectAddSkills
   variables: PropTypes.objectOf({ project_id: PropTypes.string }),
   shouldSave: PropTypes.bool.isRequired, // controls whether handleSubmit is called when props updates
-  // see UserEditableSkills for example
-  onSave: PropTypes.func.isRequired, // ActionButton handler for SkillsPicker Wrapper to implement
-  onCancel: PropTypes.func.isRequired, // ActionButton handler for SkillsPicker Wrapper to implement
+  // see UserEditableSkills.js for example
+  onSave: PropTypes.func, // ActionButton handler for SkillsPicker Wrapper to implement
+  onCancel: PropTypes.func, // ActionButton handler for SkillsPicker Wrapper to implement
 };
 
 const skillsPickerQuery = gql`
