@@ -3,7 +3,6 @@ import { gql } from "apollo-boost";
 import ChosenSkills from "../ChosenSkills";
 import SkillsPicker from "../../../SkillsPicker";
 import EditButton from "../../../common/EditButton";
-import { ActionButtons } from "../../../utilities/EditableTextField";
 
 const userAddSkills = gql`
   mutation userAddSkills ($skill_ids:[ID!]!) {
@@ -39,6 +38,25 @@ class UserEditableSkills extends React.Component {
     () => this.state.isEditing && this.toggleEdit(), // close editing mode
   );
 
+  /**
+   * Flow:
+   * 
+   * 1) Edit, ChosenSkills, SkillsPicker are mounted, state - initial
+   *     - Edit, ChosenSkills are rendered
+   *     - SkillsPicker -> componentDidMount -> sets isEditing: false -> renders null
+   * 2) Edit button clicked -> toggleEdit() -> isEditing: toggled true, shouldSave: no change, false
+   *     - SkillsPicker receives new props -> isEditing: true, shouldSave: false -> renders SkillsPicker
+   *     - ActionButtons rendered
+   * 3, cancel) User hits Cancel ActionButton -> toggleEdit() called
+   *     - isEditing: true -> toggled to false -> shouldSave: false, no change
+   *     - SkillsPicker -> new props -> isEditing: false, shouldSave: false -> renders null, still mounted
+   * 3, save) User hits Update ActionButton -> toggleSave() called
+   *     - shouldSave toggled true
+   *     - isEditing true -> this.toggleEdit() called
+   *     - SkillsPicker new props -> shouldSave true -> calls SkillsPicker.handleSubmit()
+   *     - UEditableSkills state updates -> isEditing: false, shouldSave: false,
+   *     - isEditing: false -> SkillsPicker unmounts
+   */
   render() {
     const { isEditing, shouldSave } = this.state;
     const { user } = this.props;
@@ -49,16 +67,18 @@ class UserEditableSkills extends React.Component {
           description="Acquired Skills" 
           skills={[...user.acquired_skills, ...user.requested_skills]}
         />
-        <SkillsPicker
-          isEditing={isEditing}
-          shouldSave={shouldSave}
-          mutation={userAddSkills}
-          currentSkills={user.acquired_skills}
-        />
-        {
-          isEditing &&
-          <ActionButtons onSave={this.toggleSave} onCancel={this.toggleEdit} />
-        }
+        {isEditing && (
+          <React.Fragment>
+            <br />
+            <SkillsPicker
+              shouldSave={shouldSave}
+              mutation={userAddSkills}
+              currentSkills={user.acquired_skills}
+              onSave={this.toggleSave}
+              onCancel={this.toggleEdit}
+            />
+          </React.Fragment>
+        )}
       </div>
     );
   }
@@ -66,20 +86,3 @@ class UserEditableSkills extends React.Component {
 
 export default UserEditableSkills;
 
-// this is more performant because the component doesnt mount on sidebar load
-// but it means that when the edit button is called a loader is rendered which looks choppy
-// the above (chosen) approach predicts that the user will edit their AcquiredSkills so there
-// is no noticeable load when the edit button is pressed
-// leaving this here for learning and in case we change our minds
-  // implies that isEditing be removed as a prop from SkillsPicker
-// {isEditing && (
-//   <React.Fragment>
-//     <hr className="form-hline" />
-//     <SkillsPicker
-//       shouldSave={shouldSave}
-//       mutation={userAddSkills}
-//       currentSkills={user.acquired_skills}
-//     />
-//     <ActionButtons onSave={this.toggleSave} onCancel={this.toggleEdit} />
-//   </React.Fragment>
-// )}
