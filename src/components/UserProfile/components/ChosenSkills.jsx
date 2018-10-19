@@ -1,7 +1,7 @@
 import * as React from "react";
 
-const SkillTag = ({ skill, idx, className, isAcquiredSkill }) => (
-  <li key={idx} className={className}>
+const SkillTag = ({ skill, className, isAcquiredSkill }) => (
+  <li className={className}>
     <div>{skill.name}</div>
     {/* {
       isAcquiredSkill &&
@@ -22,7 +22,7 @@ const mapSkills = skills => skills.map((skill, idx) => {
   return (
     <SkillTag
       skill={skill}
-      idx={idx}
+      key={idx}
       className={className}
       isAcquiredSkill={isAcquiredSkill}
     />
