@@ -1,14 +1,5 @@
 @import '../../../../styles/abstracts/_variables.scss';
 
-.chosen-skills {
-  @include portal-description;
-  margin-top: -45px;
-  border-top: 1px solid $light-grey;
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-}
 .sidebar-subcategory {
   @include portal-subcategory;
   font-size: 18px !important;
@@ -34,6 +25,10 @@
 
   .skill-database {
     @include tags($database);
+  }
+
+  .skill-requested {
+    @include tags($grey)
   }
 
 .skill-modal-background {
