@@ -4,6 +4,8 @@ import CreatableSelect from 'react-select/lib/Creatable';
 import Request from "../utilities/Request";
 import { gql } from "apollo-boost";
 import { client } from "../../";
+import { ActionButtons } from "../utilities/EditableTextField";
+
 
 const mapSkillsOptions = (sourceSkills, allSkills) => allSkills.reduce(
   (options, skill) => {
@@ -23,27 +25,26 @@ class SkillsPicker extends React.Component {
       input: '',
       options: null,
       selectedSkills: [],
-      isEditing: null,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleCreateInput = this.handleCreateInput.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   componentDidMount() {
-    const { currentSkills, data, isEditing } = this.props;
+    const { currentSkills, data } = this.props;
     const options = mapSkillsOptions(currentSkills, data.skills);
-    return this.setState({ options, isEditing });
+    return this.setState({ options });
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { isEditing, shouldSave } = nextProps;
-
-    if (isEditing !== this.state.isEditing) this.setState({ isEditing });
-    if (shouldSave) this.handleSubmit();
+  componentDidUpdate(prevProps) {
+    const { shouldSave } = this.props;
+    if (shouldSave !== prevProps.shouldSave) this.handleSubmit();
   }
+
+  resetFormState = () => this.setState({ input: '', selectedSkills: [] });
 
   createSkillRequest = (name) => {
     // TODO: how to handle Project skill requests?
@@ -67,28 +68,20 @@ class SkillsPicker extends React.Component {
     requestedSkills.map(skill => this.createSkillRequest(skill.label)),
   );
 
-  addNewSkill = (requestedSkill, selectedSkills) => {
+  addNewSkill = (requestedSkill) => {
+    const { selectedSkills } = this.state;
     // set the value to be unique (for ability to remove option before saving)
     // prefix with 'requested' to filter api skills vs requests during submit
     const value = `requested-${requestedSkill}`;
     return [...selectedSkills, { label: requestedSkill, value }];
   }
 
-  resetFormState = () => this.setState({ input: '', selectedSkills: [] })
 
-  handleKeyDown = (event) => {
-    const { input, selectedSkills } = this.state;
-    if (!input) return;
-
-    switch (event.key) {
-      case 'Enter':
-      case 'Tab':
-        this.setState({
-          input: '',
-          selectedSkills: this.addNewSkill(input, selectedSkills),
-        });
-        event.preventDefault();
-    }
+  handleCreateInput = (requestedSkill) => {
+    this.setState({
+      input: '',
+      selectedSkills: this.addNewSkill(requestedSkill),
+    });
   };
 
   handleChange = (selectedSkills) => this.setState({ selectedSkills });
@@ -117,22 +110,24 @@ class SkillsPicker extends React.Component {
   }
 
   render() {
-    const { input, options, selectedSkills, isEditing } = this.state;
+    const { input, options, selectedSkills } = this.state;
+    const { onSave, onCancel } = this.props;
 
-    return isEditing && (
-      <form>
-        <CreatableSelect
-          isMulti
-          isClearable
-          options={options}
-          inputValue={input}
-          value={selectedSkills}
-          onChange={this.handleChange}
-          onInputChange={this.handleInputChange}
-          onKeyDown={this.handleKeyDown}
-        />
-      </form>
-    );
+    return (
+        <form>
+          <CreatableSelect
+            isMulti
+            isClearable
+            options={options}
+            inputValue={input}
+            value={selectedSkills}
+            onChange={this.handleChange}
+            onCreateOption={this.handleCreateInput}
+            onInputChange={this.handleInputChange}
+          />
+          <ActionButtons onSave={onSave} onCancel={onCancel} />
+        </form>
+      );
   }
 }
 
@@ -141,8 +136,10 @@ SkillsPicker.propTypes = {
   currentSkills: PropTypes.array.isRequired, // source skills (user.skills, project.skills)
   mutation: PropTypes.object.isRequired, // user/projectAddSkills
   variables: PropTypes.objectOf({ project_id: PropTypes.string }),
-  isEditing: PropTypes.bool.isRequired,
-  shouldSave: PropTypes.bool.isRequired,
+  shouldSave: PropTypes.bool.isRequired, // controls whether handleSubmit is called when props updates
+  // see UserEditableSkills for example
+  onSave: PropTypes.func.isRequired, // ActionButton handler for SkillsPicker Wrapper to implement
+  onCancel: PropTypes.func.isRequired, // ActionButton handler for SkillsPicker Wrapper to implement
 };
 
 const skillsPickerQuery = gql`
@@ -160,6 +157,6 @@ export default props => (
     {...props}
     query={skillsPickerQuery}
     component={SkillsPicker}
-    loader
+    loader={{ background: "transparent", color: "transparent", size: "small" }}
   />
 );
