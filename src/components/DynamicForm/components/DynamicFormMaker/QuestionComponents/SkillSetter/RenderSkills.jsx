@@ -20,6 +20,7 @@ function collect(connect, monitor) {
 }
 
 const RenderSkills = ({ SKILL_ARRAY, connectDropTarget }) => {
+    if (!SKILL_ARRAY.length) return null
     return connectDropTarget(
         <div className="skill-subcategory">
             <div className="skill-subcategory--title">{SKILL_ARRAY[0].category}</div>

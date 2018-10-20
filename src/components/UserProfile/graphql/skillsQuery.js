@@ -1,7 +1,7 @@
 import { gql } from "apollo-boost"
 
-const skillQuery = gql`
-  query skillQuery {
+const skillsQuery = gql`
+  query skillsQuery {
    frontend: skills(category: frontend) {
         id
         name
@@ -30,4 +30,4 @@ const skillQuery = gql`
 }
 `
 
-export default skillQuery
+export default skillsQuery
