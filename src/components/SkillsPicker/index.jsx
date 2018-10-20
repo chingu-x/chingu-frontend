@@ -27,23 +27,12 @@ class SkillsPicker extends React.Component {
       options: null,
       selectedSkills: [],
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.resetFormState = this.resetFormState.bind(this);
-    this.handleCreateInput = this.handleCreateInput.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentDidMount() {
     const { currentSkills, data } = this.props;
     const options = mapSkillsOptions(currentSkills, data.skills);
     return this.setState({ options });
-  }
-
-  componentDidUpdate(prevProps) {
-    const { shouldSave } = this.props;
-    if (shouldSave !== prevProps.shouldSave) this.handleSubmit();
   }
 
   resetFormState = () => this.setState({ input: '', selectedSkills: [] });
@@ -90,7 +79,8 @@ class SkillsPicker extends React.Component {
 
   handleInputChange = (input) => this.setState({ input });
 
-  handleSubmit = () => {
+  handleSubmit = e => {
+    e.preventDefault()
     const { selectedSkills } = this.state;
 
     // handle user requested skills
@@ -107,13 +97,12 @@ class SkillsPicker extends React.Component {
     );
 
     client.mutate({ mutation, variables })
-      .then(this.resetFormState)
+      .then(this.props.onSave)
       .catch(console.error); // TODO: error handling
   }
 
   render() {
     const { input, options, selectedSkills } = this.state;
-    const { onSave, onCancel } = this.props;
 
     return (
         <form>
@@ -128,8 +117,8 @@ class SkillsPicker extends React.Component {
             onInputChange={this.handleInputChange}
           />
           <ActionButtons
-            onSave={onSave || this.handleSubmit}
-            onCancel={onCancel || this.resetFormState}
+            onSave={this.handleSubmit}
+            onCancel={this.props.onCancel}
           />
         </form>
       );
@@ -141,8 +130,6 @@ SkillsPicker.propTypes = {
   currentSkills: PropTypes.array.isRequired, // source skills (user.skills, project.skills)
   mutation: PropTypes.object.isRequired, // user/projectAddSkills
   variables: PropTypes.objectOf({ project_id: PropTypes.string }),
-  shouldSave: PropTypes.bool.isRequired, // controls whether handleSubmit is called when props updates
-  // see UserEditableSkills.js for example
   onSave: PropTypes.func, // ActionButton handler for SkillsPicker Wrapper to implement
   onCancel: PropTypes.func, // ActionButton handler for SkillsPicker Wrapper to implement
 };

@@ -9,8 +9,8 @@ const { text, textarea } = questionComponents;
 
 const ActionButtons = ({ onSave, onCancel }) => (
   <div className="edit-field-btn--btn-container">
-    <button className="edit-field-btn--left" onClick={() => onSave()}>Update</button>
-    <button className="edit-field-btn--right" onClick={() => onCancel()}>Cancel</button>
+    <button className="edit-field-btn--left" onClick={onSave}>Update</button>
+    <button className="edit-field-btn--right" onClick={onCancel}>Cancel</button>
   </div>
 );
 

@@ -25,21 +25,15 @@ const userAddSkills = gql`
 class UserAcquiredSkills extends React.Component {
   state = {
     isEditing: false, // used to control rendering of SkillsPicker
-    shouldSave: false, // used to control form submit in SkillsPicker
+    // shouldSave: false, // used to control form submit in SkillsPicker
   }
 
   toggleEdit = () => this.setState(
-    { isEditing: !this.state.isEditing }, // toggle editing mode
-    () => this.state.shouldSave && this.toggleSave(), // reset shouldSave when closing
-  );
-
-  toggleSave = () => this.setState(
-    { shouldSave: !this.state.shouldSave },
-    () => this.state.isEditing && this.toggleEdit(), // close editing mode
+    this.setState({ isEditing: !this.state.isEditing })
   );
 
   /**
-   * Flow:
+   * Flow: TODO: Fixme
    * 
    * 1) Edit, ChosenSkills, SkillsPicker are mounted, state - initial
    *     - Edit, ChosenSkills are rendered
@@ -58,7 +52,6 @@ class UserAcquiredSkills extends React.Component {
    *     - isEditing: false -> SkillsPicker unmounts
    */
   render() {
-    const { isEditing, shouldSave } = this.state;
     const { editable, user } = this.props;
     return (
       <div className="user-editable-skills">
@@ -67,18 +60,19 @@ class UserAcquiredSkills extends React.Component {
           description="Acquired Skills"
           skills={[...user.acquired_skills, ...user.requested_skills]}
         />
-        {isEditing && (
-          <React.Fragment>
-            <br />
-            <SkillsPicker
-              shouldSave={shouldSave}
-              mutation={userAddSkills}
-              currentSkills={user.acquired_skills}
-              onSave={this.toggleSave}
-              onCancel={this.toggleEdit}
-            />
-          </React.Fragment>
-        )}
+        {
+          this.state.isEditing && (
+            <React.Fragment>
+              <br />
+              <SkillsPicker
+                mutation={userAddSkills}
+                currentSkills={user.acquired_skills}
+                onSave={this.toggleEdit}
+                onCancel={this.toggleEdit}
+              />
+            </React.Fragment>
+          )
+        }
       </div>
     );
   }
