@@ -1,8 +1,7 @@
 import * as React from "react";
 import './UserSideBar.css'
 import UserInfo from './UserInfo';
-import DesiredSkillsPicker from '../DesiredSkillsPicker';
-import { userAddSkills, userAddDesiredSkills } from './graphql/skillMutations';
+import { UserSkills } from "./components";
 
 const Links = ({ user: { username } }) => (
   <div className="user-links">
@@ -16,17 +15,6 @@ const Links = ({ user: { username } }) => (
     </ul>
   </div>
 );
-
-// -- SKILL ELEMENTS -- //
-const USER_SKILLS_DOM_ELEMENTS = [
-  {
-    divClassName: 'user-skills',
-    schemaKey: 'skills',
-    desc: 'Skills',
-    mutation: userAddSkills,
-    mutationName: 'userAddSkills'
-  },
-];
 
 // -- USER SIDEBAR (EXPORT)-- // 
 const UserSideBar = ({ user, editable }) => (
@@ -48,10 +36,7 @@ const UserSideBar = ({ user, editable }) => (
       </ul>
     </header>
     <UserInfo user={user} editable={editable} />
-    <DesiredSkillsPicker 
-      user={user} 
-      editable={editable}
-    />
+    <UserSkills user={user} editable={editable} />
     <Links user={user} />
   </div>
 
