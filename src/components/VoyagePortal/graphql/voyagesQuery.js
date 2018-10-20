@@ -7,19 +7,14 @@ export const voyagesQuery = gql`
       status
     }
     cohorts {
+      id
+      title
+      start_date
+      end_date
+      status
+      applicants {
         id
-        title
-        start_date
-        end_date
-        status
-        members {
-          id
-          status
-          user {
-            id
-            status
-          }
-        }
+      }
     }
   }
 `
