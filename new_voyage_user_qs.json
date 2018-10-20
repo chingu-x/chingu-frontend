@@ -1,0 +1,125 @@
+# "new_voyage_user questions version 2"
+mutation {
+  two:questionCreate(
+    input: {
+      field_name:"coding_ability"
+      input_type:radio
+      text:"Where are you in your coding journey?"
+      options: [
+            {text:"Just getting started."}, 
+            {text:"I know the basics but have not completed any projects."}, 
+            {text:"I have built some projects but want to build something more extensive."}, 
+            {text:"I have built many projects but want to gain more experience."}, 
+            {text:"I am a professional developer looking for new challenges."},
+      ]
+      tags:[personal, ability, cohort]
+      data_type:String
+    }
+  ) {
+    id
+  }
+  
+  three:questionCreate(
+    input: {
+      field_name:"completing_coding_goals"
+      input_type:radio
+      text:"How committed are you to completing your coding goals?"
+      options:[
+          {text: "I. Can't. Stop. Coding."},
+          {text:"I meet most of my coding goals."},
+          {text:"I have been struggling to meet some of my coding goals."},
+          {text:"I am not progressing as expected."}
+        ] 
+      tags:[character, commitment, cohort]
+      data_type: String
+    }
+  ) {
+    id
+  }
+
+  five:questionCreate(
+    input: {
+      field_name:"proudest_project"
+      input_type:url
+      text:"Share a project (GitHub, hosted link or Codepen) you have completed that you are most proud of" 
+      tags:[personal, commitment, cohort]
+      data_type: String
+    }
+  ) {
+    id
+  }
+  
+  six:questionCreate(
+    input: {
+      field_name:"gender"
+      input_type:radio
+      text:"What is your gender?" 
+      options: [{text:"Male"}, {text:"Female"}, {text:"Other"}]
+      tags:[personal, user]
+      data_type: String
+    }
+  ) {
+    id
+  }
+  
+  seven:questionCreate(
+    input: {
+      field_name:"background"
+      input_type:textarea
+      text:"What is your educational and / or professional background?" 
+      tags:[personal, user]
+      data_type: String
+    }
+  ) {
+    id
+  }
+  
+  eight:questionCreate(
+    input: {
+      field_name:"coding_history"
+      input_type:textarea
+      text:"What is your coding history?" 
+      tags:[personal, user]
+      data_type: String
+    }
+  ) {
+    id
+  }
+  
+  nine:questionCreate(
+    input: {
+      field_name:"interests"
+      input_type:textarea
+      text:"What are your interests / hobbies (coding or otherwise)?" 
+      tags:[personal, user]
+      data_type: String
+    }
+  ) {
+    id
+  }
+  
+  ten:questionCreate(
+    input: {
+      field_name:"dinner_guest"
+      input_type:textarea
+      text:"Given the choice of anyone in the world, whom would you want as a dinner guest? (optional: why that person?)" 
+      tags:[personal, character]
+      data_type: String
+    }
+  ) {
+    id
+  }
+  
+  eleven:questionCreate(
+    input: {
+      field_name:"greatest_accomplishment"
+      input_type:textarea
+      text:"What is the greatest accomplishment of your life?" 
+      subtext:"Note: Doesn't have to be crazy :) - past members have answered 'my daughter', 'finishing the front-end cert', 'graduating', 'leaving my last job'), etc"
+      tags:[personal, character]
+      data_type: String
+    }
+  ) {
+    id
+  }
+}
