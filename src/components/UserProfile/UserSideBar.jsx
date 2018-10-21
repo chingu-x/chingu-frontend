@@ -28,12 +28,13 @@ const UserSideBar = ({ user, editable }) => (
         <p>{user.username}</p>
         <p>Based in {user.country}</p>
       </div>
+      {/* TODO: bring back when we have proper roles
       <ul className="positions">
         <li className="position">
           <span><i className="fas fa-check" /></span>
           Programmer
         </li>
-      </ul>
+      </ul> */}
     </header>
     <UserInfo user={user} editable={editable} />
     <UserSkills user={user} editable={editable} />
