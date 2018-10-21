@@ -12,16 +12,15 @@ const UserProfile = ({ data, match }) => {
   // Only allow editing if no /profile param provided. TODO: Check for currently logged in user
   const editable = !match.params.username
 
-  const { user, user: { teams, cohorts, username } } = data; // Fetched user
+  const { user, user: { teams, cohorts } } = data; // Fetched user
   const pastTeams = teams.filter(team => team.cohort.status === 'ended');
   const currentTeams = teams.filter(team => team.cohort.status === 'ongoing');
   const pendingApproval = cohorts.filter(cohort =>
-    cohort.members.some(member =>
-      member.user.username === username && member.status === "pending_approval"
-    ))
+    cohort.applicants.some(applicant => applicant.status !== "team_assigned"),
+  );
 
   return (
-    < div className="user-profile-background-color" >
+    <div className="user-profile-background-color">
       <div className="user-profile-container">
         <aside className="user-profile">
           <UserSideBar editable={editable} user={user} />
