@@ -36,34 +36,25 @@ const VoyageCardCreator = ({
   );
 };
 
-export const CurrentVoyageCard = ({
-  voyageTitle,
-  startDate,
-  endDate
-}) => {
-  let badgeId = voyageTitle.replace( /^\D+/g, '');
+export const CurrentVoyageCard = ({ voyage }) => {
+  const { title, start_date, end_date } = voyage;
+  let badgeId = title.replace( /^\D+/g, '');
   return (
     <VoyageCardCreator
       leftPanel={() => <Badge number={badgeId} />}
-      rightPanel={() => <Info title={voyageTitle} startDate={startDate} endDate={endDate} />}
+      rightPanel={() => <Info title={title} startDate={start_date} endDate={end_date} />}
     />
   );
 };
 
-export const UpcomingVoyageCard = ({
-  voyageNumber,
-  startDate,
-  endDate,
-  id,
-  alreadyApplied,
-  userStatus
-}) => {
+export const UpcomingVoyageCard = ({ voyage, user }) => {
+  const alreadyApplied = voyage.applicants.some(applicant => applicant.id === user.id);
   return (
     <VoyageCardCreator
       backgroundColor={"#EFEFEF"}
-      leftPanel={() => <Badge number={voyageNumber} />}
-      rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
-      action={() => alreadyApplied ? 'PENDING APPROVAL' : <Action routeId={id} userStatus={userStatus}/>}
+      leftPanel={() => <Badge number={voyage.id} />}
+      rightPanel={() => <Info startDate={voyage.start_date} endDate={voyage.end_date} />}
+      action={() => alreadyApplied ? 'PENDING APPROVAL' : <Action routeId={voyage.id} userStatus={user.status}/>}
     />
   );
 };
