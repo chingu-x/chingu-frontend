@@ -25,40 +25,13 @@ const userAddSkills = gql`
 class UserAcquiredSkills extends React.Component {
   state = {
     isEditing: false, // used to control rendering of SkillsPicker
-    shouldSave: false, // used to control form submit in SkillsPicker
   }
 
   toggleEdit = () => this.setState(
-    { isEditing: !this.state.isEditing }, // toggle editing mode
-    () => this.state.shouldSave && this.toggleSave(), // reset shouldSave when closing
+    this.setState({ isEditing: !this.state.isEditing })
   );
 
-  toggleSave = () => this.setState(
-    { shouldSave: !this.state.shouldSave },
-    () => this.state.isEditing && this.toggleEdit(), // close editing mode
-  );
-
-  /**
-   * Flow:
-   * 
-   * 1) Edit, ChosenSkills, SkillsPicker are mounted, state - initial
-   *     - Edit, ChosenSkills are rendered
-   *     - SkillsPicker -> componentDidMount -> sets isEditing: false -> renders null
-   * 2) Edit button clicked -> toggleEdit() -> isEditing: toggled true, shouldSave: no change, false
-   *     - SkillsPicker receives new props -> isEditing: true, shouldSave: false -> renders SkillsPicker
-   *     - ActionButtons rendered
-   * 3, cancel) User hits Cancel ActionButton -> toggleEdit() called
-   *     - isEditing: true -> toggled to false -> shouldSave: false, no change
-   *     - SkillsPicker -> new props -> isEditing: false, shouldSave: false -> renders null, still mounted
-   * 3, save) User hits Update ActionButton -> toggleSave() called
-   *     - shouldSave toggled true
-   *     - isEditing true -> this.toggleEdit() called
-   *     - SkillsPicker new props -> shouldSave true -> calls SkillsPicker.handleSubmit()
-   *     - UEditableSkills state updates -> isEditing: false, shouldSave: false,
-   *     - isEditing: false -> SkillsPicker unmounts
-   */
   render() {
-    const { isEditing, shouldSave } = this.state;
     const { editable, user } = this.props;
     return (
       <div className="user-editable-skills">
@@ -67,18 +40,19 @@ class UserAcquiredSkills extends React.Component {
           description="Acquired Skills"
           skills={[...user.acquired_skills, ...user.requested_skills]}
         />
-        {isEditing && (
-          <React.Fragment>
-            <br />
-            <SkillsPicker
-              shouldSave={shouldSave}
-              mutation={userAddSkills}
-              currentSkills={user.acquired_skills}
-              onSave={this.toggleSave}
-              onCancel={this.toggleEdit}
-            />
-          </React.Fragment>
-        )}
+        {
+          this.state.isEditing && (
+            <React.Fragment>
+              <br />
+              <SkillsPicker
+                mutation={userAddSkills}
+                currentSkills={user.acquired_skills}
+                onSave={this.toggleEdit}
+                onCancel={this.toggleEdit}
+              />
+            </React.Fragment>
+          )
+        }
       </div>
     );
   }
