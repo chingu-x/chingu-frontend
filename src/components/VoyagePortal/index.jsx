@@ -12,8 +12,8 @@ const VoyagePortal = ({ data: { cohorts, user, user: { id: userId, status: userS
     <div className="voyage-portal-background-color">
       <div className="voyage-portal">
         <h1 className="voyage-portal-title">VOYAGES</h1>
-        {currentVoyages.length >= 1
-          &&
+        {
+          !!currentVoyages.length &&
           <section className="voyage-section">
             <p className="voyage-portal-subcategory">Current Voyages</p>
             <div className="voyage-card-list">
@@ -26,17 +26,18 @@ const VoyagePortal = ({ data: { cohorts, user, user: { id: userId, status: userS
         <section className="voyage-section">
           <p className="voyage-portal-subcategory">Upcoming Voyages</p>
           <div className="voyage-card-list">
-            {upcomingVoyages.length >= 1
-              ? upcomingVoyages.map((voyage, index) => {
-                return (
-                  <Cards.UpcomingVoyageCard
-                    key={index}
-                    voyage={voyage}
-                    user={user}
-                  />
-                )
-              })
-              : <Cards.NoVoyagesCard />
+            {
+              !!upcomingVoyages.length
+                ? upcomingVoyages.map((voyage, index) => {
+                  return (
+                    <Cards.UpcomingVoyageCard
+                      key={index}
+                      voyage={voyage}
+                      user={user}
+                    />
+                  )
+                })
+                : <Cards.NoVoyagesCard />
             }
           </div>
         </section>

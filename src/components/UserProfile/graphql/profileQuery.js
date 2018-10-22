@@ -30,12 +30,10 @@ const profileQuery = gql`
         title
         start_date
         end_date
-        members {
+        applicants {
           id
-          user {
-            id
-            username
-          }
+          status
+          cohort_applicant_status
         }
       }
       teams {

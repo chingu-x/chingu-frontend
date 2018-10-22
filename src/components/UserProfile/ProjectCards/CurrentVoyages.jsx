@@ -6,9 +6,7 @@ const CurrentVoyages = currentTeams => {
       return (
         <Cards.CurrentVoyageCardWithTeam
           key={team.id + "_" + index}
-          voyageNumber={team.id}
-          startDate={team.cohort.start_date}
-          endDate={team.cohort.end_date}
+          voyage={team.cohort}
           team={team}
         />
       )

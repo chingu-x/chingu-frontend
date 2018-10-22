@@ -38,10 +38,9 @@ const VoyageCardCreator = ({
 
 export const CurrentVoyageCard = ({ voyage }) => {
   const { title, start_date, end_date } = voyage;
-  let badgeId = title.replace( /^\D+/g, '');
   return (
     <VoyageCardCreator
-      leftPanel={() => <Badge number={badgeId} />}
+      leftPanel={() => <Badge voyage={voyage} />}
       rightPanel={() => <Info title={title} startDate={start_date} endDate={end_date} />}
     />
   );
@@ -52,7 +51,7 @@ export const UpcomingVoyageCard = ({ voyage, user }) => {
   return (
     <VoyageCardCreator
       backgroundColor={"#EFEFEF"}
-      leftPanel={() => <Badge number={voyage.id} />}
+      leftPanel={() => <Badge voyage={voyage} />}
       rightPanel={() => <Info startDate={voyage.start_date} endDate={voyage.end_date} />}
       action={() => alreadyApplied ? 'PENDING APPROVAL' : <Action routeId={voyage.id} userStatus={user.status}/>}
     />
@@ -100,17 +99,12 @@ export const NoVoyagesCard = () => {
   );
 };
 
-export const CurrentVoyageCardWithTeam = ({
-  voyageNumber,
-  startDate,
-  endDate,
-  team,
-}) => {
+export const CurrentVoyageCardWithTeam = ({ voyage, team }) => {
   let currentStandUp = team.standups && team.standups.filter((standup) => standup.expiration > Number(new Date()));
   return (
     <VoyageCardCreator
-      leftPanel={() => <Badge number={voyageNumber} />}
-      rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
+      leftPanel={() => <Badge voyage={voyage} />}
+      rightPanel={() => <Info startDate={voyage.start_date} endDate={voyage.end_date} />}
       team={() => (
         <Title title={team.title ? team.title : null} />
       )}
@@ -125,32 +119,22 @@ export const CurrentVoyageCardWithTeam = ({
   );
 };
 
-export const PendingApprovalVoyageCard = ({
-  voyageNumber,
-  startDate,
-  endDate,
-  cohort
-}) => {
+export const PendingApprovalVoyageCard = ({ voyage }) => {
   return (
     <VoyageCardCreator
-      leftPanel={() => <Badge number={voyageNumber} />}
-      rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
+      leftPanel={() => <Badge voyage={voyage} />}
+      rightPanel={() => <Info startDate={voyage.start_date} endDate={voyage.end_date} />}
       action={() => <Pending status={"Pending Approval"} />}
     />
   );
 };
 
-export const PreviousVoyageCardWithTeam = ({
-  voyageNumber,
-  startDate,
-  endDate,
-  team
-}) => {
+export const PreviousVoyageCardWithTeam = ({ voyage, team }) => {
   return (
     <VoyageCardCreator
       backgroundColor={"#EFEFEF"}
-      leftPanel={() => <Badge number={voyageNumber} />}
-      rightPanel={() => <Info startDate={startDate} endDate={endDate} />}
+      leftPanel={() => <Badge voyage={voyage} />}
+      rightPanel={() => <Info startDate={voyage.start_date} endDate={voyage.end_date} />}
       team={() => (<Title title={team.title ? team.title : null} /> )}
     />
   );

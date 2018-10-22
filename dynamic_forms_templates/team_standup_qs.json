@@ -1,0 +1,62 @@
+mutation {
+  one: questionCreate(
+    input: {
+      field_name:"standup_id"
+      text:"Cohort Team Standup ID"
+      input_type:hidden
+      data_type:Number
+      tags:[cohort, teamwork, identifier]
+    }
+  ) {
+    id
+  }
+  
+  two: questionCreate(
+    input: {
+      field_name:"progress_sentiment"
+      text:"How would you describe your team's progress?"
+      input_type:team_progress_sentiment_buttons
+      options: [{text:"red"}, {text:"yellow"}, {text:"green"}]
+      data_type:String
+      tags:[cohort, teamwork]
+    }
+  ) {
+    id
+  }
+  
+  three: questionCreate(
+    input: {
+      field_name:"worked_on"
+      text:"What have you worked on since the last standup?"
+      input_type:textarea
+      data_type:String
+      tags:[cohort, teamwork]
+    }
+  ) {
+    id
+  }
+  
+  four: questionCreate(
+    input: {
+      field_name:"working_on"
+      text:"What will you be working on until the next standup?"
+      input_type:textarea
+      data_type:String
+      tags:[cohort, teamwork]
+    }
+  ) {
+    id
+  }
+  
+  five: questionCreate(
+    input: {
+      field_name:"blocked_on"
+      text:"Is there anything blocking your progress?"
+      input_type:textarea
+      data_type:String
+      tags:[cohort, teamwork]
+    }
+  ) {
+    id
+  }
+}

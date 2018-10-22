@@ -47,13 +47,15 @@ FORM TITLE
 .voyage-application-subtitle {
     color: $grey;
     background-color: $palest-grey;
-    width: calc(100% + 40px);
-    margin-left: -20px;
+    // width: calc(50% + 40px);
+    // margin-left: -20px;
     padding: 5px;
-    padding-left: 20px;
-    display: inline-block;
-    text-transform: uppercase;
-    font-size: 15px;
+    // padding-left: 20px;
+    // display: inline-flex;
+    text-align: center;
+    margin: 0;
+    // text-transform: uppercase;
+    font-size: 20px;
 }
 /*
 ==========================
@@ -66,9 +68,20 @@ BUTTONS
     grid-template-columns: repeat(2, 1fr);
 }
 
+.voyage-application-btn-container-single {
+    display: grid;
+    grid-template-columns: 1fr
+}
+
 .voyage-appliation-btn--green {
     grid-area: b;
     justify-self: end;
+    @include system-button($theme-green, $theme-green--hover);
+}
+
+// im sorry...
+.voyage-appliation-btn--green-center {
+    justify-self: center;
     @include system-button($theme-green, $theme-green--hover);
 }
 
@@ -78,6 +91,7 @@ BUTTONS
     @include system-button($light-grey, $grey);
 }
 .voyage-appliation-btn--green, 
+.voyage-appliation-btn--green-center,
 .voyage-appliation-btn--grey {
     padding: 5px;
     display: inline-block;
