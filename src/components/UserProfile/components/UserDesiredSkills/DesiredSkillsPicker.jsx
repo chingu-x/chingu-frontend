@@ -16,7 +16,6 @@ mutation addDesiredSkills ($skill_ids:[ID!]!) {
       id
       name
       category
-      preference_order
     }
   }
 }
@@ -75,6 +74,7 @@ class DesiredSkillsPicker extends React.Component {
   }
 
   render() {
+    // fills to length 5 adding 'null' elements as needed
     const chosenSkills = fillArray(this.props.chosenSkills, 5);
     return (
       <React.Fragment>
