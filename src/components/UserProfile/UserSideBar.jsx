@@ -26,7 +26,7 @@ const UserSideBar = ({ user, editable }) => (
           src={user ? user.avatar : require('../../assets/blank image.png')}
           alt="userprofile" />
         <p>{user.username}</p>
-        <p>Based in {user.country}</p>
+        {user.country && <p>Based in {user.country}</p>}
       </div>
       {/* TODO: bring back when we have proper roles
       <ul className="positions">
