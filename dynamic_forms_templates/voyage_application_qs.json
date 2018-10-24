@@ -1,0 +1,98 @@
+mutation {
+  questionCreate(
+    input: {
+      field_name:"voyage_id"
+      input_type:hidden
+      text:"Cohort ID for the voyage application"
+      data_type:String
+    }
+  ) {
+    id
+  }
+  
+  one: questionCreate(
+    input: {
+      field_name: "full_time"
+      input_type: radio
+      text: "How many hours a week (approximately) will you commit to your Chingu team and project?"
+      options: [
+        {text:"Full-time (20+ hours a week)", value:1}
+        {text:"Part time (10-20 hours per week)", value:0}
+      ]
+      data_type:Number
+      tags:[cohort, commitment, availability]
+    }
+  ) {
+    id
+  }
+  
+  
+  
+  two: questionCreate(
+    input: {
+      field_name: "availability"
+      input_type: radio,
+      text: "When are you usually free to code or work with your team?",
+      options: [
+          {text:"Mornings or afternoons", value:-1},
+          {text:"Evening and into the night", value:0},
+          {text:"I'm doing this full-time and I'm free at anytime!", value:1}
+      ]
+      data_type:Number
+      tags:[cohort, teamwork, commitment, personal]
+    }
+  ) {
+    id
+  }
+  
+  four: questionCreate(
+    input: {
+      field_name: "audio_meeting_sentiment"
+      input_type: radio
+      text: "If your team has an audio meeting, will you join?",
+      subtext: "Note: there is no right answer and the purpose of this question is to generate the most robust teams possible, though we have noticed that teams who engage in audio meetings are more MUCH more likely to complete the project",
+      options: [
+         {text: "Yes, of course!", value:1},
+          {text:"Yes, this will be out of my comfort zone, but that's where the best learning happens so yes I will do audio meetings", value:0},
+          {text:"No", value:-1},
+      ]
+      data_type:Number
+      tags:[cohort, personal, communication, teamwork]
+    }
+  ) {
+    id
+  }
+  
+  five: questionCreate(
+    input: {
+      field_name: "pm_interest"
+      input_type: radio,
+      text: "Do you have any interest in being a Project Manager for a Remote Dev Team?",
+      subtext: "As a Project Manager you will guide your team and by setting deadlines and maintaining a consistent workflow"
+      options: [
+          {text:"Yes", value:1},
+          {text:"Maybe", value:0},
+          {text:"No", value:-1},
+      ]
+      data_type:Number
+      tags:[cohort, personal, teamwork]
+    }
+  ) {
+    id
+  }
+  six: questionCreate(
+    input: {
+      field_name: "tier"
+      input_type: voyage_application_tier_select
+      text: "Please select the Tier and project type that best suits you for this Voyage",
+      options: [
+        {text:1},
+        {text:2},
+        {text:3}
+      ]
+      data_type:Number
+      tags:[cohort, personal, ability, character]
+    }) {
+    	id
+  	}
+}

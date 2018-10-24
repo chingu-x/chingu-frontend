@@ -48,6 +48,12 @@ $palest-grey: #f8f8f8;
 $attention-red: #f37070;
 $attention-red--light: #efb0b0;
 
+$frontend: #1856ff;
+$frontend-dependency: #6a58cf;
+$backend: #de09f1;
+$backend-dependency: hsl(17, 89%, 41%);
+$database: #ee1400;
+
 $health-green: #22b571;
 $health-yellow: #ffcc00;
 $health-yellow--light: #FFFAB7;
@@ -87,6 +93,15 @@ $transparent-background: rgba(158, 158, 158, 0.637);
   top: 0px;
   left: 0px;
 }
+
+@mixin tags($color) {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 0.2em 0.3em 0.2em 0;
+  border: 1px solid $color;
+  color: $color;
+  letter-spacing: 1.3px;
+}
 /*
 ==========================
 STYLING
@@ -97,6 +112,7 @@ $box-shadow: 0px 3px 6px $light-grey;
 $box-shadow-dark: 0px 3px 6px $dark-grey;
 $border: 1px solid $light-grey;
 $border-radius: 0px;
+$button-border-radius: 20px;
 /*
 ==========================
 Z-INDEXES
@@ -131,6 +147,15 @@ PORTALS
   text-align: left;
   text-transform: uppercase;
   font-weight: 300;
+}
+
+@mixin portal-subcategory-small {
+  color: $lighter-grey;
+  font-size: 12px;
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: 1.5px;
 }
 
 @mixin portal-description {
@@ -214,7 +239,7 @@ MAIN BUTTONS
   background-color: $background;
   color: white;
   text-transform: uppercase;
-  border-radius: $border-radius;
+  border-radius: $button-border-radius;
   padding: 10px;
   letter-spacing: 0.1em;
   text-align: center;

@@ -4,13 +4,14 @@ import { isEqual } from "lodash";
 
 import { dynamicFormMaker } from "./DynamicFormMaker";
 import { isFieldInvalid, isEmpty } from "./utilities";
-// TODO: update DF repo new changes as of 10/2/18
+// TODO: update DF repo new changes as of 10/22/18
 /**
  * @prop {array} questions array of Question data objects for rendering
  * @prop {string} purpose Dynamic Form collection name (for form data persistence)
  * @prop {array} questions array of Dynamic Question objects
  * 
  * -- OPTIONAL --
+ * @prop {object} initialData CAUTION: very delicate - must match expected shape EXACTLY. Provide initial form_data. 
  * @prop {object} hiddenData values for 'hidden' input types -> { field_name: value }
  * @prop {bool} persistence controls storing form data in LS onFormChange
  * @prop {func} onSubmit wrapper callback for handling submit behavior
@@ -19,11 +20,24 @@ import { isFieldInvalid, isEmpty } from "./utilities";
  * @prop {func} customComponents custom input_type components (merged with defaults, precedence to custom components)
  */
 class DynamicFormContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    const { purpose, questions } = props;
-    // initialize from LS data or props
-    this.state = this._initializeState(purpose, questions);
+  state = {
+    disabled: true,
+    form_data: {},
+    questions: []
+  }
+
+  componentDidMount() {
+    const { initialData, purpose, questions } = this.props;
+    const state = this._initializeState(purpose, questions);
+
+    const default_form_data = state.form_data;
+
+    // merge with prop form_data initial values
+    if (initialData) state.form_data = { ...default_form_data, ...initialData };
+
+    // check if the form data (with potential initialData) is valid to submit
+    state.disabled = this._hasEmptyAnswers(state.form_data);
+    return this.setState(state);
   }
 
   componentDidUpdate(prevProps) {
@@ -98,8 +112,6 @@ class DynamicFormContainer extends React.Component {
     return Object.keys(form_data)
       .some(field_name => {
         const value = form_data[field_name];
-        console.log(field_name, value, typeof value !== 'number' && isEmpty(value))
-        console.log(this.state)
         /*
           if non-numeric returns if value is empty
           - if value is empty (true) then the loop breaks -> disabled true
@@ -158,6 +170,10 @@ class DynamicFormContainer extends React.Component {
         // to support difference between user text and stored value
         const value = first_option.value || first_option;
         form_data[field_name] = value;
+      } else if (input_type === 'skill_setter') {
+        const MAX_SKILL_CHOICES = 5;
+        const initializedValue = Array(MAX_SKILL_CHOICES).fill(null);
+        form_data[field_name] = initializedValue;
       }
       else form_data[field_name] = '';
 
@@ -222,7 +238,6 @@ class DynamicFormContainer extends React.Component {
     
     const validateField = onValidate || isFieldInvalid;
     const fieldInvalid = validateField(type, form_data[name], min, max);
-
     this.setState({ form_data, disabled: fieldInvalid });
   }
 
@@ -289,6 +304,7 @@ const questionShape = {
     PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
+      PropTypes.object,
       // { text, value } option for different user facing text and stored value
       PropTypes.shape({ 
         text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -305,6 +321,7 @@ DynamicFormContainer.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.shape(questionShape)),
   customComponents: PropTypes.func, // custom input_type components
   hiddenData: PropTypes.object, // values for hidden fields
+  initialData: PropTypes.object, // initial form_data - USE SPARINGLY, very delicate
   persistence: PropTypes.bool, // enable LS form data persistence
   onSubmit: PropTypes.func, // optional handler for form submission
   onValidate: PropTypes.func, // optional handler for field validation

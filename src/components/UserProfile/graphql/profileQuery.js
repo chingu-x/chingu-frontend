@@ -10,18 +10,30 @@ const profileQuery = gql`
       background
       interests
       coding_history
+      acquired_skills {
+        id
+        name
+        category
+        showcase_count
+      }
+      desired_skills {
+        id
+        name
+        category
+      }
+      requested_skills {
+        id
+        name
+      }
       cohorts {
         id
         title
         start_date
         end_date
-        members {
+        applicants {
           id
           status
-          user {
-            id
-            username
-          }
+          cohort_applicant_status
         }
       }
       teams {
