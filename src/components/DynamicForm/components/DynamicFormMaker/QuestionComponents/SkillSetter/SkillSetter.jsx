@@ -84,7 +84,7 @@ class SkillSetter extends React.Component {
   removeSkillHandler = (object) => {
     let skill_array = this.state.CHOSEN_SKILL_ELEMENTS;
     let position = this.findCurrentPositionOf(object, skill_array);
-    if (position === undefined) return;
+    if (position === null) return;
     skill_array[position] = null;
 
     this.updateSkillOptions(object);
