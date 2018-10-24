@@ -9,7 +9,7 @@ import "./DesiredSkillPicker.css"
 
 const UserDesiredSkills = ({ editable, user }) =>
   <div>
-    {editable && <DesiredSkillsPicker />}
+    {editable && <DesiredSkillsPicker chosenSkills={user.desired_skills} />}
     <ChosenSkills
       description="Desired Skills"
       skills={user.desired_skills}
