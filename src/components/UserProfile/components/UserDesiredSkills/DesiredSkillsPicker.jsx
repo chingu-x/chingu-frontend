@@ -16,10 +16,18 @@ mutation addDesiredSkills ($skill_ids:[ID!]!) {
       id
       name
       category
+      preference_order
     }
   }
 }
 `;
+
+const fillArray = (sourceArray, size) => {
+  const copy = sourceArray.slice();
+  let fillSize = size - copy.length;
+  while (fillSize--) copy.push(null);
+  return copy;
+}
 
 /**
  * @prop {string} mutation  skill / desired_skill mutation
@@ -48,7 +56,17 @@ class DesiredSkillsPicker extends React.Component {
     }
   }
 
-  onSubmit = (variables) => {
+  onSubmit = (formData) => {
+    const variables = {};
+    variables.skill_ids = formData.skill_ids.reduce(
+      (selectedSkills, skill) => {
+        // ignore null skills
+        if (!skill) return selectedSkills;
+        // 
+        return [...selectedSkills, skill.id || skill];
+      },
+      [],
+    );
     client.mutate({
       mutation: userAddDesiredSkills,
       variables,
@@ -57,6 +75,7 @@ class DesiredSkillsPicker extends React.Component {
   }
 
   render() {
+    const chosenSkills = fillArray(this.props.chosenSkills, 5);
     return (
       <React.Fragment>
         {!this.props.loading && <EditButton onClick={() => this.popup.open()} />}
@@ -68,6 +87,7 @@ class DesiredSkillsPicker extends React.Component {
                 : <DynamicFormContainer
                   questions={[{ ...QA, options: [this.props.data] }]}
                   onSubmit={this.onSubmit}
+                  initialData={ { skill_ids: chosenSkills }}
                 />
             }
           </div>
