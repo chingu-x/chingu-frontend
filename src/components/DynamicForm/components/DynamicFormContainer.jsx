@@ -4,7 +4,7 @@ import { isEqual } from "lodash";
 
 import { dynamicFormMaker } from "./DynamicFormMaker";
 import { isFieldInvalid, isEmpty } from "./utilities";
-// TODO: update DF repo new changes as of 10/22/18
+// TODO: update DF repo new changes as of 11/2/18
 /**
  * @prop {array} questions array of Question data objects for rendering
  * @prop {string} purpose Dynamic Form collection name (for form data persistence)
@@ -161,8 +161,7 @@ class DynamicFormContainer extends React.Component {
       form_data,
       { field_name, input_type, options, },
     ) => {
-      // creates a Set for multiple answers
-      // TODO: apply same text / value to checkboxes
+      // creates an array for multiple answers
       if (this._isMultiAnswer(input_type)) form_data[field_name] = [];
       else if (input_type === 'dropdown') {
         const first_option = options[0];
