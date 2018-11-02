@@ -16,12 +16,20 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData
 });
 
-const mode = 'prod'
+const getURI = (mode) => {
+  switch(mode) {
+    case 'local': return 'http://localhost:8008/graphql';
+    case 'production': return 'https://main-api.chingu.io/graphql';
+    case 'staging':
+    default: return 'https://main-api-staging.chingu.io/graphql';
+  }
+}
+
 // create a new Apollo Client Instance
 const client = new ApolloClient({
   cache: new InMemoryCache({ fragmentMatcher }),
   // The URL for your graphql server
-  uri: mode === 'dev' ? 'http://localhost:8008/graphql' : 'https://api.chingu.io/graphql',
+  uri: getURI('production'),
   request: async operation => {
     const token = localStorage.getItem('token')
     operation.setContext({
