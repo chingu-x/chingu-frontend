@@ -11,25 +11,17 @@ import ScrollToTop from "./ScrollToTop";
 import "./styles/fontawesome/webfonts/fontawesome-all.css";
 import "./styles/main.css";
 import registerServiceWorker from "./registerServiceWorker";
+import uri from "./get_uri";
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData
 });
 
-const getURI = (mode) => {
-  switch(mode) {
-    case 'local': return 'http://localhost:8008/graphql';
-    case 'production': return 'https://main-api.chingu.io/graphql';
-    case 'staging':
-    default: return 'https://main-api-staging.chingu.io/graphql';
-  }
-}
-
 // create a new Apollo Client Instance
 const client = new ApolloClient({
   cache: new InMemoryCache({ fragmentMatcher }),
   // The URL for your graphql server
-  uri: getURI('production'),
+  uri,
   request: async operation => {
     const token = localStorage.getItem('token')
     operation.setContext({
