@@ -3,18 +3,16 @@ import PropTypes from "prop-types";
 import './EditableTextField.css';
 import { client } from "../../index.js";
 import { questionComponents } from "../DynamicForm/";
+import EditButton from '../common/EditButton';
+
 const { text, textarea } = questionComponents;
 
-const EditFieldButton = ({ toggleEdit }) => (
-  <button className="edit-field-btn" onClick={() => toggleEdit()}>
-    Edit
-  </button>
+const ActionButtons = ({ onSave, onCancel }) => (
+  <div className="edit-field-btn--btn-container">
+    <button className="edit-field-btn--left" onClick={onSave}>Update</button>
+    <button className="edit-field-btn--right" onClick={onCancel}>Cancel</button>
+  </div>
 );
-
-EditFieldButton.propTypes = {
-  toggleEdit: PropTypes.func,
-};
-
 
 const EditArea = ({
   large,
@@ -36,11 +34,7 @@ const EditArea = ({
   return (
     <React.Fragment>
       {inputComponent}
-      <div className="edit-field-btn--btn-container">
-        <button className="edit-field-btn--left" onClick={() => onSubmit()}>Update</button>
-        <button className="edit-field-btn--right" onClick={() => onCancel()}>Cancel</button>
-      </div>
-
+      <ActionButtons onSave={onSubmit} onCancel={onCancel} />
     </React.Fragment>
   )
 }
@@ -77,7 +71,7 @@ class EditableTextField extends React.Component {
   handleSubmit = () => {
     const { variables } = this.state;
     const { mutation } = this.props;
-    
+
     client.mutate({ mutation, variables })
       .then(this.handleUpdateData)
       .catch(console.error);
@@ -111,7 +105,7 @@ class EditableTextField extends React.Component {
       const { value } = currentTarget;
       const { variables } = this.state;
       const { mutationInputName, fieldName } = this.props;
-      
+
       variables[mutationInputName][fieldName] = value;
       return { variables };
     },
@@ -131,14 +125,16 @@ class EditableTextField extends React.Component {
     const { edit, displayEdit, variables, updatedData } = this.state;
 
     if (edit) return (
-      <EditArea
-        large={large}
-        data={variables[mutationInputName]}
-        fieldName={fieldName}
-        onSubmit={this.handleSubmit}
-        onCancel={this.handleCancel}
-        onInputChange={this.handleInputChange}
-      />
+      <Component>
+        <EditArea
+          large={large}
+          data={variables[mutationInputName]}
+          fieldName={fieldName}
+          onSubmit={this.handleSubmit}
+          onCancel={this.handleCancel}
+          onInputChange={this.handleInputChange}
+        />
+      </Component>
     );
 
     return (
@@ -147,8 +143,8 @@ class EditableTextField extends React.Component {
         onMouseEnter={() => hasPermission && this.toggleDisplayEdit(true)}
         onMouseLeave={() => hasPermission && this.toggleDisplayEdit(false)}
       >
-        {displayEdit && <EditButton toggleEdit={this.toggleEdit} />}
-        <Component data={updatedData || fieldData} />
+        <EditButton onClick={this.toggleEdit} />
+        <Component>{updatedData || fieldData}</Component>
       </div>
     );
   }
@@ -168,7 +164,9 @@ EditableTextField.propTypes = {
 };
 
 EditableTextField.defaultProps = {
-  editButton: EditFieldButton, // simple EditButton
+  editButton: EditButton, // simple EditButton
 };
+
+export { ActionButtons };
 
 export default EditableTextField;

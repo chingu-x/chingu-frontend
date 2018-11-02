@@ -1,0 +1,15 @@
+@import '../../styles/abstracts/_variables.scss';
+
+.edit-icon {
+  display: block;
+  position: relative;
+  float: right;
+  margin-top: 40px;
+
+  background-color: white;
+  border: none;
+  color: $light-grey;
+  &:hover {
+    color: $theme-green;
+  }
+}

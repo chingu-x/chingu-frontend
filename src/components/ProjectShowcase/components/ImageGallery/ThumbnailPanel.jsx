@@ -24,7 +24,7 @@ ThumbnailPanel.propTypes = {
 };
 
 ThumbnailPanel.defaultProps = {
-  toggleImgModal: console.log,
+  toggleImgModal: '',
   files: []
 };
 

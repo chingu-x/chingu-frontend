@@ -20,10 +20,10 @@ export default (
           (answer, index) => (
             <option
               className="form-answer"
-              value={answer}
+              value={answer.value || answer}
               key={'dropdown_' + field_name + '_' + index}
             >
-              {answer}
+              {answer.text || answer}
             </option>
           ),
         )

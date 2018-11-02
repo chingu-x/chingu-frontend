@@ -1,0 +1,66 @@
+@import '../../../../styles/abstracts/_variables.scss';
+
+.sidebar-subcategory {
+  @include portal-subcategory;
+  font-size: 18px !important;
+  letter-spacing: 1.6px;
+  margin-top: 20px;
+}
+
+ .skill-frontend {
+    @include tags($frontend);
+  }
+
+  .skill-frontend_dependency {
+    @include tags($frontend-dependency);
+  }
+
+  .skill-backend {
+    @include tags($backend);
+  }
+
+  .skill-backend_dependency {
+    @include tags($backend-dependency);
+  }
+
+  .skill-database {
+    @include tags($database);
+  }
+
+  .skill-requested {
+    @include tags($grey)
+  }
+
+.skill-modal-background {
+  @include transparent-background;
+}
+.skill-modal {
+  display: block;
+
+  position: absolute;
+  top: 0px;
+  left: calc(50vw - 350px);
+  z-index: 10;
+  width: 700px;
+  padding: 20px;
+  margin-top: 100px;
+
+  background-color: white;
+  box-shadow: $box-shadow;
+  border: 1px solid $palest-grey;
+
+  max-height: 900px;
+
+  .form-question {
+    text-align: center;
+    font-weight: 600;
+  }
+  .form-subtext {
+    display: block;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+}

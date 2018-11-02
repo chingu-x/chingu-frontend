@@ -8,47 +8,36 @@ const VoyagePortal = ({ data: { cohorts, user, user: { id: userId, status: userS
   // TODO: Assign in one pass
   const currentVoyages = cohorts.filter(cohort => cohort.status === "ongoing")
   const upcomingVoyages = cohorts.filter(cohort => cohort.status === "registration_open")
-  const alreadyApplied = upcomingVoyages.some(voyage => voyage.members.some(member => member.user.id === userId && member.status === "pending_approval")) // TODO: Test when data available
   return (
     <div className="voyage-portal-background-color">
       <div className="voyage-portal">
         <h1 className="voyage-portal-title">VOYAGES</h1>
-        {currentVoyages.length >= 1
-          &&
+        {
+          !!currentVoyages.length &&
           <section className="voyage-section">
             <p className="voyage-portal-subcategory">Current Voyages</p>
             <div className="voyage-card-list">
-              {currentVoyages.map((voyage, index) => {
-                return (
-                  <Cards.CurrentVoyageCard
-                    key={index}
-                    voyageTitle={voyage.title}
-                    startDate={voyage.start_date}
-                    endDate={voyage.end_date}
-                  />
-                )
-              })}
+              {currentVoyages.map((voyage, index) => (
+                <Cards.CurrentVoyageCard key={index} voyage={voyage} />
+              ))}
             </div>
           </section>
         }
         <section className="voyage-section">
           <p className="voyage-portal-subcategory">Upcoming Voyages</p>
           <div className="voyage-card-list">
-            {upcomingVoyages.length >= 1
-              ? upcomingVoyages.map((voyage, index) => {
-                return (
-                  <Cards.UpcomingVoyageCard
-                    key={index}
-                    voyageNumber={voyage.id}
-                    startDate={voyage.start_date}
-                    endDate={voyage.end_date}
-                    id={voyage.id}
-                    userStatus={userStatus}
-                    alreadyApplied={alreadyApplied}
-                  />
-                )
-              })
-              : <Cards.NoVoyagesCard />
+            {
+              !!upcomingVoyages.length
+                ? upcomingVoyages.map((voyage, index) => {
+                  return (
+                    <Cards.UpcomingVoyageCard
+                      key={index}
+                      voyage={voyage}
+                      user={user}
+                    />
+                  )
+                })
+                : <Cards.NoVoyagesCard />
             }
           </div>
         </section>
@@ -62,6 +51,6 @@ export default props => (
     {...props}
     component={VoyagePortal}
     query={voyagesQuery}
-    globalLoader
+    loader
   />
 )

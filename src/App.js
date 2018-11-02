@@ -21,36 +21,24 @@ import Private from "./components/utilities/PrivateRoute"
 import AllProjects from './components/AllProjects';
 import TeamStandup from "./components/TeamStandup";
 import ProjectShowcase from "./components/ProjectShowcase"
+import Ticketbox from './components/Ticketbox';
+// import HelpPage from "./components/HelpPage" TODO: uncomment when ready
+
 
 export default () => (
   <div className="App">
     <Header />
     <Switch>
       <Route exact path="/" component={Landing} />
-      <Route
-        exact path="/login"
-        render={
-          ({ location: { search } }) => <Login queryString={search} />
-        }
-      />
+      <Route exact path="/login" component={Login} />
       <Private
         exact path="/register"
         render={
           () => <Register version={null} /> // set custom 'chingu_application' version here
         }
       />
-      <Private exact path="/profile" render={() => <UserProfile editable={true} />} />
-      <Route
-        exact path="/profile/:username"
-        render={
-          ({ match: { params: { username } } }) => (
-            <UserProfile
-              username={username}
-              editable={false}
-            />
-          )
-        }
-      />
+      <Private exact path="/profile" component={UserProfile} />
+      <Route exact path="/profile/:username" component={UserProfile} />
       <Private exact path="/voyage" component={VoyagePortal} />
       <Private
         exact path="/voyage/application/:voyage_id"
@@ -68,11 +56,11 @@ export default () => (
       <Private exact path="/team/checkin/:id" component={WeeklyCheckin} />
       <Route exact path="/projects" component={AllProjects} />
       <Private
-        exact path="/team/:team_id/standup"
+        exact path="/team/standup/:standup_id"
         render={
-          ({ match: { params: { team_id } } }) => (
+          ({ match: { params: { standup_id } } }) => (
             <TeamStandup
-              team_id={team_id}
+              standup_id={standup_id}
               standupVersion={null}
             />
           )
@@ -81,12 +69,13 @@ export default () => (
       <Route exact path="/current" component={CurrentPrograms} />
       <Route exact path="/team" component={Staff} />
       <Route exact path="/privacy" component={PrivacyPolicy} />
+      {/* TODO: uncomment when ready <Route exact path="/help" component={HelpPage} /> */}
       <Route exact path="/companyfaq" render={() => <FAQ headerText="Company FAQs" data={companyFAQ} />} />
       <Route exact path="/programfaq" render={() => <FAQ headerText="Program FAQs" data={programFAQ} />} />
-      <Route exact path="/project/:projectId" render={
-        ({ match: { params: { projectId } } }) => <ProjectShowcase projectId={projectId}/> } />
+      <Route exact path="/project/:project_id" component={ProjectShowcase} />
       <Route path="*" exact component={Missing404Page} />
     </Switch>
+    <Ticketbox />
     <Footer />
   </div>
 )

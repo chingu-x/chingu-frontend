@@ -32,6 +32,9 @@
 
 .user-sidebar-subcategory {
   @include portal-subcategory;
+  font-size: 18px !important;
+  letter-spacing: 1.6px;
+  margin-top: 20px;
 }
 
 .photobox {
@@ -54,7 +57,8 @@
 .user-coding-history,
 .user-interests, 
 .user-links,
-.user-skills {
+.user-skills,
+.user-desired-skills {
   @include portal-description;
   margin-top: 20px;
   border-top: 1px solid $light-grey;
@@ -74,19 +78,5 @@
       text-decoration: none;
       color: #D9D9D9;
     }
-  }
-}
-
-.user-skills {
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    border: 1px solid $grey;
-    padding: 0.3em 1em;
-    margin: 0.2em 0.3em 0.2em 0;
   }
 }

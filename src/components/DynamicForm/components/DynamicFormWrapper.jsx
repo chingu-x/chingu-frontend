@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 
 import Error from "../../Error";
 import DynamicFormContainer from "./DynamicFormContainer";
+import dynamicFormSubmitMutation from "../dynamicFormSubmitMutation.js";
 
 /**
  * @prop {object} client Apollo Client instance for mutating
@@ -12,19 +13,17 @@ import DynamicFormContainer from "./DynamicFormContainer";
  * @prop {array} questions form questions
  * 
  * -- OPTIONAL -- 
+ * @prop {bool} persistence controls LS persistence of form data 
  * @prop {object} hiddenData optional object of hidden input field value(s)
- * @prop {func} onValidate optional handler for validating a form field
- * @prop {func} onSubmit optional handler for submitting mutation
- * @prop {func} onResponse optional handler for response data
- * @prop {func} onError optional handler for error data
+ * @prop {func} onValidate optional handler for validating a form field (onChange)
+ * @prop {func} onSubmit optional handler for submitting form
+ * @prop {func} onResponse optional handler for mutation response data
+ * @prop {func} onError optional handler for mutation error message
  */
 class DynamicFormWrapper extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      response: null,
-      error: null,
-    }
+  state = {
+    response: null,
+    error: null,
   }
 
   handleResponse = ({ data: response }) => {
@@ -34,56 +33,57 @@ class DynamicFormWrapper extends React.Component {
     this.setState({ response });
   }
 
-  handleError = ({ message }) => this.setState({ error: message });
+  handleError = error => this.setState({ error });
 
   handleSubmit = (form_data) => {
     const {
       client,
-      mutation,
       purpose,
       version,
     } = this.props;
+  
+    const variables = { purpose, version, form_data };
 
-    const variables = {
-      purpose,
-      version,
-      form_data,
-    };
-
-    client.mutate({ mutation, variables })
-      .then(this.handleResponse)
-      .catch(this.handleError);
+    client.mutate({
+      mutation: dynamicFormSubmitMutation,
+      variables,
+    }).then(this.handleResponse)
+    .catch(this.handleError);
   }
 
   render() {
     const {
-      onError,
+      onValidate,
       onSubmit,
+      onError,
       onResponse,
+      persistence,
       purpose,
       questions,
       hiddenData,
     } = this.props;
-
+    
     const { response, error } = this.state;
 
     if (error) return (
       onError
         ? onError(error)
-        : <Error error={error} />
+        : <Error error={error.message} />
     );
 
     if (response) return (
       onResponse
         ? onResponse(response)
-        : <Redirect to="/newsfeed" />
+        : <Redirect to="/" />
     );
 
     return (
       <DynamicFormContainer
+        persistence={persistence}
         purpose={purpose}
         questions={questions}
         hiddenData={hiddenData}
+        onValidate={onValidate}
         onSubmit={onSubmit || this.handleSubmit}
       />
     );
@@ -94,6 +94,8 @@ DynamicFormWrapper.propTypes = {
   client: PropTypes.object,
   purpose: PropTypes.string,
   version: PropTypes.number,
+  questions: PropTypes.arrayOf(PropTypes.object),
+  persistence: PropTypes.bool,
   hiddenData: PropTypes.object,
   onValidate: PropTypes.func,
   onSubmit: PropTypes.func,
@@ -102,6 +104,7 @@ DynamicFormWrapper.propTypes = {
 };
 
 DynamicFormWrapper.defaultProps = {
+  persistence: true,
   hiddenData: null,
   onValidate: null,
   onSubmit: null,

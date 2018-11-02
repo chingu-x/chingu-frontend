@@ -1,110 +1,82 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
+import { client } from "../../index"
 import Request from "../utilities/Request"
+import PopupMenu from "../utilities/PopupMenu"
 import Modal from "../common/Modal"
 import GithubLoginModal from "../Login/components/GithubLoginModal"
-import profileQuery from "../UserProfile/graphql/profileQuery"
 import voyagesQuery from "../VoyagePortal/graphql/voyagesQuery"
 import userBaseQuery from "./userBaseQuery"
-import { client } from "../../index"
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      showPortalDropdown: false,
-      showUserDropdown: false
-    }
-  }
-
-  // TODO: Refactor Header methods
-  openLoginModal = () => this.refs.loginModal.open()
-
-  closeDropdowns = () => {
-    this.refs.dropdownModal.close()
-    this.setState({ showPortalDropdown: false, showUserDropdown: false })
-  }
-
-  handleUserDropdown = e => {
+  openLoginModal = e => {
     e.stopPropagation()
-    this.state.showUserDropdown
-      ? this.refs.dropdownModal.close()
-      : this.refs.dropdownModal.open()
-
-    this.setState({
-      showPortalDropdown: false,
-      showUserDropdown: !this.state.showUserDropdown
-    })
+    this.refs.loginModal.open()
   }
 
   logout = async e => {
     e.preventDefault();
     window.localStorage.removeItem("token");
-    window.localStorage.removeItem("store");
-
-    // TODO: Server logout logic
-
+    /**
+     * TODOS: 
+     * Server logout logic
+     * Fix 'Store reset while query in flight' error
+     */
     this.props.history.replace("/")
     await client.resetStore()
   };
 
   renderAvatar = avatar => (
-    <div className="header-dropdown">
+    <PopupMenu className="header-dropdown">
       <img
-        onClick={this.handleUserDropdown}
+        onClick={this.toggleDropdown}
         className="avatar"
         src={avatar ? avatar : require('../../assets/blank image.png')} alt="user avatar"
-      />
-
-      {
-        this.state.showUserDropdown &&
-        <Fragment>
-          <div className="header-mask" />
-          <div className="header-dropdown-content avatar">
-            <Link
-              to="/newsfeed"
-            >
-              Newsfeed
-            </Link>
-
-            <Link
-              to="/voyage"
-              onMouseOver={() => client.query({ query: voyagesQuery })}
-            >
-              Voyage Portal
-            </Link>
-            <Link
-              to="/projects"
-            >
-              Project Showcase
-            </Link>
-            <hr />
-            <Link
-              to="/profile"
-              onMouseOver={() => client.query({ query: profileQuery })}
-            >
-              User Profile
-            </Link>
-            <hr />
-            <Link to="/" onClick={e => this.logout(e)}>Log out</Link>
-          </div>
-        </Fragment>
-      }
-    </div>
+        />
+      <div className="header-dropdown-content">
+        <Link
+          to="/newsfeed"
+          >
+          Newsfeed
+        </Link>
+        <Link
+          to="/voyage"
+          onMouseOver={() => client.query({ query: voyagesQuery })}
+        >
+          Voyage Portal
+        </Link>
+        <Link
+          to="/projects"
+          >
+          Project Showcase
+        </Link>
+        <hr />
+        <Link
+          to="/profile"
+          // TODO: FIXME Query related error when prefetching while vieweing ProjectShowcase
+          // onMouseOver={() => client.query({ query: profileQuery })}
+          >
+          User Profile
+        </Link>
+        <hr />
+        <Link to="/" onClick={e => this.logout(e)}>Log out</Link>
+      </div>
+    </PopupMenu>
   )
 
   render() {
-    const isDropdownOpen = this.state.showPortalDropdown || this.state.showUserDropdown
-    const { data: { user: { avatar, teams } = {} } = {} } = this.props
-    window.location.pathname === localStorage.redirect && delete localStorage.redirect // Clears the post-login redirect path
+    this.props.location.pathname === localStorage.redirect && delete localStorage.redirect // Clears the post-login redirect path
+    const { user } = this.props.data
     return (
       <Fragment>
-        <Modal onModalClick={this.closeDropdowns} background="none" ref="dropdownModal" />
-        <Modal ref="loginModal" background="transparent"><GithubLoginModal /></Modal>
-        <div
-          onClick={this.closeDropdowns}
-          className={`header header-dark ${isDropdownOpen ? "modal-peek" : ""}`}>
+        
+        <Modal 
+          ref="loginModal" 
+          background="transparent">
+          <GithubLoginModal />
+        </Modal>
+        
+        <div className="header header-dark">
           <div className="header-container">
             <div className="header-left">
               <div className="nav-logo">
@@ -112,14 +84,18 @@ class Header extends React.Component {
               </div>
             </div>
             <div className="header-right">
-              {avatar && this.renderAvatar(avatar)}
-              {!localStorage.token && !avatar && <div onClick={this.openLoginModal} className="header-btn">LOG IN</div>}
+              {user && this.renderAvatar(user.avatar)}
+              {!localStorage.token && !user && <div onClick={this.openLoginModal} className="header-btn">LOG IN</div>}
             </div>
           </div>
         </div>
       </Fragment>
     )
   }
+}
+
+Header.defaultProps = {
+  data: {}
 }
 
 export default withRouter(props => (
