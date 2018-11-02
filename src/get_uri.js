@@ -7,6 +7,6 @@ const getURI = (mode) => {
   }
 }
 // TODO: change this mode as needed. NEVER commit unless set to 'production'
-const mode = 'staging';
+const mode = 'production';
 const uri = getURI(mode);
 export default uri;
