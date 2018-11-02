@@ -1,7 +1,8 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
-
-fetch(`https://api.chingu.io/graphql`, {
+// TODO: how to set this dynamically using getURI?
+// mix of require vs import statements (this build code is not run through babel)
+fetch('https://main-api.chingu.io/graphql', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({

@@ -19,7 +19,7 @@ const CheckboxComponent = (
         <input
           type="checkbox"
           name={field_name}
-          value={answer}
+          value={answer.value || answer}
           id={field_name + '_' + index}
           checked={value.indexOf(answer.value || answer) !== -1} // is answer in answers array
           onChange={
