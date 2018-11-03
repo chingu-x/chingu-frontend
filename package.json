@@ -33,7 +33,7 @@
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css build-fragments start-js",
     "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-fragments build-js",
+    "build": "npm-run-all build-css build-fragments build-js; echo \"/* /index.html 200\" > build/_redirects",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-fragments": "node ./build_fragments.js"
