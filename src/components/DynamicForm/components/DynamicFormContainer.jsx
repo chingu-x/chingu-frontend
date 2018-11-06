@@ -4,7 +4,7 @@ import { isEqual } from "lodash";
 
 import { dynamicFormMaker } from "./DynamicFormMaker";
 import { isFieldInvalid, isEmpty } from "./utilities";
-// TODO: update DF repo new changes as of 11/2/18
+// TODO: update DF repo new changes as of 11/6/18
 /**
  * @prop {array} questions array of Question data objects for rendering
  * @prop {string} purpose Dynamic Form collection name (for form data persistence)
@@ -21,58 +21,83 @@ import { isFieldInvalid, isEmpty } from "./utilities";
  */
 class DynamicFormContainer extends React.Component {
   state = {
-    disabled: true,
-    form_data: {},
-    questions: []
+    form_data: {}, // { field_name: user response(s) }
+    questions: [], // detailed in prop types
+    disabled: true, // overall DF Container submit control
+    field_errors: {}, // individual field errors
   }
 
   componentDidMount() {
     const { initialData, purpose, questions } = this.props;
+    // initializes using input_type defaults or LS persisted data if found
     const state = this._initializeState(purpose, questions);
 
     const default_form_data = state.form_data;
-
     // merge with prop form_data initial values
     if (initialData) state.form_data = { ...default_form_data, ...initialData };
 
-    // check if the form data (with potential initialData) is valid to submit
-    state.disabled = this._hasEmptyAnswers(state.form_data);
+    // check if all the form data (from LS persistence or initialData) is valid
+    const { disabled, field_errors } = this._validateAllAnswers(state.form_data, questions);
+    state.disabled = disabled;
+    state.field_errors = field_errors;
+  
     return this.setState(state);
   }
 
   componentDidUpdate(prevProps) {
     // when the form_data is updated from onFormChange
+    const { form_data, field_errors, disabled } = this.state;
     // or it receives new questions (for multi-question sets)
-    const { form_data, disabled } = this.state;
     const { purpose, persistence, questions } = this.props;
 
     // persistence in LS
     if (persistence) {
-      // only persist disabled state and form_data
-      const persistedData = JSON.stringify({ disabled, form_data });
+      const persistedData = JSON.stringify({ form_data, field_errors, disabled });
       localStorage.setItem(purpose, persistedData);
     }
 
     // update form_data when a new question set is introduced
     // handles cases where multiple question sets may be introduced by
     // the DF Wrapper managing the DF Container
-    if (!isEqual(questions, prevProps.questions)) { // only update if question set changes
+    if (!isEqual(questions, prevProps.questions)) { // only update if question set changes, performance of deep equal?
       const new_form_data = this._handleNewQuestions(questions, form_data);
       this.setState({ form_data: new_form_data, questions });
     }
 
-    // if disabled is true then a form field has set its value
-    // it should not be overwritten until the form field is corrected
-    if (disabled) return null;
-
-    // if the form is not disabled check for empty answers
-    // using the updated form_data
-    const isDisabled = this._hasEmptyAnswers(form_data);
-
-    if (isDisabled !== disabled) {
-      // only update if theres a difference (performance) //shouldComponentUpdate() ?
-      this.setState({ disabled: isDisabled });
+    // field_errors: { field_name: boolean } -> true: should disable, false: valid
+    const should_disable = Object.values(field_errors).some(disabled => disabled === true);
+    if (this.state.disabled !== should_disable) { // only update if the two values differ
+      this.setState({ disabled: should_disable });
     }
+  }
+
+  /**
+   * Purpose: validates every answer in form_data
+   * 
+   * iterates over Question set
+   * calls the external onValidate() handler or default isFieldInvalid()
+   *   use Question and form_data values to validate and update field_errors{}
+   * returns
+   *  'disabled' boolean (overall control of DF Container submit)
+   *  'field_errors' object for individual field error tracking
+   * 
+   */
+  _validateAllAnswers(form_data, questions) {
+    const { onValidate } = this.props;
+    const validateField = onValidate || isFieldInvalid;
+
+    return questions.reduce(
+      (result, question) => {
+        const { input_type, field_name, min, max } = question;
+
+        result.field_errors[field_name] = validateField(input_type, form_data[field_name], min, max);
+
+        if (result.disabled !== field_disabled) result.disabled = field_disabled;
+
+        return result;
+      },
+      { disabled: true, field_errors: {} },
+    ); 
   }
 
   /**
@@ -163,17 +188,21 @@ class DynamicFormContainer extends React.Component {
     ) => {
       // creates an array for multiple answers
       if (this._isMultiAnswer(input_type)) form_data[field_name] = [];
+
       else if (input_type === 'dropdown') {
         const first_option = options[0];
         // options can be a single value or an object of text / value
         // to support difference between user text and stored value
         const value = first_option.value || first_option;
         form_data[field_name] = value;
-      } else if (input_type === 'skill_setter') {
+      }
+      
+      else if (input_type === 'skill_setter') {
         const MAX_SKILL_CHOICES = 5;
         const initializedValue = Array(MAX_SKILL_CHOICES).fill(null);
         form_data[field_name] = initializedValue;
       }
+      
       else form_data[field_name] = '';
 
       // insert hidden field values from hiddenData
@@ -223,7 +252,9 @@ class DynamicFormContainer extends React.Component {
    */
   _handleInputChange = ({ currentTarget, min, max }) => {
     const { name, value, type } = currentTarget;
+
     const form_data = { ...this.state.form_data };
+    const field_errors = { ...this.state.field_errors };
 
     const { onInputChange, onValidate } = this.props;
 
@@ -236,8 +267,9 @@ class DynamicFormContainer extends React.Component {
       : form_data[name] = value;
     
     const validateField = onValidate || isFieldInvalid;
-    const fieldInvalid = validateField(type, form_data[name], min, max);
-    this.setState({ form_data, disabled: fieldInvalid });
+    field_errors[name] = validateField(type, form_data[name], min, max);
+
+    this.setState({ form_data, field_errors });
   }
 
   /**
