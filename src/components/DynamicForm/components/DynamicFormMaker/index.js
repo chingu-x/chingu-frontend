@@ -22,8 +22,7 @@ const dynamicFormMaker = (
   
     if (input_type === "hidden") return null;
 
-// TODO: support for 'date' type? should be 'text' input but need to confirm formatting
-    const QuestionComponent = ["email", "url", "text"].includes(input_type)
+    const QuestionComponent = ["email", "url", "text", "date"].includes(input_type)
       ? components.text
       : components[input_type];
 
