@@ -29,18 +29,26 @@ class DynamicFormContainer extends React.Component {
 
   componentDidMount() {
     const { initialData, purpose, questions } = this.props;
-    // initializes using input_type defaults or LS persisted data if found
-    const state = this._initializeState(purpose, questions);
+    const state = { questions };
 
-    const default_form_data = state.form_data;
-    // merge with prop form_data initial values
-    if (initialData) state.form_data = { ...default_form_data, ...initialData };
+    const persistence = window.localStorage.getItem(purpose);
+    if (persistence) {
+      const persisted_state = this._getStateFromPersistence(state, persistence, initialData);
+      return this.setState(persisted_state);
+    }
+    
+    // get initial default values
+    state.form_data = this._getDefaultFormData(questions);
+    // merge with initialData if available
+    if (initialData) state.form_data = { ...state.form_data, ...initialData };
 
-    // check if all the form data (from LS persistence or initialData) is valid
+
+    // validate all answers (defaults and any provided by initialData)
+    // uses onValidate() or isFieldInvalid() on each question / form_data field value
     const { disabled, field_errors } = this._validateAllAnswers(state.form_data, questions);
     state.disabled = disabled;
     state.field_errors = field_errors;
-  
+
     return this.setState(state);
   }
 
@@ -71,6 +79,15 @@ class DynamicFormContainer extends React.Component {
     }
   }
 
+
+  _getStateFromPersistence = (base_state, persistence, initialData) => {
+    const persisted_data  = JSON.parse(persistence); // { disabled, field_errors, form_data }
+    const state = { ...base_state, ...persisted_data };
+    if (initialData) state.form_data = { ...state.form_data, ...initialData };
+
+    return state;
+  }
+
   /**
    * Purpose: validates every answer in form_data
    * 
@@ -90,9 +107,9 @@ class DynamicFormContainer extends React.Component {
       (result, question) => {
         const { input_type, field_name, min, max } = question;
 
-        result.field_errors[field_name] = validateField(input_type, form_data[field_name], min, max);
-
-        if (result.disabled !== field_disabled) result.disabled = field_disabled;
+        const field_error = validateField(input_type, form_data[field_name], min, max);
+        result.field_errors[field_name] = field_error;
+        if (result.disabled !== field_error) result.disabled = field_error;
 
         return result;
       },
@@ -116,7 +133,7 @@ class DynamicFormContainer extends React.Component {
       field_name => new_fields.includes(field_name),
     );
 
-    const new_questions_form_data = this._mapFormDataFields(questions);
+    const new_questions_form_data = this._getDefaultFormData(questions);
 
     const overlapping_form_data = overlapping_fields.reduce(
       (overlapping_data, field_name) => {
@@ -147,26 +164,6 @@ class DynamicFormContainer extends React.Component {
       });
   }
 
-  /**
-   * initializes the 'form_data' field of state
-   * 
-   * - uses local storage persisted data if available
-   * - otherwise maps over 'questions' using _mapFormDataFields()
-   */
-  _initializeState = (purpose, questions) => {
-    const persistedData = window.localStorage.getItem(purpose);
-    if (persistedData) {
-      const existing_data = JSON.parse(persistedData);
-      return { questions, ...existing_data };
-    }
-
-    // if no persisted data is found use default mapping method
-    const form_data = this._mapFormDataFields(questions);
-
-    // default initialization 'state'
-    return { disabled: true, form_data, questions };
-  }
-
   _isMultiAnswer = (input_type) => {
     // add other multiple answer types here
     return [
@@ -181,7 +178,7 @@ class DynamicFormContainer extends React.Component {
    * - handles single and multi-answer defaults
    * - injects 'hiddenData' values
    */
-  _mapFormDataFields = (questions) => questions.reduce(
+  _getDefaultFormData = (questions) => questions.reduce(
     (
       form_data,
       { field_name, input_type, options, },
