@@ -1,4 +1,12 @@
-export const QA = (category) => [
+const mapSiteLocationOptions = ({ name }) => {
+  // project_showcase -> project showcase (user facing text)
+  const text = name.split('_').join(' '); // CSS handles uppercasing
+  // preserve snakecase naming for value submitted to API
+  const value = name;
+  return { text, value };
+};
+
+export const QA = (category, siteLocations) => [
     {
       text: 'Category',
       input_type: 'hidden',
@@ -22,22 +30,7 @@ export const QA = (category) => [
       text: 'Site Feature',
       input_type: 'dropdown',
       field_name: 'site_location',
-      options: [
-        'FAQ',
-        'landing',
-        'login',
-        'newsfeed_all',
-        'newsfeed_team',
-        'other',
-        'profile',
-        'project',
-        'project_showcase',
-        'registration',
-        'team_standup',
-        'ticketbox',
-        'voyages',
-        'voyage_application'
-      ]
+      options: siteLocations.map(mapSiteLocationOptions),
     },
     {
       text: 'Title',
