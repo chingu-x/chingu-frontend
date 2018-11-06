@@ -7,6 +7,7 @@ import { QA } from "./BugSuggestionQA";
 import Success from "../Success";
 import TicketBoxError from "../TicketBoxError";
 import BackBtn from "../BackBtn";
+import { introspectEnum, Request } from "../../../utilities";
 
 class BugSuggestion extends React.Component {
   state = { error: null, response: null };
@@ -38,7 +39,7 @@ class BugSuggestion extends React.Component {
   }
 
   render() {
-    const { category, switchRenderedType } = this.props;
+    const { category, switchRenderedType, data: { siteLocationsEnum } } = this.props;
     const { error, response } = this.state;
     const imgFile = category === 'bug' ? 'Artboard 3-small.png' : 'Artboard 2-small.png';
     const imgSrc = require(`../../../../assets/${imgFile}`);
@@ -50,7 +51,7 @@ class BugSuggestion extends React.Component {
       <div className="ticketbox-form">
         <DynamicFormContainer
           hiddenData={{ category }}
-          questions={QA(category)}
+          questions={QA(category, siteLocationsEnum.options)}
           onSubmit={this.submitTicket}
           persistence
           purpose={`ticketbox-${category}`}
@@ -75,4 +76,17 @@ BugSuggestion.propTypes = {
   switchRenderedType: PropTypes.func.isRequired,
 }
 
-export default BugSuggestion;
+const siteLocationEnumQuery = introspectEnum(
+  'UserFeedbackSiteLocationEnum',
+  'siteLocationsEnum',
+  'BugSuggestionSiteLocationsEnumQuery',
+);
+
+export default props => (
+  <Request
+    {...props}
+    query={siteLocationEnumQuery}
+    component={BugSuggestion}
+    loader
+  />
+);
