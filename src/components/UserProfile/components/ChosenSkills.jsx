@@ -36,7 +36,7 @@ const ChosenSkills = ({
   return (
     <div className="user-skills">
       <h1 className="sidebar-subcategory">{description}</h1>
-      {mapSkills(skills)}
+      {!!skills.length ? mapSkills(skills) : "No Skills selected yet."}
     </div>
   );
 }

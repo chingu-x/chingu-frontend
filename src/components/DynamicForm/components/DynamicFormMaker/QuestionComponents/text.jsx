@@ -10,7 +10,7 @@ export default (
     type={input_type}
     name={field_name}
     value={form_data[field_name]}
-    className="form-input"
+    className={input_type === "date" ? "form-date" : "form-input"}
     minLength={minlength}
     maxLength={maxlength}
     onChange={
