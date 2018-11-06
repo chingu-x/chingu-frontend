@@ -9,7 +9,7 @@ class SkillSetter extends React.Component {
   state = {
     SKILL_ELEMENTS: [],
     CHOSEN_SKILL_ELEMENTS: [],
-    OPTION_LENGTH: 0
+    OPTION_LENGTH: 5 /* MAGIC NUMBER: SET MAX CHOICES HERE */
   }
 
   componentDidMount() {
@@ -31,7 +31,6 @@ class SkillSetter extends React.Component {
     this.setState({
       SKILL_ELEMENTS: skills,
       CHOSEN_SKILL_ELEMENTS: skill_ids,
-      OPTION_LENGTH:  skill_ids.length
     })
   }
 
@@ -82,13 +81,13 @@ class SkillSetter extends React.Component {
   }
 
   removeSkillHandler = (object) => {
-    let skill_array = this.state.CHOSEN_SKILL_ELEMENTS;
-    let position = this.findCurrentPositionOf(object, skill_array);
+    const chosenSkills = this.state.CHOSEN_SKILL_ELEMENTS.slice();
+    const position = this.findCurrentPositionOf(object, chosenSkills);
     if (position === null) return;
-    skill_array[position] = null;
+    chosenSkills[position] = null;
 
     this.updateSkillOptions(object);
-    this.updateForm(skill_array);
+    this.updateForm(chosenSkills);
   }
 
   checkForNoDuplicates = (object, skill_array) => {
