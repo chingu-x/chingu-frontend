@@ -42,7 +42,6 @@ class DynamicFormContainer extends React.Component {
     // merge with initialData if available
     if (initialData) state.form_data = { ...state.form_data, ...initialData };
 
-
     // validate all answers (defaults and any provided by initialData)
     // uses onValidate() or isFieldInvalid() on each question / form_data field value
     const { disabled, field_errors } = this._validateAllAnswers(state.form_data, questions);
@@ -169,6 +168,7 @@ class DynamicFormContainer extends React.Component {
     return [
       'checkbox',
       'checkbox_2_column',
+      'skill_setter',
     ].includes(input_type)
   }
 
@@ -192,12 +192,6 @@ class DynamicFormContainer extends React.Component {
         // to support difference between user text and stored value
         const value = first_option.value || first_option;
         form_data[field_name] = value;
-      }
-      
-      else if (input_type === 'skill_setter') {
-        const MAX_SKILL_CHOICES = 5;
-        const initializedValue = Array(MAX_SKILL_CHOICES).fill(null);
-        form_data[field_name] = initializedValue;
       }
       
       else form_data[field_name] = '';
