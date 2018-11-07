@@ -1,5 +1,5 @@
 import { isEmail, isURL } from "validator";
-import { isEmpty } from "lodash";
+import { isEmpty, isNumber } from "lodash";
 
 const areChoicesValid = (choices, min, max) => {
   const minChoices = min || 1;
@@ -16,27 +16,30 @@ const isTextValid = (text, min, max) => {
 }
 
 const isValid = (value, min, max) => {
+  if (isNumber(value)) return true;
   return Array.isArray(value)
     ? areChoicesValid(value, min, max)
     : isTextValid(value, min, max);
 }
 
-const isSkillSetterInvalid = (skill_ids) => {
+const isSkillSetterValid = (skill_ids) => {
+  const copy = skill_ids.slice();
   // removes the nulls at the end of the array
-  while (skill_ids[skill_ids.length - 1] === null) {
-    skill_ids.pop()
+  while (copy[copy.length - 1] === null) {
+    copy.pop()
   }
 
   // return valid if no-nulls
-  return skill_ids.every(skill => { return skill !== null });
+  return copy.every(skill => skill !== null);
 }
 
 const isFieldInvalid = (type, value, min, max) => {
+  console.log(type, value)
   switch (type) {
     case "email": return !isEmail(value);
     case "url": return !isURL(value);
     case "radio": return isEmpty(value);
-    case "skill_setter": return !isSkillSetterInvalid(value);
+    case "skill_setter": return !isSkillSetterValid(value);
     default: return !isValid(value, min, max);
   }
 }
