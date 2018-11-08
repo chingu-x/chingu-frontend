@@ -1,9 +1,7 @@
 import React from "react"
+import { clientID } from "../../../get_uri";
 
-// TODO: refactor styles
-const GithubLoginModal = ({
-  clientID = "e015fd9cc874fa5a34bf"
-}) => {
+const GithubLoginModal = () => {
   const githubAuthURL = `
   https://github.com/login/oauth/authorize?client_id=${clientID}&scope=public_repo
   `;
