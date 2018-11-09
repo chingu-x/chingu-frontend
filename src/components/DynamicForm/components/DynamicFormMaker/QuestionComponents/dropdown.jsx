@@ -1,33 +1,44 @@
 import React from "react";
+import Select from "react-select";
 
-export default (
-  { field_name, options },
+const dropdown = (
+  { field_name, input_type, options },
   onFormChange,
   form_data,
 ) => {
+  // map to React-Select option format
+  const mappedOptions = options.map(({ text, value }) => ({ label: text, value }));
   const value = form_data[field_name];
+  // React-Select wants {label, value} for value prop
+  // have to find corresponding label for the chosen value to render properly
+  const option = mappedOptions.find(el => el.value === value);
+  const label = option ? option.label : '';
   return (
-    <select
-      className="form-dropdown"
-      value={value}
+    <Select
+      escapeClearsValue={true}
+      isClearable={true}
+      isSearchable={true}
       name={field_name}
-      type="dropdown"
-      onChange={onFormChange}
-      multiple={false}
-    >
-      {
-        options.map(
-          (answer, index) => (
-            <option
-              className="form-answer"
-              value={answer.value || answer}
-              key={'dropdown_' + field_name + '_' + index}
-            >
-              {answer.text || answer}
-            </option>
-          ),
-        )
+      options={mappedOptions}
+      value={{ label, value }}
+      onChange={
+        (target) => {
+          // React-Select handles event targets internally
+          // shape currentTarget from their format
+          let value;
+          if (!target || Array.isArray(target)) value = '';
+          else value = target.value;
+          const currentTarget = {
+            value,
+            name: field_name,
+            type: input_type,
+          };
+
+          return onFormChange({ currentTarget })
+        }
       }
-    </select>
+    />
   );
-}
+};
+
+export default dropdown;
