@@ -70,8 +70,12 @@ const UserInfo = ({ user, editable }) => {
                 {props.children}
             </div>
 
-        return !editable // only render EditableTextField if editable
-            ? <UserComponent key={idx}>{user[elem.schemaKey]}</UserComponent>
+        let value = (elem.schemaKey === 'timezone' 
+                        ? `UTC ${-1 * user[elem.schemaKey] / 60}` 
+                        : user[elem.schemaKey]);
+        
+        return !editable
+            ? <UserComponent key={idx}>{value}</UserComponent>
             : (
                 <EditableTextField
                     key={idx}
@@ -79,7 +83,7 @@ const UserInfo = ({ user, editable }) => {
                     mutationName="userUpdate"
                     mutationInputName="user_data"
                     fieldName={elem.schemaKey}
-                    fieldData={user[elem.schemaKey]}
+                    fieldData={value}
                     hasPermission={editable}
                     component={UserComponent}
                     {...elem.editType}
