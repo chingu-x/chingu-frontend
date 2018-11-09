@@ -15,7 +15,7 @@ const ActionButtons = ({ onSave, onCancel }) => (
 );
 
 const EditArea = ({
-  dropdown,
+  dropdownType,
   large,
   data,
   fieldName,
@@ -27,7 +27,7 @@ const EditArea = ({
   let inputComponent;
   if (large) {
     inputComponent = textarea(inputData, onInputChange, data)
-  } else if (dropdown) {
+  } else if (dropdownType) {
     inputComponent = dropdown(inputData, onInputChange, data)
   } else {
     inputComponent = text(
@@ -46,6 +46,7 @@ const EditArea = ({
 }
 
 EditArea.propTypes = {
+  dropdownType: PropTypes.bool,
   large: PropTypes.bool,
   data: PropTypes.object,
   fieldName: PropTypes.string,
@@ -119,6 +120,7 @@ class EditableTextField extends React.Component {
 
   render() {
     const {
+      dropdownType,
       large,
       mutationInputName,
       fieldName,
@@ -133,6 +135,7 @@ class EditableTextField extends React.Component {
     if (edit) return (
       <Component>
         <EditArea
+          dropdownType={dropdownType}
           large={large}
           data={variables[mutationInputName]}
           fieldName={fieldName}
@@ -157,6 +160,7 @@ class EditableTextField extends React.Component {
 }
 
 EditableTextField.propTypes = {
+  dropdownType: PropTypes.bool,
   large: PropTypes.bool, // simple text input vs textarea
   // mutation variables expects shape { input: { fieldName: fieldData } }
   mutation: PropTypes.object, // mutation to update the Type
