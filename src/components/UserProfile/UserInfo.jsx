@@ -12,6 +12,7 @@ mutation userUpdate($user_data: UserUpdateInput!) {
     interests
     coding_history
     timezone
+    country
   }
 }
 `;
@@ -24,6 +25,23 @@ const USER_INFO_DOM_ELEMENTS = [
         desc: 'Background',
         editType: {
             large: true
+        }
+    },
+    // {
+    //     divClassName: 'user-background',
+    //     schemaKey: 'country',
+    //     desc: 'Country',
+    //     editType: {
+    //         large: false
+    //     }
+    // },
+    {
+        divClassName: 'user-interests',
+        schemaKey: 'timezone',
+        desc: 'Timezone',
+        editType: {
+            dropdownType: true,
+            dropdownOptions: timezoneOptions,
         }
     },
     {
@@ -40,15 +58,6 @@ const USER_INFO_DOM_ELEMENTS = [
         desc: 'Interests',
         editType: {
             large: true
-        }
-    },
-    {
-        divClassName: 'user-interests',
-        schemaKey: 'timezone',
-        desc: 'Timezone',
-        editType: {
-            dropdownType: true,
-            dropdownOptions: timezoneOptions,
         }
     },
 ];
