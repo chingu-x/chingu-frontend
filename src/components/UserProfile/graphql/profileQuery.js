@@ -10,6 +10,7 @@ const profileQuery = gql`
       background
       interests
       coding_history
+      timezone
       acquired_skills {
         id
         name
