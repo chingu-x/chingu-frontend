@@ -19,7 +19,7 @@ export const QA = (category, siteLocations) => [
       options: category === 'bug'
         ? [
             { text: 'Error Message', value: 'error' },
-            'malfunction',
+            { text: 'Malfunction', value: 'malfunction' },
           ] // bug category
         : [
             { text: 'Existing Feature', value: 'existing' },
