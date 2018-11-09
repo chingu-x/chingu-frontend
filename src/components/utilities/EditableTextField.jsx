@@ -24,7 +24,7 @@ const EditArea = ({
   onInputChange,
 }) => {
   const inputData = { field_name: fieldName };
-  const inputComponent;
+  let inputComponent;
   if (large) {
     inputComponent = textarea(inputData, onInputChange, data)
   } else if (dropdown) {
