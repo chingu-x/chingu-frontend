@@ -64,16 +64,13 @@ class EditableTextField extends React.Component {
     this.state = {
       edit: false,
       displayEdit: false,
-      updatedData: null,
       variables: this.initializeVariables(),
     };
   }
 
 
-  handleUpdateData = ({ data }) => {
-    const { mutationName, fieldName } = this.props;
+  handleUpdateData = () => {
     this.setState({
-      updatedData: data[mutationName][fieldName],
       edit: false,
     });
   }
@@ -134,7 +131,7 @@ class EditableTextField extends React.Component {
       editButton: EditButton,
     } = this.props;
 
-    const { edit, displayEdit, variables, updatedData } = this.state;
+    const { edit, variables } = this.state;
 
     if (edit) return (
       <Component>
@@ -158,7 +155,7 @@ class EditableTextField extends React.Component {
         onMouseLeave={() => hasPermission && this.toggleDisplayEdit(false)}
       >
         <EditButton onClick={this.toggleEdit} />
-        <Component>{updatedData || fieldData}</Component>
+        <Component>{fieldData}</Component>
       </div>
     );
   }
@@ -173,7 +170,7 @@ EditableTextField.propTypes = {
   mutationName: PropTypes.string, // the name of the mutation for accessing response data
   mutationInputName: PropTypes.string, // object that holds mutation data (ex: user_data)
   fieldName: PropTypes.string, // the field of the Type to be edited
-  fieldData: PropTypes.string, // the existing data for the field of the Type
+  fieldData: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), // the existing data for the field of the Type
   hasPermission: PropTypes.bool, // viewing User has permission to edit
   component: PropTypes.func, // component to render fieldData
   editButton: PropTypes.func, // custom EditButton
