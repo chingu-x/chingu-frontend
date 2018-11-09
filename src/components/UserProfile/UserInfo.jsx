@@ -46,7 +46,7 @@ const USER_INFO_DOM_ELEMENTS = [
         schemaKey: 'timezone',
         desc: 'Timezone',
         editType: {
-            dropdown: true,
+            dropdownType: true,
             dropdownOptions: require('./components/timezoneOptions.js')
         }
     },
