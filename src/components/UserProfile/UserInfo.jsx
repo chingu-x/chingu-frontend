@@ -10,6 +10,7 @@ mutation userUpdate($user_data: UserUpdateInput!) {
     background
     interests
     coding_history
+    timezone
   }
 }
 `;
@@ -20,16 +21,33 @@ const USER_INFO_DOM_ELEMENTS = [
         divClassName: 'user-background',
         schemaKey: 'background',
         desc: 'Background',
+        editType: {
+            large: true
+        }
     },
     {
         divClassName: 'user-coding-history',
         schemaKey: 'coding_history',
         desc: 'Coding History',
+        editType: {
+            large: true
+        }
     },
     {
         divClassName: 'user-interests',
         schemaKey: 'interests',
         desc: 'Interests',
+        editType: {
+            large: true
+        }
+    },
+    {
+        divClassName: 'user-interests',
+        schemaKey: 'timezone',
+        desc: 'Timezone',
+        editType: {
+            dropdown: true
+        }
     },
 ];
 
@@ -46,7 +64,6 @@ const UserInfo = ({ user, editable }) => {
             : (
                 <EditableTextField
                     key={idx}
-                    large
                     mutation={userUpdate}
                     mutationName="userUpdate"
                     mutationInputName="user_data"
@@ -54,6 +71,7 @@ const UserInfo = ({ user, editable }) => {
                     fieldData={user[elem.schemaKey]}
                     hasPermission={editable}
                     component={UserComponent}
+                    {...elem.editType}
                 />
             )
     });
