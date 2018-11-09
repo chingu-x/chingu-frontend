@@ -5,7 +5,7 @@ import { client } from "../../index.js";
 import { questionComponents } from "../DynamicForm/";
 import EditButton from '../common/EditButton';
 
-const { text, textarea } = questionComponents;
+const { text, textarea, dropdown } = questionComponents;
 
 const ActionButtons = ({ onSave, onCancel }) => (
   <div className="edit-field-btn--btn-container">
@@ -15,6 +15,7 @@ const ActionButtons = ({ onSave, onCancel }) => (
 );
 
 const EditArea = ({
+  dropdown,
   large,
   data,
   fieldName,
@@ -23,13 +24,18 @@ const EditArea = ({
   onInputChange,
 }) => {
   const inputData = { field_name: fieldName };
-  const inputComponent = large
-    ? textarea(inputData, onInputChange, data)
-    : text(
+  const inputComponent;
+  if (large) {
+    inputComponent = textarea(inputData, onInputChange, data)
+  } else if (dropdown) {
+    inputComponent = dropdown(inputData, onInputChange, data)
+  } else {
+    inputComponent = text(
       { input_type: 'text', ...inputData },
       onInputChange,
       data
     );
+  }
 
   return (
     <React.Fragment>
