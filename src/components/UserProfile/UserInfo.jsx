@@ -1,6 +1,7 @@
 import * as React from "react";
 import EditableTextField from '../utilities/EditableTextField';
 import { gql } from "apollo-boost";
+import { timezoneOptions } from './components/timezoneOptions.js';
 
 // -- MUTATION -- //
 const userUpdate = gql`
@@ -47,7 +48,7 @@ const USER_INFO_DOM_ELEMENTS = [
         desc: 'Timezone',
         editType: {
             dropdownType: true,
-            dropdownOptions: require('./components/timezoneOptions.js')
+            dropdownOptions: timezoneOptions,
         }
     },
 ];
