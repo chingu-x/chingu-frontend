@@ -1,6 +1,7 @@
 import * as React from "react";
 import EditableTextField from '../utilities/EditableTextField';
 import { gql } from "apollo-boost";
+import { timezoneOptions } from './components/timezoneOptions.js';
 
 // -- MUTATION -- //
 const userUpdate = gql`
@@ -10,6 +11,8 @@ mutation userUpdate($user_data: UserUpdateInput!) {
     background
     interests
     coding_history
+    timezone
+    country
   }
 }
 `;
@@ -17,19 +20,45 @@ mutation userUpdate($user_data: UserUpdateInput!) {
 // -- USERINFO ELEMENTS -- //
 const USER_INFO_DOM_ELEMENTS = [
     {
+        divClassName: 'user-interests',
+        schemaKey: 'timezone',
+        desc: 'Timezone',
+        editType: {
+            dropdownType: true,
+            dropdownOptions: timezoneOptions,
+        }
+    },
+    {
         divClassName: 'user-background',
         schemaKey: 'background',
         desc: 'Background',
+        editType: {
+            large: true
+        }
     },
+    // {
+    //     divClassName: 'user-background',
+    //     schemaKey: 'country',
+    //     desc: 'Country',
+    //     editType: {
+    //         large: false
+    //     }
+    // },
     {
         divClassName: 'user-coding-history',
         schemaKey: 'coding_history',
         desc: 'Coding History',
+        editType: {
+            large: true
+        }
     },
     {
         divClassName: 'user-interests',
         schemaKey: 'interests',
         desc: 'Interests',
+        editType: {
+            large: true
+        }
     },
 ];
 
@@ -41,19 +70,23 @@ const UserInfo = ({ user, editable }) => {
                 {props.children}
             </div>
 
-        return !editable // only render EditableTextField if editable
-            ? <UserComponent key={idx}>{user[elem.schemaKey]}</UserComponent>
+        let value = (elem.schemaKey === 'timezone' 
+                        ? `UTC ${-1 * user[elem.schemaKey] / 60}` 
+                        : user[elem.schemaKey]);
+        
+        return !editable
+            ? <UserComponent key={idx}>{value}</UserComponent>
             : (
                 <EditableTextField
                     key={idx}
-                    large
                     mutation={userUpdate}
                     mutationName="userUpdate"
                     mutationInputName="user_data"
                     fieldName={elem.schemaKey}
-                    fieldData={user[elem.schemaKey]}
+                    fieldData={value}
                     hasPermission={editable}
                     component={UserComponent}
+                    {...elem.editType}
                 />
             )
     });
