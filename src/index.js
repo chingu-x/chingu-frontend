@@ -11,7 +11,7 @@ import ScrollToTop from "./ScrollToTop";
 import "./styles/fontawesome/webfonts/fontawesome-all.css";
 import "./styles/main.css";
 import registerServiceWorker from "./registerServiceWorker";
-import uri from "./get_uri";
+import { uri } from "./get_uri";
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData
