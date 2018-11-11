@@ -20,6 +20,15 @@ mutation userUpdate($user_data: UserUpdateInput!) {
 // -- USERINFO ELEMENTS -- //
 const USER_INFO_DOM_ELEMENTS = [
     {
+        divClassName: 'user-interests',
+        schemaKey: 'timezone',
+        desc: 'Timezone',
+        editType: {
+            dropdownType: true,
+            dropdownOptions: timezoneOptions,
+        }
+    },
+    {
         divClassName: 'user-background',
         schemaKey: 'background',
         desc: 'Background',
@@ -35,15 +44,6 @@ const USER_INFO_DOM_ELEMENTS = [
     //         large: false
     //     }
     // },
-    {
-        divClassName: 'user-interests',
-        schemaKey: 'timezone',
-        desc: 'Timezone',
-        editType: {
-            dropdownType: true,
-            dropdownOptions: timezoneOptions,
-        }
-    },
     {
         divClassName: 'user-coding-history',
         schemaKey: 'coding_history',
