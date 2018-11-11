@@ -1,8 +1,8 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
-// TODO: how to set this dynamically using getURI?
-// mix of require vs import statements (this build code is not run through babel)
-fetch('https://main-api.chingu.io/graphql', {
+const { uri } = require('./src/get_uri')
+
+fetch(uri, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -36,5 +36,6 @@ fetch('https://main-api.chingu.io/graphql', {
       } else {
         console.log('Fragment types successfully extracted!');
       }
+      console.log({ uri })
     });
   });
