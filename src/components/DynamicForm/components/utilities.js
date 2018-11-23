@@ -34,7 +34,6 @@ const isSkillSetterValid = (skill_ids) => {
 }
 
 const isFieldInvalid = (type, value, min, max) => {
-  console.log(type, value)
   switch (type) {
     case "email": return !isEmail(value);
     case "url": return !isURL(value);

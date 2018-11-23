@@ -1,12 +1,16 @@
 const getURI = (mode) => {
-  switch(mode) {
-    case 'local': return 'http://localhost:8008/graphql';
-    case 'production': return 'https://main-api.chingu.io/graphql';
+  switch (mode) {
+    case 'local':
+      return { uri: 'http://localhost:3500/graphql', clientID: "84a3576a59110d11cd6f" };
     case 'staging':
-    default: return 'https://main-api-staging.chingu.io/graphql';
+      return { uri: 'https://main-api-staging.chingu.io/graphql', clientID: "84a3576a59110d11cd6f" };
+    case 'production':
+    default:
+      return { uri: 'https://main-api.chingu.io/graphql', clientID: "e015fd9cc874fa5a34bf" };
   }
 }
-// TODO: change this mode as needed. NEVER commit unless set to 'production'
-const mode = 'production';
-const uri = getURI(mode);
-export default uri;
+
+const mode = process.env.REACT_APP_API;
+const { uri, clientID } = getURI(mode);
+
+module.exports = { uri, clientID };
