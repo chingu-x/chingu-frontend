@@ -6,8 +6,9 @@ const Project = ({ project: { id, images, title, elevator_pitch } }) => {
   return (
     <Link to={`/project/${id}`} className="project">
       <img 
-        className="project-image" 
-        src={images[0] ? images[0].url : require('../../../assets/landingImage.png')} 
+        className="project-image"
+        src={require('../../../assets/landingImage.png')} 
+        // src={images[0] ? images[0].url : require('../../../assets/landingImage.png')} 
         alt="" 
       />
       <div className="project-info">

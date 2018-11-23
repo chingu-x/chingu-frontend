@@ -40,12 +40,12 @@ const ProjectShowcase = props => {
                       elevator_pitch={project.elevator_pitch}
                       project_id={project_id}
                     />
-                    <HeroImage
+                    {/* <HeroImage
                       editable={editable}
                       title={project.title}
                       images={project.images[0]}
                       project_id={project_id}
-                    />
+                    /> */}
                     <div className="project-info-container">
                       <ProjectDescription
                         editable={editable}

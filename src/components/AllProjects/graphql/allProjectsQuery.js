@@ -6,13 +6,15 @@ const allProjectsQuery = gql`
             id
             title
         	elevator_pitch
-            images(only_main:true) {
-                id
-                order
-                url
-            }
         }
     }
 `
+
+
+// images(only_main:true) {
+//     id
+//     order
+//     url
+// }
 
 export default allProjectsQuery

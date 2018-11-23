@@ -11,11 +11,6 @@ const getProjectAndUser = gql`
       github_url
       communication_url
       workflow_url
-      images {
-        id
-        url
-        order
-      }
       users {
         id
         username
@@ -24,6 +19,12 @@ const getProjectAndUser = gql`
     }
   }
 `
+
+// images {
+//   id
+//   url
+//   order
+// }
 
 const getUserId = gql`
   query getUserId {
