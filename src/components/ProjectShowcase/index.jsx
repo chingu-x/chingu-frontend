@@ -15,12 +15,13 @@ This component should only be concerned with the overall layout of the page and 
 const ProjectShowcase = props => {
   const { project_id } = props.match.params
 
-  const isEditable = (currentUserId, projectUsers) =>
-    projectUsers.some((projectUser) => currentUserId === projectUser.id);
+  const isEditable = (currentUserId, projectMembers) =>
+    projectMembers.some((projectMember) => currentUserId === projectMember.id);
 
   return (
     <Query query={getProjectAndUser} variables={{ id: project_id }}>
       {({ error, loading, data }) => {
+        console.log(error);
         if (error) return <Redirect to="/projects" />
         if (loading) return <Loader />
 
@@ -32,7 +33,7 @@ const ProjectShowcase = props => {
                 // Get logged in user to determine if project fields should be editable.
                 ({ loading, data: { user } }) => {
                   if (loading) return null
-                  const editable = user && isEditable(user.id, project.users)
+                  const editable = user && isEditable(user.id, project.members)
                   return <React.Fragment>
                     <Banner
                       editable={editable}
