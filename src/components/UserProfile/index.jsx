@@ -12,11 +12,11 @@ const UserProfile = ({ data, match }) => {
   // Only allow editing if no /profile param provided. TODO: Check for currently logged in user
   const editable = !match.params.username
 
-  const { user, user: { teams, cohorts } } = data; // Fetched user
-  const pastTeams = teams.filter(team => team.cohort.status === 'ended');
-  const currentTeams = teams.filter(team => team.cohort.status === 'ongoing');
+  const { user, user: { cohorts, projects } } = data; // Fetched user
+  // const pastTeams = projects.filter(team => team.cohort.status === 'ended');
+  // const currentTeams = projects.filter(team => team.cohort.status === 'ongoing');
   const pendingApproval = cohorts.filter(cohort =>
-    cohort.applicants.some(applicant => applicant.status !== "team_assigned"),
+    cohort.members.some(member => member.member_status !== "applicant"),
   );
 
   return (
@@ -36,10 +36,10 @@ const UserProfile = ({ data, match }) => {
           </section>
 
           <section className="user-voyage">
-            {!!currentTeams.length && <div className="user-voyage-title">Current Projects</div>}
-            <ProjectCards teamsList={currentTeams} />
-            {!!pastTeams.length && <div className="user-voyage-title">Past Projects</div>}
-            <ProjectCards teamsList={pastTeams} />
+            {!!projects.length && <div className="user-voyage-title">Current Projects</div>}
+            <ProjectCards projectsList={projects} />
+            {/* {!!pastTeams.length && <div className="user-voyage-title">Past Projects</div>}
+            <ProjectCards teamsList={pastTeams} /> */}
           </section>
 
         </main>

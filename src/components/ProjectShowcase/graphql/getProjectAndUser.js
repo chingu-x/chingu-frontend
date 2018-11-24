@@ -7,11 +7,7 @@ const getProjectAndUser = gql`
       title
       description
       elevator_pitch
-      project_url
-      github_url
-      communication_url
-      workflow_url
-      users {
+      members {
         id
         username
         avatar
