@@ -1,20 +1,29 @@
 import * as React from "react";
-import { Link } from "react-router-dom"
+import CohortProjectInfo from './CohortProjectInfo';
+import ProjectImage from './ProjectImage';
+import ProjectInfo from './ProjectInfo';
 
 const ProjectCardCreator = ({
-  leftPanel,
-  rightPanel,
+  noData,
+  imagePanel,
   projectInfo,
-  cohortProjectInfo
+  cohortProjectInfo,
+  footer
 }) => {
+  if (noData) {
+    return (
+      <div className="no-data-card">
+        Nothing Here Yet! Check Back Later!
+      </div>
+    )
+  }
   return (
     <div className="project-card__container">
-      <React.Fragment>{leftPanel()}</React.Fragment>
-      <React.Fragment>
-        {rightPanel()}
-        {cohortProjectInfo ? cohortProjectInfo() : null}
+      {imagePanel()}
+      <div className="project-info__container">
         {projectInfo ? projectInfo() : null}
-      </React.Fragment>
+      </div>
+      {footer ? footer() : null}
     </div>
   )
 }
@@ -22,18 +31,25 @@ const ProjectCardCreator = ({
 export const CohortProjectCard = ({ project }) => {
   return (
     <ProjectCardCreator
-
+      imagePanel={() => <ProjectImage project={project} />}
+      projectInfo={() => <ProjectInfo project={project} />}
     />
   )
 }
 
-export const ProjectImage = ({ project }) => {
+export const ProjectCard = ({ project }) => {
   return (
-    <Link className="project-img" to={`/project/${id}`}>
-      <img
-        className="project-img"
-        src={require('../../../assets/landingImage.png')} />ZZZZZZZZZZZZZZZZZZZZZZ
+    <ProjectCardCreator
+      imagePanel={() => <ProjectImage project={project} />}
+      projectInfo={() => <ProjectInfo project={project} />}
+    />
+  )
+}
 
-    </Link>
+export const NoProjectCard = () => {
+  return (
+    <ProjectCardCreator
+      noData={true}
+    />
   )
 }
