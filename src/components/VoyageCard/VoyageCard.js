@@ -47,6 +47,9 @@ export const CurrentVoyageCard = ({ voyage }) => {
 };
 
 export const UpcomingVoyageCard = ({ voyage, user }) => {
+  // todo: refactor to use (Cohort)voyage.member_status
+  // null -> no association with cohort. otherwise viewing user's status with that cohort
+  // applicant, approved, denied, on hold, project assigned, project unassigned
   const alreadyApplied = voyage.members.some(member => member.id === user.id);
   return (
     <VoyageCardCreator
