@@ -6,7 +6,7 @@ const dynamicFormSubmitMutation = gql`
     $version: Int
     $form_data: JSON!
   ) {
-    formSubmit(
+    userFormSubmit(
       purpose: $purpose,
       version: $version,
       form_data: $form_data
