@@ -47,7 +47,7 @@ export const CurrentVoyageCard = ({ voyage }) => {
 };
 
 export const UpcomingVoyageCard = ({ voyage, user }) => {
-  const alreadyApplied = voyage.applicants.some(applicant => applicant.id === user.id);
+  const alreadyApplied = voyage.memebers.some(memeber => memeber.id === user.id);
   return (
     <VoyageCardCreator
       backgroundColor={"#EFEFEF"}
