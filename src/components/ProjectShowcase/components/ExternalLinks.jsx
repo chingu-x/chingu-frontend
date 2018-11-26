@@ -6,18 +6,12 @@ import { Mutation } from "react-apollo";
 class ExternalLinks extends React.Component {
   static propTypes = {
     project_id: PropTypes.string.isRequired,
-    github_url: PropTypes.string,
-    project_url: PropTypes.string,
-    communication_url: PropTypes.string,
-    workflow_url: PropTypes.string
+    live_url: PropTypes.string,
   };
 
   state = {
     isEditing: false,
-    github_url: this.props.github_url || '',
-    project_url: this.props.project_url || '',
-    communication_url: this.props.communication_url || '',
-    workflow_url: this.props.workflow_url || '',
+    live_url: this.props.live_url || '',
     editBtnHidden: true
   };
 
@@ -40,24 +34,28 @@ class ExternalLinks extends React.Component {
 
   handleChange = e => {
     const { value, name } = e.target;
-
     this.setState({
       [name]: value
     });
   };
 
   makeMutation = () => {
-    const { github_url, project_url, workflow_url, communication_url } = this.state;
-    const { project_id } = this.props
+    const { live_url } = this.state;
+    const { project_id } = this.props;
+    const full_url_re = /^(https:\/\/)|(www\.)/;
     this.props.mutation({
-      variables: { project_id, project_data: { github_url, project_url, communication_url, workflow_url } },
+      variables: {
+        project_id,
+        project_data: {
+          live_url: full_url_re.test(live_url) ? live_url : `https://${live_url}`,
+        },
+      },
       optimisticResponse: {
         __typename: "Mutation",
         projectUpdate: {
           __typename: "Project",
           id: project_id,
-          github_url,
-          project_url
+          live_url
         }
       }
     });
@@ -72,7 +70,7 @@ class ExternalLinks extends React.Component {
 
   render() {
     const { editable, error } = this.props;
-    const { editBtnHidden, isEditing, github_url, project_url, workflow_url, communication_url } = this.state;
+    const { editBtnHidden, isEditing, live_url } = this.state;
 
     let btnState = ""
     if (error) btnState = "--error"
@@ -114,27 +112,8 @@ class ExternalLinks extends React.Component {
                 <input
                   className="project-button__input"
                   type="text"
-                  placeholder="Github Repository URL"
-                  name="github_url"
-                  value={github_url}
-                  onChange={this.handleChange} />
-                <input
-                  className="project-button__input"
-                  type="text"
                   placeholder="Live Link"
-                  name="project_url" value={project_url}
-                  onChange={this.handleChange} />
-                <input
-                  className="project-button__input"
-                  type="text"
-                  placeholder="Communication Tool"
-                  name="communication_url" value={communication_url}
-                  onChange={this.handleChange} />
-                <input
-                  className="project-button__input"
-                  type="text"
-                  placeholder="Workflow Tool"
-                  name="workflow_url" value={workflow_url}
+                  name="live_url" value={live_url}
                   onChange={this.handleChange} />
               </div>
             </React.Fragment>
@@ -144,44 +123,16 @@ class ExternalLinks extends React.Component {
               !isEditing &&
               <React.Fragment>
                 <a
-                  className={`project-buttons${github_url ? "" : "--disabled"}`}
+                  className={`project-buttons${live_url ? "" : "--disabled"}`}
                   target="_blank"
-                  href={github_url || null}
-                >
-                  GitHub Repo
-                </a>
-                <a
-                  className={`project-buttons${project_url ? "" : "--disabled"}`}
-                  target="_blank"
-                  href={project_url || null}
+                  href={live_url || null}
                 >
                   Live Link
                 </a>
               </React.Fragment>
 
             }
-            {
-              !isEditing && editable &&
-              <React.Fragment>
-                <a
-                  className={`project-buttons${project_url ? "" : "--disabled"}`}
-                  target="_blank"
-                  href={communication_url || null}
-                >
-                  Communication Tool
-                </a>
-                <a
-                  className={`project-buttons${project_url ? "" : "--disabled"}`}
-                  target="_blank"
-                  href={workflow_url || null}
-                >
-                  Workflow Tool
-                </a>
-              </React.Fragment>
-            }
           </div>
-
-
         </div>
         <hr className="project-side-panel--hline" />
       </React.Fragment >
@@ -194,13 +145,12 @@ function withMutation(Component) {
   const updateLinks = gql`
     mutation projectUpdate(
       $project_id: ID!
-      $project_data: ProjectInput!) {
+      $project_data: ProjectUpdate!) {
         projectUpdate(
         project_id: $project_id
         project_data: $project_data) {
           id
-          github_url
-          project_url
+          live_url
         }
       }
     `;
@@ -208,11 +158,12 @@ function withMutation(Component) {
   return props => (
     <Mutation mutation={updateLinks}>
       {(updateProject, { error, loading, data }) => {
-        const { project_url, github_url } = data ? data.projectUpdate : props
+        console.log(error, loading, data);
+        const { live_url, github_url } = data ? data.projectUpdate : props
         return <Component
           {...props}
           mutation={updateProject}
-          project_url={project_url}
+          live_url={live_url}
           github_url={github_url}
           error={error && error.message} />;
       }}

@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import Error from "../Error";
 import { client } from "../../";
 import { DynamicForm } from "../DynamicForm";
-import './TeamStandup.css';
+import './ProjectStandup.css';
 
 import { gql } from "apollo-boost";
 
@@ -33,7 +33,7 @@ class TeamStandup extends React.Component {
   }
 
   handleResponse = ({ data }) => {
-    window.localStorage.removeItem('team_standup');
+    window.localStorage.removeItem('project_standup');
     this.setState({ response: data.standupSubmit });
   }
 
@@ -61,11 +61,11 @@ class TeamStandup extends React.Component {
     return (
       <div className="team-standup-container">
         <div className="team-standup-title">
-          TEAM STANDUP
+          PROJECT STANDUP
           </div>
         <div className="team-standup">
           <DynamicForm
-            purpose="team_standup"
+            purpose="project_standup"
             version={standupVersion}
             hiddenData={{ standup_id }}
             onSubmit={this.handleSubmit}

@@ -10,6 +10,7 @@ const profileQuery = gql`
       background
       interests
       coding_history
+      timezone
       acquired_skills {
         id
         name
@@ -25,43 +26,96 @@ const profileQuery = gql`
         id
         name
       }
+      active_cohort_project {
+        id
+        title
+        description
+        elevator_pitch
+        skills {
+          id
+          name
+        }
+        members {
+          id
+          username
+          avatar
+        }
+        cohort {
+          id
+          title
+          start_date
+          end_date
+        }
+        tier {
+          level
+          title
+        }
+        team_name
+      }
+      active_projects {
+        id
+        title
+        description
+        elevator_pitch
+        skills {
+          id
+          name
+        }
+        members {
+          id
+          username
+          avatar
+        }
+        ... on CohortProject {
+          cohort {
+            id
+            title
+            start_date
+            end_date
+          }
+          tier {
+            level
+            title
+          }
+          team_name
+        }
+      }
+      projects(filters: {status:inactive}) {
+        id
+        title
+        description
+        elevator_pitch
+        skills {
+          id
+          name
+        }
+        members {
+          id
+          username
+          avatar
+        }
+        ... on CohortProject {
+          cohort {
+            id
+            title
+            start_date
+            end_date
+          }
+          tier {
+            level
+            title
+          }
+          team_name
+        }
+      }
       cohorts {
         id
         title
         start_date
         end_date
-        applicants {
+        members {
           id
-          status
-          cohort_applicant_status
-        }
-      }
-      teams {
-        id
-        title
-        cohort {
-          id
-          title
-          status
-          start_date
-          end_date
-        }
-        tier {
-            title
-            level
-        }
-        project {
-            id
-            title
-            elevator_pitch
-            images {
-              id
-              url
-            }
-            users {
-              username
-              avatar
-            }
+          member_status
         }
       }
     }

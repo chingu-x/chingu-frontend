@@ -6,12 +6,14 @@ query sidebarQuery {
     id
     username
     avatar
-    teams {
+    active_projects {
       id
-      title
-      cohort {
-        id
-        title
+      ... on CohortProject {
+        team_name
+        cohort {
+          id
+          title
+        }
       }
     }
   }

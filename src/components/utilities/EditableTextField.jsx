@@ -5,7 +5,7 @@ import { client } from "../../index.js";
 import { questionComponents } from "../DynamicForm/";
 import EditButton from '../common/EditButton';
 
-const { text, textarea } = questionComponents;
+const { text, textarea, dropdown } = questionComponents;
 
 const ActionButtons = ({ onSave, onCancel }) => (
   <div className="edit-field-btn--btn-container">
@@ -15,6 +15,8 @@ const ActionButtons = ({ onSave, onCancel }) => (
 );
 
 const EditArea = ({
+  dropdownOptions,
+  dropdownType,
   large,
   data,
   fieldName,
@@ -23,13 +25,19 @@ const EditArea = ({
   onInputChange,
 }) => {
   const inputData = { field_name: fieldName };
-  const inputComponent = large
-    ? textarea(inputData, onInputChange, data)
-    : text(
+  const dropdowninputData = { field_name: fieldName, options: dropdownOptions }
+  let inputComponent;
+  if (large) {
+    inputComponent = textarea(inputData, onInputChange, data)
+  } else if (dropdownType) {
+    inputComponent = dropdown(dropdowninputData, onInputChange, data)
+  } else {
+    inputComponent = text(
       { input_type: 'text', ...inputData },
       onInputChange,
       data
     );
+  }
 
   return (
     <React.Fragment>
@@ -40,6 +48,8 @@ const EditArea = ({
 }
 
 EditArea.propTypes = {
+  dropdownOptions: PropTypes.array,
+  dropdownType: PropTypes.bool,
   large: PropTypes.bool,
   data: PropTypes.object,
   fieldName: PropTypes.string,
@@ -54,16 +64,13 @@ class EditableTextField extends React.Component {
     this.state = {
       edit: false,
       displayEdit: false,
-      updatedData: null,
       variables: this.initializeVariables(),
     };
   }
 
 
-  handleUpdateData = ({ data }) => {
-    const { mutationName, fieldName } = this.props;
+  handleUpdateData = () => {
     this.setState({
-      updatedData: data[mutationName][fieldName],
       edit: false,
     });
   }
@@ -113,6 +120,8 @@ class EditableTextField extends React.Component {
 
   render() {
     const {
+      dropdownOptions,
+      dropdownType,
       large,
       mutationInputName,
       fieldName,
@@ -122,11 +131,13 @@ class EditableTextField extends React.Component {
       editButton: EditButton,
     } = this.props;
 
-    const { edit, displayEdit, variables, updatedData } = this.state;
+    const { edit, variables } = this.state;
 
     if (edit) return (
       <Component>
         <EditArea
+          dropdownOptions={dropdownOptions}
+          dropdownType={dropdownType}
           large={large}
           data={variables[mutationInputName]}
           fieldName={fieldName}
@@ -144,20 +155,22 @@ class EditableTextField extends React.Component {
         onMouseLeave={() => hasPermission && this.toggleDisplayEdit(false)}
       >
         <EditButton onClick={this.toggleEdit} />
-        <Component>{updatedData || fieldData}</Component>
+        <Component>{fieldData}</Component>
       </div>
     );
   }
 }
 
 EditableTextField.propTypes = {
+  dropdownOptions: PropTypes.array,
+  dropdownType: PropTypes.bool,
   large: PropTypes.bool, // simple text input vs textarea
   // mutation variables expects shape { input: { fieldName: fieldData } }
   mutation: PropTypes.object, // mutation to update the Type
   mutationName: PropTypes.string, // the name of the mutation for accessing response data
   mutationInputName: PropTypes.string, // object that holds mutation data (ex: user_data)
   fieldName: PropTypes.string, // the field of the Type to be edited
-  fieldData: PropTypes.string, // the existing data for the field of the Type
+  fieldData: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), // the existing data for the field of the Type
   hasPermission: PropTypes.bool, // viewing User has permission to edit
   component: PropTypes.func, // component to render fieldData
   editButton: PropTypes.func, // custom EditButton

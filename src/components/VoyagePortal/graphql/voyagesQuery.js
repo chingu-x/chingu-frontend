@@ -12,7 +12,7 @@ export const voyagesQuery = gql`
       start_date
       end_date
       status
-      applicants {
+      members {
         id
       }
     }

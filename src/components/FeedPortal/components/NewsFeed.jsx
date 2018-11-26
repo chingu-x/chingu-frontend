@@ -1,4 +1,5 @@
 import * as React from "react"
+import { gql } from "apollo-boost"
 import PropTypes from "prop-types"
 import Request from "../../utilities/Request"
 import Loader from "../../Loader"
@@ -7,10 +8,11 @@ import FeedItemContainer from './FeedItem';
 import TeamCard from './TeamCard';
 import newsfeedQuery from "../graphql/newsfeedQuery"
 import NoNews from './NoNews';
+import NewsfeedStandup from "./NewsfeedStandup";
 
 const NewsFeed = ({ type, loading, data }) => {
-  const getTitle = (team) => `
-    ${team ? `${team.title.toUpperCase()}` : "ALL"} NEWS
+  const getTitle = (project) => `
+    ${project ? `${project.team_name.toUpperCase()}` : "ALL"} NEWS
   `;
 
 
@@ -24,25 +26,37 @@ const NewsFeed = ({ type, loading, data }) => {
     }
   );
 
-  const renderFeed = ({ user, newsfeed: { chingu, other, team } }) => {
+  const renderStandups = standups => standups.map(
+    standup => (
+      standup.submitted_at
+      ? FeedItemContainer({
+        item: { standup, type: "NewsfeedStandup", user: standup.member, timestamp: standup.submitted_at },
+        key: standup.id,
+        component: NewsfeedItems.NewsfeedStandup,
+      })
+      : null
+    ),
+  );
+
+  const renderFeed = ({ user, project }) => {
     let dataToRender = (
       <React.Fragment>
         {
-          type === "TEAM"
-            ? <TeamCard team={team} user={user} />
-            : renderNewsfeedItems(chingu)
+          type === "PROJECT"
+            ? <TeamCard project={project} />
+            : <NoNews /> // todo: temporary
+            // : renderNewsfeedItems(user.news)
         }
-        {(team || !!chingu.length) && other && <hr className="hl" />}
-        {renderNewsfeedItems(other)}
+        {project && project.standups.length > 0 && renderStandups(project.standups)}
       </React.Fragment>
     );
-    return ((!team && !other.length && !chingu.length) ? <NoNews /> : dataToRender);
+    return (project ? dataToRender : <NoNews />);
   }
 
   return (
     <div className="main-container">
       <div className="title">
-        {data.newsfeed && getTitle(data.newsfeed.team)}
+        {data.project && getTitle(data.project)}
       </div>
       <div className="portal-panel__feed">
         {
@@ -66,19 +80,57 @@ NewsFeed.defaultProps = {
   type: "ALL",
 }
 
+const getNewsfeed = (project_id) => {
+  const project_fragment = `
+    project(id: $project_id) {
+      id
+      available_standup { id }
+      standups {
+        id
+        submitted_at
+        progress_sentiment
+        worked_on
+        working_on
+        blocked_on
+        member {
+          id
+          username
+          avatar
+        }
+      }
+      ... on CohortProject {
+        team_name
+        cohort {
+          id
+          title
+        }
+      }
+    }
+  `;
+
+  const query = `
+    query projectNewsfeed${project_id ? "($project_id: ID)" : ""} {
+      user {
+        id
+        username
+      }
+
+      ${project_id ? project_fragment : ""}
+    }
+  `;
+    console.log(query);
+  return gql(query);
+};
+
 export default (props) => {
   const variables = {
-    input: {
-      type: props.type,
-      team_id: props.team_id,
-      limit: 12,
-    }
+    project_id: props.project_id,
   }
   return (
     <Request
       {...props}
       component={NewsFeed}
-      query={newsfeedQuery}
+      query={getNewsfeed(props.project_id)}
       variables={variables}
       options={{ pollInterval: 5 * 60 * 1000 }}
     />

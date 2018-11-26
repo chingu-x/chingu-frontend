@@ -90,7 +90,7 @@ class Banner extends React.Component {
               <input
                 className="project-portal__banner-edit"
                 name="title"
-                value={title}
+                value={title || ""}
                 onChange={this.handleChange} />
             </React.Fragment>
           ) : (
@@ -102,7 +102,7 @@ class Banner extends React.Component {
             <input
               className="project-portal__banner-edit"
               name="elevator_pitch"
-              value={elevator_pitch}
+              value={elevator_pitch || ""}
               onChange={this.handleChange}
             />
           ) : (
@@ -132,7 +132,7 @@ function withMutation(Component) {
   const projectUpdate = gql`
     mutation projectUpdate(
       $project_id: ID!
-      $project_data: ProjectInput!) {
+      $project_data: ProjectUpdate!) {
         projectUpdate(
         project_id: $project_id
         project_data: $project_data) {

@@ -7,16 +7,8 @@ const getProjectAndUser = gql`
       title
       description
       elevator_pitch
-      project_url
-      github_url
-      communication_url
-      workflow_url
-      images {
-        id
-        url
-        order
-      }
-      users {
+      live_url
+      members {
         id
         username
         avatar
@@ -24,6 +16,12 @@ const getProjectAndUser = gql`
     }
   }
 `
+
+// images {
+//   id
+//   url
+//   order
+// }
 
 const getUserId = gql`
   query getUserId {

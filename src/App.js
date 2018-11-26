@@ -19,7 +19,7 @@ import Login from './components/Login';
 import FeedPortal from "./components/FeedPortal"
 import Private from "./components/utilities/PrivateRoute"
 import AllProjects from './components/AllProjects';
-import TeamStandup from "./components/TeamStandup";
+import ProjectStandup from "./components/ProjectStandup";
 import ProjectShowcase from "./components/ProjectShowcase"
 import Ticketbox from './components/Ticketbox';
 // import HelpPage from "./components/HelpPage" TODO: uncomment when ready
@@ -56,10 +56,10 @@ export default () => (
       <Private exact path="/team/checkin/:id" component={WeeklyCheckin} />
       <Route exact path="/projects" component={AllProjects} />
       <Private
-        exact path="/team/standup/:standup_id"
+        exact path="/project/standup/:standup_id"
         render={
           ({ match: { params: { standup_id } } }) => (
-            <TeamStandup
+            <ProjectStandup
               standup_id={standup_id}
               standupVersion={null}
             />
