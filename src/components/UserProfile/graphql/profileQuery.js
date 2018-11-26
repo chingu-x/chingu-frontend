@@ -31,6 +31,10 @@ const profileQuery = gql`
         title
         description
         elevator_pitch
+        skills {
+          id
+          name
+        }
         members {
           id
           username
@@ -53,6 +57,10 @@ const profileQuery = gql`
         title
         description
         elevator_pitch
+        skills {
+          id
+          name
+        }
         members {
           id
           username
@@ -72,11 +80,15 @@ const profileQuery = gql`
           team_name
         }
       }
-      projects {
+      projects(filters: {status:inactive}) {
         id
         title
         description
         elevator_pitch
+        skills {
+          id
+          name
+        }
         members {
           id
           username
