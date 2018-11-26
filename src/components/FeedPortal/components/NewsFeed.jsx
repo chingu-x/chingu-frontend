@@ -8,6 +8,7 @@ import FeedItemContainer from './FeedItem';
 import TeamCard from './TeamCard';
 import newsfeedQuery from "../graphql/newsfeedQuery"
 import NoNews from './NoNews';
+import NewsfeedStandup from "./NewsfeedStandup";
 
 const NewsFeed = ({ type, loading, data }) => {
   const getTitle = (project) => `
@@ -25,15 +26,28 @@ const NewsFeed = ({ type, loading, data }) => {
     }
   );
 
+  const renderStandups = standups => standups.map(
+    standup => (
+      standup.submitted_at
+      ? FeedItemContainer({
+        item: { standup, type: "NewsfeedStandup", user: standup.member, timestamp: standup.submitted_at },
+        key: standup.id,
+        component: NewsfeedItems.NewsfeedStandup,
+      })
+      : null
+    ),
+  );
+
   const renderFeed = ({ user, project }) => {
     let dataToRender = (
       <React.Fragment>
         {
           type === "PROJECT"
             ? <TeamCard project={project} />
-            : <NoNews />
+            : <NoNews /> // todo: temporary
             // : renderNewsfeedItems(user.news)
         }
+        {project && project.standups.length > 0 && renderStandups(project.standups)}
       </React.Fragment>
     );
     return (project ? dataToRender : <NoNews />);
@@ -71,6 +85,19 @@ const getNewsfeed = (project_id) => {
     project(id: $project_id) {
       id
       available_standup { id }
+      standups {
+        id
+        submitted_at
+        progress_sentiment
+        worked_on
+        working_on
+        blocked_on
+        member {
+          id
+          username
+          avatar
+        }
+      }
       ... on CohortProject {
         team_name
         cohort {

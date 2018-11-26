@@ -24,7 +24,7 @@ const TeamCard = ({ project: { id, available_standup } }) => {
         </Link>
         <Link
           className={`user-btn${standupStatus}`}
-          to={available_standup ? `/team/standup/${available_standup.id}` : "#"}
+          to={available_standup ? `/project/standup/${available_standup.id}` : "#"}
         >
           {available_standup ? "Submit Standup" : "No Standup Available"}
         </Link>
