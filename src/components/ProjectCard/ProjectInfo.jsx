@@ -21,7 +21,7 @@ const ProjectInfo = ({ project }) => {
                 className="team-card-avatar-img" 
                 src={user.avatar 
                   ? user.avatar 
-                  : require('../../../assets/blank image.png')} 
+                  : require('../../assets/blank image.png')} 
                 alt={user.username} 
               />
             </Link>
