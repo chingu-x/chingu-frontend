@@ -120,7 +120,7 @@ class ProjectDescription extends React.Component {
             {isEditing ? (
               <textarea
                 name="description"
-                value={description}
+                value={description || ""}
                 className="project-portal__edit-box"
                 onChange={this.handleChange}
               />
@@ -141,7 +141,7 @@ function withMutation(Component) {
   const updateProject = gql`
     mutation projectUpdate(
       $project_id: ID!
-      $project_data: ProjectInput!
+      $project_data: ProjectUpdate!
     ) {
       projectUpdate(
         project_id: $project_id

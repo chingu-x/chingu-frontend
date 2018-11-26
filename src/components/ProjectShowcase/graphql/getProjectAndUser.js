@@ -7,6 +7,7 @@ const getProjectAndUser = gql`
       title
       description
       elevator_pitch
+      live_url
       members {
         id
         username

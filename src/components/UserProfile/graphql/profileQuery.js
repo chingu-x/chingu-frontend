@@ -26,15 +26,86 @@ const profileQuery = gql`
         id
         name
       }
-      projects {
+      active_cohort_project {
         id
         title
         description
         elevator_pitch
+        skills {
+          id
+          name
+        }
         members {
           id
           username
           avatar
+        }
+        cohort {
+          id
+          title
+          start_date
+          end_date
+        }
+        tier {
+          level
+          title
+        }
+        team_name
+      }
+      active_projects {
+        id
+        title
+        description
+        elevator_pitch
+        skills {
+          id
+          name
+        }
+        members {
+          id
+          username
+          avatar
+        }
+        ... on CohortProject {
+          cohort {
+            id
+            title
+            start_date
+            end_date
+          }
+          tier {
+            level
+            title
+          }
+          team_name
+        }
+      }
+      projects(filters: {status:inactive}) {
+        id
+        title
+        description
+        elevator_pitch
+        skills {
+          id
+          name
+        }
+        members {
+          id
+          username
+          avatar
+        }
+        ... on CohortProject {
+          cohort {
+            id
+            title
+            start_date
+            end_date
+          }
+          tier {
+            level
+            title
+          }
+          team_name
         }
       }
       cohorts {

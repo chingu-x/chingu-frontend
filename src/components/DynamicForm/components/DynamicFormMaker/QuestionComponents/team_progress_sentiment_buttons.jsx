@@ -16,7 +16,8 @@ const FormButton = ({ color, onClick, data, id }) => {
 const team_progress_sentiment_buttons = (data, onFormChange, form_data) => {
   return (
     <div className="btn-container--3">
-      {data.options.map((answer, index) => {
+      {data.options.map((option, index) => {
+        const answer = option.value || option;
         return (
           <FormButton
             id={data.field_name}

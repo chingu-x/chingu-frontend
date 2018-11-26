@@ -3,56 +3,53 @@ import PropTypes from "prop-types"
 import sidebarQuery from '../graphql/sidebarQuery';
 import Request from "../../utilities/Request"
 
-const SidebarBtn = ({ team, lbl, active, action }) => {
+const SidebarBtn = ({ project, lbl, active, action }) => {
+  // todo: semantic html: use <button> or <a> -> needs styling
   return (
-    <div
+    <div 
       className={`sidebar-nav__btn-ctn ${active ? "active" : ""}`}
-      onClick={
-        () => !active && action(
-          !!team ? 'TEAM' : 'ALL',
-          team && team.id,
-        )
-      }
+      onClick={() => {
+        if (active) return;
+        const type = project ? "PROJECT" : "ALL";
+        const project_id = project && project.id;
+        return action(type, project_id);
+      }}
     >
       {
-        !!team &&
+        !!project &&
         <img
           className="sidebar-nav__btn-icon"
           src={require('../../../assets/team-icon.png')}
-          alt="team-icon"
+          alt="project-icon"
         />
       }
-      <div className="sidebar-nav__btn" >
-        {lbl}
-      </div>
+      <div className="sidebar-nav__btn">{lbl}</div>
     </div>
   )
 }
 
 SidebarBtn.propTypes = {
-  team: PropTypes.object,
+  project: PropTypes.object,
   action: PropTypes.func.isRequired,
   lbl: PropTypes.string.isRequired,
   active: PropTypes.bool
 }
 
-const TeamLinks = ({ teams, toggleNewsfeed, activeTeamId }) => {
-  let renderedTeamLinks = teams.map((team, idx) => {
-    return (
-      <SidebarBtn
-        action={toggleNewsfeed}
-        team={team}
-        key={idx}
-        active={activeTeamId === team.id}
-        lbl={team.cohort.title + "/" + team.title}
-      />
-    );
-  })
+const ProjectLinks = ({ projects, toggleNewsfeed, activeProjectID }) => {
+  let renderedTeamLinks = projects.map((project, idx) => (
+    <SidebarBtn
+      action={toggleNewsfeed}
+      project={project}
+      key={idx}
+      active={activeProjectID === project.id}
+      lbl={project.cohort.title + "/" + project.team_name}
+    />
+  ));
 
   return <Fragment>{renderedTeamLinks || null}</Fragment>
 }
 
-const SideBar = ({ data: { user }, toggleNewsfeed, team_id }) => {
+const SideBar = ({ data, data: { user }, toggleNewsfeed, project_id }) => {
   return (
     <aside className="sidebar-container">
       <div className="portal-panel__sidebar">
@@ -67,20 +64,19 @@ const SideBar = ({ data: { user }, toggleNewsfeed, team_id }) => {
 
         <SidebarBtn
           action={toggleNewsfeed}
-          active={!team_id}
+          active={!project_id}
           lbl="All News" />
         <hr className="hl" />
 
-        {user.teams.length > 0
+        {user.active_projects.length > 0
           && (
             <React.Fragment>
               <hr className="hl" />
 
-              <label className="sidebar-nav__label">Your Teams</label>
-
-              <TeamLinks
-                activeTeamId={team_id}
-                teams={user.teams}
+              <label className="sidebar-nav__label">Your Active Projects</label>
+              <ProjectLinks
+                activeProjectID={project_id}
+                projects={user.active_projects}
                 toggleNewsfeed={toggleNewsfeed}
               />
             </React.Fragment>
@@ -94,11 +90,11 @@ const SideBar = ({ data: { user }, toggleNewsfeed, team_id }) => {
 }
 
 SideBar.propTypes = {
-  team_id: PropTypes.string
+  project_id: PropTypes.string
 }
 
 SideBar.defaultProps = {
-  team_id: null,
+  project_id: null,
 }
 
 export default props => (
