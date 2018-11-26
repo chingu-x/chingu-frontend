@@ -6,8 +6,8 @@ const ProjectInfo = ({ project }) => {
   const infoObjects = [
     { label: 'Project', data: title },
     { label: 'Description', data: elevator_pitch },
-    { label: 'Techstack', data: skills },
-    { label: 'Members', data: members },
+    { label: 'Techstack', data: skills || [] },
+    { label: 'Members', data: members || [] },
   ]
 
   return infoObjects.map((info, idx) => {
