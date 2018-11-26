@@ -31,6 +31,11 @@ const profileQuery = gql`
         title
         description
         elevator_pitch
+        members {
+          id
+          username
+          avatar
+        }
         cohort {
           id
           title
@@ -42,11 +47,6 @@ const profileQuery = gql`
           title
         }
         team_name
-        members {
-          id
-          username
-          avatar
-        }
       }
       active_projects {
         id
@@ -58,6 +58,19 @@ const profileQuery = gql`
           username
           avatar
         }
+        ... on CohortProject {
+          cohort {
+            id
+            title
+            start_date
+            end_date
+          }
+          tier {
+            level
+            title
+          }
+          team_name
+        }
       }
       projects {
         id
@@ -68,6 +81,19 @@ const profileQuery = gql`
           id
           username
           avatar
+        }
+        ... on CohortProject {
+          cohort {
+            id
+            title
+            start_date
+            end_date
+          }
+          tier {
+            level
+            title
+          }
+          team_name
         }
       }
       cohorts {
