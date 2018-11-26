@@ -26,6 +26,39 @@ const profileQuery = gql`
         id
         name
       }
+      active_cohort_project {
+        id
+        title
+        description
+        elevator_pitch
+        cohort {
+          id
+          title
+          start_date
+          end_date
+        }
+        tier {
+          level
+          title
+        }
+        team_name
+        members {
+          id
+          username
+          avatar
+        }
+      }
+      active_projects {
+        id
+        title
+        description
+        elevator_pitch
+        members {
+          id
+          username
+          avatar
+        }
+      }
       projects {
         id
         title
