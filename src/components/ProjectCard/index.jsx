@@ -2,6 +2,7 @@ import * as React from "react";
 import CohortProjectInfo from './CohortProjectInfo';
 import ProjectImage from './ProjectImage';
 import ProjectInfo from './ProjectInfo';
+import './ProjectCard.css';
 
 const ProjectCardCreator = ({
   noData,
