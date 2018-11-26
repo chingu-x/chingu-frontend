@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
-import dateFormatter from "../../utilities/dateFormatter.js"
+import dateFormatter from "../utilities/dateFormatter.js"
 
 const CohortProjectInfo = ({ project }) => {
-  const { cohort, tier, title } = project;
+  const { cohort, tier, team_name } = project;
   const infoObjects = [
-    { label: 'Voyage', data: `${cohort.title} / ${dateFormatter(cohort.start_date)} - ${dateFormatter(cohort.end_date)}` },
-    { label: 'Team', data: title },
-    { label: 'Tier', data: 'Tier ' + tier.level },
+    { label: 'Voyage', data: `${cohort.title} | ${dateFormatter(cohort.start_date)} - ${dateFormatter(cohort.end_date)}` },
+    { label: 'Team', data: team_name },
+    { label: 'Tier', data: `Tier ${tier.level}-${tier.title}`},
   ]
 
   return infoObjects.map((info, idx) => {
