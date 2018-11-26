@@ -5,6 +5,7 @@ import profileQuery from "./graphql/profileQuery"
 import './UserProfile.css'
 import PendingApproval from './ProjectCards/PendingVoyages';
 import * as ProjectCards from '../ProjectCard';
+import { CohortProjectCard } from './../ProjectCard/index';
 
 // -- USER PROFILE (EXPORT) -- //
 const UserProfile = ({ data, match }) => {
@@ -19,17 +20,17 @@ const UserProfile = ({ data, match }) => {
     {
       sectionTitle: 'Current Cohort Project',
       data: active_cohort_project,
-      cardComponent: <ProjectCards.CohortProjectCard project={active_cohort_project} />,
+      cardComponent: (data) => <ProjectCards.CohortProjectCard project={data} />,
     },
     {
       sectionTitle: 'Current Projects',
       data: active_projects,
-      cardComponent: <ProjectCards.ProjectCard project={active_projects} />,
+      cardComponent: (data) => <ProjectCards.ProjectCard project={data} />,
     },
     {
-      sectionTitle: 'All Other Projects',
+      sectionTitle: 'Past Projects',
       data: projects,
-      cardComponent: <ProjectCards.ProjectCard project={projects} />,
+      cardComponent: (data) => <ProjectCards.ProjectCard project={data} />,
     },
   ]
 
@@ -50,7 +51,9 @@ const UserProfile = ({ data, match }) => {
           {projectSections.map((projectSection, idx) => {
               const projectCard = !projectSection.data || projectSection.data.length === 0
                 ? <ProjectCards.NoProjectCard />
-                : projectSection.cardComponent;
+                : projectSection.data.map((project, idx) => {
+                  return projectSection.cardComponent(project);
+                })
 
               return (
                 <section className="user-voyage" key={idx}>
