@@ -4,15 +4,10 @@ import './TeamCard.css';
 import TeamLinks from './TeamLinks';
 import dateFormatter from '../../utilities/dateFormatter';
 
-const TeamCard = ({ user: { available_standups }, team }) => {
+const TeamCard = ({ project: { id, available_standup } }) => {
   let editorIsVisible = false;
 
-  const availableStandup = (
-    !!available_standups.length &&
-    available_standups.find(su => su.team.id === team.id)
-  );
-
-  const standupStatus = availableStandup
+  const standupStatus = available_standup
     ? ""
     : "--disabled"
 
@@ -20,31 +15,19 @@ const TeamCard = ({ user: { available_standups }, team }) => {
 
   return (
     <div className="team-card-container">
-      <div className="team-card-info-container">
+      {/* <div className="team-card-info-container">
         <InfoComponents team={team} />
-      </div>
+      </div> */}
       <div className="team-card-buttons-container">
-      
-        <Link
-          to={"#"}
-          className="user-btn--disabled">Team Workspace
-          </Link>
-        <Link to={"/project/" + team.project.id} className="user-btn">Project Page</Link>
+        <Link to={`/project/${id}`} className="user-btn">
+          Project Page
+        </Link>
         <Link
           className={`user-btn${standupStatus}`}
-          to={availableStandup ? `/team/standup/${availableStandup.id}` : "#"}
-        >{availableStandup ? "Submit Standup" : "No Standup Available"}</Link>
-
-        <div className="team-resource-links-container">
-          <img
-            alt="edit links"
-            className="team-resource-links"
-            src={require(`../../../assets/links.png`)}
-            onClick={() => toggleEditorVisibility()}
-          />
-          { team.project && <TeamLinks project={team.project} />}
-        </div>
-        
+          to={available_standup ? `/team/standup/${available_standup.id}` : "#"}
+        >
+          {available_standup ? "Submit Standup" : "No Standup Available"}
+        </Link>
       </div>
     </div >
   )
