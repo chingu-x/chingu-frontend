@@ -16,20 +16,24 @@ const UserProfile = ({ data, match }) => {
   const pendingApproval = cohorts.filter(cohort =>
     cohort.members.some(member => member.member_status !== "applicant"),
   );
+  const all_active = active_cohort_project ? [active_cohort_project, ...active_projects] : active_projects;
+  const active_project_ids = all_active.map(project => project.id);
   const projectSections = [
     {
       sectionTitle: 'Current Cohort Project',
-      data: active_cohort_project,
+      data: active_cohort_project ? [active_cohort_project] : [], // must be wrapped in array for mapping
       cardComponent: (data, idx) => <ProjectCards.CohortProjectCard project={data} key={idx} />,
     },
     {
-      sectionTitle: 'Current Projects',
-      data: active_projects,
+      sectionTitle: 'Current Projects', // todo: when a project has cohort property render the cohort related bits too
+      data: active_cohort_project // filter out active cohort project if available
+        ? active_projects.filter(project => project.id !== active_cohort_project.id)
+        : active_projects,
       cardComponent: (data, idx) => <ProjectCards.ProjectCard project={data} key={idx} />,
     },
     {
-      sectionTitle: 'Past Projects',
-      data: projects,
+      sectionTitle: 'Past Projects', // todo: when a project has cohort property render the cohort related bits too
+      data: projects.filter(project => !active_project_ids.includes(project)), // filter out projects from previous sections
       cardComponent: (data, idx) => <ProjectCards.ProjectCard project={data} key={idx} />,
     },
   ]
