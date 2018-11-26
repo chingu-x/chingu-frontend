@@ -25,7 +25,7 @@ const ProjectCardCreator = ({
   }
   return (
     <div className="project-card__container">
-      {imagePanel()}
+      {imagePanel ? imagePanel() : null}
       <div className="project-info__container">
         {cohortProjectInfo ? cohortProjectInfo() : null}
         {projectInfo ? projectInfo() : null}
