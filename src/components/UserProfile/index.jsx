@@ -20,17 +20,17 @@ const UserProfile = ({ data, match }) => {
     {
       sectionTitle: 'Current Cohort Project',
       data: active_cohort_project,
-      cardComponent: (data) => <ProjectCards.CohortProjectCard project={data} />,
+      cardComponent: (data, idx) => <ProjectCards.CohortProjectCard project={data} key={idx} />,
     },
     {
       sectionTitle: 'Current Projects',
       data: active_projects,
-      cardComponent: (data) => <ProjectCards.ProjectCard project={data} />,
+      cardComponent: (data, idx) => <ProjectCards.ProjectCard project={data} key={idx} />,
     },
     {
       sectionTitle: 'Past Projects',
       data: projects,
-      cardComponent: (data) => <ProjectCards.ProjectCard project={data} />,
+      cardComponent: (data, idx) => <ProjectCards.ProjectCard project={data} key={idx} />,
     },
   ]
 
@@ -52,7 +52,7 @@ const UserProfile = ({ data, match }) => {
               const projectCard = !projectSection.data || projectSection.data.length === 0
                 ? <ProjectCards.NoProjectCard />
                 : projectSection.data.map((project, idx) => {
-                  return projectSection.cardComponent(project);
+                  return projectSection.cardComponent(project, idx);
                 })
 
               return (
