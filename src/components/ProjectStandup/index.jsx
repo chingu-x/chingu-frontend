@@ -33,7 +33,7 @@ class TeamStandup extends React.Component {
   }
 
   handleResponse = ({ data }) => {
-    window.localStorage.removeItem('team_standup');
+    window.localStorage.removeItem('project_standup');
     this.setState({ response: data.standupSubmit });
   }
 
