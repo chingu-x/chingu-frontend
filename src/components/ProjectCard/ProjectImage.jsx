@@ -6,7 +6,7 @@ const ProjectImage = ({ project }) => {
     <Link className="project-img" to={`/project/${project.id}`}>
       <img
         className="project-img"
-        src={require('./defaultProjectImg.png')} />
+        src={require('../../assets/Artboard 17.png')} />
     </Link>
   )
 }
