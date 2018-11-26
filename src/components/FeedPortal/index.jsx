@@ -7,19 +7,19 @@ class FeedPortal extends React.Component {
   state = {
     newsfeed: {
       type: "ALL",
-      team_id: null
+      project_id: null
     }
   }
 
-  toggleNewsfeed = (type, team_id) => this.setState({ newsfeed: { type, team_id } })
+  toggleNewsfeed = (type, project_id) => this.setState({ newsfeed: { type, project_id } })
 
   render() {
-    const { type, team_id } = this.state.newsfeed
+    const { type, project_id } = this.state.newsfeed
     return (
       <div className="view-container">
         <div className="portal-container">
-          <SideBar toggleNewsfeed={this.toggleNewsfeed} team_id={team_id} />
-          <NewsFeed type={type} team_id={team_id} />
+          <SideBar toggleNewsfeed={this.toggleNewsfeed} project_id={project_id} />
+          <NewsFeed type={type} project_id={project_id} />
         </div>
       </div>
     )

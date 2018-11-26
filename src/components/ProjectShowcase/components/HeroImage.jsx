@@ -126,7 +126,7 @@ class HeroImage extends React.Component {
 
 function withMutation(Component) {
   const projectUpdate = gql`
-    mutation projectUpdate($project_id: ID!, $project_data: ProjectInput!) {
+    mutation projectUpdate($project_id: ID!, $project_data: ProjectUpdate!) {
       projectUpdate( project_id: $project_id, project_data: $project_data) {
         id
         images {

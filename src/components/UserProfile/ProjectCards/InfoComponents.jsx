@@ -2,15 +2,15 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom"
 import dateFormatter from "../../utilities/dateFormatter.js"
 
-const InfoComponents = ({ team }) => {
-  const { project, cohort, tier, title } = team
+const InfoComponents = ({ project }) => {
+  const { cohort, tier, title } = project;
   const infoObjects = [
-    { label: 'Voyage', data: `${cohort.title} / ${dateFormatter(cohort.start_date)} - ${dateFormatter(cohort.end_date)}` },
-    { label: 'Team', data: title },
-    { label: 'Tier', data: 'Tier ' + tier.level },
+    // { label: 'Voyage', data: `${cohort.title} / ${dateFormatter(cohort.start_date)} - ${dateFormatter(cohort.end_date)}` },
+    // { label: 'Team', data: title },
+    // { label: 'Tier', data: 'Tier ' + tier.level },
     { label: 'Project', data: project.title },
     { label: 'Description', data: project.elevator_pitch },
-    { label: 'Members', data: project.users },
+    { label: 'Members', data: project.members },
   ]
 
   return infoObjects.map((info, idx) => {

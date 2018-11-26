@@ -50,7 +50,7 @@ export const NewsfeedVoyage = ({ voyage: { id, title }, has_applied, ...rest}) =
 // color and icon?
 export const NewsfeedAvailableStandup = ({ id, expiration }) => (
   <Link
-    to={`/team/standup/${id}`}
+    to={`/project/standup/${id}`}
     className="newsfeed-chingu-card--container chingu-card--purple"
   >
     {CardBody(`New Standup available. Expires in ${newsfeedDateFormatter(expiration, true)}`)}
