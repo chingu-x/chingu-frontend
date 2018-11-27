@@ -6,7 +6,7 @@ const TeamButtons = ({ project: { id, available_standup } }) => {
     ? ""
     : "--disabled"
   return (
-    <React.Fragment>
+    <div className="team-card-buttons-container">
       <Link to={`/project/${id}`} className="user-btn">
         Project Page
         </Link>
@@ -16,7 +16,7 @@ const TeamButtons = ({ project: { id, available_standup } }) => {
       >
         {available_standup ? "Submit Standup" : "No Standup Available"}
       </Link>
-    </React.Fragment>
+    </div>
   )
 }
 
