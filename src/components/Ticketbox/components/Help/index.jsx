@@ -13,21 +13,31 @@ const userActiveTeamsQuery = gql`
  query getUserActiveTeams {
   user {
     id
-    teams(only_active: true) {
+    projects(filters: { status: active }) {
       id
+      status
       title
-      project { 
+      members {
         id
-        title
-      }
-      cohort_users {
-        user {
-          id
-          username
-          avatar
-        }
+        username
+        avatar
       }
     }
+    # teams(only_active: true) {
+    #   id
+    #   title
+    #   project { 
+    #     id
+    #     title
+    #   }
+    #   cohort_users {
+    #     user {
+    #       id
+    #       username
+    #       avatar
+    #     }
+    #   }
+    # }
   }
  }
 `
@@ -62,7 +72,7 @@ class Help extends React.Component {
           <HelpOptions
             switchRenderedType={switchRenderedType}
             switchHelpType={this.switchHelpType}
-            hasActiveTeams={user && !!user.teams.length}
+            hasActiveTeams={user && !!user.projects.filter(p => p.status === 'active').length}
           />
         )
     }
