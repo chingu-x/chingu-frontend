@@ -48,7 +48,7 @@ export const TeamProjectCard = ({ project }) => {
       cohortProjectInfo={() => <CohortProjectInfo project={project} />}
       projectInfo={() => <ProjectInfo project={project} />}
       rightPanel={() => <TeamButtons project={project} />}
-      footer={() => <TeamResourceLinks project={project} />}
+      // footer={() => <TeamResourceLinks project={project} />}
     />
   )
 }
