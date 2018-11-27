@@ -40,10 +40,10 @@ const ProjectInfo = ({ project }) => {
         break;
     }
     return (
-      <Fragment key={idx} >
+      <div className="project-info__block" key={idx} >
         <div className="project-info__label">{info.label}</div>
         <div className="project-info__data">{data}</div>
-      </Fragment>
+      </div>
     )
   })
 }
