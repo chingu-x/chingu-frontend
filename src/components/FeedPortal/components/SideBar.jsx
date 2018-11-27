@@ -15,14 +15,14 @@ const SidebarBtn = ({ project, lbl, active, action }) => {
         return action(type, project_id);
       }}
     >
-      {
+      {/* {
         !!project &&
         <img
           className="sidebar-nav__btn-icon"
           src={require('../../../assets/team-icon.png')}
           alt="project-icon"
         />
-      }
+      } */}
       <div className="sidebar-nav__btn">{lbl}</div>
     </div>
   )
