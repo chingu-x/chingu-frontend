@@ -71,28 +71,31 @@ INFO CONTAINER
 .team-card-info-container {
     grid-column: 1 / 4;
     border-right: 1px solid $light-grey;
+    padding: 0px;
+    align-items: center;
+    justify-items: start;
 }
-.team-card-info {
-    display: grid;
-    margin-bottom: 10px;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-}
-.team-card-info--label {
-    grid-column: 1 / 2;
-    font-size: 14px;
-    color: $lighter-grey;
-    text-transform: uppercase;
-    align-self: start;
-}
+// .team-card-info {
+//     display: grid;
+//     margin-bottom: 10px;
+//     grid-template-columns: repeat(3, 1fr);
+//     grid-gap: 20px;
+// }
+// .team-card-info--label {
+//     grid-column: 1 / 2;
+//     font-size: 14px;
+//     color: $lighter-grey;
+//     text-transform: uppercase;
+//     align-self: start;
+// }
 
-.team-card-info--data {
-    grid-column: 2 / -1;
-    font-size: 14px;
-    color: $dark-grey;
-    max-height: 100px;
-    align-items: start;
-}
+// .team-card-info--data {
+//     grid-column: 2 / -1;
+//     font-size: 14px;
+//     color: $dark-grey;
+//     max-height: 100px;
+//     align-items: start;
+// }
 
 .team-card-techstack {
     grid-column: 1 / -1;

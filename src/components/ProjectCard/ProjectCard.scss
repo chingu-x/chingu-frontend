@@ -47,13 +47,14 @@ PROJECT CARDS
   grid-area: info;
   font-size: 14px;
   padding: 30px;
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  grid-gap: 10px;
   align-items: center;
   justify-items: start;
 }
-
+.project-info__block {
+  display: grid;
+  margin-bottom: 10px;
+  grid-template-columns: repeat(3, 1fr);
+}
 .project-info__label {
   grid-column: 1 / 2;
   font-size: 14px;
