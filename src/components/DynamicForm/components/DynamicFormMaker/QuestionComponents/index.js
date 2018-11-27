@@ -8,6 +8,7 @@ import team_progress_sentiment_buttons from "./team_progress_sentiment_buttons.j
 import voyage_application_tier_select from "./voyage_application_tier_select";
 import three_buttons from './three_buttons';
 import skill_setter from './SkillSetter';
+import multiple_text_input from './multiple_text_input';
 
 export default {
   checkbox,
@@ -20,5 +21,6 @@ export default {
   voyage_application_tier_select,
   team_progress_sentiment_buttons,
   three_buttons,
-  skill_setter
+  skill_setter,
+  multiple_text_input
 };

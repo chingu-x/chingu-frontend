@@ -5,7 +5,7 @@ import { client } from "../../index.js";
 import { questionComponents } from "../DynamicForm/";
 import EditButton from '../common/EditButton';
 
-const { text, textarea, dropdown } = questionComponents;
+const { text, textarea, dropdown, multiple_text_input } = questionComponents;
 
 const ActionButtons = ({ onSave, onCancel }) => (
   <div className="edit-field-btn--btn-container">
@@ -17,6 +17,7 @@ const ActionButtons = ({ onSave, onCancel }) => (
 const EditArea = ({
   dropdownOptions,
   dropdownType,
+  multipleInputType,
   large,
   data,
   fieldName,
@@ -25,12 +26,18 @@ const EditArea = ({
   onInputChange,
 }) => {
   const inputData = { field_name: fieldName };
-  const dropdowninputData = { field_name: fieldName, options: dropdownOptions }
+  const dropdowninputData = { field_name: fieldName, options: dropdownOptions };
   let inputComponent;
   if (large) {
     inputComponent = textarea(inputData, onInputChange, data)
   } else if (dropdownType) {
     inputComponent = dropdown(dropdowninputData, onInputChange, data)
+  } else if (multipleInputType) {
+    inputComponent = multiple_text_input(
+      { input_type: 'url', ...inputData }, 
+      onInputChange, 
+      data
+    );
   } else {
     inputComponent = text(
       { input_type: 'text', ...inputData },
@@ -50,6 +57,7 @@ const EditArea = ({
 EditArea.propTypes = {
   dropdownOptions: PropTypes.array,
   dropdownType: PropTypes.bool,
+  multipleInputType: PropTypes.bool,
   large: PropTypes.bool,
   data: PropTypes.object,
   fieldName: PropTypes.string,
@@ -122,6 +130,7 @@ class EditableTextField extends React.Component {
     const {
       dropdownOptions,
       dropdownType,
+      multipleInputType,
       large,
       mutationInputName,
       fieldName,
@@ -136,6 +145,7 @@ class EditableTextField extends React.Component {
     if (edit) return (
       <Component>
         <EditArea
+          multipleInputType={multipleInputType}
           dropdownOptions={dropdownOptions}
           dropdownType={dropdownType}
           large={large}
@@ -163,6 +173,7 @@ class EditableTextField extends React.Component {
 
 EditableTextField.propTypes = {
   dropdownOptions: PropTypes.array,
+  multipleInputType: PropTypes.bool,
   dropdownType: PropTypes.bool,
   large: PropTypes.bool, // simple text input vs textarea
   // mutation variables expects shape { input: { fieldName: fieldData } }
@@ -170,7 +181,7 @@ EditableTextField.propTypes = {
   mutationName: PropTypes.string, // the name of the mutation for accessing response data
   mutationInputName: PropTypes.string, // object that holds mutation data (ex: user_data)
   fieldName: PropTypes.string, // the field of the Type to be edited
-  fieldData: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), // the existing data for the field of the Type
+  fieldData: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array]), // the existing data for the field of the Type
   hasPermission: PropTypes.bool, // viewing User has permission to edit
   component: PropTypes.func, // component to render fieldData
   editButton: PropTypes.func, // custom EditButton

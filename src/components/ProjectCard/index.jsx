@@ -2,13 +2,18 @@ import * as React from "react";
 import CohortProjectInfo from './CohortProjectInfo';
 import ProjectImage from './ProjectImage';
 import ProjectInfo from './ProjectInfo';
+import TeamButtons from './TeamButtons';
+import TeamResourceLinks from './TeamResourceLinks';
 import './ProjectCard.css';
+import './TeamCard.css';
 
 const ProjectCardCreator = ({
   noData,
   imagePanel,
   projectInfo,
   cohortProjectInfo,
+  teamCard,
+  rightPanel,
   footer
 }) => {
   if (noData) {
@@ -24,14 +29,27 @@ const ProjectCardCreator = ({
     )
   }
   return (
-    <div className="project-card__container">
+    <div className={teamCard ? "team-card-container" : "project-card__container"}>
       {imagePanel ? imagePanel() : null}
-      <div className="project-info__container">
+      <div className={teamCard ? "team-card-info-container" : `project-info__container`}>
         {cohortProjectInfo ? cohortProjectInfo() : null}
         {projectInfo ? projectInfo() : null}
       </div>
+      {rightPanel ? rightPanel() : null}
       {footer ? footer() : null}
     </div>
+  )
+}
+
+export const TeamProjectCard = ({ project }) => {
+  return (
+    <ProjectCardCreator
+      teamCard={true}
+      cohortProjectInfo={() => <CohortProjectInfo project={project} />}
+      projectInfo={() => <ProjectInfo project={project} />}
+      rightPanel={() => <TeamButtons project={project} />}
+      // footer={() => <TeamResourceLinks project={project} />}
+    />
   )
 }
 
