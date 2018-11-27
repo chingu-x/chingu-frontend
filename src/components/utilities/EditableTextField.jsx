@@ -181,7 +181,7 @@ EditableTextField.propTypes = {
   mutationName: PropTypes.string, // the name of the mutation for accessing response data
   mutationInputName: PropTypes.string, // object that holds mutation data (ex: user_data)
   fieldName: PropTypes.string, // the field of the Type to be edited
-  fieldData: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), // the existing data for the field of the Type
+  fieldData: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array]), // the existing data for the field of the Type
   hasPermission: PropTypes.bool, // viewing User has permission to edit
   component: PropTypes.func, // component to render fieldData
   editButton: PropTypes.func, // custom EditButton
