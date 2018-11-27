@@ -13,7 +13,7 @@ const ProjectCardCreator = ({
   projectInfo,
   cohortProjectInfo,
   teamCard,
-  buttonPanel,
+  rightPanel,
   footer
 }) => {
   if (noData) {
@@ -31,11 +31,11 @@ const ProjectCardCreator = ({
   return (
     <div className={teamCard ? "team-card-container" : "project-card__container"}>
       {imagePanel ? imagePanel() : null}
-      <div className={teamCard ? "team-card-info-container" : "project-info__container"}>
+      <div className={teamCard ? "team-card-info-container" : `project-info__container`}>
         {cohortProjectInfo ? cohortProjectInfo() : null}
         {projectInfo ? projectInfo() : null}
       </div>
-      {buttonPanel ? buttonPanel() : null}
+      {rightPanel ? rightPanel() : null}
       {footer ? footer() : null}
     </div>
   )
@@ -47,7 +47,7 @@ export const TeamProjectCard = ({ project }) => {
       teamCard={true}
       cohortProjectInfo={() => <CohortProjectInfo project={project} />}
       projectInfo={() => <ProjectInfo project={project} />}
-      buttonPanel={() => <TeamButtons project={project} />}
+      rightPanel={() => <TeamButtons project={project} />}
       footer={() => <TeamResourceLinks project={project} />}
     />
   )
