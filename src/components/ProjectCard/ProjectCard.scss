@@ -9,34 +9,56 @@ PROJECT CARDS
   width: 100%;
   box-shadow: $box-shadow;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-areas: "image info";
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "image info info";
   background-color: white;
 }
-
-.project-img {
+.project-img-container {
   grid-area: image;
+  background-color: $theme-green--lighter;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+.project-img-text {
+  color: $theme-green;
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  z-index: 5;
+  width: 100%;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: -40px;
+}
+.project-img {
   width: 100%;
   height: auto;
   object-fit: cover;
-  background-color: $palest-grey;
+  margin: 0 auto;
+  display: block;
 }
 
 .project-info__container {
   grid-area: info;
   font-size: 14px;
   padding: 30px;
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  grid-gap: 10px;
   align-items: center;
   justify-items: start;
 }
-
+.project-info__block {
+  display: grid;
+  margin-bottom: 10px;
+  grid-template-columns: repeat(3, 1fr);
+}
 .project-info__label {
   grid-column: 1 / 2;
   font-size: 14px;
-  color: $lighter-grey;
+  color: $grey;
   text-transform: uppercase;
   align-self: start;
 }

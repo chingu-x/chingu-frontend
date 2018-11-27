@@ -7,7 +7,7 @@
     "apollo-cache-inmemory": "^1.2.9",
     "babel-polyfill": "^6.26.0",
     "cross-env": "^5.2.0",
-    "graphql": "^0.13.2",
+    "graphql": "^14.0.2",
     "graphql-tag": "^2.9.2",
     "lodash": "^4.17.10",
     "node-fetch": "^2.2.1",
@@ -22,7 +22,7 @@
     "react-markdown": "^3.4.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "^1.1.5",
+    "react-scripts": "^2.1.1",
     "react-select": "^2.1.0",
     "redux": "^3.7.2",
     "redux-form": "^7.2.3",
@@ -40,5 +40,11 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-fragments": "node ./build_fragments.js"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

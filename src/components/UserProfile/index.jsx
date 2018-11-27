@@ -5,7 +5,6 @@ import profileQuery from "./graphql/profileQuery"
 import './UserProfile.css'
 import PendingApproval from './ProjectCards/PendingVoyages';
 import * as ProjectCards from '../ProjectCard';
-import { CohortProjectCard } from './../ProjectCard/index';
 
 // -- USER PROFILE (EXPORT) -- //
 const UserProfile = ({ data, match }) => {

@@ -5,10 +5,9 @@ import Request from "../../utilities/Request"
 import Loader from "../../Loader"
 import NewsfeedItems from './index';
 import FeedItemContainer from './FeedItem';
-import TeamCard from './TeamCard';
-import newsfeedQuery from "../graphql/newsfeedQuery"
 import NoNews from './NoNews';
 import NewsfeedStandup from "./NewsfeedStandup";
+import * as ProjectCards from '../../ProjectCard';
 
 const NewsFeed = ({ type, loading, data }) => {
   const getTitle = (project) => `
@@ -29,12 +28,12 @@ const NewsFeed = ({ type, loading, data }) => {
   const renderStandups = standups => standups.map(
     standup => (
       standup.submitted_at
-      ? FeedItemContainer({
-        item: { standup, type: "NewsfeedStandup", user: standup.member, timestamp: standup.submitted_at },
-        key: standup.id,
-        component: NewsfeedItems.NewsfeedStandup,
-      })
-      : null
+        ? FeedItemContainer({
+          item: { standup, type: "NewsfeedStandup", user: standup.member, timestamp: standup.submitted_at },
+          key: standup.id,
+          component: NewsfeedItems.NewsfeedStandup,
+        })
+        : null
     ),
   );
 
@@ -43,9 +42,9 @@ const NewsFeed = ({ type, loading, data }) => {
       <React.Fragment>
         {
           type === "PROJECT"
-            ? <TeamCard project={project} />
+            ? <ProjectCards.TeamProjectCard project={project} />
             : <NoNews /> // todo: temporary
-            // : renderNewsfeedItems(user.news)
+          // : renderNewsfeedItems(user.news)
         }
         {project && project.standups.length > 0 && renderStandups(project.standups)}
       </React.Fragment>
@@ -70,7 +69,7 @@ const NewsFeed = ({ type, loading, data }) => {
 }
 
 NewsFeed.propTypes = {
-  type: PropTypes.oneOf(["ALL", "TEAM"]).isRequired,
+  type: PropTypes.oneOf(["ALL", "TEAM", "PROJECT"]).isRequired,
   data: PropTypes.shape({
     newsfeed: PropTypes.object
   })
@@ -98,12 +97,35 @@ const getNewsfeed = (project_id) => {
           avatar
         }
       }
+      title
+      description
+      elevator_pitch
+      skills {
+        id
+        name
+      }
+      members {
+        id
+        username
+        avatar
+      }
+      links {
+        id
+        url
+        label
+      }
       ... on CohortProject {
-        team_name
         cohort {
           id
           title
+          start_date
+          end_date
         }
+        tier {
+          level
+          title
+        }
+        team_name
       }
     }
   `;
@@ -118,7 +140,7 @@ const getNewsfeed = (project_id) => {
       ${project_id ? project_fragment : ""}
     }
   `;
-    console.log(query);
+  console.log(query);
   return gql(query);
 };
 
