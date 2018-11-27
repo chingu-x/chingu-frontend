@@ -26,3 +26,6 @@ yarn-error.log*
 
 .vs/
 *.sqlite
+
+
+yarn.lock
