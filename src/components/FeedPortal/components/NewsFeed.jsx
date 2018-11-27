@@ -109,6 +109,11 @@ const getNewsfeed = (project_id) => {
         username
         avatar
       }
+      links {
+        id
+        url
+        label
+      }
       ... on CohortProject {
         cohort {
           id
