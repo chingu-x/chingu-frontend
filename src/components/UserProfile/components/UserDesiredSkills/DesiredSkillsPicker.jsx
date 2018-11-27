@@ -69,7 +69,7 @@ class DesiredSkillsPicker extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {!this.props.loading && <EditButton onClick={() => this.popup.open()} />}
+        {!this.props.loading && <EditButton toggleEdit={() => this.popup.open()} />}
         <Modal ref={el => this.popup = el} background='none'>
           <div className="skill-modal" >
             {

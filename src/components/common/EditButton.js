@@ -1,9 +1,9 @@
 import * as React from 'react';
 import './EditButton.css';
 
-const EditButton = ({ onClick }) => {
+const EditButton = ({ toggleEdit  }) => {
   return (
-    <button className="fas fa-edit fa-2x edit-icon" onClick={onClick} />
+    <button className="edit-icon" onClick={toggleEdit}><i className="fas fa-edit" /></button>
   );
 };
 

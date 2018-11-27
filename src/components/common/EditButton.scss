@@ -5,11 +5,10 @@
   position: relative;
   float: right;
   margin-top: 40px;
-
-  background-color: white;
   border: none;
-  color: $light-grey;
+  background-color: white;
+  color: $grey;
   &:hover {
-    color: $theme-green;
+    color: $theme-green--hover;
   }
 }
