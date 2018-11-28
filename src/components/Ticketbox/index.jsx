@@ -37,7 +37,11 @@ const TicketboxButtons = ({ switchRenderedType }) => {
     'Artboard 3.png',
     'Artboard 4.png'
   ];
-  let labels = ['suggestion', 'bug', 'help'];
+  let labels = [
+    'suggestion', 
+    'bug', 
+    // 'help'
+  ];
   return (
     <div className="ticketbox-btn-section">
       {
