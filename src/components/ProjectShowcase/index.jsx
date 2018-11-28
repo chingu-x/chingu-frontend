@@ -21,7 +21,6 @@ const ProjectShowcase = props => {
   return (
     <Query query={getProjectAndUser} variables={{ id: project_id }}>
       {({ error, loading, data }) => {
-        console.log(error);
         if (error) return <Redirect to="/projects" />
         if (loading) return <Loader />
 

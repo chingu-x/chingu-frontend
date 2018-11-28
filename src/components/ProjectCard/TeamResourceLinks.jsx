@@ -31,7 +31,6 @@ const TeamResourceButtons = ({ links }) => {
 }
 
 const TeamResourceLinks = ({ project, editable }) => {
-  console.log(project);
   return (
     <div className="team-resource-link-container">
       <div className="team-card-info--label">Team Resource Links</div>
