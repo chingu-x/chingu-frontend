@@ -35,7 +35,7 @@ class UserAcquiredSkills extends React.Component {
     const { editable, user } = this.props;
     return (
       <div className="user-editable-skills">
-        {editable && <EditButton onClick={() => this.toggleEdit()} />}
+        {editable && <EditButton toggleEdit={this.toggleEdit} />}
         <ChosenSkills
           description="Acquired Skills"
           skills={[...user.acquired_skills, ...user.requested_skills]}
