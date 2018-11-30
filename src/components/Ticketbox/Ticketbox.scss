@@ -74,6 +74,8 @@ TICKETBOX MAIN BTN SELECTION
     text-align: center;
     cursor: pointer;
     transition: all .075s ease-out;
+    display: grid;
+    justify-items: center;
     &:hover {
       transform: scale(1.1);
     }
@@ -98,6 +100,7 @@ TICKETBOX MAIN BTN SELECTION
     text-transform: uppercase;
     letter-spacing: 1.5px;
     width: 100px;
+    margin-top: 10px;
 }
 /*
 ==========================

@@ -158,7 +158,6 @@ function withMutation(Component) {
   return props => (
     <Mutation mutation={updateLinks}>
       {(updateProject, { error, loading, data }) => {
-        console.log(error, loading, data);
         const { live_url, github_url } = data ? data.projectUpdate : props
         return <Component
           {...props}

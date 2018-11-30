@@ -140,7 +140,6 @@ const getNewsfeed = (project_id) => {
       ${project_id ? project_fragment : ""}
     }
   `;
-  console.log(query);
   return gql(query);
 };
 
