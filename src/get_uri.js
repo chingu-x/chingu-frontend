@@ -1,12 +1,12 @@
 const getURI = (mode) => {
   switch (mode) {
     case 'local':
-      return { uri: 'http://localhost:3500/graphql', clientID: "84a3576a59110d11cd6f" };
+      return { uri: 'http://localhost:3500/graphql', clientID: "Iv1.59ec3d242a1d6bdd" };
     case 'staging':
-      return { uri: 'https://main-api-staging.chingu.io/graphql', clientID: "84a3576a59110d11cd6f" };
+      return { uri: 'https://main-api-staging.chingu.io/graphql', clientID: "Iv1.476fcdb3ab16afa6" };
     case 'production':
     default:
-      return { uri: 'https://main-api.chingu.io/graphql', clientID: "e015fd9cc874fa5a34bf" };
+      return { uri: 'https://main-api.chingu.io/graphql', clientID: "Iv1.59ec3d242a1d6bdd" };
   }
 }
 

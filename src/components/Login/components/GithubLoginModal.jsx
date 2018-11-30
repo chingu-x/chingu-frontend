@@ -3,7 +3,7 @@ import { clientID } from "../../../get_uri";
 
 const GithubLoginModal = () => {
   const githubAuthURL = `
-  https://github.com/login/oauth/authorize?client_id=${clientID}&scope=public_repo
+  https://github.com/login/oauth/authorize?client_id=${clientID}
   `;
   // TODO: process.env for API and base client URL flip on dev / prod (default prod)
   return (
