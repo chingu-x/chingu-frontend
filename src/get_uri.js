@@ -1,7 +1,7 @@
 const getURI = (mode) => {
   switch (mode) {
     case 'local':
-      return { uri: 'http://localhost:3500/graphql', clientID: "Iv1.59ec3d242a1d6bdd" };
+      return { uri: 'http://localhost:3500/graphql', clientID: "Iv1.476fcdb3ab16afa6" };
     case 'staging':
       return { uri: 'https://main-api-staging.chingu.io/graphql', clientID: "Iv1.476fcdb3ab16afa6" };
     case 'production':
