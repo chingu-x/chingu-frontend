@@ -35,7 +35,7 @@ const TicketboxButtons = ({ switchRenderedType }) => {
   let assets = [
     'Artboard 2.png',
     'Artboard 3.png',
-    'Artboard 4.png'
+    // 'Artboard 4.png'
   ];
   let labels = [
     'suggestion', 
