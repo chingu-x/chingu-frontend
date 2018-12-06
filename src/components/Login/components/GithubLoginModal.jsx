@@ -1,5 +1,5 @@
-import React from "react"
-import { clientID } from "../../../get_uri";
+import React from 'react';
+import { clientID } from 'config/keys';
 
 const GithubLoginModal = () => {
   const githubAuthURL = `
@@ -7,22 +7,17 @@ const GithubLoginModal = () => {
   `;
   // TODO: process.env for API and base client URL flip on dev / prod (default prod)
   return (
-    <div className="login-box" >
-      <div className="login-title">Github Authentication</div>
-      <a
-        className="login-link"
-        href={githubAuthURL}>
-        <button className="github-auth">
-          <img
-            alt="github-icon"
-            className="github-icon"
-            src={"https://i.imgur.com/UBZgVgQ.png"}
-          />
+    <div className='login-box'>
+      <div className='login-title'>Github Authentication</div>
+      <a className='login-link'         href={githubAuthURL}
+      >
+        <button className='github-auth'>
+          <img alt='github-icon' className='github-icon' src='https://i.imgur.com/UBZgVgQ.png' />
           Log in with Github
-      </button>
+        </button>
       </a>
-    </div >
-  )
+    </div>
+  );
 };
 
-export default GithubLoginModal
+export default GithubLoginModal;

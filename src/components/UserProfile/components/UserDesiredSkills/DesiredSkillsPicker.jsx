@@ -1,97 +1,93 @@
-import * as React from "react";
+import * as React from 'react';
+import { client } from 'config/apollo';
+import { gql } from 'apollo-boost';
 import { DynamicFormContainer } from '../../../DynamicForm/components';
-import Request from "../../../utilities/Request"
-import skillsQuery from "../../graphql/skillsQuery";
-import { client } from "../../../../index.js";
+import Request from '../../../utilities/Request';
+import skillsQuery from '../../graphql/skillsQuery';
 import FormError from '../../../Error/FormError';
 import EditButton from '../../../common/EditButton';
-import Modal from '../../../common/Modal'
-import { gql } from "apollo-boost";
+import Modal from '../../../common/Modal';
 
 const userAddDesiredSkills = gql`
-mutation addDesiredSkills ($skill_ids:[ID!]!) {
-  userAddDesiredSkills(skill_ids:$skill_ids) {
-    id
-    desired_skills {
+  mutation addDesiredSkills($skill_ids: [ID!]!) {
+    userAddDesiredSkills(skill_ids: $skill_ids) {
       id
-      name
-      category
+      desired_skills {
+        id
+        name
+        category
+      }
     }
   }
-}
 `;
 
 /**
  * @prop {string} mutation  skill / desired_skill mutation
- * @prop {string} mutationName 
+ * @prop {string} mutationName
  * @prop {string} fieldName skills / desired_skills
  * @prop {array} headerText form header
  * @prop {function} updateSkills saves returned form data to parent components state
  */
 
 const QA = {
-  text: "Desired Skills",
+  text: 'Desired Skills',
   input_type: 'skill_setter',
   field_name: 'skill_ids',
-  subtext: <React.Fragment>
-    Please drag up to 5 skills from the left panel to the right panel in order of importance.
-    The skill order will be used to find other teammates that best matches your skills.
+  subtext: (
+    <React.Fragment>
+      Please drag up to 5 skills from the left panel to the right panel in order of importance. The
+      skill order will be used to find other teammates that best matches your skills.
       <br />
-    <i>Please do not leave gaps between chosen skill cards.</i>
-  </React.Fragment>
-}
+      <i>Please do not leave gaps between chosen skill cards.</i>
+    </React.Fragment>
+  ),
+};
 class DesiredSkillsPicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: null
-    }
+      error: null,
+    };
   }
 
-  onSubmit = (formData) => {
+  onSubmit = formData => {
     const variables = {};
-    variables.skill_ids = formData.skill_ids.reduce(
-      (selectedSkills, skill) => {
-        // ignore null skills
-        if (!skill) return selectedSkills;
-        // 
-        return [...selectedSkills, skill.id || skill];
-      },
-      [],
-    );
-    client.mutate({
-      mutation: userAddDesiredSkills,
-      variables,
-    }).then(this.popup.close)
+    variables.skill_ids = formData.skill_ids.reduce((selectedSkills, skill) => {
+      // ignore null skills
+      if (!skill) return selectedSkills;
+      //
+      return [...selectedSkills, skill.id || skill];
+    }, []);
+    client
+      .mutate({
+        mutation: userAddDesiredSkills,
+        variables,
+      })
+      .then(this.popup.close)
       .catch(error => this.setState({ error }));
-  }
+  };
 
   render() {
     return (
       <React.Fragment>
         {!this.props.loading && <EditButton toggleEdit={() => this.popup.open()} />}
-        <Modal ref={el => this.popup = el} background='none'>
-          <div className="skill-modal" >
-            {
-              this.state.error // TODO: Check if modal is still open on rerender
-                ? <FormError error={this.state.error.message} />
-                : <DynamicFormContainer
-                  questions={[{ ...QA, options: [this.props.data] }]}
-                  onSubmit={this.onSubmit}
-                  initialData={ { skill_ids: this.props.chosenSkills }}
-                />
-            }
+        <Modal ref={el => (this.popup = el)} background='none'>
+          <div className='skill-modal'>
+            {/* TODO: Check if modal is still open on rerender */}
+            {this.state.error ? (
+              <FormError error={this.state.error.message} />
+            ) : (
+              <DynamicFormContainer
+                questions={[{ ...QA, options: [this.props.data] }]}
+                onSubmit={this.onSubmit}
+                initialData={{ skill_ids: this.props.chosenSkills }}
+              />
+            )}
           </div>
         </Modal>
       </React.Fragment>
-    )
+    );
   }
 }
 
-export default props => (
-  <Request
-    {...props}
-    query={skillsQuery}
-    component={DesiredSkillsPicker}
-  />
-);
+export default props => <Request {...props} query={skillsQuery} component={DesiredSkillsPicker} />;

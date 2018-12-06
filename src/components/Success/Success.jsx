@@ -1,18 +1,16 @@
-import * as React from "react";
-import { Link } from "react-router-dom"
-import { client } from "../../index"
-import profileQuery from "../UserProfile/graphql/profileQuery"
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import { client } from 'config/apollo';
+import profileQuery from '../UserProfile/graphql/profileQuery';
 import './Success.css';
 
-const Success = ({ message }) => {
-  return (
-    <div className="form-success">
-      <img alt="success" className="form-success-img" src={require('../../assets/success.png')} />
-      <br />
-      {
-        message
-          ? message
-          : <React.Fragment>
+const Success = ({ message }) => (
+  <div className='form-success'>
+    <img alt='success' className='form-success-img' src={require('../../assets/success.png')} />
+    <br />
+    {message || (
+      (
+<React.Fragment>
               Thank you!
               <hr className="form-hline" />
               <Link
@@ -23,9 +21,9 @@ const Success = ({ message }) => {
                 Go To Profile
               </Link>
             </React.Fragment>
-      }
-    </div>
-  )
-}
+)
+    )}
+  </div>
+);
 
 export default Success;

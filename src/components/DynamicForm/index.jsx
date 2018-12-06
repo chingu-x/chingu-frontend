@@ -1,28 +1,28 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Query } from "react-apollo";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Query } from 'react-apollo';
 
 import './DynamicForm.css';
+import { client } from 'config/apollo';
 import Loader from '../Loader';
 import Error from '../Error';
-import { client } from "../../";
 import {
   DynamicFormWrapper,
   DynamicFormContainer,
   dynamicFormMaker,
   questionComponents,
-} from "./components";
+} from './components';
 
-import dynamicFormQuery from "./dynamicFormQuery";
-import dynamicFormSubmitMutation from "./dynamicFormSubmitMutation";
+import dynamicFormQuery from './dynamicFormQuery';
+import dynamicFormSubmitMutation from './dynamicFormSubmitMutation';
 
-const parseParams = (queryString) => {
+const parseParams = queryString => {
   const queryParams = new URLSearchParams(queryString);
   const params = {};
-  for(let entry of queryParams.entries()) {
-    if(entry.length) {
-      if(params[entry[0]]) {
-        if(Array.isArray(params[entry[0]])) {
+  for (const entry of queryParams.entries()) {
+    if (entry.length) {
+      if (params[entry[0]]) {
+        if (Array.isArray(params[entry[0]])) {
           params[entry[0]].push(...entry.slice(1));
         } else {
           params[entry[0]] = [params[entry[0]], ...entry.slice(1)];
@@ -33,7 +33,7 @@ const parseParams = (queryString) => {
     }
   }
   return params;
-}
+};
 
 /**
  * @prop {string} purpose Dynamic Form purpose
@@ -47,50 +47,40 @@ const parseParams = (queryString) => {
  * @prop {func} onResponse custom handler for mutation response data
  * @prop {func} onError custom handler for mutation error
  */
-const DynamicForm = (
-  {
-    purpose,
-    version,
-    hiddenData,
-    queryString,
-    mutation,
-    onValidate,
-    onSubmit,
-    onResponse,
-    onError,
-  },
-) => (
+const DynamicForm = ({
+  purpose,
+  version,
+  hiddenData,
+  queryString,
+  mutation,
+  onValidate,
+  onSubmit,
+  onResponse,
+  onError,
+}) => (
   <Query query={dynamicFormQuery} variables={{ purpose, version }}>
-    {
-      ({ data, loading, error }) => {
-        if (loading) return <Loader />;
-        if (error) return <Error error={error.message} />;
-        if (data.dynamicFormData) {
-          const { dynamicFormData } = data;
-          return (
-            <DynamicFormWrapper
-              client={client}
-              mutation={mutation}
-              hiddenData={
-                queryString || hiddenData ?
-                  Object.assign(hiddenData, parseParams(queryString)) :
-                  null
-              }
-              onValidate={onValidate}
-              onSubmit={onSubmit}
-              onResponse={onResponse}
-              onError={onError}
-              {...dynamicFormData}
-            />
-          );
-        }
+    {({ data, loading, error }) => {
+      if (loading) return <Loader />;
+      if (error) return <Error error={error.message} />;
+      if (data.dynamicFormData) {
+        const { dynamicFormData } = data;
         return (
-          <Error
-            error={`No Dynamic Form found: purpose: ${purpose}, version: ${version}`}
+          <DynamicFormWrapper
+            client={client}
+            mutation={mutation}
+            hiddenData={
+              queryString || hiddenData ? Object.assign(hiddenData, parseParams(queryString)) : null
+            }
+            onValidate={onValidate}
+            onSubmit={onSubmit}
+            onResponse={onResponse}
+            onError={onError}
+            {...dynamicFormData}
           />
-        )
+        );
       }
-    }
+      return <Error error={`No Dynamic Form found: purpose: ${purpose}, version: ${version}`} />;
+    }}
   </Query>
 );
 
@@ -103,7 +93,7 @@ DynamicForm.propTypes = {
   onSubmit: PropTypes.func,
   onResponse: PropTypes.func,
   onError: PropTypes.func,
-}
+};
 
 DynamicForm.defaultProps = {
   mutation: dynamicFormSubmitMutation,
@@ -111,7 +101,7 @@ DynamicForm.defaultProps = {
   onSubmit: null,
   onResponse: null,
   onError: null,
-}
+};
 
 export {
   DynamicForm,

@@ -1,22 +1,15 @@
-import React from "react";
-import { Redirect } from "react-router-dom";
-
-import Error from "../Error";
-import { client } from "../../";
-import { DynamicForm } from "../DynamicForm";
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { client } from 'config/apollo';
+import Error from '../Error';
+import { DynamicForm } from '../DynamicForm';
 import './ProjectStandup.css';
 
-import { gql } from "apollo-boost";
+import { gql } from 'apollo-boost';
 
 const submitStandupMutation = gql`
-  mutation submitStandup(
-    $standup_id: ID!
-    $standup_data: StandupSubmitInput!
-  ) {
-    standupSubmit(
-      standup_id: $standup_id
-      standup_data: $standup_data
-    ) {
+  mutation submitStandup($standup_id: ID!, $standup_data: StandupSubmitInput!) {
+    standupSubmit(standup_id: $standup_id, standup_data: $standup_data) {
       id
       progress_sentiment
       worked_on
@@ -30,12 +23,12 @@ class TeamStandup extends React.Component {
   state = {
     error: null,
     response: null,
-  }
+  };
 
   handleResponse = ({ data }) => {
     window.localStorage.removeItem('project_standup');
     this.setState({ response: data.standupSubmit });
-  }
+  };
 
   handleError = error => this.setState({ error });
 
@@ -45,27 +38,27 @@ class TeamStandup extends React.Component {
       standup_data,
     };
 
-    client.mutate({
-      mutation: submitStandupMutation,
-      variables,
-    }).then(this.handleResponse)
+    client
+      .mutate({
+        mutation: submitStandupMutation,
+        variables,
+      })
+      .then(this.handleResponse)
       .catch(this.handleError);
-  }
+  };
 
   render() {
     const { standup_id, standupVersion } = this.props;
     const { error, response } = this.state;
 
     if (error) return <Error error={error.message} />;
-    if (response) return <Redirect to="/newsfeed" />;
+    if (response) return <Redirect to='/newsfeed' />;
     return (
-      <div className="team-standup-container">
-        <div className="team-standup-title">
-          PROJECT STANDUP
-          </div>
-        <div className="team-standup">
+      <div className='team-standup-container'>
+        <div className='team-standup-title'>PROJECT STANDUP</div>
+        <div className='team-standup'>
           <DynamicForm
-            purpose="project_standup"
+            purpose='project_standup'
             version={standupVersion}
             hiddenData={{ standup_id }}
             onSubmit={this.handleSubmit}

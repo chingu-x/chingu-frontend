@@ -1,16 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import './EditableTextField.css';
-import { client } from "../../index.js";
-import { questionComponents } from "../DynamicForm/";
+import { client } from 'config/apollo';
+import { questionComponents } from '../DynamicForm';
 import EditButton from '../common/EditButton';
 
 const { text, textarea, dropdown, multiple_text_input } = questionComponents;
 
 const ActionButtons = ({ onSave, onCancel }) => (
-  <div className="edit-field-btn--btn-container">
-    <button className="edit-field-btn--left" onClick={onSave}>Update</button>
-    <button className="edit-field-btn--right" onClick={onCancel}>Cancel</button>
+  <div className='edit-field-btn--btn-container'>
+    <button className='edit-field-btn--left' onClick={onSave}>
+      Update
+    </button>
+    <button className='edit-field-btn--right' onClick={onCancel}>
+      Cancel
+    </button>
   </div>
 );
 
@@ -29,21 +33,13 @@ const EditArea = ({
   const dropdowninputData = { field_name: fieldName, options: dropdownOptions };
   let inputComponent;
   if (large) {
-    inputComponent = textarea(inputData, onInputChange, data)
+    inputComponent = textarea(inputData, onInputChange, data);
   } else if (dropdownType) {
-    inputComponent = dropdown(dropdowninputData, onInputChange, data)
+    inputComponent = dropdown(dropdowninputData, onInputChange, data);
   } else if (multipleInputType) {
-    inputComponent = multiple_text_input(
-      { input_type: 'url', ...inputData }, 
-      onInputChange, 
-      data
-    );
+    inputComponent = multiple_text_input({ input_type: 'url', ...inputData }, onInputChange, data);
   } else {
-    inputComponent = text(
-      { input_type: 'text', ...inputData },
-      onInputChange,
-      data
-    );
+    inputComponent = text({ input_type: 'text', ...inputData }, onInputChange, data);
   }
 
   return (
@@ -51,8 +47,8 @@ const EditArea = ({
       {inputComponent}
       <ActionButtons onSave={onSubmit} onCancel={onCancel} />
     </React.Fragment>
-  )
-}
+  );
+};
 
 EditArea.propTypes = {
   dropdownOptions: PropTypes.array,
@@ -76,21 +72,21 @@ class EditableTextField extends React.Component {
     };
   }
 
-
   handleUpdateData = () => {
     this.setState({
       edit: false,
     });
-  }
+  };
 
   handleSubmit = () => {
     const { variables } = this.state;
     const { mutation } = this.props;
 
-    client.mutate({ mutation, variables })
+    client
+      .mutate({ mutation, variables })
       .then(this.handleUpdateData)
       .catch(console.error);
-  }
+  };
 
   handleCancel = () => this.setState({ edit: false });
 
@@ -102,9 +98,9 @@ class EditableTextField extends React.Component {
     variables[mutationInputName][fieldName] = fieldData || '';
 
     return variables;
-  }
+  };
 
-  toggleDisplayEdit = (displayEdit) => this.setState({ displayEdit });
+  toggleDisplayEdit = displayEdit => this.setState({ displayEdit });
 
   toggleEdit = () => {
     const edit = !this.state.edit;
@@ -113,18 +109,17 @@ class EditableTextField extends React.Component {
     if (edit) newState.displayEdit = false;
 
     this.setState(newState);
-  }
+  };
 
-  handleInputChange = ({ currentTarget }) => this.setState(
-    () => {
+  handleInputChange = ({ currentTarget }) =>
+    this.setState(() => {
       const { value } = currentTarget;
       const { variables } = this.state;
       const { mutationInputName, fieldName } = this.props;
 
       variables[mutationInputName][fieldName] = value;
       return { variables };
-    },
-  )
+    });
 
   render() {
     const {
@@ -142,25 +137,26 @@ class EditableTextField extends React.Component {
 
     const { edit, variables } = this.state;
 
-    if (edit) return (
-      <Component>
-        <EditArea
-          multipleInputType={multipleInputType}
-          dropdownOptions={dropdownOptions}
-          dropdownType={dropdownType}
-          large={large}
-          data={variables[mutationInputName]}
-          fieldName={fieldName}
-          onSubmit={this.handleSubmit}
-          onCancel={this.handleCancel}
-          onInputChange={this.handleInputChange}
-        />
-      </Component>
-    );
+    if (edit)
+      return (
+        <Component>
+          <EditArea
+            multipleInputType={multipleInputType}
+            dropdownOptions={dropdownOptions}
+            dropdownType={dropdownType}
+            large={large}
+            data={variables[mutationInputName]}
+            fieldName={fieldName}
+            onSubmit={this.handleSubmit}
+            onCancel={this.handleCancel}
+            onInputChange={this.handleInputChange}
+          />
+        </Component>
+      );
 
     return (
       <div
-        className="editable-text-field-container"
+        className='editable-text-field-container'
         onMouseEnter={() => hasPermission && this.toggleDisplayEdit(true)}
         onMouseLeave={() => hasPermission && this.toggleDisplayEdit(false)}
       >
