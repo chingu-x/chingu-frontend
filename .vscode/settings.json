@@ -4,10 +4,5 @@
     "javascript.format.enable": false,
     "eslint.autoFixOnSave": true,
     "prettier.eslintIntegration": true,
-    "prettier.disableLanguages": ["js", "jsx"],
-    "workbench.colorCustomizations": {
-      "titleBar.activeForeground": "#000",
-      "titleBar.inactiveForeground": "#000000CC",
-      "titleBar.activeBackground": "#FFC600","titleBar.inactiveBackground": "#FFC600CC"
-    },
+    "prettier.disableLanguages": ["js", "jsx"]
 }
