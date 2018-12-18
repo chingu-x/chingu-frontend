@@ -103,29 +103,41 @@ class HelpRequest extends React.Component {
     const { request_type } = this.state;
     
     return (
-      <Select
-        escapeClearsValue={true}
-        isSearchable={true}
-        defaultValue="general"
-        name="request_type"
-        options={REQUEST_TYPES.map(type => ({ label: type, value: type }))}
-        // value={request_type}
-        value={{ label: request_type, value: request_type }}
-        onChange={
-          (target) => {
-            const value = target.value;
-            return this.changeRequestType(value);
+      <div className={`form-QA`}>
+        <label className="form-question">
+          Help Category
+        </label>
+        <Select
+          escapeClearsValue={true}
+          isSearchable={true}
+          defaultValue="general"
+          name="request_type"
+          options={REQUEST_TYPES.map(type => ({ label: type, value: type }))}
+          // value={request_type}
+          value={{ label: request_type, value: request_type }}
+          onChange={
+            (target) => {
+              const value = target.value;
+              return this.changeRequestType(value);
+            }
           }
-        }
-      />
+        />
+      </div>
+      
     );
   }
 
   render() {
     const { request_type } = this.state;
     const requestQuestions = questions[request_type](this.state);
+    const imgFile = 'Artboard 4-small.png';
+    const imgSrc = require(`../../../../assets/${imgFile}`);
+
     return (
       <div className="bug-suggestion-box">
+        <div className={`box-color color--help`}>
+          <img className="box-icon" alt="icon" src={imgSrc} />
+        </div>
         {this.renderBaseForm()}
         <DynamicFormContainer
           onSubmit={this.handleSubmit}
