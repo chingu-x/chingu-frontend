@@ -4,9 +4,8 @@ import { isEqual } from "lodash";
 
 import { dynamicFormMaker } from "./DynamicFormMaker";
 import { isFieldInvalid, isEmpty } from "./utilities";
-// TODO: update DF repo new changes as of 11/6/18
+// TODO: update DF repo new changes as of 12/17/18
 /**
- * @prop {array} questions array of Question data objects for rendering
  * @prop {string} purpose Dynamic Form collection name (for form data persistence)
  * @prop {array} questions array of Dynamic Question objects
  * 
@@ -59,16 +58,18 @@ class DynamicFormContainer extends React.Component {
 
     // persistence in LS
     if (persistence) {
-      const persistedData = JSON.stringify({ form_data, field_errors, disabled });
-      localStorage.setItem(purpose, persistedData);
+      const persistenceData = JSON.stringify({ form_data, field_errors, disabled });
+      localStorage.setItem(purpose, persistenceData);
     }
-
     // update form_data when a new question set is introduced
     // handles cases where multiple question sets may be introduced by
     // the DF Wrapper managing the DF Container
     if (!isEqual(questions, prevProps.questions)) { // only update if question set changes, performance of deep equal?
       const new_form_data = this._handleNewQuestions(questions, form_data);
-      this.setState({ form_data: new_form_data, questions });
+      const { disabled, field_errors } = this._validateAllAnswers(new_form_data, questions);
+      const newState = { form_data: new_form_data, questions, disabled, field_errors };
+
+      return this.setState(newState);
     }
 
     // field_errors: { field_name: boolean } -> true: should disable, false: valid
@@ -83,7 +84,7 @@ class DynamicFormContainer extends React.Component {
     const persisted_data  = JSON.parse(persistence); // { disabled, field_errors, form_data }
     const state = { ...base_state, ...persisted_data };
     if (initialData) state.form_data = { ...state.form_data, ...initialData };
-
+    
     return state;
   }
 
