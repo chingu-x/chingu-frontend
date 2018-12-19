@@ -2,11 +2,12 @@ import React from 'react';
 import { gql } from 'apollo-boost';
 import { Request } from '../../../utilities';
 import Loader from '../../../Loader';
+import BackBtn from '../BackBtn';
 import HelpRequestCard from './HelpRequestCard';
 
 class RequestList extends React.Component {
   render() {
-    const { data: { user }, loading } = this.props;
+    const { data: { user }, loading, switchRenderedType } = this.props;
 
     let toRender;
     // todo: div wrapper to customize styling / positioning?
@@ -22,6 +23,7 @@ class RequestList extends React.Component {
     return (
       <div className="bug-suggestion-box">
         {toRender}
+        <BackBtn type="center" path={""} switchRenderedType={switchRenderedType} />
       </div>
     );
   }
@@ -51,8 +53,9 @@ const userRequestListQuery = gql`
   }
 `;
 
-export default () => (
+export default props => (
   <Request
+    {...props}
     loader={false}
     query={userRequestListQuery}
     component={RequestList}
