@@ -20,7 +20,7 @@ class TicketboxPopup extends React.Component {
         // todo: pass switchRenderedType and manage back button
         return <HelpRequest />;
         // return <Help switchRenderedType={this.switchRenderedType} category={type} />
-      case 'requests':
+      case 'your tickets':
         // todo: pass switchRenderedType and manage back button
         return <RequestList />;
       default:
@@ -42,7 +42,7 @@ const TicketboxButtons = ({ switchRenderedType }) => {
     'Artboard 2.png',
     'Artboard 3.png',
     'Artboard 4.png',
-    'Tickets.png', // todo: needs icon
+    'Tickets.png',
   ];
   let labels = [
     'suggestion', 
