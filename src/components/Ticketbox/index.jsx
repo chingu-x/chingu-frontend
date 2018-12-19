@@ -1,7 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import './Ticketbox.css';
-import Help from './components/Help/';
+import HelpRequest from './components/HelpRequest';
 import PopupMenu from "../utilities/PopupMenu"
 import { BugSuggestion } from './components/Feedback';
 
@@ -16,7 +16,8 @@ class TicketboxPopup extends React.Component {
       case 'bug':
         return <BugSuggestion switchRenderedType={this.switchRenderedType} category={type} />
       case 'help':
-        return <Help switchRenderedType={this.switchRenderedType} category={type} />
+        return <HelpRequest />
+        // return <Help switchRenderedType={this.switchRenderedType} category={type} />
       default:
         return <TicketboxButtons switchRenderedType={this.switchRenderedType} />
     }
@@ -35,12 +36,12 @@ const TicketboxButtons = ({ switchRenderedType }) => {
   let assets = [
     'Artboard 2.png',
     'Artboard 3.png',
-    // 'Artboard 4.png'
+    'Artboard 4.png'
   ];
   let labels = [
     'suggestion', 
     'bug', 
-    // 'help'
+    'help'
   ];
   return (
     <div className="ticketbox-btn-section">
