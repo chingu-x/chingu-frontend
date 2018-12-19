@@ -25,3 +25,5 @@ yarn-error.log*
 
 .vs/
 *.sqlite
+
+src/fragmentTypes.json
