@@ -1,21 +1,29 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { Request } from '../../../utilities';
+import Loader from '../../../Loader';
+import BackBtn from '../BackBtn';
 import HelpRequestCard from './HelpRequestCard';
 
 class RequestList extends React.Component {
   render() {
+    const { data: { user }, loading, switchRenderedType } = this.props;
+
+    let toRender;
+    // todo: div wrapper to customize styling / positioning?
+    if (loading) toRender = <Loader size="small" />;
+    else {
+      const { help_requests } = user;
+      if (!help_requests.length) return 'No help requests created';
+      toRender = help_requests.map(HelpRequestCard);
+    }
     // todo: if allow filter by status or request_type manage state of filter tabs
     // filter client side or move <Request /> query to be managed by RequestList
-    const { data: { user } } = this.props;
-    if (!user) return null;
-
-    const { help_requests } = user;
-    if (!help_requests.length) return 'No help requests created';
-
+    
     return (
       <div className="bug-suggestion-box">
-        {help_requests.map(HelpRequestCard)}
+        {toRender}
+        <BackBtn type="center" path={""} switchRenderedType={switchRenderedType} />
       </div>
     );
   }
@@ -37,21 +45,18 @@ const userRequestListQuery = gql`
         created_at
         resolved_at
         admin_notes
-
-        ... on ChangeProject {
-          type: __typename
-        }
-
-        ... on InactiveMember {
-          type: __typename
-        }
+        ... on HelpRequest { type: __typename }
+        ... on ChangeProject { type: __typename }
+        ... on InactiveMember { type: __typename }
       }
     }
   }
 `;
 
-export default () => (
+export default props => (
   <Request
+    {...props}
+    loader={false}
     query={userRequestListQuery}
     component={RequestList}
   />

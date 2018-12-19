@@ -17,12 +17,9 @@ class TicketboxPopup extends React.Component {
       case 'bug':
         return <BugSuggestion switchRenderedType={this.switchRenderedType} category={type} />;
       case 'help':
-        // todo: pass switchRenderedType and manage back button
-        return <HelpRequest />;
-        // return <Help switchRenderedType={this.switchRenderedType} category={type} />
+        return <HelpRequest switchRenderedType={this.switchRenderedType} />;
       case 'your tickets':
-        // todo: pass switchRenderedType and manage back button
-        return <RequestList />;
+        return <RequestList switchRenderedType={this.switchRenderedType} />;
       default:
         return <TicketboxButtons switchRenderedType={this.switchRenderedType} />
     }
