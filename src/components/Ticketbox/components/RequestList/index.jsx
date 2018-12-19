@@ -12,7 +12,6 @@ class RequestList extends React.Component {
     const imgSrc = require(`../../../../assets/${imgFile}`);
 
     let toRender;
-    // todo: div wrapper to customize styling / positioning?
     if (loading) toRender = <Loader size="small" />;
     else {
       const { help_requests } = user;
