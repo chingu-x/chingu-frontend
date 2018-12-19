@@ -1,7 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import './Ticketbox.css';
-import Help from './components/Help/';
+import HelpRequest from './components/HelpRequest';
 import PopupMenu from "../utilities/PopupMenu"
 import RequestList from './components/RequestList'
 import { BugSuggestion } from './components/Feedback';
