@@ -1,21 +1,33 @@
 import React from 'react';
 import './HelpRequestCard.css';
+import dateFormatter from './../../../utilities/dateFormatter';
+import sortByValue from './../../../utilities/sortByValue';
 // todo: needs icon assets and paths
 const getRequestIconpath = (type) => {
-  let requestIconpath;
-  switch(type) {
+  let imgFile;
+  switch (type) {
     case 'ChangeProject':
-      requestIconpath = './';
+      imgFile = 'team-change_100.png';
       break;
     case 'InactiveMember':
-      requestIconpath = './';
+      imgFile = 'inactivity_100.png';
       break;
     default: // general
-      requestIconpath = './';
+      imgFile = `Artboard 4_100.png`;
       break;
   }
+  return require(`../../../../assets/${imgFile}`);
+};
 
-  return requestIconpath;
+const getTicketType = (type) => {
+  switch (type) {
+    case 'ChangeProject':
+      return 'Re: Project Team Change'
+    case 'InactiveMember':
+      return 'Re: Inactive Member'
+    default: // general
+      return 'Re: Help Request'
+  }
 };
 
 const HelpRequestCard = (helpRequest) => {
@@ -30,37 +42,43 @@ const HelpRequestCard = (helpRequest) => {
 
   // todo: needs icon assets and paths
   const STATUS_ICON_PATHS = {
-    open: './',
-    closed: './',
+    open: <div className="ticketbox-ticket--status ticket-open"></div>,
+    closed: <div className="ticketbox-ticket--status ticket-closed" />,
   };
 
   const statusIconPath = STATUS_ICON_PATHS[status];
   const requestIconPath = getRequestIconpath(type);
+  const ticketType = getTicketType(type);
+
   // todo: styling
   // wireframe idea:
   // [statusIcon]|[typeIcon]|[opened: date / (below) resolved: date]|[context]|[admin notes]
   // idea: how to manage long context or admin notes?
   return (
-    <div className="help-request-card">
-      <div className="help-request-status-icon">
-        {/* <img src={require(requestIconPath)} /> */}
-        {status}
+    <React.Fragment>
+      {statusIconPath}
+      <div className="help-request-card-ticket">
+        
+        <img className="ticketbox-tickets-icon" src={requestIconPath} />
+        <div className="ticketbox-tickets-title">{ticketType}</div>
+        <div className="help-request-timestamps">
+          {`Opened: ${dateFormatter(created_at)}`}
+        </div>
+        <div className="help-request-context">
+          {context}
+        </div>
+        {
+          admin_notes && 
+          <div className="help-request-admin_notes">
+            <div className="admin-section-header">Admin Comments:</div>
+            {admin_notes}
+          </div>
+        }
+        { resolved_at && <div className="ticket-status--resolved">Resolved: {dateFormatter(resolved_at)}</div>}
       </div>
-      <div className="help-request-card-icon">
-        {/* <img src={require(iconPath)} /> */}
-        {type}
-      </div>
-      <div className="help-request-timestamps">
-        {`opened: ${created_at}`}
-        {`resolved: ${resolved_at}`}
-      </div>
-      <div className="help-request-context">
-        {context}
-      </div>
-      <div className="help-request-admin_notes">
-        {admin_notes}
-      </div>
-    </div>
+
+    </React.Fragment>
+
   );
 };
 

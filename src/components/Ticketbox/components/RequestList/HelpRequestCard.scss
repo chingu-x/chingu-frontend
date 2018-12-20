@@ -1,0 +1,90 @@
+@import '../../../../styles/abstracts/_variables.scss';
+
+
+.help-request-card {
+  // display: grid;
+  // grid-template-areas: 
+  //   "status card card";
+  // grid-template-columns: repeat(3, auto);
+  // grid-gap: 10px;
+}
+
+.help-request-card-ticket {
+  grid-area: card;
+  display: grid;
+  grid-template-areas: 
+    "icon title title title title timestamp timestamp timestamp" 
+    ". context context context context context context context" 
+    ". admin admin admin admin admin admin admin"
+    ". resolved resolved resolved resolved resolved resolved resolved";
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 10px;
+  background-color: white;
+  box-shadow: $box-shadow;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  align-items: center;
+  color: $dark-grey;
+}
+
+.ticketbox-tickets-title {
+  grid-area: title;
+  font-weight: 600;
+}
+.ticketbox-ticket--status {
+  height: 50px;
+  width: 10px;
+  display: block;
+  position: relative;
+  left: -10px;
+  margin-bottom: -50px;
+  // writing-mode: vertical-rl;
+  // text-orientation: sideways;
+}
+.ticket-open {
+  background-color: $health-green;
+}
+.ticket-closed {
+  background-color: $health-red;
+}
+
+.ticketbox-tickets-icon {
+  grid-area: icon;
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  // justify-self: center;
+}
+
+.help-request-timestamps {
+  grid-area: timestamp;
+  text-align: right;
+}
+
+.help-request-context {
+  grid-area: context;
+}
+
+.help-request-admin_notes {
+  grid-area: admin;
+  border-top: 1px solid $light-grey;
+  padding-top: 10px;
+}
+.admin-section-header {
+  display: inline-block;
+  color: $grey;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding-right: 10px;
+}
+
+.ticket-status--resolved {
+  grid-area: resolved;
+  display: block;
+  border-top: 1px solid $light-grey;
+  padding-top: 10px;
+  color: $grey;
+  text-transform: uppercase;
+  font-size: 14px;
+}
