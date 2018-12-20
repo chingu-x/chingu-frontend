@@ -25,14 +25,12 @@ class RequestList extends React.Component {
     // filter client side or move <Request /> query to be managed by RequestList
 
     return (
-      <div className="bug-suggestion-box">
+      <div className="bug-suggestion-box tickets-container">
         <div className={`box-color color--tickets`}>
           <img className="box-icon" alt="icon" src={imgSrc} />
         </div>
-        <div className="ticketbox-form">
-          {toRender}
-          <BackBtn type="center" path={""} switchRenderedType={switchRenderedType} />
-        </div>
+        {toRender}
+        <BackBtn type="center" path={""} switchRenderedType={switchRenderedType} />
       </div>
     );
   }
