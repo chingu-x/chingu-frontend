@@ -1,8 +1,7 @@
 import React from 'react';
 import './HelpRequestCard.css';
 import dateFormatter from './../../../utilities/dateFormatter';
-import sortByValue from './../../../utilities/sortByValue';
-// todo: needs icon assets and paths
+
 const getRequestIconpath = (type) => {
   let imgFile;
   switch (type) {
@@ -12,7 +11,7 @@ const getRequestIconpath = (type) => {
     case 'InactiveMember':
       imgFile = 'inactivity_100.png';
       break;
-    default: // general
+    default: 
       imgFile = `Artboard 4_100.png`;
       break;
   }
@@ -25,7 +24,7 @@ const getTicketType = (type) => {
       return 'Re: Project Team Change'
     case 'InactiveMember':
       return 'Re: Inactive Member'
-    default: // general
+    default: 
       return 'Re: Help Request'
   }
 };
@@ -40,7 +39,6 @@ const HelpRequestCard = (helpRequest) => {
     admin_notes,
   } = helpRequest;
 
-  // todo: needs icon assets and paths
   const STATUS_ICON_PATHS = {
     open: <div className="ticketbox-ticket--status ticket-open"></div>,
     closed: <div className="ticketbox-ticket--status ticket-closed" />,
@@ -50,10 +48,6 @@ const HelpRequestCard = (helpRequest) => {
   const requestIconPath = getRequestIconpath(type);
   const ticketType = getTicketType(type);
 
-  // todo: styling
-  // wireframe idea:
-  // [statusIcon]|[typeIcon]|[opened: date / (below) resolved: date]|[context]|[admin notes]
-  // idea: how to manage long context or admin notes?
   return (
     <React.Fragment>
       {statusIconPath}
