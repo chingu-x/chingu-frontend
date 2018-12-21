@@ -6,7 +6,6 @@ import Loader from "../../Loader"
 import NewsfeedItems from './index';
 import FeedItemContainer from './FeedItem';
 import NoNews from './NoNews';
-import NewsfeedStandup from "./NewsfeedStandup";
 import * as ProjectCards from '../../ProjectCard';
 
 const NewsFeed = ({ type, loading, data }) => {
@@ -14,16 +13,15 @@ const NewsFeed = ({ type, loading, data }) => {
     ${project ? `${project.team_name.toUpperCase()}` : "ALL"} NEWS
   `;
 
-
-  const renderNewsfeedItems = items => items.map(
-    item => {
-      return FeedItemContainer({
-        component: NewsfeedItems[item.type],
-        item,
-        key: item.id,
-      })
-    }
-  );
+  // const renderNewsfeedItems = items => items.map(
+  //   item => {
+  //     return FeedItemContainer({
+  //       component: NewsfeedItems[item.type],
+  //       item,
+  //       key: item.id,
+  //     })
+  //   }
+  // );
 
   const renderStandups = standups => standups.map(
     standup => (
