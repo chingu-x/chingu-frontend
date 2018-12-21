@@ -17,8 +17,6 @@ const createHelpRequestMutation = gql`
   }
 `;
 
-// todo: refactor to export with Request
-// use data to limit HR options
 const projectHelpRequestQuery = gql`
   query projectHelpRequestQuery {
     user {
@@ -104,8 +102,6 @@ class HelpRequest extends React.Component {
   }
 
   renderBaseForm = () => {
-    // todo: limit options based on user in active cohort
-    // REQUEST OPTIONS: change here
     const { request_type } = this.state;
     const { data: { user }} = this.props;
     let request_options = ['general']
