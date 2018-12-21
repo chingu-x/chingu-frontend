@@ -75,7 +75,7 @@ TicketboxButtons.propTypes = {
 export default () => localStorage.token
   ? (
       <PopupMenu className="ticketbox-container">
-        <div className="ticketbox-btn--main">?</div>
+        <div className="ticketbox-btn--main"><i class="fas fa-question"></i></div>
         <TicketboxPopup />
       </PopupMenu>
     )
