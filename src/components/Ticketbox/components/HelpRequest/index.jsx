@@ -8,6 +8,7 @@ import { client } from '../../../../index';
 import BackBtn from '../BackBtn';
 import TicketBoxError from '../TicketBoxError';
 import { DynamicFormContainer } from '../../../DynamicForm';
+import Request from "../../../utilities/Request"
 
 const createHelpRequestMutation = gql`
   mutation createHelpRequestMutation($help_request_data: HelpRequestData!) {
@@ -51,9 +52,17 @@ class HelpRequest extends React.Component {
     this.state = {
       request_type: 'general',
       error: null,
+      request_options: ['general'],
     };
   }
 
+  componentDidMount() {
+    let { data: { user } } = this.props;
+    if (user && user.active_cohort_project) {
+      this.setState({ request_options: ['general', 'inactivity', 'change_project'] })
+    }
+  }
+  
   fetchProjectRequestData = async () => {
     const { data: { user } } = await client.query({ query: projectHelpRequestQuery })
       .catch(console.error); 
@@ -106,8 +115,7 @@ class HelpRequest extends React.Component {
   renderBaseForm = () => {
     // todo: limit options based on user in active cohort
     // REQUEST OPTIONS: change here
-    const REQUEST_TYPES = ['general', 'inactivity', 'change_project'];
-    const { request_type } = this.state;
+    const { request_type, request_options } = this.state;
     
     return (
       <div className={`form-QA`}>
@@ -119,7 +127,7 @@ class HelpRequest extends React.Component {
           isSearchable={true}
           defaultValue="general"
           name="request_type"
-          options={REQUEST_TYPES.map(type => ({ label: type, value: type }))}
+          options={request_options.map(type => ({ label: type, value: type }))}
           // value={request_type}
           value={{ label: request_type, value: request_type }}
           onChange={
@@ -140,7 +148,6 @@ class HelpRequest extends React.Component {
     const requestQuestions = questions[request_type](this.state);
     const imgFile = 'Artboard 4-small.png';
     const imgSrc = require(`../../../../assets/${imgFile}`);
-
     if (error) return <TicketBoxError switchRenderedType={switchRenderedType} />;
 
     return (
@@ -165,4 +172,11 @@ HelpRequest.propTypes = {
   switchRenderedType: PropTypes.func,
 };
 
-export default HelpRequest;
+export default props => (
+  <Request
+    {...props}
+    component={HelpRequest}
+    query={projectHelpRequestQuery}
+    loader={true}
+  />
+);
