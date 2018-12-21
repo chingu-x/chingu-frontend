@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import dateFormatter from "../utilities/dateFormatter.js"
 
 const CohortProjectInfo = ({ project }) => {

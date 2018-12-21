@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import UserSideBar from "./UserSideBar";
 import Request from "../utilities/Request"
 import profileQuery from "./graphql/profileQuery"
