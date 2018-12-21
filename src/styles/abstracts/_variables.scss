@@ -131,7 +131,7 @@ PORTALS
 ==========================
 */
 @mixin portal-title {
-  color: $light-grey;
+  color: $grey;
   font-size: $portal-title-size;
   margin: 0 auto;
   margin-top: 120px;
@@ -139,6 +139,7 @@ PORTALS
   text-transform: uppercase;
   text-align: center;
   display: block;
+  font-weight: 600;
 }
 
 @mixin portal-subcategory {
