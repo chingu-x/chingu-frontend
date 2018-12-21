@@ -87,6 +87,6 @@ export default props => (
     {...props}
     query={siteLocationEnumQuery}
     component={BugSuggestion}
-    loader
+    loader={{size: 'small', color: 'rgba:(0,0,0,0)'}}
   />
 );
