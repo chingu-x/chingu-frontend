@@ -1,0 +1,86 @@
+@import '../../../../styles/abstracts/_variables.scss';
+
+
+.help-request-card {
+  // display: grid;
+  // grid-template-areas: 
+  //   "status card card";
+  // grid-template-columns: repeat(3, auto);
+  // grid-gap: 10px;
+}
+
+.help-request-card-ticket {
+  grid-area: card;
+  display: grid;
+  grid-template-columns: 35px calc(100% - 35px);
+  grid-gap: 10px;
+  background-color: white;
+  box-shadow: $box-shadow;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  align-items: center;
+  color: $dark-grey;
+}
+
+.ticketbox-tickets-title {
+  grid-column: 2 / -1;
+  font-weight: 600;
+}
+.ticketbox-ticket--status {
+  height: 50px;
+  width: 10px;
+  display: block;
+  position: relative;
+  left: -10px;
+  margin-bottom: -50px;
+}
+.ticket-open {
+  background-color: $health-green;
+}
+.ticket-closed {
+
+}
+
+.ticketbox-tickets-icon {
+  grid-column: 1 / 2;
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+}
+
+.help-request-timestamps {
+  grid-column: 2 / -1;
+  text-align: left;
+  margin-top: -15px;
+  color: $grey;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.help-request-context {
+  grid-column: 2 / -1;
+}
+
+.help-request-admin_notes {
+  grid-column: 2 / -1;
+  border-top: 1px solid $light-grey;
+  padding-top: 10px;
+}
+.admin-section-header {
+  display: inline-block;
+  color: $grey;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding-right: 10px;
+}
+
+.ticket-status--resolved {
+  grid-column: 2 / -1;
+  display: block;
+  border-top: 1px solid $light-grey;
+  padding-top: 10px;
+  color: $grey;
+  text-transform: uppercase;
+  font-size: 14px;
+}

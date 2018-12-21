@@ -3,7 +3,6 @@ import CohortProjectInfo from './CohortProjectInfo';
 import ProjectImage from './ProjectImage';
 import ProjectInfo from './ProjectInfo';
 import TeamButtons from './TeamButtons';
-import TeamResourceLinks from './TeamResourceLinks';
 import './ProjectCard.css';
 import './TeamCard.css';
 

@@ -1,10 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { gql } from 'apollo-boost';
-
 import questions from './questions';
-import { client } from '../../../../index'
+import { client } from '../../../../index';
+import BackBtn from '../BackBtn';
+import TicketBoxError from '../TicketBoxError';
 import { DynamicFormContainer } from '../../../DynamicForm';
+import Request from "../../../utilities/Request"
 
 const createHelpRequestMutation = gql`
   mutation createHelpRequestMutation($help_request_data: HelpRequestData!) {
@@ -14,8 +17,6 @@ const createHelpRequestMutation = gql`
   }
 `;
 
-// todo: refactor to export with Request
-// use data to limit HR options
 const projectHelpRequestQuery = gql`
   query projectHelpRequestQuery {
     user {
@@ -45,7 +46,10 @@ const projectHelpRequestQuery = gql`
 class HelpRequest extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { request_type: 'general' };
+    this.state = {
+      request_type: 'general',
+      error: null,
+    };
   }
 
   fetchProjectRequestData = async () => {
@@ -80,6 +84,10 @@ class HelpRequest extends React.Component {
     return { ...projectData, request_type, project_id };
   };
 
+  handleSuccess = () => this.props.switchRenderedType('requests');
+
+  handleError = (error) => this.setState({ error });
+
   handleSubmit = (formData) => {
     const { request_type } = this.state;
     const help_request_data = { context: formData.context };
@@ -89,18 +97,17 @@ class HelpRequest extends React.Component {
     }
 
     client.mutate({ mutation: createHelpRequestMutation, variables: { help_request_data } })
-    .then(console.log)
-    .catch(console.log);
-    // todo: implement handlers
-      // .then(this.handleSuccess)
-      // .catch(this.handleError);
+      .then(this.handleSuccess)
+      .catch(this.handleError);
   }
 
   renderBaseForm = () => {
-    // todo: limit options based on user in active cohort
-    // REQUEST OPTIONS: change here
-    const REQUEST_TYPES = ['general', 'inactivity', 'change_project'];
     const { request_type } = this.state;
+    const { data: { user }} = this.props;
+    let request_options = ['general']
+    if (user && user.active_cohort_project) {
+      request_options =  [...request_options, 'inactivity', 'change_project'];
+    }
     
     return (
       <div className={`form-QA`}>
@@ -112,7 +119,7 @@ class HelpRequest extends React.Component {
           isSearchable={true}
           defaultValue="general"
           name="request_type"
-          options={REQUEST_TYPES.map(type => ({ label: type, value: type }))}
+          options={request_options.map(type => ({ label: type, value: type }))}
           // value={request_type}
           value={{ label: request_type, value: request_type }}
           onChange={
@@ -128,24 +135,39 @@ class HelpRequest extends React.Component {
   }
 
   render() {
-    const { request_type } = this.state;
+    const { request_type, error } = this.state;
+    const { switchRenderedType } = this.props;
     const requestQuestions = questions[request_type](this.state);
     const imgFile = 'Artboard 4-small.png';
     const imgSrc = require(`../../../../assets/${imgFile}`);
+    if (error) return <TicketBoxError switchRenderedType={switchRenderedType} />;
 
     return (
       <div className="bug-suggestion-box">
         <div className={`box-color color--help`}>
           <img className="box-icon" alt="icon" src={imgSrc} />
         </div>
-        {this.renderBaseForm()}
-        <DynamicFormContainer
-          onSubmit={this.handleSubmit}
-          questions={requestQuestions}
-        />
+        <div className="ticketbox-form">
+          {this.renderBaseForm()}
+          <DynamicFormContainer
+            onSubmit={this.handleSubmit}
+            questions={requestQuestions}
+          />
+          <BackBtn type="left" path={""} switchRenderedType={switchRenderedType} />
+        </div>
       </div>
     );
   }
 }
 
-export default HelpRequest;
+HelpRequest.propTypes = {
+  switchRenderedType: PropTypes.func,
+};
+
+export default props => (
+  <Request
+    {...props}
+    component={HelpRequest}
+    query={projectHelpRequestQuery}
+  />
+);

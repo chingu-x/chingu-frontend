@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import './Ticketbox.css';
 import HelpRequest from './components/HelpRequest';
 import PopupMenu from "../utilities/PopupMenu"
+import RequestList from './components/RequestList'
 import { BugSuggestion } from './components/Feedback';
 
 class TicketboxPopup extends React.Component {
@@ -14,10 +15,11 @@ class TicketboxPopup extends React.Component {
     switch (type) {
       case 'suggestion':
       case 'bug':
-        return <BugSuggestion switchRenderedType={this.switchRenderedType} category={type} />
+        return <BugSuggestion switchRenderedType={this.switchRenderedType} category={type} />;
       case 'help':
-        return <HelpRequest />
-        // return <Help switchRenderedType={this.switchRenderedType} category={type} />
+        return <HelpRequest switchRenderedType={this.switchRenderedType} />;
+      case 'your tickets':
+        return <RequestList switchRenderedType={this.switchRenderedType} />;
       default:
         return <TicketboxButtons switchRenderedType={this.switchRenderedType} />
     }
@@ -36,12 +38,14 @@ const TicketboxButtons = ({ switchRenderedType }) => {
   let assets = [
     'Artboard 2.png',
     'Artboard 3.png',
-    'Artboard 4.png'
+    'Artboard 4.png',
+    'Tickets.png',
   ];
   let labels = [
     'suggestion', 
     'bug', 
-    'help'
+    'help',
+    'your tickets'
   ];
   return (
     <div className="ticketbox-btn-section">
@@ -71,7 +75,7 @@ TicketboxButtons.propTypes = {
 export default () => localStorage.token
   ? (
       <PopupMenu className="ticketbox-container">
-        <div className="ticketbox-btn--main">?</div>
+        <div className="ticketbox-btn--main"><i className="fas fa-question"></i></div>
         <TicketboxPopup />
       </PopupMenu>
     )
