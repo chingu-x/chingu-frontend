@@ -1,14 +1,18 @@
-import React from 'react';
-import { gql } from 'apollo-boost';
-import { Request } from '../../../utilities';
-import Loader from '../../../Loader';
-import BackBtn from '../BackBtn';
-import HelpRequestCard from './HelpRequestCard';
+import React from "react";
+import { gql } from "apollo-boost";
+import { Request } from "../../../utilities";
+import Loader from "../../../Loader";
+import BackBtn from "../BackBtn";
+import HelpRequestCard from "./HelpRequestCard";
 
 class RequestList extends React.Component {
   render() {
-    const { data: { user }, loading, switchRenderedType } = this.props;
-    const imgFile = 'Tickets-small.png';
+    const {
+      data: { user },
+      loading,
+      switchRenderedType
+    } = this.props;
+    const imgFile = "Tickets-small.png";
     const imgSrc = require(`../../../../assets/${imgFile}`);
 
     let toRender;
@@ -16,7 +20,8 @@ class RequestList extends React.Component {
     else {
       const { help_requests } = user;
       if (!help_requests.length) {
-        toRender = 'No tickets yet! Come back after you have submitted a Bug, Suggestion or Help Ticket.';
+        toRender =
+          "No tickets yet! Come back after you have submitted a Bug, Suggestion or Help Ticket.";
       } else {
         toRender = help_requests.map(HelpRequestCard);
       }
@@ -30,11 +35,15 @@ class RequestList extends React.Component {
           <img className="box-icon" alt="icon" src={imgSrc} />
         </div>
         {toRender}
-        <BackBtn type="center" path={""} switchRenderedType={switchRenderedType} />
+        <BackBtn
+          type="center"
+          path={""}
+          switchRenderedType={switchRenderedType}
+        />
       </div>
     );
   }
-};
+}
 
 const userRequestListQuery = gql`
   query userRequestListQuery(
@@ -52,15 +61,17 @@ const userRequestListQuery = gql`
         created_at
         resolved_at
         admin_notes
-        ... on HelpRequest { type: __typename }
-        ... on ChangeProject { 
-          type: __typename 
+        ... on HelpRequest {
+          type: __typename
+        }
+        ... on ChangeProject {
+          type: __typename
           requested_project {
             title
           }
         }
-        ... on InactiveMember { 
-          type: __typename 
+        ... on InactiveMember {
+          type: __typename
           inactive_member {
             username
           }
@@ -77,5 +88,6 @@ export default props => (
     loader={false}
     query={userRequestListQuery}
     component={RequestList}
+    options={{ fetchPolicy: "network-only" }}
   />
 );
