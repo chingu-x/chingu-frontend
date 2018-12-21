@@ -25,17 +25,21 @@
 PLACEMENT OF MODALS
 ==========================
 */
-.bug-suggestion-box,
-.ticketbox-btn-section {
+.bug-suggestion-box {
     position: absolute;
     right: 20px;
     bottom: 120px;
     background-color: white;
     box-shadow: $box-shadow;
     padding: 30px;
-    width: 475px;
+    width: 400px;
     max-height: calc(100vh - 200px);	
     overflow-y: auto;
+}
+.ticketbox-btn-section {
+    position: absolute;
+    right: 15px;
+    bottom: 120px;
 }
 /*
 ==========================
@@ -68,6 +72,8 @@ TICKETBOX MAIN BTN SELECTION
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     grid-gap: 15px;
+    align-items: center;
+    justify-items: end;
 }
 
 .ticketbox-btn--container {
@@ -75,7 +81,8 @@ TICKETBOX MAIN BTN SELECTION
     cursor: pointer;
     transition: all .075s ease-out;
     display: grid;
-    justify-items: center;
+    justify-items: end;
+    align-items: center;
     &:hover {
       transform: scale(1.1);
     }
@@ -84,9 +91,26 @@ TICKETBOX MAIN BTN SELECTION
       transform: none;
     }
   }
+  
+    .ticketbox-btn--text {
+        display: none;
+        color: white;
+        background-color: $darker-grey;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+        text-transform: capitalize;
+        justify-self: end;
+        border-radius: 5px;
+        width: auto;
+        position: relative;
+        padding: 8px;
+        right: 70px;
+        margin-top: -65px;
+        white-space: nowrap
+    }
   .ticketbox-btn {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background-color: none;
     box-shadow: $box-shadow;
@@ -94,14 +118,12 @@ TICKETBOX MAIN BTN SELECTION
     &.disabled {
       cursor: default;
     }
+    &:hover + .ticketbox-btn--text {
+        display: block;
+    }
+
 }
-.ticketbox-btn--text {
-    color: $dark-grey;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    width: 100px;
-    margin-top: 10px;
-}
+
 /*
 ==========================
 BUG & SUGGESTION FORMS
