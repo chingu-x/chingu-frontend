@@ -20,6 +20,21 @@ class TierSelectRadioComponent extends React.Component {
       }
     ]
     const { answer, field_name, index, onFormChange, form_data } = this.props;
+    let subtext;
+    switch (answer.value) {
+      case 1:
+        subtext = <p>HTML / Basic Javascript / Basic Algorithms (Landing Pages)</p>;
+        break;
+      case 2:
+        subtext = <p>Intermediate Algorithms / Front-end Projects (Front-End)</p>;
+        break;
+      case 3: 
+        subtext = <p>Advanced Projects / Data Visualization / Back-end (Full-Stack)</p>;
+        break;
+      default:
+        subtext = <p>HTML / Basic Javascript / Basic Algorithms (Landing Pages)</p>;
+        break;
+    }
     return (
       <div className={badges[index].btnClassName + '-container'}>
         <div key={'radio-answer_' + field_name + '_' + index} className="radio-container">
@@ -28,13 +43,8 @@ class TierSelectRadioComponent extends React.Component {
               <img className={badges[index].className} src={badges[index].img} alt={'badge-' + index} />
             </div>
             <div className="badge-title">{`Tier ${answer.text}`}</div>
-            {/* im sorry... */}
             <div className="badge-subtext">
-              {
-                answer.value === 1 && <p>HTML / Basic Javascript / Basic Algorithms (Landing Pages)</p> ||
-                answer.value === 2 && <p>Intermediate Algorithms / Front-end Projects (Front-End)</p> ||
-                answer.value === 3 && <p>Advanced Projects / Data Visualization / Back-end (Full-Stack)</p>
-              }
+              {subtext}
             </div>
             <input
               className="form-radio special-badge-input"
