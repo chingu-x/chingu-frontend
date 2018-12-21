@@ -18,14 +18,14 @@ const getRequestIconpath = (type) => {
   return require(`../../../../assets/${imgFile}`);
 };
 
-const getTicketType = (type) => {
+const getTicketType = ({ type, inactive_member, requested_project }) => {
   switch (type) {
     case 'ChangeProject':
-      return 'Re: Project Team Change'
+      return `Project Team Change: ${requested_project ? requested_project.title : 'Auto-Placement'}`
     case 'InactiveMember':
-      return 'Re: Inactive Member'
+      return `Inactive Member: ${inactive_member.username}`
     default: 
-      return 'Re: Help Request'
+      return 'Help Request'
   }
 };
 
@@ -37,6 +37,9 @@ const HelpRequestCard = (helpRequest) => {
     created_at,
     resolved_at,
     admin_notes,
+    requested_project,
+    inactive_member,
+    last_contact
   } = helpRequest;
 
   const STATUS_ICON_PATHS = {
@@ -46,7 +49,7 @@ const HelpRequestCard = (helpRequest) => {
 
   const statusIconPath = STATUS_ICON_PATHS[status];
   const requestIconPath = getRequestIconpath(type);
-  const ticketType = getTicketType(type);
+  const ticketType = getTicketType({ type, inactive_member, requested_project });
 
   return (
     <React.Fragment>
@@ -56,7 +59,7 @@ const HelpRequestCard = (helpRequest) => {
         <img className="ticketbox-tickets-icon" src={requestIconPath} />
         <div className="ticketbox-tickets-title">{ticketType}</div>
         <div className="help-request-timestamps">
-          {`Opened: ${dateFormatter(created_at)}`}
+          {`Opened ${dateFormatter(created_at)}`}
         </div>
         <div className="help-request-context">
           {context}
@@ -68,7 +71,7 @@ const HelpRequestCard = (helpRequest) => {
             {admin_notes}
           </div>
         }
-        { resolved_at && <div className="ticket-status--resolved">Resolved: {dateFormatter(resolved_at)}</div>}
+        { resolved_at && <div className="ticket-status--resolved">Resolved {dateFormatter(resolved_at)}</div>}
       </div>
 
     </React.Fragment>
