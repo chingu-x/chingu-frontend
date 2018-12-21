@@ -5,6 +5,7 @@ const ProjectImage = ({ project }) => {
   return (
     <Link className="project-img-container" to={`/project/${project.id}`}>
       <img
+        alt="project-img"
         className="project-img"
         src={require('../../assets/Artboard 17.png')} />
        <div className="project-img-text">Work In Progress</div>
