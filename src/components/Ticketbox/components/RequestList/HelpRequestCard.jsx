@@ -39,7 +39,7 @@ const HelpRequestCard = (helpRequest) => {
     admin_notes,
     requested_project,
     inactive_member,
-    last_contact
+    // last_contact
   } = helpRequest;
 
   const STATUS_ICON_PATHS = {
@@ -56,7 +56,7 @@ const HelpRequestCard = (helpRequest) => {
       {statusIconPath}
       <div className="help-request-card-ticket">
         
-        <img className="ticketbox-tickets-icon" src={requestIconPath} />
+        <img alt="ticketbox-icon" className="ticketbox-tickets-icon" src={requestIconPath} />
         <div className="ticketbox-tickets-title">{ticketType}</div>
         <div className="help-request-timestamps">
           {`Opened ${dateFormatter(created_at)}`}
