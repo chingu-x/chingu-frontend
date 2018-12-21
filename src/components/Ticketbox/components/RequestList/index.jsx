@@ -53,8 +53,19 @@ const userRequestListQuery = gql`
         resolved_at
         admin_notes
         ... on HelpRequest { type: __typename }
-        ... on ChangeProject { type: __typename }
-        ... on InactiveMember { type: __typename }
+        ... on ChangeProject { 
+          type: __typename 
+          requested_project {
+            title
+          }
+        }
+        ... on InactiveMember { 
+          type: __typename 
+          inactive_member {
+            username
+          }
+          last_contact
+        }
       }
     }
   }
