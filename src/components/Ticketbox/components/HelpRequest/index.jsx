@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { gql } from 'apollo-boost';
-
 import questions from './questions';
 import { client } from '../../../../index';
 import BackBtn from '../BackBtn';
@@ -52,17 +51,9 @@ class HelpRequest extends React.Component {
     this.state = {
       request_type: 'general',
       error: null,
-      request_options: ['general'],
     };
   }
 
-  componentDidMount() {
-    let { data: { user } } = this.props;
-    if (user && user.active_cohort_project) {
-      this.setState({ request_options: ['general', 'inactivity', 'change_project'] })
-    }
-  }
-  
   fetchProjectRequestData = async () => {
     const { data: { user } } = await client.query({ query: projectHelpRequestQuery })
       .catch(console.error); 
@@ -115,7 +106,12 @@ class HelpRequest extends React.Component {
   renderBaseForm = () => {
     // todo: limit options based on user in active cohort
     // REQUEST OPTIONS: change here
-    const { request_type, request_options } = this.state;
+    const { request_type } = this.state;
+    const { data: { user }} = this.props;
+    let request_options = ['general']
+    if (user && user.active_cohort_project) {
+      request_options =  [...request_options, 'inactivity', 'change_project'];
+    }
     
     return (
       <div className={`form-QA`}>
@@ -177,6 +173,5 @@ export default props => (
     {...props}
     component={HelpRequest}
     query={projectHelpRequestQuery}
-    loader={true}
   />
 );
