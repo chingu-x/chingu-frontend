@@ -1,57 +1,27 @@
 import * as React from 'react';
 import "./NewsfeedStandup.css";
+import FeedItemContainer from "./FeedItem";
+import StandupDetail from "./StandupDetail";
+import StandupSummary from "./StandupSummary";
 
-const sentimentMap = {
-  red: 'Trouble Ahead!',
-  yellow: 'Nervous',
-  green: 'Great!',
-};
-
-const responseLabelMap = {
-  progress_sentiment: 'Health Status',
-  worked_on: 'Worked on',
-  working_on: 'Working on',
-  blocked_on: 'Blocked on',
-}
-
-const classNameSelector = (item, data) => {
-  let className = "team-standup-answer";
-  if (item === "progress_sentiment") {
-    className += ` team-standup-status--${data}`;
-  }
-  return className;
-};
-
-const renderResponses = standupFields => Object.keys(standupFields).map(
-  standupField => {
-    const fieldValue = standupFields[standupField];
-    const className = classNameSelector(standupField, fieldValue);
-    return (
-      <div className="team-standup-data" key={standupField}>
-        <label className="team-standup-label">{responseLabelMap[standupField]} :</label>
-        <div className={className}>
-          {
-            standupField === "progress_sentiment"
-              ? sentimentMap[fieldValue]
-              : fieldValue
-          }
-        </div>
+const renderResponses = standups => {
+  const standup = {standup: standups.standups[Object.values(standups.standups).length-1]};
+  return (
+    <React.Fragment>
+      <div className="team-standup-summary">
+        <StandupSummary/>
       </div>
-    );
-  },
-);
-
-const NewsfeedStandup = ({
-  standup: {
-    progress_sentiment,
-    worked_on,
-    working_on,
-    blocked_on,
-  },
-}) => (
-    <div className="team-standup-card-container">
-      {renderResponses({ progress_sentiment, worked_on, working_on, blocked_on })}
-    </div>
+      <div className="team-standup-detail">
+        <StandupDetail {...standup}/>
+      </div>
+    </React.Fragment>
   );
+};
+
+const NewsfeedStandup = (standups) => (
+  <div className="team-standup-container">
+    {renderResponses({ standups })}
+  </div>
+);
 
 export default NewsfeedStandup;

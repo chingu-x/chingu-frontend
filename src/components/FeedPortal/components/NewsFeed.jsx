@@ -14,28 +14,34 @@ const NewsFeed = ({ type, loading, data }) => {
     ${project ? `${project.team_name.toUpperCase()}` : "ALL"} NEWS
   `;
 
-
   const renderNewsfeedItems = items => items.map(
     item => {
       return FeedItemContainer({
         component: NewsfeedItems[item.type],
         item,
         key: item.id,
-      })
+      });
     }
   );
 
-  const renderStandups = standups => standups.map(
-    standup => (
+  const renderStandups = standups => {
+    /*
+    (
       standup.submitted_at
         ? FeedItemContainer({
-          item: { standup, type: "NewsfeedStandup", user: standup.member, timestamp: standup.submitted_at },
+          item: { standups, type: "NewsfeedStandup", user: standup.member, timestamp: standup.submitted_at },
           key: standup.id,
           component: NewsfeedItems.NewsfeedStandup,
         })
         : null
-    ),
-  );
+    )
+    */
+    return (
+      <div>
+        <NewsfeedStandup {...standups} />
+      </div>
+    );
+  };
 
   const renderFeed = ({ user, project }) => {
     let dataToRender = (
