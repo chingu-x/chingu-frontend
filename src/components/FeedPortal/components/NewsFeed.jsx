@@ -25,22 +25,18 @@ const NewsFeed = ({ type, loading, data }) => {
   );
 
   const renderStandups = standups => {
-    /*
-    (
+    console.log('NewsFeed - standups: ', standups[standups.length-1]);
+    const standup = standups[standups.length-1];
+    console.log('NewsFeed - standup: ', standup);
+    return (
       standup.submitted_at
         ? FeedItemContainer({
-          item: { standups, type: "NewsfeedStandup", user: standup.member, timestamp: standup.submitted_at },
+          item: { standup, type: "NewsfeedStandup", user: standup.member, timestamp: standup.submitted_at },
           key: standup.id,
           component: NewsfeedItems.NewsfeedStandup,
         })
         : null
     )
-    */
-    return (
-      <div>
-        <NewsfeedStandup {...standups} />
-      </div>
-    );
   };
 
   const renderFeed = ({ user, project }) => {

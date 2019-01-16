@@ -29,7 +29,7 @@ const renderResponses = standupFields => Object.keys(standupFields).map(
     return (
       <React.Fragment>
         <div className="team-standup-data" key={standupField}>
-          <label className="team-standup-label">{responseLabelMap[standupField]} :</label>
+          <label className="team-standup-label team-standup-label--bordered">{responseLabelMap[standupField]} :</label>
           <div className={className}>
             {
               standupField === "progress_sentiment"
@@ -49,7 +49,7 @@ const StandupDetail = ({
     working_on,
     blocked_on,
   },
-}) =>
+}) => 
   (
     <div>
       {renderResponses({ progress_sentiment, worked_on, working_on, blocked_on })}
