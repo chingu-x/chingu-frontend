@@ -1,4 +1,6 @@
-import * as React from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import "./NewsfeedStandup.css";
 import FeedItemContainer from "./FeedItem";
 import StandupDetail from "./StandupDetail";
@@ -6,16 +8,25 @@ import StandupSummary from "./StandupSummary";
 
 class NewsfeedStandup extends React.Component {
 
-  state = {
-    standup_selected: {},
+  static propTypes = {
+    standup: PropTypes.object.isRequired,
+    timestamp: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    user: PropTypes.object.isRequired,
   };
 
-  componentDidMount() {
-    const { standup } = this.props;
-    this.setState(standup);
+  constructor(props) {
+    super(props);
+
+    const { standup } = props;
+    this.state = {
+      standup: standup,
+    };
+    console.log('standup:', this.state);
   }
   
-  renderResponses = (standup) => {
+  renderResponses() {
+    console.log('NewsfeedStandup - renderResponses - this.state: ', this.state);
     return (
       <React.Fragment>
         <div className="team-standup-container">
@@ -23,7 +34,7 @@ class NewsfeedStandup extends React.Component {
             <StandupSummary/>
           </div>
           <div className="team-standup-detail">
-            <StandupDetail {...standup}/>
+            <StandupDetail { ...this.state }/>
           </div>
         </div>
       </React.Fragment>
@@ -31,10 +42,9 @@ class NewsfeedStandup extends React.Component {
   };
 
   render() {
-    const standup = {...this.props.standup};
     return (
       <React.Fragment>
-        { this.renderResponses({ standup }) }
+        { this.renderResponses() }
       </React.Fragment>
     );
   }
