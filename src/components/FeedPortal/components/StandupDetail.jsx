@@ -12,7 +12,7 @@ const responseLabelMap = {
   worked_on: 'Worked on',
   working_on: 'Working on',
   blocked_on: 'Blocked on',
-}
+};
 
 const classNameSelector = (item, data) => {
   let className = "team-standup-answer";

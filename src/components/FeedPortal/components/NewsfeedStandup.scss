@@ -10,20 +10,23 @@ CONTAINER
     display: grid;
     grid-template-columns: 30% 70%;
     grid-gap: 10px;
-    background-color: #f8f8f8;
     padding: 10px; 
 }
   
 .team-standup-summary {
+    background-color: white;
     display: grid;
     grid-column: 1;
     grid-row: 1;
+    padding: .5rem;
 }
   
 .team-standup-detail {
+    background-color: white;
     display: grid;
     grid-column: 2;
     grid-row: 1;
+    padding: .5rem;
 }
 /*
 ==========================
@@ -41,7 +44,7 @@ data object
     grid-area: l;
     display: block;
     padding-bottom: 30px;
-    font-size: 12px;
+    font-size: 14px;
     color: #9e9e9e; 
 }
   
