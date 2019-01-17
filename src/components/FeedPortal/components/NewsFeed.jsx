@@ -25,9 +25,7 @@ const NewsFeed = ({ type, loading, data }) => {
   );
 
   const renderStandups = standups => {
-    console.log('NewsFeed - standups: ', standups[standups.length-1]);
     const standup = standups[standups.length-1];
-    console.log('NewsFeed - standup: ', standup);
     return (
       standup.submitted_at
         ? FeedItemContainer({

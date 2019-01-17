@@ -49,8 +49,7 @@ const StandupDetail = ({
     working_on,
     blocked_on,
   },
-}) => 
-  (
+}) => (
     <div>
       {renderResponses({ progress_sentiment, worked_on, working_on, blocked_on })}
     </div>
