@@ -8,26 +8,24 @@ CONTAINER
 */
 .team-standup-container {
     display: grid;
-    grid-template-columns: 30% 70%;
-    grid-gap: 10px;
-    grid-auto-rows: minmax(10rem, auto);
-    padding: 10px; 
+    grid-template-columns: 25% 72%;
+    grid-gap: 1rem;
 }
   
 .team-standup-summary {
     background-color: white;
-    display: grid;
+    display: table-cell; // Force height of all children to that of largest child 
     grid-column: 1;
     grid-row: 1;
-    padding: .5rem;
+    padding: .25rem;
 }
   
 .team-standup-detail {
     background-color: white;
-    display: grid;
+    display: table-cell; // Force height of all children to that of largest child 
     grid-column: 2;
     grid-row: 1;
-    padding: .5rem;
+    padding: .25rem;
 }
 /*
 ==========================
@@ -49,7 +47,7 @@ data object
 }
   
 .team-standup-label--bordered {
-    border-right: 1px solid #3d3636; 
+    border-right: 1px solid #9e9e9e; 
 }
 
 .team-standup-label--padtop {
@@ -71,7 +69,7 @@ data object
 .team-standup-id {
     display: block;
     font-size: 12px;
-    color: $dark-grey;
+    color: $health-green;
 }
 /*
 ==========================

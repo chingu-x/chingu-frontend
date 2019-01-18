@@ -91,6 +91,8 @@ const getNewsfeed = (project_id) => {
         worked_on
         working_on
         blocked_on
+        is_expired
+        expiration
         member {
           id
           username

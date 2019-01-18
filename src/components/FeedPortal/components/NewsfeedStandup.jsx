@@ -23,6 +23,8 @@ class NewsfeedStandup extends React.Component {
       standups: standups,
       selected_standup: { ...standups[standups.length-1] },
     };
+
+    this.updateSelectedStandup = this.updateSelectedStandup.bind(this);
   }
 
   updateSelectedStandup(standup) {
@@ -30,18 +32,16 @@ class NewsfeedStandup extends React.Component {
   }
   
   renderResponses() {
-    console.log('NewsfeedStandup - renderResponses - this.state: ', this.state);
-    const standup = { standup: this.state.selected_standup };
     return (
       <React.Fragment>
         <div className="team-standup-container">
           <div className="team-standup-summary">
             <StandupSummary 
               standups={ this.state.standups }
-              updateStandupSelected={ this.updateSelectedStandup }/>
+              updateSelectedStandup={ this.updateSelectedStandup }/>
           </div>
           <div className="team-standup-detail">
-            <StandupDetail { ...standup }/>
+            <StandupDetail { ...{ standup: this.state.selected_standup } }/>
           </div>
         </div>
       </React.Fragment>
