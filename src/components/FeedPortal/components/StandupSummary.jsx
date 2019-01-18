@@ -49,6 +49,14 @@ const newStandupSelected = (e, mostRecentStandup, updateSelectedStandup) => {
 const renderResponses = (props) => {
   console.log('StandupSummary - renderResponses - props: ', props);
   const mostRecentStandup = props.standups[props.standups.length-1];
+  const pendingStandup = props.standups
+  .sort( (a, b) => (b.id - a.id))
+  .reduce( (standups, currentStandup) => {
+    if (!currentStandup.submitted_at) {
+      standups.push(currentStandup)
+    }
+    return standups;
+  }, [])[0];
   return (
     <React.Fragment>
       <label className="team-standup-label">Recent Standups</label>
@@ -70,25 +78,15 @@ const renderResponses = (props) => {
             : null
         ),
       )}
-      <label className="team-standup-label team-standup-label--padtop">Pending Standups</label>
-      { props.standups.map( standup => (
-          !standup.submitted_at
-            ? <a href='#' className="team-standup-id" key={standup.expiration}
-                onClick={ (e) => {
-                newStandupSelected(e, standup, props.updateSelectedStandup);
-              } }>
-              { formatStandupId('pending', standup) }
-              </a>
-            : null
-        ),
-      )}
-      <label className="team-standup-label team-standup-label--padtop">Missed Standups:
-        &nbsp;
-        { props.standups.reduce( (accumulator, standup) => {
-            return accumulator = standup.is_expired ? accumulator + 1 : accumulator;
-          }, 0)
-        }
-      </label>
+      <label className="team-standup-label team-standup-label--padtop">Pending Standup</label>
+      { 
+        <a href='#' className="team-standup-id" key={pendingStandup.expiration}
+            onClick={ (e) => {
+          newStandupSelected(e, pendingStandup, props.updateSelectedStandup);
+        } }>
+        { formatStandupId('pending', pendingStandup) }
+        </a>
+      }
     </React.Fragment>
   );
 };
