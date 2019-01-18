@@ -32,7 +32,6 @@ class NewsfeedStandup extends React.Component {
   renderResponses() {
     console.log('NewsfeedStandup - renderResponses - this.state: ', this.state);
     const standup = { standup: this.state.selected_standup };
-    console.log('standup: ', standup);
     return (
       <React.Fragment>
         <div className="team-standup-container">

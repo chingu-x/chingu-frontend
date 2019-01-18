@@ -27,8 +27,8 @@ const renderResponses = standupFields => Object.keys(standupFields).map(
     const fieldValue = standupFields[standupField];
     const className = classNameSelector(standupField, fieldValue);
     return (
-      <React.Fragment>
-        <div className="team-standup-data" key={standupField}>
+      <React.Fragment key={standupField}>
+        <div className="team-standup-data">
           <label className="team-standup-label team-standup-label--bordered">{responseLabelMap[standupField]} :</label>
           <div className={className}>
             {
