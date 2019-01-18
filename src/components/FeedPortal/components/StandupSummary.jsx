@@ -24,20 +24,26 @@ const classNameSelector = (item, data) => {
   return className;
 };
 
-const renderResponses = () => {
-  console.log()
+const formatStandupId = (standup) => {
+  return new Date(standup.submitted_at).toLocaleDateString()
+    + ' - ' + standup.member.username;
+}
+
+const renderResponses = (props) => {
+  console.log('props: ', props);
   return (
     <React.Fragment>
       <label className="team-standup-label">Recent Standups</label>
-      <label className="team-standup-label">All Standups</label>
-      <label className="team-standup-label">Missed Standups: nn</label>
+      <div className="team-standup-id">{ formatStandupId(props.standups[props.standups.length-1]) }</div>
+      <label className="team-standup-label team-standup-label--padtop">All Standups</label>
+      <label className="team-standup-label team-standup-label--padtop">Missed Standups: nn</label>
     </React.Fragment>
   );
 };
 
-const StandupSummary = () => (
+const StandupSummary = (props) => (
   <div className="team-standup-summary-data">
-    {renderResponses()}
+    {renderResponses(props)}
   </div>
 );
 
