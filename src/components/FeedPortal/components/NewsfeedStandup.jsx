@@ -9,7 +9,7 @@ import StandupSummary from "./StandupSummary";
 class NewsfeedStandup extends React.Component {
 
   static propTypes = {
-    standup: PropTypes.object.isRequired,
+    standups: PropTypes.array.isRequired,
     timestamp: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     user: PropTypes.object.isRequired,
@@ -18,23 +18,31 @@ class NewsfeedStandup extends React.Component {
   constructor(props) {
     super(props);
 
-    const { standup } = props;
+    const { standups } = props;
     this.state = {
-      standup: standup,
+      standups: standups,
+      selected_standup: { ...standups[standups.length-1] },
     };
-    console.log('standup:', this.state);
+  }
+
+  updateSelectedStandup(standup) {
+    this.setState({ selected_standup: { ...standup } });
   }
   
   renderResponses() {
     console.log('NewsfeedStandup - renderResponses - this.state: ', this.state);
+    const standup = { standup: this.state.selected_standup };
+    console.log('standup: ', standup);
     return (
       <React.Fragment>
         <div className="team-standup-container">
           <div className="team-standup-summary">
-            <StandupSummary/>
+            <StandupSummary 
+              standups={ this.state.standups }
+              updateStandupSelected={ this.updateSelectedStandup }/>
           </div>
           <div className="team-standup-detail">
-            <StandupDetail { ...this.state }/>
+            <StandupDetail { ...standup }/>
           </div>
         </div>
       </React.Fragment>

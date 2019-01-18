@@ -1,4 +1,6 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
+
 import "./NewsfeedStandup.css";
 
 const sentimentMap = {
@@ -23,6 +25,7 @@ const classNameSelector = (item, data) => {
 };
 
 const renderResponses = () => {
+  console.log()
   return (
     <React.Fragment>
       <label className="team-standup-label">Recent Standups</label>
@@ -37,5 +40,10 @@ const StandupSummary = () => (
     {renderResponses()}
   </div>
 );
+
+StandupSummary.propTypes = {
+  standups: PropTypes.array.isRequired,
+  updateStandupSelected: PropTypes.func.isRequired,
+}
 
 export default StandupSummary;

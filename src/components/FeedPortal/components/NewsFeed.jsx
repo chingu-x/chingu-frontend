@@ -25,16 +25,16 @@ const NewsFeed = ({ type, loading, data }) => {
   );
 
   const renderStandups = standups => {
-    const standup = standups[standups.length-1];
     return (
-      standup.submitted_at
-        ? FeedItemContainer({
-          item: { standup, type: "NewsfeedStandup", user: standup.member, timestamp: standup.submitted_at },
-          key: standup.id,
-          component: NewsfeedItems.NewsfeedStandup,
-        })
-        : null
-    )
+      FeedItemContainer({
+        item: { 
+          standups, type: "NewsfeedStandup", 
+          user: standups[standups.length-1].member, 
+          timestamp: standups[standups.length-1].submitted_at },
+        key: standups[standups.length-1].id,
+        component: NewsfeedItems.NewsfeedStandup,
+      })
+    );
   };
 
   const renderFeed = ({ user, project }) => {
