@@ -27,11 +27,11 @@ class NewsfeedStandup extends React.Component {
     this.updateSelectedStandup = this.updateSelectedStandup.bind(this);
   }
 
-  updateSelectedStandup(standup) {
+  updateSelectedStandup= (standup) => {
     this.setState({ selected_standup: { ...standup } });
   }
   
-  renderResponses() {
+  renderResponses = () => {
     return (
       <React.Fragment>
         <div className="team-standup-container">
@@ -48,7 +48,7 @@ class NewsfeedStandup extends React.Component {
     );
   };
 
-  render() {
+  render = () => {
     return (
       <React.Fragment>
         { this.renderResponses() }
