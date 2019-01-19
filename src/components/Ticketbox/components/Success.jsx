@@ -5,7 +5,7 @@ const Success = ({ category, url }) => (
         Success!
       <br />
         {url 
-            ? <a href={url} target="_blank">View {category} Issue on Github</a> 
+            ? <a href={url} target="_blank" rel="noopener noreferrer">View {category} Issue on Github</a> 
             : <div className="ticketbox-success--subtext">
                 Please wait a few days for us to review and get back to you.
                 </div>
