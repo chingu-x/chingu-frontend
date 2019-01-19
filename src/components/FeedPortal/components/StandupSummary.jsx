@@ -3,27 +3,6 @@ import PropTypes from 'prop-types';
 
 import "./NewsfeedStandup.css";
 
-const sentimentMap = {
-  red: 'Trouble Ahead!',
-  yellow: 'Nervous',
-  green: 'Great!',
-};
-
-const responseLabelMap = {
-  progress_sentiment: 'Health Status',
-  worked_on: 'Worked on',
-  working_on: 'Working on',
-  blocked_on: 'Blocked on',
-}
-
-const classNameSelector = (item, data) => {
-  let className = "team-standup-answer";
-  if (item === "progress_sentiment") {
-    className += ` team-standup-status--${data}`;
-  }
-  return className;
-};
-
 const formatStandupId = (type, standup) => {
   let standupDate = null;
   switch (type) {
@@ -46,47 +25,86 @@ const newStandupSelected = (e, mostRecentStandup, updateSelectedStandup) => {
   updateSelectedStandup(mostRecentStandup);
 };
 
-const renderResponses = (props) => {
-  console.log('StandupSummary - renderResponses - props: ', props);
-  const mostRecentStandup = props.standups[props.standups.length-1];
-  const pendingStandup = props.standups
-  .sort( (a, b) => (b.id - a.id))
+// Render the most recent pending standup. It is expected that this is the 
+// first cell where `submitted_at` is null.
+const pendingStandup = (sortedStandups,updateSelectedStandup) => {
+  const pendingStandup = sortedStandups
   .reduce( (standups, currentStandup) => {
     if (!currentStandup.submitted_at) {
       standups.push(currentStandup)
     }
     return standups;
   }, [])[0];
+
   return (
-    <React.Fragment>
-      <label className="team-standup-label">Recent Standups</label>
-      <a href='#' className="team-standup-id" 
-        onClick={ (e) => {
-          newStandupSelected(e, mostRecentStandup, props.updateSelectedStandup);
-         } }>
-        { formatStandupId('most_recent', mostRecentStandup) }
-      </a>
-      <label className="team-standup-label team-standup-label--padtop">All Standups</label>
-      { props.standups.map( standup => (
-          standup.submitted_at && standup.submitted_at !== mostRecentStandup.submitted_at
+    <div>
+      <label className="team-standup-label">Pending Standup</label>
+      { 
+        pendingStandup 
+          ? <a href='#' className="team-standup-id" key={pendingStandup.expiration}
+              onClick={ (e) => {
+                newStandupSelected(e, pendingStandup, updateSelectedStandup);
+              } }>
+              { formatStandupId('pending', pendingStandup) }
+            </a>
+          : <div className="team-standup-id">
+              No uncompleted standups!
+            </div>
+      }
+    </div>
+  );
+}
+
+// Render the most recently completed standup. It is expected that the first
+// cell will contain the most recently scheduled standup.
+const mostRecentStandup = (sortedStandups, updateSelectedStandup) => {
+  const mostRecentStandup = sortedStandups[0];
+  return (
+    <div>
+      <label className="team-standup-label  team-standup-label--padtop"> Most Recent Standup</label>
+      {
+        mostRecentStandup && mostRecentStandup.submitted_at
+          ? <a href='#' className="team-standup-id" onClick={ (e) => {
+              newStandupSelected(e, mostRecentStandup, updateSelectedStandup);
+            } }>
+            { formatStandupId('most_recent', mostRecentStandup) }
+            </a>
+          : <div className="team-standup-id">
+              No standups completed yet
+            </div>
+      }
+    </div>
+  );
+};
+
+const completedStandups = (sortedStandups, updateSelectedStandup) => {
+  return (
+    <div>
+      <label className="team-standup-label team-standup-label--padtop">Completed Standups</label>
+      { sortedStandups.map( (standup, standupIndex) => (
+          standupIndex !== 0 && standup.submitted_at && standup.submitted_at !== mostRecentStandup.submitted_at
             ? <a href='#' className="team-standup-id" key={standup.submitted_at}
                 onClick={ (e) => {
-                newStandupSelected(e, standup, props.updateSelectedStandup);
+                newStandupSelected(e, standup, updateSelectedStandup);
               } }>
               { formatStandupId('submitted', standup) }
               </a>
             : null
         ),
       )}
-      <label className="team-standup-label team-standup-label--padtop">Pending Standup</label>
-      { 
-        <a href='#' className="team-standup-id" key={pendingStandup.expiration}
-            onClick={ (e) => {
-          newStandupSelected(e, pendingStandup, props.updateSelectedStandup);
-        } }>
-        { formatStandupId('pending', pendingStandup) }
-        </a>
-      }
+    </div>
+  );
+}
+
+const renderResponses = (props) => {
+  let sortedStandups = props.standups
+  .slice() // Copy the array of standups so we don't modify props
+  .sort( (a, b) => (b.submitted_at - a.submitted_at) );
+  return (
+    <React.Fragment>
+      { pendingStandup(sortedStandups, props.updateSelectedStandup) }
+      { mostRecentStandup(sortedStandups, props.updateSelectedStandup) }
+      { completedStandups(sortedStandups, props.updateSelectedStandup) }
     </React.Fragment>
   );
 };
