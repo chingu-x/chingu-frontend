@@ -6,7 +6,7 @@ import "./NewsfeedStandup.css";
 class StandupList extends React.Component {
 
   static propTypes = {
-    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
     standups: PropTypes.array.isRequired,
     newStandupSelected: PropTypes.func.isRequired,
     updateSelectedStandup: PropTypes.func.isRequired,
@@ -23,7 +23,7 @@ class StandupList extends React.Component {
     let standupDate = null;
     switch (type) {
       case 'most_recent':
-      case 'submitted':
+      case 'completed':
         standupDate = new Date(standup.submitted_at).toLocaleDateString();
         break;
       case 'pending':
@@ -34,16 +34,30 @@ class StandupList extends React.Component {
     }
     return `${standupDate} - ${standup.member.username}`;
   };
+
+  formatTitle = (type) => {
+    switch (type) {
+      case 'completed':
+        return 'Completed Standups';
+      case 'most_recent':
+        return 'Most Recent Standup';
+      case 'pending':
+        return 'Pending Standup';
+      default:
+        throw new Error(`Invalid standup type argument - type: ${type}`);
+    }
+  }
   
-  renderStandups = (title, sortedStandups, newStandupSelected, updateSelectedStandup) => {
+  renderStandups = (type, sortedStandups, newStandupSelected, updateSelectedStandup) => {
     let displayCount = 1;
     const incrementDisplayCount = () => {
       displayCount += 1;
     };
     // TODO: Add 'More...' option to multientry lists
+    // TODO: Add function to determine if element is to be displayed based on its type. Replace ternary below
     return (
       <div>
-        <label className="team-standup-label team-standup-label--padtop">{ title }</label>
+        <label className="team-standup-label team-standup-label--padtop">{ this.formatTitle(type) }</label>
         { sortedStandups.length > 0
             ? sortedStandups.map( (standup, standupIndex) => (
                 standupIndex !== 0 && standup.submitted_at && 
@@ -52,13 +66,13 @@ class StandupList extends React.Component {
                       onClick={ (e) => {
                         newStandupSelected(e, standup, updateSelectedStandup);
                       } }>
-                      { this.formatStandupId('submitted', standup) }
+                      { this.formatStandupId(type, standup) }
                       { incrementDisplayCount() }
                     </a>
                   : null
               ))
             : <div className="team-standup-id">
-                No standups completed yet
+                No standups
               </div>
         }
       </div>
@@ -66,12 +80,10 @@ class StandupList extends React.Component {
   };
 
   render = () => {
-    let sortedStandups = this.props.standups
-    .slice() // Copy the array of standups so we don't modify props
-    .sort( (a, b) => (b.submitted_at - a.submitted_at) );
+    console.log('this.props.standups: ', this.props.standups);
     return (
       <React.Fragment>
-        { this.renderStandups(this.props.title, sortedStandups,
+        { this.renderStandups(this.props.type, this.props.standups,
             this.props.newStandupSelected,
             this.props.updateSelectedStandup) }
       </React.Fragment>
