@@ -14,8 +14,10 @@ class StandupList extends React.Component {
 
   constructor(props) {
     super(props);
+    this.defaultDisplayListCount = 2;
     this.state = {
-      displayCount: 0,
+      listDisplayLimit: this.defaultDisplayListCount,
+      scrollText: "More..."
     };
   }
 
@@ -47,21 +49,78 @@ class StandupList extends React.Component {
         throw new Error(`Invalid standup type argument - type: ${type}`);
     }
   }
+
+  /**
+   * Based on its type, determine if the current standup should be displayed
+   * @param {String} type Identifies the standup as 'completed', 'most_recent',
+   * or 'pending'
+   * @param {Object} standup Standup object instance
+   * @param {Number} standupIndex Standup's position in the list
+   * @param {Number} displayCount Number of entries currently included in the list
+   * @returns {Boolean} true if standup is to be display, otherwise false.
+   */
+  filterStandups = (type, standup, standupIndex, displayCount) => {
+    switch (type) {
+      case 'completed':
+        return standupIndex !== 0 && standup.submitted_at && displayCount <= this.state.listDisplayLimit;
+      case 'most_recent':
+        return standup.submitted_at;
+      case 'pending':
+        return !standup.submitted_at;
+      default:
+        throw new Error(`Invalid standup type argument - type: ${type}`);
+    }
+  }
+
+  renderMore = (type, sortedStandups) => {
+    const completedStandupCount = sortedStandups.reduce((count, standup, standupIndex) => {
+      if (this.filterStandups('completed', standup, standupIndex, 0)) {
+        count += 1;
+      }
+      return count;
+    }, 0);
+
+    return (
+      <div>
+        { type === 'completed' && completedStandupCount > 3
+            ? <a id="team-standup-scroll" href='#' className="team-standup-id"
+                onClick={ (e) => {
+                  // Do something
+                  if (this.state.scrollText === 'More...') {
+                    this.setState({ 
+                      listDisplayLimit: completedStandupCount,
+                      scrollText: 'Less...'
+                    });
+                  } else {
+                    this.setState({ 
+                      listDisplayLimit: this.defaultDisplayListCount,
+                      scrollText: 'More...'
+                    });
+                  }
+                } }>
+                { this.state.scrollText }
+              </a>
+            : null
+        }
+      </div>
+    );
+  }
   
-  renderStandups = (type, sortedStandups, newStandupSelected, updateSelectedStandup) => {
-    let displayCount = 1;
+  renderList = (type, sortedStandups, newStandupSelected, updateSelectedStandup) => {
+    let displayCount = 0;
     const incrementDisplayCount = () => {
       displayCount += 1;
     };
-    // TODO: Add 'More...' option to multientry lists
-    // TODO: Add function to determine if element is to be displayed based on its type. Replace ternary below
+    const standupClassName = type === 'pending' 
+      ? 'team-standup-label'
+      : ' team-standup-label team-standup-label--padtop';
+
     return (
       <div>
-        <label className="team-standup-label team-standup-label--padtop">{ this.formatTitle(type) }</label>
+        <label className={standupClassName}>{ this.formatTitle(type) }</label>
         { sortedStandups.length > 0
             ? sortedStandups.map( (standup, standupIndex) => (
-                standupIndex !== 0 && standup.submitted_at && 
-                displayCount < 4
+                this.filterStandups(type, standup, standupIndex, displayCount)
                   ? <a href='#' className="team-standup-id" key={standup.submitted_at}
                       onClick={ (e) => {
                         newStandupSelected(e, standup, updateSelectedStandup);
@@ -75,15 +134,15 @@ class StandupList extends React.Component {
                 No standups
               </div>
         }
+        { this.renderMore(type, sortedStandups) }
       </div>
     );
   };
 
   render = () => {
-    console.log('this.props.standups: ', this.props.standups);
     return (
       <React.Fragment>
-        { this.renderStandups(this.props.type, this.props.standups,
+        { this.renderList(this.props.type, this.props.standups,
             this.props.newStandupSelected,
             this.props.updateSelectedStandup) }
       </React.Fragment>
