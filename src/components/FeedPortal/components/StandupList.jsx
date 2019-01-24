@@ -85,7 +85,6 @@ class StandupList extends React.Component {
         { type === 'completed' && completedStandupCount > 3
             ? <a id="team-standup-scroll" href='#' className="team-standup-id"
                 onClick={ (e) => {
-                  // Do something
                   if (this.state.scrollText === 'More...') {
                     this.setState({ 
                       listDisplayLimit: completedStandupCount,
