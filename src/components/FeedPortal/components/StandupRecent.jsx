@@ -10,12 +10,12 @@ const StandupRecent = ({ sortedStandups, newStandupSelected, updateSelectedStand
         Most Recent Standup
       </label>
       { mostRecentStandup.submitted_at
-          ? <a href='#' className="team-standup-id" key={ mostRecentStandup.submitted_at }
+          ? <button className="team-standup-id" key={ mostRecentStandup.submitted_at }
               onClick={ (e) => {
                 newStandupSelected(e, mostRecentStandup, updateSelectedStandup);
               } }>
-              { new Date(mostRecentStandup.submitted_at).toLocaleDateString()} - { mostRecentStandup.member.username }
-            </a>
+              { new Date(mostRecentStandup.submitted_at).toLocaleDateString() } - { mostRecentStandup.member.username }
+            </button>
           : <div className="team-standup-id" key="norecent">No completed standups</div>
       }
     </React.Fragment>

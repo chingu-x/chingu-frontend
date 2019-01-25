@@ -1,6 +1,5 @@
 @import '../../../styles/abstracts/_variables.scss';
 
-
 /*
 ==========================
 CONTAINER
@@ -70,6 +69,7 @@ data object
     display: block;
     font-size: 12px;
     color: $health-green;
+    padding-left: 0;
 }
 /*
 ==========================

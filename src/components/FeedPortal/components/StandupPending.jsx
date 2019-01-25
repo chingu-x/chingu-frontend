@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from "react-router-dom"
 
 import "./NewsfeedStandup.css";
 
@@ -10,19 +11,22 @@ const StandupPending = ({ sortedStandups }) => {
     }
     return standups;
   }, [])[0];
-  
+  const standupId = `${ new Date(pendingStandup.expiration).toLocaleDateString() } - ${ pendingStandup.member.username }`;
   return (
     <React.Fragment>
       <label className='team-standup-label'>
         Pending Standup
       </label>
       { !pendingStandup.submitted_at && pendingStandup.expiration > Date.now()
-          ? <a href='#' className="team-standup-id" key={pendingStandup.submitted_at}
-              onClick={ (e) => {
-                // TODO: Add display of pending standup dialog
-              } }>
-              { new Date(pendingStandup.expiration).toLocaleDateString() }
-            </a>
+          ? <div>
+              <Link className={`team-standup-id`}
+                to={pendingStandup ? `/project/standup/${pendingStandup.id}` : "#"}
+              >
+                { pendingStandup 
+                    ? standupId
+                    : "No Standup Available" }
+              </Link>
+            </div>
           : <div className="team-standup-id">No pending standup</div>
       }
     </React.Fragment>
