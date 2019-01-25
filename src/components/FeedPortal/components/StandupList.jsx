@@ -66,7 +66,7 @@ class StandupList extends React.Component {
       case 'most_recent':
         return standup.submitted_at;
       case 'pending':
-        return !standup.submitted_at;
+        return !standup.submitted_at && standup.expiration > Date.now();
       default:
         throw new Error(`Invalid standup type argument - type: ${type}`);
     }
@@ -127,11 +127,11 @@ class StandupList extends React.Component {
                       { this.formatStandupId(type, standup) }
                       { incrementDisplayCount() }
                     </a>
-                  : null
+                  : type !== 'completed' 
+                      ? <div className="team-standup-id" key="nostandup">No Standups</div>
+                      : null
               ))
-            : <div className="team-standup-id">
-                No standups
-              </div>
+            : <div className="team-standup-id">No standups</div>
         }
         { this.renderMore(type, sortedStandups) }
       </div>
