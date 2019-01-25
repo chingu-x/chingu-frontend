@@ -21,7 +21,7 @@ class NewsfeedStandup extends React.Component {
     const { standups } = props;
     this.state = {
       standups: standups,
-      selected_standup: { ...standups[standups.length-1] },
+      selected_standup: {},
     };
 
     this.updateSelectedStandup = this.updateSelectedStandup.bind(this);

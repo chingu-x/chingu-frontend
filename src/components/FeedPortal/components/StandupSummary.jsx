@@ -2,7 +2,9 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import "./NewsfeedStandup.css";
-import StandupList from './StandupList';
+import StandupCompleted from './StandupCompleted';
+import StandupPending from './StandupPending';
+import StandupRecent from './StandupRecent';
 
 class StandupSummary extends React.Component {
 
@@ -16,6 +18,12 @@ class StandupSummary extends React.Component {
     this.state = {
       displayCount: 0,
     };
+
+    // Force the most recently completed standup to be displayed in the detail panel
+    this.sortedStandups = props.standups
+    .slice() // Copy the array of standups so we don't modify props
+    .sort( (a, b) => (b.submitted_at - a.submitted_at) );
+    props.updateSelectedStandup(this.sortedStandups[0]);
   }
 
   // Update the selected standup in the containers state to force its display
@@ -25,31 +33,13 @@ class StandupSummary extends React.Component {
   }
 
   renderResponses = (props) => {
-    let sortedStandups = props.standups
-    .slice() // Copy the array of standups so we don't modify props
-    .sort( (a, b) => (b.submitted_at - a.submitted_at) );
-
-    const pendingStandups = sortedStandups
-    .reduce( (standups, currentStandup) => {
-      if (!currentStandup.submitted_at) {
-        standups.push(currentStandup)
-      }
-      return standups;
-    }, []);
-
-    // TODO: Refactor to use StandupList component for all types of standups
     return (
       <React.Fragment>
-        <StandupList type="pending" 
-          standups={ [pendingStandups[0]] }
+        <StandupPending sortedStandups={ this.sortedStandups } />
+        <StandupRecent sortedStandups={ this.sortedStandups }
           newStandupSelected={ this.newStandupSelected }
           updateSelectedStandup={ props.updateSelectedStandup }/>
-        <StandupList type="most_recent" 
-          standups={ [sortedStandups[0]] }
-          newStandupSelected={ this.newStandupSelected }
-          updateSelectedStandup={ props.updateSelectedStandup }/>
-        <StandupList type="completed"
-          standups={ props.standups }
+        <StandupCompleted sortedStandups={ this.sortedStandups }
           newStandupSelected={ this.newStandupSelected }
           updateSelectedStandup={ props.updateSelectedStandup }/>
       </React.Fragment>
