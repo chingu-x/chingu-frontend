@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import "./NewsfeedStandup.css";
 
+const INITIAL_LIST_LIMIT = 3;
+
 class StandupCompleted extends React.Component {
 
   static propTypes = {
@@ -13,7 +15,7 @@ class StandupCompleted extends React.Component {
 
   constructor(props) {
     super(props);
-    this.defaultDisplayListCount = 2;
+    this.defaultDisplayListCount = INITIAL_LIST_LIMIT;
     this.state = {
       listDisplayLimit: this.defaultDisplayListCount,
       scrollText: "More..."
@@ -34,7 +36,7 @@ class StandupCompleted extends React.Component {
 
     return (
       <div>
-        { completedStandupCount > 3
+        { completedStandupCount > INITIAL_LIST_LIMIT
             ? <a id="team-standup-scroll" href='#' className="team-standup-id"
                 onClick={ (e) => {
                   if (this.state.scrollText === 'More...') {
@@ -59,7 +61,7 @@ class StandupCompleted extends React.Component {
 
   render = () => {
     const { sortedStandups, newStandupSelected, updateSelectedStandup } = this.props;
-    let displayCount = 0;
+    let displayCount = 1;
     const incrementDisplayCount = () => {
       displayCount += 1;
     };
@@ -76,7 +78,8 @@ class StandupCompleted extends React.Component {
                       onClick={ (e) => {
                         newStandupSelected(e, standup, updateSelectedStandup);
                       } }>
-                      { new Date(standup.submitted_at).toLocaleDateString()} - { standup.member.username }                      { incrementDisplayCount() }
+                      { new Date(standup.submitted_at).toLocaleDateString()} - { standup.member.username }
+                      { incrementDisplayCount() }
                     </a>
                   : null
               ))
