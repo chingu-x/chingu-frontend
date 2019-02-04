@@ -5,7 +5,7 @@ import Footer from '../components/Footer/Footer';
 test('Footer tbd', async () => {
   // Render a Footer
   const footer = shallow(<Footer />);
-  console.log('footer hasClass("connection-icon"): ', footer.hasClass('connection-icon'));
+  console.log('footer: ', footer.debug());
 
-  expect(footer.hasClass('connection-icon')).toBe(true) // Just for validating Jest setup
+  expect(footer.hasClass('connection-icon')); // Just for validating Jest setup
 });
