@@ -46,7 +46,7 @@
     "eject": "react-scripts eject",
     "build-fragments": "node ./build_fragments.js",
     "jest-init": "jest --init",
-    "jest": "jest --runInBand"
+    "jest": "jest --runInBand --verbose"
   },
   "browserslist": [
     ">0.2%",
