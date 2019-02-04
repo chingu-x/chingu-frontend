@@ -28,6 +28,11 @@
     "redux-form": "^7.2.3",
     "validator": "^10.7.0"
   },
+  "devDependencies": {
+    "@babel/preset-env": "^7.3.1",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.8.0"
+  },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
@@ -39,7 +44,9 @@
     "build": "npm-run-all build-css build-fragments build-js; echo \"/* /index.html 200\" > build/_redirects",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "build-fragments": "node ./build_fragments.js"
+    "build-fragments": "node ./build_fragments.js",
+    "jest-init": "jest --init",
+    "jest": "jest --runInBand"
   },
   "browserslist": [
     ">0.2%",
