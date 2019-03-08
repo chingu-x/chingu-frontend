@@ -27,7 +27,7 @@ class Landing extends React.Component {
   // handleApplyClick = () => !!localStorage.token ? this.props.history.push(path) : this.openLoginModal()
   handleApplyClick = () => {
     const path =
-      "https://docs.google.com/forms/d/e/1FAIpQLSe7eeorRF3kWj98X9Q342VrQdriGoDoBfu6ELOEeDuxrQ2wgw/viewform?embedded=true";
+      "https://goo.gl/forms/Tc2AwNbXnRcDzKsN2";
 
     window.location = path;
   };
