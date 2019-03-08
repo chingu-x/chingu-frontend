@@ -84,8 +84,9 @@ class Header extends React.Component {
               </div>
             </div>
             <div className="header-right">
-              {user && this.renderAvatar(user.avatar)}
-              {!localStorage.token && !user && <div onClick={this.openLoginModal} className="header-btn">LOG IN</div>}
+              {/* FIXME: Temp */}
+              {/* {user && this.renderAvatar(user.avatar)}
+              {!localStorage.token && !user && <div onClick={this.openLoginModal} className="header-btn">LOG IN</div>} */}
             </div>
           </div>
         </div>
