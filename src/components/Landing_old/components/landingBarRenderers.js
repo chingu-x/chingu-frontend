@@ -1,7 +1,7 @@
 import * as React from 'react';
 import _ from "lodash";
 
-import LandingBarWithIcons from "./LandingBarWithIcons.jsx";
+import LandingBarWithIcons from "./LandingBarWithIcons.jsx.js";
 import LandingProjects from "./LandingProjects";
 import LandingTestimonial from "./LandingTestimonial";
 import landingImages from "../../../styles/assets/landingImages";
