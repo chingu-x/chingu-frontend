@@ -1,0 +1,77 @@
+@import "styles/abstracts/_variables.scss";
+
+/*
+==========================
+Text Styling
+==========================
+*/
+.landing--header {
+  font-size: 44px;
+  font-weight: 800;
+  text-transform: capitalize;
+  line-height: 56px;
+}
+
+.landing--description {
+  font-size: 24px;
+  font-weight: 400;
+}
+/*
+==========================
+Landing Container
+==========================
+*/
+.landing--container {
+  background-image: linear-gradient($theme-purple, $theme-purple-medium);
+  margin-top: 60px;
+  padding: 100px 0px;
+}
+
+.landing {
+  max-width: $max-width;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: "text image";
+  grid-gap: 50px;
+}
+/*
+==========================
+Landing Text
+==========================
+*/
+.landing-text {
+  grid-area: text;
+  color: white;
+  max-width: 550px;
+}
+
+.landing-text--description {
+  margin-top: -20px;
+}
+
+.landing-text--btn {
+  background-color: $theme-green;
+  padding: 10px 30px;
+  border: none;
+  box-shadow: $box-shadow-dark;
+  border-radius: $button-border-radius;
+  color: white;
+  font-weight: 800;
+  font-size: 18px;
+  &:hover {
+    background-color: $theme-green--hover;
+  }
+}
+/*
+==========================
+Landing Image
+==========================
+*/
+.landing-img {
+  grid-area: image;
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+}

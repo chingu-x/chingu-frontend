@@ -1,9 +1,12 @@
-import React from 'react';
-import './Landing.scss';
+import React from "react";
+import "./LandingPage.scss";
+import Landing from "./components/Landing";
 
-const Landing = () => {
+const LandingPage = () => {
   return (
-    <div />
-  )
-}
-export default Landing;
+    <div className="landing--container">
+      <Landing />
+    </div>
+  );
+};
+export default LandingPage;
