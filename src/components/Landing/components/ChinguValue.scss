@@ -1,0 +1,120 @@
+@import "styles/abstracts/_variables.scss";
+
+.chingu-value--container {
+  max-width: $max-width;
+  background-color: white;
+  margin: 0 auto;
+  padding: 100px 0px;
+}
+/*
+==========================
+Value Text
+==========================
+*/
+.chingu-value {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 100px;
+}
+/*
+==========================
+Bullets
+==========================
+*/
+.landing--bulet-unit {
+  margin-top: 30px;
+  .fa-circle {
+    font-size: 10px;
+    margin-top: 6px;
+    display: block;
+  }
+}
+
+.landing--bullets {
+  font-size: 24px;
+  font-weight: 400;
+  margin-top: -25px;
+  margin-left: 32px;
+}
+/*
+==========================
+Level Ups
+==========================
+*/
+.level-ups--container {
+  margin-top: 80px;
+}
+
+.skill-line {
+  width: 10px;
+  height: 100%;
+  background-color: black;
+  display: inline-block;
+}
+
+.skills-base {
+  display: grid;
+  grid-template-columns: 15px 10fr;
+  grid-gap: 10px;
+  justify-items: stretch;
+
+  .skill-line {
+    background-color: $orange-light;
+  }
+}
+
+.skills-base-header {
+  color: white;
+  background-color: $orange;
+  padding: 5px 10px;
+}
+
+.skill-unit {
+  display: grid;
+  grid-template-columns: 15px 10fr;
+  grid-gap: 10px;
+  padding-bottom: 8px;
+}
+
+.skills-header {
+  display: grid;
+  grid-template-columns: 15px 10fr;
+  grid-gap: 10px;
+  align-items: center;
+  margin: 10px 0px;
+
+  .fa-plus {
+    font-size: 24px;
+    margin-left: -6px;
+  }
+}
+
+.soft_skills {
+  .skills-header {
+    color: $attention-red;
+  }
+  .skill-line {
+    background-color: $attention-red--light;
+    height: calc(100% + 8px);
+  }
+}
+
+.projects {
+  .skills-header {
+    color: $theme-green;
+  }
+  .skill-line {
+    background-color: $theme-green--lighter;
+    height: calc(100% + 10px);
+  }
+}
+
+.teamwork {
+  .skills-header {
+    color: $blue;
+  }
+  .skill-line {
+    background-color: $blue-light;
+    height: calc(100% + 10px);
+  }
+}

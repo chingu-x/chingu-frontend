@@ -21,35 +21,40 @@ export const chingu_value = {
 
 export const level_ups = {
   base_skill: `Your Tech Stack`,
-  soft_skills: {
-    header: "Soft Skills",
-    skills: [
-      `Time Management`,
-      `Accountability & Reliability`,
-      `Handling Interpersonal Conflict`,
-      `Collaboration`,
-      `Clear, Respectful Communication`
-    ]
-  },
-  project: {
-    header: "Project Development",
-    skills: [
-      `Git / GitHub / Local Development`,
-      `Planning a Project`,
-      `Choosing the right technologies`,
-      `Project Setup to Deployment`
-    ]
-  },
-  teamwork: {
-    header: "Teamwork",
-    skills: [
-      `Team Git Workflows`,
-      `Familiarty with Other Peoples Code`,
-      `Developing Easily Maintainable Code`,
-      `Agile Project Management`,
-      `Mentoring Others`
-    ]
-  }
+  skills: [
+    {
+      header: "Soft Skills",
+      skills: [
+        `Time Management`,
+        `Accountability & Reliability`,
+        `Handling Interpersonal Conflict`,
+        `Collaboration`,
+        `Clear, Respectful Communication`
+      ],
+      className: "soft_skills"
+    },
+    {
+      header: "Project Development",
+      skills: [
+        `Git / GitHub / Local Development`,
+        `Planning a Project`,
+        `Choosing the right technologies`,
+        `Project Setup to Deployment`
+      ],
+      className: "projects"
+    },
+    {
+      header: "Teamwork",
+      skills: [
+        `Team Git Workflows`,
+        `Familiarty with Other Peoples Code`,
+        `Developing Easily Maintainable Code`,
+        `Agile Project Management`,
+        `Mentoring Others`
+      ],
+      className: "teamwork"
+    }
+  ]
 };
 
 export const min_requirements = {

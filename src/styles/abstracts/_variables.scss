@@ -74,6 +74,11 @@ $badge-3--hover: rgb(236, 172, 75);
 
 $modal-background: rgba(158, 158, 158, 0.637);
 
+$orange: #ff8800;
+$orange-light: #fbddbb;
+$blue: #2c91d4;
+$blue-light: #dde8f5;
+
 $transparent-background: rgba(158, 158, 158, 0.637);
 @mixin transparent-background {
   background-color: $transparent-background;
