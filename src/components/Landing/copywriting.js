@@ -1,12 +1,15 @@
-const tagline = {
+export const tagline = {
   header: "Practice building projects to become job ready",
-  description: `Practice the technical and soft skills required in a professional software job through Chingu’s 10-week Cohort programs. 100% Online and Free.`
+  description: `Practice the technical and soft skills required in a professional 
+                software job through Chingu’s 10-week Cohort programs.
+                100% Online and Free.`
 };
 
-const chingu_value = {
+export const chingu_value = {
   minor: `What can Chingu do for me?`,
   header: `Think you just need to know the right language to be a good programmer?`,
-  description: `Whether you are new to the industry or a seasoned developer, Chingu’s 10-week Cohorts are designed to help you level up.
+  description: `Whether you are new to the industry or a seasoned developer, 
+                Chingu’s 10-week Cohorts are designed to help you level up.
                   When Chingu places you in a team, you'll have opportunities to:
                   `,
   bullets: [
@@ -16,7 +19,7 @@ const chingu_value = {
   ]
 };
 
-const level_ups = {
+export const level_ups = {
   base_skill: `Your Tech Stack`,
   soft_skills: {
     header: "Soft Skills",
@@ -49,32 +52,38 @@ const level_ups = {
   }
 };
 
-const min_requirements = {
+export const min_requirements = {
   minor: `Minimum Requirements`,
   header: `Are you ready for Chingu?`,
-  description: `You’ll need, at minimum, intermediate HTML/CSS and basic JavaScript knowledge to qualify for Chingu Cohorts.
-                Know more than that? Chingu’s got you covered: our Cohorts have three different “tiers” separated by skill 
+  description: `You’ll need, at minimum, intermediate HTML/CSS and basic 
+                JavaScript knowledge to qualify for Chingu Cohorts.
+                Know more than that? Chingu’s got you covered: our Cohorts have 
+                three different “tiers” separated by skill 
                 level so that you can work in the tier you feel most comfortable in. 
                 `,
   more_info: `See more information about Tiers here.`
 };
 
-const tiers = [
+export const tiers = [
   {
     header: `Tier 1 Requirements`,
-    description: `Intermediate grasp of HTML/CSS and a basic grasp of JavaScript (DOM manipulation and event loop).`
+    description: `Intermediate grasp of HTML/CSS and a basic grasp of JavaScript 
+                  (DOM manipulation and event loop).`
   },
   {
     header: `Tier 2 Requirements`,
-    description: `Intermediate grasp of HTML, CSS and JavaScript. Familiarity with making API calls and interest in using a JavaScript library like React, Vue or Angular.`
+    description: `Intermediate grasp of HTML, CSS and JavaScript. 
+                  Familiarity with making API calls and interest in 
+                  using a JavaScript library like React, Vue or Angular.`
   },
   {
     header: `Tier 3 Requirements`,
-    description: `Advanced grasp of HTML, CSS and JavaScript. You may have some familiarity or interest in creating APIs and full stack projects. `
+    description: `Advanced grasp of HTML, CSS and JavaScript. You may have some 
+                  familiarity or interest in creating APIs and full stack projects. `
   }
 ];
 
-const cohort_schedule = {
+export const cohort_schedule = {
   header: `2019 Chingu Cohorts`,
   spring: {
     minor: `Spring`,
@@ -93,7 +102,7 @@ const cohort_schedule = {
   }
 };
 
-const cohort_breakdown = {
+export const cohort_breakdown = {
   header: `Cohort Breakdown`,
   pre_work: {
     header: `Pre-Work`,
@@ -109,7 +118,8 @@ const cohort_breakdown = {
   }
 };
 
-const call_for_action = {
+export const call_for_action = {
   header: `Join Chingu's 10-Week Cohort`,
-  description: `Join our next Cohort to be a better developer.  All Online. All Free.`
+  description: `Join our next Cohort to be a better developer.  
+                All Online. All Free.`
 };
