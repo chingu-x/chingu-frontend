@@ -8,7 +8,8 @@ FONT
 ==========================
 */
 /// @type List
-$base-font-family: "Open Sans", "Helvetica Neue", "Raleway", sans-serif;
+$base-font-family: "Nunito", "Open Sans", "Helvetica Neue", "Raleway",
+  sans-serif;
 $base-font-size: 14px;
 $portal-title-size: 40px;
 $portal-subcategory-size: 24px;
@@ -18,8 +19,12 @@ $base-font-weight: 400;
 COLORS
 ==========================
 */
-$theme-purple: #080a38;
-$theme-purple--hover: rgb(7, 8, 44);
+$theme-purple-dark: #080a38;
+$theme-purple-dark--hover: rgb(7, 8, 44);
+$theme-purple: #1f1f7a;
+$theme-purple--hover: #19196b;
+$theme-purple-medium: #7677d8;
+$theme-purple-medium--hover: #6b6cc7;
 $light-purple: #71739b;
 $light-purple--hover: rgb(102, 104, 139);
 $pale-purple--hover: rgb(206, 206, 224);
@@ -31,16 +36,16 @@ $theme-green--lighter: rgb(202, 238, 225);
 $theme-green--lightest: rgb(233, 247, 242);
 $theme-green--palest: #def0e9;
 
-$bug: #16B57C;
-$suggestion: #FFCE00;
-$help: #E20000;
+$bug: #16b57c;
+$suggestion: #ffce00;
+$help: #e20000;
 
 $darkest-grey: #333333;
 $darker-grey: #4f4f4f;
 $dark-grey: #7f7f7f;
 $med-grey: rgb(158, 158, 158);
 $grey: #bbbbbb;
-$lighter-grey: #D9D9D9;
+$lighter-grey: #d9d9d9;
 $light-grey: #e6e6e6;
 $pale-grey: #efefef;
 $palest-grey: #f8f8f8;
@@ -56,9 +61,9 @@ $database: #ee1400;
 
 $health-green: #22b571;
 $health-yellow: #ffcc00;
-$health-yellow--light: #FFFAB7;
+$health-yellow--light: #fffab7;
 $health-red: #ef8585;
-$health-red--light: #FCC4C4;
+$health-red--light: #fcc4c4;
 
 $badge-1: #f5e3a1;
 $badge-1--hover: rgb(245, 219, 126);
@@ -112,7 +117,7 @@ $box-shadow: 0px 3px 6px $light-grey;
 $box-shadow-dark: 0px 3px 6px $dark-grey;
 $border: 1px solid $light-grey;
 $border-radius: 0px;
-$button-border-radius: 20px;
+$button-border-radius: 10px;
 /*
 ==========================
 Z-INDEXES
@@ -323,10 +328,10 @@ NEWSFEED CARDS
 }
 @mixin newsfeed-card--icon {
   width: 40px;
-    height: 40px;
-    grid-column: 1 / 2;
-    margin: 0 auto;
-    align-self: center;
+  height: 40px;
+  grid-column: 1 / 2;
+  margin: 0 auto;
+  align-self: center;
 }
 
 @mixin newsfeed-card-text-container {
@@ -335,7 +340,7 @@ NEWSFEED CARDS
 
 @mixin newsfeed-card-text {
   font-size: 14px;
-    line-height: 28px;
+  line-height: 28px;
 }
 /*
 ==========================
