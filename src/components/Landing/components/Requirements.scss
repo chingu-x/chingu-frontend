@@ -1,0 +1,14 @@
+@import "styles/abstracts/_variables.scss";
+
+.requirements-container {
+  background-color: $palest-grey;
+  padding: 100px 0px;
+}
+
+.requirements {
+  max-width: $max-width;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 100px;
+}

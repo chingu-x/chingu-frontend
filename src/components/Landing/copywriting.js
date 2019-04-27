@@ -71,17 +71,20 @@ export const min_requirements = {
 
 export const tiers = [
   {
+    class: "tier_1",
     header: `Tier 1 Requirements`,
     description: `Intermediate grasp of HTML/CSS and a basic grasp of JavaScript 
                   (DOM manipulation and event loop).`
   },
   {
+    class: "tier_2",
     header: `Tier 2 Requirements`,
     description: `Intermediate grasp of HTML, CSS and JavaScript. 
                   Familiarity with making API calls and interest in 
                   using a JavaScript library like React, Vue or Angular.`
   },
   {
+    class: "tier_3",
     header: `Tier 3 Requirements`,
     description: `Advanced grasp of HTML, CSS and JavaScript. You may have some 
                   familiarity or interest in creating APIs and full stack projects. `
