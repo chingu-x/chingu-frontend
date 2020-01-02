@@ -14,28 +14,28 @@ const NewsFeed = ({ type, loading, data }) => {
     ${project ? `${project.team_name.toUpperCase()}` : "ALL"} NEWS
   `;
 
-
   const renderNewsfeedItems = items => items.map(
     item => {
       return FeedItemContainer({
         component: NewsfeedItems[item.type],
         item,
         key: item.id,
-      })
+      });
     }
   );
 
-  const renderStandups = standups => standups.map(
-    standup => (
-      standup.submitted_at
-        ? FeedItemContainer({
-          item: { standup, type: "NewsfeedStandup", user: standup.member, timestamp: standup.submitted_at },
-          key: standup.id,
-          component: NewsfeedItems.NewsfeedStandup,
-        })
-        : null
-    ),
-  );
+  const renderStandups = standups => {
+    return (
+      FeedItemContainer({
+        item: { 
+          standups, type: "NewsfeedStandup", 
+          user: standups[standups.length-1].member, 
+          timestamp: standups[standups.length-1].submitted_at },
+        key: standups[standups.length-1].id,
+        component: NewsfeedItems.NewsfeedStandup,
+      })
+    );
+  };
 
   const renderFeed = ({ user, project }) => {
     let dataToRender = (
@@ -91,6 +91,8 @@ const getNewsfeed = (project_id) => {
         worked_on
         working_on
         blocked_on
+        is_expired
+        expiration
         member {
           id
           username

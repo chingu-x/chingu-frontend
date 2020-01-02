@@ -1,57 +1,61 @@
-import * as React from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import "./NewsfeedStandup.css";
+import FeedItemContainer from "./FeedItem";
+import StandupDetail from "./StandupDetail";
+import StandupSummary from "./StandupSummary";
 
-const sentimentMap = {
-  red: 'Trouble Ahead!',
-  yellow: 'Nervous',
-  green: 'Great!',
-};
+class NewsfeedStandup extends React.Component {
 
-const responseLabelMap = {
-  progress_sentiment: 'Health Status',
-  worked_on: 'Worked on',
-  working_on: 'Working on',
-  blocked_on: 'Blocked on',
-}
+  static propTypes = {
+    standups: PropTypes.array.isRequired,
+    timestamp: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    user: PropTypes.object.isRequired,
+  };
 
-const classNameSelector = (item, data) => {
-  let className = "team-standup-answer";
-  if (item === "progress_sentiment") {
-    className += ` team-standup-status--${data}`;
+  constructor(props) {
+    super(props);
+
+    const { standups } = props;
+    this.state = {
+      standups: standups,
+      selected_standup: {},
+    };
+
+    this.updateSelectedStandup = this.updateSelectedStandup.bind(this);
   }
-  return className;
-};
 
-const renderResponses = standupFields => Object.keys(standupFields).map(
-  standupField => {
-    const fieldValue = standupFields[standupField];
-    const className = classNameSelector(standupField, fieldValue);
+  updateSelectedStandup= (standup) => {
+    this.setState({ selected_standup: { ...standup } });
+  }
+  
+  renderResponses = () => {
     return (
-      <div className="team-standup-data" key={standupField}>
-        <label className="team-standup-label">{responseLabelMap[standupField]} :</label>
-        <div className={className}>
-          {
-            standupField === "progress_sentiment"
-              ? sentimentMap[fieldValue]
-              : fieldValue
-          }
+      <React.Fragment>
+        <div className="team-standup-container">
+          <div className="team-standup-summary">
+            <StandupSummary 
+              standups={ this.state.standups }
+              updateSelectedStandup={ this.updateSelectedStandup }/>
+          </div>
+          <div className="team-standup-detail">
+            <StandupDetail { ...{ standup: this.state.selected_standup } }/>
+          </div>
         </div>
-      </div>
+      </React.Fragment>
     );
-  },
-);
+  };
 
-const NewsfeedStandup = ({
-  standup: {
-    progress_sentiment,
-    worked_on,
-    working_on,
-    blocked_on,
-  },
-}) => (
-    <div className="team-standup-card-container">
-      {renderResponses({ progress_sentiment, worked_on, working_on, blocked_on })}
-    </div>
-  );
+  render = () => {
+    return (
+      <React.Fragment>
+        { this.renderResponses() }
+      </React.Fragment>
+    );
+  }
+
+}
 
 export default NewsfeedStandup;

@@ -8,7 +8,7 @@ const Links = ({ user: { username } }) => (
     <h1 className="user-sidebar-subcategory">links</h1>
     <ul>
       <li>
-        <a target="_blank" href={`https://www.github.com/${username}`}>
+        <a target="_blank" rel="noopener noreferrer" href={`https://www.github.com/${username}`}>
           <i className="fab fa-github fa-3x" />
         </a>
       </li>

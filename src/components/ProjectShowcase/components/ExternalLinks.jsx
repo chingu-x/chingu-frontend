@@ -125,6 +125,7 @@ class ExternalLinks extends React.Component {
                 <a
                   className={`project-buttons${live_url ? "" : "--disabled"}`}
                   target="_blank"
+                  rel="noopener noreferrer"
                   href={live_url || null}
                 >
                   Live Link

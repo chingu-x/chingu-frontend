@@ -19,7 +19,8 @@ const IssueIcon = () => {
 
 export const GithubActivityPullRequest = ( data ) => {
   return (
-    <a href={data.url} target="_blank" className="github-activity-container">
+    <a href={data.url} target="_blank" 
+    rel="noopener noreferrer" className="github-activity-container">
       <PRIcon />
       <div className="github-activity-text">
         <div className="github-activity-title">{data.title}</div>
@@ -30,7 +31,8 @@ export const GithubActivityPullRequest = ( data ) => {
 }
 export const GithubActivityIssue = ( data ) => {
   return (
-    <a href={data.url} target="_blank" className="github-activity-container">
+    <a href={data.url} target="_blank" rel="noopener noreferrer"
+      className="github-activity-container">
       <IssueIcon />
       <div className="github-activity-text">
         <div className="github-activity-title">{data.title}</div>
